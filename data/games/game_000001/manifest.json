@@ -2,11 +2,15 @@
   "game_id": "game_000001",
   "status": "completed",
   "created_at": "2026-03-18T06:47:17.032015+00:00",
-  "updated_at": "2026-03-18T06:47:17.034857+00:00",
+  "updated_at": "2026-03-18T16:57:35.316532+00:00",
   "phases": {
     "resolve": {
       "file": "resolve_result.json",
       "updated_at": "2026-03-18T06:47:17.034762+00:00"
+    },
+    "translate": {
+      "file": "chat_history_en.md",
+      "updated_at": "2026-03-18T16:57:35.316527+00:00"
     }
   },
   "completed_at": "2026-03-18T06:47:17.034833+00:00",

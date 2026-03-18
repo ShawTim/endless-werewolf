@@ -49,6 +49,8 @@ def setup_game(players, roles):
         player_state = {
             "id": player["id"],
             "name": player["name"],
+            "name_zh": player.get("name_zh", player["name"]),
+            "name_en": player.get("name_en", player["name"]),
             "persona": player["persona"],
             "model": player["model"],
             "seat": idx,
