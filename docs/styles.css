@@ -75,6 +75,44 @@ body {
 .empty { color: var(--muted); }
 .hidden { display: none; }
 
+.asset-showcase {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.asset-block {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #19130e;
+  padding: 10px;
+}
+.asset-block h3 {
+  margin: 4px 0 10px;
+  color: #f8d9a8;
+  font-size: 16px;
+}
+.asset-grid {
+  display: grid;
+  gap: 8px;
+}
+.cards-grid {
+  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+}
+.cards-grid img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.avatars-grid {
+  grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+}
+.avatars-grid img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
 .meta {
   border: 1px solid var(--line);
   border-radius: 10px;

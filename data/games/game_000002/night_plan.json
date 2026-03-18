@@ -1,0 +1,160 @@
+[
+  {
+    "player_name": "ConspiBro",
+    "role": "Werewolf (狼人)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "ConspiBro",
+      "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
+      "model": "nvidia/minimaxai/minimax-m2.5",
+      "initial_role": "Werewolf (狼人)",
+      "night_memory": [
+        "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
+      ],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister",
+        "EasyBake"
+      ],
+      "legal_actions": {
+        "action": "inspect_center",
+        "target": [
+          0,
+          1,
+          2
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "Blaze",
+    "role": "Seer (預言家)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "Blaze",
+      "persona": "暴躁老哥、直腸直肚。你討厭別人說話轉彎抹角。即使你是好人，你也喜歡第一時間跳出來指控別人。",
+      "model": "github-copilot/gpt-4.1",
+      "initial_role": "Seer (預言家)",
+      "night_memory": [],
+      "other_players": [
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "SafetySam",
+            "Dr. Pizza",
+            "Twister",
+            "EasyBake",
+            "ConspiBro"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "EasyBake",
+    "role": "Robber (強盜)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "EasyBake",
+      "persona": "老好人、極容易相信別人。你總是試圖調解紛爭。如果你被迫說謊，你會顯得極度生硬和結巴（使用...和呃...）。",
+      "model": "nvidia/qwen/qwen3.5-397b-a17b",
+      "initial_role": "Robber (強盜)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "rob",
+        "target": [
+          "Blaze",
+          "SafetySam",
+          "Dr. Pizza",
+          "Twister",
+          "ConspiBro"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "Dr. Pizza",
+    "role": "Troublemaker (搗蛋鬼)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "Dr. Pizza",
+      "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+      "model": "nvidia/moonshotai/kimi-k2.5",
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "Blaze",
+          "SafetySam",
+          "Twister",
+          "EasyBake",
+          "ConspiBro"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]
