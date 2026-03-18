@@ -1,0 +1,15 @@
+.env
+__pycache__/
+.openclaw/
+memory/
+logs/
+data/state/
+SOUL.md
+USER.md
+IDENTITY.md
+HEARTBEAT.md
+TOOLS.md
+AGENTS.md
+chat_history.md
+*.pyc
+FLOW.md

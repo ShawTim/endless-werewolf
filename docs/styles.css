@@ -1,0 +1,116 @@
+:root {
+  --bg: #13100d;
+  --panel: #1d1712;
+  --panel-2: #241c15;
+  --text: #f4e7cf;
+  --muted: #b6a98f;
+  --accent: #d96f2b;
+  --line: #3a2d21;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(circle at top, #2a1f16 0%, var(--bg) 55%);
+  color: var(--text);
+}
+
+.topbar {
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px;
+  background: rgba(18, 14, 10, 0.8);
+  backdrop-filter: blur(4px);
+}
+.topbar h1 { margin: 0 0 4px; font-size: 24px; }
+.topbar p { margin: 0; color: var(--muted); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  min-height: calc(100vh - 85px);
+}
+
+.sidebar {
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  padding: 12px;
+}
+.panel-title { font-weight: 700; margin-bottom: 10px; }
+#search {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text);
+  margin-bottom: 10px;
+}
+#game-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+}
+
+.game-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #1a140f;
+  cursor: pointer;
+}
+.game-item:hover,
+.game-item.active { border-color: var(--accent); }
+.game-item .id { font-weight: 700; }
+.game-item .meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+.content { padding: 16px; }
+.empty { color: var(--muted); }
+.hidden { display: none; }
+
+.meta {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--panel-2);
+  margin-bottom: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.tabs button {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.tabs button.active {
+  border-color: var(--accent);
+  color: #ffd8bf;
+}
+
+.tab-pane {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #16110c;
+  padding: 12px;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  max-height: calc(100vh - 290px);
+  overflow: auto;
+}
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+}

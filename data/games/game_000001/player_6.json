@@ -1,0 +1,21 @@
+{
+  "id": "6",
+  "name": "Zeta",
+  "model": "nvidia/minimaxai/minimax-m2.5",
+  "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
+  "initial_role": "Robber (強盜)",
+  "current_role": "Seer (預言家)",
+  "night_memory": "你偷咗 Alpha 張牌，換完之後你而家係：Seer (預言家)。",
+  "night_memory_list": [
+    "你偷咗 Alpha 張牌，換完之後你而家係：Seer (預言家)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Robber (強盜)",
+      "action": "rob",
+      "target": "Alpha",
+      "new_role": "Seer (預言家)",
+      "source": "agent"
+    }
+  ]
+}

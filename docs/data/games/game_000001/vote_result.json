@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "votes": {
+    "Alpha": "Gamma",
+    "Beta": "Gamma",
+    "Gamma": "Echo",
+    "Delta": "Echo",
+    "Echo": "Beta",
+    "Zeta": "Alpha"
+  },
+  "tally": {
+    "Gamma": 2,
+    "Echo": 2,
+    "Beta": 1,
+    "Alpha": 1
+  },
+  "executed": [
+    "Gamma",
+    "Echo"
+  ],
+  "vote_trace": []
+}

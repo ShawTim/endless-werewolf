@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 一夜狼人 — 遊戲檔案館</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🐺 AI 一夜狼人 檔案館</h1>
+      <p>Browse 每一場 game 嘅夜晚、日頭對話、投票、結算</p>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="panel-title">Games</div>
+        <input id="search" placeholder="搜尋 game id / outcome" />
+        <ul id="game-list"></ul>
+      </aside>
+
+      <section class="content">
+        <div id="empty" class="empty">揀一場 game 睇詳情</div>
+
+        <div id="details" class="hidden">
+          <div class="meta" id="meta"></div>
+
+          <div class="tabs">
+            <button data-tab="night" class="active">Night</button>
+            <button data-tab="chat">Day Chat</button>
+            <button data-tab="vote">Vote</button>
+            <button data-tab="resolve">Resolve</button>
+          </div>
+
+          <pre id="tab-night" class="tab-pane"></pre>
+          <pre id="tab-chat" class="tab-pane hidden"></pre>
+          <pre id="tab-vote" class="tab-pane hidden"></pre>
+          <pre id="tab-resolve" class="tab-pane hidden"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
