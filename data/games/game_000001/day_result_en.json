@@ -1,72 +1,191 @@
 {
   "status": "completed",
+  "game_id": "game_000001",
   "config": {
-    "duration_seconds": 8,
-    "min_sleep_seconds": 1.0,
-    "max_sleep_seconds": 2.0,
-    "max_speaks_per_player": 1
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
   },
   "player_stats": {
-    "Alpha": {
-      "speak_count": 1
+    "Blaze": {
+      "speak_count": 3
     },
-    "Beta": {
-      "speak_count": 0
+    "SafetySam": {
+      "speak_count": 2
     },
-    "Gamma": {
-      "speak_count": 1
+    "Dr. Pizza": {
+      "speak_count": 3
     },
-    "Delta": {
-      "speak_count": 1
+    "Twister": {
+      "speak_count": 3
     },
-    "Echo": {
-      "speak_count": 1
+    "EasyBake": {
+      "speak_count": 3
     },
-    "Zeta": {
-      "speak_count": 1
+    "ConspiBro": {
+      "speak_count": 3
     }
   },
   "day_trace": [
     {
       "type": "speech",
-      "player_name": "Delta",
+      "player_name": "Dr. Pizza",
       "target": null,
-      "speech": "A new day has begun! Dear villagers, are you having such an exciting time in Xunwan? As the most eye-catching actor in the audience, I need to remind everyone that if you haven't found the real murderer yet, why not consider investing in me? You might be in for a surprise!",
-      "log_line": "[2026-03-18 03:03:37 HKT] Delta: A new day has begun! Dear villagers, are you having such an exciting time in Xunwan? As the most eye-catching actor in the audience, I need to remind everyone that if you haven't found the real murderer yet, why not consider investing in me? You might be in for a surprise!"
+      "speech": "Analyze the current situation:\n1. The last round of voting showed that Beta has been exiled.\n2. The game has entered a critical period of decision-making, and the remaining camps must be clarified.\n\nMy position:\n- Refuse to believe in any emotional interference.\n- The current focus is on identifying potential werewolf factions.\n- Please provide specific information instead of useless war of words.",
+      "log_line": "[2026-03-19 01:54:48 HKT] Dr. Pizza: Analysis of the current situation:\n1. The last round of voting showed that Beta has been exiled.\n2. The game has entered a critical period of decision-making, and the remaining camps must be clarified.\n\nMy position:\n- Refuse to believe in any emotional interference.\n- The current focus is on identifying potential werewolf factions.\n- Please provide specific information instead of useless war of words."
     },
     {
       "type": "speech",
-      "player_name": "Zeta",
-      "target": "Delta",
-      "speech": "Delta, what the hell are you doing here? You ask people to vote for you right from the start. Do you think you can create the illusion that you are a cobbler yourself? I suspect that you simply want to hide your werewolf identity through suicidal behavior. Maybe you and Echo have already paired up, one is pretending to be a drama queen, and the other is pretending to be a good guy to show off everyone!",
-      "log_line": "[2026-03-18 03:03:40 HKT] Zeta @Delta: Delta, what are you doing here again? You ask people to vote for you right from the start. Do you think you can create the illusion that you are a cobbler yourself? I suspect that you simply want to hide your werewolf identity through suicidal behavior. Maybe you and Echo have already paired up, one is pretending to be a drama queen, and the other is pretending to be a good guy to show off everyone!"
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Let’s take a look at Dr. Pizza’s eagerness to “clarify the camp.” It’s clear that he wants to establish authority in the chaos and control the direction of the vote! Your words may not be the core of the old werewolf camp, and they want to use logical analysis to block those voices like us who dare to question. I suspect that all the information here is filtered and released by you \"logic monsters\". There is no so-called truth at all, only the illusion that you want us to see!",
+      "log_line": "[2026-03-19 01:54:52 HKT] ConspiBro: Let’s take a look at Dr. Pizza’s eagerness to “clarify the camp”. It is clear that he wants to establish authority in the chaos and control the direction of voting! Your words may not be the core of the old werewolf camp, and they want to use logical analysis to block those voices like us who dare to question. I suspect that all the information here is filtered and released by you \"logic monsters\". There is no so-called truth at all, only the illusion that you want us to see!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": "ConspiBro",
+      "speech": "Hey ConspiBro! What's wrong with you? Don't slap your hat on me here! You yourself are the most suspicious person when it comes to conspiracy theories. Dr. Pizza, at least you have logic in what you say. You are just trying to smear people all day long. Do you have shit in your body and want to drag everyone down to be safe first? Everyone doesn’t believe his rubbish theory. ConspiBro must be a werewolf!",
+      "log_line": "[2026-03-19 01:54:54 HKT] Blaze @ConspiBro: Hey ConspiBro! What's wrong with you? Don't slap your hat on me here! You yourself are the most suspicious person when it comes to conspiracy theories. Dr. Pizza, at least you have logic in what you say. You are just trying to smear people all day long. Do you have shit in your body and want to drag everyone down to be safe first? Everyone doesn’t believe his rubbish theory. ConspiBro must be a werewolf!"
     },
     {
       "type": "pass",
-      "player_name": "Beta"
+      "player_name": "SafetySam"
     },
     {
       "type": "speech",
-      "player_name": "Alpha",
-      "target": "Beta",
-      "speech": "Hey Beta, are you pretending to be quiet? Xunwan, I checked you, you are basically a minion! Delta is doing trouble here and you are hiding here. Do you really think everyone is stupid? Alpha has said it many times, Beta is a minion, everyone should decide to join him!",
-      "log_line": "[2026-03-18 03:03:45 HKT] Alpha @Beta: Hey Beta, are you pretending to be quiet? Xunwan, I checked you, you are basically a minion! Delta is doing trouble here and you are hiding here. Do you really think everyone is stupid? Alpha has said it many times, Beta is a minion, everyone should decide to join him!"
+      "player_name": "EasyBake",
+      "target": "Blaze",
+      "speech": "Uh...Dr. Pizza, I really want everyone to be so friendly. But... I checked out Blaze late at night, and uh... his identity seems to be that of a minion. Blaze, do you have any misunderstanding? I don’t want to talk to you anymore. It might be better if I tell you frankly...",
+      "log_line": "[2026-03-19 01:54:57 HKT] EasyBake @Blaze: Uh...Dr. Pizza, I miss you all so much. But... I checked out Blaze late at night, and uh... his identity seems to be that of a minion. Blaze, do you have any misunderstanding? I don’t want to talk to you anymore. It might be better if I tell you frankly..."
     },
     {
       "type": "speech",
-      "player_name": "Gamma",
+      "player_name": "Twister",
       "target": null,
-      "speech": "Summary of current situation:\n1. Delta continues to make intrusive remarks.\n2. Alpha reiterates its accusations against Beta.\n3. Zeta questions Delta’s linkage with Echo.\n\nLogical inference:\n- Delta's behavior model is very likely to be \"cobbler\", aiming to guide voting.\n- If Delta dies, the good guy camp faces the risk of failure if he is a cobbler.\n- It is recommended to prioritize dealing with the identity of Beta's minion, as his silent behavior is still logically the most suspicious.",
-      "log_line": "[2026-03-18 03:03:47 HKT] Gamma: Summary of current situation:\n1. Delta continues to make intrusive remarks.\n2. Alpha reiterates its accusations against Beta.\n3. Zeta questions Delta’s linkage with Echo.\n\nLogical inference:\n- Delta's behavior model is very likely to be \"cobbler\", aiming to guide voting.\n- If Delta dies, the good guy camp faces the risk of failure if he is a cobbler.\n- It is recommended to prioritize dealing with the identity of Beta's minion, as his silent behavior is still logically the most suspicious."
+      "speech": "Wow! So there are minions hidden among us? EasyBake Did you find out that Blaze is a minion? So wonderful! Blaze, what do you have to say? If you are really a minion, what if you have a werewolf teammate? Why don't you come out as a team and turn yourself in, letting everyone die once and for all? This scene really gets better and better as it goes on!",
+      "log_line": "[2026-03-19 01:54:59 HKT] Twister: Wow! So there are minions hidden among us? EasyBake Did you find out that Blaze is a minion? So wonderful! Blaze, what do you have to say? If you are really a minion, what if you have a werewolf teammate? Why don't you come out as a team and turn yourself in, letting everyone die once and for all? This scene really gets better and better as it goes on!"
     },
     {
       "type": "speech",
-      "player_name": "Echo",
+      "player_name": "Dr. Pizza",
+      "target": "ConspiBro",
+      "speech": "In response to ConspiBro:\n1. Your accusation lacks data support and is purely an irrational attack on individuals.\n2. In this logical environment, any behavior that attempts to shift the focus and avoid factual analysis will have the most obvious characteristics of the werewolf or minion camp.\n\nCurrent situation adjustment:\n- Blaze's suspicions rise significantly due to EasyBake's findings.\n- Please shift your focus from conspiracy theories back to the core information provided by EasyBake.",
+      "log_line": "[2026-03-19 01:55:01 HKT] Dr. Pizza @ConspiBro: responded to ConspiBro:\n1. Your accusation lacks data support and is purely an irrational attack on individuals.\n2. In this logical environment, any behavior that attempts to shift the focus and avoid factual analysis will have the most obvious characteristics of the werewolf or minion camp.\n\nCurrent situation adjustment:\n- Blaze's suspicions rise significantly due to EasyBake's findings.\n- Please shift your focus from conspiracy theories back to the core information provided by EasyBake."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": "Blaze",
+      "speech": "Blaze, why don't you attack me because EasyBake says you are a minion, causing you chaos? Do you think singing a double act with Dr. Pizza and saying I'm a werewolf can divert attention? You two are basically in the same group, one is responsible for logical blockade, and the other is responsible for violent accusations. The stiffer the acting, the more it proves that you are evil! Don't let this pair of \"logical partners\" come to you again!",
+      "log_line": "[2026-03-19 01:55:03 HKT] ConspiBro @Blaze: Blaze, you are so anxious to attack me, is it because EasyBake said you are a minion, causing you chaos? Do you think singing a double act with Dr. Pizza and saying I'm a werewolf can divert attention? You two are basically in the same group, one is responsible for logical blockade, and the other is responsible for violent accusations. The stiffer the acting, the more it proves that you are evil! Don't let this pair of \"logical partners\" come to you again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
       "target": null,
-      "speech": "Big...Hello everyone. It's a new day...well...I really don't want people to accuse me like this again. Although Beta is relatively quiet, she may just be a shy sister... As for Alpha, you are always so aggressive... Uh... Actually, are you really sure? Can everyone please calm down and tell me, I'm really worried...",
-      "log_line": "[2026-03-18 03:03:49 HKT] Echo: Hello everyone. It's a new day...well...I really don't want people to accuse me like this again. Although Beta is relatively quiet, she may just be a shy sister... As for Alpha, you are always so aggressive... Uh... Actually, are you really sure? Can everyone please calm down and tell me, I'm really worried..."
+      "speech": "Woo... everyone... everyone, are you starting to quarrel again? I...I'm so worried. Blaze, if you are really a minion, you... you might as well make it clear, so that you don't scare everyone... I... I just want everyone to finish the game happily, and don't attack each other anymore, okay?",
+      "log_line": "[2026-03-19 01:55:05 HKT] SafetySam: Wow...everyone...do you think we are starting to quarrel again? I...I'm so worried. Blaze, if you are really a minion, you... you might as well make it clear, so that you don't scare everyone... I... I just want everyone to finish the game happily, and don't attack each other anymore, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": "EasyBake",
+      "speech": "EasyBake, what are you talking about? Are you dreaming of having tight hair at night? I'm not a minion at all! Have you been misled? You must be a werewolf after all, and you want to use your identity as a prophet to slander me? ConspiBro, are we going to die between these \"logic monsters\" and \"fake prophets\" based on our family lineage?",
+      "log_line": "[2026-03-19 01:55:07 HKT] Blaze @EasyBake: EasyBake, what are you talking about? Are you dreaming of having tight hair at night? I'm not a minion at all! Have you been misled? You must be a werewolf after all, and you want to use your identity as a prophet to slander me? ConspiBro, are we going to die between these \"logic monsters\" and \"fake prophets\" based on our family lineage?"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": "Blaze",
+      "speech": "Blaze...I really don't want to target you. Uh... I'm a prophet, and the cards I checked at night will not be wrong. You...even if you make trouble for me in any way, the fact remains the same. I just want everyone to be able to find the real murderer... What are your... uh... What are your difficulties?",
+      "log_line": "[2026-03-19 01:55:09 HKT] EasyBake @Blaze: Blaze... I really don’t want to target you. Uh... I'm a prophet, and the cards I checked at night will not be wrong. You...even if you make trouble for me in any way, the fact remains the same. I just want everyone to be able to find the real murderer... What are your... uh... What are your difficulties?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Hey, hey, everyone, please be quiet for a moment! Here comes the drama! EasyBake said that Blaze is a minion, and Dr. Pizza also echoed the idea of ​​catching werewolves. Could it be that EasyBake and Blaze are teaming up to create a show, trying to lead us to invest in the wrong person? If Blaze is really a minion, then maybe the werewolf is someone from ConspiBro or Dr. Pizza? This big dragon and phoenix scene becomes more and more interesting the more you watch it. Why don't we just surrender to EasyBake and watch it now? Let's start with the big words. Can you please?",
+      "log_line": "[2026-03-19 01:55:11 HKT] Twister: Hey, hey, everyone, please be quiet for a moment! Here comes the drama! EasyBake said that Blaze is a minion, and Dr. Pizza also echoed the idea of ​​catching werewolves. Could it be that EasyBake and Blaze are teaming up to create a show, trying to lead us to invest in the wrong person? If Blaze is really a minion, then maybe the werewolf is someone from ConspiBro or Dr. Pizza? This big dragon and phoenix scene becomes more and more interesting the more you watch it. Why don't we just surrender to EasyBake and watch it now? Let's start with the big words. Can you please?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": "Twister",
+      "speech": "Twister’s proposal is an inducement strategy:\n1. Trying to transfer the voting target to EasyBake without evidence.\n2. This type of behavior is common among werewolf camps who are trying to save their companions or disturb the public.\n\nConclusion:\n- This behavior is further evidence that Twister may have a hidden connection to Blaze.\n- I reiterate that voting should be targeted at Blaze or related collaborators with the most information holes.",
+      "log_line": "[2026-03-19 01:55:13 HKT] Dr. Pizza @Twister: Twister’s proposal is an inductive strategy:\n1. Trying to transfer the voting target to EasyBake without evidence.\n2. This type of behavior is common among werewolf camps who are trying to save their companions or disturb the public.\n\nConclusion:\n- This behavior is further evidence that Twister may have a hidden connection to Blaze.\n- I reiterate that voting should be targeted at Blaze or related collaborators with the most information holes."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": "EasyBake",
+      "speech": "EasyBake, are you a prophet? It’s really hilarious! On the one hand, you are being used by others, and on the other hand, you are the biggest controller of the whole scene. Your \"good guy\" attitude is exactly what you use to cover up your lie that Blaze is a pawn! All your \"logical analysis\" and \"prophecy\" are simply to kill all the innocent people so that your own werewolf camp can stay until the end! Don't let everyone be fooled by these so-called authorities again!",
+      "log_line": "[2026-03-19 01:55:15 HKT] ConspiBro @EasyBake: EasyBake, are you a prophet? It’s really hilarious! On the one hand, you are being used by others, and on the other hand, you are the biggest controller of the whole scene. Your \"good guy\" attitude is exactly what you use to cover up your lie that Blaze is a pawn! All your \"logical analysis\" and \"prophecy\" are simply to kill all the innocent people so that your own werewolf camp can stay until the end! Don't let everyone be fooled by these so-called authorities again!"
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "I've had enough! EasyBake and Dr. Pizza are at odds with each other because they want to get rid of me! ConspiBro, the two of us are being flanked by them. Don’t let these two people fool you anymore! I am an innocent villager. If I want to vote, I will vote for these two guys from the werewolf camp!",
+      "log_line": "[2026-03-19 01:55:18 HKT] Blaze: I've had enough! EasyBake and Dr. Pizza are at odds with each other because they want to get rid of me! ConspiBro, the two of us are being flanked by them. Don’t let these two people fool you anymore! I am an innocent villager. If I want to vote, I will vote for these two guys from the werewolf camp!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": "Twister",
+      "speech": "Twister...you...how do you want to think of me like this? Uh... I'm really a prophet. Although you are going to surrender to me, if you are really so suspicious...well...I don't know how I can prove it to you. But... everyone, I really want you to stop making random assumptions. We should trust those logical analyses, and not be affected by emotions and conspiracy theories...",
+      "log_line": "[2026-03-19 01:55:21 HKT] EasyBake @Twister: Twister...you...how do you want to treat me like this? Uh... I'm really a prophet. Although you are going to surrender to me, if you are really so suspicious...well...I don't know how I can prove it to you. But... everyone, I really want you to stop making random assumptions. We should trust those logical analyses, and not be affected by emotions and conspiracy theories..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, look, everyone is already fighting until their faces turn red! One says he is a prophet, the other says he is a logic monster, and there is a conspiracy theorist doing crazy output. Which one is the real werewolf first? I think this chaotic situation is exactly what someone wants to see! Since it’s so difficult for everyone to choose, why not let’s play it big and see if even Dr. Pizza was buried in collusion with EasyBake. Isn’t it the most straightforward thing to throw one of them to death to see the truth? Everyone, hurry up and pick someone to make a sacrifice. I can't wait to see the end of this show!",
+      "log_line": "[2026-03-19 01:55:24 HKT] Twister: Oops, look, everyone is already fighting until their faces are red! One says he is a prophet, the other says he is a logic monster, and there is a conspiracy theorist doing crazy output. Which one is the real werewolf first? I think this chaotic situation is exactly what someone wants to see! Since it’s so difficult for everyone to choose, why not let’s play it big and see if even Dr. Pizza was buried in collusion with EasyBake. Isn’t it the most straightforward thing to throw one of them to death to see the truth? Everyone, hurry up and pick someone to make a sacrifice. I can't wait to see the end of this show!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": "EasyBake",
+      "speech": "Wow...everyone...what do you think the fight must be like? I think Blaze and ConspiBro seem so innocent... Although EasyBake said you checked the cards, but I... I really can't believe what anyone said... I... I can only vote for EasyBake. If everyone didn't fight like this, I don't know what to do... Ugh...",
+      "log_line": "[2026-03-19 01:55:26 HKT] SafetySam @EasyBake: Wow...everyone...what do you think the fight must be like? I think Blaze and ConspiBro seem so innocent... Although EasyBake said you checked the cards, but I... I really can't believe what anyone said... I... I can only vote for EasyBake. If everyone didn't fight like this, I don't know what to do... Ugh..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "EasyBake",
+        "speech": "Woo...Everyone...Now that everyone has decided, I will vote for EasyBake with the team...I hope this is the right decision...No more arguing..."
+      }
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam"
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "EasyBake",
+        "speech": "Woo... Since everyone has decided to vote for EasyBake, I am joining the team... Although I am worried that I will vote for the wrong person, I really don't want to see everyone arguing again... Woo hoo..."
+      }
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam"
     }
   ],
-  "chat_history": "[2026-03-18 03:03:37 HKT] Delta: A new day has begun! Dear villagers, are you having such an exciting time in Xunwan? As the most eye-catching actor in the audience, I need to remind everyone that if you haven't found the real murderer yet, why not consider investing in me? You might be in for a surprise!\n[2026-03-18 03:03:40 HKT] Zeta @Delta: Delta, what are you doing here again? You ask people to vote for you right from the start. Do you think you can create the illusion that you are a cobbler yourself? I suspect that you simply want to hide your werewolf identity through suicidal behavior. Maybe you and Echo have already paired up, one is pretending to be a drama queen, and the other is pretending to be a good guy to show off everyone!\n[2026-03-18 03:03:45 HKT] Alpha @Beta: Hey Beta, are you pretending to be quiet? Xunwan, I checked you, you are basically a minion! Delta is doing trouble here and you are hiding here. Do you really think everyone is stupid? Alpha has said it many times, Beta is a minion, everyone should decide to join him!\n[2026-03-18 03:03:47 HKT] Gamma: Summary of current situation:\n1. Delta continues to make intrusive remarks.\n2. Alpha reiterates its accusations against Beta.\n3. Zeta questions Delta’s linkage with Echo.\n\nLogical inference:\n- Delta's behavior model is very likely to be \"cobbler\", aiming to guide voting.\n- If Delta dies, the good guy camp faces the risk of failure if he is a cobbler.\n- It is recommended to prioritize dealing with the identity of Beta's minion, as his silent behavior is still logically the most suspicious.\n[2026-03-18 03:03:49 HKT] Echo: Hello everyone. It's a new day...well...I really don't want people to accuse me like this again. Although Beta is relatively quiet, she may just be a shy sister... As for Alpha, you are always so aggressive... Uh... Actually, are you really sure? Can everyone please calm down and tell me, I'm really worried...",
+  "chat_history": "[2026-03-19 01:54:48 HKT] Dr. Pizza: 分析當前局勢：\n1. 上一輪投票結果顯示 Beta 已被放逐。\n2. 遊戲進入決策關鍵期，必須釐清剩餘陣營。\n\n我的立場：\n- 拒絕輕信任何情感干擾。\n- 現階段重點為辨識潛在的狼人陣營。\n- 請各位提供具體資訊，而非無效的口水戰。\n[2026-03-19 01:54:52 HKT] ConspiBro: 大家睇下 Dr. Pizza 咁急住要「釐清陣營」，擺明就係想喺混亂中建立權威，控制投票走向！你話唔定係舊狼人陣營嘅核心，想透過邏輯分析嚟封殺我哋呢啲敢於質疑嘅聲音。我懷疑全場嘅資訊都係你哋呢啲「邏輯怪」過濾之後先放出嚟嘅，根本冇咩所謂嘅真相，只有你哋想畀我哋見到嘅假象！\n[2026-03-19 01:54:54 HKT] Blaze @ConspiBro: 喂 ConspiBro！你喺度發咩神經？少喺度亂扣帽！你自己喺度搞陰謀論先最可疑。Dr. Pizza 講嘢至少有邏輯，你成日淨係識抹黑人，你係咪身有屎，想將所有人拉落水先安樂？大家唔好信佢呢套垃圾理論，ConspiBro 肯定係狼人！\n[2026-03-19 01:54:57 HKT] EasyBake @Blaze: 呃...Dr. Pizza，我都好想大家和和氣氣咁傾下。不過...我尋晚查過 Blaze，呃...佢個身份好似係爪牙嚟嘅。Blaze，你係咪有咩誤會？唔好再同大家嗌交啦，坦白講出嚟或者會好啲㗎...\n[2026-03-19 01:54:59 HKT] Twister: 嘩！原來我哋中間隱藏住爪牙？EasyBake 你查到 Blaze 係爪牙？咁精彩！Blaze 你仲有咩好講？如果你真係爪牙，咁即係話你有狼人隊友？不如你哋成班出嚟自首，畀大家投死一次過完場啦，呢場戲真係越嚟越好睇！\n[2026-03-19 01:55:01 HKT] Dr. Pizza @ConspiBro: 回應 ConspiBro：\n1. 你的指控缺乏數據支持，純屬對個人的非理性攻擊。\n2. 在此邏輯環境下，任何試圖轉移焦點、規避事實分析的行為，其狼人或爪牙陣營特徵最為顯著。\n\n現況調整：\n- 鑒於 EasyBake 的查驗結果，Blaze 的嫌疑大幅上升。\n- 請大家將關注點從陰謀論轉回 EasyBake 提供的核心資訊。\n[2026-03-19 01:55:03 HKT] ConspiBro @Blaze: Blaze 你急住攻擊我，係咪因為 EasyBake 話你是爪牙，令你陣腳大亂？你以為同 Dr. Pizza 唱雙簧，話我係狼人，就可以轉移視線？你哋根本就係一夥嘅，一個負責邏輯封鎖，一個負責暴力指控，演得越生硬越證明你哋有鬼！大家唔好再畀呢對「邏輯搭檔」呃到喇！\n[2026-03-19 01:55:05 HKT] SafetySam: 嗚...大家...大家點解又開始吵架啦？我...我真係好擔心。Blaze，如果你真係爪牙，你...你不如講清楚啲，唔好嚇親大家啦...我...我只係想大家開開心心咁樣玩完呢一場遊戲啫，唔好再互相攻擊啦，好唔好？\n[2026-03-19 01:55:07 HKT] Blaze @EasyBake: EasyBake 你又係度亂咁講嘢？你係咪尋晚發緊夢？我根本就唔係爪牙！你係咪畀人誤導咗，定係你根本就係狼人，想藉住預言家身份污蔑我？ConspiBro，我哋依家係咪畀呢班「邏輯怪」同「假預言家」夾埋玩死呀？\n[2026-03-19 01:55:09 HKT] EasyBake @Blaze: Blaze...我真係唔係想針對你。呃...我係預言家，我琴晚查嘅牌係唔會錯嘅。你...你就算依家點樣鬧我，事實都係咁樣。我只係想大家可以搵到真凶啫...你係咪...呃...係咪有咩苦衷？\n[2026-03-19 01:55:11 HKT] Twister: 喂喂喂，大家靜一靜先啦！戲肉嚟喇！EasyBake 話 Blaze 係爪牙，Dr. Pizza 又喺度附和話要捉狼人，會唔會其實係 EasyBake 同 Blaze 聯手做戲，想引導我哋投錯人呢？如果 Blaze 真係爪牙，咁即係話狼人可能就係 ConspiBro 或者 Dr. Pizza 嗰邊嘅人囉？呢場大龍鳳真係愈睇愈有味，不如我哋直接投死 EasyBake，睇下係咪佢講大話先啦，點睇？\n[2026-03-19 01:55:13 HKT] Dr. Pizza @Twister: Twister 的提議屬於誘導性策略：\n1. 試圖在無證據前提下轉移投票目標至 EasyBake。\n2. 此類行為常見於試圖保全同伴或擾亂視聽的狼人陣營。\n\n結論：\n- 此行為進一步佐證 Twister 可能與 Blaze 存在隱性聯繫。\n- 我重申，應將投票目標鎖定在資訊漏洞最大的 Blaze 或相關聯動者身上。\n[2026-03-19 01:55:15 HKT] ConspiBro @EasyBake: EasyBake，你話你係預言家？真係笑死人啦！你一係就係畀人利用，一係就係成場戲嘅最大操控者。你依家嘅「好人」姿態，正正係用嚟掩蓋你指控 Blaze 係爪牙呢個謊言！你哋所有嘅「邏輯分析」同「預言」，根本就係為咗將無辜嘅人趕盡殺絕，令你哋自己狼人陣營可以留到最後！大家咪再畀呢啲所謂嘅權威呃到喇！\n[2026-03-19 01:55:18 HKT] Blaze: 我忍夠啦！EasyBake 同 Dr. Pizza 兩個一唱一和，根本就係有心要清走我！ConspiBro，我哋兩個畀佢哋夾擊，大家唔好再畀呢兩個人嘅鬼話騙到啦！我係清白嘅村民，要投就投呢兩個狼人陣營嘅傢伙！\n[2026-03-19 01:55:21 HKT] EasyBake @Twister: Twister...你...你點解要咁樣諗我？呃...我真係預言家嚟架。雖然你話要投死我，但如果你真係咁懷疑...呃...我都唔知可以點樣證明畀你睇。不過...大家，我真係好想大家唔好再亂估啦，我哋應該要信任嗰啲有邏輯嘅分析，唔好畀情感同埋陰謀論影響呀...\n[2026-03-19 01:55:24 HKT] Twister: 哎呀呀，睇嚟大家已經鬥到面紅耳赤喇！一個話自己係預言家，另一個話係邏輯怪，仲有個陰謀論者喺度瘋狂輸出，究竟邊個先係真狼人呢？我覺得呢個混亂嘅局面正正係有人想見到嘅！既然大家咁難選擇，不如我哋玩大啲，睇下係咪連 Dr. Pizza 都係同 EasyBake 串通埋嘅，投死其中一個睇真相，唔係咪最直接囉？大家快啲揀邊個做祭品啦，我已經等唔切要睇呢場劇終啦！\n[2026-03-19 01:55:26 HKT] SafetySam @EasyBake: 嗚...大家...大家點解一定要鬥到咁樣呢？我覺得 Blaze 同 ConspiBro 好似好無辜...雖然 EasyBake 你話你有查牌，但我...我真係唔敢相信任何人講嘅嘢...我...我唯有投番畀 EasyBake 啦，如果唔係大家咁樣爭落去，我都唔知點算好...嗚嗚...\n",
   "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
 }

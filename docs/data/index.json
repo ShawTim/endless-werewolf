@@ -4,21 +4,19 @@
     {
       "game_id": "game_000001",
       "status": "completed",
-      "created_at": "2026-03-18T06:47:17.032015+00:00",
-      "completed_at": "2026-03-18T06:47:17.034833+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
+      "created_at": "2026-03-18T17:52:40.515463+00:00",
+      "completed_at": "2026-03-18T17:56:33.932472+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
       "executed": [
-        "Gamma",
-        "Echo"
+        "SafetySam"
       ],
       "winners": [
-        "Alpha",
-        "Gamma",
-        "Zeta"
+        "Dr. Pizza",
+        "ConspiBro"
       ],
       "votes_count": 6,
-      "chat_lines": 12
+      "chat_lines": 33
     }
   ]
 }

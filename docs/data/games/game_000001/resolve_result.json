@@ -1,67 +1,62 @@
 {
   "status": "completed",
-  "outcome": "village_win",
-  "winner_team": "village_team",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
   "winners": [
-    "Alpha",
-    "Gamma",
-    "Zeta"
+    "Dr. Pizza",
+    "ConspiBro"
   ],
-  "reason": "At least one werewolf was executed.",
+  "reason": "No werewolf was executed.",
   "executed": [
-    "Gamma",
-    "Echo"
+    "SafetySam"
   ],
   "werewolves_in_play": [
-    "Echo"
+    "ConspiBro"
   ],
-  "executed_werewolves": [
-    "Echo"
-  ],
+  "executed_werewolves": [],
   "votes": {
-    "Alpha": "Gamma",
-    "Beta": "Gamma",
-    "Gamma": "Echo",
-    "Delta": "Echo",
-    "Echo": "Beta",
-    "Zeta": "Alpha"
+    "Blaze": "SafetySam",
+    "SafetySam": "Twister",
+    "Dr. Pizza": "EasyBake",
+    "Twister": "SafetySam",
+    "EasyBake": "SafetySam",
+    "ConspiBro": "Twister"
   },
   "tally": {
-    "Gamma": 2,
-    "Echo": 2,
-    "Beta": 1,
-    "Alpha": 1
+    "SafetySam": 3,
+    "Twister": 2,
+    "EasyBake": 1
   },
   "final_roles": {
-    "Alpha": {
-      "initial_role": "Seer (預言家)",
-      "current_role": "Robber (強盜)",
-      "team": "village_team"
-    },
-    "Beta": {
+    "Blaze": {
       "initial_role": "Minion (爪牙)",
-      "current_role": "Minion (爪牙)",
-      "team": "werewolf_team"
-    },
-    "Gamma": {
-      "initial_role": "Villager (村民)",
       "current_role": "Villager (村民)",
       "team": "village_team"
     },
-    "Delta": {
+    "SafetySam": {
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "current_role": "Troublemaker (搗蛋鬼)",
+      "team": "village_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Villager (村民)",
+      "current_role": "Minion (爪牙)",
+      "team": "werewolf_team"
+    },
+    "Twister": {
       "initial_role": "Tanner (皮匠)",
       "current_role": "Tanner (皮匠)",
       "team": "tanner"
     },
-    "Echo": {
+    "EasyBake": {
+      "initial_role": "Seer (預言家)",
+      "current_role": "Seer (預言家)",
+      "team": "village_team"
+    },
+    "ConspiBro": {
       "initial_role": "Werewolf (狼人)",
       "current_role": "Werewolf (狼人)",
       "team": "werewolf_team"
-    },
-    "Zeta": {
-      "initial_role": "Robber (強盜)",
-      "current_role": "Seer (預言家)",
-      "team": "village_team"
     }
   },
   "game_id": "game_000001"

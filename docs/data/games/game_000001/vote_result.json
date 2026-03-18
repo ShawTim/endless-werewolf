@@ -1,22 +1,21 @@
 {
   "status": "completed",
+  "game_id": "game_000001",
   "votes": {
-    "Alpha": "Gamma",
-    "Beta": "Gamma",
-    "Gamma": "Echo",
-    "Delta": "Echo",
-    "Echo": "Beta",
-    "Zeta": "Alpha"
+    "Blaze": "SafetySam",
+    "SafetySam": "Twister",
+    "Dr. Pizza": "EasyBake",
+    "Twister": "SafetySam",
+    "EasyBake": "SafetySam",
+    "ConspiBro": "Twister"
   },
   "tally": {
-    "Gamma": 2,
-    "Echo": 2,
-    "Beta": 1,
-    "Alpha": 1
+    "SafetySam": 3,
+    "Twister": 2,
+    "EasyBake": 1
   },
   "executed": [
-    "Gamma",
-    "Echo"
+    "SafetySam"
   ],
   "vote_trace": []
 }

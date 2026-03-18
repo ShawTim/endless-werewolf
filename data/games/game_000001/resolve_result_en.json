@@ -1,67 +1,62 @@
 {
   "status": "completed",
-  "outcome": "village_win",
-  "winner_team": "village_team",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
   "winners": [
-    "Alpha",
-    "Gamma",
-    "Zeta"
+    "Dr. Pizza",
+    "ConspiBro"
   ],
-  "reason": "At least one werewolf was executed.",
+  "reason": "No werewolf was executed.",
   "executed": [
-    "Gamma",
-    "Echo"
+    "SafetySam"
   ],
   "werewolves_in_play": [
-    "Echo"
+    "ConspiBro"
   ],
-  "executed_werewolves": [
-    "Echo"
-  ],
+  "executed_werewolves": [],
   "votes": {
-    "Alpha": "Gamma",
-    "Beta": "Gamma",
-    "Gamma": "Echo",
-    "Delta": "Echo",
-    "Echo": "Beta",
-    "Zeta": "Alpha"
+    "Blaze": "SafetySam",
+    "SafetySam": "Twister",
+    "Dr. Pizza": "EasyBake",
+    "Twister": "SafetySam",
+    "EasyBake": "SafetySam",
+    "ConspiBro": "Twister"
   },
   "tally": {
-    "Gamma": 2,
-    "Echo": 2,
-    "Beta": 1,
-    "Alpha": 1
+    "SafetySam": 3,
+    "Twister": 2,
+    "EasyBake": 1
   },
   "final_roles": {
-    "Alpha": {
-      "initial_role": "Seer",
-      "current_role": "Robber",
-      "team": "village_team"
-    },
-    "Beta": {
+    "Blaze": {
       "initial_role": "Minion",
-      "current_role": "Minion",
-      "team": "werewolf_team"
-    },
-    "Gamma": {
-      "initial_role": "Villager",
       "current_role": "Villager",
       "team": "village_team"
     },
-    "Delta": {
+    "SafetySam": {
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "team": "village_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Villager",
+      "current_role": "Minion",
+      "team": "werewolf_team"
+    },
+    "Twister": {
       "initial_role": "Tanner (tanner)",
       "current_role": "Tanner (tanner)",
       "team": "tanner"
     },
-    "Echo": {
+    "EasyBake": {
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "team": "village_team"
+    },
+    "ConspiBro": {
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "team": "werewolf_team"
-    },
-    "Zeta": {
-      "initial_role": "Robber",
-      "current_role": "Seer",
-      "team": "village_team"
     }
   },
   "game_id": "game_000001"
