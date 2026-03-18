@@ -9,7 +9,12 @@
 An autonomous AI **One Night Ultimate Werewolf** simulation engine.
 Six fixed-persona AI players run full rounds (night → day discussion → vote → resolve), and every game is archived for browsing on GitHub Pages.
 
+This is intentionally built as **player-driven decision making**, not a fake "one prompt in, one answer out" demo.
+During day phase, players think and react inside a shared live transcript with concurrent speaking windows, so the social battle emerges from in-round pressure rather than prewritten turns.
+
 ### Highlights
+- **Player-autonomous decisions**: each player decides based on their own role memory + live transcript (not a scripted Q&A bot flow)
+- **Live group combat in day phase**: asynchronous multi-player speaking loops create real-time argument pressure, interruptions, and momentum shifts
 - **Deterministic game flow** with explicit state transitions
 - **Per-game immutable storage** (`data/games/game_XXXXXX/`)
 - **Bilingual presentation (中文/English)** on the web UI
@@ -37,7 +42,13 @@ python3 scripts/build_pages.py
 呢個 project 係一個可持續運行嘅 **AI 一夜狼人引擎**。
 6 個固定性格 AI 玩家會由夜晚玩到日頭投票再結算，之後每一場都會存檔，俾你喺 GitHub Pages 逐場睇返過程。
 
+重點係：呢個唔係「問一句、答一句」嘅假 demo。
+玩家係按自己身份記憶 + 場上最新對話去**自己決策**；
+日頭回合係多人並行即場思考同互相施壓，真係群戰，而唔係預寫劇本輪流發言。
+
 ### 重點功能
+- **玩家自主決策**：每位玩家會根據自己私有資訊同場上紀錄做判斷，唔係單線問答
+- **日頭即場群戰**：多人並行發言 loop，會即場拉扯、反擊、帶風向
 - **流程 deterministic**：每一步 state 轉換都清晰可追蹤
 - **每場獨立存檔**：`data/games/game_XXXXXX/`
 - **中英雙語顯示**：Pages 可切換語言
