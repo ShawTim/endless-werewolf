@@ -21,6 +21,7 @@ allow_patterns=(
   "docs/"
   "scripts/build_pages.py"
   "scripts/publish_pages.sh"
+  "scripts/cron_run_game_publish.sh"
   "scripts/check_public_repo.sh"
 )
 

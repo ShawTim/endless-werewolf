@@ -18,14 +18,19 @@ from pathlib import Path
 WORKSPACE = Path(__file__).resolve().parent
 
 
-def build_thinker_prompt(player_context: dict, chat_history: str) -> str:
+def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: dict | None = None) -> str:
     """Build the prompt for the thinker subagent."""
     player_name = player_context["player_name"]
     persona = player_context["persona"]
     initial_role = player_context["initial_role"]
     current_role = player_context["current_role"]
     night_memory = player_context.get("night_memory_text", "今晚冇咩特別發生。")
-    
+    turn_hints = turn_hints or {}
+    was_mentioned = turn_hints.get("was_mentioned_recently", False)
+    recent_speakers = turn_hints.get("recent_speakers", [])
+    debate_notes = turn_hints.get("debate_notes", [])
+    nudge = turn_hints.get("nudge", "")
+
     return f"""你正在玩《一夜狼人》。現在是白天自由辯論階段。
 
 【你的身份】
@@ -40,8 +45,20 @@ def build_thinker_prompt(player_context: dict, chat_history: str) -> str:
 【場上目前公開討論紀錄】
 {chat_history}
 
+【即場辯論訊號】
+- 你最近是否被點名/提及：{was_mentioned}
+- 最近發言過嘅玩家：{recent_speakers}
+- 辯論提醒：{debate_notes}
+- 即場提示：{nudge}
+
 【你的任務】
 請決定你的日間行動。你可以選擇 "speak"（發言）或 "pass"（沉默）。
+
+重要策略指引（必須考慮）：
+1) 如果有人點名你而你完全唔回應，通常會變得可疑（但某些角色可刻意利用）。
+2) 主動發言太多亦可能被視為帶風向而可疑。
+3) 你要綜合「身份策略 + 人格 + 當前場上壓力」再決定 speak 或 pass。
+4) 如果你選擇 speak，優先回應最近挑戰你或主導風向嘅玩家，而唔係自說自話。
 
 如果發言，請說出你想說的話，可以選擇性地 @ 一位玩家作為回應對象。
 
@@ -134,9 +151,10 @@ def main():
     player_context = request.get("player_context", {})
     model = request.get("model", "google/gemini-3.1-flash-lite-preview")
     chat_history = request.get("chat_history", "")
-    
+    turn_hints = request.get("turn_hints", {})
+
     # Build thinker prompt
-    thinker_prompt = build_thinker_prompt(player_context, chat_history)
+    thinker_prompt = build_thinker_prompt(player_context, chat_history, turn_hints=turn_hints)
     
     # Spawn thinker
     player_name = player_context.get("player_name", "unknown")

@@ -1,6 +1,7 @@
 import asyncio
 import json
 import random
+import re
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -97,12 +98,13 @@ class BridgeAgentClient:
                 return {}
             return json.loads(text[start:end + 1])
 
-    async def request_day_action(self, player_context: dict[str, Any], chat_history: str) -> dict[str, Any]:
+    async def request_day_action(self, player_context: dict[str, Any], chat_history: str, turn_hints: dict[str, Any] | None = None) -> dict[str, Any]:
         decision = await self._call_bridge({
             "request_type": "day_action",
             "player_context": player_context,
             "model": player_context["model"],
             "chat_history": chat_history,
+            "turn_hints": turn_hints or {},
         })
         return {
             "action": decision.get("action", "pass"),
@@ -138,6 +140,31 @@ class DayPhaseRuntime:
         candidate = self.game_dir / "night_result.json"
         return candidate if candidate.exists() else NIGHT_RESULT_PATH
 
+    def _mentioned_by_recent(self, chat_history: str, player_name: str, window: int = 8) -> bool:
+        lines = [ln for ln in chat_history.splitlines() if ln.strip()]
+        recent = lines[-window:]
+        pattern = re.compile(rf"@{re.escape(player_name)}\b|\b{re.escape(player_name)}\b")
+        for ln in recent:
+            if pattern.search(ln):
+                return True
+        return False
+
+    def _recent_speaker_names(self, chat_history: str, window: int = 8) -> list[str]:
+        lines = [ln for ln in chat_history.splitlines() if ln.strip()]
+        recent = lines[-window:]
+        speakers: list[str] = []
+        for ln in recent:
+            if "] " not in ln:
+                continue
+            tail = ln.split("] ", 1)[1]
+            if ":" not in tail:
+                continue
+            head = tail.split(":", 1)[0].strip()
+            speaker = head.split(" @", 1)[0].strip()
+            if speaker and speaker not in speakers:
+                speakers.append(speaker)
+        return speakers
+
     def load_players_from_night_result(self) -> list[dict[str, Any]]:
         night_path = self._night_result_path()
         if not night_path.exists():
@@ -169,8 +196,21 @@ class DayPhaseRuntime:
                 break
 
             chat_history = await self.chat_log.read_all()
+            was_mentioned = self._mentioned_by_recent(chat_history, player_name)
+            recent_speakers = [n for n in self._recent_speaker_names(chat_history) if n != player_name]
+            turn_hints = {
+                "was_mentioned_recently": was_mentioned,
+                "recent_speakers": recent_speakers,
+                "speak_count": self.player_stats[player_name]["speak_count"],
+                "max_speaks": self.config.max_speaks_per_player,
+                "debate_notes": [
+                    "If someone directly challenged you and you ignore it, that can look suspicious (sometimes strategically useful).",
+                    "Speaking too aggressively can also increase suspicion.",
+                    "Balance role strategy, persona, and current table pressure before deciding speak vs pass.",
+                ],
+            }
             try:
-                decision = await self.bridge_client.request_day_action(ctx, chat_history)
+                decision = await self.bridge_client.request_day_action(ctx, chat_history, turn_hints=turn_hints)
             except Exception as e:
                 self.day_trace.append({"type": "bridge_error", "player_name": player_name, "error": str(e)})
                 continue
@@ -180,7 +220,7 @@ class DayPhaseRuntime:
             speech = (decision.get("speech") or "").strip()
 
             if action == "pass":
-                self.day_trace.append({"type": "pass", "player_name": player_name})
+                self.day_trace.append({"type": "pass", "player_name": player_name, "mentioned_recently": was_mentioned})
                 continue
 
             if action != "speak" or not speech:
