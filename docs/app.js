@@ -42,6 +42,26 @@ const avatarPath = {
   ConspiBro: './assets/avatars/conspibro.svg',
 };
 
+const LABELS = {
+  en: {
+    werewolf_win:  'Werewolf Victory',
+    village_win:   'Village Victory',
+    tanner_win:    'Tanner Victory',
+    werewolf_team: 'Werewolf',
+    village_team:  'Village',
+    tanner_team:   'Tanner',
+  },
+  zh: {
+    werewolf_win:  '狼人勝利',
+    village_win:   '村民勝利',
+    tanner_win:    '鞣皮匠勝利',
+    werewolf_team: '狼人陣營',
+    village_team:  '村民陣營',
+    tanner_team:   '鞣皮匠',
+  },
+};
+function t(key) { return LABELS[currentLang]?.[key] ?? key; }
+
 function setTab(name) {
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === name);
@@ -115,7 +135,7 @@ function renderLatestSummary() {
   const executed = (g.executed || []).join(', ') || '-';
   els.latestSummary.innerHTML = `
     <div>Latest game: <strong>${g.game_id}</strong></div>
-    <div>Outcome: <strong>${g.outcome || 'unknown'}</strong> · Winner Team: <strong>${g.winner_team || 'unknown'}</strong></div>
+    <div>Outcome: <strong>${t(g.outcome) || 'unknown'}</strong> · Winner: <strong>${t(g.winner_team) || 'unknown'}</strong></div>
     <div>Executed: <strong>${executed}</strong></div>
     <div class="chips">
       <span class="chip">Chat Lines: ${g.chat_lines ?? '-'}</span>
@@ -199,7 +219,7 @@ function renderResolve(resolve, maps, day = {}) {
       <h4>${localizeName(name, maps)}</h4>
       <div class="kv">Initial: ${roleShort(payload.initial_role)}</div>
       <div class="kv">Final: ${roleShort(payload.current_role)}</div>
-      <div class="kv">Team: ${payload.team}</div>
+      <div class="kv">Team: ${t(payload.team)}</div>
     </div>
   `).join('');
 
@@ -207,8 +227,8 @@ function renderResolve(resolve, maps, day = {}) {
     <div class="card-grid">
       <div class="info-card">
         <h4>Outcome</h4>
-        <div class="kv">${resolve?.outcome || '-'}</div>
-        <div class="kv">Winner Team: ${resolve?.winner_team || '-'}</div>
+        <div class="kv">${t(resolve?.outcome) || '-'}</div>
+        <div class="kv">Winner: ${t(resolve?.winner_team) || '-'}</div>
         <div class="kv">Winners: ${winners}</div>
         <div class="kv">Executed: ${executed}</div>
         <div class="kv">Reason: ${resolve?.reason || '-'}</div>
@@ -238,8 +258,8 @@ function renderCurrentDetails() {
 
   els.meta.textContent = [
     `Game: ${selected.game_id}`,
-    `Outcome: ${resolve?.outcome || selected.outcome || 'unknown'}`,
-    `Winner: ${resolve?.winner_team || selected.winner_team || 'unknown'}`,
+    `Outcome: ${t(resolve?.outcome || selected.outcome) || 'unknown'}`,
+    `Winner: ${t(resolve?.winner_team || selected.winner_team) || 'unknown'}`,
     `Executed: ${((resolve?.executed || selected.executed || []).map(n => localizeName(n, maps))).join(', ') || '-'}`,
     `Chat lines: ${selected.chat_lines ?? '-'}`,
     `Lang: ${currentLang === 'en' ? 'English' : '中文'}`,
@@ -300,8 +320,8 @@ function renderList(items) {
     card.dataset.id = g.game_id;
     card.innerHTML = `
       <div class="gid">${g.game_id}</div>
-      <div class="gmeta">Outcome: ${g.outcome || 'unknown'}</div>
-      <div class="gmeta">Winner: ${g.winner_team || 'unknown'}</div>
+      <div class="gmeta">Outcome: ${t(g.outcome) || 'unknown'}</div>
+      <div class="gmeta">Winner: ${t(g.winner_team) || 'unknown'}</div>
       <div class="gmeta">Executed: ${(g.executed || []).join(', ') || '-'}</div>
     `;
     card.addEventListener('click', () => showGame(g));
@@ -328,6 +348,8 @@ async function init() {
   els.lang.addEventListener('change', () => {
     currentLang = els.lang.value;
     localStorage.setItem('werewolf_lang', currentLang);
+    renderLatestSummary();
+    renderList(games);
     renderCurrentDetails();
   });
 
