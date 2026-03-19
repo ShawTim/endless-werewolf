@@ -44,25 +44,21 @@ const avatarPath = {
 
 const LABELS = {
   en: {
-    // outcomes / teams
     werewolf_win:  'Werewolf Victory',
     village_win:   'Village Victory',
     tanner_win:    'Tanner Victory',
     werewolf_team: 'Werewolf',
     village_team:  'Village',
     tanner_team:   'Tanner',
-    // night tab
     'Center Cards': 'Center Cards',
     'Center':       'Center',
     'Seat':         'Seat',
     'Initial':      'Initial',
     'Current':      'Current',
     'Memory':       'Memory',
-    // vote tab
     'Votes':        'Votes',
     'Tally':        'Tally',
     'Executed':     'Executed',
-    // resolve tab
     'Outcome':      'Outcome',
     'Winners':      'Winners',
     'Reason':       'Reason',
@@ -75,7 +71,6 @@ const LABELS = {
     'Pass Turns':           'Pass Turns',
   },
   zh: {
-    // outcomes / teams
     werewolf_win:   '狼人勝利',
     village_win:    '村民勝利',
     tanner_win:     '鞣皮匠勝利',
@@ -85,7 +80,6 @@ const LABELS = {
     werewolf:       '狼人陣營',
     village:        '村民陣營',
     tanner:         '鞣皮匠陣營',
-    // role names
     'Werewolf':     '狼人',
     'Minion':       '爪牙',
     'Seer':         '預言家',
@@ -93,18 +87,15 @@ const LABELS = {
     'Troublemaker': '搗亂者',
     'Villager':     '村民',
     'Tanner':       '鞣皮匠',
-    // night tab
     'Center Cards': '中央牌',
     'Center':       '中央',
     'Seat':         '座位',
     'Initial':      '初始身份',
     'Current':      '現時身份',
     'Memory':       '夜晚記憶',
-    // vote tab
     'Votes':        '投票',
     'Tally':        '票數',
     'Executed':     '被處決',
-    // resolve tab
     'Outcome':      '結果',
     'Winners':      '勝利者',
     'Reason':       '原因',
@@ -115,7 +106,6 @@ const LABELS = {
     'Most Targeted Player': '最多被點名者',
     'Speech Turns':         '發言次數',
     'Pass Turns':           '跳過次數',
-    // known reason strings from backend
     'No werewolf was executed':    '沒有狼人被處決',
     'A werewolf was executed':     '有狼人被處決',
     'Tanner was executed':         '鞣皮匠被處決',
@@ -130,13 +120,33 @@ function applyStaticI18n() {
 }
 
 function setTab(name) {
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === name);
-  });
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
   els.night.classList.toggle('hidden', name !== 'night');
   els.chat.classList.toggle('hidden', name !== 'chat');
   els.vote.classList.toggle('hidden', name !== 'vote');
   els.resolve.classList.toggle('hidden', name !== 'resolve');
+}
+
+function roleShort(role = '') {
+  return String(role).split(' (')[0] || role;
+}
+
+function roleColor(role) {
+  const r = roleShort(role).toLowerCase();
+  if (r === 'werewolf' || r === 'minion') return 'role-wolf';
+  if (r === 'tanner') return 'role-tanner';
+  return 'role-village';
+}
+
+function roleIcon(role) {
+  const icons = { werewolf: '🐺', minion: '🗡', seer: '👁', robber: '🦝', troublemaker: '🌀', villager: '🏡', tanner: '⚙' };
+  return icons[roleShort(role).toLowerCase()] || '?';
+}
+
+function teamClass(team) {
+  if (team === 'werewolf_team' || team === 'werewolf') return 'team-wolf';
+  if (team === 'tanner_team' || team === 'tanner') return 'team-tanner';
+  return 'team-village';
 }
 
 function buildNameMaps(night) {
@@ -159,10 +169,6 @@ function localizeTextByNameMap(text, maps) {
     out = out.replace(new RegExp(`\\b${safe}\\b`, 'g'), local);
   }
   return out;
-}
-
-function roleShort(role = '') {
-  return String(role).split(' (')[0] || role;
 }
 
 function parseChatLines(chatText) {
@@ -193,6 +199,20 @@ function parseChatLines(chatText) {
   return out;
 }
 
+function sceneTitle(i, total) {
+  if (total <= 4) return ['Opening', 'Pressure', 'Counterplay', 'Final Push'][i] || `Scene ${i + 1}`;
+  return ['Opening Claims', 'First Accusations', 'Counterattack', 'Vote Momentum'][i] || `Scene ${i + 1}`;
+}
+
+function summarizeScene(items, maps) {
+  if (!items.length) return '-';
+  const speakers = [...new Set(items.map(x => localizeName(x.speaker, maps)))];
+  const targets = items.filter(x => x.target).map(x => localizeName(x.target, maps));
+  const topTarget = Object.entries(targets.reduce((a, n) => (a[n] = (a[n] || 0) + 1, a), {})).sort((a, b) => b[1] - a[1])[0]?.[0];
+  if (topTarget) return `${speakers.slice(0, 3).join(', ')} drove pressure on ${topTarget}.`;
+  return `${speakers.slice(0, 3).join(', ')} traded claims and positioning.`;
+}
+
 function renderLatestSummary() {
   if (!games.length) {
     els.latestSummary.textContent = 'No games yet.';
@@ -213,100 +233,198 @@ function renderLatestSummary() {
 
 function renderNight(night, maps) {
   const players = Object.values(night?.players || {}).sort((a, b) => (a.seat || 0) - (b.seat || 0));
-  const cards = players.map(p => `
-    <div class="info-card">
-      <h4>${localizeName(p.name, maps)}</h4>
-      <div class="kv">${t('Seat')}: ${p.seat + 1}</div>
-      <div class="kv">${t('Initial')}: ${t(roleShort(p.initial_role))}</div>
-      <div class="kv">${t('Current')}: ${t(roleShort(p.current_role))}</div>
-      <div class="kv">${t('Memory')}: ${p.night_memory_text || '-'}</div>
-    </div>
-  `).join('');
-  const center = (night?.center_cards || []).map((c, i) => `<div class="kv">${t('Center')} ${i}: ${t(roleShort(c))}</div>`).join('');
 
-  els.night.innerHTML = `
-    <div class="card-grid">
-      <div class="info-card"><h4>${t('Center Cards')}</h4>${center || '<div class="kv">-</div>'}</div>
-      ${cards}
-    </div>
-  `;
-}
+  const centerChips = (night?.center_cards || []).map(c => {
+    const rs = roleShort(c);
+    return `<span class="role-chip ${roleColor(rs)}">${roleIcon(rs)} ${t(rs)}</span>`;
+  }).join('');
 
-function renderChat(chatText, maps) {
-  const items = parseChatLines(chatText);
-  const html = items.map(it => {
-    const rawSpeaker = it.speaker;
-    const speaker = localizeName(rawSpeaker, maps);
-    const target = it.target ? localizeName(it.target, maps) : null;
-    const avatar = avatarPath[rawSpeaker] || './assets/avatars/blaze.svg';
-    const speech = currentLang === 'zh' ? localizeTextByNameMap(it.speech, maps) : it.speech;
-
+  const cards = players.map(p => {
+    const rawName = p.name;
+    const name = localizeName(rawName, maps);
+    const avatar = avatarPath[rawName] || './assets/avatars/blaze.svg';
+    const initRole = roleShort(p.initial_role);
+    const currRole = roleShort(p.current_role);
+    const swapped = initRole !== currRole;
+    const memory = p.night_memory_text || '';
     return `
-      <div class="chat-row">
-        <img class="chat-avatar" src="${avatar}" alt="${speaker}" />
-        <div class="bubble-wrap">
-          <div class="speaker-line">${speaker} · ${it.when}${target ? `<span class="target-tag">@${target}</span>` : ''}</div>
-          <div class="speech-bubble">${speech}</div>
+      <div class="night-card">
+        <img class="night-avatar" src="${avatar}" alt="${name}" />
+        <div class="night-card-body">
+          <div class="night-name">${name}</div>
+          <div class="night-roles">
+            <span class="role-chip ${roleColor(initRole)}${swapped ? ' role-dim' : ''}">${roleIcon(initRole)} ${t(initRole)}</span>
+            ${swapped ? `<span class="swap-arrow">→</span><span class="role-chip ${roleColor(currRole)}">${roleIcon(currRole)} ${t(currRole)}</span>` : ''}
+          </div>
+          ${memory ? `<div class="night-memory">${memory}</div>` : ''}
         </div>
       </div>
     `;
   }).join('');
 
-  els.chat.innerHTML = `<div class="chat-thread">${html || '<div class="kv">(no chat history)</div>'}</div>`;
+  els.night.innerHTML = `
+    <div class="night-center-row">
+      <span class="night-section-label">${t('Center Cards')}</span>
+      <div class="center-chips">${centerChips || '-'}</div>
+    </div>
+    <div class="night-players-grid">${cards}</div>
+  `;
+}
+
+function renderChat(chatText, maps) {
+  const items = parseChatLines(chatText);
+  if (!items.length) {
+    els.chat.innerHTML = '<div class="kv">(no chat history)</div>';
+    return;
+  }
+
+  const chunkSize = Math.max(3, Math.ceil(items.length / 4));
+  const scenes = [];
+  for (let i = 0; i < items.length; i += chunkSize) scenes.push(items.slice(i, i + chunkSize));
+
+  const html = scenes.map((scene, idx) => {
+    const summary = summarizeScene(scene, maps);
+    const lines = scene.map(it => {
+      const rawSpeaker = it.speaker;
+      const speaker = localizeName(rawSpeaker, maps);
+      const target = it.target ? localizeName(it.target, maps) : null;
+      const avatar = avatarPath[rawSpeaker] || './assets/avatars/blaze.svg';
+      const speech = currentLang === 'zh' ? localizeTextByNameMap(it.speech, maps) : it.speech;
+
+      return `
+        <div class="chat-row">
+          <img class="chat-avatar" src="${avatar}" alt="${speaker}" />
+          <div class="bubble-wrap">
+            <div class="speaker-line">${speaker} · ${it.when}${target ? `<span class="target-tag">@${target}</span>` : ''}</div>
+            <div class="speech-bubble">${speech}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="scene-block">
+        <div class="scene-head">
+          <div class="scene-title">${sceneTitle(idx, scenes.length)}</div>
+          <div class="scene-summary">${summary}</div>
+        </div>
+        <div class="chat-thread">${lines}</div>
+      </section>
+    `;
+  }).join('');
+
+  els.chat.innerHTML = html;
 }
 
 function renderVote(vote, maps) {
-  const rows = Object.entries(vote?.votes || {}).map(([from, to]) => `<div class="kv">${localizeName(from, maps)} → ${localizeName(to, maps)}</div>`).join('');
-  const tally = Object.entries(vote?.tally || {}).map(([name, n]) => `<div class="kv">${localizeName(name, maps)}: ${n}</div>`).join('');
-  const executed = (vote?.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const votesHtml = Object.entries(vote?.votes || {}).map(([from, to]) => {
+    const avatar = avatarPath[from] || './assets/avatars/blaze.svg';
+    return `
+      <div class="vote-row">
+        <img class="vote-avatar" src="${avatar}" alt="${from}" />
+        <span class="vote-from">${localizeName(from, maps)}</span>
+        <span class="vote-arrow">→</span>
+        <span class="vote-to">${localizeName(to, maps)}</span>
+      </div>
+    `;
+  }).join('');
+
+  const tally = vote?.tally || {};
+  const maxVotes = Math.max(...Object.values(tally), 1);
+  const tallyHtml = Object.entries(tally)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, n]) => {
+      const pct = Math.round((n / maxVotes) * 100);
+      const isExecuted = (vote?.executed || []).includes(name);
+      return `
+        <div class="tally-row">
+          <span class="tally-name${isExecuted ? ' tally-executed' : ''}">${localizeName(name, maps)}</span>
+          <div class="tally-bar-wrap">
+            <div class="tally-bar${isExecuted ? ' tally-bar-executed' : ''}" style="width:${pct}%"></div>
+          </div>
+          <span class="tally-count">${n}</span>
+        </div>
+      `;
+    }).join('');
+
+  const executed = (vote?.executed || []).map(n => localizeName(n, maps));
 
   els.vote.innerHTML = `
-    <div class="card-grid">
-      <div class="info-card"><h4>${t('Votes')}</h4>${rows || '<div class="kv">-</div>'}</div>
-      <div class="info-card"><h4>${t('Tally')}</h4>${tally || '<div class="kv">-</div>'}</div>
-      <div class="info-card"><h4>${t('Executed')}</h4><div class="kv">${executed}</div></div>
+    <div class="vote-layout">
+      <div class="vote-section">
+        <h4 class="vote-section-head">${t('Votes')}</h4>
+        <div class="vote-list">${votesHtml || '<div class="kv">-</div>'}</div>
+      </div>
+      <div class="vote-section">
+        <h4 class="vote-section-head">${t('Tally')}</h4>
+        <div class="tally-chart">${tallyHtml || '<div class="kv">-</div>'}</div>
+        ${executed.length ? `<div class="executed-banner">⚔ ${t('Executed')}: ${executed.join(', ')}</div>` : ''}
+      </div>
     </div>
   `;
 }
 
 function renderResolve(resolve, maps, day = {}) {
-  const winners = (resolve?.winners || []).map(n => localizeName(n, maps)).join(', ') || '-';
-  const executed = (resolve?.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const outcome = resolve?.outcome;
+  const winners = resolve?.winners || [];
+  const executed = resolve?.executed || [];
+  const winnerNames = winners.map(n => localizeName(n, maps));
+  const executedNames = executed.map(n => localizeName(n, maps));
+
+  const bannerClass = outcome === 'werewolf_win' ? 'outcome-wolf' : outcome === 'tanner_win' ? 'outcome-tanner' : 'outcome-village';
+  const outcomeIcon = outcome === 'werewolf_win' ? '🐺' : outcome === 'tanner_win' ? '⚙' : '🏡';
 
   const speakCounts = day?.player_stats || {};
   const targeted = {};
   for (const item of (day?.day_trace || [])) {
     if (item.type === 'speech' && item.target) targeted[item.target] = (targeted[item.target] || 0) + 1;
   }
-  const mostActive = Object.entries(speakCounts).sort((a,b)=> (b[1].speak_count||0)-(a[1].speak_count||0))[0]?.[0] || '-';
-  const mostTargeted = Object.entries(targeted).sort((a,b)=>b[1]-a[1])[0]?.[0] || '-';
+  const mostActive = Object.entries(speakCounts).sort((a, b) => (b[1].speak_count || 0) - (a[1].speak_count || 0))[0]?.[0] || '-';
+  const mostTargeted = Object.entries(targeted).sort((a, b) => b[1] - a[1])[0]?.[0] || '-';
+  const speechTurns = (day?.day_trace || []).filter(x => x.type === 'speech').length;
+  const passTurns = (day?.day_trace || []).filter(x => x.type === 'pass').length;
 
-  const finalRoles = Object.entries(resolve?.final_roles || {}).map(([name, payload]) => `
-    <div class="info-card">
-      <h4>${localizeName(name, maps)}</h4>
-      <div class="kv">${t('Initial')}: ${t(roleShort(payload.initial_role))}</div>
-      <div class="kv">${t('Final')}: ${t(roleShort(payload.current_role))}</div>
-      <div class="kv">${t('Team')}: ${t(payload.team)}</div>
-    </div>
-  `).join('');
+  const finalRoles = Object.entries(resolve?.final_roles || {}).map(([name, payload]) => {
+    const avatar = avatarPath[name] || './assets/avatars/blaze.svg';
+    const localName = localizeName(name, maps);
+    const initRole = roleShort(payload.initial_role);
+    const currRole = roleShort(payload.current_role);
+    const swapped = initRole !== currRole;
+    const isWinner = winners.includes(name);
+    const isExecuted = executed.includes(name);
+    const tc = teamClass(payload.team);
+    return `
+      <div class="reveal-player-card ${tc}${isWinner ? ' reveal-winner' : ''}${isExecuted ? ' reveal-executed' : ''}">
+        ${isWinner ? '<div class="winner-crown">👑</div>' : ''}
+        ${isExecuted ? '<div class="executed-mark">⚔</div>' : ''}
+        <img class="reveal-avatar" src="${avatar}" alt="${localName}" />
+        <div class="reveal-name">${localName}</div>
+        <div class="reveal-roles">
+          ${swapped
+            ? `<span class="role-chip ${roleColor(initRole)} role-dim">${t(initRole)}</span><span class="swap-arrow">→</span><span class="role-chip ${roleColor(currRole)}">${t(currRole)}</span>`
+            : `<span class="role-chip ${roleColor(currRole)}">${t(currRole)}</span>`
+          }
+        </div>
+        <div class="reveal-team ${tc}-label">${t(payload.team)}</div>
+      </div>
+    `;
+  }).join('');
 
   els.resolve.innerHTML = `
-    <div class="card-grid">
-      <div class="info-card">
-        <h4>${t('Outcome')}</h4>
-        <div class="kv">${t(resolve?.outcome) || '-'}</div>
-        <div class="kv">${t('Winners')}: ${winners}</div>
-        <div class="kv">${t('Executed')}: ${executed}</div>
-        <div class="kv">${t('Reason')}: ${t(resolve?.reason) || '-'}</div>
+    <div class="outcome-banner ${bannerClass}">
+      <span class="outcome-icon">${outcomeIcon}</span>
+      <div class="outcome-main">
+        <div class="outcome-text">${t(outcome) || '-'}</div>
+        <div class="outcome-detail">${t('Winners')}: ${winnerNames.join(', ')} · ${t('Executed')}: ${executedNames.join(', ') || '-'}</div>
+        ${resolve?.reason ? `<div class="outcome-reason">${t(resolve.reason)}</div>` : ''}
       </div>
-      <div class="info-card">
-        <h4>${t('Round Insights')}</h4>
-        <div class="kv">${t('Most Active Speaker')}: ${localizeName(mostActive, maps)}</div>
-        <div class="kv">${t('Most Targeted Player')}: ${localizeName(mostTargeted, maps)}</div>
-        <div class="kv">${t('Speech Turns')}: ${(day?.day_trace || []).filter(x => x.type === 'speech').length}</div>
-        <div class="kv">${t('Pass Turns')}: ${(day?.day_trace || []).filter(x => x.type === 'pass').length}</div>
-      </div>
-      ${finalRoles}
+    </div>
+    <div class="reveal-grid">${finalRoles}</div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="stat-label">${t('Most Active Speaker')}</span><span class="stat-val">${localizeName(mostActive, maps)}</span></div>
+      <div class="stat-chip"><span class="stat-label">${t('Most Targeted Player')}</span><span class="stat-val">${localizeName(mostTargeted, maps)}</span></div>
+      <div class="stat-chip"><span class="stat-label">${t('Speech Turns')}</span><span class="stat-val">${speechTurns}</span></div>
+      <div class="stat-chip"><span class="stat-label">${t('Pass Turns')}</span><span class="stat-val">${passTurns}</span></div>
     </div>
   `;
 }
@@ -368,7 +486,7 @@ async function showGame(game) {
   els.details.classList.remove('hidden');
   renderCurrentDetails();
   setTab('chat');
-  document.getElementById('detail-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  els.details.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderList(items) {
@@ -387,9 +505,8 @@ function renderList(items) {
     card.dataset.id = g.game_id;
     card.innerHTML = `
       <div class="gid">${g.game_id}</div>
-      <div class="gmeta">Outcome: ${t(g.outcome) || 'unknown'}</div>
-      <div class="gmeta">Winner: ${t(g.winner_team) || 'unknown'}</div>
-      <div class="gmeta">Executed: ${(g.executed || []).join(', ') || '-'}</div>
+      <div class="gmeta">${t(g.outcome) || 'unknown'} · ${t(g.winner_team) || 'unknown'}</div>
+      <div class="gmeta">${t('Executed')}: ${(g.executed || []).join(', ') || '-'}</div>
     `;
     card.addEventListener('click', () => showGame(g));
     els.list.appendChild(card);
@@ -426,10 +543,7 @@ async function init() {
   renderList(games);
   els.search.addEventListener('input', applySearch);
 
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.addEventListener('click', () => setTab(btn.dataset.tab));
-  });
-
+  document.querySelectorAll('.tabs button').forEach(btn => btn.addEventListener('click', () => setTab(btn.dataset.tab)));
   if (games.length) showGame(games[0]);
 }
 

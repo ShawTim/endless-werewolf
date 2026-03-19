@@ -291,6 +291,54 @@ body {
   color: #d8ccff;
 }
 
+.scene-block {
+  border: 1px solid #352b74;
+  border-radius: 12px;
+  background: #100b2b;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.scene-head {
+  border-bottom: 1px dashed #3a2f7f;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+.scene-title {
+  font-family: Cinzel, serif;
+  color: #e5dcff;
+  font-size: 18px;
+}
+.scene-summary {
+  color: #bfb4df;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.reveal-btn {
+  border: 1px solid #54479c;
+  background: #1a1345;
+  color: #f0eaff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.reveal-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.reveal-row {
+  border: 1px solid #3d2f82;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  background: #1a1444;
+}
+
 @media (max-width: 760px) {
   body { overflow: auto; }
   .page-wrap { grid-template-columns: 1fr; overflow: visible; }
