@@ -308,6 +308,7 @@ async function showGame(game) {
   els.details.classList.remove('hidden');
   renderCurrentDetails();
   setTab('chat');
+  document.getElementById('detail-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderList(items) {

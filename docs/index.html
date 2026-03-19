@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+
     <nav class="topnav">
       <div class="brand">🐺 Endless Werewolf</div>
       <div class="nav-actions">
@@ -20,64 +21,69 @@
       </div>
     </nav>
 
-    <header class="hero">
-      <h1
-        data-i18n-en="6 AI Agents. One Night. Someone Must Die."
-        data-i18n-zh="6 個 AI 特工。一夜之間。必有人死。"
-      >6 AI Agents. One Night. Someone Must Die.</h1>
-      <p
-        data-i18n-en="A live social-deduction simulation where each AI player makes autonomous decisions, bluffs in public, and votes under pressure."
-        data-i18n-zh="即時社交推理模擬。每位 AI 玩家自主決策、公開虛張聲勢、在壓力下投票。"
-      >
-        A live social-deduction simulation where each AI player makes autonomous decisions,
-        bluffs in public, and votes under pressure.
-      </p>
-      <div id="latest-summary" class="latest-summary">Loading latest round...</div>
-    </header>
+    <div class="page-wrap">
 
-    <main class="container">
-      <section class="panel">
-        <div class="panel-head">
-          <h2>AI Players</h2>
+      <!-- LEFT SIDEBAR: game navigation -->
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <span class="sidebar-title">Games</span>
+          <input id="search" placeholder="Search…" />
         </div>
-        <div class="players-grid">
-          <article class="player-card"><img src="./assets/avatars/blaze.svg" alt="Blaze" /><h3 data-i18n-en="Blaze" data-i18n-zh="譚仔大辣">Blaze</h3><p data-i18n-en="Hot-tempered accuser." data-i18n-zh="暴躁直腸，第一個指控人。">Hot-tempered accuser.</p><span>GPT-4.1</span></article>
-          <article class="player-card"><img src="./assets/avatars/safetysam.svg" alt="SafetySam" /><h3 data-i18n-en="SafetySam" data-i18n-zh="安全主任">SafetySam</h3><p data-i18n-en="Overly cautious drifter." data-i18n-zh="極度謹慎，永遠等風向先表態。">Overly cautious drifter.</p><span>GPT-5-mini</span></article>
-          <article class="player-card"><img src="./assets/avatars/dr_pizza.svg" alt="Dr. Pizza" /><h3 data-i18n-en="Dr. Pizza" data-i18n-zh="PHD">Dr. Pizza</h3><p data-i18n-en="Cold logic analyst." data-i18n-zh="冷酷邏輯怪，只信資訊漏洞。">Cold logic analyst.</p><span>Kimi K2.5</span></article>
-          <article class="player-card"><img src="./assets/avatars/twister.svg" alt="Twister" /><h3 data-i18n-en="Twister" data-i18n-zh="方唐鏡">Twister</h3><p data-i18n-en="Chaos agent, lies for fun." data-i18n-zh="唯恐天下不亂，講大話為樂。">Chaos agent, lies for fun.</p><span>GLM-5</span></article>
-          <article class="player-card"><img src="./assets/avatars/easybake.svg" alt="EasyBake" /><h3 data-i18n-en="EasyBake" data-i18n-zh="天真grill">EasyBake</h3><p data-i18n-en="Naïve peacemaker, terrible liar." data-i18n-zh="老好人，容易信人，講大話好生硬。">Naïve peacemaker, terrible liar.</p><span>Qwen3.5-397B</span></article>
-          <article class="player-card"><img src="./assets/avatars/conspibro.svg" alt="ConspiBro" /><h3 data-i18n-en="ConspiBro" data-i18n-zh="白兵師兄">ConspiBro</h3><p data-i18n-en="Conspiracy theorist, trusts no one." data-i18n-zh="陰謀論者，懷疑所有人包括老實人。">Conspiracy theorist, trusts no one.</p><span>MiniMax M2.5</span></article>
-        </div>
-      </section>
+        <div id="game-list" class="games-list"></div>
+      </aside>
 
-      <section class="panel">
-        <div class="panel-head">
-          <h2>Game Archive</h2>
-          <input id="search" placeholder="Search game id / outcome / winner..." />
-        </div>
-        <div id="game-list" class="games-grid"></div>
-      </section>
+      <!-- RIGHT MAIN CONTENT -->
+      <main class="main-content">
 
-      <section class="panel">
-        <div id="empty" class="empty">Pick a game card above to inspect full round details.</div>
+        <!-- Hero -->
+        <header class="hero">
+          <h1
+            data-i18n-en="6 AI Agents. One Night. Someone Must Die."
+            data-i18n-zh="6 個 AI 特工。一夜之間。必有人死。"
+          >6 AI Agents. One Night. Someone Must Die.</h1>
+          <p
+            data-i18n-en="A live social-deduction simulation where each AI player makes autonomous decisions, bluffs in public, and votes under pressure."
+            data-i18n-zh="即時社交推理模擬。每位 AI 玩家自主決策、公開虛張聲勢、在壓力下投票。"
+          >A live social-deduction simulation where each AI player makes autonomous decisions, bluffs in public, and votes under pressure.</p>
+          <div id="latest-summary" class="latest-summary">Loading latest round...</div>
+        </header>
 
-        <div id="details" class="hidden">
-          <div id="meta" class="meta"></div>
-
-          <div class="tabs">
-            <button data-tab="night">Night</button>
-            <button data-tab="chat" class="active">Day Chat</button>
-            <button data-tab="vote">Vote</button>
-            <button data-tab="resolve">Reveal</button>
+        <!-- AI Players -->
+        <section class="panel">
+          <div class="panel-head"><h2>AI Players</h2></div>
+          <div class="players-grid">
+            <article class="player-card"><img src="./assets/avatars/blaze.svg" alt="Blaze" /><h3 data-i18n-en="Blaze" data-i18n-zh="譚仔大辣">Blaze</h3><p data-i18n-en="Hot-tempered accuser." data-i18n-zh="暴躁直腸，第一個指控人。">Hot-tempered accuser.</p><span>GPT-4.1</span></article>
+            <article class="player-card"><img src="./assets/avatars/safetysam.svg" alt="SafetySam" /><h3 data-i18n-en="SafetySam" data-i18n-zh="安全主任">SafetySam</h3><p data-i18n-en="Overly cautious drifter." data-i18n-zh="極度謹慎，永遠等風向先表態。">Overly cautious drifter.</p><span>GPT-5-mini</span></article>
+            <article class="player-card"><img src="./assets/avatars/dr_pizza.svg" alt="Dr. Pizza" /><h3 data-i18n-en="Dr. Pizza" data-i18n-zh="PHD">Dr. Pizza</h3><p data-i18n-en="Cold logic analyst." data-i18n-zh="冷酷邏輯怪，只信資訊漏洞。">Cold logic analyst.</p><span>Kimi K2.5</span></article>
+            <article class="player-card"><img src="./assets/avatars/twister.svg" alt="Twister" /><h3 data-i18n-en="Twister" data-i18n-zh="方唐鏡">Twister</h3><p data-i18n-en="Chaos agent, lies for fun." data-i18n-zh="唯恐天下不亂，講大話為樂。">Chaos agent, lies for fun.</p><span>GLM-5</span></article>
+            <article class="player-card"><img src="./assets/avatars/easybake.svg" alt="EasyBake" /><h3 data-i18n-en="EasyBake" data-i18n-zh="天真grill">EasyBake</h3><p data-i18n-en="Naïve peacemaker, terrible liar." data-i18n-zh="老好人，容易信人，講大話好生硬。">Naïve peacemaker, terrible liar.</p><span>Qwen3.5-397B</span></article>
+            <article class="player-card"><img src="./assets/avatars/conspibro.svg" alt="ConspiBro" /><h3 data-i18n-en="ConspiBro" data-i18n-zh="白兵師兄">ConspiBro</h3><p data-i18n-en="Conspiracy theorist, trusts no one." data-i18n-zh="陰謀論者，懷疑所有人包括老實人。">Conspiracy theorist, trusts no one.</p><span>MiniMax M2.5</span></article>
           </div>
+        </section>
 
-          <div id="tab-night" class="tab-pane hidden"></div>
-          <div id="tab-chat" class="tab-pane"></div>
-          <div id="tab-vote" class="tab-pane hidden"></div>
-          <div id="tab-resolve" class="tab-pane hidden"></div>
-        </div>
-      </section>
-    </main>
+        <!-- Game Detail -->
+        <section class="panel" id="detail-section">
+          <div id="empty" class="empty">← Pick a game to inspect the full round.</div>
+
+          <div id="details" class="hidden">
+            <div id="meta" class="meta"></div>
+
+            <div class="tabs">
+              <button data-tab="night">Night</button>
+              <button data-tab="chat" class="active">Day Chat</button>
+              <button data-tab="vote">Vote</button>
+              <button data-tab="resolve">Reveal</button>
+            </div>
+
+            <div id="tab-night"   class="tab-pane hidden"></div>
+            <div id="tab-chat"    class="tab-pane"></div>
+            <div id="tab-vote"    class="tab-pane hidden"></div>
+            <div id="tab-resolve" class="tab-pane hidden"></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
 
     <script src="./app.js"></script>
   </body>
