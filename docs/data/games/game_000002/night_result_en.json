@@ -9,20 +9,20 @@
       "model": "github-copilot/gpt-4.1",
       "seat": 0,
       "initial_role": "Seer",
-      "current_role": "Tanner (tanner)",
+      "current_role": "Robber",
       "night_memory": [
-        "You checked SafetySam and his identity is: Tanner."
+        "You checked SafetySam and his identity is: Villager."
       ],
       "night_actions": [
         {
           "role": "Seer",
           "action": "inspect_player",
           "target": "SafetySam",
-          "seen_role": "Tanner (tanner)",
+          "seen_role": "Villager",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You checked SafetySam and his identity is: Tanner."
+      "night_memory_text": "You checked SafetySam and his identity is: Villager."
     },
     "2": {
       "id": "2",
@@ -32,8 +32,8 @@
       "persona": "Extremely cautious and a wallflower. You are never the first to speak, always waiting for the direction of the wind to become clear before taking a stand. If accused, you would immediately act pitiful or look away.",
       "model": "github-copilot/gpt-5-mini",
       "seat": 1,
-      "initial_role": "Tanner (tanner)",
-      "current_role": "Robber",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -46,23 +46,11 @@
       "persona": "Cold logic monster. You speak concisely and like to use columns. You never trust your intuition, only the information holes on the field. You are the hardest person to be fooled in the whole room.",
       "model": "nvidia/moonshotai/kimi-k2.5",
       "seat": 2,
-      "initial_role": "Troublemaker",
-      "current_role": "Troublemaker",
-      "night_memory": [
-        "You swapped cards from Blaze and SafetySam, but you don't know what they ended up with."
-      ],
-      "night_actions": [
-        {
-          "role": "Troublemaker",
-          "action": "swap",
-          "targets": [
-            "Blaze",
-            "SafetySam"
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You swapped cards from Blaze and SafetySam, but you don't know what they ended up with."
+      "initial_role": "Tanner (tanner)",
+      "current_role": "Tanner (tanner)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     },
     "4": {
       "id": "4",
@@ -72,22 +60,6 @@
       "persona": "A dramatist who fears that the world will not be in chaos. No matter what your identity is, you like to mess up the situation by jumping around randomly at the beginning. You find it more fun to lie to people than to win the game.",
       "model": "nvidia/z-ai/glm5",
       "seat": 3,
-      "initial_role": "Minion",
-      "current_role": "Minion",
-      "night_memory": [
-        "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
-      ],
-      "night_actions": [],
-      "night_memory_text": "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
-    },
-    "5": {
-      "id": "5",
-      "name": "EasyBake",
-      "name_zh": "innocent grill",
-      "name_en": "EasyBake",
-      "persona": "He is a good person and trusts others easily. You always try to mediate disputes. If you are forced to lie, you will appear extremely stiff and stammering (using... and uh...).",
-      "model": "nvidia/qwen/qwen3.5-397b-a17b",
-      "seat": 4,
       "initial_role": "Robber",
       "current_role": "Seer",
       "night_memory": [
@@ -104,6 +76,20 @@
       ],
       "night_memory_text": "You stole the Blaze card, and after replacing it, your family line is: Seer (seer)."
     },
+    "5": {
+      "id": "5",
+      "name": "EasyBake",
+      "name_zh": "innocent grill",
+      "name_en": "EasyBake",
+      "persona": "He is a good person and trusts others easily. You always try to mediate disputes. If you are forced to lie, you will appear extremely stiff and stammering (using... and uh...).",
+      "model": "nvidia/qwen/qwen3.5-397b-a17b",
+      "seat": 4,
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
     "6": {
       "id": "6",
       "name": "ConspiBro",
@@ -116,18 +102,18 @@
       "current_role": "Werewolf",
       "night_memory": [
         "You are the only werewolf on the field, and you can choose to look at a middle hole card.",
-        "You peek at the 0 hole card in the middle and see it: Villager."
+        "You peek at the 0 hole card in the middle and see it: Troublemaker."
       ],
       "night_actions": [
         {
           "role": "Werewolf",
           "action": "inspect_center",
           "target": 0,
-          "seen_role": "Villager",
+          "seen_role": "Troublemaker",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only werewolf on the field, and you can choose to look at a middle hole card. You peek at the 0 hole card in the middle and see it: Villager."
+      "night_memory_text": "You are the only werewolf on the field, and you can choose to look at a middle hole card. You peek at the 0 hole card in the middle and see it: Troublemaker."
     }
   },
   "seating_order": [
@@ -139,9 +125,9 @@
     "6"
   ],
   "center_cards": [
-    "Villager",
+    "Troublemaker",
     "Werewolf",
-    "Villager"
+    "Minion"
   ],
   "night_trace": [
     {
@@ -159,20 +145,10 @@
       "source": "agent"
     },
     {
-      "actor": "EasyBake",
+      "actor": "Twister",
       "role": "Robber",
       "action": "rob",
       "target": "Blaze",
-      "source": "agent"
-    },
-    {
-      "actor": "Dr. Pizza",
-      "role": "Troublemaker",
-      "action": "swap",
-      "targets": [
-        "Blaze",
-        "SafetySam"
-      ],
       "source": "agent"
     }
   ]

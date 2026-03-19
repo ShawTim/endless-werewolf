@@ -2,18 +2,21 @@
   "schema_version": 1,
   "games": [
     {
-      "game_id": "game_000003",
+      "game_id": "game_000002",
       "status": "completed",
-      "created_at": "2026-03-19T15:40:37.933522+00:00",
-      "completed_at": "2026-03-19T15:41:33.095471+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
+      "created_at": "2026-03-19T15:44:50.297281+00:00",
+      "completed_at": "2026-03-19T15:45:45.217394+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
       "executed": [
-        "SafetySam"
+        "SafetySam",
+        "Blaze"
       ],
-      "winners": [],
+      "winners": [
+        "ConspiBro"
+      ],
       "votes_count": 6,
-      "chat_lines": 14
+      "chat_lines": 21
     },
     {
       "game_id": "game_000001",
