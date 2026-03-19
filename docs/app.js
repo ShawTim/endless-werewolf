@@ -68,15 +68,37 @@ function localizeName(raw, maps) {
   return maps.toLocal.get(raw) || raw;
 }
 
+function localizeTextByNameMap(text, maps) {
+  let out = text || '';
+  for (const [raw, local] of maps.toLocal.entries()) {
+    const safe = raw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`\\b${safe}\\b`, 'g'), local);
+  }
+  return out;
+}
+
 function parseChatLines(chatText) {
-  const lines = (chatText || '').split('\n').filter(Boolean);
+  const rawLines = (chatText || '').split('\n');
+  const chunks = [];
+  let current = [];
+
+  for (const ln of rawLines) {
+    if (/^\[\d{4}-\d{2}-\d{2}/.test(ln)) {
+      if (current.length) chunks.push(current.join('\n'));
+      current = [ln];
+    } else if (current.length) {
+      current.push(ln);
+    }
+  }
+  if (current.length) chunks.push(current.join('\n'));
+
   const out = [];
-  for (const ln of lines) {
-    const m = ln.match(/^\[(.*?)\]\s+([^:]+):\s*(.*)$/s);
+  for (const chunk of chunks) {
+    const m = chunk.match(/^\[(.*?)\]\s+([^:]+):\s*([\s\S]*)$/);
     if (!m) continue;
     const when = m[1];
     const head = m[2].trim();
-    const speech = m[3] || '';
+    const speech = (m[3] || '').trim();
     const [speaker, targetPart] = head.split(' @');
     out.push({
       when,
@@ -124,13 +146,14 @@ function renderChat(chatText, maps) {
     const speaker = localizeName(rawSpeaker, maps);
     const target = it.target ? localizeName(it.target, maps) : null;
     const avatar = avatarPath[rawSpeaker] || './assets/avatars/blaze.svg';
+    const speech = currentLang === 'zh' ? localizeTextByNameMap(it.speech, maps) : it.speech;
 
     return `
       <div class="chat-row">
         <img class="chat-avatar" src="${avatar}" alt="${speaker}" />
         <div class="bubble-wrap">
           <div class="speaker-line">${speaker} · ${it.when}${target ? `<span class="target-tag">@${target}</span>` : ''}</div>
-          <div class="speech-bubble">${it.speech}</div>
+          <div class="speech-bubble">${speech}</div>
         </div>
       </div>
     `;
