@@ -149,7 +149,10 @@ def main():
         return
     
     player_context = request.get("player_context", {})
-    model = request.get("model", "google/gemini-3.1-flash-lite-preview")
+    model = request.get("model") or player_context.get("model")
+    if not model:
+        print(json.dumps({"action": "pass", "error": f"No model specified for player {player_context.get('player_name', 'unknown')}"}, ensure_ascii=False))
+        return
     chat_history = request.get("chat_history", "")
     turn_hints = request.get("turn_hints", {})
 
