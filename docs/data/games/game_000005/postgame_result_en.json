@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000005",
+  "generated_at": "2026-03-19T22:02:30.302885+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Getting executed as Robber hurts. I think the table overreacted and misread my signals in key turns."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Twister, I knew Werewolf had the edge."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I kept my composure as Werewolf and let the table collapse into the lines I wanted. That's a clean Werewolf finish."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I lost this one as Villager. Too much table energy got absorbed by Twister, and my read couldn't recover."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I lost this one as Troublemaker. Too much table energy got absorbed by Twister, and my read couldn't recover."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I lost this one as Tanner. Too much table energy got absorbed by Twister, and my read couldn't recover."
+      }
+    ]
+  }
+}

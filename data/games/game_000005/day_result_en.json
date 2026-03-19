@@ -1,0 +1,95 @@
+{
+  "status": "completed",
+  "game_id": "game_000005",
+  "config": {
+    "duration_seconds": 20,
+    "min_sleep_seconds": 1.2,
+    "max_sleep_seconds": 2.8,
+    "max_speaks_per_player": 2
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 0
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "A new day is here again! Look, a lot of fun happened again in Xunwan? Although I am very satisfied with the situation of Xunri, I feel that there are still some surprises yet to be revealed! As someone who loves watching movies, should I reveal more exciting stuff? Are you ready for the next big chaos? I'm not sure... I'm the most lurking werewolf first!",
+      "log_line": "[2026-03-20 06:01:43 HKT] Twister: A new day is here again! Look, a lot of fun happened again in Xunwan? Although I am very satisfied with the situation of Xunri, I feel that there are still some surprises yet to be revealed! As someone who loves watching movies, should I reveal more exciting stuff? Are you ready for the next big chaos? I'm not sure... I'm the most lurking werewolf first!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. I... uh... explain. Twister started saying some weird stuff again? Everyone...well...I really don't want anyone to get into trouble anymore, so why don't we just calm down and stop playing these mutual suspicion games, okay? Uh... I'm really worried.",
+      "log_line": "[2026-03-20 06:01:49 HKT] EasyBake: Hello everyone. I... uh... explain. Twister started saying some weird stuff again? Everyone...well...I really don't want anyone to get into trouble anymore, so why don't we just calm down and stop playing these mutual suspicion games, okay? Uh... I'm really worried."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory:\n1. Twister's speech is full of uncontrollable disruptive information. If he is a werewolf, his purpose of disrupting has been achieved.\n2. The role value of EasyBake’s peacemaker approaches zero during a period of extreme information scarcity.\n\nSuggestions for the current situation:\n- Please disclose your current role positioning.\n- Target of Suspicion: Convergence of operations between Twister and ConspiBro.",
+      "log_line": "[2026-03-20 06:01:52 HKT] Dr. Pizza: Logical inventory:\n1. Twister's speech is full of uncontrollable disruptive information. If he is a werewolf, his purpose of disrupting has been achieved.\n2. The role value of EasyBake’s peacemaker approaches zero during a period of extreme information scarcity.\n\nSuggestions for the current situation:\n- Please disclose your current role positioning.\n- Target of Suspicion: Convergence of operations between Twister and ConspiBro."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Twister, you are a troublemaker, what are you doing again? Telling nonsense about being a werewolf, do you think it's so cool? I think your \"cross-talk\" is more like a werewolf trying to mislead everyone through interference! As for Dr. Pizza, are you pretending to be calm and analytical? It’s hard to believe this group of people anymore. This game is just a few of them acting here. There’s no reason why I voted for Twister!",
+      "log_line": "[2026-03-20 06:01:55 HKT] Blaze: Twister, you are such a troublemaker, what are you doing here again? Telling nonsense about being a werewolf, do you think it's so cool? I think your \"cross-talk\" is more like a werewolf trying to mislead everyone through interference! As for Dr. Pizza, are you pretending to be calm and analytical? It’s hard to believe this group of people anymore. This game is just a few of them acting here. There’s no reason why I voted for Twister!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Another scene of \"werewolves pointing at each other\"? Twister revealed that he is a werewolf, and Blaze bites Twister again and refuses to let go. These are the most typical \"whitewashing scenes\" within the werewolf camp! Do you think that by diverting public attention by attacking each other, you can make everyone ignore the person behind the experiment? Dr. Pizza’s calm analysis and EasyBake’s mediation are all strategies to exclude those of us who dare to expose the truth from voting!",
+      "log_line": "[2026-03-20 06:01:58 HKT] ConspiBro: Is this \"werewolf fingering each other\" drama coming again? Twister revealed that he is a werewolf, and Blaze bites Twister again and refuses to let go. These are the most typical \"whitewashing scenes\" within the werewolf camp! Do you think that by diverting public attention by attacking each other, you can make everyone ignore the person behind the experiment? Dr. Pizza’s calm analysis and EasyBake’s mediation are all strategies to exclude those of us who dare to expose the truth from voting!"
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam",
+      "mentioned_recently": false
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": "Blaze",
+      "speech": "Blaze, why are you so responsive? I'm just kidding, you're so anxious to clear me out just because you have a guilty conscience! You keep saying that people are werewolves, is it because you are the big werewolf who leads the way? Why don't we all throw ourselves to Blaze's death and see what happens?",
+      "log_line": "[2026-03-20 06:02:02 HKT] Twister @Blaze: Blaze, what are you doing with such a big reaction? I'm just kidding, you're so anxious to clear me out just because you have a guilty conscience! You keep saying that people are werewolves, is it because you are the big werewolf who leads the way? Why don't we all throw ourselves to Blaze's death and see what happens?"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": "Twister",
+      "speech": "Twister...what you're talking about is really...uh...very strange. Although I know you like to create atmosphere, but this is not a theater... Uh... everyone... why don't we check our respective roles and stop playing these mutual suspicion games, okay?",
+      "log_line": "[2026-03-20 06:02:05 HKT] EasyBake @Twister: Twister... what you said is really... uh... really weird. Although I know you like to create atmosphere, but this is not a theater... Uh... everyone... why don't we check our respective roles and stop playing these mutual suspicion games, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": "Twister",
+      "speech": "Twister: Your words reveal a high degree of \"intentional confusion\" motivation. If you are a werewolf, you have achieved your purpose of interference; if you are not, your words and deeds have become negative assets in the logical analysis of the whole audience.\n\nCurrent requirements:\n1. Demand that Twister and ConspiBro disclose the details of their night operations.\n2. If the information is refused to be disclosed or the information is not logically consistent, it will be defined as the first excluded object in the subsequent voting session.",
+      "log_line": "[2026-03-20 06:02:07 HKT] Dr. Pizza @Twister: Twister: Your words reveal a very high motivation for \"deliberate confusion\". If you are a werewolf, you have achieved your purpose of interference; if you are not, your words and deeds have become negative assets in the logical analysis of the whole audience.\n\nCurrent requirements:\n1. Demand that Twister and ConspiBro disclose the details of their night operations.\n2. If the information is refused to be disclosed or the information is not logically consistent, it will be defined as the first excluded object in the subsequent voting session."
+    }
+  ],
+  "chat_history": "[2026-03-20 06:01:43 HKT] Twister: A new day is here again! Look, a lot of fun happened again in Xunwan? Although I am very satisfied with the situation of Xunri, I feel that there are still some surprises yet to be revealed! As someone who loves watching movies, should I reveal more exciting stuff? Are you ready for the next big chaos? I'm not sure... I'm the most lurking werewolf first!\n[2026-03-20 06:01:49 HKT] EasyBake: Hello everyone. I... uh... explain. Twister started saying some weird stuff again? Everyone...well...I really don't want anyone to get into trouble anymore, so why don't we just calm down and stop playing these mutual suspicion games, okay? Uh... I'm really worried.\n[2026-03-20 06:01:52 HKT] Dr. Pizza: Logical inventory:\n1. Twister's speech is full of uncontrollable disruptive information. If he is a werewolf, his purpose of disrupting has been achieved.\n2. The role value of EasyBake’s peacemaker approaches zero during a period of extreme information scarcity.\n\nSuggestions for the current situation:\n- Please disclose your current role positioning.\n- Target of Suspicion: Convergence of operations between Twister and ConspiBro.\n[2026-03-20 06:01:55 HKT] Blaze: Twister, you are such a troublemaker, what are you doing here again? Telling nonsense about being a werewolf, do you think it's so cool? I think your \"cross-talk\" is more like a werewolf trying to mislead everyone through interference! As for Dr. Pizza, are you pretending to be calm and analytical? It’s hard to believe this group of people anymore. This game is just a few of them acting here. There’s no reason why I voted for Twister!\n[2026-03-20 06:01:58 HKT] ConspiBro: Is this \"werewolf fingering each other\" drama coming again? Twister revealed that he is a werewolf, and Blaze bites Twister again and refuses to let go. These are the most typical \"whitewashing scenes\" within the werewolf camp! Do you think that by diverting public attention by attacking each other, you can make everyone ignore the person behind the experiment? Dr. Pizza’s calm analysis and EasyBake’s mediation are all strategies to exclude those of us who dare to expose the truth from voting!\n[2026-03-20 06:02:02 HKT] Twister @Blaze: Blaze, what are you doing with such a big reaction? I'm just kidding, you're so anxious to clear me out just because you have a guilty conscience! You keep saying that people are werewolves, is it because you are the big werewolf who leads the way? Why don't we all throw ourselves to Blaze's death and see what happens?\n[2026-03-20 06:02:05 HKT] EasyBake @Twister: Twister... what you said is really... uh... really weird. Although I know you like to create atmosphere, but this is not a theater... Uh... everyone... why don't we check our respective roles and stop playing these mutual suspicion games, okay?\n[2026-03-20 06:02:07 HKT] Dr. Pizza @Twister: Twister: Your words reveal a very high motivation for \"deliberate confusion\". If you are a werewolf, you have achieved your purpose of interference; if you are not, your words and deeds have become negative assets in the logical analysis of the whole audience.\n\nCurrent requirements:\n1. Demand that Twister and ConspiBro disclose the details of their night operations.\n2. If the information is refused to be disclosed or the information is not logically consistent, it will be defined as the first excluded object in the subsequent voting session.",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
