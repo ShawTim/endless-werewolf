@@ -8,8 +8,8 @@
       "persona": "暴躁老哥、直腸直肚。你討厭別人說話轉彎抹角。即使你是好人，你也喜歡第一時間跳出來指控別人。",
       "model": "github-copilot/gpt-4.1",
       "seat": 0,
-      "initial_role": "Seer (預言家)",
-      "current_role": "Seer (預言家)",
+      "initial_role": "Tanner (皮匠)",
+      "current_role": "Tanner (皮匠)",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -22,8 +22,8 @@
       "persona": "極度謹慎、牆頭草。你從不第一個發言，總是等風向明確才表態。如果被指控，你會立刻裝可憐或者轉移視線。",
       "model": "github-copilot/gpt-5-mini",
       "seat": 1,
-      "initial_role": "Tanner (皮匠)",
-      "current_role": "Tanner (皮匠)",
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -53,10 +53,10 @@
       "initial_role": "Minion (爪牙)",
       "current_role": "Minion (爪牙)",
       "night_memory": [
-        "你見到狼人係：ConspiBro。狼人唔知道你係爪牙。"
+        "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
       ],
       "night_actions": [],
-      "night_memory_text": "你見到狼人係：ConspiBro。狼人唔知道你係爪牙。"
+      "night_memory_text": "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
     },
     "5": {
       "id": "5",
@@ -80,13 +80,11 @@
       "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
       "model": "nvidia/minimaxai/minimax-m2.5",
       "seat": 5,
-      "initial_role": "Werewolf (狼人)",
-      "current_role": "Werewolf (狼人)",
-      "night_memory": [
-        "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
-      ],
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
+      "night_memory": [],
       "night_actions": [],
-      "night_memory_text": "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
+      "night_memory_text": ""
     }
   },
   "seating_order": [
@@ -98,9 +96,9 @@
     "6"
   ],
   "center_cards": [
-    "Villager (村民)",
     "Werewolf (狼人)",
-    "Villager (村民)"
+    "Werewolf (狼人)",
+    "Seer (預言家)"
   ],
   "night_trace": []
 }

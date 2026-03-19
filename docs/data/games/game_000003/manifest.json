@@ -1,0 +1,34 @@
+{
+  "game_id": "game_000003",
+  "status": "completed",
+  "created_at": "2026-03-19T15:40:37.933522+00:00",
+  "updated_at": "2026-03-19T15:41:57.830007+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-03-19T15:40:37.934373+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-03-19T15:40:37.936024+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-03-19T15:41:10.477363+00:00"
+    },
+    "vote": {
+      "file": "vote_result.json",
+      "updated_at": "2026-03-19T15:41:33.092827+00:00"
+    },
+    "resolve": {
+      "file": "resolve_result.json",
+      "updated_at": "2026-03-19T15:41:33.095333+00:00"
+    },
+    "translate": {
+      "file": "chat_history_en.md",
+      "updated_at": "2026-03-19T15:41:57.830003+00:00"
+    }
+  },
+  "completed_at": "2026-03-19T15:41:33.095471+00:00",
+  "outcome": "no_team_win"
+}

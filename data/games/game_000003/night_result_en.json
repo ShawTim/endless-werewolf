@@ -8,21 +8,11 @@
       "persona": "The grumpy old man has a straight stomach. You hate it when people talk in a roundabout way. Even if you are a good person, you still like to jump out and accuse others immediately.",
       "model": "github-copilot/gpt-4.1",
       "seat": 0,
-      "initial_role": "Seer",
-      "current_role": "Tanner (tanner)",
-      "night_memory": [
-        "You checked SafetySam and his identity is: Tanner."
-      ],
-      "night_actions": [
-        {
-          "role": "Seer",
-          "action": "inspect_player",
-          "target": "SafetySam",
-          "seen_role": "Tanner (tanner)",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You checked SafetySam and his identity is: Tanner."
+      "initial_role": "Tanner (tanner)",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     },
     "2": {
       "id": "2",
@@ -32,7 +22,7 @@
       "persona": "Extremely cautious and a wallflower. You are never the first to speak, always waiting for the direction of the wind to become clear before taking a stand. If accused, you would immediately act pitiful or look away.",
       "model": "github-copilot/gpt-5-mini",
       "seat": 1,
-      "initial_role": "Tanner (tanner)",
+      "initial_role": "Villager",
       "current_role": "Robber",
       "night_memory": [],
       "night_actions": [],
@@ -75,10 +65,10 @@
       "initial_role": "Minion",
       "current_role": "Minion",
       "night_memory": [
-        "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
+        "You won't see any werewolves when you wake up, which means both werewolf cards are probably in the middle."
       ],
       "night_actions": [],
-      "night_memory_text": "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
+      "night_memory_text": "You won't see any werewolves when you wake up, which means both werewolf cards are probably in the middle."
     },
     "5": {
       "id": "5",
@@ -89,20 +79,20 @@
       "model": "nvidia/qwen/qwen3.5-397b-a17b",
       "seat": 4,
       "initial_role": "Robber",
-      "current_role": "Seer",
+      "current_role": "Tanner (tanner)",
       "night_memory": [
-        "You stole the Blaze card, and after replacing it, your family line is: Seer (seer)."
+        "You stole the Blaze card, and after replacing it, your family line is: Tanner (cobbler)."
       ],
       "night_actions": [
         {
           "role": "Robber",
           "action": "rob",
           "target": "Blaze",
-          "new_role": "Seer",
+          "new_role": "Tanner (tanner)",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You stole the Blaze card, and after replacing it, your family line is: Seer (seer)."
+      "night_memory_text": "You stole the Blaze card, and after replacing it, your family line is: Tanner (cobbler)."
     },
     "6": {
       "id": "6",
@@ -112,22 +102,11 @@
       "persona": "Conspiracy theorists. You feel like everyone is lying, and even if someone tells the truth, you suspect there is a deeper motive behind it. You like to come up with the most ridiculous hypotheses that you can't completely refute.",
       "model": "nvidia/minimaxai/minimax-m2.5",
       "seat": 5,
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
-      "night_memory": [
-        "You are the only werewolf on the field, and you can choose to look at a middle hole card.",
-        "You peek at the 0 hole card in the middle and see it: Villager."
-      ],
-      "night_actions": [
-        {
-          "role": "Werewolf",
-          "action": "inspect_center",
-          "target": 0,
-          "seen_role": "Villager",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You are the only werewolf on the field, and you can choose to look at a middle hole card. You peek at the 0 hole card in the middle and see it: Villager."
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     }
   },
   "seating_order": [
@@ -139,25 +118,11 @@
     "6"
   ],
   "center_cards": [
-    "Villager",
     "Werewolf",
-    "Villager"
+    "Werewolf",
+    "Seer"
   ],
   "night_trace": [
-    {
-      "actor": "ConspiBro",
-      "role": "Werewolf",
-      "action": "inspect_center",
-      "target": 0,
-      "source": "agent"
-    },
-    {
-      "actor": "Blaze",
-      "role": "Seer",
-      "action": "inspect_player",
-      "target": "SafetySam",
-      "source": "agent"
-    },
     {
       "actor": "EasyBake",
       "role": "Robber",
