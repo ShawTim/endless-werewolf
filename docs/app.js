@@ -34,6 +34,15 @@ let selected = null;
 let selectedPayload = null;
 let currentLang = localStorage.getItem('werewolf_lang') || 'zh';
 
+const avatarPath = {
+  Blaze: './assets/avatars/blaze.svg',
+  SafetySam: './assets/avatars/safetysam.svg',
+  'Dr. Pizza': './assets/avatars/dr_pizza.svg',
+  Twister: './assets/avatars/twister.svg',
+  EasyBake: './assets/avatars/easybake.svg',
+  ConspiBro: './assets/avatars/conspibro.svg',
+};
+
 function setTab(name) {
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === name);
@@ -44,24 +53,139 @@ function setTab(name) {
   els.resolve.classList.toggle('hidden', name !== 'resolve');
 }
 
-function buildNameMap(night) {
-  const map = new Map();
+function buildNameMaps(night) {
+  const toLocal = new Map();
   const players = (night && night.players) ? Object.values(night.players) : [];
   for (const p of players) {
     const zh = p.name_zh || p.name || '';
     const en = p.name_en || p.name || '';
-    map.set(p.name, currentLang === 'en' ? en : zh);
+    toLocal.set(p.name, currentLang === 'en' ? en : zh);
   }
-  return map;
+  return { toLocal };
 }
 
-function localizeTextByNameMap(text, nameMap) {
-  let out = text || '';
-  for (const [raw, local] of nameMap.entries()) {
-    const safe = raw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    out = out.replace(new RegExp(`\\b${safe}\\b`, 'g'), local);
+function localizeName(raw, maps) {
+  return maps.toLocal.get(raw) || raw;
+}
+
+function parseChatLines(chatText) {
+  const lines = (chatText || '').split('\n').filter(Boolean);
+  const out = [];
+  for (const ln of lines) {
+    const m = ln.match(/^\[(.*?)\]\s+([^:]+):\s*(.*)$/s);
+    if (!m) continue;
+    const when = m[1];
+    const head = m[2].trim();
+    const speech = m[3] || '';
+    const [speaker, targetPart] = head.split(' @');
+    out.push({
+      when,
+      speaker: (speaker || '').trim(),
+      target: targetPart ? targetPart.trim() : null,
+      speech,
+    });
   }
   return out;
+}
+
+function roleShort(role = '') {
+  return String(role).split(' (')[0] || role;
+}
+
+function renderNight(night, maps) {
+  const players = Object.values((night && night.players) || {}).sort((a, b) => (a.seat || 0) - (b.seat || 0));
+  const cards = players.map(p => `
+    <div class="info-card">
+      <h4>${localizeName(p.name, maps)}</h4>
+      <div class="kv">Seat: ${p.seat + 1}</div>
+      <div class="kv">Initial: ${roleShort(p.initial_role)}</div>
+      <div class="kv">Current: ${roleShort(p.current_role)}</div>
+      <div class="kv">Memory: ${(p.night_memory_text || '-')}</div>
+    </div>
+  `).join('');
+
+  const center = (night.center_cards || []).map((c, i) => `<div class="kv">Center ${i}: ${roleShort(c)}</div>`).join('');
+
+  els.night.innerHTML = `
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Center Cards</h4>
+        ${center || '<div class="kv">-</div>'}
+      </div>
+      ${cards}
+    </div>
+  `;
+}
+
+function renderChat(chatText, maps) {
+  const items = parseChatLines(chatText);
+  const html = items.map(it => {
+    const rawSpeaker = it.speaker;
+    const speaker = localizeName(rawSpeaker, maps);
+    const target = it.target ? localizeName(it.target, maps) : null;
+    const avatar = avatarPath[rawSpeaker] || './assets/avatars/blaze.svg';
+
+    return `
+      <div class="chat-row">
+        <img class="chat-avatar" src="${avatar}" alt="${speaker}" />
+        <div class="bubble-wrap">
+          <div class="speaker-line">${speaker} · ${it.when}${target ? `<span class="target-tag">@${target}</span>` : ''}</div>
+          <div class="speech-bubble">${it.speech}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  els.chat.innerHTML = `<div class="chat-thread">${html || '<div class="kv">(no chat history)</div>'}</div>`;
+}
+
+function renderVote(vote, maps) {
+  const votes = vote.votes || {};
+  const rows = Object.entries(votes).map(([from, to]) => `
+    <div class="kv">${localizeName(from, maps)} → ${localizeName(to, maps)}</div>
+  `).join('');
+
+  const tally = Object.entries(vote.tally || {}).map(([name, n]) => `
+    <div class="kv">${localizeName(name, maps)}: ${n}</div>
+  `).join('');
+
+  const executed = (vote.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+
+  els.vote.innerHTML = `
+    <div class="card-grid">
+      <div class="info-card"><h4>Votes</h4>${rows || '<div class="kv">-</div>'}</div>
+      <div class="info-card"><h4>Tally</h4>${tally || '<div class="kv">-</div>'}</div>
+      <div class="info-card"><h4>Executed</h4><div class="kv">${executed}</div></div>
+    </div>
+  `;
+}
+
+function renderResolve(resolve, maps) {
+  const winners = (resolve.winners || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const executed = (resolve.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+
+  const finalRoles = Object.entries(resolve.final_roles || {}).map(([name, payload]) => `
+    <div class="info-card">
+      <h4>${localizeName(name, maps)}</h4>
+      <div class="kv">Initial: ${roleShort(payload.initial_role)}</div>
+      <div class="kv">Final: ${roleShort(payload.current_role)}</div>
+      <div class="kv">Team: ${payload.team}</div>
+    </div>
+  `).join('');
+
+  els.resolve.innerHTML = `
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Outcome</h4>
+        <div class="kv">${resolve.outcome || '-'}</div>
+        <div class="kv">Winner Team: ${resolve.winner_team || '-'}</div>
+        <div class="kv">Winners: ${winners}</div>
+        <div class="kv">Executed: ${executed}</div>
+        <div class="kv">Reason: ${resolve.reason || '-'}</div>
+      </div>
+      ${finalRoles}
+    </div>
+  `;
 }
 
 function renderCurrentDetails() {
@@ -72,28 +196,21 @@ function renderCurrentDetails() {
   const resolve = currentLang === 'en' && selectedPayload.resolve_en ? selectedPayload.resolve_en : selectedPayload.resolve;
   const chat = currentLang === 'en' && selectedPayload.chat_en ? selectedPayload.chat_en : selectedPayload.chat;
 
-  const nameMap = buildNameMap(selectedPayload.night || night);
+  const maps = buildNameMaps(selectedPayload.night || night);
 
   els.meta.textContent = [
     `Game: ${selected.game_id}`,
     `Outcome: ${resolve.outcome || selected.outcome || 'unknown'}`,
     `Winner: ${resolve.winner_team || selected.winner_team || 'unknown'}`,
-    `Executed: ${((resolve.executed || selected.executed || []).map(n => nameMap.get(n) || n)).join(', ') || '-'}`,
+    `Executed: ${((resolve.executed || selected.executed || []).map(n => localizeName(n, maps))).join(', ') || '-'}`,
     `Chat lines: ${selected.chat_lines ?? '-'}`,
     `Lang: ${currentLang === 'en' ? 'English' : '中文'}`,
   ].join(' | ');
 
-  if (currentLang === 'en' && selectedPayload.night_en) {
-    els.night.textContent = JSON.stringify(night, null, 2);
-    els.vote.textContent = JSON.stringify(vote, null, 2);
-    els.resolve.textContent = JSON.stringify(resolve, null, 2);
-    els.chat.textContent = chat || '(no chat history)';
-  } else {
-    els.night.textContent = localizeTextByNameMap(JSON.stringify(night, null, 2), nameMap);
-    els.vote.textContent = localizeTextByNameMap(JSON.stringify(vote, null, 2), nameMap);
-    els.resolve.textContent = localizeTextByNameMap(JSON.stringify(resolve, null, 2), nameMap);
-    els.chat.textContent = localizeTextByNameMap(chat || '(no chat history)', nameMap);
-  }
+  renderNight(night || {}, maps);
+  renderChat(chat || '', maps);
+  renderVote(vote || {}, maps);
+  renderResolve(resolve || {}, maps);
 }
 
 async function showGame(game) {
@@ -105,11 +222,11 @@ async function showGame(game) {
     loadJson(`${base}/night_result.json`).catch(() => ({})),
     loadJson(`${base}/vote_result.json`).catch(() => ({})),
     loadJson(`${base}/resolve_result.json`).catch(() => ({})),
-    loadText(`${base}/chat_history.md`).catch(() => ""),
+    loadText(`${base}/chat_history.md`).catch(() => ''),
     loadJsonOptional(`${base}/night_result_en.json`),
     loadJsonOptional(`${base}/vote_result_en.json`),
     loadJsonOptional(`${base}/resolve_result_en.json`),
-    loadText(`${base}/chat_history_en.md`).catch(() => ""),
+    loadText(`${base}/chat_history_en.md`).catch(() => ''),
   ]);
 
   selectedPayload = {
@@ -126,7 +243,7 @@ async function showGame(game) {
   els.empty.classList.add('hidden');
   els.details.classList.remove('hidden');
   renderCurrentDetails();
-  setTab('night');
+  setTab('chat');
 }
 
 function renderList(items) {
