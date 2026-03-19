@@ -26,6 +26,7 @@ const els = {
   chat: document.getElementById('tab-chat'),
   vote: document.getElementById('tab-vote'),
   resolve: document.getElementById('tab-resolve'),
+  latestSummary: document.getElementById('latest-summary'),
   lang: document.getElementById('lang-select'),
 };
 
@@ -183,9 +184,21 @@ function renderVote(vote, maps) {
   `;
 }
 
-function renderResolve(resolve, maps) {
+function renderResolve(resolve, maps, day = {}) {
   const winners = (resolve.winners || []).map(n => localizeName(n, maps)).join(', ') || '-';
   const executed = (resolve.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+
+  const speakCounts = day.player_stats || {};
+  const acc = {};
+  for (const item of (day.day_trace || [])) {
+    if (item.type !== 'speech') continue;
+    if (item.target) {
+      acc[item.target] = (acc[item.target] || 0) + 1;
+    }
+  }
+  const mostActive = Object.entries(speakCounts)
+    .sort((a, b) => (b[1].speak_count || 0) - (a[1].speak_count || 0))[0]?.[0] || '-';
+  const mostTargeted = Object.entries(acc).sort((a, b) => b[1] - a[1])[0]?.[0] || '-';
 
   const finalRoles = Object.entries(resolve.final_roles || {}).map(([name, payload]) => `
     <div class="info-card">
@@ -206,7 +219,32 @@ function renderResolve(resolve, maps) {
         <div class="kv">Executed: ${executed}</div>
         <div class="kv">Reason: ${resolve.reason || '-'}</div>
       </div>
+      <div class="info-card">
+        <h4>Round Insights</h4>
+        <div class="kv">Most Active Speaker: ${localizeName(mostActive, maps)}</div>
+        <div class="kv">Most Targeted Player: ${localizeName(mostTargeted, maps)}</div>
+        <div class="kv">Speech Turns: ${(day.day_trace || []).filter(x => x.type === 'speech').length}</div>
+        <div class="kv">Pass Turns: ${(day.day_trace || []).filter(x => x.type === 'pass').length}</div>
+      </div>
       ${finalRoles}
+    </div>
+  `;
+}
+
+function renderLatestSummary() {
+  if (!games.length) {
+    els.latestSummary.textContent = 'No games yet.';
+    return;
+  }
+  const g = games[0];
+  const executed = (g.executed || []).join(', ') || '-';
+  els.latestSummary.innerHTML = `
+    <div>Latest game: <strong>${g.game_id}</strong></div>
+    <div>Outcome: <strong>${g.outcome || 'unknown'}</strong> · Winner Team: <strong>${g.winner_team || 'unknown'}</strong></div>
+    <div>Executed: <strong>${executed}</strong></div>
+    <div class="chips">
+      <span class="chip">Chat Lines: ${g.chat_lines ?? '-'}</span>
+      <span class="chip">Votes: ${g.votes_count ?? '-'}</span>
     </div>
   `;
 }
@@ -215,6 +253,7 @@ function renderCurrentDetails() {
   if (!selectedPayload || !selected) return;
 
   const night = currentLang === 'en' && selectedPayload.night_en ? selectedPayload.night_en : selectedPayload.night;
+  const day = currentLang === 'en' && selectedPayload.day_en ? selectedPayload.day_en : selectedPayload.day;
   const vote = currentLang === 'en' && selectedPayload.vote_en ? selectedPayload.vote_en : selectedPayload.vote;
   const resolve = currentLang === 'en' && selectedPayload.resolve_en ? selectedPayload.resolve_en : selectedPayload.resolve;
   const chat = currentLang === 'en' && selectedPayload.chat_en ? selectedPayload.chat_en : selectedPayload.chat;
@@ -233,7 +272,7 @@ function renderCurrentDetails() {
   renderNight(night || {}, maps);
   renderChat(chat || '', maps);
   renderVote(vote || {}, maps);
-  renderResolve(resolve || {}, maps);
+  renderResolve(resolve || {}, maps, day || {});
 }
 
 async function showGame(game) {
@@ -241,12 +280,14 @@ async function showGame(game) {
   document.querySelectorAll('.game-item').forEach(i => i.classList.toggle('active', i.dataset.id === game.game_id));
 
   const base = `./data/games/${game.game_id}`;
-  const [night, vote, resolve, chat, nightEn, voteEn, resolveEn, chatEn] = await Promise.all([
+  const [night, day, vote, resolve, chat, nightEn, dayEn, voteEn, resolveEn, chatEn] = await Promise.all([
     loadJson(`${base}/night_result.json`).catch(() => ({})),
+    loadJson(`${base}/day_result.json`).catch(() => ({})),
     loadJson(`${base}/vote_result.json`).catch(() => ({})),
     loadJson(`${base}/resolve_result.json`).catch(() => ({})),
     loadText(`${base}/chat_history.md`).catch(() => ''),
     loadJsonOptional(`${base}/night_result_en.json`),
+    loadJsonOptional(`${base}/day_result_en.json`),
     loadJsonOptional(`${base}/vote_result_en.json`),
     loadJsonOptional(`${base}/resolve_result_en.json`),
     loadText(`${base}/chat_history_en.md`).catch(() => ''),
@@ -254,10 +295,12 @@ async function showGame(game) {
 
   selectedPayload = {
     night,
+    day,
     vote,
     resolve,
     chat,
     night_en: nightEn,
+    day_en: dayEn,
     vote_en: voteEn,
     resolve_en: resolveEn,
     chat_en: chatEn,
@@ -307,6 +350,7 @@ async function init() {
   });
 
   renderList(games);
+  renderLatestSummary();
   els.search.addEventListener('input', applySearch);
 
   const tabs = document.querySelectorAll('.tabs button');
