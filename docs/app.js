@@ -44,20 +44,66 @@ const avatarPath = {
 
 const LABELS = {
   en: {
+    // outcomes / teams
     werewolf_win:  'Werewolf Victory',
     village_win:   'Village Victory',
     tanner_win:    'Tanner Victory',
     werewolf_team: 'Werewolf',
     village_team:  'Village',
     tanner_team:   'Tanner',
+    // night tab
+    'Center Cards': 'Center Cards',
+    'Center':       'Center',
+    'Seat':         'Seat',
+    'Initial':      'Initial',
+    'Current':      'Current',
+    'Memory':       'Memory',
+    // vote tab
+    'Votes':        'Votes',
+    'Tally':        'Tally',
+    'Executed':     'Executed',
+    // resolve tab
+    'Outcome':      'Outcome',
+    'Winners':      'Winners',
+    'Reason':       'Reason',
+    'Final':        'Final',
+    'Team':         'Team',
+    'Round Insights':       'Round Insights',
+    'Most Active Speaker':  'Most Active Speaker',
+    'Most Targeted Player': 'Most Targeted Player',
+    'Speech Turns':         'Speech Turns',
+    'Pass Turns':           'Pass Turns',
   },
   zh: {
+    // outcomes / teams
     werewolf_win:  '狼人勝利',
     village_win:   '村民勝利',
     tanner_win:    '鞣皮匠勝利',
     werewolf_team: '狼人陣營',
     village_team:  '村民陣營',
     tanner_team:   '鞣皮匠',
+    // night tab
+    'Center Cards': '中央牌',
+    'Center':       '中央',
+    'Seat':         '座位',
+    'Initial':      '初始身份',
+    'Current':      '現時身份',
+    'Memory':       '夜晚記憶',
+    // vote tab
+    'Votes':        '投票',
+    'Tally':        '票數',
+    'Executed':     '被處決',
+    // resolve tab
+    'Outcome':      '結果',
+    'Winners':      '勝利者',
+    'Reason':       '原因',
+    'Final':        '最終身份',
+    'Team':         '陣營',
+    'Round Insights':       '回合數據',
+    'Most Active Speaker':  '最活躍發言者',
+    'Most Targeted Player': '最多被點名者',
+    'Speech Turns':         '發言次數',
+    'Pass Turns':           '跳過次數',
   },
 };
 function t(key) { return LABELS[currentLang]?.[key] ?? key; }
@@ -155,17 +201,17 @@ function renderNight(night, maps) {
   const cards = players.map(p => `
     <div class="info-card">
       <h4>${localizeName(p.name, maps)}</h4>
-      <div class="kv">Seat: ${p.seat + 1}</div>
-      <div class="kv">Initial: ${roleShort(p.initial_role)}</div>
-      <div class="kv">Current: ${roleShort(p.current_role)}</div>
-      <div class="kv">Memory: ${p.night_memory_text || '-'}</div>
+      <div class="kv">${t('Seat')}: ${p.seat + 1}</div>
+      <div class="kv">${t('Initial')}: ${roleShort(p.initial_role)}</div>
+      <div class="kv">${t('Current')}: ${roleShort(p.current_role)}</div>
+      <div class="kv">${t('Memory')}: ${p.night_memory_text || '-'}</div>
     </div>
   `).join('');
-  const center = (night?.center_cards || []).map((c, i) => `<div class="kv">Center ${i}: ${roleShort(c)}</div>`).join('');
+  const center = (night?.center_cards || []).map((c, i) => `<div class="kv">${t('Center')} ${i}: ${roleShort(c)}</div>`).join('');
 
   els.night.innerHTML = `
     <div class="card-grid">
-      <div class="info-card"><h4>Center Cards</h4>${center || '<div class="kv">-</div>'}</div>
+      <div class="info-card"><h4>${t('Center Cards')}</h4>${center || '<div class="kv">-</div>'}</div>
       ${cards}
     </div>
   `;
@@ -201,9 +247,9 @@ function renderVote(vote, maps) {
 
   els.vote.innerHTML = `
     <div class="card-grid">
-      <div class="info-card"><h4>Votes</h4>${rows || '<div class="kv">-</div>'}</div>
-      <div class="info-card"><h4>Tally</h4>${tally || '<div class="kv">-</div>'}</div>
-      <div class="info-card"><h4>Executed</h4><div class="kv">${executed}</div></div>
+      <div class="info-card"><h4>${t('Votes')}</h4>${rows || '<div class="kv">-</div>'}</div>
+      <div class="info-card"><h4>${t('Tally')}</h4>${tally || '<div class="kv">-</div>'}</div>
+      <div class="info-card"><h4>${t('Executed')}</h4><div class="kv">${executed}</div></div>
     </div>
   `;
 }
@@ -223,28 +269,27 @@ function renderResolve(resolve, maps, day = {}) {
   const finalRoles = Object.entries(resolve?.final_roles || {}).map(([name, payload]) => `
     <div class="info-card">
       <h4>${localizeName(name, maps)}</h4>
-      <div class="kv">Initial: ${roleShort(payload.initial_role)}</div>
-      <div class="kv">Final: ${roleShort(payload.current_role)}</div>
-      <div class="kv">Team: ${t(payload.team)}</div>
+      <div class="kv">${t('Initial')}: ${roleShort(payload.initial_role)}</div>
+      <div class="kv">${t('Final')}: ${roleShort(payload.current_role)}</div>
+      <div class="kv">${t('Team')}: ${t(payload.team)}</div>
     </div>
   `).join('');
 
   els.resolve.innerHTML = `
     <div class="card-grid">
       <div class="info-card">
-        <h4>Outcome</h4>
+        <h4>${t('Outcome')}</h4>
         <div class="kv">${t(resolve?.outcome) || '-'}</div>
-        <div class="kv">Winner: ${t(resolve?.winner_team) || '-'}</div>
-        <div class="kv">Winners: ${winners}</div>
-        <div class="kv">Executed: ${executed}</div>
-        <div class="kv">Reason: ${resolve?.reason || '-'}</div>
+        <div class="kv">${t('Winners')}: ${winners}</div>
+        <div class="kv">${t('Executed')}: ${executed}</div>
+        <div class="kv">${t('Reason')}: ${resolve?.reason || '-'}</div>
       </div>
       <div class="info-card">
-        <h4>Round Insights</h4>
-        <div class="kv">Most Active Speaker: ${localizeName(mostActive, maps)}</div>
-        <div class="kv">Most Targeted Player: ${localizeName(mostTargeted, maps)}</div>
-        <div class="kv">Speech Turns: ${(day?.day_trace || []).filter(x => x.type === 'speech').length}</div>
-        <div class="kv">Pass Turns: ${(day?.day_trace || []).filter(x => x.type === 'pass').length}</div>
+        <h4>${t('Round Insights')}</h4>
+        <div class="kv">${t('Most Active Speaker')}: ${localizeName(mostActive, maps)}</div>
+        <div class="kv">${t('Most Targeted Player')}: ${localizeName(mostTargeted, maps)}</div>
+        <div class="kv">${t('Speech Turns')}: ${(day?.day_trace || []).filter(x => x.type === 'speech').length}</div>
+        <div class="kv">${t('Pass Turns')}: ${(day?.day_trace || []).filter(x => x.type === 'pass').length}</div>
       </div>
       ${finalRoles}
     </div>
