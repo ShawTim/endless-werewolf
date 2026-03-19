@@ -62,6 +62,12 @@ const LABELS = {
 };
 function t(key) { return LABELS[currentLang]?.[key] ?? key; }
 
+function applyStaticI18n() {
+  document.querySelectorAll('[data-i18n-en]').forEach(el => {
+    el.textContent = currentLang === 'zh' ? el.dataset.i18nZh : el.dataset.i18nEn;
+  });
+}
+
 function setTab(name) {
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === name);
@@ -348,11 +354,13 @@ async function init() {
   els.lang.addEventListener('change', () => {
     currentLang = els.lang.value;
     localStorage.setItem('werewolf_lang', currentLang);
+    applyStaticI18n();
     renderLatestSummary();
     renderList(games);
     renderCurrentDetails();
   });
 
+  applyStaticI18n();
   renderLatestSummary();
   renderList(games);
   els.search.addEventListener('input', applySearch);
