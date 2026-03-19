@@ -3,24 +3,22 @@ async function loadJson(path) {
   if (!r.ok) throw new Error(`Failed to load ${path}`);
   return r.json();
 }
-
 async function loadJsonOptional(path) {
   const r = await fetch(path);
   if (!r.ok) return null;
   return r.json();
 }
-
 async function loadText(path) {
   const r = await fetch(path);
-  if (!r.ok) return "";
+  if (!r.ok) return '';
   return r.text();
 }
 
 const els = {
   list: document.getElementById('game-list'),
   search: document.getElementById('search'),
-  empty: document.getElementById('empty'),
   details: document.getElementById('details'),
+  empty: document.getElementById('empty'),
   meta: document.getElementById('meta'),
   night: document.getElementById('tab-night'),
   chat: document.getElementById('tab-chat'),
@@ -33,7 +31,7 @@ const els = {
 let games = [];
 let selected = null;
 let selectedPayload = null;
-let currentLang = localStorage.getItem('werewolf_lang') || 'zh';
+let currentLang = localStorage.getItem('werewolf_lang') || 'en';
 
 const avatarPath = {
   Blaze: './assets/avatars/blaze.svg',
@@ -56,11 +54,9 @@ function setTab(name) {
 
 function buildNameMaps(night) {
   const toLocal = new Map();
-  const players = (night && night.players) ? Object.values(night.players) : [];
+  const players = (night?.players) ? Object.values(night.players) : [];
   for (const p of players) {
-    const zh = p.name_zh || p.name || '';
-    const en = p.name_en || p.name || '';
-    toLocal.set(p.name, currentLang === 'en' ? en : zh);
+    toLocal.set(p.name, currentLang === 'en' ? (p.name_en || p.name) : (p.name_zh || p.name));
   }
   return { toLocal };
 }
@@ -78,12 +74,16 @@ function localizeTextByNameMap(text, maps) {
   return out;
 }
 
+function roleShort(role = '') {
+  return String(role).split(' (')[0] || role;
+}
+
 function parseChatLines(chatText) {
-  const rawLines = (chatText || '').split('\n');
+  const lines = (chatText || '').split('\n');
   const chunks = [];
   let current = [];
 
-  for (const ln of rawLines) {
+  for (const ln of lines) {
     if (/^\[\d{4}-\d{2}-\d{2}/.test(ln)) {
       if (current.length) chunks.push(current.join('\n'));
       current = [ln];
@@ -101,40 +101,45 @@ function parseChatLines(chatText) {
     const head = m[2].trim();
     const speech = (m[3] || '').trim();
     const [speaker, targetPart] = head.split(' @');
-    out.push({
-      when,
-      speaker: (speaker || '').trim(),
-      target: targetPart ? targetPart.trim() : null,
-      speech,
-    });
+    out.push({ when, speaker: (speaker || '').trim(), target: targetPart ? targetPart.trim() : null, speech });
   }
   return out;
 }
 
-function roleShort(role = '') {
-  return String(role).split(' (')[0] || role;
+function renderLatestSummary() {
+  if (!games.length) {
+    els.latestSummary.textContent = 'No games yet.';
+    return;
+  }
+  const g = games[0];
+  const executed = (g.executed || []).join(', ') || '-';
+  els.latestSummary.innerHTML = `
+    <div>Latest game: <strong>${g.game_id}</strong></div>
+    <div>Outcome: <strong>${g.outcome || 'unknown'}</strong> · Winner Team: <strong>${g.winner_team || 'unknown'}</strong></div>
+    <div>Executed: <strong>${executed}</strong></div>
+    <div class="chips">
+      <span class="chip">Chat Lines: ${g.chat_lines ?? '-'}</span>
+      <span class="chip">Votes: ${g.votes_count ?? '-'}</span>
+    </div>
+  `;
 }
 
 function renderNight(night, maps) {
-  const players = Object.values((night && night.players) || {}).sort((a, b) => (a.seat || 0) - (b.seat || 0));
+  const players = Object.values(night?.players || {}).sort((a, b) => (a.seat || 0) - (b.seat || 0));
   const cards = players.map(p => `
     <div class="info-card">
       <h4>${localizeName(p.name, maps)}</h4>
       <div class="kv">Seat: ${p.seat + 1}</div>
       <div class="kv">Initial: ${roleShort(p.initial_role)}</div>
       <div class="kv">Current: ${roleShort(p.current_role)}</div>
-      <div class="kv">Memory: ${(p.night_memory_text || '-')}</div>
+      <div class="kv">Memory: ${p.night_memory_text || '-'}</div>
     </div>
   `).join('');
-
-  const center = (night.center_cards || []).map((c, i) => `<div class="kv">Center ${i}: ${roleShort(c)}</div>`).join('');
+  const center = (night?.center_cards || []).map((c, i) => `<div class="kv">Center ${i}: ${roleShort(c)}</div>`).join('');
 
   els.night.innerHTML = `
     <div class="card-grid">
-      <div class="info-card">
-        <h4>Center Cards</h4>
-        ${center || '<div class="kv">-</div>'}
-      </div>
+      <div class="info-card"><h4>Center Cards</h4>${center || '<div class="kv">-</div>'}</div>
       ${cards}
     </div>
   `;
@@ -164,16 +169,9 @@ function renderChat(chatText, maps) {
 }
 
 function renderVote(vote, maps) {
-  const votes = vote.votes || {};
-  const rows = Object.entries(votes).map(([from, to]) => `
-    <div class="kv">${localizeName(from, maps)} → ${localizeName(to, maps)}</div>
-  `).join('');
-
-  const tally = Object.entries(vote.tally || {}).map(([name, n]) => `
-    <div class="kv">${localizeName(name, maps)}: ${n}</div>
-  `).join('');
-
-  const executed = (vote.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const rows = Object.entries(vote?.votes || {}).map(([from, to]) => `<div class="kv">${localizeName(from, maps)} → ${localizeName(to, maps)}</div>`).join('');
+  const tally = Object.entries(vote?.tally || {}).map(([name, n]) => `<div class="kv">${localizeName(name, maps)}: ${n}</div>`).join('');
+  const executed = (vote?.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
 
   els.vote.innerHTML = `
     <div class="card-grid">
@@ -185,22 +183,18 @@ function renderVote(vote, maps) {
 }
 
 function renderResolve(resolve, maps, day = {}) {
-  const winners = (resolve.winners || []).map(n => localizeName(n, maps)).join(', ') || '-';
-  const executed = (resolve.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const winners = (resolve?.winners || []).map(n => localizeName(n, maps)).join(', ') || '-';
+  const executed = (resolve?.executed || []).map(n => localizeName(n, maps)).join(', ') || '-';
 
-  const speakCounts = day.player_stats || {};
-  const acc = {};
-  for (const item of (day.day_trace || [])) {
-    if (item.type !== 'speech') continue;
-    if (item.target) {
-      acc[item.target] = (acc[item.target] || 0) + 1;
-    }
+  const speakCounts = day?.player_stats || {};
+  const targeted = {};
+  for (const item of (day?.day_trace || [])) {
+    if (item.type === 'speech' && item.target) targeted[item.target] = (targeted[item.target] || 0) + 1;
   }
-  const mostActive = Object.entries(speakCounts)
-    .sort((a, b) => (b[1].speak_count || 0) - (a[1].speak_count || 0))[0]?.[0] || '-';
-  const mostTargeted = Object.entries(acc).sort((a, b) => b[1] - a[1])[0]?.[0] || '-';
+  const mostActive = Object.entries(speakCounts).sort((a,b)=> (b[1].speak_count||0)-(a[1].speak_count||0))[0]?.[0] || '-';
+  const mostTargeted = Object.entries(targeted).sort((a,b)=>b[1]-a[1])[0]?.[0] || '-';
 
-  const finalRoles = Object.entries(resolve.final_roles || {}).map(([name, payload]) => `
+  const finalRoles = Object.entries(resolve?.final_roles || {}).map(([name, payload]) => `
     <div class="info-card">
       <h4>${localizeName(name, maps)}</h4>
       <div class="kv">Initial: ${roleShort(payload.initial_role)}</div>
@@ -213,38 +207,20 @@ function renderResolve(resolve, maps, day = {}) {
     <div class="card-grid">
       <div class="info-card">
         <h4>Outcome</h4>
-        <div class="kv">${resolve.outcome || '-'}</div>
-        <div class="kv">Winner Team: ${resolve.winner_team || '-'}</div>
+        <div class="kv">${resolve?.outcome || '-'}</div>
+        <div class="kv">Winner Team: ${resolve?.winner_team || '-'}</div>
         <div class="kv">Winners: ${winners}</div>
         <div class="kv">Executed: ${executed}</div>
-        <div class="kv">Reason: ${resolve.reason || '-'}</div>
+        <div class="kv">Reason: ${resolve?.reason || '-'}</div>
       </div>
       <div class="info-card">
         <h4>Round Insights</h4>
         <div class="kv">Most Active Speaker: ${localizeName(mostActive, maps)}</div>
         <div class="kv">Most Targeted Player: ${localizeName(mostTargeted, maps)}</div>
-        <div class="kv">Speech Turns: ${(day.day_trace || []).filter(x => x.type === 'speech').length}</div>
-        <div class="kv">Pass Turns: ${(day.day_trace || []).filter(x => x.type === 'pass').length}</div>
+        <div class="kv">Speech Turns: ${(day?.day_trace || []).filter(x => x.type === 'speech').length}</div>
+        <div class="kv">Pass Turns: ${(day?.day_trace || []).filter(x => x.type === 'pass').length}</div>
       </div>
       ${finalRoles}
-    </div>
-  `;
-}
-
-function renderLatestSummary() {
-  if (!games.length) {
-    els.latestSummary.textContent = 'No games yet.';
-    return;
-  }
-  const g = games[0];
-  const executed = (g.executed || []).join(', ') || '-';
-  els.latestSummary.innerHTML = `
-    <div>Latest game: <strong>${g.game_id}</strong></div>
-    <div>Outcome: <strong>${g.outcome || 'unknown'}</strong> · Winner Team: <strong>${g.winner_team || 'unknown'}</strong></div>
-    <div>Executed: <strong>${executed}</strong></div>
-    <div class="chips">
-      <span class="chip">Chat Lines: ${g.chat_lines ?? '-'}</span>
-      <span class="chip">Votes: ${g.votes_count ?? '-'}</span>
     </div>
   `;
 }
@@ -262,9 +238,9 @@ function renderCurrentDetails() {
 
   els.meta.textContent = [
     `Game: ${selected.game_id}`,
-    `Outcome: ${resolve.outcome || selected.outcome || 'unknown'}`,
-    `Winner: ${resolve.winner_team || selected.winner_team || 'unknown'}`,
-    `Executed: ${((resolve.executed || selected.executed || []).map(n => localizeName(n, maps))).join(', ') || '-'}`,
+    `Outcome: ${resolve?.outcome || selected.outcome || 'unknown'}`,
+    `Winner: ${resolve?.winner_team || selected.winner_team || 'unknown'}`,
+    `Executed: ${((resolve?.executed || selected.executed || []).map(n => localizeName(n, maps))).join(', ') || '-'}`,
     `Chat lines: ${selected.chat_lines ?? '-'}`,
     `Lang: ${currentLang === 'en' ? 'English' : '中文'}`,
   ].join(' | ');
@@ -277,7 +253,7 @@ function renderCurrentDetails() {
 
 async function showGame(game) {
   selected = game;
-  document.querySelectorAll('.game-item').forEach(i => i.classList.toggle('active', i.dataset.id === game.game_id));
+  document.querySelectorAll('.game-card').forEach(i => i.classList.toggle('active', i.dataset.id === game.game_id));
 
   const base = `./data/games/${game.game_id}`;
   const [night, day, vote, resolve, chat, nightEn, dayEn, voteEn, resolveEn, chatEn] = await Promise.all([
@@ -294,11 +270,7 @@ async function showGame(game) {
   ]);
 
   selectedPayload = {
-    night,
-    day,
-    vote,
-    resolve,
-    chat,
+    night, day, vote, resolve, chat,
     night_en: nightEn,
     day_en: dayEn,
     vote_en: voteEn,
@@ -314,16 +286,26 @@ async function showGame(game) {
 
 function renderList(items) {
   els.list.innerHTML = '';
+  if (!items.length) {
+    els.list.innerHTML = '<div class="kv">No games found.</div>';
+    return;
+  }
   for (const g of items) {
-    const li = document.createElement('li');
-    li.className = 'game-item';
-    li.dataset.id = g.game_id;
-    li.innerHTML = `
-      <div class="id">${g.game_id}</div>
-      <div class="meta">${g.outcome || 'unknown'} · ${(g.executed || []).join(', ') || '-'}</div>
+    const isWolf = g.winner_team === 'werewolf_team';
+    const isVillage = g.winner_team === 'village_team';
+    const cardClass = isWolf ? 'win-werewolf' : isVillage ? 'win-village' : '';
+
+    const card = document.createElement('div');
+    card.className = `game-card ${cardClass}`.trim();
+    card.dataset.id = g.game_id;
+    card.innerHTML = `
+      <div class="gid">${g.game_id}</div>
+      <div class="gmeta">Outcome: ${g.outcome || 'unknown'}</div>
+      <div class="gmeta">Winner: ${g.winner_team || 'unknown'}</div>
+      <div class="gmeta">Executed: ${(g.executed || []).join(', ') || '-'}</div>
     `;
-    li.addEventListener('click', () => showGame(g));
-    els.list.appendChild(li);
+    card.addEventListener('click', () => showGame(g));
+    els.list.appendChild(card);
   }
 }
 
@@ -349,17 +331,18 @@ async function init() {
     renderCurrentDetails();
   });
 
-  renderList(games);
   renderLatestSummary();
+  renderList(games);
   els.search.addEventListener('input', applySearch);
 
-  const tabs = document.querySelectorAll('.tabs button');
-  tabs.forEach(btn => btn.addEventListener('click', () => setTab(btn.dataset.tab)));
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => setTab(btn.dataset.tab));
+  });
 
   if (games.length) showGame(games[0]);
 }
 
 init().catch(err => {
-  els.empty.textContent = `Failed to load archive: ${err.message}`;
   console.error(err);
+  if (els.list) els.list.innerHTML = `<div class="kv">Failed to load games: ${err.message}</div>`;
 });

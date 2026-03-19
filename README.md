@@ -1,34 +1,66 @@
-# AI One Night Ultimate Werewolf 🐺
+# Endless Werewolf 🐺
 
-[GitHub Pages Demo / 線上展示](https://shawtim.github.io/endless-werewolf/)
+**Live Demo:** https://shawtim.github.io/endless-werewolf/
+
+An autonomous **One Night Werewolf** showcase where 6 AI players make their own decisions, argue in real-time group discussion, and vote under social pressure.
+
+> This is not a fake “one prompt, one answer” bot demo.
+> Each player acts from private role memory + live table context.
 
 ---
 
-## English
+## Why this project is interesting
 
-An autonomous AI **One Night Ultimate Werewolf** simulation engine.
-Six fixed-persona AI players run full rounds (night → day discussion → vote → resolve), and every game is archived for browsing on GitHub Pages.
+- **Player-autonomous decisions** (not scripted turn-by-turn outputs)
+- **Concurrent day debate loops** that generate natural pressure and interruptions
+- **Deterministic state outputs** for full replay and audit
+- **Bilingual presentation** (中文 / English)
+- **Per-game immutable archives** for long-run simulation and browsing
 
-This is intentionally built as **player-driven decision making**, not a fake "one prompt in, one answer out" demo.
-During day phase, players think and react inside a shared live transcript with concurrent speaking windows, so the social battle emerges from in-round pressure rather than prewritten turns.
+---
 
-### Highlights
-- **Player-autonomous decisions**: each player decides based on their own role memory + live transcript (not a scripted Q&A bot flow)
-- **Live group combat in day phase**: asynchronous multi-player speaking loops create real-time argument pressure, interruptions, and momentum shifts
-- **Deterministic game flow** with explicit state transitions
-- **Per-game immutable storage** (`data/games/game_XXXXXX/`)
-- **Bilingual presentation (中文/English)** on the web UI
-- **End-of-flow translation** for logs/results (`*_en.json`, `chat_history_en.md`)
-- **Transparent outputs** for demo and audit
+## AI Players
 
-### Pipeline
-1. **Night** (`gm_night.py` + `night_phase.py`)
-2. **Day + Vote** (`day_phase.py`)
-3. **Resolve** (`resolve_phase.py`)
-4. **Translate to English** (`translate_phase.py`)
-5. **Publish archive UI data** (`scripts/build_pages.py`)
+| Player | Persona | Model |
+|---|---|---|
+| Blaze | Hot-tempered accuser | github-copilot/gpt-4.1 |
+| SafetySam | Overly cautious drifter | github-copilot/gpt-5-mini |
+| Dr. Pizza | Cold logic analyst | nvidia/moonshotai/kimi-k2.5 |
+| Twister | Chaos theater starter | nvidia/z-ai/glm5 |
+| EasyBake | Trusting peacemaker | nvidia/qwen/qwen3.5-397b-a17b |
+| ConspiBro | Conspiracy amplifier | nvidia/minimaxai/minimax-m2.5 |
 
-### Run
+---
+
+## Pipeline
+
+1. **Night setup/finalize** (`gm_night.py`, `night_phase.py`)
+2. **Day discussion + vote** (`day_phase.py`)
+3. **Resolve outcome** (`resolve_phase.py`)
+4. **Translate logs** (`translate_phase.py`)
+5. **Build Pages archive** (`scripts/build_pages.py`)
+
+---
+
+## Data Model
+
+- Per game: `data/games/game_XXXXXX/`
+- Current pointer: `data/current_game.json`
+- Counter: `data/game_counter.json`
+- Pages site: `docs/`
+
+Each game stores:
+- `night_result.json`
+- `day_result.json`
+- `vote_result.json`
+- `resolve_result.json`
+- `chat_history.md`
+- English mirrors: `*_en.json`, `chat_history_en.md`
+
+---
+
+## Run locally
+
 ```bash
 python3 gm_night.py
 python3 run_full_game.py
@@ -37,46 +69,12 @@ python3 scripts/build_pages.py
 
 ---
 
-## 中文（廣東話）
+## Public safety
 
-呢個 project 係一個可持續運行嘅 **AI 一夜狼人引擎**。
-6 個固定性格 AI 玩家會由夜晚玩到日頭投票再結算，之後每一場都會存檔，俾你喺 GitHub Pages 逐場睇返過程。
+The repo uses a public allowlist check script:
 
-重點係：呢個唔係「問一句、答一句」嘅假 demo。
-玩家係按自己身份記憶 + 場上最新對話去**自己決策**；
-日頭回合係多人並行即場思考同互相施壓，真係群戰，而唔係預寫劇本輪流發言。
-
-### 重點功能
-- **玩家自主決策**：每位玩家會根據自己私有資訊同場上紀錄做判斷，唔係單線問答
-- **日頭即場群戰**：多人並行發言 loop，會即場拉扯、反擊、帶風向
-- **流程 deterministic**：每一步 state 轉換都清晰可追蹤
-- **每場獨立存檔**：`data/games/game_XXXXXX/`
-- **中英雙語顯示**：Pages 可切換語言
-- **流程尾段自動翻英文**：輸出 `*_en.json` 同 `chat_history_en.md`
-- **Demo 友好**：可完整回放 night/day/vote/resolve
-
-### 遊戲流程
-1. **夜晚**（`gm_night.py` + `night_phase.py`）
-2. **日頭辯論 + 投票**（`day_phase.py`）
-3. **勝負結算**（`resolve_phase.py`）
-4. **英文翻譯輸出**（`translate_phase.py`）
-5. **重建頁面資料**（`scripts/build_pages.py`）
-
-### 快速執行
 ```bash
-python3 gm_night.py
-python3 run_full_game.py
-python3 scripts/build_pages.py
+bash scripts/check_public_repo.sh
 ```
 
----
-
-## Data Layout
-- `data/games/game_XXXXXX/` — per-game immutable outputs
-- `data/current_game.json` — current game pointer
-- `data/game_counter.json` — game id counter
-- `docs/` — GitHub Pages site files
-
-## Notes
-- Public repo is kept **public-safe** with whitelist checks.
-- Internal/private workflow files are excluded from publish scope.
+to avoid pushing internal/private operational files.

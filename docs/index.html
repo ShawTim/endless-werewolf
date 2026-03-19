@@ -1,76 +1,72 @@
 <!doctype html>
-<html lang="zh-HK">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI 一夜狼人 — 遊戲檔案館</title>
+    <title>Endless Werewolf — AI One Night Showcase</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <h1>🐺 AI 一夜狼人 檔案館</h1>
-      <p>Browse 每一場 game 嘅夜晚、日頭對話、投票、結算</p>
-      <label class="lang-row">Language:
-        <select id="lang-select">
-          <option value="zh">中文</option>
-          <option value="en">English</option>
-        </select>
-      </label>
+    <nav class="topnav">
+      <div class="brand">🐺 Endless Werewolf</div>
+      <div class="nav-actions">
+        <label class="lang-row">Language
+          <select id="lang-select">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+          </select>
+        </label>
+        <a class="gh-link" href="https://github.com/ShawTim/endless-werewolf" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>6 AI Agents. One Night. Someone Must Die.</h1>
+      <p>
+        A live social-deduction simulation where each AI player makes autonomous decisions,
+        bluffs in public, and votes under pressure.
+      </p>
+      <div id="latest-summary" class="latest-summary">Loading latest round...</div>
     </header>
 
-    <main class="layout">
-      <aside class="sidebar">
-        <div class="panel-title">Games</div>
-        <input id="search" placeholder="搜尋 game id / outcome" />
-        <ul id="game-list"></ul>
-      </aside>
-
-      <section class="content">
-        <div id="latest-hero" class="latest-hero">
-          <h2>Latest Round</h2>
-          <div id="latest-summary" class="latest-summary">Loading...</div>
+    <main class="container">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>AI Players</h2>
         </div>
-
-        <div class="asset-showcase">
-          <div class="asset-block">
-            <h3>Role Cards</h3>
-            <div class="asset-grid cards-grid">
-              <img src="./assets/cards/werewolf.svg" alt="Werewolf card" />
-              <img src="./assets/cards/minion.svg" alt="Minion card" />
-              <img src="./assets/cards/seer.svg" alt="Seer card" />
-              <img src="./assets/cards/robber.svg" alt="Robber card" />
-              <img src="./assets/cards/troublemaker.svg" alt="Troublemaker card" />
-              <img src="./assets/cards/villager.svg" alt="Villager card" />
-              <img src="./assets/cards/tanner.svg" alt="Tanner card" />
-            </div>
-          </div>
-          <div class="asset-block">
-            <h3>Player Avatars</h3>
-            <div class="asset-grid avatars-grid">
-              <img src="./assets/avatars/blaze.svg" alt="Blaze avatar" />
-              <img src="./assets/avatars/safetysam.svg" alt="SafetySam avatar" />
-              <img src="./assets/avatars/dr_pizza.svg" alt="Dr. Pizza avatar" />
-              <img src="./assets/avatars/twister.svg" alt="Twister avatar" />
-              <img src="./assets/avatars/easybake.svg" alt="EasyBake avatar" />
-              <img src="./assets/avatars/conspibro.svg" alt="ConspiBro avatar" />
-            </div>
-          </div>
+        <div class="players-grid">
+          <article class="player-card"><img src="./assets/avatars/blaze.svg" alt="Blaze" /><h3>Blaze</h3><p>Hot-tempered accuser.</p><span>Model: gpt-4.1</span></article>
+          <article class="player-card"><img src="./assets/avatars/safetysam.svg" alt="SafetySam" /><h3>SafetySam</h3><p>Overly cautious drifter.</p><span>Model: gpt-5-mini</span></article>
+          <article class="player-card"><img src="./assets/avatars/dr_pizza.svg" alt="Dr. Pizza" /><h3>Dr. Pizza</h3><p>Cold logic analyst.</p><span>Model: kimi-k2.5</span></article>
+          <article class="player-card"><img src="./assets/avatars/twister.svg" alt="Twister" /><h3>Twister</h3><p>Chaos theater starter.</p><span>Model: glm5</span></article>
+          <article class="player-card"><img src="./assets/avatars/easybake.svg" alt="EasyBake" /><h3>EasyBake</h3><p>Trusting peacemaker.</p><span>Model: qwen3.5</span></article>
+          <article class="player-card"><img src="./assets/avatars/conspibro.svg" alt="ConspiBro" /><h3>ConspiBro</h3><p>Conspiracy amplifier.</p><span>Model: minimax-m2.5</span></article>
         </div>
+      </section>
 
-        <div id="empty" class="empty">揀一場 game 睇詳情</div>
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Game Archive</h2>
+          <input id="search" placeholder="Search game id / outcome / winner..." />
+        </div>
+        <div id="game-list" class="games-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div id="empty" class="empty">Pick a game card above to inspect full round details.</div>
 
         <div id="details" class="hidden">
-          <div class="meta" id="meta"></div>
+          <div id="meta" class="meta"></div>
 
           <div class="tabs">
-            <button data-tab="night" class="active">Night</button>
-            <button data-tab="chat">Day Chat</button>
+            <button data-tab="night">Night</button>
+            <button data-tab="chat" class="active">Day Chat</button>
             <button data-tab="vote">Vote</button>
-            <button data-tab="resolve">Resolve</button>
+            <button data-tab="resolve">Reveal</button>
           </div>
 
-          <div id="tab-night" class="tab-pane"></div>
-          <div id="tab-chat" class="tab-pane hidden"></div>
+          <div id="tab-night" class="tab-pane hidden"></div>
+          <div id="tab-chat" class="tab-pane"></div>
           <div id="tab-vote" class="tab-pane hidden"></div>
           <div id="tab-resolve" class="tab-pane hidden"></div>
         </div>
