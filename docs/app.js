@@ -271,8 +271,23 @@ function renderNight(night, maps) {
   `;
 }
 
-function renderChat(chatText, maps) {
-  const items = parseChatLines(chatText);
+function chatItemsFromDayTrace(day) {
+  const trace = day?.day_trace || [];
+  return trace
+    .filter(x => x.type === 'speech' && x.player_name && x.speech)
+    .map((x, i) => ({
+      when: x.log_line?.match(/^\[(.*?)\]/)?.[1] || `turn-${i + 1}`,
+      speaker: x.player_name,
+      target: x.target || null,
+      speech: x.speech,
+    }));
+}
+
+function renderChat(chatText, maps, day = {}) {
+  let items = chatItemsFromDayTrace(day);
+  if (!items.length) {
+    items = parseChatLines(chatText);
+  }
   if (!items.length) {
     els.chat.innerHTML = '<div class="kv">(no chat history)</div>';
     return;
@@ -450,7 +465,7 @@ function renderCurrentDetails() {
   ].join(' | ');
 
   renderNight(night || {}, maps);
-  renderChat(chat || '', maps);
+  renderChat(chat || '', maps, day || {});
   renderVote(vote || {}, maps);
   renderResolve(resolve || {}, maps, day || {});
 }
