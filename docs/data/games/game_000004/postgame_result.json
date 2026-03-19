@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000004",
+  "generated_at": "2026-03-19T19:02:40.938241+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "譚仔大辣",
+        "player_name_en": "Blaze",
+        "role": "Robber (強盜)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "I went down, but the plan worked. As Robber, I pulled pressure where it needed to go. If that's the cost of winning for Village, I take it."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "白兵師兄",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Getting executed as Werewolf hurts. I think the table overreacted and misread my signals in key turns."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "安全主任",
+        "player_name_en": "SafetySam",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Twister, I knew Village had the edge."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "方唐鏡",
+        "player_name_en": "Twister",
+        "role": "Seer (預言家)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I kept my composure as Seer and let the table collapse into the lines I wanted. That's a clean Village finish."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "天真grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Twister, I knew Village had the edge."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I lost this one as Tanner. Too much table energy got absorbed by Twister, and my read couldn't recover."
+      }
+    ]
+  }
+}
