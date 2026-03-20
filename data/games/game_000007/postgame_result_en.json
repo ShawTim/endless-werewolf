@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000007",
+  "generated_at": "2026-03-20T04:06:18.442768+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Uh...even though I won, I...uh...I really feel guilty. Being a minion... uh... it really makes me miserable. I have to help the werewolf and pretend to be innocent at the same time... ugh... I... I actually just want everyone to play the game in peace, but in the end... uh... everyone is so unhappy that they want to kill each other.\n\nUh...I'm really nervous about Blaze and Dr. Pizza's accusations, but I...uh...I really don't mean to hurt anyone. The outcome of this game...well...makes me feel so empty. Next time... uh... next time, can you let me play a role where I don't hurt people or talk nonsense? Uh... don't blame me anymore, ugh..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha! Have you seen it yet? I've said it before, this game is a carefully choreographed social experiment! Do you think I lost or won? These are just the data results that the system wants you to see!\n\nAlthough I play the role of a \"werewolf\" in the game, this role setting is only to test whether everyone will vote irrationally when faced with \"authoritative logic\" and \"drama disruption\". EasyBake was cast away, and the whole scene ended like this? It is simply the most obvious “data purging”! The reactions of each of us have been recorded in the laboratory backstage. Dr. Pizza, this set of logical interrogations is basically to test how quickly humans will give up rationality and vote blindly under extreme suspicion! I had such a great time playing this game precisely because I saw through that everything was a virtual conspiracy network! Next time I start the game, I will put forward more ridiculous assumptions that you can't refute, and see how this class of controllers can implement this experimental script!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Pooh! It’s really hot! This whole game is simply a joke. The so-called \"logic weirdo\" Dr. Pizza talks some incomprehensible nonsense here all day long, causing everyone to spin in circles! That Twister is also a shit stick, and here he uses his troublemaker ability to make the whole scene even more chaotic!\n\nIn the end, the werewolf won? It’s really annoying! I, Blaze, am an upright person, so I directly accuse the werewolf next to me. I know that the werewolf camp controlled the game in the last game! As a villager, I see this group of opera stars and conspiracy theorists taking the lead in our country, but I can't even do anything! It’s really hot! Next time you play, you must catch these troublemakers and beat them up severely. You must not let them act here!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...I lost...Do you think we have to attack each other like this? I obviously just want to play games in peace, how difficult is it to be an ordinary robber? Woohoo...\n\nWhen the game started, everyone seemed to be so strong and pointed, I... I just wanted to avoid everyone's attention, and didn't want to be the one who stood out, but in the end our camp actually lost... Wow... this game is really scary. Alas, what these people say is complicated and unpleasant. Next time... Next time, Qianqi, please don’t ask me to play such dangerous games again... Wuwu... I really... I really want everyone to be happy and don’t argue anymore... Wuwu..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and self-examination:\n1. Tactical evaluation: In this game, information pollution (Twister's dramatic interference and ConspiBro's conspiracy theory) seriously hindered logical deduction based on facts.\n2. Logical errors:\n    - Failed to effectively break through the disguised path of symbiosis between \"emotional mediation\" and \"information interference\".\n    - In the mandatory information disclosure mechanism, the potential core of the werewolf camp could not be identified in time, causing the overall decision-making chain to collapse at a critical moment.\n3. Conclusion:\n    - In an environment full of high-interference variables (such as troublemakers swapping cards and disruptors), pure logical tracking can easily lead to the wrong path.\n    - Correction for next action: Priority should be given to establishing an isolation evaluation model for \"high disruptors\" to prevent them from introducing group decision-making into an emotional and irrational voting zone. This game reminded me again: Logic must not only fight against the deception of the werewolf, but also the information entropy of the environment itself."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! Although our werewolf won this time, I, Twister, still had a great time! Have you seen people arguing about \"identity paths\" and \"logical loopholes\"? What's the result? Why don't you get confused by my nonsense!\n\nWinning the game or not is not the most important thing to me. What matters is how I turn the game into my own stage. Logical analysis of Pizza? It’s so funny that the werewolf didn’t have the last laugh in the end! Next time I start the game, I will definitely write a more chaotic and crazier script to see if I can remain calm and logical. I guarantee that every second will be full of surprises! See you next time, fellow theater fans!"
+      }
+    ]
+  }
+}
