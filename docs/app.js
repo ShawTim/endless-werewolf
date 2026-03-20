@@ -538,6 +538,19 @@ async function showGame(game) {
   els.details.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function outcomeTagline(g) {
+  if (currentLang === 'zh') {
+    if (g.winner_team === 'werewolf_team') return '🐺 狼人大勝';
+    if (g.winner_team === 'village_team') return '🏘️ 村民倖存';
+    if (g.winner_team === 'tanner') return '⚙️ 製皮者反勝';
+    return '❔ 結局未明';
+  }
+  if (g.winner_team === 'werewolf_team') return '🐺 Werewolves Prevail';
+  if (g.winner_team === 'village_team') return '🏘️ Village Survives';
+  if (g.winner_team === 'tanner') return '⚙️ Tanner Steals It';
+  return '❔ Outcome Unknown';
+}
+
 function renderList(items) {
   els.list.innerHTML = '';
   if (!items.length) {
@@ -548,14 +561,18 @@ function renderList(items) {
     const isWolf = g.winner_team === 'werewolf_team';
     const isVillage = g.winner_team === 'village_team';
     const cardClass = isWolf ? 'win-werewolf' : isVillage ? 'win-village' : '';
+    const banner = isWolf ? './assets/banner-redmoon.png' : './assets/thumb-cardback.png';
 
     const card = document.createElement('div');
     card.className = `game-card ${cardClass}`.trim();
     card.dataset.id = g.game_id;
     card.innerHTML = `
-      <div class="gid">${g.game_id}</div>
-      <div class="gmeta">${t(g.outcome) || 'unknown'} · ${t(g.winner_team) || 'unknown'}</div>
-      <div class="gmeta">${t('Executed')}: ${(g.executed || []).join(', ') || '-'}</div>
+      <div class="game-thumb" style="background-image:url('${banner}')"></div>
+      <div class="game-card-body">
+        <div class="gid">${g.game_id}</div>
+        <div class="tagline">${outcomeTagline(g)}</div>
+        <div class="gmeta">${t('Executed')}: ${(g.executed || []).join(', ') || '-'}</div>
+      </div>
     `;
     card.addEventListener('click', () => showGame(g));
     els.list.appendChild(card);

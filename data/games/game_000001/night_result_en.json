@@ -8,13 +8,13 @@
       "persona": "The grumpy old man has a straight stomach. You hate it when people talk in a roundabout way. Even if you are a good person, you still like to jump out and accuse others immediately.",
       "model": "github-copilot/gpt-4.1",
       "seat": 0,
-      "initial_role": "Minion",
-      "current_role": "Villager",
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
       "night_memory": [
-        "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
+        "You meet another werewolf: Dr. Pizza."
       ],
       "night_actions": [],
-      "night_memory_text": "You see the werewolf line: ConspiBro. The werewolf doesn't know you're a minion."
+      "night_memory_text": "You meet another werewolf: Dr. Pizza."
     },
     "2": {
       "id": "2",
@@ -24,23 +24,21 @@
       "persona": "Extremely cautious and a wallflower. You are never the first to speak, always waiting for the direction of the wind to become clear before taking a stand. If accused, you would immediately act pitiful or look away.",
       "model": "github-copilot/gpt-5-mini",
       "seat": 1,
-      "initial_role": "Troublemaker",
-      "current_role": "Troublemaker",
+      "initial_role": "Robber",
+      "current_role": "Robber",
       "night_memory": [
-        "You swapped the Blaze and Dr. Pizza cards, but you don't know what they ended up with."
+        "You stole the Blaze card, and after replacing it, your family line is: Werewolf."
       ],
       "night_actions": [
         {
-          "role": "Troublemaker",
-          "action": "swap",
-          "targets": [
-            "Blaze",
-            "Dr. Pizza"
-          ],
+          "role": "Robber",
+          "action": "rob",
+          "target": "Blaze",
+          "new_role": "Werewolf",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped the Blaze and Dr. Pizza cards, but you don't know what they ended up with."
+      "night_memory_text": "You stole the Blaze card, and after replacing it, your family line is: Werewolf."
     },
     "3": {
       "id": "3",
@@ -50,11 +48,13 @@
       "persona": "Cold logic monster. You speak concisely and like to use columns. You never trust your intuition, only the information holes on the field. You are the hardest person to be fooled in the whole room.",
       "model": "nvidia/moonshotai/kimi-k2.5",
       "seat": 2,
-      "initial_role": "Villager",
-      "current_role": "Minion",
-      "night_memory": [],
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You meet another werewolf type: Blaze."
+      ],
       "night_actions": [],
-      "night_memory_text": ""
+      "night_memory_text": "You meet another werewolf type: Blaze."
     },
     "4": {
       "id": "4",
@@ -64,8 +64,8 @@
       "persona": "A dramatist who fears that the world will not be in chaos. No matter what your identity is, you like to mess up the situation by jumping around randomly at the beginning. You find it more fun to lie to people than to win the game.",
       "model": "nvidia/z-ai/glm5",
       "seat": 3,
-      "initial_role": "Tanner (tanner)",
-      "current_role": "Tanner (tanner)",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -78,21 +78,13 @@
       "persona": "He is a good person and trusts others easily. You always try to mediate disputes. If you are forced to lie, you will appear extremely stiff and stammering (using... and uh...).",
       "model": "nvidia/qwen/qwen3.5-397b-a17b",
       "seat": 4,
-      "initial_role": "Seer",
-      "current_role": "Seer",
+      "initial_role": "Minion",
+      "current_role": "Minion",
       "night_memory": [
-        "You checked out Blaze and his identity is: Minion."
+        "You see the werewolf line: Blaze, Dr. Pizza. The werewolf doesn't know you're a minion."
       ],
-      "night_actions": [
-        {
-          "role": "Seer",
-          "action": "inspect_player",
-          "target": "Blaze",
-          "seen_role": "Minion",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You checked out Blaze and his identity is: Minion."
+      "night_actions": [],
+      "night_memory_text": "You see the werewolf line: Blaze, Dr. Pizza. The werewolf doesn't know you're a minion."
     },
     "6": {
       "id": "6",
@@ -102,22 +94,23 @@
       "persona": "Conspiracy theorists. You feel like everyone is lying, and even if someone tells the truth, you suspect there is a deeper motive behind it. You like to come up with the most ridiculous hypotheses that you can't completely refute.",
       "model": "nvidia/minimaxai/minimax-m2.5",
       "seat": 5,
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
       "night_memory": [
-        "You are the only werewolf on the field, and you can choose to look at a middle hole card.",
-        "You peek at the 0th hole card in the middle and see it: Werewolf."
+        "You swapped cards from Blaze and SafetySam, but you don't know what they ended up with."
       ],
       "night_actions": [
         {
-          "role": "Werewolf",
-          "action": "inspect_center",
-          "target": 0,
-          "seen_role": "Werewolf",
+          "role": "Troublemaker",
+          "action": "swap",
+          "targets": [
+            "Blaze",
+            "SafetySam"
+          ],
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only werewolf on the field, and you can choose to look at a middle hole card. You peek at the 0th hole card in the middle and see it: Werewolf."
+      "night_memory_text": "You swapped cards from Blaze and SafetySam, but you don't know what they ended up with."
     }
   },
   "seating_order": [
@@ -129,32 +122,25 @@
     "6"
   ],
   "center_cards": [
-    "Werewolf",
-    "Robber",
-    "Villager"
+    "Seer",
+    "Villager",
+    "Tanner (tanner)"
   ],
   "night_trace": [
     {
-      "actor": "ConspiBro",
-      "role": "Werewolf",
-      "action": "inspect_center",
-      "target": 0,
-      "source": "agent"
-    },
-    {
-      "actor": "EasyBake",
-      "role": "Seer",
-      "action": "inspect_player",
+      "actor": "SafetySam",
+      "role": "Robber",
+      "action": "rob",
       "target": "Blaze",
       "source": "agent"
     },
     {
-      "actor": "SafetySam",
+      "actor": "ConspiBro",
       "role": "Troublemaker",
       "action": "swap",
       "targets": [
         "Blaze",
-        "Dr. Pizza"
+        "SafetySam"
       ],
       "source": "agent"
     }

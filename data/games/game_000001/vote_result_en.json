@@ -3,16 +3,16 @@
   "game_id": "game_000001",
   "votes": {
     "Blaze": "SafetySam",
-    "SafetySam": "Twister",
-    "Dr. Pizza": "EasyBake",
-    "Twister": "SafetySam",
+    "SafetySam": "EasyBake",
+    "Dr. Pizza": "SafetySam",
+    "Twister": "Dr. Pizza",
     "EasyBake": "SafetySam",
-    "ConspiBro": "Twister"
+    "ConspiBro": "SafetySam"
   },
   "tally": {
-    "SafetySam": 3,
-    "Twister": 2,
-    "EasyBake": 1
+    "SafetySam": 4,
+    "EasyBake": 1,
+    "Dr. Pizza": 1
   },
   "executed": [
     "SafetySam"

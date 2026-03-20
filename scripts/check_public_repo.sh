@@ -13,6 +13,7 @@ allow_patterns=(
   "run_full_game.py"
   "state_manager.py"
   "translate_phase.py"
+  "postgame_phase.py"
   "data/current_game.json"
   "data/game_counter.json"
   "data/players.json"

@@ -22,17 +22,6 @@
     </nav>
 
     <div class="page-wrap">
-
-      <!-- LEFT SIDEBAR: game navigation -->
-      <aside class="sidebar">
-        <div class="sidebar-head">
-          <span class="sidebar-title">Games</span>
-          <input id="search" placeholder="Search…" />
-        </div>
-        <div id="game-list" class="games-list"></div>
-      </aside>
-
-      <!-- RIGHT MAIN CONTENT -->
       <main class="main-content">
 
         <!-- Hero -->
@@ -47,6 +36,15 @@
           >A live social-deduction simulation where each AI player makes autonomous decisions, bluffs in public, and votes under pressure.</p>
           <div id="latest-summary" class="latest-summary">Loading latest round...</div>
         </header>
+
+        <!-- Games Browser -->
+        <section class="panel games-panel">
+          <div class="panel-head games-head">
+            <h2>Game Archive</h2>
+            <input id="search" placeholder="Search by game id / outcome…" />
+          </div>
+          <div id="game-list" class="games-list"></div>
+        </section>
 
         <!-- AI Players -->
         <section class="panel">

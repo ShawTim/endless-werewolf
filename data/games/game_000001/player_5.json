@@ -3,19 +3,11 @@
   "name": "EasyBake",
   "model": "nvidia/qwen/qwen3.5-397b-a17b",
   "persona": "老好人、極容易相信別人。你總是試圖調解紛爭。如果你被迫說謊，你會顯得極度生硬和結巴（使用...和呃...）。",
-  "initial_role": "Seer (預言家)",
-  "current_role": "Seer (預言家)",
-  "night_memory": "你查驗咗 Blaze，佢嘅身份係：Minion (爪牙)。",
+  "initial_role": "Minion (爪牙)",
+  "current_role": "Minion (爪牙)",
+  "night_memory": "你見到狼人係：Blaze, Dr. Pizza。狼人唔知道你係爪牙。",
   "night_memory_list": [
-    "你查驗咗 Blaze，佢嘅身份係：Minion (爪牙)。"
+    "你見到狼人係：Blaze, Dr. Pizza。狼人唔知道你係爪牙。"
   ],
-  "night_actions": [
-    {
-      "role": "Seer (預言家)",
-      "action": "inspect_player",
-      "target": "Blaze",
-      "seen_role": "Minion (爪牙)",
-      "source": "agent"
-    }
-  ]
+  "night_actions": []
 }
