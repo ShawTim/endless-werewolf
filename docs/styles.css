@@ -523,7 +523,9 @@ body {
   position: relative;
   border: 2px solid var(--line);
   border-radius: 14px;
-  background: rgba(14, 10, 38, 0.88);
+  background:
+    linear-gradient(rgba(10, 7, 28, 0.82), rgba(10, 7, 28, 0.82)),
+    url('./assets/thumb-cardback.png') center center / cover;
   padding: 12px 8px 10px;
   text-align: center;
   display: flex;
