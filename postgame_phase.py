@@ -32,6 +32,14 @@ def _team_label(team: str) -> str:
     }.get(team, team or "Unknown")
 
 
+def _team_label_zh(team: str) -> str:
+    return {
+        "werewolf_team": "狼人陣營",
+        "village_team": "村民陣營",
+        "tanner": "製皮者",
+    }.get(team, team or "未知")
+
+
 def _mood(status: str, executed: bool) -> str:
     if status == "winner" and executed:
         return "defiant"
@@ -42,22 +50,22 @@ def _mood(status: str, executed: bool) -> str:
     return "bitter"
 
 
-def _build_quote(name: str, role: str, team: str, status: str, executed: bool, top_target: str | None) -> str:
-    role_short = role.split(" (")[0] if role else "Unknown"
-    team_short = _team_label(team)
+def _build_quote(name: str, role: str, team: str, status: str, executed: bool, top_target: str | None, top_target_zh: str | None = None) -> str:
+    role_zh = role.split("(")[1].rstrip(")") if "(" in role else role
+    team_zh = _team_label_zh(team)
+    target_zh = top_target_zh or top_target
 
     if status == "winner" and executed:
-        return f"I went down, but the plan worked. As {role_short}, I pulled pressure where it needed to go." \
-               f" If that's the cost of winning for {team_short}, I take it."
+        return f"我雖然被殺，但計劃成功了。作為{role_zh}，我把壓力引到了需要的地方。這就是{team_zh}勝利的代價，我認了。"
     if status == "winner":
-        if top_target and top_target != name:
-            return f"I stayed alive and rode the table momentum. Once pressure shifted to {top_target}, I knew {team_short} had the edge."
-        return f"I kept my composure as {role_short} and let the table collapse into the lines I wanted. That's a clean {team_short} finish."
+        if target_zh and top_target != name:
+            return f"我存活到了最後，借助了枱面的趨勢。壓力轉移到{target_zh}之後，我知道{team_zh}已經佔優。"
+        return f"我以{role_zh}的身份保持冷靜，讓枱面按我想要的方向崩潰。{team_zh}完美收局。"
     if executed:
-        return f"Getting executed as {role_short} hurts. I think the table overreacted and misread my signals in key turns."
-    if top_target and top_target != name:
-        return f"I lost this one as {role_short}. Too much table energy got absorbed by {top_target}, and my read couldn't recover."
-    return f"I couldn't close it out as {role_short}. Next round I need cleaner timing and tighter claims."
+        return f"作為{role_zh}被投出去真的很難受。我覺得枱面反應過度，幾個關鍵回合誤讀了我的信號。"
+    if target_zh and top_target != name:
+        return f"我以{role_zh}輸了這局。太多枱面能量都被{target_zh}吸引，我的判斷沒能追回來。"
+    return f"我沒能以{role_zh}鎖定勝局。下一局需要更準確的時機和更清晰的聲稱。"
 
 
 def run_postgame_phase() -> dict[str, Any]:
@@ -86,8 +94,13 @@ def run_postgame_phase() -> dict[str, Any]:
             target_counts[tgt] = target_counts.get(tgt, 0) + 1
 
     top_target = None
+    top_target_zh = None
     if target_counts:
         top_target = sorted(target_counts.items(), key=lambda x: x[1], reverse=True)[0][0]
+        for p in players.values():
+            if p.get("name") == top_target:
+                top_target_zh = p.get("name_zh") or top_target
+                break
 
     interviews = {
         "dead": [],
@@ -107,7 +120,7 @@ def run_postgame_phase() -> dict[str, Any]:
                 player_state = p
                 break
 
-        quote = _build_quote(name, role, team, status, executed, top_target)
+        quote = _build_quote(name, role, team, status, executed, top_target, top_target_zh)
         row = {
             "player_name": name,
             "player_name_zh": (player_state or {}).get("name_zh", name),

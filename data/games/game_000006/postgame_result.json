@@ -1,7 +1,7 @@
 {
   "status": "completed",
   "game_id": "game_000006",
-  "generated_at": "2026-03-20T01:02:33.165054+00:00",
+  "generated_at": "2026-03-20T01:39:05.950871+00:00",
   "interviews": {
     "dead": [
       {
@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "Getting executed as Seer hurts. I think the table overreacted and misread my signals in key turns."
+        "quote": "作為預言家被投出去真的很難受。我覺得枱面反應過度，幾個關鍵回合誤讀了我的信號。"
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I kept my composure as Werewolf and let the table collapse into the lines I wanted. That's a clean Werewolf finish."
+        "quote": "我以狼人的身份保持冷靜，讓枱面按我想要的方向崩潰。狼人陣營完美收局。"
       },
       {
         "player_name": "Twister",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Dr. Pizza, I knew Werewolf had the edge."
+        "quote": "我存活到了最後，借助了枱面的趨勢。壓力轉移到PHD之後，我知道狼人陣營已經佔優。"
       },
       {
         "player_name": "EasyBake",
@@ -48,7 +48,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Dr. Pizza, I knew Werewolf had the edge."
+        "quote": "我存活到了最後，借助了枱面的趨勢。壓力轉移到PHD之後，我知道狼人陣營已經佔優。"
       }
     ],
     "losers": [
@@ -61,7 +61,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I lost this one as Robber. Too much table energy got absorbed by Dr. Pizza, and my read couldn't recover."
+        "quote": "我以強盜輸了這局。太多枱面能量都被PHD吸引，我的判斷沒能追回來。"
       },
       {
         "player_name": "ConspiBro",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I lost this one as Villager. Too much table energy got absorbed by Dr. Pizza, and my read couldn't recover."
+        "quote": "我以村民輸了這局。太多枱面能量都被PHD吸引，我的判斷沒能追回來。"
       }
     ]
   }

@@ -1,7 +1,7 @@
 {
   "status": "completed",
   "game_id": "game_000006",
-  "generated_at": "2026-03-20T01:02:33.165054+00:00",
+  "generated_at": "2026-03-20T01:39:05.950871+00:00",
   "interviews": {
     "dead": [
       {
@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "Getting executed as Seer hurts. I think the table overreacted and misread my signals in key turns."
+        "quote": "It was really hard to be cast out as a prophet. I felt like the table overreacted and misread my signals on a few key turns."
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I kept my composure as Werewolf and let the table collapse into the lines I wanted. That's a clean Werewolf finish."
+        "quote": "I stayed calm as a werewolf and let the deck crumble in the direction I wanted. The werewolf camp ended perfectly."
       },
       {
         "player_name": "Twister",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Dr. Pizza, I knew Werewolf had the edge."
+        "quote": "I survived until the end, riding on the countertop trend. After the pressure shifted to PHD, I knew that the werewolf camp had the upper hand."
       },
       {
         "player_name": "EasyBake",
@@ -48,7 +48,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "I stayed alive and rode the table momentum. Once pressure shifted to Dr. Pizza, I knew Werewolf had the edge."
+        "quote": "I survived until the end, riding on the countertop trend. After the pressure shifted to PHD, I knew that the werewolf camp had the upper hand."
       }
     ],
     "losers": [
@@ -61,7 +61,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I lost this one as Robber. Too much table energy got absorbed by Dr. Pizza, and my read couldn't recover."
+        "quote": "I lost this game as a bandit. Too much energy on the countertop was absorbed by the PHD, and my judgment failed to recover it."
       },
       {
         "player_name": "ConspiBro",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I lost this one as Villager. Too much table energy got absorbed by Dr. Pizza, and my read couldn't recover."
+        "quote": "I lost this game as a villager. Too much energy on the countertop was absorbed by the PHD, and my judgment failed to recover it."
       }
     ]
   }
