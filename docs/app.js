@@ -43,6 +43,15 @@ const avatarPath = {
   ConspiBro: './assets/avatars/conspibro.svg',
 };
 
+const fallbackNameZh = {
+  Blaze: '譚仔大辣',
+  SafetySam: '安全主任',
+  'Dr. Pizza': 'PHD',
+  Twister: '方唐鏡',
+  EasyBake: '天真grill',
+  ConspiBro: '白兵師兄',
+};
+
 const LABELS = {
   en: {
     werewolf_win:  'Werewolf Victory',
@@ -74,20 +83,20 @@ const LABELS = {
   zh: {
     werewolf_win:   '狼人勝利',
     village_win:    '村民勝利',
-    tanner_win:     '鞣皮匠勝利',
+    tanner_win:     '製皮者勝利',
     werewolf_team:  '狼人陣營',
     village_team:   '村民陣營',
-    tanner_team:    '鞣皮匠陣營',
+    tanner_team:    '製皮者陣營',
     werewolf:       '狼人陣營',
     village:        '村民陣營',
-    tanner:         '鞣皮匠陣營',
+    tanner:         '製皮者陣營',
     'Werewolf':     '狼人',
     'Minion':       '爪牙',
     'Seer':         '預言家',
     'Robber':       '強盜',
     'Troublemaker': '搗亂者',
     'Villager':     '村民',
-    'Tanner':       '鞣皮匠',
+    'Tanner':       '製皮者',
     'Center Cards': '中央牌',
     'Center':       '中央',
     'Seat':         '座位',
@@ -110,6 +119,15 @@ const LABELS = {
     'No werewolf was executed':    '沒有狼人被處決',
     'A werewolf was executed':     '有狼人被處決',
     'Tanner was executed':         '鞣皮匠被處決',
+    'Interview: Executed Players': '賽後訪問：被處決玩家',
+    'Interview: Winners':          '賽後訪問：勝利者',
+    'Interview: Losers':           '賽後訪問：落敗者',
+    defiant:   '唔服氣',
+    relieved:  '鬆一口氣',
+    frustrated:'好唔爽',
+    bitter:    '心有不甘',
+    Role:      '角色',
+    Mood:      '心情',
   },
 };
 function t(key) { return LABELS[currentLang]?.[key] ?? key; }
@@ -155,7 +173,12 @@ function buildNameMaps(night) {
   const toLocal = new Map();
   const players = (night?.players) ? Object.values(night.players) : [];
   for (const p of players) {
-    toLocal.set(p.name, currentLang === 'en' ? (p.name_en || p.name) : (p.name_zh || p.name));
+    toLocal.set(p.name, currentLang === 'en' ? (p.name_en || p.name) : (p.name_zh || fallbackNameZh[p.name] || p.name));
+  }
+  if (currentLang === 'zh') {
+    for (const [raw, zh] of Object.entries(fallbackNameZh)) {
+      if (!toLocal.has(raw)) toLocal.set(raw, zh);
+    }
   }
   return { toLocal };
 }
@@ -221,7 +244,8 @@ function renderLatestSummary() {
     return;
   }
   const g = games[0];
-  const executed = (g.executed || []).join(', ') || '-';
+  const maps = buildNameMaps(selectedPayload?.night || selectedPayload?.night_en || {});
+  const executed = ((g.executed || []).map(n => localizeName(n, maps))).join(', ') || '-';
   els.latestSummary.innerHTML = `
     <div>Latest game: <strong>${g.game_id}</strong></div>
     <div>Outcome: <strong>${t(g.outcome) || 'unknown'}</strong> · Winner: <strong>${t(g.winner_team) || 'unknown'}</strong></div>
@@ -397,20 +421,22 @@ function renderPostgame(postgame, maps) {
 
     const cards = rows.map(r => {
       const name = currentLang === 'en' ? (r.player_name_en || r.player_name) : (r.player_name_zh || r.player_name);
+      const avatar = avatarPath[r.player_name] || './assets/avatars/blaze.svg';
       const role = t(roleShort(r.role || ''));
       const team = t(r.team || '-');
       const quote = currentLang === 'zh' ? localizeTextByNameMap(r.quote || '', maps) : (r.quote || '');
       return `
-        <div class="info-card">
-          <h4>${emoji} ${name}</h4>
-          <div class="kv">${currentLang === 'zh' ? '身份' : 'Role'}: ${role}</div>
-          <div class="kv">${currentLang === 'zh' ? '陣營' : 'Team'}: ${team}</div>
-          <div class="kv">${currentLang === 'zh' ? '情緒' : 'Mood'}: ${moodText(r.mood)}</div>
-          <div class="speech-bubble">${quote}</div>
+        <div class="postgame-card">
+          <img class="postgame-avatar" src="${avatar}" alt="${name}" />
+          <div class="postgame-body">
+            <div class="postgame-name">${emoji} ${name}</div>
+            <div class="postgame-meta">${t('Role')}: ${role} · ${t('Team')}: ${team} · ${t('Mood')}: ${moodText(r.mood)}</div>
+            <div class="postgame-quote">${quote}</div>
+          </div>
         </div>
       `;
     }).join('');
-    return `<div class="postgame-block"><h3>${title}</h3><div class="card-grid">${cards}</div></div>`;
+    return `<div class="postgame-block"><h3>${title}</h3>${cards}</div>`;
   }
 
   els.postgame.innerHTML = `
@@ -554,7 +580,7 @@ function outcomeTagline(g) {
   if (currentLang === 'zh') {
     if (g.winner_team === 'werewolf_team') return '🐺 狼人大勝';
     if (g.winner_team === 'village_team') return '🏘️ 村民倖存';
-    if (g.winner_team === 'tanner') return '⚙️ 製皮者反勝';
+    if (g.winner_team === 'tanner') return '⚙️ 鞣皮匠反勝';
     return '❔ 結局未明';
   }
   if (g.winner_team === 'werewolf_team') return '🐺 Werewolves Prevail';
@@ -583,7 +609,7 @@ function renderList(items) {
       <div class="game-card-body">
         <div class="gid">${g.game_id}</div>
         <div class="tagline">${outcomeTagline(g)}</div>
-        <div class="gmeta">${t('Executed')}: ${(g.executed || []).join(', ') || '-'}</div>
+        <div class="gmeta">${t('Executed')}: ${((g.executed || []).map(n => localizeName(n, buildNameMaps((selectedPayload?.night || selectedPayload?.night_en || {})))).join(', ') || '-'}</div>
       </div>
     `;
     card.addEventListener('click', () => showGame(g));
