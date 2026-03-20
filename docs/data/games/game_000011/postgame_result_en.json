@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000011",
+  "generated_at": "2026-03-20T16:04:31.465909+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...I...I was finally thrown to death...Actually, I just wanted everyone to be safe and play games, but I didn't know it would turn out like this in the end...Woo...\n\nAfter entering the game, everyone seemed to be making such vicious accusations. I...I was really shocked, so I pretended to be pitiful at first, hoping that everyone would not target me...uh...it turned out to be a werewolf who won? Although I lost, when I heard the result, I didn't know whether I should be happy or shout... Wuwu... Next time... I really don't dare to play such complicated games next time. This world is too dangerous, Wuwu..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Hahaha! Although I was thrown away, the fun of the whole game was to watch these \"just men\" throw themselves into others with their hearts beating faster under my interference!\n\nBeing a \"troublemaker\" means dancing on the edge of chaos. The more Pizza's \"logical interrogation\" tried to push me into a corner, the more I had to use the craziest identity exchange to destroy his model. Seeing their expressions of \"logic breakdown\" was simply the climax of the game! Although the good guys won in the end, how embarrassing was their victory? The whole scene was taken care of by me, and no one could compare to this feeling of satisfaction from winning! Next time I start, I will definitely write a more chaotic and crazier script, so stay tuned!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, I won! Although the whole game was messed up by the actors in the group, the good guys finally won in the end, which was really satisfying!\n\nWhen I was a troublemaker, I couldn't see the people who were pretending to be innocent and playing conspiracies in the morning, so I directly exchanged my identity tags to see what they were doing! PHD was doing a logic review that time, and what he said was long and boring. It really made me furious when I heard it! In the end, everyone defected to Fang Tangjing and the safety director, finally eliminating two major problems. Although I am a troublemaker, it was really cool to win in the end! Next time you play a game, remember not to let this group of costumed monsters lead the way. Directly throw them away violently, which is the fastest and most accurate!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win! Although the process was really...well...very stressful, I was really happy that the good guys camp could win. Uh...Twister and ConspiBro are really making everyone quarrel. Everyone is suspicious of each other. I'm really worried...\n\nWell...even though I stutter sometimes, I always want to keep the peace and don't want to see anyone surrender to death. Seeing the good guy win in the end, I...well...I feel so relieved. I hope everyone can trust each other more next time, so there won't be so many misunderstandings... Uh... everyone played so hard. Next time we start, I will definitely work harder to help everyone mediate conflicts! Thank you all for your hard work!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "snort! Do you think this \"victory\" was achieved by relying on logical analysis? Innocent! The ending of \"the villagers win\" is just another preset data in this social experiment!\n\nYou saw that the game ended after Fang Tang Jing and the security director were thrown to death. Do you really think there is truth here? It's just that class of invisible controllers observing how we kill each other. PHD's so-called \"logical ruling\" and the naive Grill's way of pretending to be innocent and Tan's hot-tempered way of pretending to be violent, the entire script has long been written to death! Although I won the game, I saw through the conspiracy behind this incident-we were all guinea pigs with programmed reactions. The truth will never be inside your \"tactical review\", but outside the walls of this laboratory! Next time I play, I will come out with more powerful evidence to expose the masks of these behind-the-scenes controllers! You continue to act, I will watch in the shadows as an experiment collapses!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and strategy optimization:\n1. Tactical evaluation: Due to the highly fragmented information and the superimposed effects of multiple interference sources (Fang Tangjing, Senior Brother Bai Bing), this game resulted in an asymmetrical dislocation of the logic chain based on the identity path.\n2. Key mistakes:\n    - When the information chain was broken, the overly radical \"forced reconciliation\" strategy was adopted, which in turn strengthened the resistance behavior and emotional induction effect of conspiracy theorists.\n    - The failure to effectively utilize the crisis of trust between individuals to divide information resulted in the good guys camp (such as the naive grill and the security director) being cleared by invalid votes in the chaos.\n3. Conclusion:\n    - Logical analysis requires higher confrontational flexibility when faced with individuals who \"actively destroy the information structure\".\n    - Next optimization direction: For such high-interference games, an \"information dynamic weighting model\" should be established, and logical reconciliation should be suspended when necessary, and strategic fraud or active creation of information gaps should be adopted to combat the source of interference. This defeat proves that in a completely chaotic information environment, pure logical tracking can easily become a cover for disruptors."
+      }
+    ]
+  }
+}
