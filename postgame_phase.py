@@ -111,11 +111,22 @@ def run_postgame_phase() -> dict[str, Any]:
     chat_lines = [ln for ln in chat_history.splitlines() if ln.strip()]
     chat_excerpt = "\n".join(chat_lines[-20:])
 
+    # Build English→Chinese name map for all players
+    name_map = {}
+    for p in players.values():
+        en = p.get("name", "")
+        zh = p.get("name_zh") or en
+        if en:
+            name_map[en] = zh
+
+    executed_zh = [name_map.get(n, n) for n in resolve.get("executed", [])]
+
     game_summary = {
         "outcome": resolve.get("outcome", "unknown"),
         "winner_team": resolve.get("winner_team", "unknown"),
-        "executed": resolve.get("executed", []),
+        "executed": executed_zh,
         "chat_excerpt": chat_excerpt,
+        "name_map": name_map,
     }
 
     interviews: dict[str, list[dict[str, Any]]] = {
@@ -140,7 +151,7 @@ def run_postgame_phase() -> dict[str, Any]:
         persona = (player_state or {}).get("persona", "")
 
         player_context = {
-            "player_name": name,
+            "player_name": name_map.get(name, name),
             "persona": persona,
             "role": role,
             "team": team,

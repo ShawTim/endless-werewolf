@@ -90,7 +90,7 @@ def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     outcome_desc = {
         "village_win": "村民陣營獲勝",
         "werewolf_win": "狼人陣營獲勝",
-        "tanner_win": "製皮者獲勝",
+        "tanner_win": "鞣皮匠獲勝",
         "village_win_no_wolf": "村民陣營獲勝（場上無狼人）",
         "no_team_win": "無人勝出",
     }.get(outcome, outcome)
@@ -98,27 +98,37 @@ def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     status_desc = "勝利" if status == "winner" else "落敗"
     executed_desc = "，並且被投出局" if executed else ""
 
+    # Extract Chinese role name from "Seer (預言家)" format
+    role_zh = role.split("(")[1].rstrip(")") if "(" in role else role
+
+    name_map = game_summary.get("name_map", {})
+    name_table = "\n".join(f"  {en} → {zh}" for en, zh in name_map.items()) if name_map else "  （無）"
+
     return f"""你係《一夜狼人》嘅玩家，現在遊戲已經結束，記者黎訪問你。
 
 【你嘅身份】
 玩家名稱：{player_name}
 你嘅人格：{persona}
-你嘅身份：{role}（{team}）
+你嘅角色：{role_zh}
 你嘅結局：{status_desc}{executed_desc}
 
 【今局結果】
 結果：{outcome_desc}
 被投出局嘅玩家：{', '.join(executed_players) if executed_players else '無'}
 
+【玩家中英文名對照（提及其他玩家時必須用中文名）】
+{name_table}
+
 【日間對話節錄（部分）】
 {chat_excerpt or '（無記錄）'}
 
 【你嘅任務】
-以你嘅人格同身份，用廣東話講一句賽後感受。要求：
+以你嘅人格同角色，用廣東話口語講 1-2 句賽後感受。要求：
 - 真實反映你嘅情緒同處境（贏/輸/被殺）
 - 符合你嘅個人風格同人格
-- 1至2句，自然口語廣東話
+- 提及任何玩家時，必須用佢哋嘅中文名（見上方對照表）
 - 唔好重複講自己係咩角色
+- 全程廣東話，唔好夾英文
 
 只輸出以下 JSON，唔好任何 markdown 或解釋：
 {{"quote": "你嘅廣東話賽後感受"}}"""

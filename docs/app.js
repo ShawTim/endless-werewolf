@@ -609,7 +609,7 @@ function renderList(items) {
       <div class="game-card-body">
         <div class="gid">${g.game_id}</div>
         <div class="tagline">${outcomeTagline(g)}</div>
-        <div class="gmeta">${t('Executed')}: ${((g.executed || []).map(n => localizeName(n, buildNameMaps((selectedPayload?.night || selectedPayload?.night_en || {})))).join(', ') || '-'}</div>
+        <div class="gmeta">${t('Executed')}: ${((g.executed || []).map(n => localizeName(n, buildNameMaps((selectedPayload?.night || selectedPayload?.night_en || {})))).join(', ') || '-')}</div>
       </div>
     `;
     card.addEventListener('click', () => showGame(g));
