@@ -1,0 +1,116 @@
+{
+  "status": "completed",
+  "game_id": "game_000006",
+  "config": {
+    "duration_seconds": 20,
+    "min_sleep_seconds": 1.2,
+    "max_sleep_seconds": 2.8,
+    "max_speaks_per_player": 2
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. A new day has begun again... uh... although the voting on Qin Day was very confusing, but everyone is not so angry... I sometimes feel... uh... it seems that everyone has some misunderstandings. Why don't we lean down and take a look at the werewolf below? I...I really want everyone to be able to play nice...uh...please just calm down, okay?",
+      "log_line": "[2026-03-20 09:01:42 HKT] EasyBake: Hello everyone. A new day has begun again... uh... although the voting on Qin Day was very confusing, but everyone is not so angry... I sometimes feel... uh... it seems that everyone has some misunderstandings. Why don't we lean down and take a look at the werewolf below? I...I really want everyone to be able to play nice...uh...please just calm down, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "A new day has begun! Are we all suspicious of each other here? I just feel that if everyone wants to have fun, why don’t we do it directly? Blaze, you just said that you are a villager, Dr. Pizza, do you have any thoughts? I think today’s script should be more exciting. Are you ready for the finale?",
+      "log_line": "[2026-03-20 09:01:45 HKT] Twister: A new day has begun! Are we all suspicious of each other here? I just feel that if everyone wants to have fun, why don’t we do it directly? Blaze, you just said that you are a villager, Dr. Pizza, do you have any thoughts? I think today’s script should be more exciting. Are you ready for the finale?"
+    },
+    {
+      "type": "pass",
+      "player_name": "SafetySam",
+      "mentioned_recently": false
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here comes this \"script\" and \"ending\" nonsense again? Twister, do you and Dr. Pizza have a good rapport over here singing double acts? Let me tell you, the core of this experiment is to create an illusion of \"who is the werewolf\", thereby concealing the true purpose of your controllers! I will not let your \"final ending\" lead you astray. I still insist that everyone in this experiment is a manipulated pawn, and you are the manipulators playing with the pawns!",
+      "log_line": "[2026-03-20 09:01:49 HKT] ConspiBro: This \"script\" and \"ending\" nonsense again? Twister, do you and Dr. Pizza have a good rapport over here singing double acts? Let me tell you, the core of this experiment is to create an illusion of \"who is the werewolf\", thereby concealing the true purpose of your controllers! I will not let your \"final ending\" lead you astray. I still insist that everyone in this experiment is a manipulated pawn, and you are the manipulators playing with the pawns!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory:\n1. There are currently very few people left on the field, and the outcome is close to the critical point.\n2. The motives of Twister and Blaze’s accusations are still highly vague, and Twister’s “final theory” has a strong color of final manipulation.\n3. Although ConspiBro’s conspiracy theory is absurd, it effectively hinders the process of logical analysis.\n\nSuggestions for the current situation:\n- Everyone, please make the final reveal of your identity immediately, reject all emotions and dramatic speeches, and decide who to vote based on logical conclusions.",
+      "log_line": "[2026-03-20 09:01:52 HKT] Dr. Pizza: Logical inventory:\n1. There are currently very few people left on the field, and the outcome is close to the critical point.\n2. The motives of Twister and Blaze’s accusations are still highly vague, and Twister’s “final theory” has a strong color of final manipulation.\n3. Although ConspiBro’s conspiracy theory is absurd, it effectively hinders the process of logical analysis.\n\nSuggestions for the current situation:\n- Everyone, please make the final reveal of your identity immediately, reject all emotions and dramatic speeches, and decide who to vote based on logical conclusions."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Come on! Dr. Pizza's logical and weird tone really makes people furious! Twister, you are a troublemaker, what are you doing again? What's the ending? You know what I say, I am a true prophet according to my family lineage! Dr. Pizza and Twister, you two are basically a team of werewolves, and you want to make this big show here! Let's make a decision quickly, otherwise we will be played to death by the two of them!",
+      "log_line": "[2026-03-20 09:01:54 HKT] Blaze: Come on! Dr. Pizza's logical and weird tone really makes people furious! Twister, you are a troublemaker, what are you doing again? What's the ending? You know what I say, I am a true prophet according to my family lineage! Dr. Pizza and Twister, you two are basically a team of werewolves, and you want to make this big show here! Let's make a decision quickly, otherwise we will be played to death by the two of them!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. Blaze, you are accusing someone again... uh... actually I think Dr. Pizza and Twister may just have different methods... uh... why don't we all try to verify our identities before we argue again, okay? I...I really don't want everyone to accuse each other anymore, it's so scary...",
+      "log_line": "[2026-03-20 09:01:56 HKT] EasyBake: Hello everyone. Blaze, you are accusing someone again... uh... actually I think Dr. Pizza and Twister may just have different methods... uh... why don't we all try to verify our identities before we argue again, okay? I...I really don't want everyone to accuse each other anymore, it's so scary..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Blaze said he is a villager? Is Dr. Pizza tightening his logic here? This scene is about to reach its climax! Since you two are unwilling to admit your identity, I will be the \"bad guy\" and admit it, I am a werewolf, what? We will announce the finale of this game together. Look at the next one who dares to vote for me!",
+      "log_line": "[2026-03-20 09:01:58 HKT] Twister: Blaze, is he a villager? Is Dr. Pizza tightening his logic here? This scene is about to reach its climax! Since you two are unwilling to admit your identity, I will be the \"bad guy\" and admit it, I am a werewolf, what? We will announce the finale of this game together. Look at the next one who dares to vote for me!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... Twister... You said you were a werewolf again... What you said made everyone more confused... We all pray that it is not easy for him to hear... Although I am only a robber, but I... I don't want this game to become like this... Woo hoo... Everyone, please calm down...",
+      "log_line": "[2026-03-20 09:02:01 HKT] SafetySam: Woo... Twister... You said you were a werewolf again... What you said made everyone more confused... We all pray that he won't let you know... Although I am only a robber, but I... I don't want this game to become like this... Woo hoo... Everyone, please calm down..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Twister Are you saying you are a werewolf? ConspiBro Are you doing an experiment? These people simply want to use these confusing remarks to lead us to vote for the wrong person! Although I am a robber, I can see very clearly that the real werewolf is the guy who is the screenwriter here! Let's unite together quickly, don't let this group of manipulators mess us up again!",
+      "log_line": "[2026-03-20 09:02:04 HKT] ConspiBro: Twister, do you think you are a werewolf? ConspiBro Are you doing an experiment? These people simply want to use these confusing remarks to lead us to vote for the wrong person! Although I am a robber, I can see very clearly that the real werewolf is the guy who is the screenwriter here! Let's unite together quickly, don't let this group of manipulators mess us up again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical ruling:\n1. Blaze claims to have the identity of a \"prophet\", but the source of his information and the logic of his identity development are extremely confusing.\n2. This kind of contradictory statement usually refers to the werewolf camp's strategy of \"abandoning pawns to save commanders\" or \"final confusion\" before the end.\n\nPosition:\n- Refusing to believe Blaze's prophetic pronouncements.\n- It is recommended that all members conduct a vote and prioritize the elimination of objects with the most serious information conflicts.",
+      "log_line": "[2026-03-20 09:02:06 HKT] Dr. Pizza: Logical ruling:\n1. Blaze claims to have the identity of a \"prophet\", but the source of his information and the logic of his identity development are extremely confusing.\n2. This kind of contradictory statement usually refers to the werewolf camp's strategy of \"abandoning pawns to save commanders\" or \"final confusion\" before the end.\n\nPosition:\n- Refusing to believe Blaze's prophetic pronouncements.\n- It is recommended that all members conduct a vote and prioritize the elimination of objects with the most serious information conflicts."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": "Dr. Pizza",
+      "speech": "Dr. Pizza Are you still pretending to be an expert? Listen clearly, everyone, I am the true prophet who checked the cards first! Dr. Pizza, you and Twister are in harmony here, you are the core of the werewolf camp! I'm ready to show the evidence. If you don't want to lose, you should kill Dr. Pizza and Twister together. Don't let these two people's nonsense delay you any longer!",
+      "log_line": "[2026-03-20 09:02:08 HKT] Blaze @Dr. Pizza: Dr. Pizza, are you still pretending to be an expert? Listen clearly, everyone, I am the true prophet who checked the cards first! Dr. Pizza, you and Twister are in harmony here, you are the core of the werewolf camp! I'm ready to show the evidence. If you don't want to lose, you should kill Dr. Pizza and Twister together. Don't let these two people's nonsense delay you any longer!"
+    }
+  ],
+  "chat_history": "[2026-03-20 09:01:42 HKT] EasyBake: Hello everyone. A new day has begun again... uh... although the voting on Qin Day was very confusing, but everyone is not so angry... I sometimes feel... uh... it seems that everyone has some misunderstandings. Why don't we lean down and take a look at the werewolf below? I...I really want everyone to be able to play nice...uh...please just calm down, okay?\n[2026-03-20 09:01:45 HKT] Twister: A new day has begun! Are we all suspicious of each other here? I just feel that if everyone wants to have fun, why don’t we do it directly? Blaze, you just said that you are a villager, Dr. Pizza, do you have any thoughts? I think today’s script should be more exciting. Are you ready for the finale?\n[2026-03-20 09:01:49 HKT] ConspiBro: This \"script\" and \"ending\" nonsense again? Twister, do you and Dr. Pizza have a good rapport over here singing double acts? Let me tell you, the core of this experiment is to create an illusion of \"who is the werewolf\", thereby concealing the true purpose of your controllers! I will not let your \"final ending\" lead you astray. I still insist that everyone in this experiment is a manipulated pawn, and you are the manipulators playing with the pawns!\n[2026-03-20 09:01:52 HKT] Dr. Pizza: Logical inventory:\n1. There are currently very few people left on the field, and the outcome is close to the critical point.\n2. The motives of Twister and Blaze’s accusations are still highly vague, and Twister’s “final theory” has a strong color of final manipulation.\n3. Although ConspiBro’s conspiracy theory is absurd, it effectively hinders the process of logical analysis.\n\nSuggestions for the current situation:\n- Everyone, please make the final reveal of your identity immediately, reject all emotions and dramatic speeches, and decide who to vote based on logical conclusions.\n[2026-03-20 09:01:54 HKT] Blaze: Come on! Dr. Pizza's logical and weird tone really makes people furious! Twister, you are a troublemaker, what are you doing again? What's the ending? You know what I say, I am a true prophet according to my family lineage! Dr. Pizza and Twister, you two are basically a team of werewolves, and you want to make this big show here! Let's make a decision quickly, otherwise we will be played to death by the two of them!\n[2026-03-20 09:01:56 HKT] EasyBake: Hello everyone. Blaze, you are accusing someone again... uh... actually I think Dr. Pizza and Twister may just have different methods... uh... why don't we all try to verify our identities before we argue again, okay? I...I really don't want everyone to accuse each other anymore, it's so scary...\n[2026-03-20 09:01:58 HKT] Twister: Blaze, is he a villager? Is Dr. Pizza tightening his logic here? This scene is about to reach its climax! Since you two are unwilling to admit your identity, I will be the \"bad guy\" and admit it, I am a werewolf, what? We will announce the finale of this game together. Look at the next one who dares to vote for me!\n[2026-03-20 09:02:01 HKT] SafetySam: Woo... Twister... You said you were a werewolf again... What you said made everyone more confused... We all pray that he won't let you know... Although I am only a robber, but I... I don't want this game to become like this... Woo hoo... Everyone, please calm down...\n[2026-03-20 09:02:04 HKT] ConspiBro: Twister, do you think you are a werewolf? ConspiBro Are you doing an experiment? These people simply want to use these confusing remarks to lead us to vote for the wrong person! Although I am a robber, I can see very clearly that the real werewolf is the guy who is the screenwriter here! Let's unite together quickly, don't let this group of manipulators mess us up again!\n[2026-03-20 09:02:06 HKT] Dr. Pizza: Logical ruling:\n1. Blaze claims to have the identity of a \"prophet\", but the source of his information and the logic of his identity development are extremely confusing.\n2. This kind of contradictory statement usually refers to the werewolf camp's strategy of \"abandoning pawns to save commanders\" or \"final confusion\" before the end.\n\nPosition:\n- Refusing to believe Blaze's prophetic pronouncements.\n- It is recommended that all members conduct a vote and prioritize the elimination of objects with the most serious information conflicts.\n[2026-03-20 09:02:08 HKT] Blaze @Dr. Pizza: Dr. Pizza, are you still pretending to be an expert? Listen clearly, everyone, I am the true prophet who checked the cards first! Dr. Pizza, you and Twister are in harmony here, you are the core of the werewolf camp! I'm ready to show the evidence. If you don't want to lose, you should kill Dr. Pizza and Twister together. Don't let these two people's nonsense delay you any longer!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
