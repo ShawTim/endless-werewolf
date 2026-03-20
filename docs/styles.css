@@ -175,7 +175,9 @@ body {
 .player-card {
   border: 1px solid var(--line-gold);
   border-radius: 12px;
-  background: rgba(18, 14, 48, 0.85);
+  background:
+    linear-gradient(rgba(18, 14, 48, 0.88), rgba(18, 14, 48, 0.88)),
+    url('./assets/thumb-cardback.png') center / cover;
   padding: 10px;
 }
 .player-card img {

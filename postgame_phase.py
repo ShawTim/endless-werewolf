@@ -65,9 +65,13 @@ def _call_bridge(payload: dict[str, Any]) -> dict[str, Any]:
     except json.JSONDecodeError:
         start = text.find("{")
         end = text.rfind("}")
-        if start == -1 or end == -1 or end <= start:
-            return {}
-        return json.loads(text[start:end + 1])
+        if start != -1 and end > start:
+            try:
+                return json.loads(text[start:end + 1])
+            except json.JSONDecodeError:
+                pass
+        # Bridge returned plain text — treat as raw quote
+        return {"_raw": text}
 
 
 def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str) -> str:
@@ -79,7 +83,7 @@ def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], mod
             "player_context": player_context,
             "game_summary": game_summary,
         })
-        return result.get("quote", "").strip()
+        return (result.get("quote") or result.get("_raw") or "").strip()
     except Exception as e:
         print(f"[postgame] bridge call failed for {player_context.get('player_name')}: {e}", flush=True)
         return ""
