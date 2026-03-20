@@ -1,4 +1,5 @@
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -7,6 +8,8 @@ import state_manager
 
 WORKSPACE = Path(__file__).resolve().parent
 STATE_DIR = WORKSPACE / "data" / "state"
+BRIDGE_AGENT_ID = "ai_werewolf_bridge"
+FALLBACK_MODEL = "claude-sonnet-4-6"
 
 
 def _utc_now() -> str:
@@ -24,22 +27,6 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def _team_label(team: str) -> str:
-    return {
-        "werewolf_team": "Werewolf",
-        "village_team": "Village",
-        "tanner": "Tanner",
-    }.get(team, team or "Unknown")
-
-
-def _team_label_zh(team: str) -> str:
-    return {
-        "werewolf_team": "狼人陣營",
-        "village_team": "村民陣營",
-        "tanner": "製皮者",
-    }.get(team, team or "未知")
-
-
 def _mood(status: str, executed: bool) -> str:
     if status == "winner" and executed:
         return "defiant"
@@ -50,22 +37,52 @@ def _mood(status: str, executed: bool) -> str:
     return "bitter"
 
 
-def _build_quote(name: str, role: str, team: str, status: str, executed: bool, top_target: str | None, top_target_zh: str | None = None) -> str:
-    role_zh = role.split("(")[1].rstrip(")") if "(" in role else role
-    team_zh = _team_label_zh(team)
-    target_zh = top_target_zh or top_target
+def _call_bridge(payload: dict[str, Any]) -> dict[str, Any]:
+    cmd = [
+        "openclaw", "agent",
+        "--agent", BRIDGE_AGENT_ID,
+        "--message", json.dumps(payload, ensure_ascii=False),
+        "--json",
+    ]
+    proc = subprocess.run(
+        cmd,
+        cwd=str(WORKSPACE),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(f"bridge call failed: {proc.stderr.strip() or proc.stdout.strip()}")
 
-    if status == "winner" and executed:
-        return f"我雖然畀人殺死，但計劃係成功咗嘅。作為{role_zh}，我將壓力引去需要去嘅地方。呢就係{team_zh}嬴嘅代價，認喇。"
-    if status == "winner":
-        if target_zh and top_target != name:
-            return f"我捱到最後，借住咗枱面嘅氣勢。壓力轉移到{target_zh}之後，我就知道{team_zh}已經佔優喇。"
-        return f"我以{role_zh}嘅身份保持冷靜，讓枱面按我想要嘅方向崩潰。{team_zh}完美收局。"
-    if executed:
-        return f"作為{role_zh}畀人投出去真係好唔好受。我覺得枱面反應過度，幾個關鍵回合錯讀咗我嘅信號。"
-    if target_zh and top_target != name:
-        return f"我以{role_zh}輸咗呢局。太多枱面能量都畀{target_zh}吸走，我嘅判斷冇辦法追返嚟。"
-    return f"我冇辦法以{role_zh}鎖定勝局。下一局要時機更準，聲稱更清晰。"
+    parsed = json.loads(proc.stdout)
+    payloads = (((parsed or {}).get("result") or {}).get("payloads") or [])
+    if not payloads:
+        return {}
+
+    text = (payloads[0].get("text") or "").strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start == -1 or end == -1 or end <= start:
+            return {}
+        return json.loads(text[start:end + 1])
+
+
+def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str) -> str:
+    """Call bridge agent to get an AI-generated postgame quote. Falls back to empty string on error."""
+    try:
+        result = _call_bridge({
+            "request_type": "postgame_interview",
+            "model": model,
+            "player_context": player_context,
+            "game_summary": game_summary,
+        })
+        return result.get("quote", "").strip()
+    except Exception as e:
+        print(f"[postgame] bridge call failed for {player_context.get('player_name')}: {e}", flush=True)
+        return ""
 
 
 def run_postgame_phase() -> dict[str, Any]:
@@ -85,34 +102,29 @@ def run_postgame_phase() -> dict[str, Any]:
     executed_set = set(resolve.get("executed", []))
     winners = set(resolve.get("winners", []))
 
-    target_counts: dict[str, int] = {}
-    for item in day.get("day_trace", []):
-        if item.get("type") != "speech":
-            continue
-        tgt = item.get("target")
-        if tgt:
-            target_counts[tgt] = target_counts.get(tgt, 0) + 1
+    # Build chat excerpt for context (last 20 lines)
+    chat_history = day.get("chat_history", "")
+    chat_lines = [ln for ln in chat_history.splitlines() if ln.strip()]
+    chat_excerpt = "\n".join(chat_lines[-20:])
 
-    top_target = None
-    top_target_zh = None
-    if target_counts:
-        top_target = sorted(target_counts.items(), key=lambda x: x[1], reverse=True)[0][0]
-        for p in players.values():
-            if p.get("name") == top_target:
-                top_target_zh = p.get("name_zh") or top_target
-                break
+    game_summary = {
+        "outcome": resolve.get("outcome", "unknown"),
+        "winner_team": resolve.get("winner_team", "unknown"),
+        "executed": resolve.get("executed", []),
+        "chat_excerpt": chat_excerpt,
+    }
 
-    interviews = {
+    interviews: dict[str, list[dict[str, Any]]] = {
         "dead": [],
         "winners": [],
         "losers": [],
     }
 
-    for name, payload in final_roles.items():
+    for name, role_payload in final_roles.items():
         executed = name in executed_set
         status = "winner" if name in winners else "loser"
-        team = payload.get("team", "")
-        role = payload.get("current_role", "")
+        team = role_payload.get("team", "")
+        role = role_payload.get("current_role", "")
 
         player_state = None
         for p in players.values():
@@ -120,7 +132,21 @@ def run_postgame_phase() -> dict[str, Any]:
                 player_state = p
                 break
 
-        quote = _build_quote(name, role, team, status, executed, top_target, top_target_zh)
+        model = (player_state or {}).get("model", FALLBACK_MODEL)
+        persona = (player_state or {}).get("persona", "")
+
+        player_context = {
+            "player_name": name,
+            "persona": persona,
+            "role": role,
+            "team": team,
+            "status": status,
+            "executed": executed,
+        }
+
+        print(f"[postgame] interviewing {name} ({role}, {status})...", flush=True)
+        quote = _get_quote(player_context, game_summary, model)
+
         row = {
             "player_name": name,
             "player_name_zh": (player_state or {}).get("name_zh", name),

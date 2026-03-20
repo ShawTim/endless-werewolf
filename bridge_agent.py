@@ -74,6 +74,56 @@ def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: di
 注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
 
 
+def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
+    """Build the prompt for a postgame interview quote."""
+    player_name = player_context["player_name"]
+    persona = player_context["persona"]
+    role = player_context["role"]
+    team = player_context["team"]
+    status = player_context["status"]
+    executed = player_context["executed"]
+    outcome = game_summary.get("outcome", "unknown")
+    winner_team = game_summary.get("winner_team", "unknown")
+    executed_players = game_summary.get("executed", [])
+    chat_excerpt = game_summary.get("chat_excerpt", "")
+
+    outcome_desc = {
+        "village_win": "村民陣營獲勝",
+        "werewolf_win": "狼人陣營獲勝",
+        "tanner_win": "製皮者獲勝",
+        "village_win_no_wolf": "村民陣營獲勝（場上無狼人）",
+        "no_team_win": "無人勝出",
+    }.get(outcome, outcome)
+
+    status_desc = "勝利" if status == "winner" else "落敗"
+    executed_desc = "，並且被投出局" if executed else ""
+
+    return f"""你係《一夜狼人》嘅玩家，現在遊戲已經結束，記者黎訪問你。
+
+【你嘅身份】
+玩家名稱：{player_name}
+你嘅人格：{persona}
+你嘅身份：{role}（{team}）
+你嘅結局：{status_desc}{executed_desc}
+
+【今局結果】
+結果：{outcome_desc}
+被投出局嘅玩家：{', '.join(executed_players) if executed_players else '無'}
+
+【日間對話節錄（部分）】
+{chat_excerpt or '（無記錄）'}
+
+【你嘅任務】
+以你嘅人格同身份，用廣東話講一句賽後感受。要求：
+- 真實反映你嘅情緒同處境（贏/輸/被殺）
+- 符合你嘅個人風格同人格
+- 1至2句，自然口語廣東話
+- 唔好重複講自己係咩角色
+
+只輸出以下 JSON，唔好任何 markdown 或解釋：
+{{"quote": "你嘅廣東話賽後感受"}}"""
+
+
 def validate_decision(decision: dict) -> dict:
     """Validate and normalize thinker output."""
     action = decision.get("action")
@@ -148,29 +198,43 @@ def main():
         }, ensure_ascii=False))
         return
     
+    request_type = request.get("request_type", "day_action")
     player_context = request.get("player_context", {})
     model = request.get("model") or player_context.get("model")
     if not model:
         print(json.dumps({"action": "pass", "error": f"No model specified for player {player_context.get('player_name', 'unknown')}"}, ensure_ascii=False))
         return
+
+    if request_type == "postgame_interview":
+        game_summary = request.get("game_summary", {})
+        player_name = player_context.get("player_name", "unknown")
+        prompt = build_postgame_prompt(player_context, game_summary)
+        raw = spawn_thinker_subagent(model, prompt, player_name)
+        if "status" in raw and raw["status"] == "needs_runtime":
+            print(json.dumps(raw, ensure_ascii=False, indent=2))
+            return
+        quote = raw.get("quote", "").strip()
+        print(json.dumps({"status": "ok", "quote": quote}, ensure_ascii=False, indent=2))
+        return
+
     chat_history = request.get("chat_history", "")
     turn_hints = request.get("turn_hints", {})
 
     # Build thinker prompt
     thinker_prompt = build_thinker_prompt(player_context, chat_history, turn_hints=turn_hints)
-    
+
     # Spawn thinker
     player_name = player_context.get("player_name", "unknown")
     decision = spawn_thinker_subagent(model, thinker_prompt, player_name)
-    
+
     # If it's a needs_runtime placeholder, return it
     if "status" in decision and decision["status"] == "needs_runtime":
         print(json.dumps(decision, ensure_ascii=False, indent=2))
         return
-    
+
     # Validate and normalize
     validated = validate_decision(decision)
-    
+
     # Return to caller
     print(json.dumps({
         "status": "ok",
