@@ -163,12 +163,19 @@ def spawn_thinker_subagent(model: str, prompt: str, player_name: str) -> dict:
         
         # Extract JSON from result
         output = result.get("result", "")
-        # Try to find JSON in output
         import re
-        json_match = re.search(r'\{[^}]*"action"[^}]*\}', output, re.DOTALL)
+        # Try full output as JSON first
+        try:
+            return json.loads(output.strip())
+        except json.JSONDecodeError:
+            pass
+        # Fall back to finding first {...} block
+        json_match = re.search(r'\{.*?\}', output, re.DOTALL)
         if json_match:
-            return json.loads(json_match.group())
-        
+            try:
+                return json.loads(json_match.group())
+            except json.JSONDecodeError:
+                pass
         return {"action": "pass", "target": None, "speech": ""}
         
     except ImportError:

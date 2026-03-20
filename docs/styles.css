@@ -498,7 +498,9 @@ body {
   border-color: var(--red);
 }
 .outcome-village {
-  background: rgba(40, 90, 65, 0.20);
+  background:
+    linear-gradient(rgba(10, 45, 28, 0.70), rgba(5, 30, 18, 0.78)),
+    url('./assets/bg-enchanted-forest.png') center 40% / cover;
   border-color: var(--green);
 }
 .outcome-tanner {
