@@ -83,20 +83,20 @@ const LABELS = {
   zh: {
     werewolf_win:   '狼人勝利',
     village_win:    '村民勝利',
-    tanner_win:     '製皮者勝利',
+    tanner_win:     '皮匠勝利',
     werewolf_team:  '狼人陣營',
     village_team:   '村民陣營',
-    tanner_team:    '製皮者陣營',
+    tanner_team:    '皮匠陣營',
     werewolf:       '狼人陣營',
     village:        '村民陣營',
-    tanner:         '製皮者陣營',
+    tanner:         '皮匠陣營',
     'Werewolf':     '狼人',
     'Minion':       '爪牙',
     'Seer':         '預言家',
     'Robber':       '強盜',
     'Troublemaker': '搗亂者',
     'Villager':     '村民',
-    'Tanner':       '製皮者',
+    'Tanner':       '皮匠',
     'Center Cards': '中央牌',
     'Center':       '中央',
     'Seat':         '座位',
@@ -118,7 +118,7 @@ const LABELS = {
     'Pass Turns':           '跳過次數',
     'No werewolf was executed':    '沒有狼人被處決',
     'A werewolf was executed':     '有狼人被處決',
-    'Tanner was executed':         '鞣皮匠被處決',
+    'Tanner was executed':         '皮匠被處決',
     'Interview: Executed Players': '賽後訪問：被處決玩家',
     'Interview: Winners':          '賽後訪問：勝利者',
     'Interview: Losers':           '賽後訪問：落敗者',
@@ -580,7 +580,7 @@ function outcomeTagline(g) {
   if (currentLang === 'zh') {
     if (g.winner_team === 'werewolf_team') return '🐺 狼人大勝';
     if (g.winner_team === 'village_team') return '🏘️ 村民倖存';
-    if (g.winner_team === 'tanner') return '⚙️ 鞣皮匠反勝';
+    if (g.winner_team === 'tanner') return '⚙️ 皮匠反勝';
     return '❔ 結局未明';
   }
   if (g.winner_team === 'werewolf_team') return '🐺 Werewolves Prevail';

@@ -90,7 +90,7 @@ def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     outcome_desc = {
         "village_win": "村民陣營獲勝",
         "werewolf_win": "狼人陣營獲勝",
-        "tanner_win": "鞣皮匠獲勝",
+        "tanner_win": "皮匠獲勝",
         "village_win_no_wolf": "村民陣營獲勝（場上無狼人）",
         "no_team_win": "無人勝出",
     }.get(outcome, outcome)
