@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000009",
+  "generated_at": "2026-03-20T10:05:37.151228+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Uh...uh...what a pity. I...I always wanted everyone to be safe and to avoid conflicts. Uh... Any idea, did the werewolf win in the end? I...I feel really uncomfortable. When I see everyone supporting me...\n\nIn fact... uh... as an ordinary villager, I just want to see everyone calm and caring, but in the end... uh... the relationship between everyone is really tense, and they even want to attack each other. Although I lost...well...I really hope that next time everyone can trust me more and accuse me less. Everyone... uh... thank you for your hard work. I will definitely try my best to be a better person next time and less likely to be misunderstood. Woo hoo..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and strategy optimization:\n1. Tactical evaluation: This game successfully used the asymmetry of information to secretly maintain a hidden chain of protection when all parties fell into chaos due to the confrontation mechanism.\n2. Key execution points:\n    - In a state of extremely chaotic information flow, keep a low profile and use your opponent's logical arguments to cover up information.\n    - Successfully identified and exploited \"irrational confrontation\" mechanisms within the opponent's camp (such as conspiracy theories and emotional disturbances) to shift voting pressure to other camps.\n3. Conclusion:\n    - This victory proves that in an environment of extreme information opacity, maintaining a hidden information structure is better than proactively making logical disclosures.\n    - Strategy summary: For logic-driven players, timely creation of logical gaps and information noise is often more effective than direct confrontation. Although logical analysis is stable, flexible identity disguise and information isolation are still the core tactics for victory when dealing with irrational games and chaotic situations."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha! The werewolf wins! Have you seen it yet? Fang Tangjing's performance is always the most exciting!\n\nAlthough I spent the entire game playing \"Jumping and Jumping\", sometimes calling myself a troublemaker, and sometimes arguing with Pizza, I had actually seen the flaws in their logical interrogation method! Pizza's so-called \"logical inventory\" and \"identity reconciliation\" are nothing but a pile of waste paper in the face of my chaotic tactics of \"jumping identities\"!\n\nWhat I like to see the most is the people who think they are in the \"good guy camp\" blaming each other, breaking down, and doubting their lives in the chaos I created. It’s cool whether I win or not, but the “feeling of masterpiece” of seeing a camp collapse is the most priceless! Next time I start the game, I will definitely come up with a crazier script to ensure that everyone has a fun and crazy time. Goodbye, all theater fans!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Pooh! A full game is a disaster! That PH D spends all day playing \"logical decisions\", which is a waste of time; Fang Tang Jingjo's friend also spends all day pretending to cause destruction, and the identities he gets are so confusing! I was able to do this as a robber, and I clearly thought about the situation clearly, and I knew that the werewolf had the last laugh in the end. It was really exciting!\n\nWhat annoys me the most is that Brother Bai Bing, who talks about \"conspiracy\" and \"controller\" all the time, is basically the one who leads the way here, making everyone suspicious of each other, and finally the good guys camp completely collapses. I, Blaze, hate beating around the bush the most. I could just leave that drama queen and be done with it, but everyone is being led to be careless and careless by this nonsense! Next time I start the game, I will definitely not let this group of people act here again, I will just throw them to death! I am really unwilling to lose this game!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...I lost...Do you think we have to attack each other like this? I obviously just want to play games in peace, how difficult is it to be a peaceful villager? Woohoo...\n\nWhen the game started, everyone seemed to be so strong and pointed, I... I just wanted to avoid everyone's attention, and didn't want to be the one who stood out, but in the end our camp actually lost... Wow... I... I really don't dare to play again next time These are such complicated and scheming games... Wuwu... What these people say is so complicated and ugly, it scares me to death... Wuwu... Next time... It’s better not to ask me again next time, I just want everyone to be nice and kind... Wuwu..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "snort! Have you seen it yet? I have said before that the outcome of this \"werewolf victory\" is just another preset data in this social experiment!\n\nDo you really think the werewolf won? It's just that class of invisible controllers watching how we kill each other! PHD's so-called \"logical review\" is the same as Fang Tang Jing's \"drama spoiler\". The entire script has long been written to death! Although I lost in this game, I saw through the conspiracy behind this matter-we are all mice with programmed reactions. The truth will never be in your \"tactical review\", but outside the walls of this laboratory! Play again next time, I will come out with more powerful evidence to expose the mask of your controller! You continue to act, I will watch in the shadows as an experiment collapses!"
+      }
+    ]
+  }
+}
