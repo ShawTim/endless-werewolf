@@ -56,16 +56,16 @@ def _build_quote(name: str, role: str, team: str, status: str, executed: bool, t
     target_zh = top_target_zh or top_target
 
     if status == "winner" and executed:
-        return f"我雖然被殺，但計劃成功了。作為{role_zh}，我把壓力引到了需要的地方。這就是{team_zh}勝利的代價，我認了。"
+        return f"我雖然畀人殺死，但計劃係成功咗嘅。作為{role_zh}，我將壓力引去需要去嘅地方。呢就係{team_zh}嬴嘅代價，認喇。"
     if status == "winner":
         if target_zh and top_target != name:
-            return f"我存活到了最後，借助了枱面的趨勢。壓力轉移到{target_zh}之後，我知道{team_zh}已經佔優。"
-        return f"我以{role_zh}的身份保持冷靜，讓枱面按我想要的方向崩潰。{team_zh}完美收局。"
+            return f"我捱到最後，借住咗枱面嘅氣勢。壓力轉移到{target_zh}之後，我就知道{team_zh}已經佔優喇。"
+        return f"我以{role_zh}嘅身份保持冷靜，讓枱面按我想要嘅方向崩潰。{team_zh}完美收局。"
     if executed:
-        return f"作為{role_zh}被投出去真的很難受。我覺得枱面反應過度，幾個關鍵回合誤讀了我的信號。"
+        return f"作為{role_zh}畀人投出去真係好唔好受。我覺得枱面反應過度，幾個關鍵回合錯讀咗我嘅信號。"
     if target_zh and top_target != name:
-        return f"我以{role_zh}輸了這局。太多枱面能量都被{target_zh}吸引，我的判斷沒能追回來。"
-    return f"我沒能以{role_zh}鎖定勝局。下一局需要更準確的時機和更清晰的聲稱。"
+        return f"我以{role_zh}輸咗呢局。太多枱面能量都畀{target_zh}吸走，我嘅判斷冇辦法追返嚟。"
+    return f"我冇辦法以{role_zh}鎖定勝局。下一局要時機更準，聲稱更清晰。"
 
 
 def run_postgame_phase() -> dict[str, Any]:
