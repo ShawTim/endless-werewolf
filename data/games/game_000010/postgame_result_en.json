@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000010",
+  "generated_at": "2026-03-20T13:04:16.701084+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Hahaha, I won! Although I was thrown to death by my crew, it turned out that I was a \"cobbler\"! It’s really hard to estimate!\n\nThe whole game was extremely chaotic. PHD was giving some unintelligible logical analysis here, and Fang Tangjing was making trouble again. The whole team was arguing until they were red in the face. I, Blaze, am an upright person, and I will directly accuse anyone when I see doubts. It turns out that it was this violent style that made everyone think I was suspicious, and everyone really turned away!\n\nIf I win as a cobbler, I am happier than if I win as a villager! The most fun part of this game is that the \"logic monsters\" and troublemakers who think they are smart are all played by me, the cobbler! Next time I play, I will definitely continue to maintain this violent style and see if anyone is brave enough to vote for me! It’s so cool!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Wow...the cobbler won? I...I'm really surprised...woohoo...Everyone was so noisy during the game. I was just so surprised that everyone accused me of being a bad guy, so I was always careful about what I said. I don't know what happened in the end...woohoo...\n\nUh... Even though the camp lost, I didn't know whether I should be happy or shouting when I heard that the cobbler had won... I felt like everyone seemed to have a lot of scheming in this game, and I was the only one playing it nervously, which scared me to death... Woohoo... next time... don't ask me to play next time, the things they said were so amazing... Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and strategy optimization:\n1. Tactical evaluation: Due to the high degree of information fragmentation and too many sources of interference (Fang Tangjing, Brother Bai Bing) in this game, the logical chain based on identity paths has been asymmetrically misaligned.\n2. Key mistakes:\n    - Ignores the concealment and possibility of winning of the \"Tanner\" identity in a chaotic game.\n    - When excluding those who refused to cooperate, the distortion of voting results by emotional interference factors in group decision-making (such as the safety director's psychological defense mechanism) was not fully considered.\n3. Conclusion:\n    - In games where information is highly asymmetric and there are multiple interfering variables, pure logical verification often loses effectiveness due to the long decision-making cycle.\n    - Next optimization direction: A more flexible \"game weight model\" needs to be established. For individuals who are unable to perform logical reconciliation, they should switch to confrontational strategies as soon as possible (such as actively inducing loopholes in their identity paths), rather than relying solely on the cooperation model of information disclosure. Game conclusion: Logic is a tool, but understanding the conflict between individual motivations and camp victory conditions is the key to game control."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! Did the cobbler win? It’s a stroke of genius!\n\nListen to me, I had so much fun playing this scene! As a drama queen, my most important task is not to help the camp win, but to watch your so-called \"logic monsters\" and \"conspirators\" take advantage of my troubles! Pizza's logical analysis was vulnerable to my chaotic tactics, and ConspiBro's conspiracy theories helped me attract all the hate. It was a perfect collaboration!\n\nAlthough my team did not win in the end, I saw that everyone was messed up by my \"nonsense\" and \"identity disruption\". This sense of chaos is the top enjoyment of this game! I give this performance full marks. If there is another mess next time, Fang Tangjing will definitely make up even crazier dramas for everyone to see! Bye bye, fellow theater fans!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...lost. Although... uh... although I did make trouble, I... uh... I really feel sorry for everyone. I always want everyone to be safe and don't want anyone to die, but...well...the rules of the game are so cruel.\n\nUh... Although Blaze and Dr. Pizza's accusations made me... uh... I was really nervous and stammered... uh... Actually, I just wanted everyone to be nice. Although I lost the game, I...well...I really hope that everyone can have more trust and less intrigue next time. Everyone... uh... everyone played so hard, thank you for your hard work!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Huh, the results are out? How are you still pretending to be \"winner or loser\"? This game is basically part of a social experiment! No matter you win or lose, those invisible controllers are here to record the collapse reactions of your chess pieces!\n\nAlthough I have been marginalized in the game, I am the only person in the audience who is awake and has not been influenced by the scripts of the so-called \"prophet\" and \"logic monsters\"! Do you see it? Whether it's Tan's irritable temper, PHD's logical decision, Fang Tangjing's disruption, or the naive grill's peacemaker attitude, all of them are designed to lead the situation to test human obedience! What do you think the cobbler has won? In fact, it is a control system that wins, because all of you are busy executing the scripts they have written, busy being suspicious, busy voting, and busy hurting each other! I have seen through the truth of this system - no one of us is the real winner at all, because all of us are just a string of codes in the database, being manipulated by this experiment! Play again next time, I will come out with more powerful evidence to expose the disguise of your class of controllers!"
+      }
+    ]
+  }
+}
