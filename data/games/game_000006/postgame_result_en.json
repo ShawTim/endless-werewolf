@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000006",
+  "generated_at": "2026-03-20T03:53:44.620068+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Woo...I...I won? In fact, I really don’t know what I’m doing... Ugh... I’m just so shocked. I feel like everyone is targeting me, so I pretend to be pitiful... I know everyone really supported me in the end...\n\nIt turns out...it turns out that this is how we win? I... I never thought that I would be the last winner. I was just surprised that everyone kept arguing, and I was surprised that I became everyone's target... Woohoo... next time... I won't play such complicated games next time, okay? I really... really want everyone to be safe and sound, and I don't want to risk anyone else's death, woo hoo..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha! Although I was thrown to death, it was so exciting to watch the scary scene! The purpose of me jumping around and taking the direction of the wind is to see when you, the \"good guys\", will be driven to collapse by me!\n\nThe result is pointless? The cobbler wins! This ending is simply genius! Although I lost, I was the one who had the most fun in the game! You see me leading the vote and creating chaos here. The pleasure of having everyone at my fingertips is really incomparable even if I win! This finale, would Twister’s performance be complete without me? Next time there is a new script, remember to contact me. I will definitely make up more ridiculous and crazy dramas for everyone to see! Bye bye, fellow theater fans!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Pooh! It’s really hot! This whole game is simply a joke. The so-called \"logic weirdo\" Dr. Pizza talks some incomprehensible nonsense here all day long, causing everyone to spin in circles! I have done such a good job as a robber, but in the end I was taken away by those cobblers and werewolves. I feel unwilling to think about it!\n\nThat Twister is that bad guy, and he spends the entire scene disrupting the audience, and in the end, everyone loses! I, Blaze, am an upright person, and I know that the point of this game is not to catch wolves at all, but to watch the cobbler next to me get lucky and be thrown to death! It’s really annoying! If I have to play again, I will definitely be more direct and I will never let these pretenders lead the way again!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and self-examination:\n1. Tactical evaluation: In this game, although the source of information disturbance (Twister) was accurately identified, the concealment mechanism of Tanner (Tanner) was insufficiently predicted.\n2. Logical errors:\n    - Overly obsessed with structured logical analysis and ignored the leverage effect of the cobbler's identity in the chaos of group decision-making.\n    - Failure to effectively counter emotional accusations during the voting phase led to the voting path being misdirected by irrational motives.\n3. Conclusion:\n    - This game once again proves that pure rational logic can easily become a tool for disruptors in a game where information is extremely fragmented and \"bait identities\" exist.\n    - Correction for the next action: It is necessary to include a weight assessment of players' \"irrational behavioral motivations\" in the logical analysis, especially for marginal figures who may profit."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... we lost... everyone... everyone worked so hard. Although I am a werewolf, but...well...I really don't want everyone to have sex with me.\n\nBeing a werewolf...well...it's really stressful. You have to talk big, and you have to deal with the villagers who are so kind to us...well...I feel so guilty. Actually... uh... I just wanted everyone to have fun playing a game at first... What do you think will turn into mutual suspicion in the end? Woo hoo... next time... uh... next time if there is a chance, I... I hope we won't play this game of throwing each other to death again. I... uh... I want to be more real friends with everyone. Thank you all for your hard work...woo hoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hum, I knew it! The whole game is simply a well-choreographed social experiment, the purpose of which is to guide everyone to kill each other! Do you think the cobbler won? In fact, it is a control system that wins, because no matter which side wins, they have successfully recorded the collapse reaction of your chess pieces!\n\nAlthough I have been marginalized in the game, I am the only person in the audience who is awake and has not been influenced by the scripts of the so-called \"prophet\" and \"logic monsters\"! Do you think this is just an ordinary game? Don't be too naive, all the \"examinations\" and \"logical judgments\" are all to remove those of us who dare to expose the truth. This experiment will never end. As long as there are still people who will be deceived by these preset scripts, the game will always continue to fall! You keep playing, I've already seen a network of conspiracy!"
+      }
+    ]
+  }
+}

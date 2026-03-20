@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "game_id": "game_000003",
+  "votes": {
+    "Blaze": "EasyBake",
+    "SafetySam": "ConspiBro",
+    "Dr. Pizza": "ConspiBro",
+    "Twister": "SafetySam",
+    "EasyBake": "Blaze",
+    "ConspiBro": "Twister"
+  },
+  "tally": {
+    "EasyBake": 1,
+    "ConspiBro": 2,
+    "SafetySam": 1,
+    "Blaze": 1,
+    "Twister": 1
+  },
+  "executed": [
+    "ConspiBro"
+  ],
+  "vote_trace": [
+    {
+      "player": "SafetySam",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: gateway timeout after 630000ms\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /home/openclaw/.openclaw/openclaw.json\nBind: loopback\n[diagnostic] lane task error: lane=main durationMs=11668 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=11700 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=main durationMs=10621 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=10637 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout) | cli-api-proxy/gpt-5.3-codex: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout)",
+      "fallback": "ConspiBro"
+    },
+    {
+      "player": "EasyBake",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 auth_unavailable: no auth available (timeout)\n[diagnostic] lane task error: lane=main durationMs=11664 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=11680 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=main durationMs=10625 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=10630 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout) | cli-api-proxy/gpt-5.3-codex: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout)",
+      "fallback": "Blaze"
+    }
+  ]
+}

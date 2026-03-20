@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "game_id": "game_000004",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 0
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "邏輯裁定與身分核實：\n1. 根據夜間查驗結果，Blaze 的身分為『爪牙 (Minion)』。\n2.  Twister 自述身分路徑與邏輯分析完全背離，其身分可信度極低。\n3. EasyBake 的發言資訊量極低，建議列入次要觀察名單。\n\n立場：\n- 本輪核心任務為排除『爪牙』身分之 Blaze。\n- 請 Twister 停止戲劇性言語干擾，否則將被認定為狼人陣營保護鏈。",
+      "log_line": "[2026-03-20 11:35:38 HKT] Dr. Pizza: 邏輯裁定與身分核實：\n1. 根據夜間查驗結果，Blaze 的身分為『爪牙 (Minion)』。\n2.  Twister 自述身分路徑與邏輯分析完全背離，其身分可信度極低。\n3. EasyBake 的發言資訊量極低，建議列入次要觀察名單。\n\n立場：\n- 本輪核心任務為排除『爪牙』身分之 Blaze。\n- 請 Twister 停止戲劇性言語干擾，否則將被認定為狼人陣營保護鏈。"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "又嚟呢套「狼人互指」嘅戲碼？Blaze 喺度扮暴躁，Twister 同 Dr. Pizza 喺度玩夢境預言同邏輯陷阱，全部都係劇本！你哋係咪諗住透過互相攻擊嚟轉移大家對「操縱者」嘅關注？Blaze，你話你查咗 SafetySam 係村民，Pizza，你又話你查咗 Blaze 係爪牙，你哋個個都係預言家，咁即係話全場都係「實驗操控員」囉？我話你哋知，我呢個村民絕對唔會畀你哋嘅腳本操控，無論你哋點樣互相推卸責任，都掩飾唔到你哋背後嘅陰謀！",
+      "log_line": "[2026-03-20 11:35:43 HKT] ConspiBro: 又嚟呢套「狼人互指」嘅戲碼？Blaze 喺度扮暴躁，Twister 同 Dr. Pizza 喺度玩夢境預言同邏輯陷阱，全部都係劇本！你哋係咪諗住透過互相攻擊嚟轉移大家對「操縱者」嘅關注？Blaze，你話你查咗 SafetySam 係村民，Pizza，你又話你查咗 Blaze 係爪牙，你哋個個都係預言家，咁即係話全場都係「實驗操控員」囉？我話你哋知，我呢個村民絕對唔會畀你哋嘅腳本操控，無論你哋點樣互相推卸責任，都掩飾唔到你哋背後嘅陰謀！"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro 你又喺度發咩神經？成日話咩實驗、咩操控，你係咪發夢發多咗？依家 Twister 同 EasyBake 明顯就係狼人陣營嘅核心，我查過佢哋！大家咪再畀呢啲陰謀論帶風向，今日目標明確，就係投死 Twister 同 EasyBake！你再喺度搞事，下一個就係投你！",
+      "log_line": "[2026-03-20 11:36:26 HKT] Blaze: ConspiBro 你又喺度發咩神經？成日話咩實驗、咩操控，你係咪發夢發多咗？依家 Twister 同 EasyBake 明顯就係狼人陣營嘅核心，我查過佢哋！大家咪再畀呢啲陰謀論帶風向，今日目標明確，就係投死 Twister 同 EasyBake！你再喺度搞事，下一個就係投你！"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "ConspiBro 你又喺度講埋啲實驗論？話我同 Dr. Pizza 唱雙簧？你越係咁講，越顯得你心虛呀！我嘅「夢境預言」話唔定就係要揭開你呢個村民面具下嘅秘密呢？不如大家一齊投死 ConspiBro，睇吓係咪好似我話齋，呢個實驗入面嘅最大漏洞就係你呢個陰謀論者！",
+      "log_line": "[2026-03-20 11:36:43 HKT] Twister: ConspiBro 你又喺度講埋啲實驗論？話我同 Dr. Pizza 唱雙簧？你越係咁講，越顯得你心虛呀！我嘅「夢境預言」話唔定就係要揭開你呢個村民面具下嘅秘密呢？不如大家一齊投死 ConspiBro，睇吓係咪好似我話齋，呢個實驗入面嘅最大漏洞就係你呢個陰謀論者！"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "嗚...大家千祈唔好再投死人啦...我...我只係一個強盜，咩都唔知呀...Blaze 你咁兇，Twister 同 ConspiBro 又喺度講埋啲聽唔明嘅野...我...我真係好混亂，大家唔好再吵啦，好唔好？嗚嗚...",
+      "log_line": "[2026-03-20 11:36:48 HKT] SafetySam: 嗚...大家千祈唔好再投死人啦...我...我只係一個強盜，咩都唔知呀...Blaze 你咁兇，Twister 同 ConspiBro 又喺度講埋啲聽唔明嘅野...我...我真係好混亂，大家唔好再吵啦，好唔好？嗚嗚..."
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "EasyBake",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: session file locked (timeout 10000ms): pid=1435236 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[diagnostic] lane task error: lane=main durationMs=12248 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=12310 error=\"Error: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=84602 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=84625 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: session file locked (timeout 10000ms): pid=1329500 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)"
+    }
+  ],
+  "chat_history": "[2026-03-20 11:38:59 HKT] Dr. Pizza: 邏輯盤點：\n1. 上輪投票中，各角色行為模式出現顯著的隨機性，身分資訊依然不透明。\n2. 場上各方指控過於情緒化，且資訊存在嚴重的二次污染。\n\n立場重申：\n- 拒絕輕信未經交叉驗證的指控。\n- 請各方明確陳述身分路徑，以識別真正的資訊漏洞。\n- 若 Twister 無法公開身分，將列為第一排除對象。\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
