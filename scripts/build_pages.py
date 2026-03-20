@@ -16,11 +16,13 @@ FILES_TO_COPY = [
     "day_result.json",
     "vote_result.json",
     "resolve_result.json",
+    "postgame_result.json",
     "chat_history.md",
     "night_result_en.json",
     "day_result_en.json",
     "vote_result_en.json",
     "resolve_result_en.json",
+    "postgame_result_en.json",
     "chat_history_en.md",
 ]
 

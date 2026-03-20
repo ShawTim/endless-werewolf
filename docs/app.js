@@ -23,6 +23,7 @@ const els = {
   night: document.getElementById('tab-night'),
   chat: document.getElementById('tab-chat'),
   vote: document.getElementById('tab-vote'),
+  postgame: document.getElementById('tab-postgame'),
   resolve: document.getElementById('tab-resolve'),
   latestSummary: document.getElementById('latest-summary'),
   lang: document.getElementById('lang-select'),
@@ -124,6 +125,7 @@ function setTab(name) {
   els.night.classList.toggle('hidden', name !== 'night');
   els.chat.classList.toggle('hidden', name !== 'chat');
   els.vote.classList.toggle('hidden', name !== 'vote');
+  els.postgame.classList.toggle('hidden', name !== 'postgame');
   els.resolve.classList.toggle('hidden', name !== 'resolve');
 }
 
@@ -379,6 +381,33 @@ function renderVote(vote, maps) {
   `;
 }
 
+function renderPostgame(postgame, maps) {
+  const itv = postgame?.interviews || {};
+
+  function section(title, rows, emoji) {
+    if (!rows || !rows.length) return '';
+    const cards = rows.map(r => {
+      const name = currentLang === 'en' ? (r.player_name_en || r.player_name) : (r.player_name_zh || r.player_name);
+      return `
+        <div class="info-card">
+          <h4>${emoji} ${name}</h4>
+          <div class="kv">Role: ${roleShort(r.role || '')}</div>
+          <div class="kv">Team: ${r.team || '-'}</div>
+          <div class="kv">Mood: ${r.mood || '-'}</div>
+          <div class="speech-bubble">${r.quote || ''}</div>
+        </div>
+      `;
+    }).join('');
+    return `<div class="postgame-block"><h3>${title}</h3><div class="card-grid">${cards}</div></div>`;
+  }
+
+  els.postgame.innerHTML = `
+    ${section('Interview: Executed Players', itv.dead, '💀')}
+    ${section('Interview: Winners', itv.winners, '🏆')}
+    ${section('Interview: Losers', itv.losers, '🥀')}
+  ` || '<div class="kv">(no postgame interviews)</div>';
+}
+
 function renderResolve(resolve, maps, day = {}) {
   const outcome = resolve?.outcome;
   const winners = resolve?.winners || [];
@@ -450,6 +479,7 @@ function renderCurrentDetails() {
   const night = currentLang === 'en' && selectedPayload.night_en ? selectedPayload.night_en : selectedPayload.night;
   const day = currentLang === 'en' && selectedPayload.day_en ? selectedPayload.day_en : selectedPayload.day;
   const vote = currentLang === 'en' && selectedPayload.vote_en ? selectedPayload.vote_en : selectedPayload.vote;
+  const postgame = currentLang === 'en' && selectedPayload.postgame_en ? selectedPayload.postgame_en : selectedPayload.postgame;
   const resolve = currentLang === 'en' && selectedPayload.resolve_en ? selectedPayload.resolve_en : selectedPayload.resolve;
   const chat = currentLang === 'en' && selectedPayload.chat_en ? selectedPayload.chat_en : selectedPayload.chat;
 
@@ -467,6 +497,7 @@ function renderCurrentDetails() {
   renderNight(night || {}, maps);
   renderChat(chat || '', maps, day || {});
   renderVote(vote || {}, maps);
+  renderPostgame(postgame || {}, maps);
   renderResolve(resolve || {}, maps, day || {});
 }
 
@@ -475,24 +506,27 @@ async function showGame(game) {
   document.querySelectorAll('.game-card').forEach(i => i.classList.toggle('active', i.dataset.id === game.game_id));
 
   const base = `./data/games/${game.game_id}`;
-  const [night, day, vote, resolve, chat, nightEn, dayEn, voteEn, resolveEn, chatEn] = await Promise.all([
+  const [night, day, vote, postgame, resolve, chat, nightEn, dayEn, voteEn, postgameEn, resolveEn, chatEn] = await Promise.all([
     loadJson(`${base}/night_result.json`).catch(() => ({})),
     loadJson(`${base}/day_result.json`).catch(() => ({})),
     loadJson(`${base}/vote_result.json`).catch(() => ({})),
+    loadJsonOptional(`${base}/postgame_result.json`),
     loadJson(`${base}/resolve_result.json`).catch(() => ({})),
     loadText(`${base}/chat_history.md`).catch(() => ''),
     loadJsonOptional(`${base}/night_result_en.json`),
     loadJsonOptional(`${base}/day_result_en.json`),
     loadJsonOptional(`${base}/vote_result_en.json`),
+    loadJsonOptional(`${base}/postgame_result_en.json`),
     loadJsonOptional(`${base}/resolve_result_en.json`),
     loadText(`${base}/chat_history_en.md`).catch(() => ''),
   ]);
 
   selectedPayload = {
-    night, day, vote, resolve, chat,
+    night, day, vote, postgame, resolve, chat,
     night_en: nightEn,
     day_en: dayEn,
     vote_en: voteEn,
+    postgame_en: postgameEn,
     resolve_en: resolveEn,
     chat_en: chatEn,
   };

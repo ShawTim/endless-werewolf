@@ -540,6 +540,38 @@ body {
 .stat-label { color: var(--muted); font-size: 11px; }
 .stat-val   { font-weight: 600; font-size: 15px; }
 
+.reveal-btn {
+  border: 1px solid #54479c;
+  background: #1a1345;
+  color: #f0eaff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.reveal-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.reveal-row {
+  border: 1px solid #3d2f82;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  background: #1a1444;
+}
+.postgame-block { margin-bottom: 12px; }
+.postgame-block h3 {
+  margin: 0 0 8px;
+  font-family: Cinzel, serif;
+  font-size: 18px;
+  color: #e5dcff;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 760px) {
   body { overflow: auto; height: auto; }

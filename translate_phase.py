@@ -82,6 +82,7 @@ def run_translate_phase() -> dict[str, Any]:
         "day": game_dir / "day_result.json",
         "vote": game_dir / "vote_result.json",
         "resolve": game_dir / "resolve_result.json",
+        "postgame": game_dir / "postgame_result.json",
     }
 
     output_files: dict[str, str] = {}
@@ -104,7 +105,7 @@ def run_translate_phase() -> dict[str, Any]:
 
     # legacy compatibility output (latest game only)
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    for name in ["night_result_en.json", "day_result_en.json", "vote_result_en.json", "resolve_result_en.json", "chat_history_en.md"]:
+    for name in ["night_result_en.json", "day_result_en.json", "vote_result_en.json", "resolve_result_en.json", "postgame_result_en.json", "chat_history_en.md"]:
         src = game_dir / name
         if src.exists():
             (STATE_DIR / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
