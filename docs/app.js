@@ -384,17 +384,29 @@ function renderVote(vote, maps) {
 function renderPostgame(postgame, maps) {
   const itv = postgame?.interviews || {};
 
-  function section(title, rows, emoji) {
+  const moodMap = {
+    en: { defiant: 'defiant', relieved: 'relieved', frustrated: 'frustrated', bitter: 'bitter' },
+    zh: { defiant: '不服輸', relieved: '鬆一口氣', frustrated: '挫敗', bitter: '苦澀' },
+  };
+  const m = moodMap[currentLang] || moodMap.en;
+  const moodText = (x) => m[x] || x || '-';
+
+  function section(titleEn, titleZh, rows, emoji) {
     if (!rows || !rows.length) return '';
+    const title = currentLang === 'zh' ? titleZh : titleEn;
+
     const cards = rows.map(r => {
       const name = currentLang === 'en' ? (r.player_name_en || r.player_name) : (r.player_name_zh || r.player_name);
+      const role = t(roleShort(r.role || ''));
+      const team = t(r.team || '-');
+      const quote = currentLang === 'zh' ? localizeTextByNameMap(r.quote || '', maps) : (r.quote || '');
       return `
         <div class="info-card">
           <h4>${emoji} ${name}</h4>
-          <div class="kv">Role: ${roleShort(r.role || '')}</div>
-          <div class="kv">Team: ${r.team || '-'}</div>
-          <div class="kv">Mood: ${r.mood || '-'}</div>
-          <div class="speech-bubble">${r.quote || ''}</div>
+          <div class="kv">${currentLang === 'zh' ? '身份' : 'Role'}: ${role}</div>
+          <div class="kv">${currentLang === 'zh' ? '陣營' : 'Team'}: ${team}</div>
+          <div class="kv">${currentLang === 'zh' ? '情緒' : 'Mood'}: ${moodText(r.mood)}</div>
+          <div class="speech-bubble">${quote}</div>
         </div>
       `;
     }).join('');
@@ -402,9 +414,9 @@ function renderPostgame(postgame, maps) {
   }
 
   els.postgame.innerHTML = `
-    ${section('Interview: Executed Players', itv.dead, '💀')}
-    ${section('Interview: Winners', itv.winners, '🏆')}
-    ${section('Interview: Losers', itv.losers, '🥀')}
+    ${section('Interview: Executed Players', '賽後訪問：被處決玩家', itv.dead, '💀')}
+    ${section('Interview: Winners', '賽後訪問：勝方', itv.winners, '🏆')}
+    ${section('Interview: Losers', '賽後訪問：敗方', itv.losers, '🥀')}
   ` || '<div class="kv">(no postgame interviews)</div>';
 }
 
