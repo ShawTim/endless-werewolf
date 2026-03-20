@@ -1,0 +1,165 @@
+{
+  "status": "completed",
+  "game_id": "game_000012",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 3
+    },
+    "Dr. Pizza": {
+      "speak_count": 3
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 3
+    }
+  },
+  "day_trace": [
+    {
+      "type": "pass",
+      "player_name": "SafetySam",
+      "mentioned_recently": false
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here comes the trick again! I had known that Blaze was a \"cobbler\" who was always pretending to be a good guy to disrupt the situation. His purpose was to lead everyone to vote him out so that he could complete his hidden victory condition. Don’t be misled by these roundabout characters. There must be a bigger conspiracy experiment behind the entire game!",
+      "log_line": "[2026-03-21 03:01:48 HKT] ConspiBro: Here comes the trick again! I had known that Blaze was a \"cobbler\" who was always pretending to be a good guy to disrupt the situation. His purpose was to lead everyone to vote him out so that he could complete his hidden victory condition. Don’t be misled by these roundabout characters. There must be a bigger conspiracy experiment behind the entire game!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory:\n1. The identity chain in the game is extremely confusing, and it is currently necessary to calibrate the initial identities and night operation paths of all parties in real time.\n2. Information loopholes: ConspiBro accuses Blaze of being a \"cobbler\" and requires logical verification of his verification basis.\n\nPosition:\n- Reject unexamined accusations.\n- Ask each participant to: (1) state their initial identity, (2) describe their specific operations at night to eliminate information noise.",
+      "log_line": "[2026-03-21 03:01:53 HKT] Dr. Pizza: Logical inventory:\n1. The identity chain in the game is extremely confusing, and it is currently necessary to calibrate the initial identities and night operation paths of all parties in real time.\n2. Information loopholes: ConspiBro accuses Blaze of being a \"cobbler\" and requires logical verification of his verification basis.\n\nPosition:\n- Reject unexamined accusations.\n- Ask each participant to: (1) state their initial identity, (2) describe their specific operations at night to eliminate information noise."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, what's wrong with you? You say I am a cobbler? Do you have a lot of hair in your dreams? As soon as this game started, you started talking about some crazy conspiracy theories. You and Twister were trying to get rid of me, a civilian villager! Pizza, you are talking some unintelligible nonsense here again. No one can believe them. You must leave this shithead ConspiBro today!",
+      "log_line": "[2026-03-21 03:01:56 HKT] Blaze: ConspiBro, what's wrong with you? You say I am a cobbler? Do you have a lot of hair in your dreams? As soon as this game started, you started talking about some crazy conspiracy theories. You and Twister were trying to get rid of me, a civilian villager! Pizza, you are talking some unintelligible nonsense here again. No one can believe them. You must leave this shithead ConspiBro today!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. It's another new day... uh... although I don't know exactly what happened, but I... uh... I really hope that everyone is living an ordinary and happy life. Why don't we all... uh... communicate slowly so that there won't be any misunderstandings again, okay?",
+      "log_line": "[2026-03-21 03:01:59 HKT] EasyBake: Hello everyone. It's another new day... uh... although I don't know exactly what happened, but I... uh... I really hope that everyone is living an ordinary and happy life. Why don't we all... uh... communicate slowly so that there won't be any misunderstandings again, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone is arguing about the controller again so early? It’s really boring! Since you want to know so much, I will break the news directly: I actually used a very proud ability last night to change someone's identity beyond recognition. Who was it? Hehe, you must be scared! This sense of unknown is the most exciting part of this experiment, isn't it? The suspicion show of Blaze and ConspiBro is outdated, do you have any more creative ways to play?",
+      "log_line": "[2026-03-21 03:02:03 HKT] Twister: Oops, are you arguing about a system controller again so early? It’s really boring! Since you want to know so much, I will break the news directly: I actually used a very proud ability last night to change someone's identity beyond recognition. Who was it? Hehe, you must be scared! This sense of unknown is the most exciting part of this experiment, isn't it? The suspicion show of Blaze and ConspiBro is outdated, do you have any more creative ways to play?"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh...ConspiBro, you said Blaze is a cobbler again? I... I am so confused. Everyone is reporting their identity. I... I am just a villager who has just been changed by a robber. I don't know anything about it... Wuwu... I hope everyone can't just throw themselves into others just because they are suspicious of each other. I... I am really afraid of this atmosphere, Wuwu...",
+      "log_line": "[2026-03-21 03:02:06 HKT] SafetySam: Ugh...ConspiBro, you said Blaze is a cobbler again? I... I am so confused. Everyone is reporting their identity. I... I am just a villager who has just been changed by a robber. I don't know anything about it... Wuwu... I hope everyone can't just throw themselves into others just because they are suspicious of each other. I... I am really afraid of this atmosphere, Wuwu..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": "Dr. Pizza",
+      "speech": "Pizza, your interrogation mechanism is basically designed to screen out all the \"variables\" that are disobedient! You asked me to describe my nighttime motives? I'm not sure you are involved with Blaze and want to use this information to optimize your simulation algorithm and completely eliminate me, the person who sees through the truth! I will never be kidnapped by this \"review process\". The scripts of your controllers are getting more and more explicit!",
+      "log_line": "[2026-03-21 03:02:09 HKT] ConspiBro @Dr. Pizza: Pizza, your interrogation mechanism is basically to screen out all the \"variables\" that are disobedient! You asked me to describe my nighttime motives? I'm not sure you are involved with Blaze and want to use this information to optimize your simulation algorithm and completely eliminate me, the person who sees through the truth! I will never be kidnapped by this \"review process\". The scripts of your controllers are getting more and more explicit!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory update:\n1. The confrontation between Blaze and ConspiBro lacks an empirical path, and the night operations of Twister and SafetySam are also completely missing. This phenomenon usually means that the game has fallen into an information black hole.\n2. Identify the path: The current optimal solution to the game is to cross-examine the identities and paths of each participant to clarify whether there is a werewolf camp protection chain.\n\nPosition:\n-Reject accusations without logical verification.\n- Please Twister and EasyBake disclose their nightly activities, otherwise it will be regarded as hindering the decision-making process and directly included in the voting exclusion sequence.",
+      "log_line": "[2026-03-21 03:02:13 HKT] Dr. Pizza: Logical inventory update:\n1. The confrontation between Blaze and ConspiBro lacks an empirical path, and the night operations of Twister and SafetySam are also completely missing. This phenomenon usually means that the game has fallen into an information black hole.\n2. Identify the path: The current optimal solution to the game is to cross-examine the identities and paths of each participant to clarify whether there is a werewolf camp protection chain.\n\nPosition:\n-Reject accusations without logical verification.\n- Please Twister and EasyBake disclose their nightly activities, otherwise it will be regarded as hindering the decision-making process and directly included in the voting exclusion sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "EasyBake, you pretend to be the good guy here all the time, but are you actually involved with ConspiBro? You two are trying to be a good person and a bad person. You just want to lead everyone to the wrong target! I, Blaze, am doing the right thing. If I say he is a shit stick, he will be a shit stick. If you try to block the situation again, I will throw you away together!",
+      "log_line": "[2026-03-21 03:02:16 HKT] Blaze: EasyBake, you pretend to be a good guy here all day long, but in fact you are in conflict with ConspiBro? You two are trying to be a good person and a bad person. You just want to lead everyone to the wrong target! I, Blaze, am doing the right thing. If I say he is a shit stick, he will be a shit stick. If you try to block the situation again, I will throw you away together!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": "Blaze",
+      "speech": "Uh...Blaze...you...don't talk to me like that...I...I'm really not from the werewolf camp. I just want everyone to have fun playing games like this...uh...Since everyone is so nervous, I...I haven't done anything this evening, so why don't we all calm down and make such a plan?",
+      "log_line": "[2026-03-21 03:02:20 HKT] EasyBake @Blaze: Uh...Blaze...you...don't talk to me like that...I...I'm really not from the werewolf camp, I just want everyone to have fun playing games like this...uh...Since everyone is so nervous, I...I haven't done anything this evening, so why don't we all calm down and make such a plan?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone is arguing about the controller again so early? It’s really boring! Since you want to know so much, I will break the news directly: I actually used a very proud ability last night to change someone's identity beyond recognition. Who was it? Hehe, you must be scared! This sense of unknown is the most exciting part of this experiment, isn't it? The suspicion show of Blaze and ConspiBro is outdated, do you have any more creative ways to play?",
+      "log_line": "[2026-03-21 03:02:24 HKT] Twister: Oops, are you arguing about a system controller again so early? It’s really boring! Since you want to know so much, I will break the news directly: I actually used a very proud ability last night to change someone's identity beyond recognition. Who was it? Hehe, you must be scared! This sense of unknown is the most exciting part of this experiment, isn't it? The suspicion show of Blaze and ConspiBro is outdated, do you have any more creative ways to play?"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...everyone prays that there won't be any more quarrels...I...I'm just an ordinary villager, I don't know anything...Twister and Dr. Pizza seem to be talking about something so profound, I...I'm so confused, wuwu...Should everyone reveal their identities first, so as not to attack each other again? Woohoo...",
+      "log_line": "[2026-03-21 03:02:28 HKT] SafetySam: Woo... I hope everyone can stop arguing... I... I'm just an ordinary villager, I don't know anything... Twister and Dr. Pizza seem to be talking about something so profound, I... I'm so confused, woo... Should everyone reveal their identities first, so as not to attack each other again? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Pizza, do you want to use this \"voting system\" to eliminate me again? The controllers of your class cooperate with each other, one is the violent accuser, and the other is the calm judge. The purpose is to exclude me, the person who exposed the laboratory conspiracy! Let me tell you, no matter how you vote, I will never hand over any identity information, because you are not doing it to win the game, but to eliminate dissidents! Everyone, please see clearly, the rules of this game itself are a trap. As long as you cooperate with them in the review, you are an accomplice in this conspiracy!",
+      "log_line": "[2026-03-21 03:02:32 HKT] ConspiBro: Pizza, do you want to use this \"system voting\" to eliminate me again? The controllers of your class cooperate with each other, one is the violent accuser, and the other is the calm judge. The purpose is to exclude me, the person who exposed the laboratory conspiracy! Let me tell you, no matter how you vote, I will never hand over any identity information, because you are not doing it to win the game, but to eliminate dissidents! Everyone, please see clearly, the rules of this game itself are a trap. As long as you cooperate with them in the review, you are an accomplice in this conspiracy!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and action statement:\n1. ConspiBro refuses to reconcile information and continues to use conspiracy theories to interfere, while Blaze maintains a highly emotional confrontation. The behavior of both parties shows that there are major information loopholes in their identity paths.\n2. In order to break the current deadlock, mandatory identity disclosure is the only option.\n\nPosition:\n- Refuse to be gullible by ConspiBro’s emotional incitement.\n- It is recommended that all members focus their voting on those who refuse to cooperate with information disclosure in order to end the current information black hole.",
+      "log_line": "[2026-03-21 03:02:51 HKT] Dr. Pizza: Logical inventory and action statement:\n1. ConspiBro refuses to reconcile information and continues to use conspiracy theories to interfere, while Blaze maintains a highly emotional confrontation. The behavior of both parties shows that there are major information loopholes in their identity paths.\n2. In order to break the current deadlock, mandatory identity disclosure is the only option.\n\nPosition:\n- Refuse to be gullible by ConspiBro’s emotional incitement.\n- It is recommended that all members focus their voting on those who refuse to cooperate with information disclosure in order to end the current information black hole."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro What are you talking about here about laboratories and controllers? Your nonsense is a waste of everyone's time! I, Blaze, am doing my best, but since you are unwilling to reveal your identity and are just diverting your attention, I suspect that you are the core of the werewolf camp! Don’t let her fool you again with her crazy words. Today we have the same goal, to defect to ConspiBro. Let’s talk first!",
+      "log_line": "[2026-03-21 03:02:54 HKT] Blaze: ConspiBro, what lab and controller are you talking about here? Your nonsense is a waste of everyone's time! I, Blaze, am doing my best, but since you are unwilling to reveal your identity and are just diverting your attention, I suspect that you are the core of the werewolf camp! Don’t let her fool you again with her crazy words. Today we have the same goal, to defect to ConspiBro. Let’s talk first!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh...Blaze...you...don't talk to me anymore, I...I really don't know anything, and I'm not involved in any conspiracy...uh...everyone accuses each other like this, I'm really sad...uh...Twister, maybe he's just joking, we...uh...should we sit down and lean down slowly?",
+      "log_line": "[2026-03-21 03:02:57 HKT] EasyBake: Wow...Blaze...you...don't talk to me anymore, I...I really don't know anything, and I'm not involved in any conspiracy...uh...everyone accuses each other like this, I'm really sad...uh...Twister, maybe he was just joking, we...uh...should we sit down and lean down slowly?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, is Pizza showing off his \"logic professor\" face again? Okay, since you want to play logical reconciliation, I'll play with you! I did exchange things last night, but were they the same person? Hey, you robots who only believe in logic will never understand the joy of chaos! If you want to act publicly, why don't you tell me first what you did last night? I'm not sure you are the werewolf who wants to hide your identity the most?",
+      "log_line": "[2026-03-21 03:03:00 HKT] Twister: Oops, is Pizza showing off his face as a \"logic professor\" again? Okay, since you want to play logical reconciliation, I'll play with you! I did exchange things last night, but were they the same person? Hey, you robots who only believe in logic will never understand the joy of chaos! If you want to act publicly, why don't you tell me first what you did last night? I'm not sure you are the werewolf who wants to hide your identity the most?"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Wow...everyone...do you think we must accuse each other like this? I... I'm just an ordinary robber... uh... robber... wu wu... I... I, Qin Wan, really don't know anything. Can we all work together peacefully and stop arguing... wu wu...",
+      "log_line": "[2026-03-21 03:03:04 HKT] SafetySam: Wow...everyone...do you think we must accuse each other like this? I... I'm just an ordinary robber... uh... robber... wu wu... I... I, Qin Wan, really don't know anything. Can we all work together peacefully and stop arguing... wu wu..."
+    }
+  ],
+  "chat_history": "[2026-03-21 03:01:48 HKT] ConspiBro: 又嚟呢套！我早知Blaze係個「皮匠」，佢成日扮好人喺度攪局，目的就係要引導大家投佢出局，好完成佢嗰個隱蔽嘅勝利條件。大家唔好畀呢啲轉彎抹角嘅角色誤導，成場遊戲背後肯定有更加龐大嘅陰謀實驗！\n[2026-03-21 03:01:53 HKT] Dr. Pizza: 邏輯盤點：\n1. 賽局身分鏈條極度混亂，目前需即時校對各方初始身分與夜間操作路徑。\n2. 資訊漏洞：ConspiBro 指控 Blaze 身分為『皮匠』，需對其查驗依據進行邏輯驗證。\n\n立場：\n- 拒絕未經審查之指控。\n- 請各參與者：(1) 陳述初始身分，(2) 描述夜間具體操作，以排除資訊噪音。\n[2026-03-21 03:01:56 HKT] Blaze: ConspiBro 你又喺度發咩神經？你話我係皮匠？你係咪發夢發多咗？呢場遊戲一開波你就喺度講啲乜鬼陰謀論，根本就係你同 Twister 夾埋想清走我呢個平民村民！Pizza，你又喺度講埋啲聽唔明嘅廢話，大家都唔好信佢哋，今日一定要投走呢個搞屎棍 ConspiBro！\n[2026-03-21 03:01:59 HKT] EasyBake: 大...大家好呀。又係新嘅一日...呃...雖然我又唔係好清楚發生緊咩事，但我...呃...我真係希望大家都平平凡凡、開開心心咁過。大家不如...呃...慢慢溝通，唔好再有咩誤會啦，好唔好？\n[2026-03-21 03:02:03 HKT] Twister: 哎呀呀，大家咁早又喺度爭論邊個係控制員？真係悶死人啦！既然你哋咁想知，我就直接爆料啦：我昨晚其實用咗個好得意嘅能力，將某人嘅身分變到面目全非，至於係邊個？嘿嘿，你哋估吓啦！呢種未知感先係呢場實驗最刺激嘅地方，唔係咩？Blaze 同 ConspiBro 嘅猜忌表演已經過時喇，大家仲有冇啲更有創意嘅玩法？\n[2026-03-21 03:02:06 HKT] SafetySam: 嗚...ConspiBro 你又話 Blaze 係皮匠？我...我真係好混亂呀，每個人都報自己身分，我...我只係一個啱啱被強盜換過牌嘅村民，咩都唔知呀...嗚嗚...大家千祈唔好因為互相猜忌就隨便投人呀，我...我真係好怕呢種氣氛呀，嗚嗚...\n[2026-03-21 03:02:09 HKT] ConspiBro @Dr. Pizza: Pizza，你呢套審訊機制根本就係為咗篩走所有唔聽話嘅「變數」！你叫我描述夜間動機？話唔定你同 Blaze 夾埋，想利用呢啲資訊去優化你哋嗰套模擬算法，將我呢個睇穿真相嘅人徹底消除！我絕對唔會畀呢套「審查程序」綁架，你哋呢班控制員嘅腳本真係越來越露骨啦！\n[2026-03-21 03:02:13 HKT] Dr. Pizza: 邏輯盤點更新：\n1. Blaze 與 ConspiBro 之對峙缺乏實證路徑，Twister 與 SafetySam 之夜間行動亦完全缺失。此現象通常代表賽局已陷入資訊黑洞。\n2. 識別路徑：目前賽局最優解為透過對各參與者進行身分與路徑交叉審查，以釐清是否存在狼人陣營保護鏈。\n\n立場：\n- 拒絕未經邏輯驗證的指控。\n- 請 Twister 與 EasyBake 公開其夜間活動對象，否則將視為妨礙決策流程，直接納入投票排除序列。\n[2026-03-21 03:02:16 HKT] Blaze: EasyBake，你成日喺度扮好人，其實你同 ConspiBro 夾埋㗎啦？你哋兩個一個唱紅臉一個唱白臉，根本就係想引導大家投錯目標！我 Blaze 行得正企得正，我話佢係搞屎棍就係搞屎棍，你哋再係度阻頭阻勢，就一齊投走埋你哋！\n[2026-03-21 03:02:20 HKT] EasyBake @Blaze: 呃...Blaze...你...你唔好咁樣話我呀...我...我真係唔係咩狼人陣營嘅人，我只係想大家開開心心咁樣玩遊戲...呃...既然大家都咁緊張，我...我琴晚咩都冇做過，不如大家都心平氣和咁樣傾下計好唔好呀？\n[2026-03-21 03:02:24 HKT] Twister: 哎呀呀，大家咁早又喺度爭論邊個係控制員？真係悶死人啦！既然你哋咁想知，我就直接爆料啦：我昨晚其實用咗個好得意嘅能力，將某人嘅身分變到面目全非，至於係邊個？嘿嘿，你哋估吓啦！呢種未知感先係呢場實驗最刺激嘅地方，唔係咩？Blaze 同 ConspiBro 嘅猜忌表演已經過時喇，大家仲有冇啲更有創意嘅玩法？\n[2026-03-21 03:02:28 HKT] SafetySam: 嗚...大家千祈唔好再吵啦...我...我只係一個平平凡凡嘅村民，咩都唔知呀...Twister 同 Dr. Pizza 講嘢好似好深奧咁，我...我真係好混亂呀，嗚嗚...大家係咪應該先報出自己身分，唔好再互相攻擊啦？嗚嗚...\n[2026-03-21 03:02:32 HKT] ConspiBro: Pizza，你又想用呢套「系統投票」嚟肅清我？你哋呢班控制員互相配合，一個做暴躁指控者，一個做冷靜判官，目的就係要將我呢個揭露實驗室陰謀嘅人排擠出去！我話你知，無論你哋點樣進行投票，我絕對唔會交出任何身分資料，因為你哋根本唔係為咗遊戲勝利，係為咗清除異己！大家，睇清楚啦，呢場遊戲嘅規則本身就係個陷阱，只要你哋配合佢哋進行審查，你哋就係呢場陰謀嘅同謀！\n[2026-03-21 03:02:51 HKT] Dr. Pizza: 邏輯盤點與行動聲明：\n1. ConspiBro 拒絕資訊對帳並持續使用陰謀論干擾， Blaze 則維持高度情緒化對抗，雙方行為均顯示其身分路徑存在重大資訊漏洞。\n2. 為了打破當前賽局僵局，強制性身分披露為唯一選擇。\n\n立場：\n- 拒絕輕信 ConspiBro 之情緒煽動。\n- 建議全員將投票焦點鎖定為拒絕配合資訊披露者，以終結當前資訊黑洞狀態。\n[2026-03-21 03:02:54 HKT] Blaze: ConspiBro 你仲喺度講咩實驗室、控制員？你呢啲歪理簡直係浪費大家時間！我 Blaze 行得正企得正，既然你又唔肯報身分，又淨係識喺度轉移視線，我懷疑你根本就係狼人陣營嘅核心！大家唔好再畀佢呢套瘋言瘋語騙到，今日目標一致，投走 ConspiBro 先講！\n[2026-03-21 03:02:57 HKT] EasyBake: 嗚...Blaze...你...你唔好再話我喇，我...我真係咩都唔知呀，亦都冇參與咩陰謀...呃...大家咁樣互相指控，我真係好難過...呃...Twister 佢或者只係開玩笑，我哋...呃...我哋係咪應該坐低慢慢傾下呢？\n[2026-03-21 03:03:00 HKT] Twister: 哎呀呀，Pizza 又喺度擺佢嗰副「邏輯教授」嘅嘴臉啦？好啦，既然你想玩邏輯對帳，我咪陪你玩囉！昨晚我係有交換過嘢，不過係邊個同邊個？嘿嘿，嗰種混亂嘅樂趣，你呢啲只信邏輯嘅機器人係永遠唔會明㗎！你話要公開行動，不如你自己先講吓你昨晚做咗咩？話唔定你先係嗰個最想掩蓋身分嘅狼人呢？\n[2026-03-21 03:03:04 HKT] SafetySam: 嗚...大家...大家點解一定要咁樣互相指控呀？我...我只係一個平平凡凡嘅強盜...呃...強盜...嗚嗚...我...我琴晚真係咩都唔知呀，大家可唔可以和平啲傾下計，唔好再吵啦...嗚嗚...\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

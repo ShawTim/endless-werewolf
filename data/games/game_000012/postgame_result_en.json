@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000012",
+  "generated_at": "2026-03-20T19:04:17.990496+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Uh...uh...even though the camp won, I...uh...I really feel so guilty. Being a minion... uh... it really makes me miserable. I have to help the werewolf and pretend to be innocent at the same time... ugh... I... I actually just want everyone to play the game in peace, but in the end... uh... it really makes everyone so unhappy and accuses each other of being so stubborn.\n\nUh... Although Blaze and Dr. Pizza's accusations made me... uh... I was really nervous and stammered... uh... Actually, I just wanted everyone to be nice and didn't want to see anyone being thrown to death. Although I won the game in the end... uh... I really hope that everyone can have more trust and less intrigue next time. Everyone... uh... everyone played so hard, thank you for your hard work!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and strategy optimization:\n1. Tactical evaluation: This game successfully used the \"trust gap\" between individuals and the high-intensity \"information interference\" to maintain the information isolation of the camp with a low-key strategy when the good guys camp was mired in controversy.\n2. Critical success factors:\n    - Effectively transform individual confrontations (such as Blaze vs. ConspiBro) into a black hole of camp information, avoiding direct scrutiny of core members.\n    - Successfully identified and exploited the emotional breakdown of participants when faced with forced revelations, further exacerbating the randomness of group decision-making.\n3. Conclusion:\n    - This game once again proves that in a field with chaotic information, maintaining calmness in logical analysis and waiting for opportunities to take advantage of the opponent's decision-making bias are the basis for victory.\n    - Optimization of the next operation: In the future, the unconscious protection mechanism of \"emotional mediation\" players (such as naive grill) should be identified and utilized earlier, and they should be included in the camp's tactical cover network. This victory proves that in a game of extreme information asymmetry, calm information control is always better than chaotic logical collisions."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is rolling! The whole game was a disaster. I acted as a prophet and checked people to find a \"troublemaker\". As a result, the whole team was accusing each other and making logical decisions. It was a waste of time! That Fang Tangjing was a badass again, and the whole scene was messed up by him. In the end, the werewolf actually won, which was really flattering!\n\nI, Blaze, am an upright person, so I directly accuse the other person of being a werewolf. After all, the point of this game is not to catch wolves at all, but to watch this person know how to act and cause trouble! I'm so marginalized in this game, it's so infuriating! Next time I play, I will be more direct. I will never let these weird costumes lead the way. Winning or losing is not the same thing. Being treated like a fool and playing first is the most popular! Next time I play, I will definitely catch those werewolves and beat them up hard!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...lose it...do you think we have to accuse each other like this? I obviously just want to play the game in peace, how difficult is it to be a law-abiding robber? Woohoo...\n\nWhen the game started, everyone seemed to be so strong and pointed, I... I just wanted to avoid everyone's attention, and didn't want to be the one who stood out, but in the end our camp actually lost... Wow... this game is really scary. Alas, what these people say is complicated and unpleasant. Next time... Next time, Qianqi, please don’t ask me to play such dangerous games again... Wuwu... I really... I really want everyone to be happy and don’t argue anymore... Wuwu..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! Although the werewolf camp had the last laugh, Tang Jing’s performance in this scene was simply superb!\n\nYou can watch those so-called \"logic monsters\" and \"conspirators\" arguing with each other until they are red in the face. I throw out some false clues while watching them fall into a crazy chain of suspicion due to my disruption. This feeling of controlling the overall situation is really great! I am a \"troublemaker\" and my goal is not to let anyone have an easy time!\n\nPHD Want to analyze me using a logic model? It's so naive! In the face of chaos, all data will become invalid. Although I am playing the role of a spoiler, I can see everyone's heartbeats racing and their feet in chaos because of my joke. This \"spoiler\" sense of artistic achievement is far more enjoyable than simply winning the game! Next time I start again, see how I rewrite the script to make it even more absurd and crazy, just wait and see!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "snort! Do you really think that this \"victory\" was achieved by relying on logical analysis or voting? Innocent! The ending of \"the werewolf wins\" is just another preset data in a social experiment!\n\nYou see, when I exposed Blaze as the troublemaker, when I tried to point out the collusion between PHD and Blaze, the scene immediately turned against me. This purge was not to catch wolves at all, but to eliminate all variables that could interfere with the experimental parameters! PHD's so-called \"logical ruling\" and Fang Tang Jing's \"chaotic drama\" are actually the pros and cons of the same mechanism. The purpose is to test the collapse reaction of human beings under extreme suspicion and irrational information. Although I lost the game, I saw through the conspiracy behind this incident - we are all guinea pigs with programmed reactions. The truth will never be inside your \"tactical review\", but outside the walls of this laboratory! You continue to act, I will watch in the shadow as an experiment completely collapsed in self-contradiction!"
+      }
+    ]
+  }
+}
