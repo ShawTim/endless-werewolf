@@ -60,14 +60,13 @@ body {
 .gh-link {
   color: var(--moon);
   text-decoration: none;
-  border: 1px solid var(--line-gold);
-  border-radius: 999px;
-  padding: 6px 10px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
 }
 .gh-link:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 8px var(--accent-glow);
+  opacity: 1;
 }
 
 /* ── PAGE LAYOUT ── */
