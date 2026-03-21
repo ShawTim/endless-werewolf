@@ -17,6 +17,13 @@
 
 * { box-sizing: border-box; }
 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(200, 149, 42, 0.35); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200, 149, 42, 0.65); }
+* { scrollbar-width: thin; scrollbar-color: rgba(200, 149, 42, 0.35) transparent; }
+
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
