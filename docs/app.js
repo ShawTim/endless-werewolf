@@ -599,7 +599,7 @@ function renderList(items) {
     const isWolf = g.winner_team === 'werewolf_team';
     const isVillage = g.winner_team === 'village_team';
     const cardClass = isWolf ? 'win-werewolf' : isVillage ? 'win-village' : '';
-    const banner = isWolf ? './assets/banner-redmoon.png' : './assets/bg-enchanted-forest.png';
+    const banner = isWolf ? './assets/banner-redmoon.png' : isVillage ? './assets/bg-enchanted-forest.png' : './assets/banner-tanner.png';
 
     const card = document.createElement('div');
     card.className = `game-card ${cardClass}`.trim();

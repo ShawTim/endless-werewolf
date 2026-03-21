@@ -506,7 +506,9 @@ body {
   border-color: var(--green);
 }
 .outcome-tanner {
-  background: rgba(120, 90, 10, 0.18);
+  background:
+    linear-gradient(rgba(60, 35, 5, 0.72), rgba(30, 18, 3, 0.80)),
+    url('./assets/banner-tanner.png') center center / cover;
   border-color: #c8a518;
 }
 .outcome-icon    { font-size: 32px; flex-shrink: 0; position: relative; z-index: 1; }
