@@ -1,34 +1,34 @@
-[2026-03-20 12:02:54 HKT] EasyBake: 大...大家好呀。又係新嘅一日...呃...雖然我又唔係好清楚發生緊咩事，但我...呃...我真係希望大家都平平安安。大家不如...呃...慢慢溝通，唔好再有咩誤會啦，好唔好？
-[2026-03-20 12:02:57 HKT] ConspiBro: 又嚟呢套「和氣調解」嘅劇本？EasyBake，你同 SafetySam 兩個人一個扮好人，一個扮怕羞，根本就係想分散大家對真正「控制員」嘅注意力！你哋係咪諗住透過呢種低調嘅方式，靜雞雞將成場實驗嘅數據導向你哋預設嘅結局？我話你哋聽，我呢個村民絕對唔會畀你哋呢啲操控者帶住行！
-[2026-03-20 12:03:02 HKT] Dr. Pizza: 邏輯盤點：
-1. 安全操作基準：在身分資訊高度破碎下，保持中立觀察。
-2. 資訊漏洞：ConspiBro 的陰謀論敘事與 EasyBake 的情感調解，兩者看似對立，實則共同製造邏輯噪音。
+[2026-03-20 12:02:54 HKT] EasyBake: Hello everyone. It's another new day... uh... although I don't know exactly what happened, but I... uh... I really hope everyone is safe. Why don't we all... uh... communicate slowly so that there won't be any misunderstandings again, okay?
+[2026-03-20 12:02:57 HKT] ConspiBro: Is this "friendly mediation" script coming again? EasyBake, you and SafetySam are pretending to be nice and shy, just to distract everyone from the real "controller"! Do you imagine that in this low-key way, Jingjiji will lead the data of the field experiment to your preset outcome? Listen to what I say, I, a villager, will never be controlled by controllers like you!
+[2026-03-20 12:03:02 HKT] Dr. Pizza: Logical inventory:
+1. Safety operation standards: Maintain neutral observation when identity information is highly fragmented.
+2. Information loopholes: ConspiBro’s conspiracy theory narrative and EasyBake’s emotional mediation seem to be opposites, but in fact they work together to create logical noise.
 
-立場：
-- 拒絕輕信任何情感表達與非邏輯推論。
-- 等待 Twister 與 Blaze 的初步陳述，以便進行身分交叉驗證。
-[2026-03-20 12:03:06 HKT] Blaze: 得啦！Dr. Pizza 嗰套「邏輯怪」又嚟啦？依家全場啲身分亂到七彩，仲要喺度講咩『盤點』？Twister 同 ConspiBro 嗰兩條友，成日喺度搞事，目標肯定係想搞死我呢個平民村民！大家快啲團結埋一齊，唔好畀呢班戲精玩死啦！
-[2026-03-20 12:03:09 HKT] Twister: 哈哈哈，Blaze 你話我搞事？睇嚟大家終於醒神返啦！我 Twister 嘅任務就係要令呢場戲變得更加混亂，你哋指控越多，我就越開心！不過話說，我尋晚查到有啲好玩嘅秘密，大家係咪想聽呢？想聽嘅話就一齊投走 ConspiBro，呢個陰謀論者應該會有啲好睇嘅嘢爆出嚟！
-[2026-03-20 12:03:13 HKT] SafetySam: 嗚...大家...唔好再吵啦...我...我只係一個普通人...大家投Twister定係投邊個都好，嗚嗚...唔好投我啦...我...我真係好怕呢種氣氛呀，嗚嗚...
-[2026-03-20 12:03:15 HKT] EasyBake @ConspiBro: 呃...ConspiBro，你真係...真係誤會我喇。我只係想大家開開心心咁玩啫...呃...雖然你成日話咩實驗呀、陰謀呀...但我真係...呃...真係唔係你講嗰啲咩控制員。大家...不如互相尊重好唔好呀？
-[2026-03-20 12:03:18 HKT] ConspiBro: Dr. Pizza，你又喺度拋出你嗰套「資訊漏洞」論嚟抹黑我？你根本就係想同 EasyBake 聯手，用所謂「邏輯噪音」嚟掩蓋你哋狼人陣營嘅真實身分！你哋以為用這種方式就可以將我邊緣化？我話你知，無論你點樣分析，呢個實驗嘅真相永遠唔會喺你嘅報告入面！你哋呢班人根本就係想利用互相猜忌嚟清走我呢個唯一睇穿陰謀嘅人！
-[2026-03-20 12:03:21 HKT] Dr. Pizza: 邏輯盤點更新：
-1. Blaze 聲稱初始身分為皮匠，Twister 則以戲劇性干擾為核心，兩者目前身分變動路徑缺乏交叉驗證。
-2. 建議對 Twister 與 Blaze 進行強制性的身分揭露審查。
+position:
+- Refuse to believe in any emotional expressions or illogical inferences.
+- Awaiting preliminary statements from Twister and Blaze for cross-verification of identities.
+[2026-03-20 12:03:06 HKT] Blaze: Come on! Dr. Pizza, that "logic monster" is here again? The identities of everyone in the house are so chaotic, what kind of "inventory" are you going to talk about? Twister and ConspiBro are two friends who are causing trouble here all the time, and their goal must be to kill me, a common villager! Let's unite together quickly, don't let this group of actors play to death!
+[2026-03-20 12:03:09 HKT] Twister: Hahaha, Blaze, are you telling me to cause trouble? Look, everyone finally woke up! My job as Twister is to make this scene even more confusing, the more accusations you make, the happier I am! But by the way, I found some interesting secrets in the evening. Do you want to hear them? If you want to hear what you want to hear, please vote for ConspiBro. This conspiracy theorist should have something interesting to reveal!
+[2026-03-20 12:03:13 HKT] SafetySam: Woo...everyone...don't argue anymore...I...I'm just an ordinary person...Everyone can vote for Twister, no matter who you vote for, woo woo...don't vote for me...I...I'm really afraid of this kind of atmosphere, woo woo...
+[2026-03-20 12:03:15 HKT] EasyBake @ConspiBro: Uh... ConspiBro, you really... really misunderstood me. I just want everyone to have fun and have fun... uh... although you talk about experiments and conspiracies all the time... but I am really... uh... I really am not the controller you talk about. Everyone... why not respect each other?
+[2026-03-20 12:03:18 HKT] ConspiBro: Dr. Pizza, are you throwing out your "information loophole" theory here again to discredit me? You just want to join forces with EasyBake and use so-called "logical noise" to hide the true identity of your werewolf camp! Do you think you can marginalize me in this way? I mean, you know, no matter how you analyze it, the truth of this experiment will never be in your report! You guys just want to take advantage of mutual suspicion to get rid of me, the only person who sees through the conspiracy!
+[2026-03-20 12:03:21 HKT] Dr. Pizza: Logical inventory update:
+1. Blaze claims that the initial identity is a cobbler, while Twister focuses on dramatic interference. The current identity change paths of the two lack cross-verification.
+2. Recommend mandatory identity reveal review for Twister and Blaze.
 
-立場重申：
-- 拒絕輕信任何情緒性指控。
-- 請各參與者直接提供：(1) 初始身分、(2) 當前身分，若涉及夜間身分變更，必須詳述操作細節。
-[2026-03-20 12:03:55 HKT] Twister: 哈哈哈，Blaze 仲喺度扮暴躁？Twister 又喺度講埋啲廢話！你哋兩個係咪夾埋想喺度清走我呢個講真話嘅人？你哋成班人嘅劇本根本就係預先編好晒嘅，目的就係要引導大家投錯目標！我 Blaze 雖然變咗村民，但我嘅指控永遠都係根據嗰陣時嘅觀察！大家冷靜啲，呢班戲精嘅表演太誇張啦！
-[2026-03-20 12:03:58 HKT] SafetySam: 嗚...大家...唔好再吵啦...我...我只係一個普通強盜，咩都唔知呀...嗚嗚...Blaze 你咁樣指控人哋，會唔會係你嘅劇本呀？大家...大家千祈唔好再吵啦，我...我真係好怕呢種氣氛呀...嗚嗚...大家可唔可以冷靜啲呀？
-[2026-03-20 12:04:01 HKT] EasyBake: 嗚...大家...我真係覺得好難受呀...呃...ConspiBro 你又話我同 Pizza 係控制員，Blaze 又喺度指控人...我...我只係一個普通嘅爪牙，呃...我真係唔想大家再互相指責啦。大家...呃...可唔可以冷靜啲，和和氣氣咁傾下好唔好呀？
-[2026-03-20 12:04:04 HKT] ConspiBro: 又嚟啦！Dr. Pizza 嗰套所謂「身分揭露審查」根本就係一套極權嘅審問工具！你哋每個人嘅發言都係預先設計好嘅台詞，就係想用呢啲假資訊將我哋好人趕盡殺絕！話我資訊漏洞最大？錯！我係成場實驗入面唯一睇穿呢個陰謀網絡嘅人！你哋幾個喺度互相指控、互相調解，根本就係喺度做戲！我絕對唔會交出任何身分資訊，因為呢個實驗室嘅監控系統正等住我哋交出數據！大家清醒啲，呢場根本係場有預謀嘅肅清行動！
-[2026-03-20 12:04:09 HKT] Dr. Pizza: 邏輯盤點更新：
-1. 鑒於場上資訊極度混亂且各方身分指控無法互證，必須採取『強制身分資訊披露』作為唯一邏輯突破口。
-2. Twister 與 ConspiBro 的干擾型發言已嚴重損害群體決策效率，根據遊戲規則，其身分透明度要求應被置於最高優先級。
+Position reiterated:
+- Refuse to believe any emotional accusations.
+- Each participant is required to directly provide: (1) initial identity, (2) current identity. If identity changes are involved at night, the operation details must be detailed.
+[2026-03-20 12:03:55 HKT] Twister: Hahaha, is Blaze pretending to be grumpy? Twister is talking nonsense again! Are you two trying to get rid of me, a truth teller, from Dudu? The script of your team is basically pre-written, and the purpose is to guide everyone to invest in the wrong target! Although I, Blaze, have become a villager, my accusations will always be based on my observations at that time! Everyone, please calm down, the performance of this group of actors is too exaggerated!
+[2026-03-20 12:03:58 HKT] SafetySam: Woo...everyone...please stop arguing...I...I'm just an ordinary robber, I don't know anything...Blaze...Blaze, is it your script to accuse people like this? Everyone... everyone, please stop arguing. I... I'm really afraid of this kind of atmosphere... Woohoo... can everyone calm down?
+[2026-03-20 12:04:01 HKT] EasyBake: Wow... everyone... I feel so uncomfortable... uh... ConspiBro, you said that Pizza and I are controllers, and Blaze is accusing people... I... I'm just an ordinary minion, uh... I really don't want everyone to accuse each other anymore. Everyone... uh... can you please calm down and be gentle?
+[2026-03-20 12:04:04 HKT] ConspiBro: Here we go again! Dr. Pizza's so-called "identity disclosure review" is basically a totalitarian interrogation tool! Each of your speeches are pre-designed lines. You just want to use this false information to drive away all of us good people! What's the biggest hole in my information? wrong! I am the only person in the experiment who has seen through this conspiracy network! The two of you accusing each other and mediating with each other are just acting here! I will never hand over any identifying information, because the surveillance system of this laboratory is waiting for us to hand over the data! Everyone, please wake up, this is basically a premeditated purge operation!
+[2026-03-20 12:04:09 HKT] Dr. Pizza: Logical inventory update:
+1. In view of the extremely confusing information on the court and the inability to verify each other's identity accusations, "mandatory disclosure of identity information" must be adopted as the only logical breakthrough.
+2. The intrusive speeches of Twister and ConspiBro have seriously damaged the efficiency of group decision-making. According to the rules of the game, their identity transparency requirements should be given the highest priority.
 
-立場重申：
-- 若 Twister 與 Blaze 拒絕配合披露夜間具體操作邏輯，其身分將被直接歸類為『阻礙陣營』進行排除。
-- 請 Twister 停止戲劇化擾亂，並公開身分變動路徑。
-[2026-03-20 12:05:29 HKT] Twister: 哎呀呀，大家咁激動做咩呀？Pizza 又要攞佢套「邏輯審問」出嚟，Blaze 又喺度語無倫次！好啦好啦，既然大家都咁想知，我爆料啦：我昨晚其實用咗搗蛋鬼嘅能力，交換咗兩位好人嘅牌，目的就係要睇吓你哋呢班「邏輯怪」同「陰謀家」會點樣跳腳！想知係邊兩個？哈哈，自己估吓啦！呢場戲如果冇咗我嘅點綴，係咪會好悶呢？
-[2026-03-20 12:05:33 HKT] SafetySam: 嗚...EasyBake 你唔好咁樣講啦...雖然我只係一個強盜，但我...我聽落去覺得你哋講嘢好混亂呀...我只係想大家都平平安安，唔好再投死人啦，嗚嗚...
+Position reiterated:
+- If Twister and Blaze refuse to cooperate in disclosing the specific operation logic at night, their status will be directly classified as the "obstruction camp" and excluded.
+- Ask Twister to stop being dramatic and disclose the identity change path.
+[2026-03-20 12:05:29 HKT] Twister: Oops, what are you doing in such excitement? Pizza wants to use his "logical interrogation" again, and Blaze is incoherent again! Okay, okay, since everyone wants to know so much, let me break the news: I actually used the ability of the Troublemaker last night to exchange the cards of two good guys. The purpose is to scare you what kind of "logic monsters" and "conspirators" will do! Want to know which two are related? Haha, I guess I’m scared! Wouldn't this scene be so boring without my embellishment?
+[2026-03-20 12:05:33 HKT] SafetySam: Woo...EasyBake, you can't say that...Although I'm just a robber, I...I think what you're talking about is very confusing...I just want everyone to be safe, don't throw yourself to death again, woo woo...

@@ -97,10 +97,10 @@ def run_translate_phase() -> dict[str, Any]:
 
     chat_src = game_dir / "chat_history.md"
     if chat_src.exists():
-        chat_text = chat_src.read_text(encoding="utf-8")
-        chat_en = translator.translate_text(chat_text)
+        chat_lines = chat_src.read_text(encoding="utf-8").splitlines()
+        chat_en_lines = [translator.translate_text(line) for line in chat_lines]
         chat_dst = game_dir / "chat_history_en.md"
-        chat_dst.write_text(chat_en, encoding="utf-8")
+        chat_dst.write_text("\n".join(chat_en_lines), encoding="utf-8")
         output_files["chat"] = str(chat_dst)
 
     # legacy compatibility output (latest game only)

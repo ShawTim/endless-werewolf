@@ -573,7 +573,7 @@ async function showGame(game) {
   els.details.classList.remove('hidden');
   renderCurrentDetails();
   setTab('chat');
-  els.details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 }
 
 function outcomeTagline(g) {
