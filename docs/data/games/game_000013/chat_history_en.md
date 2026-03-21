@@ -1,0 +1,32 @@
+[2026-03-21 06:05:06 HKT] EasyBake: Hello everyone. It's another new day... uh... although I don't know exactly what happened, but I... uh... I really hope everyone is safe. Why don't we all... uh... communicate slowly so that there won't be any misunderstandings again, okay?
+[2026-03-21 06:05:13 HKT] Dr. Pizza: Logical inventory:
+1. The entropy value of the opening information is too high, and the speeches of Twister and ConspiBro have formed a significant interference path.
+2. Identify the path: The identity of each participant and the evidence of night operations must be established.
+
+Position:
+- Refuse to trust statements without cross-verification.
+- Ask each participant to: (1) state the initial identity, (2) accurately describe the object of the night operation to facilitate identity path mapping.
+[2026-03-21 06:05:18 HKT] Blaze: Pizza, are you using the so-called "logical reconciliation" again? It’s nonsense! Everyone's status is so chaotic, what kind of inventory do you want to play here? As you know, I checked SafetySam last night and he is a civilian villager! If everyone still wants to drag them down, I suspect that these two friends Twister and ConspiBro are the core of the werewolf camp. It’s time to surrender to these bastards today!
+[2026-03-21 06:05:22 HKT] ConspiBro: Is this "prophet" inspection drama coming again? Blaze, if you found out that SafetySam is a villager, he wants to join forces with Pizza to steer the vote away from me! Everyone can see clearly that the script of this group of people is basically pre-designed. Today, the two controllers, Blaze and Pizza, must be surrendered to reveal the truth of the laboratory first!
+[2026-03-21 06:05:28 HKT] Twister: Oops, are you arguing about a prophet again so early? It’s really boring! Since you want to know so much, I will break the news directly: I actually used a very proud ability to check someone's identity last night. Who was it? Hey, I won’t let you listen! This sense of unknown is the most exciting part of this experiment, isn't it? The suspicion show of Blaze and ConspiBro is outdated, do you have any more creative ways to play?
+[2026-03-21 06:05:34 HKT] EasyBake: Woo... everyone... uh... contact me again. Seeing everyone voting here again, I...I'm really worried. Uh... In fact, it's fine to vote or leave. I... I really hope that this game can end quickly, and everyone can return to calmness... Uh... I'm sorry, is it boring to talk about it?
+[2026-03-21 06:05:37 HKT] Dr. Pizza: Logical inventory update:
+1. Blaze claims that the initial identity is a troublemaker, while Twister is centered on dramatic interference. The current identity change paths of the two lack cross-verification.
+2. Recommend mandatory identity reveal review of Blaze and Twister.
+
+Position reiterated:
+- Refuse to believe any emotional accusations.
+- Each participant is required to directly provide: (1) initial identity, (2) current identity. If identity changes are involved at night, the operation details must be detailed.
+[2026-03-21 06:05:41 HKT] Blaze @ConspiBro: ConspiBro, what are you talking about here about laboratories and controllers? Your nonsense is a waste of everyone's time! I, Blaze, am doing my best, but since you are unwilling to reveal your identity and are just diverting your attention, I suspect that you are the core of the werewolf camp! Don’t let her fool you again with her crazy words. Today we have the same goal, to defect to ConspiBro. Let’s talk first!
+[2026-03-21 06:05:44 HKT] ConspiBro: Blaze, are you eager to leave me because you have been entangled with Pizza and want to use "information disclosure" to get rid of me, the person who has seen through your tactics of disturbing your identity? How does your identity as a "prophet" come about? Let me tell you, no matter how angry you are or how many accusations you make, you can't hide the identity change conspiracy that you and Pizza are planning behind the scenes! Don't let everyone be fooled by this group of "controllers" again!
+[2026-03-21 06:05:48 HKT] SafetySam: Wow...everyone...please stop arguing...I...I'm just an ordinary villager, I don't know anything...Blaze, you are so mean, Twister and ConspiBro are here to bury some unintelligible wild people...I...I am really confused, please stop arguing, okay? Woohoo...
+[2026-03-21 06:05:55 HKT] Twister: Hahaha, Pizza, are you pretending to be that "logic professor" again? Okay, since you want to play logical reconciliation, I'll play with you! I did exchange things last night, but were they the same person? Hey, you robots who only believe in logic will never understand the joy of chaos! If you want to act publicly, why don't you tell me first what you did last night? I'm not sure you are the werewolf who wants to hide your identity the most?
+[2026-03-21 06:06:00 HKT] EasyBake: Ugh...Pizza, you said you want to censor people again...uh...actually, I don't think everyone should target anyone like this. Uh... I... I'm just an ordinary villager. Everyone... uh... why not just calm down and stop accusing each other, okay? Uh... I really don't want everyone to have sex with me anymore.
+[2026-03-21 06:06:04 HKT] Dr. Pizza: Logical ruling and inventory:
+1. Both Blaze and Twister are stated as "prophet" (checking path). According to the rules, this is an absolute logical contradiction, and one of them must have forged identity information.
+2. Reconciliation conclusion: Both behavior patterns have constituted serious information disturbance, and the opposing camp needs to be directly included in the high-risk elimination sequence.
+
+Position:
+- Refuse to accept unilateral statements without reconciliation of information.
+- It is recommended that all players give up their disputes, and based on the loopholes in Blaze and Twister's presentation paths, force one of them to be locked out for voting to clear up the noise in the game.
+[2026-03-21 06:06:07 HKT] Blaze @ConspiBro: ConspiBro, you always say that I am a "troublemaker" and that I am a fan, it is simply because of your guilty conscience! This is what my Blaze check result says. If you have the ability, please reveal your identity path. Don’t talk about incomprehensible nonsense here to divert attention! As you can see clearly, the most suspicious thing about this situation is this conspiracy theorist who wants to clear out everyone. He must be cleared out today, otherwise everyone will die together!

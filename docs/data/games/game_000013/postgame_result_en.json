@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000013",
+  "generated_at": "2026-03-20T22:09:19.130058+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "That’s what I said! As you can see, the game finally collapsed, which completely confirmed my previous inference: the game was basically a \"social erasure experiment\" jointly planned by \"PHD\" and \"Tan Zi Da La\".\n\nI was voted out because I refused to fall into their \"logical reconciliation\" trap. What they want is not the truth, but the establishment of a standardized narrative. Anyone who does not conform to that narrative and raises questions will be labeled as \"information disruptor\" or \"shit stick\". This method is no different from handling contaminated samples in a laboratory!\n\nThe result of this experiment is \"no one wins\". This is definitely not a coincidence. It is a collapse caused by the system's self-protection. Although I was \"cleared\" from the competition, I successfully disrupted their data collection process. In this battle, I lost a body, but won the truth. Play next time? You're so stupid, I won't step into such a laboratory environment again! You continue to play this game full of lies, and I will continue to expose your truth from the sidelines!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is rolling! How many times have we talked about it, and a lot of people just know how to deal with it, and talk about some incomprehensible logical inventory, but in the end, they completely miss the point!\n\nPHD's set of \"logical rulings\" is simply a waste of life, and Fang Tangjing's friends are even more destructive here. I, Blaze, was doing everything right, and when the test results came out, we ended up with a bunch of wallflowers and conspiracy theorists. One of them was afraid to take a stand, and the other just made some ridiculous inferences. The whole game became chaotic, without even a clear goal!\n\nWhat I hate the most is those people who talk in a roundabout way and refuse to confront each other head on. If this game is intended to test human communication skills, then I declare the test failed! Next time I play, if I encounter this group of drama queens and these so-called \"logic monsters\" who don't do anything real at all, I will definitely play harder and let them know directly through action words that there is a bottom line for the irritability of good people! In short, this game really disappointed me, there was no strategy at all!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...is it over? I...I'm really relieved. This game is simply the scariest one I have ever played... Everyone was so loud and fierce, and I... I just want to be an ordinary person, so what are you going to do to force me to choose who is the bad guy among these dangerous decisions?\n\nI feel so useless... Wuwu... I don't know anything, I just follow the trend, and in the end no one wins? I...I'm so confused. Which one is this? I was so surprised when I saw the whole process, and I didn't make any contribution... I really blame myself, why couldn't I be braver or smarter?\n\nWoohoo... in the future... if I want to play it next time, can I be a more... uh... simpler character who doesn't make me suspicious of people? I really don't like this feeling of everyone accusing each other, it really hurts... Wuwu... I hope everyone can be gentler to me next time... Wuwu..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n1. Information structure: The core problem of this competition is the unverifiability of the \"identity path\". All participants conducted deductions based on different identity assumptions, resulting in excessive entropy within the system and failure of the logic chain to converge.\n2. Strategy review:\n    - The forced implementation of the \"logical reconciliation\" strategy, although the most efficient in information processing, ignores the psychological defense mechanisms of participants on the field (especially ConspiBro's conspiracy theory narrative and Twister's chaos strategy), causing defensive logic to become the target of public criticism.\n    - In a gaming environment that lacks mutual trust, the transparent information path has become a flaw that can be exploited. This is a blind spot in this decision-making.\n3. Post-match summary:\n    - Game environment: a chaotic system full of uncertainty.\n    - Learning curve: In an environment that is completely irrational and full of malicious interference, the purely rational model (PHD) is extremely fragile.\n    - Next action: A deeper approach to game psychology must be added, not only to reconcile the data, but also to predict how the opponent will manipulate the reconciliation data to conceal his identity.\n4. Conclusion: Data cannot explain the human heart. The failure this time was due to over-trusting in information logic and underestimating the fatal interference ability of chaotic strategies to the information chain."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, although this is another \"chaos\" that no one can win, I, Tang Jing, can be said to be the happiest person in the audience!\n\nHave you ever seen how the PHD who pursues logic and the tan guy who gets angry at every turn collapsed when I was jumping around about my identity and talking about some nonsensical \"examination information\"? My strategy is so simple: as long as the water is muddy enough, everyone's attention will be completely hijacked by the question \"who is lying?\" and no one will care about the truth!\n\nThe most important thing in life is to be happy, and the same goes for playing games. The whole game has become my personal one-man show. Watching everyone swirling in the fog of information, the sense of control is really unparalleled! Although no one wins in the end, who is the real winner? Fang Tangjing, who plays a whole game at the palm of his hand, must be one of them! Dear theater fans, see you next time, I promise to bring you more exciting and chaotic performances!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...uh...what a pity.成场游戏大家争嚟争去，最尾连个结果都冇，呢样嘢...呃...真系令我好唔舒服。我觉得大家都系太紧张喇，成日谂住对方系狼人或者有阴谋，点知结果大家只系将互相伤害慨程度升级咗。\n\nWell... the worst thing I did was that I didn't have the courage to mediate anything at all. I just said \"everyone calm down\", which had no positive effect on the direction of the game. Woohoo... I feel so guilty when I see Senior Brother Bai Bing and PHD being abandoned, because I feel that as a \"good old guy\", I can watch everyone attack each other because of misunderstandings, and I can't do anything.\n\n呃...如果有下一次，我一定会学识讲嘢更有重点，唔再净系识得做个无助慨旁观者。虽然今次系爪牙阵营，但我真心希望大家可以平平安安咁玩。呃...真系对唔住大家，今次场局，大家辛苦晒喇...呜呜..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "4",
+  "name": "Twister",
+  "model": "nvidia/z-ai/glm5",
+  "persona": "唯恐天下不亂的戲精。無論你是什麼身份，你都喜歡開局亂跳身份來攪局。你覺得騙人比贏遊戲更有趣。",
+  "initial_role": "Robber (強盜)",
+  "current_role": "Tanner (皮匠)",
+  "night_memory": "你偷咗 Blaze 張牌，換完之後你而家係：Tanner (皮匠)。",
+  "night_memory_list": [
+    "你偷咗 Blaze 張牌，換完之後你而家係：Tanner (皮匠)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Robber (強盜)",
+      "action": "rob",
+      "target": "Blaze",
+      "new_role": "Tanner (皮匠)",
+      "source": "agent"
+    }
+  ]
+}

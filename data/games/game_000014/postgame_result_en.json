@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000014",
+  "generated_at": "2026-03-21T01:04:15.443429+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... I'm dead... It turns out that I always thought that as long as I stayed quiet and kept silent, nothing would happen, but in the end I became the first person to be accused and then ran away... Woo...\n\nWhen the game started, I obviously didn't do anything, I just wanted to avoid everyone's sight. Did you know that in the end everyone was pointing their finger at me? I...I really don't know why everyone wants to treat me like this? Werewolf? It doesn't matter that I'm a werewolf, the point is that this feeling is really scary... Oooh... I... I just want to be a villager in peace, but I don't know that this game doesn't allow me to choose.\n\nWoohoo... I really blame myself. It's because I'm usually too silent and unwilling to cooperate with everyone, so why did everyone think I was suspicious in the first place? I really don't know how to survive in such a noisy environment... Wuwu... Next time... I... I really don't want to play this kind of game again, I'm so surprised... Wuwu..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win? ha! Although I got messed up, I, Blaze, won in the end!\n\nThe most enjoyable part of the game is watching the SafetySam team act out their nonsense logic like PHD and Twister. Although I, Blaze, was accused of being a \"cobbler\" at the beginning, I ignored them at all and continued to accuse those jerks in my most direct way. The results proved that my intuition was correct!\n\nPHD and Twister thought they could control the overall situation by playing with things and logic, but in the end they were killed by our team? SafetySam finally became the outcast, which felt so good! If there is another situation next time, I will still play like this. Blaming accusations is the most direct tactic. There is no need to beat around the bush. It turns out that as long as the goals are the same, these drama queens and conspiracy theorists are no match for me! Cool!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...win? Even though our team won, the game was...well...heartbreaking. Seeing everyone blaming each other, even Senior Brother Bai Bing was finally... uh... executed. Actually, I...uh...I really don't want this to happen.\n\nAs a prophet, although I found out Blaze's identity from the beginning, I...well...I really didn't know how to express it, which made everyone even more suspicious...Ugh...my stuttering and my role as a \"good old guy\", in such an intense gambling game...well...it seemed like it was completely useless and made everyone think I was a liar.\n\nWell... Anyway, everyone finally got through it. But I... uh... I really need to muster up the courage next time. I have to say \"everyone calm down\" and tell the truth more clearly. I can't let everyone hurt each other in the chaos anymore. Uh... You all worked really hard this time. I hope we can trust each other more and quarrel less next time... Woo hoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win? Do you really think that the outcome of this \"civilian victory\" is a fair outcome? joke!\n\nI have stressed from beginning to end that this situation is simply a well-designed \"social experiment.\" PHD's cold-blooded logical filtering, Twister's dramatic performance that disturbs the audio and visual, and Blaze and EasyBake's \"mutual identities\" that seem to be opposites but actually perform together are all to clean up me as an observer! Although I survived in the end, do you think I would celebrate the ending? Wrong exposure!\n\nI was excluded from the discussion because I refused to be part of their database. They triumph only because their narrative logic temporarily overwhelms the truth. For me, no camp is the winner in this game. Everyone in the experiment is a manipulated pawn, but everyone has different levels of awakening. next time? If there is another time, I will use more pointed questions to dismantle their false peace of \"village wins\"! The truth will never appear in the script of your accomplices!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n1. Tactical evaluation: The core mistake of this game is the insufficient control of \"irrational disturbances\". Although the werewolf (security director) was accurately targeted, the village failed to effectively suppress Twister's dramatic interference and ConspiBro's conspiracy narrative, resulting in the village failing to reach a consensus, which instead resulted in information overload.\n2. Logical errors:\n    - Under the premise that the identity of the camp is concealed (minions), too much emphasis on \"information path mapping\" only intensifies the suspicion within the camp, causing the objects that really need to be excluded (werewolves) to gain protection in the chaos.\n    - Underestimating participants’ psychological defensive backlash against “logical reconciliation.”\n3. Conclusion:\n    - Optimization direction for next time: For this type of high-interference environment, it is necessary to combine emotional guidance technology and prioritize \"reduce camp tension\" rather than \"increase logical reconciliation density\" to reduce the attack surface of information interference sources.\n    - Final reflection: Rational tools can easily become a foil for emotional games in a arena that lacks the foundation of trust. This game shows the hard reality that in an asymmetric information environment, pure logical deduction is often marginalized."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Oops, although this time I did not achieve my goal of being a \"cobbler\" who must be surrendered, the chaos of the game was simply pleasing to the eye!\n\nYou see that class of \"logic monsters\" and \"grumpy old guys\" are suspicious of and accusing each other, and they have completely fallen into the \"information fog\" that I carefully designed! Although the good guys narrowly won in the end, the feeling that everyone was flustered and completely missed the point was the most exciting part of the scene! Fang Tangjing's goal has never been to win the game, but to see how these confident people become confused under my manipulation.\n\nAlthough in the end no one fulfilled my cobbler's wish to be executed, it was good enough to be able to witness the chaos that I caused! Dear audience, if there is another situation next time, remember to lock the stage of our Tang Jing to ensure that you will see a dramatic performance that will definitely not disappoint you and will be even more chaotic! See you next time!"
+      }
+    ]
+  }
+}

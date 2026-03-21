@@ -5,24 +5,22 @@
   "winners": [],
   "reason": "No werewolf in play, but someone was executed.",
   "executed": [
-    "ConspiBro",
-    "Dr. Pizza"
+    "ConspiBro"
   ],
   "werewolves_in_play": [],
   "executed_werewolves": [],
   "votes": {
     "Blaze": "ConspiBro",
-    "SafetySam": "EasyBake",
+    "SafetySam": "ConspiBro",
     "Dr. Pizza": "Twister",
-    "Twister": "Dr. Pizza",
-    "EasyBake": "ConspiBro",
-    "ConspiBro": "Dr. Pizza"
+    "Twister": "ConspiBro",
+    "EasyBake": "Dr. Pizza",
+    "ConspiBro": "Twister"
   },
   "tally": {
-    "ConspiBro": 2,
-    "EasyBake": 1,
-    "Twister": 1,
-    "Dr. Pizza": 2
+    "ConspiBro": 3,
+    "Twister": 2,
+    "Dr. Pizza": 1
   },
   "final_roles": {
     "Blaze": {
