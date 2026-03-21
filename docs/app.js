@@ -453,8 +453,8 @@ function renderResolve(resolve, maps, day = {}) {
   const winnerNames = winners.map(n => localizeName(n, maps));
   const executedNames = executed.map(n => localizeName(n, maps));
 
-  const bannerClass = outcome === 'werewolf_win' ? 'outcome-wolf' : outcome === 'tanner_win' ? 'outcome-tanner' : 'outcome-village';
-  const outcomeIcon = outcome === 'werewolf_win' ? '🐺' : outcome === 'tanner_win' ? '⚙' : '🏡';
+  const bannerClass = outcome === 'werewolf_win' ? 'outcome-wolf' : outcome === 'tanner_win' ? 'outcome-tanner' : outcome === 'no_team_win' ? 'outcome-noteam' : 'outcome-village';
+  const outcomeIcon = outcome === 'werewolf_win' ? '🐺' : outcome === 'tanner_win' ? '⚙' : outcome === 'no_team_win' ? '💀' : '🏡';
 
   const speakCounts = day?.player_stats || {};
   const targeted = {};
@@ -599,7 +599,8 @@ function renderList(items) {
     const isWolf = g.winner_team === 'werewolf_team';
     const isVillage = g.winner_team === 'village_team';
     const cardClass = isWolf ? 'win-werewolf' : isVillage ? 'win-village' : '';
-    const banner = isWolf ? './assets/banner-redmoon.png' : isVillage ? './assets/bg-enchanted-forest.png' : './assets/banner-tanner.png';
+    const isTanner = g.winner_team === 'tanner';
+    const banner = isWolf ? './assets/banner-redmoon.png' : isVillage ? './assets/bg-enchanted-forest.png' : isTanner ? './assets/banner-tanner.png' : './assets/banner-noteam.png';
 
     const card = document.createElement('div');
     card.className = `game-card ${cardClass}`.trim();

@@ -511,6 +511,12 @@ body {
     url('./assets/banner-tanner.png') center center / cover;
   border-color: #c8a518;
 }
+.outcome-noteam {
+  background:
+    linear-gradient(rgba(20, 20, 25, 0.72), rgba(10, 10, 15, 0.80)),
+    url('./assets/banner-noteam.png') center center / cover;
+  border-color: #666;
+}
 .outcome-icon    { font-size: 32px; flex-shrink: 0; position: relative; z-index: 1; }
 .outcome-main    { display: flex; flex-direction: column; gap: 3px; min-width: 0; position: relative; z-index: 1; }
 .outcome-text    { font-family: Cinzel, serif; font-size: 18px; font-weight: 700; }
