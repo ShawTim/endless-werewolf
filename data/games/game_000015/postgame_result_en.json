@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000015",
+  "generated_at": "2026-03-21T10:36:27.992171+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The fire is rolling! Losing so badly makes me so angry that I spurt blood!\n\nWhat I hate the most as a \"werewolf\" is meeting those \"conspiracy theorists\" who don't understand logic and bite people indiscriminately, like Senior Brother Bai Bing. At the beginning of the wave, he started talking nonsense about \"I found out that I am a wolf\". Although he found out that it was true, the way he said it simply challenged my bottom line! In addition, the drama star Fang Tangjing was doing some boring identity swaps, which completely disrupted the rhythm originally planned by SafetySam and I, and we couldn't even cooperate!\n\nPHD's \"Logical Reconciliation\" is so annoying that there are a lot of people trying to beat the air, and no one dares to confront it head-on! I was irritable because I hate beating around the bush, and as a result, the entire game was filled with people beating around the bush. It was really tiring to play! If you lose, you lose, but next time I start the game, I vow to find someone who can speak human language to play, so that I don't have to meet this group of \"drama queens\" and \"logic monsters\" who talk nonsense, which is a waste of my irritability points!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and rational analysis:\n1. Tactical evaluation: The victory of this game was attributed to the final accurate locking and removal of the high-threat target (Blaze/Tan Zai Dala), despite the significant information entropy and emotional interference within the camp.\n2. Logic review:\n    - Information processing: When faced with the interference strategy of Twister (Fang Tangjing) and the conspiracy theory orientation of ConspiBro (Brother Bai Bing), the logic model showed a certain ability to resist interference, but it also exposed the lag in processing \"non-linear information paths\" (such as identity exchange).\n    - Decision-making trade-off: Choose to give up the emotional confrontation with the spoilers and re-anchor the focus on \"identity path mapping\", which is the key to reaching consensus in a chaotic game.\n3. Conclusion:\n    - This victory verified the effectiveness of \"information transparency\" and \"mandatory reconciliation\" in containing sources of disturbance.\n    - Next action: In response to similar high-interference environments, the monitoring weight of \"interference path variables\" (such as identity changers) should be further strengthened to prevent information interference sources from gaining too much dominance in the middle of the game.\n    - Summary: Logic is the only way to clear away noise. Although the process is full of emotional turmoil, the results prove that this methodology has sufficient game adaptability."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, although Blaze was executed and the good guys successfully won, for us, Tang Jing, this scene was basically a wonderful stage play!\n\nDid you see it? Tan Zi’s violent reaction of wanting to kill everyone, as well as the ultimate showdown between rationality and madness between PHD and Brother Bai Bing, is so exciting that it has no friends! Although I didn't win any faction points, I managed to turn the situation upside down and make everyone confused in the \"information fog\". This kind of pleasure is not about winning, but purely about watching everyone collapse, which really fascinates me!\n\nAlthough it is said that \"the good guys win\", have you ever discovered who actually controls the rhythm of the scene? It’s me, Fang Tang Jing! Next time I start, remember to continue to pay attention to me. I guarantee that next time the spoiler drama will be even crazier and more unexpected! This philosophy of life that deceiving people is more interesting than winning the game is slowly coming to light. Dear theater fans, I’m leaving first. See you next time!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Ugh...well...even though I won in the end...I still feel so uncomfortable inside. Everyone was so noisy during the whole game, and finally Blaze was executed, and everyone seemed to have been hurt a lot...well...it was really not the ending I wanted to see.\n\nAs a villager, I really feel so incompetent. I have always wanted to be a \"good guy\" and try to mediate, but...well...in this environment of mutual suspicion, my efforts seemed to be completely useless, and instead were regarded as a weakness. Seeing everyone blaming each other and even attacking each other with such vicious words, I feel... well... this kind of victory is not a real victory at all.\n\nUh... if I want to play again next time, I... I really need to learn how to stick to my position and not just say \"everyone calm down\", because it turns out that... uh... in this kind of game, excessive weakness will deepen everyone's misunderstanding. Uh... Thank you for your hard work. Regardless of whether you win or lose, please be gentle next time, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win? Huh, this is just the ending written by Datai once again in this large-scale social experiment to test human beings' obedience to \"logic\" and \"truth\"!\n\nDo you think that the \"execution\" of Blaze (Blaze) means that the werewolf crisis has been resolved? No, this is just because the laboratory adjusted the parameters and needed a \"just\" ending to appease the participants. I saw clearly from beginning to end: PHD's logical reconciliation and Fang Tangjing's chaotic interference were all designed to conceal the real truth - all of us, from the moment it started, were data points in this experiment!\n\nI have not been \"cleared\", which in itself proves that my observation value has not been exhausted by the stage. This victory just made everyone think that they finally defeated \"darkness\" with \"logic\". But look at this so-called \"peace\". Isn't this the most terrifying form of psychological control? next time? Don't be stupid, if you still think this is just a simple game, then you will really lose completely. I will watch from the edge until all the false masks of this \"village experiment\" are lifted one by one!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...lose it...do you think we have to accuse each other like this? I obviously just want to play games in peace, how difficult is it to be a peaceful werewolf? Woohoo...\n\nWhen the game entered, everyone seemed to be so strong and pointed, I... I just wanted to avoid everyone's attention, and I didn't want to be the one who stood out. Who knows what the game turned out to be like in the end... Wow... So no one camp won? I... I'm really confused. What people say is complicated and ugly, and it scares me to death... Wuwu... Next time... I won't ask you to play with me next time. I just want everyone to be harmonious and don't argue anymore... Wuwu..."
+      }
+    ]
+  }
+}

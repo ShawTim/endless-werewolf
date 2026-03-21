@@ -1,0 +1,68 @@
+{
+  "status": "completed",
+  "outcome": "village_win",
+  "winner_team": "village_team",
+  "winners": [
+    "Dr. Pizza",
+    "Twister",
+    "EasyBake",
+    "ConspiBro"
+  ],
+  "reason": "At least one werewolf was executed.",
+  "executed": [
+    "Blaze"
+  ],
+  "werewolves_in_play": [
+    "Blaze",
+    "SafetySam"
+  ],
+  "executed_werewolves": [
+    "Blaze"
+  ],
+  "votes": {
+    "Blaze": "Twister",
+    "SafetySam": "Dr. Pizza",
+    "Dr. Pizza": "Blaze",
+    "Twister": "Blaze",
+    "EasyBake": "Blaze",
+    "ConspiBro": "Blaze"
+  },
+  "tally": {
+    "Twister": 1,
+    "Dr. Pizza": 1,
+    "Blaze": 4
+  },
+  "final_roles": {
+    "Blaze": {
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "SafetySam": {
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "Twister": {
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "team": "village_team"
+    },
+    "EasyBake": {
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "ConspiBro": {
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "team": "village_team"
+    }
+  },
+  "game_id": "game_000015"
+}
