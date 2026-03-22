@@ -1,0 +1,24 @@
+{
+  "game_id": "game_000017",
+  "status": "running",
+  "created_at": "2026-03-22T10:43:33.458934+00:00",
+  "updated_at": "2026-03-22T10:46:49.829766+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-03-22T10:43:33.461077+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-03-22T10:43:33.462660+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-03-22T10:45:03.558850+00:00"
+    },
+    "vote": {
+      "file": "vote_result.json",
+      "updated_at": "2026-03-22T10:46:49.829757+00:00"
+    }
+  }
+}

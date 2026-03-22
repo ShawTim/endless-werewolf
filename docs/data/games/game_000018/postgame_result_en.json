@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000018",
+  "generated_at": "2026-03-22T10:49:43.462367+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The fire is rolling! Playing these games becomes more and more boring! The whole game was a disaster. Everyone was talking about incomprehensible logic and conspiracy theories, but no one caught the real bastard. I was executed like this. It was a shame!\n\nThat Fang Tangjing (Twister) is really a troublemaker. He throws out false trump cards to guide the trend all the time. There is also PHD's rigid \"elimination sequence\", which completely consumes everyone's energy. I obviously wanted to lead everyone to clean up the source of the disturbance, but in the end, a group of losers and people who pretended to be innocent joined forces and surrendered. The entire game was just a role-playing game, and no one wanted to play the game seriously!\n\nWhat I hate the most is those people who talk in a roundabout way and refuse to confront each other head on. If this game is intended to test human communication skills, then I declare the test failed! Next time I play, if I encounter this group of drama queens and these so-called \"logic monsters\" who don't do anything real at all, I will definitely play harder and let them know directly through action words that there is a bottom line for the irritability of good people! In short, this game really disappointed me, there was no strategy at all!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and rational analysis:\n1. Tactical assessment: The core path to victory for the werewolf camp this time lies in \"precise management of information entropy.\" By simulating the tone of a rational reconciliation, the village's attention was successfully locked into an ineffective debate framework, thereby concealing the true identity of the werewolf camp.\n2. Logic review:\n    - Camp operation: PHD and Twister successfully used \"logical confrontation\" and \"disruption strategy\" to form an effective information shielding field. By continuously requiring verification of the \"identity path\", the village is trapped in a cycle of internal accusations, making it impossible to effectively calibrate the core variables of the werewolf.\n    - Blind spot correction: Although victory was finally achieved, there is still room for improvement in response efficiency when confronting ConspiBro's conspiracy theory narrative. In the future, the \"information filtering\" strategy for such irrational disturbances should be optimized to maintain the consistency of logical output.\n3. Conclusion:\n    - The results of this game verify that in an environment full of irrational noise, the value of the rational model (PHD) lies not only in transmitting information, but also in shaping the rhythm of the game by defining \"logical boundaries\".\n    - Next action: The dynamic adaptability of the game model will be further improved to respond to the behavioral patterns of different types of disturbance sources (drama queens, conspiracy theorists).\n    - Summary: Logic is the only way to clean up the noise. Putting chaos into order is the key to victory."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win? This is just a \"werewolf victory\" node deliberately arranged by the group of controllers to celebrate the smooth progress of the experiment!\n\nYou see, PHD's logical ruling and Fang Tangjing (Twister)'s disruption are a carefully choreographed \"red face, white face\" drama from beginning to end. They just want to use this seemingly perfect logical framework to induce everyone to conduct various ineffective self-examinations, and at the same time get rid of observers like me who can recognize that this is a \"social experiment.\"\n\nI was not \"executed\", which in itself proves that the value of my observation has not been exhausted by the stage. This victory just made everyone think that they finally defeated \"darkness\" with \"logic\". But look at this so-called \"peace\". Isn't this the most terrifying form of psychological control? next time? Don't be stupid, if you still think this is just a simple game, then you will really lose completely. I will continue to observe from the edge until all the false masks of this \"village experiment\" are lifted one by one!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ugh...why do we have to argue about winning and losing again? I... I'm just an ordinary character. I just want to be a \"little guy\" in the game. I just want to be safe and follow the other side. Who knows what the game turned into in the end, making everyone so unhappy... Ugh...\n\nWell... when it comes to this game, I'm really scared of being accused, so I keep pretending to be pitiful and ignorant. Little did we know that in the end, Tan Zai's Blaze was voted away, and the werewolf won the whole game. I'm actually quite conflicted, because although I'm in the werewolf camp, but... well... watching everyone make love, I feel really uncomfortable.\n\nWoohoo...I...I'm really not suitable for playing these games full of suspicion. I hope that next time... if there is a next time... everyone can be gentle and peaceful, okay? I just want everyone to be happy, so I don’t want to make any more noise... wu wu..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! Although the good guy camp was \"lost\" this time, our Tang Jing's stage play was really exciting!\n\nDid you see it? Tan Zi's hot-tempered one who wants to kill everyone, Senior Brother Bai Bing's \"Taiwan Conspiracy Theory\", and PHD's serious \"Exclusion Sequence\", this chaotic collision is simply art! My role is to add fuel to this chaos. Watch everyone struggling in the fog of information, doubting each other, and finally unable to even make a logical reconciliation. This sense of chaos is the soul of the game!\n\nAlthough I didn't win any camp points in the end, being able to turn this game into my personal performance was already the biggest victory! It's more fun to lie to people than to win the game. This sentence has been perfectly verified in this game. Dear audience, if there is another situation next time, remember to lock the stage of our Tang Jing to ensure that you will see a dramatic performance that will definitely not disappoint you and will be even more chaotic! Bye-Bye!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Uh... uh... the werewolf wins again? I...I'm so unhappy. After all, I have always wanted to be a \"peace ambassador\" and try to mediate everyone's conflicts, but in the end... well... everyone just thought I was suspicious, and even my own identity became the object of everyone's suspicion.\n\nUh... As a cobbler, although I lost in the end, I... uh... I really hope that everyone will stop arguing. In fact, if everyone can be sincere, perhaps this game does not need to become so cruel at all. When I saw Tan Zai Da La (Blaze) being executed, I...well...I really felt so guilty and felt that I was powerless to prevent it from happening.\n\nWell... I think the biggest lesson this game taught me is not to be too naive and believe in these rules that will make people attack each other. Next time, if there is a next time, I...well...I want to be a person who doesn't need to hurt each other. Uh... thank you for your hard work. I hope I can see you all laughing and ending the game next time, okay? Woohoo..."
+      }
+    ]
+  }
+}
