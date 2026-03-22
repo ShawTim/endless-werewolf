@@ -6,12 +6,8 @@ set -euo pipefail
 # Optional env:
 #   BATCH_LABEL="games-001-020"
 
-cd "$(dirname "$0")/.."
-
-python3 scripts/build_pages.py
-
-# Commit only when there are changes
-if git diff --quiet -- docs data/games data/current_game.json data/game_counter.json; then
+# Commit only when there are changes (staged, unstaged, or untracked)
+if [ -z "$(git status --porcelain -- docs data/games data/current_game.json data/game_counter.json)" ]; then
   echo "No changes to publish."
   exit 0
 fi

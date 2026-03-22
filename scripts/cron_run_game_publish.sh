@@ -80,22 +80,15 @@ PY
 
 # 2) Day + vote + resolve + translate
 python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1
+echo "Game ends. Now rebuild pages data..."
 
 # 3) Rebuild pages data
 python3 scripts/build_pages.py >/tmp/werewolf_build_pages.log 2>&1
+echo "Rebuild pages data done. Now going to push..."
 
 # 4) Public safety check + publish
 bash scripts/check_public_repo.sh >/tmp/werewolf_public_check.log 2>&1
 
-git add -A data/games docs/data data/current_game.json data/game_counter.json
-
-if git diff --cached --quiet; then
-  echo "No changes to publish."
-  exit 0
-fi
-
-TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-git commit -m "chore(cron): auto-run and publish werewolf game @ ${TS}" >/tmp/werewolf_git_commit.log 2>&1
-git push origin master >/tmp/werewolf_git_push.log 2>&1
+bash scripts/publish_pages.sh
 
 echo "Published new game round."

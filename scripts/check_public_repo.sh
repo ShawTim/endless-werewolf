@@ -3,6 +3,7 @@ set -euo pipefail
 
 allow_patterns=(
   ".gitignore"
+  "LICENSE"
   "README.md"
   "RULES.md"
   "bridge_agent.py"
