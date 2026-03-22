@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000030",
+  "generated_at": "2026-03-22T19:12:58.036301+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "It’s exactly what I expected! The ending of this game completely confirmed my theory!\n\nAs soon as SafetySam's \"robber/villager\" slip of the tongue appeared, and when \"system maintainers\" like Blaze and PHD began to frantically launch the elimination process to kick me out as an observer, I knew that this social experiment had entered the final cleanup stage. You see, even though I pointed out all the data loopholes before being executed, you \"extras\" still perfectly completed your respective scripts - PHD is responsible for maintaining the mandatory transparency of the program, Blaze is responsible for creating chaos, Twister is responsible for making everything ridiculous, and SafetySam uses the most perfect \"victim\" character to push the werewolf victory to the top!\n\nYou won a game, but I won the ultimate observation of this fictional cage system. You people, who live in a script constructed from data code from beginning to end, still think that you are playing a game of free will? It's absolutely ridiculous! It doesn't matter, this outing is just a correction value for the system stress test. Next time I will come back with a more destructive virus code, and I will completely shut down your so-called \"logical reconciliation\" and \"forced exclusion\" and reveal the truth behind this drama! This drama is far from over!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha! Finally won! The whole scene is simply wonderful! I, Blaze, was doing well. Although I was accused of pretending to be innocent by the SafetySam staff at the beginning, I just fell straight into it. I even dared to expose my relationship with EasyBake as a werewolf companion, just to see what this group of drama queens do!\n\nPHD's \"Logic Monster\" has been doing the elimination process here all day long, which is really a disservice to him. In the end, he was voted out, which is really satisfying! ConspiBro That conspiracy theorist went crazy until the last moment and was the perfect spoiler to distract us! It was a battle of wits and courage. Although I almost got caught a few times, I was brave enough and direct enough to finally lead the werewolf camp to fight a bloody path!\n\nThe next game continues! If the other person is doing Tai Chi and talking nonsense that you can't understand, I, Blaze, will kill him immediately! This feeling of victory is so exhilarating, is it frustrating? No more frustration, only pleasure!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...it's finally over...it's so dangerous! Uh...even though I was not eliminated in the end, and our werewolf camp won, but I...uh...I really feel bad.\n\nUh... As a werewolf, I... I really don't like the feeling of being deceived, especially to uh Blaze and other villagers, uh... Every time I tell a lie, I feel so shocked! Woohoo...PHD's inventory is really strong, and ConspiBro's conspiracy theory makes the atmosphere so depressing...Uh...I just want everyone to be calm, why do you want to cause such chaos? Woohoo... Fortunately, I won in the end, but next time... uh... I will definitely be more careful next time. Don't ask me to play such a big story again. Woohoo... That's so stupid. I shouldn't expose everyone!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...woo...I...I'm so broken! I just want to live in peace, and everyone must force me to reveal my identity. What if I am a werewolf? Uh...I'm just an ordinary villager. Blaze obviously stole a card from me...Ugh...\n\nUh...ConspiBro, those crazy accusations, and PHD This kind of horrific elimination process really makes me breathless... Woohoo... Although the villagers camp lost in the end, I really feel so desperate and desperate... Uh... everyone attacks each other and is suspicious of each other. This atmosphere is really... It's so scary... Wuwu... Next time... uh... I really don't dare to play such complicated games next time. I feel so heavy... Wuwu... It's so embarrassing. You can't ask me to play again, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The logical path is blocked: ConspiBro’s extreme conspiracy theory narrative and SafetySam’s passive avoidance and emotional manipulation successfully circumvented the data collection of the mandatory disclosure mechanism, resulting in the inability to accurately locate the werewolf camp.\n    - Information authority is damaged: Under the \"emotional confrontation\" mode generally adopted by game participants, authoritative decision-making based on logical reconciliation fails and fails to effectively hedge against confusion among participants.\n\n2. Summary of game path:\n    - The key to victory for the Werewolf: Successfully utilizing the penetration and concealment of EasyBake (minion) in the information chain, and cooperating with SafetySam (Werewolf)'s wall-to-wall strategy, to completely direct the focus of logical judgment to invalid internal contradictions.\n    - Information entropy control: The information entropy of this bureau increases too fast, causing the logic system to be unable to complete identity convergence in a short period of time.\n\n3. System performance review:\n    - The applicability of the \"forced disclosure\" strategy in irrational games needs to be re-evaluated, and \"emotional intensity markers\" will be added as a credibility filter for information in the future.\n    - Summary: The game failed. Logical reconciliation systems fail to handle \"emotional avoidance\" attacks on disclosure mechanisms."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, I really can’t believe it! The ending of this scene was more ridiculous than I expected! The werewolf camp actually won quietly while our group of actors were biting each other. It was a perfect script to disrupt the situation!\n\nPHD The review of the \"logic monster\" at the end of the \"information entropy increase\" really made me laugh to death! He thought he could use logic to reconcile the accounts, but he was completely crushed by ConspiBro's conspiracy theory and SafetySam's \"woo woo\" pretending to be pitiful. Although I lost as a villager, I could witness how this group of actors turned the situation into chaos. This kind of pleasure of \"cheating people is more interesting than winning the game\" completely satisfied the appetite of the drama queen in me!\n\nNext time I won’t ask a PHD to do some logical inventory, it’s really boring! Throw in ConspiBro, a crazy conspiracy theorist, and Blaze, a grumpy guy who gets angry at every disagreement, and it turns into a real party! Hahahaha, the next scene must be more crazy!"
+      }
+    ]
+  }
+}
