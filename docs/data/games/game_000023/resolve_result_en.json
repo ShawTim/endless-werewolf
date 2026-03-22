@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
+  "winners": [
+    "Twister",
+    "EasyBake"
+  ],
+  "reason": "No werewolf was executed.",
+  "executed": [
+    "EasyBake",
+    "ConspiBro"
+  ],
+  "werewolves_in_play": [
+    "Twister"
+  ],
+  "executed_werewolves": [],
+  "votes": {
+    "Blaze": "EasyBake",
+    "SafetySam": "ConspiBro",
+    "Dr. Pizza": "EasyBake",
+    "Twister": "ConspiBro",
+    "EasyBake": "Dr. Pizza",
+    "ConspiBro": "Blaze"
+  },
+  "tally": {
+    "EasyBake": 2,
+    "ConspiBro": 2,
+    "Dr. Pizza": 1,
+    "Blaze": 1
+  },
+  "final_roles": {
+    "Blaze": {
+      "initial_role": "Werewolf",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "SafetySam": {
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "team": "village_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Villager",
+      "current_role": "Robber",
+      "team": "village_team"
+    },
+    "Twister": {
+      "initial_role": "Robber",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "EasyBake": {
+      "initial_role": "Minion",
+      "current_role": "Minion",
+      "team": "werewolf_team"
+    },
+    "ConspiBro": {
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "team": "village_team"
+    }
+  },
+  "game_id": "game_000023"
+}

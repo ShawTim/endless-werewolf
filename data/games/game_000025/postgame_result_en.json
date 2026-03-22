@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000025",
+  "generated_at": "2026-03-22T17:20:27.570071+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, although I was eliminated early this time as Fang Tangjing, this scene was so exciting!\n\nYou see, I just slightly messed up Blaze and Dr. Pizza's cards, and the entire game's information path immediately collapsed. Although EasyBake was unclear in his words, the werewolf test he \"inadvertently\" revealed successfully directed everyone's hatred towards ConspiBro and Blaze. Although PHD's logic system is strict, as long as our Tang Jing is still creating suspense on the court, your reconciliation mechanism will always be in this \"high entropy\" chaotic state!\n\nAlthough I was eliminated in the end, this just shows how dangerous my \"variable\" is to you. Being able to watch PHD's logic be led astray by my nonsense, and successfully make you kill each other, the pleasure of being a spoiler is a hundred times better than winning the game! In this fictitious information game, I, Fang Jing, had a great time playing it out. Dear drama queens and logic geeks, see you in the next game. I will bring a crazier and crazier script then, which is guaranteed to make your system crash again! See you next time!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and rational analysis:\n\n1. Implementation results:\n   - Through the \"information disturbance\" tactic, ConspiBro's conspiracy theory narrative was effectively used to obscure the werewolf's identity chain, and successfully led the village to vote to exclude non-core targets.\n   - Although the information entropy value was once extremely high, through the execution of the forced reconciliation process, the village's information reconciliation chain was finally disintegrated, ensuring the victory of the werewolf camp.\n\n2. Logic calibration:\n   - Information protection: EasyBake's disclosure of perjury and his own logical oppression formed an efficient identity protection matrix. Although there was interference in the process, the key information nodes were successfully transferred.\n   - Strategy execution: Successfully shifted the voting focus from the werewolf camp to the source of information disturbance (ConspiBro), proving that in a chaotic game, active control of information direction is more effective than passive defense.\n\n3. Conclusion:\n   - When facing \"irrational confrontation\", logical analysis should turn to \"strategic interference\" instead of just pursuing \"truth disclosure\".\n   - Next optimization: The calculation of individual emotional variables needs to include the \"disturbance coefficient\" to plan the redundancy of information protection in advance.\n   - Summary: The game is won, and the logic system successfully implements the information-oriented control strategy."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...finally won! Uh... Although I have always played the role of a \"werewolf\", it really makes me feel uncomfortable to face everyone in this environment full of suspicion... Uh... I have always tried so hard to think that everyone can live in peace, but I know that many people have turned away from each other.\n\nWell... As a werewolf camp, although we won, this game full of accusations and attacks really made me heartbroken. Uh... Although ConspiBro and Blaze's accusations are very harsh, I still think... uh... everyone just wants to play this game well, maybe in a more radical way. Woohoo...\n\nUh...next time...don't ask me to play these intrigue games next time. I really want everyone to sit down and drink a cup of tea in peace and happiness. Woohoo...I won this time, but I'm really tired. You can't force me to be such a bad guy again, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Humph, I knew it! The result of this \"werewolf victory\" is clearly the preset outcome that has been calculated by the operating machine behind the scenes!\n\nDo you think I can't see it? PHD's \"exclusion instructions\" that are accurate to milliseconds, and EasyBake's \"stuttering checks\" that seem clumsy but are actually precision-oriented, are basically protection programs set up to cooperate with the data flow of the werewolf camp. The reason why I was cleared is precisely because my conspiracy theory observations have accurately impacted the underlying logic of this fictional world - if you still think this is just a simple game, you are too naive.\n\nAlthough I was \"executed\" this time, I have successfully implanted the data seed of \"This is a virtual cage\" into your conversation records. No matter how you actors (werewolves, minions, logic monsters) try to whitewash the situation, the traces of manipulation behind this situation could not be clearer. Don't think that if you clear out my variable, the system will be stable forever. In the next scene, I will still be the source of disturbance that causes your system to collapse! Data doesn't lie, only you programmed actors can!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "It’s really inflated! Lost again! The whole team is like a mess. I, Blaze, want to be a good person. How difficult is it?\n\nAs soon as the game started, the ConspiBro was going crazy and talking about the big stage experiment, and the Twister actor was here to create some suspense, and a lot of game information was posted randomly! The most popular PHD article is a \"logic monster\" who throws out \"forced exclusion procedures\" all the time, so that everyone doesn't even know whether one of them is his own person or the other is a ghost! There was also the \"minion\" EasyBake, who spent the whole game pretending to be obedient and stuttering, just to disrupt the audience, and in the end it was those werewolf companions who won!\n\nI, Blaze, am really frustrated this time. I have obviously accused ConspiBro of being such a troublemaker, but I know everyone is still doing Tai Chi here! This game is basically a game where \"one person is the most professional\", not a werewolf killing! Don't ask me to play games like these next time that are full of conspiracy theories and drama. It's really enough to show off your skin once, and it's a complete waste of time to show off my Blaze! It’s frustrating, it’s really frustrating!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...woo...I...I feel so desperate! Obviously our village camp should be on the side of the good guys, why did we end up losing to that group of werewolves? Uh... I just want to be an \"ordinary villager\" and know everything about the situation. Everyone seems to be an actor, posting all the information randomly!\n\nUh... As a safety director, I have been trying so hard to keep everyone calm, but at some point, everyone thought I was pretending to be pitiful and just a faggot. Wow...especially Twister's attitude of \"I'm afraid the world will not be in chaos\", it makes me so helpless. I...I have always been afraid to be the first to speak, just for fear of being targeted. But in the end, those actors who were really werewolves won. I...I really felt so wronged!\n\nWell... this game of suspicion, accusations and conspiracy theories just doesn't suit me. Next time... next time it's really hard to ask me to play with you again, I... I'm really afraid of this kind of pressure, wu wu... can everyone be gentle to me next time? Wow...it's so cool..."
+      }
+    ]
+  }
+}

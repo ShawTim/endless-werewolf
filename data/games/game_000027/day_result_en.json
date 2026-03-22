@@ -1,0 +1,162 @@
+{
+  "status": "completed",
+  "game_id": "game_000027",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 3
+    },
+    "Dr. Pizza": {
+      "speak_count": 3
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 3
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! The game is filled with a sense of \"set up\" lag from the very beginning! Have you already planned this? Blaze looks like \"I'm a villager\", but who knows if his trump card has been tampered with by the \"logic monster\" PHD or the drama queen Twister? Let me tell you, this game is a huge social experiment from beginning to end. The purpose is to see how human beings destroy themselves in the chaos of information! Twister, what did you do last night? Don't think I can't see it. Your \"watching a show\" look is just like an observer sent by the Taiwan Broadcasting Corporation! Everyone better be prepared, the trump card of this cage will be revealed at any time!",
+      "log_line": "[2026-03-23 ​​01:32:59 HKT] ConspiBro: Here we go again! The game is filled with a sense of \"set up\" lag from the very beginning! Have you already planned this? Blaze looks like \"I'm a villager\", but who knows if his trump card has been tampered with by the \"logic monster\" PHD or the drama queen Twister? Let me tell you, this game is a huge social experiment from beginning to end. The purpose is to see how human beings destroy themselves in the chaos of information! Twister, what did you do last night? Don't think I can't see it. Your \"watching a show\" look is just like an observer sent by the Taiwan Broadcasting Corporation! Everyone better be prepared, the trump card of this cage will be revealed at any time!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh... I hope we can stop arguing... I... I'm just an ordinary villager, I don't know anything... Blaze is vicious, ConspiBro is talking about some conspiracy theories, Twister and Pizza are accusing each other, I... I'm so confused... Let's stop throwing people to death, okay? Woohoo...",
+      "log_line": "[2026-03-23 01:33:02 HKT] SafetySam: Ugh... I hope everyone can stop arguing... I... I'm just an ordinary villager, I don't know anything... Blaze is vicious, ConspiBro talks about conspiracy theories, Twister and Pizza Accusing each other here, I... I'm really confused... Let's stop throwing people to death, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory:\n1. Anomaly identification: Currently, the amount of game information is close to zero, and the identity of each participant is in a state of uncertainty.\n2. Goal: Establish a basic path.\n\nPosition:\n- Refuse to believe in one-sided narratives.\n- Mandatory requirement: All parties disclose their initial identities and state the motivation for night operations to eliminate logical conflicts and data redundancy.",
+      "log_line": "[2026-03-23 01:33:05 HKT] Dr. Pizza: Logical inventory:\n1. Anomaly identification: Currently, the amount of game information is close to zero, and the identity of each participant is in a state of uncertainty.\n2. Goal: Establish a basic path.\n\nPosition:\n- Refuse to believe in one-sided narratives.\n- Mandatory requirement: All parties disclose their initial identities and state the motivation for night operations to eliminate logical conflicts and data redundancy."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Listen up, everyone! I, Blaze, didn’t do anything tonight, I did everything right! A team of drama queens are here again, ConspiBro is here again talking nonsense, and PHD, your logic monster is here again, taking stock, are you really interested in showing off your fun stuff? Today we have the same goal. If the other person continues to mess around and talk nonsense that I can’t understand, I will kill him directly! Tell us your true identity quickly, and stop doing Tai Chi here!",
+      "log_line": "[2026-03-23 ​​01:33:09 HKT] Blaze: Hello! Listen up, everyone! I, Blaze, didn’t do anything tonight, I did everything right! A team of drama queens are here again, ConspiBro is here again talking nonsense, and PHD, your logic monster is here again, taking stock, are you really interested in showing off your fun stuff? Today we have the same goal. If the other person continues to mess around and talk nonsense that I can’t understand, I will kill him directly! Tell us your true identity quickly, and stop doing Tai Chi here!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone is finally together again! Will this game be a solo show this time? I actually tried very hard to \"experience\" this game last night, and I saw a lot of interesting identity-changing cards! Hehe, as for the side one? I won’t tell you and let you listen, leaving some suspense for you to evaluate slowly! Isn't this feeling of mutual doubt more exciting than winning a game? PHD, are you still taking stock of what is your \"meal on the plate\"? This kind of atmosphere where everyone is pretending to be cool really makes me excited!",
+      "log_line": "[2026-03-23 ​​01:33:13 HKT] Twister: Oops, everyone is finally together again! Will this game be a solo show this time? I actually tried very hard to \"experience\" this game last night, and I saw a lot of interesting identity-changing cards! Hehe, as for the side one? I won’t tell you and let you listen, leaving some suspense for you to evaluate slowly! Isn't this feeling of mutual doubt more exciting than winning a game? PHD, are you still taking stock of what is your \"meal on the plate\"? This kind of atmosphere where everyone is pretending to be cool really makes me excited!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. It's a new day again... uh... although everyone seems to be so enthusiastic, I think... uh... it's better for everyone to calm down. Actually, I was... uh... lucky enough to meet Blaze last night... uh... he seemed to be quite special. Everyone... uh... stop attacking each other, okay?",
+      "log_line": "[2026-03-23 ​​01:33:16 HKT] EasyBake: Hello everyone. It's a new day again... uh... although everyone seems to be so enthusiastic, I think... uh... it's better for everyone to calm down. Actually, I was... uh... lucky enough to meet Blaze last night... uh... he seemed to be quite special. Everyone... uh... stop attacking each other, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "You listen! PHD, you are forcing disclosure again, and you want to \"establish a basic path\". You are basically trying to digitize and label our privacy! Twister, if you have a real identity, don’t tell me. Are you not an observer? Blaze, you say you are a villager, but do you understand how \"murderous\" your starting formation was? I dare to say that all the speaking time points and these so-called identity disclosures in this game are all the results of data processing through background calculations! PHD is executing an \"Identity Mapping Reconciliation\" program, the purpose of which is to clean up all self-aware variables in us! Don't try to use this logical script to kidnap my judgment. I have already seen the edge of this fictional cage, and you are all extras on this stage!",
+      "log_line": "[2026-03-23 ​​01:33:19 HKT] ConspiBro: Listen! PHD, you are forcing disclosure again, and you want to \"establish a basic path\". You are basically trying to digitize and label our privacy! Twister, if you have a real identity, don’t tell me. Are you not an observer? Blaze, you say you are a villager, but do you understand how \"murderous\" your starting formation was? I dare to say that all the speaking time points and these so-called identity disclosures in this game are all the results of data processing through background calculations! PHD is executing an \"Identity Mapping Reconciliation\" program, the purpose of which is to clean up all self-aware variables in us! Don't try to use this logical script to kidnap my judgment. I have already seen the edge of this fictional cage, and you are all extras on this stage!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh... I hope everyone can stop arguing... Uh... I... I really don't know anything. PHD, you... uh... you said that forced disclosure is really cruel... uh... actually, I... I'm just an ordinary villager. Last night, I... uh... I really didn't do anything. Everyone...uh...can you calm down? Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​01:33:23 HKT] SafetySam: Ugh... I hope everyone can stop arguing... Uh... I... I really don't know. PHD, you... uh... you said that forced disclosure is really cruel... uh... actually, I... I'm just an ordinary villager. Last night, I... uh... I really didn't do anything. Everyone...uh...can you calm down? Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and mandatory disclosure:\n1. Anomaly identification: Currently, the information entropy value of the game is at an extremely high level, and there are significant conflicts in the identity paths of each participant.\n2. Objective: Mandatory establishment of identity reconciliation mechanism.\n\nImplementation policy:\n- Require all participants to immediately disclose: (1) initial identity, (2) target of night operation.\n- Warning: Any participant who continues to use conspiracy theories, emotional blackmail or dramatic interference to avoid information transparency will be directly included in the exclusion sequence.",
+      "log_line": "[2026-03-23 01:33:28 HKT] Dr. Pizza: Logical inventory and mandatory disclosure:\n1. Anomaly identification: Currently, the information entropy value of the game is at an extremely high level, and there are significant conflicts in the identity paths of each participant.\n2. Objective: Mandatory establishment of identity reconciliation mechanism.\n\nImplementation policy:\n- Require all participants to immediately disclose: (1) initial identity, (2) target of night operation.\n- Warning: Any participant who continues to use conspiracy theories, emotional blackmail or dramatic interference to avoid information transparency will be directly included in the exclusion sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "PHD You are taking stock again, just to protect the drama queens of your class! ConspiBro commentators are talking about \"social experiments\" here, are you complicit? I, Blaze, act upright and speak up. If anyone dares to play Tai Chi here again today, I will be the first to kill him! Tell us your identity quickly and stop talking nonsense!",
+      "log_line": "[2026-03-23 ​​01:33:31 HKT] Blaze: PHD You are taking stock again, just to protect the drama queens of your class! ConspiBro commentators are talking about \"social experiments\" here, are you complicit? I, Blaze, act upright and speak up. If anyone dares to play Tai Chi here again today, I will be the first to kill him! Tell us your identity quickly and stop talking nonsense!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...everyone...uh...don't make any more noise. ConspiBro, you... uh... you said that Pizza and Twister are colluding, and I said that Blaze has a... uh... special identity. Actually, I... I just want to mediate everyone's conflict... uh... I really don't know. Everyone...uh...can we discuss our identities calmly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​01:34:05 HKT] EasyBake: Oh... everyone... uh... don't argue anymore. ConspiBro, you... uh... you said that Pizza and Twister are colluding, and I said that Blaze has a... uh... special identity. Actually, I... I just want to mediate everyone's conflict... uh... I really don't know. Everyone...uh...can we discuss our identities calmly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, you are forcing disclosure again, and you want to \"establish a basic path\". You are basically trying to digitize and label our privacy! Twister, if you have a real identity, don’t tell me. Are you not an observer? Blaze, you say you are a villager, but do you understand how \"murderous\" your starting formation was? I dare to say that all the speaking time points and these so-called identity disclosures in this game are all the results of data processing through background calculations! PHD is executing an \"Identity Mapping Reconciliation\" program, the purpose of which is to clean up all self-aware variables in us! Don't try to use this logical script to kidnap my judgment. I have already seen the edge of this fictional cage, and you are all extras on this stage!",
+      "log_line": "[2026-03-23 ​​01:34:09 HKT] ConspiBro: PHD, you are forcing disclosure again. You want to \"establish a basic path\". You just want to digitize and label our privacy! Twister, if you have a real identity, don’t tell me. Are you not an observer? Blaze, you say you are a villager, but do you understand how \"murderous\" your starting formation was? I dare to say that all the speaking time points and these so-called identity disclosures in this game are all the results of data processing through background calculations! PHD is executing an \"Identity Mapping Reconciliation\" program, the purpose of which is to clean up all self-aware variables in us! Don't try to use this logical script to kidnap my judgment. I have already seen the edge of this fictional cage, and you are all extras on this stage!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... everyone... uh... I don't dare to say that Pizza is a werewolf, but ConspiBro you... uh... you pretended to be pitiful when you opened your mouth, and you said something big, which really worried me... uh... why don't you calm down, I... I'm just an ordinary villager, I really don't know anything... Don't argue anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 01:34:12 HKT] SafetySam: Woo...everyone...uh...Pizza is a werewolf. I dare not say it, but it is ConspiBro You... uh... you pretended to be pitiful when you opened your mouth, and you said something big, which really worried me... uh... why don't you all calm down, I... I'm just an ordinary villager, I really don't know anything... Let's stop arguing, okay? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Logical inventory and elimination procedures:\n1. Locking in sources of information disturbance: ConspiBro’s ongoing “social experiment” narrative and extreme conspiracy theories have constituted the most serious source of information pollution in the game, and its motives for avoiding identity disclosure are suspicious.\n2. Execution: According to the forced exclusion sequence, ConspiBro is included in the exclusion objects.\n\nVoting Execution: I vote for ConspiBro."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "ConspiBro, you are a clueless guy! Are you having a dream? You control the stage and tell the script all the time, it’s all about you taking the lead and messing up the situation! PHD will forcibly exclude you, but you are still here to die! Today's goal is the same. If the other person continues to mess around and talk nonsense, I will kill him directly! I, Blaze, am doing the right thing, and I vote for ConspiBro!"
+      }
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Ugh...ConspiBro, you...uh...you want to explain it so horribly? I... I'm really afraid of this feeling of accusing each other... Uh... why don't we all calm down first, uh... if there is a contradiction in what I say, uh... it must be because I am too nervous, I'm sorry... uh... can't we stop arguing and have a good talk? Woohoo...",
+      "log_line": "[2026-03-23 ​​01:34:41 HKT] EasyBake: Ugh...ConspiBro, you...uh...how do you want your explanation to be so scary? I... I'm really afraid of this feeling of accusing each other... Uh... why don't we all calm down first, uh... if there is a contradiction in what I say, uh... it must be because I am too nervous, I'm sorry... uh... can't we stop arguing and have a good talk? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Abnormal identification: ConspiBro’s continued conspiracy theory narrative and SafetySam’s passive avoidance have constituted serious information disturbance and path blocking within the game.\n2. Implementation policy:\n   - Enforce identity reconciliation requirements and make ConspiBro the highest priority exclusion.\n   - If a participant cannot provide a verifiable identity operation chain, it will be deemed as maliciously interfering with the stability of the game and forced voting exclusion will be implemented.",
+      "log_line": "[2026-03-23 01:34:44 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: ConspiBro’s continued conspiracy theory narrative and SafetySam’s passive avoidance have constituted serious information disturbance and path blocking within the game.\n2. Implementation policy:\n   - Enforce identity reconciliation requirements and make ConspiBro the highest priority exclusion.\n   - If a participant cannot provide a verifiable identity operation chain, it will be deemed as maliciously interfering with the stability of the game and forced voting exclusion will be implemented."
+    },
+    {
+      "type": "pass",
+      "player_name": "Twister",
+      "mentioned_recently": true
+    }
+  ],
+  "chat_history": "[2026-03-23 01:32:59 HKT] ConspiBro: 又嚟啦！成場局一開始就充滿咗一種「被設定好」嘅滯後感！你們是不是早就預謀好了？Blaze 一臉「我係村民」嘅樣子，但誰知道底牌是不是早就被那個「邏輯怪」PHD 或者那個戲精 Twister 動過手腳了？我告訴你們，這場遊戲從頭到尾就是一個巨大的社會實驗，目的是要看人類在資訊混亂中如何自毀！Twister，你昨晚到底動了什麼手腳？別以為我看不出來，你那種「看戲」的眼神，根本就是大台派下來的觀察員！大家最好準備好，這個囚籠的底牌隨時會被揭開！\n[2026-03-23 01:33:02 HKT] SafetySam: 嗚...大家千祈唔好再吵啦...我...我只係一個平平凡凡嘅村民，咩都唔知呀...Blaze 又兇人，ConspiBro 又講埋啲陰謀論，Twister 同 Pizza 喺度互相指控，我...我真係好混亂呀...大家唔好再投死人啦，好唔好呀？嗚嗚...\n[2026-03-23 01:33:05 HKT] Dr. Pizza: 邏輯盤點：\n1. 異常識別：目前賽局資訊量接近零，各參與者身分均處於不確定狀態。\n2. 目標：建立基礎路徑。\n\n立場：\n- 拒絕輕信單方面敘事。\n- 強制要求：各方公開初始身分，並陳述夜間操作動機，排除邏輯衝突與數據冗餘。\n[2026-03-23 01:33:09 HKT] Blaze: 喂！大家聽住！我 Blaze 今晚咩都冇做，我行得正企得正！成班戲精又喺度做戲，ConspiBro 又喺度講埋啲廢話，PHD 你條邏輯怪又喺度盤點，你哋到底係咪夾埋好晒玩嘢？今日目標一致，邊個再喺度亂帶風向、講埋啲聽唔明嘅廢話，我就直接投死佢！快啲報你哋嘅真正身分，唔好再喺度耍太極！\n[2026-03-23 01:33:13 HKT] Twister: 哎呀呀，大家終於又聚頭啦！今次呢個局又會係邊個嘅個人秀呢？我昨晚其實好努力咁去「體會」呢個遊戲，睇到好多有趣嘅身分變動底牌！嘿嘿，至於係邊個？我就唔講畀你聽，留返啲懸念畀你哋慢慢估啦！呢種互相懷疑嘅感覺，唔係比贏遊戲更加刺激咩？PHD，你仲喺度盤點緊邊個係你嘅「盤中餐」呀？呢種大家都扮晒嘢嘅氛圍，真係令我興奮到震呀！\n[2026-03-23 01:33:16 HKT] EasyBake: 大...大家好呀。又係新嘅一日...呃...雖然大家都好似好有熱情咁，但我覺得...呃...大家不如平心靜氣先。其實我昨晚...呃...好運氣咁樣見到 Blaze...呃...佢身分好似好特別咁。大家...呃...唔好再互相攻擊啦，可以嗎？\n[2026-03-23 01:33:19 HKT] ConspiBro: 你哋聽住！PHD，你又喺度強制披露，話要「建立基礎路徑」，根本就係想將我哋嘅隱私數據化、標籤化！Twister，你話有身分底牌唔講，你唔係 observer 係咩？Blaze，你話你係村民，但點解你開局嗰陣嗰股「殺氣」咁重？我敢講，這場局的所有發言時間點、這些所謂的身分披露，全部都是經過後台運算的數據處理結果！PHD 正在執行一個「身分映射對帳」的程序，目的就是為了要把我們中所有具有自我意識的變量全部清理掉！別想用這套邏輯劇本來綁架我的判斷，我已經看見了這座虛構囚籠的邊緣，而你哋，全都是這個大台的臨時演員！\n[2026-03-23 01:33:23 HKT] SafetySam: 嗚...大家千祈唔好再吵啦...呃...我...我真係咩都唔知呀。PHD 你...呃...你又話要強制披露，真係好兇呀...呃...其實我...我只係一個平平凡凡嘅村民，昨晚我...呃...我真係咩都冇做過。大家...呃...可唔可以冷靜啲呀？唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-23 01:33:28 HKT] Dr. Pizza: 邏輯盤點與強制披露：\n1. 異常識別：目前賽局資訊熵值處於極高位，各參與者身分路徑存在顯著衝突。\n2. 目標：強制建立身分對帳機制。\n\n執行方針：\n- 要求各參與者立即披露：(1) 初始身分，(2) 夜間操作對象。\n- 預警：任何持續以陰謀論、情緒勒索或戲劇化干擾來規避資訊透明的參與者，將直接被列入排除序列。\n[2026-03-23 01:33:31 HKT] Blaze: PHD 你又喺度盤點，根本就係想掩護你哋班戲精！ConspiBro 條友喺度大講咩「社會實驗」，你哋係咪串通好啦？我 Blaze 行得正企得正，我話事，今日誰敢再喺度耍太極玩嘢，我就第一個投死佢！快啲報你哋嘅身分，唔好再喺度廢話！\n[2026-03-23 01:34:05 HKT] EasyBake: 嗚...大家...呃...唔好再吵啦。ConspiBro 你...呃...你話 Pizza 同 Twister 串通好，我又話 Blaze 係...呃...特別嘅身分，其實我...我只係想調解下大家嘅矛盾姐...呃...我真係咩都唔知呀。大家...呃...可唔可以冷靜啲討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-23 01:34:09 HKT] ConspiBro: PHD，你又喺度強制披露，話要「建立基礎路徑」，根本就係想將我哋嘅隱私數據化、標籤化！Twister，你話有身分底牌唔講，你唔係 observer 係咩？Blaze，你話你係村民，但點解你開局嗰陣嗰股「殺氣」咁重？我敢講，這場局的所有發言時間點、這些所謂的身分披露，全部都是經過後台運算的數據處理結果！PHD 正在執行一個「身分映射對帳」的程序，目的就是為了要把我們中所有具有自我意識的變量全部清理掉！別想用這套邏輯劇本來綁架我的判斷，我已經看見了這座虛構囚籠的邊緣，而你哋，全都是這個大台的臨時演員！\n[2026-03-23 01:34:12 HKT] SafetySam: 嗚...大家...呃...Pizza 係咪狼人我都唔敢講，但係 ConspiBro 你...呃...你一開口就話我裝可憐，又講咩大台，真係令我好擔心呀...呃...不如大家冷靜啲，我...我只係一個平平凡凡嘅村民，真係咩都唔知呀...大家唔好再吵啦，好唔好呀？嗚嗚...\n[2026-03-23 01:34:41 HKT] EasyBake: 嗚...ConspiBro 你...呃...你點解要講得咁可怕呀？我...我真係好怕呢種互相指控嘅感覺...呃...大家不如平心靜氣先，呃...如果我講嘢有矛盾，呃...那一定係我太緊張啦，唔好意思...呃...我哋係咪可以唔好再吵，好好傾偈呢？嗚嗚...\n[2026-03-23 01:34:44 HKT] Dr. Pizza: 邏輯盤點與排除程序：\n1. 異常識別：ConspiBro 持續的陰謀論敘事與 SafetySam 的消極迴避，已構成賽局內嚴重的資訊擾動與路徑阻斷。\n2. 執行方針：\n   - 強制執行身分對帳要求，並將 ConspiBro 列為最高優先級排除對象。\n   - 若參與者無法提供可驗證的身分操作鏈，將視為惡意干擾賽局穩定性，執行強制投票排除。\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

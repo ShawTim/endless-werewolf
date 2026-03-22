@@ -87,7 +87,7 @@ python3 scripts/build_pages.py >/tmp/werewolf_build_pages.log 2>&1
 # 4) Public safety check + publish
 bash scripts/check_public_repo.sh >/tmp/werewolf_public_check.log 2>&1
 
-git add data/games docs/data data/current_game.json data/game_counter.json
+git add -A data/games docs/data data/current_game.json data/game_counter.json
 
 if git diff --cached --quiet; then
   echo "No changes to publish."

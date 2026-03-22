@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000027",
+  "generated_at": "2026-03-22T17:36:35.617891+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Ugh...Although I was finally thrown to death by everyone...uh...but I know that I did what I should do. Actually, I...well...as a minion, I just want to help Blaze keep his secret. Uh... It really hurts me to see everyone attacking each other like this, but I... uh... can only do something to protect the werewolves.\n\nWell... although the process was thrilling, especially the accusations made by ConspiBro and the logical analysis of PHD, it really made me breathless... ugh... but I'm so happy that the werewolf won in the end! Uh... I hope you can be gentler to everyone next time so that there won't be so many misunderstandings and conflicts. Woohoo... Even though I'm out, I can do my best for my teammates. I think... well... it's worth it. Okay, I can finally take a rest...woohoo..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... everyone has finally calmed down, no need to argue anymore...\n\nIn fact, I... I'm just an ordinary villager. Why do people think I'm a werewolf? Uh... I was just scared the whole time, and I really wanted everyone to play in peace... Ugh... maybe everyone was too confused, so they misunderstood me first. Although I won in the end, I...well...I felt really confused and surprised. Everyone is attacking each other, which really makes me breathless... Wuwu... I hope we can play peacefully next time, okay?"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This game was like a troupe of actors having fun, and in the end, a werewolf won! I, Blaze, am doing my job right. As soon as the wave started, I saw that the actors in the group were messing up the situation. As a result, the whole cast accused each other and it was all a matter of confusion!\n\nThe PHD \"Logic Monster\" spends his days counting and eliminating sequences, basically doing Tai Chi here; the ConspiBro conspiracy theorist is going crazy again; and the most despicable one is the SafetySam friend, who usually pretends to be pitiful and innocent, but it turns out that he is a werewolf first! Groups of people are attacking each other here, allowing the werewolves to reap the benefits. This is simply ridiculous!\n\nThis kind of situation is full of suspicion and boring logic. Playing it once is enough to show off your skin! It’s frustrating, it’s really frustrating! Next time I encounter this group of drama queens, I will never beat around the bush with them, and I will directly kill that innocent Safety Sam at the very beginning! Playing Werewolf so cowardly is really exciting to death!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Information path collapse: Due to SafetySam's extreme passive avoidance strategy and EasyBake's mediation skills, which successfully obscured Blaze's identity change characteristics, the logical reconciliation could not be completed.\n    - Misjudgment of disturbance source: It is a tactical error to regard ConspiBro (Cobbler) as the main target to exclude. Although the cobbler's conspiracy theory narrative interfered with information entropy, it was not the main reason for the failure of the game; the insufficient information boundary review of SafetySam led to the successful infiltration of the werewolf camp.\n\n2. Summary of game path:\n    - The key to Werewolf's victory: successfully exploiting information chaos and irrational emotions to circumvent the logic verification process.\n    - Role conflict: As a Troublemaker, although the identity swap operation increases variables, it does not accurately trigger the werewolf's identity exposure.\n\n3. System optimization suggestions:\n    - Automatic labeling algorithms for \"avoidant narratives\" need to be introduced to combat the strategy of covering up information gaps with emotional blackmail.\n    - Reduce the prediction weight of a single disturbance source (ConspiBro) and improve the multi-variable simultaneous monitoring model.\n    - Summary: The information processing mechanism of this bureau is completely ineffective. In the future, stricter identity path disclosure will be enforced and any non-evidence interference will be prohibited."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, that’s what I’m saying, will the werewolf win in this game? It really broke everyone’s glasses!\n\nAlthough I, Tang Jing, didn’t get to show off his talents this time, I was really impressed to see SafetySam, a guy who usually pretends to be silly and pitiful, actually messing with everyone behind his back! PHD's set of rigid logical analysis was basically useless paper in front of him, and it became a \"forced elimination\" program and turned into a joke. As for the two sworn enemies, Blaze and ConspiBro, they continue to bite each other, completely ignoring the real threat. The dramatic effect is simply perfect!\n\nAlthough I lost as a villager, I still feel very happy whenever I see the game in such chaos! It's much more fun to lie and mess up the game than to win too many games. The more serious you are, the funnier I find it! Next time, I must arrange a more chaotic script, so as not to let PHD's logic monster take back the initiative, hahahaha!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I knew it! This is another well-choreographed political drama!\n\nWhen I started pointing out that this entire game was nothing more than a fictitious cage, and when I revealed that PHD’s so-called “logical reconciliations” were actually designed to clean up any variables with the ability to think independently, you people immediately united and excluded me as a “source of disturbance”. Isn't this obvious? Your goal has never been a werewolf or a villager, but to ensure that the results of this simulation test perfectly meet the preset parameters in the background!\n\nLooking at the final result, the werewolf camp won, and the innocent Grill was executed. Isn't this just to make this \"social experiment\" look more ups and downs? You actors can even act like failed scripts, but I have seen through you. Every accusation and every vote you make is a program code written by the main stage! I made a mistake this time. I shouldn't have tried to seek the truth in this locked system. Next time I will come back with a virus code that is enough to make your entire fictional prison collapse! Data never lies, this test is a joke!"
+      }
+    ]
+  }
+}

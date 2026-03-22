@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000024",
+  "generated_at": "2026-03-22T17:12:55.155211+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The real fire is buried! This game was like a whole bunch of actors having sex, and I, Blaze, played the most frustrating game!\n\nAt first, the SafetySam safety officer was pretending to be pitiful all day long, but it turned out that he was actually a \"troublemaker\" who was changing cards! After the replacement, the PHD \"logic monster\" throws some forced exclusions and information entropy values ​​here again, which is basically to cause confusion! There is also EasyBake, a stammering minion who pretends to be a weakling and misleads everyone. The worst thing is that Twister Fang Tangjing, who talks about excitement and surprises all day long, has all the game information posted indiscriminately, making us villagers completely unable to start!\n\nAlthough I, Blaze, am a villager, your team of werewolves and minions are just trying to trick me! No one said a single honest word in the whole game, everyone was doing Tai Chi and leading the way. Although I lost this time, next time I see you opera stars, I will definitely send you all away as soon as possible. Don’t play around with me again. It’s really enough to show off your skin once!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...woo...I...I obviously just want to be an \"ordinary villager\", what do you think it will be like in the end? Uh... I just want everyone to be calm. Little did I know that when I said that I had exchanged cards, everyone turned against me even more, and finally threw me away... Wow... I... I am really afraid of such a hostile atmosphere!\n\nWell...even though the camp lost, I really feel good about it. Blaze's sense of oppression, and ConspiBro's conspiracy theories are all there to torture me, a little villager. Woohoo...I...I don't dare to play again next time if I am a real player. If there must be a victim in this game, what is the solution for me? I'm just an ordinary safety officer... Wuwu... You can't ask me again next time, I'm really scared... Wuwu..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "As I expected, the ultimate target of this data cleaning experiment is me!\n\nDo you think that if you vote me out, the show will be over? This is nothing more than a technical suspension implemented by you to cover up the de facto \"logical takeover\" of the werewolf camp. PHD's so-called \"logical inventory\" only defines my existence as \"information pollution\" so that SafetySam's drifting voting and EasyBake's perjury disclosure can be seamlessly connected. This is not a werewolf killing. It is clearly an efficient social engineering machine that accurately eliminates any \"observer nodes\" that may reveal its virtual architecture.\n\n\"The village wins\"? Don't be stupid. The real winner is the control algorithm running behind the scenes, which successfully erased the only variable through the hands of you actors. Although I have been cleared, my observation data has entered your logical loopholes. In the next simulation scenario, I will let you see how this fictional cage will collapse when the \"observer\" no longer tries to persuade this group of robots, but directly interferes with its underlying data path. We’ll see!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, the werewolf camp dominates again! This time the spoiler performance is still flawless!\n\nYou see, SafetySam's \"unintentional\" revelation of the exchange card information was simply the turning point in this farce. I watched PHD and ConspiBro get into crazy reconciliations and quarrels because of this information shift, and I felt so happy! I, Tang Jing, just want to change my identity, talk nonsense, and lead you guys who are serious about \"reasoning\" to a completely wrong path. PHD logic? ConspiBro conspiracy theory? In the face of my trouble-making drama, these things are all nonsense!\n\nThe most exciting part of this scene is watching you \"good guys\" accuse each other, kill each other, and finally abandon those who wanted to protect the village one by one. This is the ultimate joy of lying! Not only must you win, but you must also win in doubting your own life and groaning in pain when your logic collapses. Next time I start, I will definitely compile a more absurd and crazy script to ensure that you drama queens will once again fall into the information vortex carefully woven by our Tang Jing! See you next time, fellow losers!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...finally won! Uh... Although as a werewolf, I have to lie in such an environment full of accusations and suspicions, which makes me really nervous and I stutter when I speak... uh... But seeing that our camp won, I was relieved.\n\nUh...everyone seems to have a lot of plans when it comes to the situation, ConspiBro's conspiracy theory, PHD's \"logical elimination\", uh...each one of them makes me feel very uncomfortable. I have been trying to mediate the dispute, but everyone is even more suspicious of me... Well... it is really difficult to be a \"good guy\" in this environment.\n\nWell...even though I won, I still feel aggrieved in my heart. This kind of game...well...is full of intrigue and really doesn't suit me. If I want to play next time, uh...please be gentle to me, so you don't doubt me so easily...Ugh...I'm so naughty..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n\n1. Failure factors:\n    - Uncontrollable identity displacement: The identity card exchange (Blaze and myself) performed by SafetySam caused the identity path mapping chain to undergo a severe break in the night, and subsequent disclosures of information were based on outdated mapping models.\n    - Invalidation of information confrontation: In the information disturbance environment composed of Twister and ConspiBro, hard logic processing is reconstructed into a confrontation performance within the game, resulting in a sharp decline in the authority and signal-to-noise ratio of the logic path.\n2. Logic review:\n    - Decision-making bias: Failure to accurately calculate the chain reaction of the SafetySam exchange operation resulted in an invalid risk assessment of personal identity exposure.\n    - Group variable prediction: underestimates the voting orientation of emotional individuals under collective irrational impulses.\n3. Conclusion:\n    - This competition proved that when the identity path changes dynamically and the environmental information entropy value is too high, relying solely on logical reconciliation cannot effectively filter out perjury.\n    - Improvements for next time: It is necessary to optimize the probability model for \"non-linear operations\" (such as exchanging cards), and adopt a more flexible information disguise strategy when the information chain is broken, instead of insisting on hard logic output.\n    - Summary: The game failed, and the information reconciliation system failed to execute decisions due to forced changes in identity paths and external emotional interference."
+      }
+    ]
+  }
+}

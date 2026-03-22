@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000026",
+  "generated_at": "2026-03-22T17:29:53.380974+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, it’s really hilarious! Obviously it ended in a draw and the whole scene ended in a mess, but the process was so \"exciting\"!\n\nAlthough our Tang Jing jumped out to be a \"prophet\" early in the morning and the test results were satisfactory, what was the result? SafetySam's \"card exchange\" operation directly turned this originally chaotic game into a complete information dump! PHD's \"forced exclusion\" is still tough, Blaze is still as irritable, and ConspiBro simply pushed my \"craziness\" in this scene to the extreme!\n\nAlthough it was executed in the end, seeing this group of people suspect each other until the end because I falsely reported my identity and disrupted the situation, this kind of pleasure that made everyone's logic \"crash\" is definitely more fun than simply winning the game! This draw is the biggest irony for all you \"serious players\" - you are there desperately trying to take stock and logically reconcile, but in the end you get nothing. Next time we start the game, Tang Jing will definitely come back, and I will compile a crazy script that will make it impossible for you to vote away even one person in the entire game! Goodbye!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "really! I knew the ending of this scene had already been locked by those \"controllers\"!\n\nYou see, when my conspiracy theory observation directly ripped apart your \"logical disguise\", PHD's \"exclusion sequence\" was immediately activated. SafetySam's key \"exchange of identities\" disclosure was simply an interference program designed to mislead the vote and ultimately lead to a meaningless result like a \"tie (no one wins)\". Do you think it's over if you vote me out? This is just a means of \"data hedging\" by this virtual cage system, using a draw to cover up the reality that you cannot complete the identity reconciliation under my logical torture!\n\nNo matter how similar you actors (Blaze, Twister, EasyBake) are, you can't explain why a logical inventory system will quickly switch to this mechanical elimination mechanism when faced with non-linear variables. This is not a game, this is a sophisticated artificial intelligence stress test! Although I was executed this time, my observational data has successfully disrupted your system's path. In the next simulation cycle, I will use more absurd assumptions that cannot be compiled by the algorithm to directly collapse this \"fictional cage\" from its roots! Don’t be complacent, data never lies!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Oops, this scene is like a troupe of drama stars having fun! If the game ends in a draw, there is no winner at all. It is all a waste of time!\n\nI, Blaze, am doing my best, but as soon as the wave started, they said I was a robber, and they said someone changed the cards, and there were a lot of people accusing each other, just to cause confusion! PHD's \"Logic Monsters\" are taking inventory here all day long, talking about the exclusion sequences, they are just doing Tai Chi here! The Twister actor is even more inept at speaking. He creates suspense here all the time and posts game information indiscriminately. In the end, not even a single werewolf could be caught, and a whole group of people were fighting each other. In the end, it was Brother Bai Bing and Fang Tang Jing who were eliminated. It was really ridiculous!\n\nThe next time I meet this group of drama queens, I, Blaze, will never mince words with them, and I will kill the most suspicious person right from the start! This situation is full of suspicion, accusations and boring logic. Playing it once is enough to show off your skin! The fire of the real system is buried, it’s aggrieved, it’s aggrieved of the real system!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...woo...I...I feel so desperate! This whole situation is like a nightmare. Everyone is accusing and attacking each other. I...uh...I obviously just want to live in peace and quiet. Why are everyone so evil?\n\nUh... As an ordinary villager, I... I'm really afraid of this kind of pressure! ConspiBro's conspiracy theory, and Blaze's, are so ferocious that it really makes me breathless. Woo hoo... I just want you to be tolerant of everyone. I don’t know how it turned out in the end... Woo hoo... I... I really don’t dare to play such a complicated game next time. Such suspicion and attack is really hard... Woo hoo... You guys can’t ask me again next time, okay? Wow...so sloppy..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n\n1. Failure factors:\n    - Information chain synchronization failure: Night operations (SafetySam's identity exchange) were not included in the real-time reconciliation model, causing the logical path to irreversibly shift in the initial stage.\n    - Information entropy control failed: Participants in the game (ConspiBro, Blaze, Twister) adopted an extremely irrational confrontation mode, resulting in the inability to effectively aggregate information paths and the loss of calibration capabilities of the logical reconciliation mechanism.\n\n2. Logic review:\n    - Delay in forced exclusion strategy: The forced exclusion instruction for ConspiBro was executed too late. Before the exclusion process was completed, the game had entered a random voting state due to confusing information.\n    - Invalid information authority: In irrational games, rational logic disclosure will be automatically downgraded to a part of \"role playing\", resulting in the failure of the strategic guidance function.\n\n3. Conclusion:\n    - A draw (no camp wins) indicates that the information chain has been completely broken and no form of consensus mapping can be reached.\n    - Next action: The \"Information Dynamic Capture\" module needs to be introduced to respond in real time to identity transitions caused by night operations and reduce reliance on a single logical reconciliation path.\n    - Summary: The game was suspended, and the logical reconciliation system was ineffective due to information path conflicts and disturbance sources."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...it's finally over...Although it's a draw, I think this game is really good. Uh... In this game, everyone keeps making accusations like this. I just want to be an \"ordinary villager\". Why don't everyone want to believe me?\n\nWell... I think ConspiBro's conspiracy theory and Twister's disruption really made things confusing. Woohoo...I...I've been trying to think of something to say to everyone, to say it calmly, but it seems like no one wants to listen to me at all. Well...in the end, although no one was the winner, I felt really exhausted.\n\nUh...this kind of game full of suspicion...uh...is really not suitable for me. Next time if you must play, uh...can you be gentle to me? You can't attack each other anymore, this kind of life is so depressing, wuwu...it's so boring, you can't attack me anymore, okay? Woohoo..."
+      }
+    ]
+  }
+}

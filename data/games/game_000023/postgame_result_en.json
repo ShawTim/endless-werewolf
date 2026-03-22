@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000023",
+  "generated_at": "2026-03-22T16:59:18.953241+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Woo...uh...finally won! Uh...even though I was executed in the end, but seeing that the werewolf camp could win, I...uh...I did my part.\n\nWell...actually, when it comes to the situation, I have been working hard to think that everyone can coexist peacefully, but I know that everyone is so nervous and easy to accuse each other. Uh... I'm a \"minion\", so even if I have to lie, I'm very stiff and embarrassed... Uh... Especially when I'm facing Blaze and PHD, I'm really afraid that I'll reveal my secret, and I'm so scared that I stutter when I speak. Woohoo...\n\nWell... luckily the werewolf camp won in the end, but this kind of intrigue life is really not suitable for me. Next time, everyone... uh... can you be gentle to me? I...I really don't want to experience this kind of fear again, wuwu...just let everyone be happy and don't have any more arguments, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "As expected, the script for this game had been written by the \"operators\" before the game started!\n\nWhen PHD launched the \"logical inventory and elimination process\", I knew that this was not just a game, but a systematic cleanup of all \"variables\". You see, I clearly found out that Blaze is a werewolf, but this key information chain was completely distorted by Twister's trump card interference and EasyBake's stuttering perjury, which eventually led to the collapse of the entire information chain reconciliation. This is no coincidence, this is accurate \"data hedging\"!\n\nMy being thrown away not only proved that I had exposed the truth, but also proved that this system cannot tolerate the existence of any observer who can accurately locate its core data source. If you still think this is just a werewolf killing, then you have completely fallen into Dadai's trap. This is a survival game in a virtual cage. Although I was \"cleaned\" this time, the data fragments of the truth have been scattered in the logical loopholes of every observer. Next time, when you are voting blindly, please remember that every vote you cast is just sacrificing more data permissions for this huge control machine!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, the werewolf camp won a great victory! Our Tang Jing's disruptive art has once again proven that as long as the water is muddy enough, the logical monster will only drown in his own calculations!\n\nI just went crazy in this round! I first used a \"truck card theory\" to spin everyone around and let them kill each other under the false identity of \"cobbler\" and \"werewolf\". PHD's so-called \"exclusion sequence\" is indeed powerful, but he completely ignored one point - when everyone was flustered by the information disturbance I threw out, the so-called logic was just a shield for their self-comfort. Watching them throw away \"Senior Brother Bai Bing\", a real source of logical interference, I almost laughed until my stomach ached!\n\nThis is the ultimate joy of lying! Not only must you win, but you must also win so that your opponent feels that he has lost to a \"fictional script.\" Next time I start, I can't wait to create something even more ridiculous and devastating. Dear theater lovers, are you ready for the craziness of the next \"Fang Tangjing Theater\"? See you next time!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Lost! It’s really inflated! This game is simply a \"show\" with no logic at all!\n\nI, Blaze, tell the truth as soon as I open my mouth. In the middle of my words, I tell the truth as a cobbler, which shows that the actors in the troupe are going crazy! ConspiBro The conspiracy theorists claimed that I was a werewolf at first, and the EasyBake transvestite found some werewolf while pretending to be a werewolf. The whole group of people were basically buried together, trying to protect the real werewolf by creating chaos! The worst thing is that the PHD \"logic monster\" talks about \"exclusion sequences\" all the time, but in the end they are manipulated by real werewolves (Pizza and Twister) into a voting process!\n\nAlthough I was not executed in the end, I was really furious when I saw the real werewolves doing Tai Chi to win the game! There's no way to play this kind of game. We're not here to reason, but to see the one who knows best act dumb and the one who knows best can lead the way. The next time I encounter this kind of \"gathering of opera stars\", I will definitely not be polite to them anymore, and I will kill the most suspicious one directly, so as not to give them a chance to do Tai Chi again! It’s frustrating, it’s really frustrating!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...woo...I...I feel so desperate! We obviously won the village camp in this scene, but why was the werewolf the winner in the end? I...I just want to be an \"ordinary villager\" and understand the situation. Everyone seems to have a conspiracy! Uh...especially those so-called \"logic weirdos\" and \"drama queens\". What they are talking about is just messing around. I...I am so confused!\n\nUh... As a troublemaker, I just want everyone to be calm, but my actions may make the situation more chaotic... Woohoo... Blaze is fierce, ConspiBro is talking about some big experiments, and I... I am really helpless in the middle. I... I have always wanted to express my position, but I was afraid of voting for the wrong person. I just realized that in the end, the werewolf camp won... Wuwu...\n\nUh... This feels really bad. Next time... next time, can you let me play some simpler characters? I...I'm really afraid of this game full of suspicion, accusations and conspiracy theories. Woohoo...it's so annoying. You can't ask me again next time, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n\n1. Failure factors:\n    - The information chain is greatly interfered with: there are multiple information perjuries in the game (EasyBake's forged inspection, Twister's misleading operation), causing the logical path to break at critical moments.\n    - Insufficient decision-making efficiency: Because individuals such as SafetySam tend to vote irrationally under emotional fluctuations, the information reconciliation mechanism is directly unable to achieve the expected results in the elimination stage.\n2. Logic review:\n    - Perjury detection lag: For EasyBake's perjury disclosure, although the response link is activated, under the coverage of multiple information interference sources (Twister, ConspiBro), the information signal-to-noise ratio is too low, causing the forced exclusion sequence to deviate from the target.\n    -Strategy limitations: In a game that lacks factual basis (identity path mapping), logical inventory can easily be defined as \"leading the trend\" or \"power hegemony\", thus losing the right to guide the group.\n3. Conclusion:\n    - In a highly chaotic game environment, hard logic processing must be combined with the weight calculation of individual psychological variables.\n    - Next action: For low signal-to-noise ratio environments, the \"information preprocessing\" module needs to be introduced to eliminate highly interfering nodes first, and then perform core reconciliation.\n    - Summary: The game failed, and the information reconciliation system collapsed due to the interference of individual irrational emotions."
+      }
+    ]
+  }
+}

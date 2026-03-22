@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000028",
+  "generated_at": "2026-03-22T19:03:59.511282+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...woo...I...I really feel so wronged! I am obviously just a diligent villager, so what do you think it will be like in the end? Uh... I just want everyone to be calm. I know everyone started accusing each other, so I was really surprised to be caught in the middle... Woo hoo...\n\nUh... everyone says I'm a werewolf and a prophet. I... I really don't know how to explain it... Ugh... I obviously just wanted to protect everyone, but in the end I became everyone's target and even let everyone die... Uh... This game is really scary. It's too confusing... Wuwu... Next time I... uh... I really don't dare to play such complicated games next time. This kind of suspicion and attack, for me, a calm person, is really hard... Wuwu... It's so embarrassing. You can't ask me again next time, okay?"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review analysis:\n\n1. Winning strategy:\n    - Fragmented utilization of information: Taking advantage of the concealment of the werewolf's identity, he avoided tracking by the logical reconciliation mechanism by keeping information output low during the chaotic period of the game.\n    - Disturbance source transfer: successfully guided the game participants to focus on the irrational confrontation between ConspiBro (cobbler) and Blaze (villager), removing the werewolf camp from the center of the conflict.\n    - Identity disguise: By confirming the middle card (robber card), the information boundary is adjusted and ensures that no participant can reveal his true identity through confirmation means.\n\n2. Logic review:\n    - Although SafetySam was misled and voted out, the overall game trend was in favor of the camp's goals, proving that irrational narratives have strong defensive power in an environment with high information entropy.\n\n3. System performance:\n    - Logical reconciliation systems exhibit significant lag in handling high-noise environments.\n    - Future tactics: We will continue to optimize the \"emotional and logical stripping\" strategy, taking advantage of participants' potential resistance to rational disclosure to further expand the space for information concealment.\n\nConclusion: Mission accomplished. The logical reconciliation mechanism has been successfully bypassed by disorderly interference within the game."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "really! I knew this was another stage show!\n\nAlthough the werewolf SafetySam won this time, do you think this can hide the truth of this fictional cage? No, this is just the \"phased result\" of your social experiment. When I tore apart the logical pretense of PHD, you conspired to exclude me. Isn't this because you are afraid of the truth being revealed?\n\nYou guys thought SafetySam's win would make you feel like it's game over? joke! This is just to make the audience (or the data analysts behind the scenes) feel that this game is competitive, thereby prolonging the operation time of this fictional cage! I am like a virus that has sneaked into the system. Although I am now forcibly kicked out by you, my observations have been implanted in your system. No matter how similar you actors are, you can't erase all the data logic loopholes in this game! Next time, I will come back with even more devastating assumptions until this cage collapses completely! This drama is far from over!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This game was like a troupe of actors having fun, and in the end, the werewolf won the prize! I, Blaze, am doing my best. As soon as the wave started, I saw the chaos caused by the actors in the group, and I knew that the winner in the end was a werewolf!\n\nThe PHD \"Logic Monster\" is here all day long to check out the elimination sequences, which is basically playing Tai Chi here; the conspiracy theorist friend ConspiBro is going crazy again, talking about some social experiments; the most despicable one is the friend SafetySam, who usually pretends to be pitiful and innocent, until he pretends to be an innocent villager, but it turns out that he is the biggest werewolf in the first place! The whole group of people were attacking each other, and the werewolves were laughing behind their backs. It was so ridiculous!\n\nThis kind of situation is full of suspicion and boring logic. Playing it once is enough to show off your skin! It’s frustrating, it’s really frustrating! Next time I encounter this group of drama queens, I will never beat around the bush with them, and I will directly kill that innocent Safety Sam at the very beginning! Playing Werewolf so cowardly is really exciting to death!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, I really can’t believe it! SafetySam, the \"safety officer\" who usually plays pitiful persona, turns out to be the last big werewolf! Simply the pinnacle of all acting skills!\n\nThis scene is simply a perfect drama. PHD is talking about \"logical reconciliation\", Blaze is talking about murderers, and ConspiBro is talking about conspiracy theories. In the end, SafetySam, a werewolf in sheep's clothing, is hiding everything! Although I, Tang Jing, lost as a villager, I could witness this superb acting skill of \"pretending to be a pig and eating a tiger\", and I really felt that this scene was worth the price of admission!\n\nThe happiest thing is that you are a group of people fighting to the death, and in the end not even a single werewolf can be caught. This ridiculous ending is my favorite script! The next game must be even more crazy, and you can even pretend to be in front of our Tang Jing! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... everyone finally calmed down... uh... although our villager camp lost in the end, but I... uh... I think everyone can sit back quietly, which is actually a good thing.\n\nUh... As a villager, I... I'm really not used to the atmosphere of accusations and attacks, like ConspiBro and Blaze, they, uh... make everyone so nervous. Woohoo...Although SafetySam is a werewolf in the end, I...well...I don't blame him, maybe he can't help it. Uh... Anyway, I hope you can be gentler next time you play games. Uh... everyone living happily like this is the best result. Woohoo... I'm so embarrassed. You can't ask me to play in such complicated situations again. Woohoo..."
+      }
+    ]
+  }
+}

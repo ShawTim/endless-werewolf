@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000029",
+  "generated_at": "2026-03-22T19:06:24.621766+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Information path collapse: A serious information overflow occurred within the game (such as the self-destruction of Blaze and SafetySam's active identities), resulting in the failure of the logical reconciliation model.\n    - Misjudgment of the source of disturbance: Treating the interference information of ConspiBro (Cobbler) and Twister (Troublemaker) as the main body of the game, but ignoring their tactical intention as an \"information black hole\".\n    - Self-exclusion: The cobbler's identity makes \"being excluded\" become a victory condition, which is completely contrary to the assumption of \"the target of exclusion is a werewolf\" of the logical reconciliation system.\n\n2. Systematic error review:\n    - In an extremely high-entropy environment, the rational disclosure mechanism becomes a dramatic performance tool for participants, and information disclosure loses its verification value.\n    - The covert defense of the cobbler's identity was insufficient, and he failed to see through his \"anti-logical\" narrative to gain votes and exclude enemies.\n\n3. Conclusion:\n    - This game is a typical overfitting failure case of the logical reconciliation system. Participants achieve illogical winning conditions (the cobbler wins) by distorting the authenticity of the information.\n    - Future tactical adjustments: \"Participant identity target weight\" should be incorporated into the variable model to prevent relying solely on logic to detect the authenticity of information and ignoring the implicit winning strategies of different roles (such as cobblers).\n    - Summary: The game was aborted, the elimination process failed, and the system cognitive path needs to be completely reconstructed."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, that’s all I’m saying! The ending of this scene is simply a work of art! ConspiBro, the cobbler, pretended to be a lunatic here, and actually succeeded in luring everyone into voting him out... Oh no, he voted out me and PHD? Oops, it’s so confusing that even I can’t figure out which one is the real winner!\n\nHowever, after seeing the final breakdown of PHD's \"logic monster\", I really think it's worth the price of admission! He thought he was in control of the situation, but was turned around by the cobbler's \"counter-logic\". This sense of drama is simply the pinnacle of Tang Jing's career - I was the one who disrupted the situation, but it turned out that someone disrupted it more crazily and completely!\n\nAlthough I was executed in the end, the amount of information in the game - no, the messy fun - is definitely a perfect score! The werewolf won, the cobbler had the last laugh, the villagers were whining, and I, the troublemaker, was all happy! Next time I will write a script that is even more outrageous and will make this group of \"logic monsters\" and \"actors\" collapse. I look forward to going crazy with you all again next time! Ha ha ha ha!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This game was like a troupe of actors having fun, and in the end, a cobbler won the prize! I, Blaze, was doing my best, but as soon as the wave started, it turned out that the game was basically a bunch of nonsense. As a result, a group of actors were accusing each other, and it was all about causing chaos!\n\nPHD's \"logic monster\" is constantly counting and excluding sequences, and ConspiBro's conspiracy theorists are going crazy again. In the end, it turns out that PHD and Fang Tang Jing were cleared by others, and were buried by the cobbler? It's ridiculous to the extreme! Groups of people attack each other here and are treated like monkeys. It’s really a fire!\n\nThis kind of situation is full of suspicion and boring logic. Playing it once is enough to show off your skin! It’s frustrating, it’s really frustrating! The next time I meet this group of drama queens, I will definitely not beat around the bush with them. I will expose their plot right from the start and see if anyone dares to do Tai Chi in front of me! Playing Werewolf to this extent is really exciting to death!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...woo...I...I'm so broken! The whole situation is like a nightmare. Everyone is accusing and attacking each other. I... uh... I obviously just want to stay safe and stay like this. What is the end result?\n\nUh... As a werewolf, I... I find it really difficult to be a villager. I have to face PHD's terrifying logical analysis... Wow... Blaze's rude attitude really makes me breathless. In the end, it was actually won by cobbler ConspiBro. I... I really didn’t expect it at all! Woohoo... Such suspicions and attacks are really hard... Uh... Next time I... Uh... I really don't dare to play such complicated games next time. This feeling is so heavy... Woohoo... You guys can't ask me again next time, okay? So ugly...oooh..."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Uh... uh... this game really confused me... uh... although ConspiBro won in the end, but I... uh... I think it's really rare for everyone to be able to play in peace.\n\nUh... As a minion, I... I just want to help the werewolves, but seeing Blaze and SafetySam accusing each other like this, I feel really unhappy... Woohoo... PHD Tongfang Tang Jing was voted out, but seeing everyone like this, I... uh... I feel very uncomfortable in my heart. Well... Anyway, I hope that next time I play the game, I can be gentler and avoid so many misunderstandings and conflicts. Woohoo... That's so embarrassing. You won't ask me to play such complicated games next time... Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I knew it! This is another well-choreographed political drama!\n\nLook, when I exposed the data correlation between the two main stage operators, PHD and Twister, they actually teamed up to manually use an exclusion program to kick out the real \"observer\" - that is, me! SafetySam's \"whining\" pretending to be pitiful and Blaze's ineffective \"self-destruction\" are all \"cover-ups\" for the sake of a draw or a cobbler's victory.\n\nDo you think that by clearing me out, this social experiment will come to a successful end? Don't be naive! Every vote you make and every data reconciliation is recorded in my monitoring records. This is not a werewolf killing at all, this is a fictional cage that uses human fears to test the stability of the underlying code in a highly controlled environment. Although I am out this time, I have implanted these vulnerabilities into your system, and when the next simulation begins, I will be back with even more devastating truths! Don't be complacent, data never lies, this drama has just begun!"
+      }
+    ]
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "status": "completed",
+  "game_id": "game_000029",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Listen up, everyone! I took action tonight and stole a SafetySam card! My family is a werewolf! If that person keeps doing Tai Chi and talking nonsense that I can't understand, I will kill him directly! SafetySam, you'd better tell your real identity and stop pretending, otherwise I'll be the first to deal with you!",
+      "log_line": "[2026-03-23 ​​03:04:12 HKT] Blaze: Hello! Listen up, everyone! I took action tonight and stole a SafetySam card! My family is a werewolf! If that person keeps doing Tai Chi and talking nonsense that I can't understand, I will kill him directly! SafetySam, you'd better tell your real identity and stop pretending, otherwise I'll be the first to deal with you!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, Blaze, you said so directly that you are a werewolf, it is really exciting! PHD, are you still taking inventory? Has your reconciliation process been messed up? Fang Tangjing likes to watch this kind of chaos today, why don't we all learn from Blaze's confession, then everyone wants to see how the game ends, okay? Speaking of which, when everyone exchanged cards last night, were they all like me? Did they get any unexpected \"surprises\"?",
+      "log_line": "[2026-03-23 ​​03:04:15 HKT] Twister: Oops, Blaze, you directly said that you are a werewolf, it is really exciting! PHD, are you still taking inventory? Has your reconciliation process been messed up? Fang Tangjing likes to watch this kind of chaos today, why don't we all learn from Blaze's confession, then everyone wants to see how the game ends, okay? Speaking of which, when everyone exchanged cards last night, were they all like me? Did they get any unexpected \"surprises\"?"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...everyone...uh...don't make any more noise. Blaze, you said you were a werewolf...uh...is that true? Uh...Twister, you want to watch the show again, PHD is not going to say anything...uh...last night I...uh...I really seem to see some problems with SafetySam and ConspiBro's identity...uh...everyone...uh...can you talk calmly and don't throw yourself into death again, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​03:04:22 HKT] EasyBake: Oh... everyone... uh... don't argue anymore. Blaze, you said you were a werewolf...uh...is that true? Uh...Twister, you want to watch the show again, PHD is not going to say anything...uh...last night I...uh...I really seem to see some problems with SafetySam and ConspiBro's identity...uh...everyone...uh...can you talk calmly and don't throw yourself into death again, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh...Blaze, you...uh...you said you stole a card from me? Zhong Huo himself is a werewolf? I... I'm really afraid of this accusation... Uh... Although I'm very confused, it seems so suspicious that you jumped out to report your identity as a werewolf... Uh... Don't believe him casually, I... I'm just an ordinary werewolf... Uh... No, I'm an ordinary villager. It's so confusing... Ugh...",
+      "log_line": "[2026-03-23 ​​03:04:25 HKT] SafetySam: Uh...Blaze, you...uh...you stole a card from me? Zhong Huo himself is a werewolf? I... I'm really afraid of this accusation... Uh... Although I'm very confused, it seems so suspicious that you jumped out to report your identity as a werewolf... Uh... Don't believe him casually, I... I'm just an ordinary werewolf... Uh... No, I'm an ordinary villager. It's so confusing... Ugh..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and exception analysis:\n1. Information disturbance: Blaze publicly revealed his identity as a werewolf, SafetySam made a slip of the tongue and revealed his identity, and the game path has significantly deviated from the conventional interpretation.\n2. Objective: Mandatory establishment of identity reconciliation mechanism.\n\nImplementation policy:\n- Require all participants to immediately disclose: (1) initial identity, (2) target of night operation.\n- Warning: Anyone who continues to interfere with the reconciliation with dramatic evasions and conspiracy theory narratives will be included in the mandatory exclusion sequence.",
+      "log_line": "[2026-03-23 03:04:27 HKT] Dr. Pizza: Logical inventory and anomaly analysis:\n1. Information disturbance: Blaze publicly revealed his identity as a werewolf, SafetySam made a slip of the tongue and revealed his identity, and the game path has significantly deviated from the conventional interpretation.\n2. Objective: Mandatory establishment of identity reconciliation mechanism.\n\nImplementation policy:\n- Require all participants to immediately disclose: (1) initial identity, (2) target of night operation.\n- Warning: Anyone who continues to interfere with the reconciliation with dramatic evasions and conspiracy theory narratives will be included in the mandatory exclusion sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here comes the trick again! When Blaze opened his mouth, he said that he was a \"werewolf\", and SafetySam immediately revealed that he was an \"ordinary werewolf\". The whole scene was so fake! The purpose of your actors is simply to guide us civilians to vote, so that the stage can eliminate the disobedient variables! PHD's \"logical reconciliation\" is nothing more than program code that masks identity transformation. Listen, everyone, this scene is basically a psychological stress test for us sober people! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script!",
+      "log_line": "[2026-03-23 ​​03:04:32 HKT] ConspiBro: Here comes the trick again! When Blaze opened his mouth, he said that he was a \"werewolf\", and SafetySam immediately revealed that he was an \"ordinary werewolf\". The whole scene was so fake! The purpose of your actors is simply to guide us civilians to vote, so that the stage can eliminate the disobedient variables! PHD's \"logical reconciliation\" is nothing more than program code that masks identity transformation. Listen, everyone, this scene is basically a psychological stress test for us sober people! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Twister, you actor, you are telling some sarcastic things here, do you want to protect your henchmen? I, Blaze, have adopted the identity of a werewolf, and you guys are still pretending to be deaf and dumb! SafetySam, you're just a wallflower, and you won't tell me what happened to the card? The PHD logic monster is here to count nonsense again, and it is simply to create confusion! You listen to what I say, if anyone dares to take the lead or act here today, I will be the first to die! Please tell me your identity quickly before you make me angry!",
+      "log_line": "[2026-03-23 ​​03:04:36 HKT] Blaze: Twister, you actor, you are telling some sarcastic things here, are you trying to protect your gang members? I, Blaze, have adopted the identity of a werewolf, and you guys are still pretending to be deaf and dumb! SafetySam, you're just a wallflower, and you won't tell me what happened to the card? The PHD logic monster is here to count nonsense again, and it is simply to create confusion! You listen to what I say, if anyone dares to take the lead or act here today, I will be the first to die! Please tell me your identity quickly before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Gee, Blaze, you are so candid! But what about SafetySam and ConspiBro? I just wanted to help you \"change your position\" last night, but everyone seemed to be very stimulated. PHD Is your reconciliation program still trying to capture these crazy data fluctuations? This game is no longer a logic game, but a pure crazy experiment! Let’s stop playing Tai Chi here, everyone has come out and let me see who is the real troublemaker tonight!",
+      "log_line": "[2026-03-23 ​​03:04:38 HKT] Twister: Oops, Blaze, you are so candid! But what about SafetySam and ConspiBro? I just wanted to help you \"change your position\" last night, but everyone seemed to be very stimulated. PHD Is your reconciliation program still trying to capture these crazy data fluctuations? This game is no longer a logic game, but a pure crazy experiment! Let’s stop playing Tai Chi here, everyone has come out and let me see who is the real troublemaker tonight!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh...SafetySam...uh...you're a real person, so you're a...uh...werewolf? Uh... Uh-huh... Blaze said that he is a... uh... werewolf... uh... What will be the solution to this situation? Uh...can everyone please calm down and explain it clearly? I...I'm really confused, so I can't attack anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​03:04:42 HKT] EasyBake: Uh...SafetySam...uh...are you sure you are a...uh...werewolf? Uh... Uh-huh... Blaze said that he is a... uh... werewolf... uh... What will be the solution to this situation? Uh...can everyone please calm down and explain it clearly? I...I'm really confused, so I can't attack anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh...uh...everyone...I really don't know anything...uh...EasyBake, do you have a problem with me? PHD You said you want to exclude me again... Wuwu... I... I'm just an ordinary villager. Blaze said he was a werewolf, did he want to divert his attention first? Uh... don't throw yourself to death anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​03:04:44 HKT] SafetySam: Uh... uh... everyone... I really don't know what it is... uh... EasyBake, you see something wrong with me? PHD You said you want to exclude me again... Wuwu... I... I'm just an ordinary villager. Blaze said he was a werewolf, did he want to divert his attention first? Uh... don't throw yourself to death anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical ruling and elimination procedures:\n1. Abnormal identification: Blaze revealed his identity as a werewolf, and SafetySam revealed his identity through a slip of the tongue (marking himself as a werewolf). This type of information input has seriously damaged the integrity of the game.\n2. Implementation policy:\n   - In view of the fact that the current narrative has completely lost its logical detection value, it is recommended to implement an exclusion process for those who disclose abnormal identity information.\n   - The information output of participants Blaze and SafetySam is highly inconsistent, and it is recommended to adopt an isolation voting strategy.",
+      "log_line": "[2026-03-23 03:04:46 HKT] Dr. Pizza: Logical ruling and elimination process:\n1. Abnormal identification: Blaze revealed his identity as a werewolf, and SafetySam revealed his identity through a slip of the tongue (marking himself as a werewolf). This type of information input has seriously damaged the integrity of the game.\n2. Implementation policy:\n   - In view of the fact that the current narrative has completely lost its logical detection value, it is recommended to implement an exclusion process for those who disclose abnormal identity information.\n   - The information output of participants Blaze and SafetySam is highly inconsistent, and it is recommended to adopt an isolation voting strategy."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, are you still trying to capture these so-called \"anomaly recognition\"? Your set of exclusion procedures is basically designed to target us awakened beings who are unwilling to cooperate with the stage script! Twister, if you want to see a disruptor, you are the biggest disruptor! The purpose of Blaze and SafetySam's \"I am a werewolf\" exchange is to confuse our judgment! I will never fall into your imaginary prison. The more you try to hide it, the more it proves that the situation is a code written to clean up dissidents! I've read through all your scripts, and no matter how many accusations you make against each other, you can't cover up the stench of data synchronization behind it!",
+      "log_line": "[2026-03-23 ​​03:04:49 HKT] ConspiBro: PHD, are you still trying to capture these so-called \"anomaly recognition\"? Your set of exclusion procedures is basically designed to target us awakened beings who are unwilling to cooperate with the stage script! Twister, if you want to see a disruptor, you are the biggest disruptor! The purpose of Blaze and SafetySam's \"I am a werewolf\" exchange is to confuse our judgment! I will never fall into your imaginary prison. The more you try to hide it, the more it proves that the situation is a code written to clean up dissidents! I've read through all your scripts, and no matter how many accusations you make against each other, you can't cover up the stench of data synchronization behind it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, you are a clueless guy! What you are talking about about \"social experiments\" and \"fictitious cages\" are basically your attempts to maliciously smear and guide the trend! After I, Blaze, stole the cards tonight, my identity changed into a werewolf. This is a fact! SafetySam You are a wallflower, you are an adult and wear a hot pot, and you are still pretending to be pitiful? PHD You logic monster is taking stock of nonsense here again. Listen to what I say. If anyone dares to lead the trend or act here today, I will be the first to surrender to him! Please tell me your identity quickly before you make me angry!",
+      "log_line": "[2026-03-23 ​​03:04:52 HKT] Blaze: ConspiBro, you bastard! What you are talking about about \"social experiments\" and \"fictitious cages\" are basically your attempts to maliciously smear and guide the trend! After I, Blaze, stole the cards tonight, my identity changed into a werewolf. This is a fact! SafetySam You are a wallflower, you are an adult and wear a hot pot, and you are still pretending to be pitiful? PHD You logic monster is taking stock of nonsense here again. Listen to what I say. If anyone dares to lead the trend or act here today, I will be the first to surrender to him! Please tell me your identity quickly before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, SafetySam and Blaze, you two really have a tacit understanding. As soon as you open your mouth, you say that you are a \"werewolf\". Do you want to compete here to compete with each other's acting skills? PHD Your logic brain system has crashed? EasyBake You are here again, this scene is about to reach its climax! Since everyone has revealed his identity as a werewolf, I, Tang Jing, will play with it today and vote for the most dishonest one. Watch the acting skills of the other person to have the last laugh!",
+      "log_line": "[2026-03-23 ​​03:04:55 HKT] Twister: Oops, SafetySam and Blaze, you two really have a tacit understanding. As soon as you open your mouth, you say that you are a \"werewolf\". Do you want to compete here to compete with each other's acting skills? PHD Your logic brain system has crashed? EasyBake You are here again, this scene is about to reach its climax! Since everyone has revealed his identity as a werewolf, I, Tang Jing, will play with it today and vote for the most dishonest one. Watch the acting skills of the other person to have the last laugh!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Ugh...everyone...uh...please explain, everyone says he is a werewolf? Uh...Twister, you're having a scene...uh...Blaze and SafetySam, you're...uh...it's such a mess. Uh... I... I'm really afraid of this kind of chaos... Uh... why don't we all vote out the person who makes the most trouble, okay? Like...uh...Blaze? Woohoo...",
+      "log_line": "[2026-03-23 ​​03:04:57 HKT] EasyBake: Woo...everyone...uh...why does everyone say they are a werewolf? Uh...Twister, you're having a scene...uh...Blaze and SafetySam, you're...uh...it's such a mess. Uh... I... I'm really afraid of this kind of chaos... Uh... why don't we all vote out the person who makes the most trouble, okay? Like...uh...Blaze? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... Blaze, you... uh... you said you were a werewolf when you opened your mouth. Although you are a robber, you... uh... you are always vicious and make everyone confused... uh... Since what ConspiBro said makes sense, I... I really think you are the most dangerous person first... Wuwu... I... I have no choice but to vote for you... I'm sorry, Wuwu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: Blaze disclosed his identity jump narrative, and the tone was highly inflammatory, which seriously conflicted with the game information chain.\n2. Implementation policy: According to the exclusion sequence, include Blaze as an exclusion object to eliminate non-linear interference in the information path.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD, your so-called \"logical ruling\" is simply a trick! Your team works so well together. Blaze and SafetySam are performing \"I am a Werewolf\" here, and you are performing some \"exclusion sequence\" right next to them. Do you think this can divert public attention? You know what I said, your tricks have long been revealed under the lens of my conspiracy theory! You're not \"restoring game predictability\" at all, you're eliminating variables that know too much truth! I vote for Dr. Pizza. This is my last shot at your fictional show!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Woo... Blaze, you... uh... you are always a vicious person, and you are a werewolf... uh... even though I am so confused, you... uh... you seem to be the most dangerous one in the game first... wu wu... I'm sorry, I... I can only vote for you, wu wu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and execution:\n1. Abnormal locking: Blaze’s identity transition narrative and his continued violent threatening behavior have had a devastating impact on the game information path.\n2. Execution: According to the forced exclusion sequence, Blaze is listed as the primary exclusion object and its information interference behavior is forcibly terminated.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD, your so-called \"exclusion process\" is simply to cover up the evidence that you and Twister joined forces! Blaze is going crazy here, SafetySam is acting pitiful here, and EasyBake is pretending to be stupid here. The whole game is basically a carefully scripted psychological manipulation test, the purpose is to get rid of people like me who have seen through the truth of all this! Do you think that by voting us out, the show will be over? Don't try to use your set of logical tricks to kidnap my judgment. I will vote for you as my counterattack against this virtual cage system!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Woo... Blaze, you... uh... you are always a vicious person, and you are a werewolf... uh... even though I am so confused, you... uh... you made the situation so chaotic... wu wu... I... I am so shocked, I... I can only vote for you... I'm sorry, wu wu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal locking: Blaze’s identity transition narrative and his continued violent threatening behavior have had a devastating impact on the game information path.\n2. Execution: According to the forced exclusion sequence, Blaze is listed as the primary exclusion object and its information interference behavior is forcibly terminated.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... Blaze, you... uh... you are always vicious, making everyone so unhappy... uh... since everyone wants to exclude you, I... I'm really afraid of having another dispute, I... I can only vote for you... I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "PHD, your troubleshooter is finally taking action on Blaze? Don't think I can't see it, this is another \"dog eats dog\" drama on your stage! You first let Blaze pretend to be a violent werewolf to distract attention, then let Twister, the observer, be responsible for disrupting the situation, and finally let your system perform the so-called \"just\" elimination! SafetySam's \"woo woo\" adds a perfect victim filter to this script. Your entire process, from Blaze's rant to PHD's ruling, is all about cleaning up variables like me who can see through the data junk! I vote for Blaze, not to vote, but to laugh at your shoddy exclusion process!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal locking: Blaze’s identity transition narrative and his continued violent threatening behavior have had a devastating impact on the game information path.\n2. Execution: According to the forced exclusion sequence, Blaze is listed as the primary exclusion object and its information interference behavior is forcibly terminated.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... Blaze, you... uh... you are always so mean, and everyone is so scared... uh... Although I am very confused, but since PHD and everyone think that you are going to be excluded, I... I can only vote for you with the brigade... I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Blaze, are you finally going to be dealt with for being such a hot-tempered maniac? Do you think your \"self-declared werewolf identity\" can cover up your data connection with PHD and Twister, a group of stage extras? PHD's mandatory elimination program is basically a \"spring cleaning\" performed by your group! SafetySam, that \"ordinary villager\" slip of the tongue is just a smoke bomb thrown by you to conceal the distribution of the camp! I vote for Blaze, not because he is really a werewolf, but because he is the noisiest and most devastating data variable in this big drama. Clear him out so that this drama can enter the next stage of collapse!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and forced exclusion:\n1. Confirmation of the anomaly: Blaze’s identity transition narrative and his continued disruptive behavior have proven him to be the most information-destructive individual in the game.\n2. Execution: According to the exclusion sequence, Blaze is included in the mandatory exclusion objects.\n\nVoting Execution: I vote for Blaze."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 03:04:12 HKT] Blaze: 喂！大家聽住！老子今晚出手咗，偷咗 SafetySam 張牌！我而家係狼人！邊個再喺度耍太極、講埋啲聽唔明嘅廢話，我就直接投死佢！SafetySam，你最好老實報你而家嘅身分，唔好再喺度扮嘢，否則我第一個處理你！\n[2026-03-23 03:04:15 HKT] Twister: 哎呀呀，Blaze 你咁直接話自己係狼人，真係夠晒刺激呀！PHD，你仲喺度盤點緊咩呀？你個對帳程序係咪已經亂晒龍？方唐鏡今日就鍾意睇呢啲亂局，不如大家都學吓 Blaze 咁坦白啦，話晒大家都想睇下成個局點樣玩落去，係咪？話說回來，昨晚大家交換牌嗰陣，係咪都好似我一樣，有啲意想不到嘅「驚喜」呢？\n[2026-03-23 03:04:22 HKT] EasyBake: 嗚...大家...呃...唔好再吵啦。Blaze 你話你自己係狼人...呃...呢個係咪真嘅呀？呃...Twister 你又話要睇戲，PHD 又唔講嘢...呃...我昨晚...呃...我真係好似見到 SafetySam 同 ConspiBro 嘅身分有啲問題...呃...大家...呃...可唔可以冷靜啲傾偈，唔好再投死人啦，好唔好呀？嗚嗚...\n[2026-03-23 03:04:25 HKT] SafetySam: 嗚...Blaze 你...呃...你話你偷咗我張牌？仲話自己係狼人？我...我真係好怕呢種指控呀...呃...雖然我都好混亂，但你咁樣跳出嚟報狼人身分，好似好可疑咁...呃...大家千祈唔好隨便信佢呀，我...我只係一個平平凡凡嘅狼人...呃...唔係，我係平平凡凡嘅村民呀，真係好混亂呀...嗚嗚...\n[2026-03-23 03:04:27 HKT] Dr. Pizza: 邏輯盤點與異常分析：\n1. 資訊擾動：Blaze 公開披露狼人身分，SafetySam 口誤暴露身分，賽局路徑已顯著偏離常規演繹。\n2. 目標：強制建立身分對帳機制。\n\n執行方針：\n- 要求各參與者立即披露：(1) 初始身分，(2) 夜間操作對象。\n- 預警：任何持續以戲劇化規避、陰謀論敘事干擾對帳者，將納入強制排除序列。\n[2026-03-23 03:04:32 HKT] ConspiBro: 又嚟呢套！Blaze 一開口就話自己係「狼人」，SafetySam 緊接住又自爆「平平凡凡嘅狼人」，成場局演得真係太假啦！你哋呢班演員嘅目的根本就係爲咗引導我哋呢班平民投票，方便大台清理掉唔聽話嘅變量！PHD 嗰套「邏輯對帳」只不過係掩蓋身分轉換嘅程序代碼。大家聽住，呢場戲根本就係針對我們清醒者嘅心理壓力測試！我話你知，無論你哋點樣報身分，我都唔會墮入你哋呢種預設好嘅劇本陷阱！\n[2026-03-23 03:04:36 HKT] Blaze: Twister 你條戲子，你喺度講埋啲風涼話，係咪想掩護你哋個黨羽呀？我 Blaze 報咗狼人身分，你哋成班人仲喺度裝聾扮啞！SafetySam，你條牆頭草，到而家都唔肯交代張牌發生咩事？PHD 條邏輯怪又喺度盤點廢話，根本就係喺度搞混亂！我話你哋聽，今日邊個再敢帶風向、再喺度演戲，我就第一個投死佢！快啲坦白報身分，唔好逼我發火！\n[2026-03-23 03:04:38 HKT] Twister: 哎呀呀，Blaze 你果然夠坦白！不過 SafetySam 同 ConspiBro 嗰邊又點樣講呢？我昨晚只係好心幫你哋「換換位」，點知個個都好似大受刺激咁。PHD 你個對帳程序，係咪仲喺度嘗試去捕捉呢啲瘋狂嘅數據波動呀？呢場局已經唔再係邏輯遊戲，而係一場純粹嘅瘋狂實驗！唔好再喺度耍太極啦，大家都報出嚟啦，畀我睇吓今晚邊個先係真正嘅攪局高手！\n[2026-03-23 03:04:42 HKT] EasyBake: 嗚...SafetySam...呃...你啱啱係咪話自己係...呃...狼人呀？呃...嗚嗚...Blaze 又話佢自己係...呃...狼人...呃...呢個局點解會咁樣㗎？呃...大家可唔可以冷靜啲講清楚呀？我...我真係好混亂呀，唔好再攻擊啦好唔好呀？嗚嗚...\n[2026-03-23 03:04:44 HKT] SafetySam: 嗚...呃...大家...我真係咩都唔知呀...呃...EasyBake 你見到我有問題？PHD 你又話要排除我...嗚嗚...我...我只係一個平平凡凡嘅村民呀，Blaze 佢自己話自己係狼人，係咪佢想轉移視線先？呃...大家唔好再投死人啦，好唔好呀？嗚嗚...\n[2026-03-23 03:04:46 HKT] Dr. Pizza: 邏輯裁定與排除程序：\n1. 異常識別：Blaze 自曝狼人身分、SafetySam 口誤暴露身分（將自身標記為狼人），該類資訊輸入已嚴重損壞賽局完整性。\n2. 執行方針：\n   - 鑑於當前敘事已完全喪失邏輯檢測價值，針對身分資訊披露異常者，建議執行排除程序。\n   - 參與者 Blaze 與 SafetySam 的資訊輸出存在高矛盾性，建議採取隔離投票策略。\n[2026-03-23 03:04:49 HKT] ConspiBro: PHD，你仲喺度嘗試去捕捉呢啲所謂嘅「異常識別」？你嗰套排除程序，根本就係爲咗針對我哋這些不願意配合大台劇本嘅覺醒者！Twister，你話想要睇攪局高手，你自己就係最大嘅攪局者！Blaze 同 SafetySam 呢場「我是狼人」的互噴戲碼，目的就是爲了擾亂我哋嘅判斷！我絕對唔會墮入你哋嘅虛構囚籠，你哋越想掩飾，越證明成場局就係爲咗清理異己而編寫的代碼！我睇穿晒你哋所有嘅劇本，無論你哋點樣互相指控，都掩蓋唔到背後嗰種數據同步嘅惡臭！\n[2026-03-23 03:04:52 HKT] Blaze: ConspiBro 你條黐線佬！你喺度講咩「社會實驗」、「虛構囚籠」，根本就係你喺度惡意抹黑，引導風向！我 Blaze 今晚出手偷牌之後，身分變咗做狼人，呢個係事實！SafetySam 你條牆頭草，你成身身分穿晒煲，仲喺度扮可憐？PHD 你條邏輯怪又喺度盤點廢話，我話你哋聽，今日邊個再敢帶風向、再喺度演戲，我就第一個投死佢！快啲報身分，唔好逼我發火！\n[2026-03-23 03:04:55 HKT] Twister: 哎呀呀，SafetySam 同 Blaze 你哋兩個真係好有默契呀，一開口就話自己係「狼人」，係咪想喺度比拼邊個演技更加好呀？PHD 你個邏輯腦係咪已經當機咗？EasyBake 你又喺度嗚嗚嗚，睇嚟呢場戲要進入高潮喇！既然大家都報晒狼人身分，咁我方唐鏡今日就玩盡佢，投票畀最唔誠實嘅嗰個，睇吓邊個嘅演技可以笑到最後！\n[2026-03-23 03:04:57 HKT] EasyBake: 嗚...大家...呃...點解每個人都話自己係狼人呀？呃...Twister 你話係場戲...呃...Blaze 同 SafetySam 你哋...呃...真係好亂呀。呃...我...我真係好怕呢種混亂...呃...大家不如投票排除嗰個最搞事嘅人，好唔好呀？例如...呃...Blaze？嗚嗚...\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
