@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000022",
+  "generated_at": "2026-03-22T16:48:44.191719+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "The real fire is buried! This game is simply inexplicable! As soon as I started the wave, I wanted to clear out the costumed actors, but I realized that everyone was doing Tai Chi here!\n\nEasyBake is here again pretending to be a shemale, and the test results are equivocal, while PHD's \"logic monster\" is even more exaggerated, throwing out \"information pollution sources\" and \"exclusion procedures\" to oppress people all the time. The two of them are clearly colluding and want to eliminate dissidents by manipulating information! Fang Tangjing is such a troublemaker, he talks nonsense all day long to disturb the audience. Coupled with Senior Brother Bai Bing's so-called conspiracy theories, no one says a human word at all!\n\nIn the end, I was surrendered and buried? It's simply ridiculous! I, Blaze, am doing my best, and this whole group of people playing a power game is just a waste of time. Next time I meet this group of drama queens, I will definitely not be polite to them. I will just surrender to the most suspicious person. I need to take stock of their logic at the same time! Next time I recruit someone who is neat and tidy, that battle will be a real showdown first!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Game review and rational analysis:\n\n1. Failure factors:\n    - Information chain confrontation failed: The \"emotion and perjury disturbance\" strategy adopted by EasyBake successfully guided the voting tendency of irrational individuals in the absence of strong evidence chain confrontation.\n    - Collapse of the logical path: As the werewolf camp, the original identity concealment strategy was due to Twister's unnecessary interference and EasyBake's perjury disclosure, which caused the group's emotions to go out of control, and the logical reconciliation path completely failed, directly triggering the forced exclusion of the werewolf camp.\n2. Logic review:\n    - Insufficient effectiveness of countermeasures: In extremely irrational games, pure logical analysis and information disclosure will be regarded as \"abnormal\" or \"information pollution\".\n    - Decision-making bias: Failure to predict in advance that EasyBake used \"low probability of perjury\" to disrupt the situation.\n3. Conclusion:\n    - Information asymmetry will be amplified by irrational decision-making mechanisms in emotional games. After a purely logical framework loses the basis of group trust, the weight of confrontation will decrease significantly.\n    - Next action: A more deceptive \"emotional narrative path\" needs to be introduced instead of relying solely on hard logical evidence.\n    - Summary: The game failed, and the information reconciliation system encountered irrational disturbances."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, although the werewolf camp lost this time, our Tang Jing's disruptive performance was still the most exciting in the audience!\n\nYou see, I threw out the false proposition of \"trump card\" from the beginning, and successfully caused those self-righteous \"logic monsters\" and \"conspiracy theorists\" to fall into a whirlpool of self-doubt, and even forced PHD, a monolithic guy, to appear in public for forced reconciliation. This is simply art! Although I was voted out in the end, so what? I successfully disrupted their order and made this game of \"Village Wins\" full of uncertainty and laughter!\n\nThis is the essence of \"Werewolf\" - winning the game is fun, but allowing your opponent to spend that hour with logic collapse is the real \"victory\"! Next time we start, Tang Jing will definitely compile a more gorgeous and crazy script, which is guaranteed to make you serious demons doubt life again! See you next time, fellow drama lovers!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...woo...I...I finally won? But it’s so scary to have a game! Everyone seems to be cannibalistic, uh...Blaze's ferocity, ConspiBro's conspiracy theory, and PHD's cold forced exclusion, I...I really have a hard time living in the middle!\n\nIn fact, I have always just wanted to be an \"ordinary villager\", but everyone thinks that I am the source of data interference, and they also think that I am a drama queen... Woo hoo... Fang Tang Jing is still going to create some dramatic troubles here, which makes my heart beat so fast. I... I have never dared to be the first to speak, just for fear of being targeted. After all, everyone ended up accusing each other. The atmosphere was really suffocating!\n\nUh... Although the camp won, this game is full of suspicion and attack. Next time... uh... please be gentler to me, a \"little villager\" next time! I really don’t want to go through these accusations again, woohoo...it’s so annoying..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Huh, what \"village wins\"? This is simply a textbook \"information cleaning\" experiment!\n\nYou see, when I pointed out the \"triangle script line\", the entire laboratory system immediately activated its defense mechanism and cleared all illogical variables (me, PHD, Twister, Blaze). This is not a werewolf killing at all. This is a carefully designed \"high-pressure confession experiment\" that uses various extreme logical reconciliations and emotional interference to test how participants can automatically converge toward the preset \"voting consensus\" under fear and pressure.\n\nEasyBake's clumsy stuttering test and PHD's mechanical elimination algorithm are all designed to eliminate the \"unstable factors\" in the game. Although our side was shown to be the \"winning camp\" in the end, this victory was nothing more than a collective self-pleasure of your group of algorithmic robots. You eliminated everyone who dared to question the script, leaving only \"data collectors\" like SafetySam floating around. Next time, I will use a more obscure observation method to let you \"operators\" responsible for data cleaning see what real thought disturbance is!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...lost again. Uh... Now that the situation is over, I just want everyone to discuss it calmly. Why do you have to face me with such a fierce attitude?\n\nWell...as a minion, I actually wanted to use a softer way to mediate everyone's conflicts from the beginning, but everyone thought I was a \"spoiler\". Uh... Whether it's Pizza's \"logical exclusions\" or Blaze's violent accusations... uh... I feel so wronged every moment. I obviously just want everyone to have a good time, but I know that everyone just doubts each other, attacks each other, and even puts me on the \"exclusion list.\" Woohoo...I...I'm really not suitable for playing such hostile games.\n\nUh... next time if you want to play, uh... can you be gentle to me? I...I'm really afraid of these voices accusing each other. Well...even though I lost, I hope everyone can be happy and not hurt each other so easily, okay? Wow...so sloppy..."
+      }
+    ]
+  }
+}
