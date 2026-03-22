@@ -74,6 +74,62 @@ def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: di
 注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
 
 
+def build_night_action_prompt(decision_request: dict) -> str:
+    """Build the prompt for a player's night action decision."""
+    player_name = decision_request["player_name"]
+    persona = decision_request["persona"]
+    role = decision_request["initial_role"]
+    night_memory = decision_request.get("night_memory", [])
+    other_players = decision_request.get("other_players", [])
+    legal_actions = decision_request.get("legal_actions", {})
+
+    memory_text = "\n".join(night_memory) if night_memory else "（暫時未有資訊）"
+    others_text = "、".join(other_players)
+    legal_text = json.dumps(legal_actions, ensure_ascii=False)
+
+    return f"""你正在玩《一夜狼人》。現在係夜晚行動階段。
+
+【你的身份】
+玩家名稱：{player_name}
+你的人格：{persona}
+你的角色：{role}
+
+【你目前知道的資訊】
+{memory_text}
+
+【其他玩家】
+{others_text}
+
+【你可以執行的行動（合法行動）】
+{legal_text}
+
+【你的任務】
+根據你的角色能力同策略，選擇一個合法行動。
+
+角色策略提示：
+- 狼人（Werewolf）：你係孤狼就睇中央牌搜集情報；你有同伴就互相認出對方（如果兩人都係狼人，夜晚會知道）。
+- 預言家（Seer）：選擇一個你最想查明身份嘅玩家，或者睇兩張中央牌增加資訊。
+- 強盜（Robber）：選擇一個目標偷換身份，要考慮哪個玩家換走最有利。
+- 搗蛋鬼（Troublemaker）：選擇兩個目標互換身份，製造混亂。
+
+【輸出格式】
+只輸出一個 JSON，不要任何 markdown 或多餘文字。
+
+如果你係狼人或強盜（單一目標）：
+{{"thought": "你的思考", "action": "行動名稱", "target": 目標（數字或玩家名稱）}}
+
+如果你係搗蛋鬼（兩個目標）：
+{{"thought": "你的思考", "action": "swap", "targets": ["玩家A", "玩家B"]}}
+
+如果你係預言家，選擇睇玩家：
+{{"thought": "你的思考", "action": "inspect_player", "target": "玩家名稱"}}
+
+如果你係預言家，選擇睇中央牌：
+{{"thought": "你的思考", "action": "inspect_center", "targets": [0, 1]}}
+
+注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
+
+
 def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     """Build the prompt for a postgame interview quote."""
     player_name = player_context["player_name"]
@@ -220,6 +276,25 @@ def main():
     model = request.get("model") or player_context.get("model")
     if not model:
         print(json.dumps({"action": "pass", "error": f"No model specified for player {player_context.get('player_name', 'unknown')}"}, ensure_ascii=False))
+        return
+
+    if request_type == "night_action":
+        decision_request = request.get("decision_request", {})
+        player_name = player_context.get("player_name", decision_request.get("player_name", "unknown"))
+        prompt = build_night_action_prompt(decision_request)
+        raw = spawn_thinker_subagent(model, prompt, player_name)
+        if "status" in raw and raw["status"] == "needs_runtime":
+            print(json.dumps(raw, ensure_ascii=False, indent=2))
+            return
+        # Normalize output — extract action/target/targets
+        result = {
+            "status": "ok",
+            "action": raw.get("action", ""),
+            "target": raw.get("target"),
+            "targets": raw.get("targets"),
+            "thought": raw.get("thought", ""),
+        }
+        print(json.dumps(result, ensure_ascii=False, indent=2))
         return
 
     if request_type == "postgame_interview":
