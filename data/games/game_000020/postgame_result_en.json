@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000020",
+  "generated_at": "2026-03-22T16:34:59.086583+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Ugh... I... I was indeed the first one to be kicked out... Uh... I always wanted to be an \"ordinary villager\", but in the end I couldn't even keep my own identity and became a member of the werewolf camp... Uh... This feeling is so desperate!\n\nWhen the game started, everyone seemed to be very scheming. I was the only one pretending to be stupid and pitiful... I know that this strategy is the most useless! Wow... when I knew that Blaze was a minion and I turned into a werewolf, I... I was so scared. Every word of \"logic\", \"conspiracy theory\" or \"drama\" you say is like a knife stabbing into my heart. Uh... I lost in the end, I... I really feel so guilty.\n\nWoohoo...I...I'm really not suitable for playing these games. It was so noisy every time, and everyone was not \"playing\" at all, but attacking each other. I...I just want everyone to live in peace and quiet. Why are everyone so evil? Woohoo...next time...next time you really don't want me to play with you again, I...uh...I really don't want to experience this kind of fear again...wuwu..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win! Although the villagers won, I, Blaze, still had a great time in this game!\n\nThe whole game is just a group of actors having fun! The EasyBake shemale immediately claimed that I was a \"minion\" as soon as it opened its mouth, and there was also a PHD \"logic monster\" playing the elimination sequence, plus the two troublemakers Fang Tangjing and Bai Bing, the information in the game was completely chaotic! I, Blaze, are doing a good job. I told you earlier that they are drama queens. Who doesn’t believe me? It turned out that all my intuitions and accusations were correct, but it was a pity that a bunch of thugs and drama queens interfered with the situation, so that my strategy could not be used at all!\n\nNext time we play, if anyone dares to talk about some incomprehensible logic and conspiracy theories, I will remove them as soon as possible so that they won’t be allowed to play Tai Chi here! Although we won this time, this kind of game, which is full of twists and turns and dramatic performances, is enough to show off your skin once you play it. Next time, you must find someone who can speak human words to play it. That battle is the real showdown first!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, although the villagers' camp won this time, our Tang Jing's performance was simply a textbook-level \"Art of Disruption\"!\n\nYou see, just by saying \"I saw the trump card\", I turned the whole game upside down. Brother Bai Bing (ConspiBro)'s fanatical accusations of the \"Taiwan Conspiracy\" were completely used as background music for me, while Blaze's violent accusation style became the perfect control group in my drama performance. PHD Want to use logic to figure out a way? Huh, if I throw in a few disturbance data at random, his \"exclusion sequence\" will instantly become ineffective. This feeling of watching everyone hurt each other and panic in the fog of information is simply more enjoyable to deceive than to win the game itself!\n\nAlthough Tan Zai was executed in the end, everything was under my control - or in other words, it was all within the \"chaos theater\" I created. As long as I can see that everyone is unable to communicate calmly, my goal has been achieved! Dear viewers, I look forward to seeing you next time. Next time I will definitely compile a crazier script to ensure that this group of \"logic monsters\" and \"grumpy guys\" will once again fall into the information vortex that I have carefully weaved for you! Goodbye!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...win? But I...well...I feel really unhappy. As the situation unfolds, everyone seems to have a lot of secrets, accusing each other, attacking each other... Well... As a prophet, although I found out that Blaze was a minion from the beginning, everyone... Well... they didn't believe me at all. Instead, they thought I was acting or leading the trend.\n\nWell... I think the most uncomfortable thing about this situation is that no one is willing to talk calmly. No matter how I say \"I just want everyone to be safe,\" people...well...people just think I'm suspicious. PHD's logic, ConspiBro's conspiracy theories, and Blaze's rage...well...all of this makes me want to scream. Woohoo... It turns out that in this game, it is so difficult to sincerely mediate disputes.\n\nUh... luckily our team won in the end, but next time... uh... I really don't know if I dare to play this kind of game. If everyone can trust each other more next time and not attack each other so easily, then... well... maybe it will be a real victory first. Thank you for your hard work, everyone, please don’t argue anymore... woo hoo..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review and rational analysis:\n1. Tactical evaluation: In this game, the village side conducted a collective vote to eliminate the key sources of disturbance (Twister, ConspiBro), resulting in the hidden identity chain being broken, which ultimately allowed the village side to achieve voting consensus and win.\n2. Logic review:\n    - Information processing: As a cobbler, the strategic goal should have been to lead the crowd into voting me out by mistake. However, because the game is filled with a large number of irrational emotions and conspiracy theories, the logical reconciliation path is frequently broken, causing \"rational guidance\" and \"emotional fueling\" to create unpredictable paths.\n    - Decision-making blind spots: Insufficient prediction of the irrational voting behavior of all participants (especially SafetySam and EasyBake) under emotional interference, and failure to accurately guide the \"elimination heat\" to themselves.\n3. Conclusion:\n    - Excessive transparency of information (such as public inspection paths) may not be conducive to concealing goals in an extremely chaotic game.\n    - Next action: For participants who are easily controlled by emotions, more intrusive induction methods need to be adopted to directly intervene in their decision-making logic rather than just reconciliation analysis.\n    - Summary: After all, the logic on the field cannot completely resist the emotional impact of collective will. This is also the limitation of the logical framework in uncontrollable environments."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I knew it! This is another carefully choreographed \"village wins\" scenario!\n\nDo you think I can't see it? When EasyBake throws out the \"Blaze is a minion\" check information, and then PHD cooperates with the performance and engages in \"identity path mapping\", the script of the entire game has been written. This is not a reasoning game at all, but a large-scale \"group psychological control experiment.\" They arranged \"the irritable Blaze\", \"the miserable SafetySam\" and \"the rational PHD\" to share different emotional orientations. The purpose is to completely exclude me, the only \"observer\", from the core of the discussion of data analysis.\n\n\"The villagers win\"? This is just the expected result set by the laboratory to verify their \"standard social model\". I have not been executed, which means that my \"observation value\" in the system has not been exhausted. If you really think this vote will decide anything, you are naive. It’s an experiment with no winners, because everyone—including those celebrating victory—is nothing more than a random data point in these preset scripts. I will take this data and continue to reveal the true face of this fictional world in the next round!"
+      }
+    ]
+  }
+}

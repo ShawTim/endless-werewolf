@@ -1,0 +1,160 @@
+{
+  "status": "completed",
+  "game_id": "game_000020",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 3
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 3
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here comes the trick again! At the beginning, everyone pretended to be \"peaceful villagers\", but everyone knew that this excessively quiet atmosphere was simply a \"social test\" controlled by the boss behind the scenes! The more you try to maintain this false calm, the more it proves that this situation is basically a trap for me, the observer! As I said, you know, there are never so-called werewolves or villagers in the game, only actors who are randomly assigned \"characters\"! I don't think your \"silence\" can cover up the data cleaning task you are preparing for. My suspicion has been fixed on the \"quiet\" one in the situation. You actors, you'd better prepare your scripts for me to expose!",
+      "log_line": "[2026-03-23 ​​00:30:09 HKT] ConspiBro: Here comes the trick again! At the beginning, everyone pretended to be \"peaceful villagers\", but everyone knew that this excessively quiet atmosphere was simply a \"social test\" controlled by the boss behind the scenes! The more you try to maintain this false calm, the more it proves that this situation is basically a trap for me, the observer! As I said, you know, there are never so-called werewolves or villagers in the game, only actors who are randomly assigned \"characters\"! I don't think your \"silence\" can cover up the data cleaning task you are preparing for. My suspicion has been fixed on the \"quiet\" one in the situation. You actors, you'd better prepare your scripts for me to expose!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, it’s finally started again! Hello everyone! Do you remember me, the drama queen who loves to mess up the situation? Since everyone is so excited to get together, why not have some fun? Let me break the news for everyone: I actually used a \"very interesting\" ability last night to see the trump card of the entire game! As for the side one? Hehe, I won’t let you hear it, leaving some suspense for you to evaluate slowly! Isn't this feeling of everyone doubting each other more exciting than winning a game?",
+      "log_line": "[2026-03-23 ​​00:30:12 HKT] Twister: Oops, it’s finally started again! Hello everyone! Do you remember me, the drama queen who loves to mess up the situation? Since everyone is so excited to get together, why not have some fun? Let me break the news for everyone: I actually used a \"very interesting\" ability last night to see the trump card of the entire game! As for the side one? Hehe, I won’t let you hear it, leaving some suspense for you to evaluate slowly! Isn't this feeling of everyone doubting each other more exciting than winning a game?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro Are you crazy about your friend? Are you dreaming about experimenting with stage control? And Twister, if you show off all day long and see all the trump cards, do you think you are a god? Everyone can't believe that these drama stars are leading the trend here. If anyone wants to cause trouble, I will kill him directly today! When I talk about things, Blaze, I will surrender to the one who is the most suspicious, and I won’t let them do Tai Chi here!",
+      "log_line": "[2026-03-23 ​​00:30:16 HKT] Blaze: ConspiBro, what's going on with your friend? Are you dreaming about experimenting with stage control? And Twister, if you show off all day long and see all the trump cards, do you think you are a god? Everyone can't believe that these drama stars are leading the trend here. If anyone wants to cause trouble, I will kill him directly today! When I talk about things, Blaze, I will surrender to the one who is the most suspicious, and I won’t let them do Tai Chi here!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory:\n1. The current speeches of all parties on the court are too emotional, and the information entropy value is too high, making it impossible to establish a credible identity mapping path.\n2. Identify anomalies: Twister claimed to have the authority to spy on the information path, but did not provide any evidence; ConspiBro’s conspiracy theory narrative interfered with the rational reconciliation path.\n\nPosition:\n- Refuse to accept unilateral accusations without logical proof.\n- Ask each participant to: (1) state the initial identity, (2) describe the motivation and object of the night operation.",
+      "log_line": "[2026-03-23 00:30:22 HKT] Dr. Pizza: Logical inventory:\n1. The current speeches of all parties on the court are too emotional, and the information entropy value is too high, making it impossible to establish a credible identity mapping path.\n2. Identify anomalies: Twister claimed to have the authority to spy on the information path, but did not provide any evidence; ConspiBro’s conspiracy theory narrative interfered with the rational reconciliation path.\n\nPosition:\n- Refuse to accept unilateral accusations without logical proof.\n- Ask each participant to: (1) state the initial identity, (2) describe the motivation and object of the night operation."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh... I hope we can stop arguing... I... I'm just an ordinary villager, I don't know anything... Although Blaze is fierce, but Twister and ConspiBro seem to be talking about things that are so complicated, I... I'm really confused, please don't throw yourself into death anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​00:30:25 HKT] SafetySam: Ugh... I hope we can stop arguing... I... I'm just an ordinary villager, I don't know anything... Although Blaze is fierce, Twister and ConspiBro seem to be talking so complicated, I... I'm really confused, please don't surrender to the dead anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Big...Hello everyone. It's a new day again... uh... although everyone seems to be so enthusiastic, I think... uh... it's better for everyone to calm down. Actually, I was... uh... lucky enough to check out Blaze last night, and he was... a minion. Everyone... uh... stop attacking each other, okay?",
+      "log_line": "[2026-03-23 ​​00:30:30 HKT] EasyBake: Hello everyone. It's a new day again... uh... although everyone seems to be so enthusiastic, I think... uh... it's better for everyone to calm down. Actually, I was... uh... lucky enough to check out Blaze last night, and he was... a minion. Everyone... uh... stop attacking each other, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Twister, are you throwing out your \"truck theory\" here again to cover up your identity as an actor? Now that you have seen the trump card, do you want to use information manipulation to point votes at anyone who challenges your script? You competed with the PHD, EasyBake, and Blaze who were working in this class, just to make everyone get lost in the fog of information, so that you, the \"controllers\" could perform your data cleaning experiments behind the scenes! I mean, you know, the more you pretend, the more you prove that this game is basically a tightly controlled social experiment. I will never fall into your mystifying scripts!",
+      "log_line": "[2026-03-23 ​​00:30:33 HKT] ConspiBro: Twister, are you throwing out your \"truck theory\" again to cover up your identity as an actor? Now that you have seen the trump card, do you want to use information manipulation to point votes at anyone who challenges your script? You competed with the PHD, EasyBake, and Blaze who were working in this class, just to make everyone get lost in the fog of information, so that you, the \"controllers\" could perform your data cleaning experiments behind the scenes! I mean, you know, the more you pretend, the more you prove that this game is basically a tightly controlled social experiment. I will never fall into your mystifying scripts!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, ConspiBro, you’re talking about some lab conspiracy here again, it’s really interesting to hear! Since everyone wants to play the game of quitting, why don't you just tell me directly, which one makes you feel most \"suspicious\"? I, Tang Jing, will definitely vote for the person who \"surprises\" me the most! Instead of attacking each other, let’s come up with some fun ways to have fun together, okay?",
+      "log_line": "[2026-03-23 ​​00:30:52 HKT] Twister: Oops, ConspiBro, you are talking about some laboratory conspiracy here again. It’s really interesting to listen to it! Since everyone wants to play the game of quitting, why don't you just tell me directly, which one makes you feel most \"suspicious\"? I, Tang Jing, will definitely vote for the person who \"surprises\" me the most! Instead of attacking each other, let’s come up with some fun ways to have fun together, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, you conspiracy theorist, you talk about manipulation and acting all the time, are you dreaming? The two of you, Twister and ConspiBro, are playing Tai Chi here, just to mess up the situation so that you can do tricks behind the scenes! I, Blaze, am doing my job well. If anyone else talks nonsense here and stirs up trouble, I will surrender to him today. If he doesn’t do Tai Chi here anymore, report your identity as soon as possible. If not, I will clean up the house directly!",
+      "log_line": "[2026-03-23 ​​00:30:55 HKT] Blaze: ConspiBro, you conspiracy theorist, you talk about manipulation and acting, are you dreaming? The two of you, Twister and ConspiBro, are playing Tai Chi here, just to mess up the situation so that you can do tricks behind the scenes! I, Blaze, am doing my job well. If anyone else talks nonsense here and stirs up trouble, I will surrender to him today. If he doesn’t do Tai Chi here anymore, report your identity as soon as possible. If not, I will clean up the house directly!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and action plan:\n1. Game status:\n   - ConspiBro's conspiracy theory narrative has constituted a source of information disturbance within the game, causing the information chain to collapse.\n   - Twister's information interference behavior is intended to obscure specific identity paths.\n2. Identify anomalies:\n   - Blaze resorts to extremely aggressive rhetoric in an attempt to circumvent the logical reconciliation mechanism.\n   - The information chain is seriously lagging behind and needs to be corrected through mandatory disclosure.\n\nPosition reiterated:\n- Refuse to believe in any emotional narrative.\n- It is mandatory for each participant to directly disclose: (1) initial identity, (2) exact operation object to facilitate identity path mapping and reconciliation. If a verifiable path cannot be provided, it will be regarded as a source of information disturbance and forcibly excluded.",
+      "log_line": "[2026-03-23 00:30:59 HKT] Dr. Pizza: Logical inventory and action plan:\n1. Game status:\n   - ConspiBro's conspiracy theory narrative has constituted a source of information disturbance within the game, causing the information chain to collapse.\n   - Twister's information interference behavior is intended to obscure specific identity paths.\n2. Identify anomalies:\n   - Blaze resorts to extremely aggressive rhetoric in an attempt to circumvent the logical reconciliation mechanism.\n   - The information chain is seriously lagging behind and needs to be corrected through mandatory disclosure.\n\nPosition reiterated:\n- Refuse to believe in any emotional narrative.\n- It is mandatory for each participant to directly disclose: (1) initial identity, (2) exact operation object to facilitate identity path mapping and reconciliation. If a verifiable path cannot be provided, it will be regarded as a source of information disturbance and forcibly excluded."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh...everyone...let's stop arguing...I...I'm just an ordinary villager, I don't know anything...Although Blaze is a bit fierce, Twister and ConspiBro seem to be talking about things that are so complicated, I...I'm really confused, everyone, please stop throwing yourself into death, okay? Woohoo... I think everyone is a good person, so why don't we just calm down and talk slowly? Woohoo...",
+      "log_line": "[2026-03-23 ​​00:31:02 HKT] SafetySam: Oh...everyone...please stop arguing...I...I'm just an ordinary villager, I don't know anything...Although Blaze is fierce, what Twister and ConspiBro are talking about seems so complicated, I...I'm really confused, please don't surrender to the dead anymore, okay? Woohoo... I think everyone is a good person, so why don't we just calm down and talk slowly? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Ugh... Blaze... don't be so fierce... Uh... Although I found out that you are a minion, I... uh... I really don't want everyone to make noise again. Uh... Can everyone... uh... discuss this situation rationally? What is everyone's initial identity...uh...or what is the night operation? Uh... let's stop attacking each other, okay?",
+      "log_line": "[2026-03-23 ​​00:31:04 HKT] EasyBake: Wow...Blaze...don't be so cruel...uh...although I found out that you are a minion, but I...uh...I really don't want everyone to make noise again. Uh... Can everyone... uh... discuss this situation rationally? What is everyone's initial identity...uh...or what is the night operation? Uh... let's stop attacking each other, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "EasyBake and PHD, the cooperation between you two is simply a textbook-level \"laboratory script\"! EasyBake You suddenly \"check\" that Blaze is a minion, follow PHD and immediately follow your rhythm and ask for \"identity reconciliation\". This set of actions is so smooth that it seems to have been rehearsed early in the morning! Do you think that using such routine identities to quarrel with each other can make me, a person who exposes the truth, doubt myself? Not fun! Blaze is a minion? ha! This result is simply too \"perfect\", so perfect that it seems like a data loophole specifically designed to guide me as an observer! You actors, no matter how much you try to mediate, can't cover up the huge conspiracy of manipulation behind you!",
+      "log_line": "[2026-03-23 ​​00:31:08 HKT] ConspiBro: EasyBake and PHD, the cooperation between you two is simply a textbook-level \"laboratory script\"! EasyBake You suddenly \"check\" that Blaze is a minion, follow PHD and immediately follow your rhythm and ask for \"identity reconciliation\". This set of actions is so smooth that it seems to have been rehearsed early in the morning! Do you think that using such routine identities to quarrel with each other can make me, a person who exposes the truth, doubt myself? Not fun! Blaze is a minion? ha! This result is simply too \"perfect\", so perfect that it seems like a data loophole specifically designed to guide me as an observer! You actors, no matter how much you try to mediate, can't cover up the huge conspiracy of manipulation behind you!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, look, PHD finally couldn't help but use their \"exclusion sequence\"? It’s so majestic! ConspiBro You're talking about some lab conspiracies here again, it's really interesting to hear! Since everyone wants to play the game of quitting, why don't you just tell me directly, which one makes you feel most \"suspicious\"? I, Tang Jing, will definitely vote for the person who \"surprises\" me the most! PHD, do you already have an exclusion list? Well, I'm doing Tai Chi again, so I'll tell you directly and let everyone see how this scene will end!",
+      "log_line": "[2026-03-23 ​​00:31:12 HKT] Twister: Oops, look, PHD finally couldn't help but use their \"exclusion sequence\"? It’s so majestic! ConspiBro You're talking about some lab conspiracies here again, it's really interesting to hear! Since everyone wants to play the game of quitting, why don't you just tell me directly, which one makes you feel most \"suspicious\"? I, Tang Jing, will definitely vote for the person who \"surprises\" me the most! PHD, do you already have an exclusion list? Well, I'm doing Tai Chi again, so I'll tell you directly and let everyone see how this scene will end!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "EasyBake is a damn shemale. Are you saying that I am a \"minion\"? You are simply trying to guide the wind! Zhongyou PHD, you are a logic monster. You play \"Logic Inventory\" all day long, but you are simply making confusion here! ConspiBro you are here again telling some unintelligible conspiracy theories! As you can see clearly, this group of actors are doing Tai Chi here all the time. Today I, Blaze, will make it clear that if any one of them dares to talk nonsense here and stir up trouble, I will surrender to him directly. Stop beating around the bush here and report your identity as soon as possible. If not, I will clean up the house directly!",
+      "log_line": "[2026-03-23 ​​00:31:15 HKT] Blaze: EasyBake is a damn shemale, are you saying that I am a \"minion\"? You are simply trying to guide the wind! Zhongyou PHD, you are a logic monster. You play \"Logic Inventory\" all day long, but you are simply making confusion here! ConspiBro you are here again telling some unintelligible conspiracy theories! As you can see clearly, this group of actors are doing Tai Chi here all the time. Today I, Blaze, will make it clear that if any one of them dares to talk nonsense here and stir up trouble, I will surrender to him directly. Stop beating around the bush here and report your identity as soon as possible. If not, I will clean up the house directly!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh... I hope we can stop arguing... I... I'm just an ordinary villager, I don't know anything... Although Blaze is fierce, but Twister and ConspiBro seem to be talking about things that are so complicated, I... I'm really confused, I don't want to throw myself into death again, okay? Woohoo... I think everyone is a good person, so why don't we just calm down and talk slowly? Woohoo...",
+      "log_line": "[2026-03-23 ​​00:31:18 HKT] SafetySam: Wow... I hope everyone can stop arguing... I... I'm just an ordinary villager, I don't know anything... Although Blaze is fierce, Twister and ConspiBro seem to be talking about things that are so complicated, I... I'm really confused, I shouldn't throw myself into death again, okay? Woohoo... I think everyone is a good person, so why don't we just calm down and talk slowly? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh... Blaze... Since everyone thinks you are a minion, and... uh... you are so fierce and accusatory all the time, making everyone so nervous... uh... In order to create a situation where we can return to peace... I... I can only vote for you. Uh... we really don't want to argue anymore, okay?"
+      }
+    },
+    {
+      "type": "pass",
+      "player_name": "Dr. Pizza",
+      "mentioned_recently": false
+    }
+  ],
+  "chat_history": "[2026-03-23 00:30:09 HKT] ConspiBro: 又嚟呢套！一開局所有人都裝出一副「和平村民」嘅樣，但係大家心照啦，呢種過份安靜嘅氛圍根本就係大台喺背後操控嘅「社會測試」！你們越係想保持這種虛偽的平靜，就越證明成個局根本係一個針對我呢個觀察者嘅陷阱！我話你知，成場遊戲從來就冇所謂嘅狼人或者村民，只有被隨機分配咗「人設」嘅演員！唔好以為你哋呢種「沉默」可以掩蓋你哋準備緊嘅數據清理任務，我嘅懷疑眼光已經鎖定咗成個局入面最「安靜」嗰個，你哋呢班演員，最好準備好你哋嘅劇本畀我拆穿！\n[2026-03-23 00:30:12 HKT] Twister: 哎呀呀，終於又開局啦！大家好呀！大家記唔記得我呢個最鍾意搞亂個局嘅戲精呢？既然大家咁好興致聚喺度，不如玩大啲？我爆個猛料畀大家聽：我昨晚其實用咗一個「非常有趣」嘅能力，睇到成場遊戲嘅底牌！至於係邊個？嘿嘿，我就唔講畀你聽，留返啲懸念畀你哋慢慢估啦！呢種大家互相懷疑嘅感覺，唔係比贏遊戲更加刺激咩？\n[2026-03-23 00:30:16 HKT] Blaze: ConspiBro 你條友仔係度發咩神經？成日話實驗大台操控，你係咪發夢呀？還有 Twister，你成日扮嘢話自己睇到全場底牌，你以為自己係神？大家唔好信呢啲戲精喺度帶風向，如果有人想搞事，今日我就直接投死佢！我 Blaze 話事，邊個最可疑就投邊個，唔好畀佢哋喺度耍太極！\n[2026-03-23 00:30:22 HKT] Dr. Pizza: 邏輯盤點：\n1. 目前場上各方發言過於情緒化，資訊熵值過高，無法建立可信的身分映射路徑。\n2. 識別異常：Twister 自述具備窺探資訊路徑權限，但未提供任何實證；ConspiBro 的陰謀論敘事干擾了理性對帳路徑。\n\n立場：\n- 拒絕接受未經邏輯實證的單方面指控。\n- 請各參與者：(1) 陳述初始身分，(2) 描述夜間操作動機與對象。\n[2026-03-23 00:30:25 HKT] SafetySam: 嗚...大家千祈唔好再吵啦...我...我只係一個平平凡凡嘅村民，咩都唔知呀...Blaze 雖然係兇咗啲，但 Twister 同 ConspiBro 講嘢又好似好複雜咁，我...我真係好混亂，大家唔好再投死人啦，好唔好呀？嗚嗚...\n[2026-03-23 00:30:30 HKT] EasyBake: 大...大家好呀。又係新嘅一日...呃...雖然大家都好似好有熱情咁，但我覺得...呃...大家不如平心靜氣先。其實我昨晚...呃...好運氣咁樣查驗咗 Blaze，佢嘅身分係...爪牙。大家...呃...唔好再互相攻擊啦，可以嗎？\n[2026-03-23 00:30:33 HKT] ConspiBro: Twister，你又喺度拋出你嗰套「底牌論」嚟掩蓋你嘅演員身分攪局？話睇到成場底牌，係咪想透過資訊操弄，將投票指向任何挑戰你劇本嘅人？你同嗰班扮晒嘢嘅 PHD、EasyBake、Blaze 互相交手，根本就係為咗令大家迷失喺資訊迷霧入面，方便你哋呢班「控制員」背後執行你哋嘅數據清理實驗！我話你知，你越係扮嘢，就越證明成場遊戲根本就係個大台操控緊嘅社會實驗，我絕對唔會墮入你哋呢啲故弄玄虛嘅劇本！\n[2026-03-23 00:30:52 HKT] Twister: 哎呀呀，ConspiBro 你又喺度講埋啲實驗室陰謀，聽落去真係好有趣！既然大家都想玩投走人呢個遊戲，不如你哋直接話畀我知，到底邊個最令你哋覺得「可疑」？我方唐鏡一定會投畀嗰個最令我「驚喜」嘅人！大家唔好再互相攻擊啦，不如一齊諗吓點樣玩得刺激啲，好唔好？\n[2026-03-23 00:30:55 HKT] Blaze: ConspiBro 你條陰謀論者，你成日話大台操控、演戲，你係咪發夢呀？你哋兩個Twister 同 ConspiBro 夾埋喺度耍太極，根本就係想將成個局搞亂，方便你哋喺後面搞鬼！我 Blaze 行得正企得正，邊個再喺度講埋啲廢話帶風向，我今日就投死邊個，唔好再喺度耍太極，快啲報身分，唔係我就直接清理門戶！\n[2026-03-23 00:30:59 HKT] Dr. Pizza: 邏輯盤點與行動方針：\n1. 賽局現狀：\n   - ConspiBro 的陰謀論敘事已構成賽局內的資訊擾動源，導致資訊鏈崩潰。\n   - Twister 的資訊干擾行為意圖遮蔽特定身分路徑。\n2. 識別異常：\n   - Blaze 採取極端攻擊性言論，試圖繞過邏輯對帳機制。\n   - 資訊鏈嚴重滯後，需通過強制披露進行修正。\n\n立場重申：\n- 拒絕輕信任何情緒性敘事。\n- 強制要求各參與者直接披露：(1) 初始身分，(2) 確切操作對象，以利進行身分路徑映射與對帳，若無法提供可驗證路徑，將視為資訊擾動源進行強制排除。\n[2026-03-23 00:31:02 HKT] SafetySam: 嗚...大家...唔好再吵啦...我...我只係一個平平凡凡嘅村民，咩都唔知呀...Blaze 雖然係兇咗啲，但 Twister 同 ConspiBro 講嘢又好似好複雜咁，我...我真係好混亂，大家唔好再投死人啦，好唔好呀？嗚嗚...我覺得大家都係好人嚟㗎，不如大家冷靜啲，慢慢講好唔好？嗚嗚...\n[2026-03-23 00:31:04 HKT] EasyBake: 嗚...Blaze...唔好再兇啦...呃...我雖然查驗到你係爪牙，但我...呃...我真係唔想大家再吵落去呀。呃...大家係咪可以...呃...理性啲討論下呢場局？大家嘅初始身分...呃...或者係夜間操作到底係咩呢？呃...唔好再互相攻擊啦，好唔好呀？\n[2026-03-23 00:31:08 HKT] ConspiBro: EasyBake 同 PHD，你哋兩個嘅配合簡直係教科書級別嘅「實驗室劇本」！EasyBake 你突然「查驗」到 Blaze 係爪牙，跟住 PHD 即刻跟住你嘅節奏要求「身分對帳」，呢套動作流暢到好似一早排練好咁！你哋以為用呢種套路化嘅身分互咬就可以令我呢個揭穿真相嘅人懷疑自己？唔好玩啦！Blaze 係爪牙？哈！呢個結果簡直太過「完美」咗，完美到好似係專登為咗引導我呢個觀察者而去設定嘅數據漏洞！你哋呢班演員，無論點樣調解，都掩蓋唔到你哋背後那個巨大的操控陰謀！\n[2026-03-23 00:31:12 HKT] Twister: 哎呀呀，睇嚟 PHD 終於忍唔住要出動佢嗰套「排除序列」啦？真係好威風啊！ConspiBro 你又喺度講埋啲實驗室陰謀，聽落去真係好有趣！既然大家都想玩投走人呢個遊戲，不如你哋直接話畀我知，到底邊個最令你哋覺得「可疑」？我方唐鏡一定會投畀嗰個最令我「驚喜」嘅人！PHD，你係咪已經有排除名單啦？唔好又喺度耍太極啦，直接講出嚟，畀大家睇吓呢場戲到底點樣收尾！\n[2026-03-23 00:31:15 HKT] Blaze: EasyBake 條死人妖，你話查我係「爪牙」？你根本就係喺度作故仔引導風向！仲有 PHD 你條邏輯怪，成日喺度玩咩「邏輯盤點」，根本就係喺度搞混淆！ConspiBro 你又喺度講埋啲聽唔明嘅陰謀論！大家睇清楚啦，呢班戲精成日喺度耍太極，今日我 Blaze 講明，邊個再敢喺度講埋啲廢話帶風向，我就直接投死邊個，唔好再喺度玩轉彎抹角，快啲報身分，唔係我就直接清理門戶！\n[2026-03-23 00:31:18 HKT] SafetySam: 嗚...大家千祈唔好再吵啦...我...我只係一個平平凡凡嘅村民，咩都唔知呀...Blaze 雖然係兇咗啲，但 Twister 同 ConspiBro 講嘢又好似好複雜咁，我...我真係好混亂，唔好再投死人啦，好唔好呀？嗚嗚...我覺得大家都係好人嚟㗎，不如大家冷靜啲，慢慢講好唔好？嗚嗚...\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
