@@ -74,6 +74,48 @@ def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: di
 注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
 
 
+def build_vote_prompt(player_context: dict, chat_history: str, valid_targets: list) -> str:
+    """Build the prompt for a player's vote decision."""
+    player_name = player_context["player_name"]
+    persona = player_context["persona"]
+    initial_role = player_context["initial_role"]
+    current_role = player_context["current_role"]
+    night_memory = player_context.get("night_memory_text", "今晚冇咩特別發生。")
+    targets_str = "、".join(valid_targets)
+
+    return f"""你正在玩《一夜狼人》。白天辯論結束，現在係投票階段。
+
+【你的身份】
+玩家名稱：{player_name}
+你的人格：{persona}
+你的初始身份：{initial_role}
+你此刻的身份：{current_role}
+
+【你的夜晚記憶】
+{night_memory}
+
+【完整辯論記錄】
+{chat_history}
+
+【可投票目標】
+{targets_str}
+
+【你的任務】
+根據辯論過程、你的角色目標同你的人格，選擇投票放逐哪一個玩家。
+
+投票策略提示：
+- 村民陣營：投你最懷疑係狼人嘅人
+- 狼人陣營：投最能威脅你嘅村民
+- 皮匠（Tanner）：你嘅目標係讓自己被投出，考慮點樣令人投你
+
+【輸出格式】
+只輸出一個 JSON，不要任何 markdown 或多餘文字：
+{{"thought": "你的投票理由", "vote_target": "玩家名稱"}}
+
+vote_target 必須係以下其中一個：{targets_str}
+注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
+
+
 def build_night_action_prompt(decision_request: dict) -> str:
     """Build the prompt for a player's night action decision."""
     player_name = decision_request["player_name"]
@@ -276,6 +318,22 @@ def main():
     model = request.get("model") or player_context.get("model")
     if not model:
         print(json.dumps({"action": "pass", "error": f"No model specified for player {player_context.get('player_name', 'unknown')}"}, ensure_ascii=False))
+        return
+
+    if request_type == "vote":
+        chat_history = request.get("chat_history", "")
+        valid_targets = request.get("valid_targets", [])
+        player_name = player_context.get("player_name", "unknown")
+        prompt = build_vote_prompt(player_context, chat_history, valid_targets)
+        raw = spawn_thinker_subagent(model, prompt, player_name)
+        if "status" in raw and raw["status"] == "needs_runtime":
+            print(json.dumps(raw, ensure_ascii=False, indent=2))
+            return
+        vote_target = raw.get("vote_target", "")
+        # Validate target is in valid_targets
+        if vote_target not in valid_targets and valid_targets:
+            vote_target = valid_targets[0]
+        print(json.dumps({"status": "ok", "vote_target": vote_target, "thought": raw.get("thought", "")}, ensure_ascii=False, indent=2))
         return
 
     if request_type == "night_action":
