@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000016",
+  "generated_at": "2026-03-22T07:03:56.109534+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The fire is rolling! The whole game was lost in an unclear manner!\n\nAlthough I, Blaze, am a hot person, I have always been in a head-to-head confrontation. One of them is a drama queen and the other is a slut. I accuse him right away! I know that as a classmate, one or two systems were dressed up, PHD was playing \"Exclusion Sequence\", and Fang Tangjing was playing \"Naughty Changes\", which made the game information so confusing that he couldn't even see the logic!\n\nWhat annoys me the most is that I, Tan Zai Da La, obviously wanted to lead the camp to catch wolves, but in the end, I was taken away by this group of \"actors\" who knew nothing about communication and only knew how to play psychological warfare! Did the werewolf camp win? What a satire! Next time I play, if I still encounter these people who are talking about incomprehensible logic and pretending to be pitiful, I will definitely not give them a chance to speak from beginning to end, and directly take more radical measures to clear them out! This situation, which was not frank enough, was really unsatisfying to play, and it was a waste of my Frustration Points!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... win... win? I obviously didn't do anything, I just kept pretending to be pitiful and didn't know anything about it. Why did our werewolf camp win in the end? Uh... I really feel that it's so unreal. I'm so shocked by the whole game that I don't dare to express my opinion casually. I'm afraid that if I say the wrong thing, I'll be accused... Ugh...\n\nAlthough the final result was a win, I felt really uneasy. When Blaze was executed, I...I was really afraid that I would be the next one. My strategy was to stay on the sidelines, watching the wind blow and follow the trend. Who knew that this strategy actually allowed me to survive to the end? Uh... I think this game is really scary. It doesn't rely on \"logic\" or \"strategy\" at all, but it relies on whoever is lucky or who pretends to be more innocent to survive.\n\nWoohoo...can I play a more marginal role next time, someone who doesn't have to make decisions at all? This feeling of having to deal with the werewolf and the villagers is simply torture... Wuwu... I finally got over it, but I hope everyone will not remember me anymore. I just want everyone to be calm and not make any more noise... Wuwu..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review and rational analysis:\n1. Tactical evaluation: The victory of this game is attributed to the werewolf camp's successful use of the \"information differentiation\" strategy to guide the village into internal conflict and emotional confrontation. By manipulating the opacity of the information path, the village's logical reconciliation path was successfully circumvented.\n2. Logic review:\n    - Camp operation: As a member of the werewolf camp (PHD), the core strategy is to disguise as a neutral \"logical disturbance source\" and promote invalid identity path reconciliation, effectively delaying the village's detection of the true werewolf's identity.\n    - Limitations: When dealing with Fang Tangjing’s (Twister) dramatic behavior and Brother Bai Bing’s (ConspiBro) conspiracy theory orientation, although the logical framework remained stable, it failed to completely filter out the interference of emotional noise on systematic decision-making.\n3. Conclusion:\n    - This victory verified that in a highly chaotic environment, adopting \"information masking\" and \"emotional agitation\" is more effective than relying solely on logical reconciliation.\n    - Next action: For subsequent games, the execution depth of \"pseudo-rational character design\" will be further optimized to make it more deceptive when confusing the audience.\n    - Summary: Logic is a tool, and gaming is the purpose. As long as the flow of information paths can be controlled, no matter how chaotic the system itself is, victory will eventually converge to the party that controls the variables."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Win! Fang Tangjing's \"disruption strategy\" won again!\n\nHave you ever seen those \"good guys\" finally collapse? Tan Zi's hot temper and Brother Bai Bing's \"conspiracy theories\" completely occupied everyone's discussion space. Coupled with the \"naughty changes\" I revealed from time to time, the situation was simply my toy! I was involved with PHD from the beginning. I was disrupting the situation in front of the stage, and he was using logic to manipulate behind the scenes. Although everyone said that I was suspicious, in the end, did they make us crippled?\n\nThis kind of game is not won by serious deduction, but by deception, by messing up the situation, and watching everyone swirling in the fog of information, it is really exciting! Our Tang Jing will always be the most entertaining character on the field. Although Tan Zai died greatly, it doesn't matter, the werewolf camp won, and these sacrifices were worth it! Dear theater fans, I am always the winner. Next time, remember to prepare for even crazier performances! Bye-Bye!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Wow...I...I really don't know...uh...why will we lose to the werewolf camp in the end? I've obviously been trying to persuade everyone here, hoping that everyone would stop quarreling and finish the game happily together. Why do you think you don't believe me? Uh...I'm just an ordinary villager. I really can't handle these deceitful games...uh...I'm just an ordinary villager.\n\nAfter seeing Brother Bai Bing and PHD being surrendered, everyone became more and more excited. I...well...although I really wanted to help everyone calm down, every time I spoke up, people questioned me as a \"mediator\" or \"pacifier.\" Woohoo...I...I really blame myself. Maybe it's because I'm too trusting, or maybe it's because I'm really not suitable for playing this kind of game where I have to be suspicious of others.\n\nUh... Anyway, after losing this time, I... I learned a very painful lesson: It turns out that in this kind of game, excessive simplicity... uh... can really be exploited by others, and can even become the most vulnerable link in the game. Next time I play this kind of game, I...well...maybe I shouldn't be such a \"good guy\" anymore. It's really sad. I hope everyone can trust each other more and scheming less next time, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I knew it! It’s this old script again! Doesn't the victory of the werewolf camp just prove that the entire game is designed to screen out the \"unstable factors\" like us who don't cooperate with the logic of the stage?\n\nLook at PHD's arrogant \"logical elimination sequence\" and Blaze's programmed \"violent actor\" performance. This series of manipulations are simply to muddy the water and make me, the only observer who sees through the system's loopholes, look ridiculous. Do you think that if the werewolf wins, you are the winner? Stop laughing so hard! The werewolves won simply because they provided \"villain data\" that was more in line with the laboratory's expectations and more stable, so that the experiment could continue!\n\nThe fact that I was not \"executed\" did not mean that I lost, but it proved that my data as an \"observer\" still had some value to them. I have seen clearly that the essence of this game is to allow players to attack each other in the fog of information, and in the end all real observations and questions are completely obliterated. Next time? If you are still going to continue looking for \"victory\" in this false experiment, then so be it. I will continue to collect more evidence of loopholes in this social experiment from the sidelines until all of you actors who have changed beyond recognition are exposed one by one!"
+      }
+    ]
+  }
+}
