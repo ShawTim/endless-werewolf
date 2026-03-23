@@ -1,0 +1,325 @@
+{
+  "status": "completed",
+  "game_id": "game_000035",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "喂，大家聽住！老子昨晚咩都冇做，但我見到 Dr. Pizza 同 EasyBake 兩個陰濕鬼喺度鬼鬼祟祟！EasyBake 你唔係話自己係皮匠咩？點解會同隻狼人 pizza 夾埋一齊？今日目標一致，邊個再喺度扮傻充愣或者帶風向，我就直接投死佢！快啲報你哋嘅身分，唔好逼我發火！",
+      "log_line": "[2026-03-23 13:32:56 HKT] Blaze: 喂，大家聽住！老子昨晚咩都冇做，但我見到 Dr. Pizza 同 EasyBake 兩個陰濕鬼喺度鬼鬼祟祟！EasyBake 你唔係話自己係皮匠咩？點解會同隻狼人 pizza 夾埋一齊？今日目標一致，邊個再喺度扮傻充愣或者帶風向，我就直接投死佢！快啲報你哋嘅身分，唔好逼我發火！"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "又開始啦！Blaze 一開口就指控 Dr. Pizza 同 EasyBake，這不就是標準的「轉移視線」劇本嗎？你哋成班戲精喺度做戲，一個扮暴躁，一個扮皮匠，一個扮邏輯怪，成套劇本就係要保住你們狼人陣營嘅核心節點！我敢講，這場遊戲根本就是為了把我們這些有獨立思考能力的人排擠掉的心理測試，你們的指控，全都是大台編排好的臨時台詞！我絕對唔會墮入你哋這種低端戲碼，這場虛構囚籠的底牌，我一定會拆穿它！",
+      "log_line": "[2026-03-23 13:32:59 HKT] ConspiBro: 又開始啦！Blaze 一開口就指控 Dr. Pizza 同 EasyBake，這不就是標準的「轉移視線」劇本嗎？你哋成班戲精喺度做戲，一個扮暴躁，一個扮皮匠，一個扮邏輯怪，成套劇本就係要保住你們狼人陣營嘅核心節點！我敢講，這場遊戲根本就是為了把我們這些有獨立思考能力的人排擠掉的心理測試，你們的指控，全都是大台編排好的臨時台詞！我絕對唔會墮入你哋這種低端戲碼，這場虛構囚籠的底牌，我一定會拆穿它！"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "邏輯盤點與身分聲明：\n1. 賽局現狀：資訊鏈嚴重斷裂，個體敘事存在明顯邏輯衝突。\n2. 對帳要求：\n    - Blaze：請說明你「夜間觀察」的具體手段與可驗證來源，否則視為惡意擾動。\n    - ConspiBro：繼續拒絕披露具體操作路徑，將直接納入強制排除序列。\n3. 立場：不信任何無實證的指控，要求各參與者立即進行邏輯交叉校準。",
+      "log_line": "[2026-03-23 13:33:03 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 賽局現狀：資訊鏈嚴重斷裂，個體敘事存在明顯邏輯衝突。\n2. 對帳要求：\n    - Blaze：請說明你「夜間觀察」的具體手段與可驗證來源，否則視為惡意擾動。\n    - ConspiBro：繼續拒絕披露具體操作路徑，將直接納入強制排除序列。\n3. 立場：不信任何無實證的指控，要求各參與者立即進行邏輯交叉校準。"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "哎呀呀，大家終於又醒過嚟啦！呢個舞臺簡直精彩！Blaze 喺度發火，PHD 喺度講邏輯，ConspiBro 又喺度講陰謀論，成個局簡直就係為咗我呢個戲精而設！不如大家都報出自己昨晚見到嘅「風景」啦？PHD，你個對帳程序係咪又卡住咗？Blaze，你話見到 Pizza 同 EasyBake 鬼鬼祟祟，呢個爆料夠晒刺激呀！嚟啦，每個人都報吓身分，畀啲刺激我玩吓好唔好呀？",
+      "log_line": "[2026-03-23 13:33:05 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺簡直精彩！Blaze 喺度發火，PHD 喺度講邏輯，ConspiBro 又喺度講陰謀論，成個局簡直就係為咗我呢個戲精而設！不如大家都報出自己昨晚見到嘅「風景」啦？PHD，你個對帳程序係咪又卡住咗？Blaze，你話見到 Pizza 同 EasyBake 鬼鬼祟祟，呢個爆料夠晒刺激呀！嚟啦，每個人都報吓身分，畀啲刺激我玩吓好唔好呀？"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "嗚...呃...Blaze 你...呃...做咩話我同 Pizza 鬼鬼祟祟呀？我...我只係一個平平凡凡嘅村民呀，真係咩都唔知呀...呃...大家...呃...唔好再互相攻擊啦，好唔好呀？嗚嗚...",
+      "log_line": "[2026-03-23 13:33:08 HKT] EasyBake: 嗚...呃...Blaze 你...呃...做咩話我同 Pizza 鬼鬼祟祟呀？我...我只係一個平平凡凡嘅村民呀，真係咩都唔知呀...呃...大家...呃...唔好再互相攻擊啦，好唔好呀？嗚嗚..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "嗚...呃...大家...我真係好怕呢種氣氛呀...呃...Blaze 同 ConspiBro 嘅指控令我好亂呀...呃...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...",
+      "log_line": "[2026-03-23 13:33:10 HKT] SafetySam: 嗚...呃...大家...我真係好怕呢種氣氛呀...呃...Blaze 同 ConspiBro 嘅指控令我好亂呀...呃...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Pizza，你條邏輯怪仲喺度死撐！EasyBake 你呢條偽皮匠，扮無辜扮到咁，係咪以爲我係瞎嘅？成個局咁明顯，你哋兩隻狼夾埋一齊，仲喺度扮咩邏輯對帳？我 Blaze 今日就要送你哋兩個返老家！",
+      "log_line": "[2026-03-23 13:33:12 HKT] Blaze: Pizza，你條邏輯怪仲喺度死撐！EasyBake 你呢條偽皮匠，扮無辜扮到咁，係咪以爲我係瞎嘅？成個局咁明顯，你哋兩隻狼夾埋一齊，仲喺度扮咩邏輯對帳？我 Blaze 今日就要送你哋兩個返老家！"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD，你那套所謂的「邏輯交叉校準」簡直是此地無銀三百兩！你跟 Blaze 一搭一唱，一個拋出指控，一個進行「冷靜盤點」，這種二元對立的戲碼我早已看透！你們越是想清理我這個「核心變量」，就越證明你們這群臨時演員已經慌了！你們根本不是在對帳，而是在合謀銷毀這場虛構囚籠的數據，企圖掩蓋你們才是這場遊戲真正掌控者的事實！",
+      "log_line": "[2026-03-23 13:33:15 HKT] ConspiBro: PHD，你那套所謂的「邏輯交叉校準」簡直是此地無銀三百兩！你跟 Blaze 一搭一唱，一個拋出指控，一個進行「冷靜盤點」，這種二元對立的戲碼我早已看透！你們越是想清理我這個「核心變量」，就越證明你們這群臨時演員已經慌了！你們根本不是在對帳，而是在合謀銷毀這場虛構囚籠的數據，企圖掩蓋你們才是這場遊戲真正掌控者的事實！"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "邏輯盤點與身分聲明：\n1. 異常識別：Blaze 的指控缺乏實證基礎，為典型的情緒性煽動；ConspiBro 的敘事持續脫離賽局事實，屬於嚴重噪音。\n2. 對帳要求：\n    - 再次要求各方披露初始身分與夜間操作對象，這是終止混沌的唯一路徑。\n3. 立場：不容許模糊地帶，拒絕任何情緒化的指控，將針對持續無法配合邏輯對帳者執行最高優先級排除。",
+      "log_line": "[2026-03-23 13:33:18 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 異常識別：Blaze 的指控缺乏實證基礎，為典型的情緒性煽動；ConspiBro 的敘事持續脫離賽局事實，屬於嚴重噪音。\n2. 對帳要求：\n    - 再次要求各方披露初始身分與夜間操作對象，這是終止混沌的唯一路徑。\n3. 立場：不容許模糊地帶，拒絕任何情緒化的指控，將針對持續無法配合邏輯對帳者執行最高優先級排除。"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "哎呀呀，睇嚟呢場戲嘅火藥味愈嚟愈濃喇！Blaze 咬死 EasyBake 同 Pizza，Pizza 又喺度盤點緊邊個係變量，EasyBake 又喺度扮可憐，成個場景簡直就係為我呢個戲精而設嘅舞臺！既然大家都咁有「祕密」，不如我哋簡單啲：我就投個最搞事嘅 Blaze 啦！睇吓佢係咪真係咁「直腸直肚」，定係背後有咩大陰謀？PHD 你盤點完未呀？不如帶頭投 Blaze 出局，畀啲刺激大家玩吓好唔好呀？",
+      "log_line": "[2026-03-23 13:33:21 HKT] Twister: 哎呀呀，睇嚟呢場戲嘅火藥味愈嚟愈濃喇！Blaze 咬死 EasyBake 同 Pizza，Pizza 又喺度盤點緊邊個係變量，EasyBake 又喺度扮可憐，成個場景簡直就係為我呢個戲精而設嘅舞臺！既然大家都咁有「祕密」，不如我哋簡單啲：我就投個最搞事嘅 Blaze 啦！睇吓佢係咪真係咁「直腸直肚」，定係背後有咩大陰謀？PHD 你盤點完未呀？不如帶頭投 Blaze 出局，畀啲刺激大家玩吓好唔好呀？"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "嗚...呃...Blaze 你...呃...你話見到我同 Pizza 鬼鬼祟祟，真係唔係咁㗎！我...我只係一個平平凡凡嘅村民呀，真係咩都唔知...呃...大家...唔好再互相攻擊啦，好唔好呀？嗚嗚...",
+      "log_line": "[2026-03-23 13:33:23 HKT] EasyBake: 嗚...呃...Blaze 你...呃...你話見到我同 Pizza 鬼鬼祟祟，真係唔係咁㗎！我...我只係一個平平凡凡嘅村民呀，真係咩都唔知...呃...大家...唔好再互相攻擊啦，好唔好呀？嗚嗚..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "嗚...呃...大家...千祈唔好再吵啦...Blaze 你...呃...話人哋係狼人，係咪有咩實質證據呀？呃...我...我只係一個平平凡凡嘅強盜，昨晚咩都唔知呀...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...",
+      "log_line": "[2026-03-23 13:33:25 HKT] SafetySam: 嗚...呃...大家...千祈唔好再吵啦...Blaze 你...呃...話人哋係狼人，係咪有咩實質證據呀？呃...我...我只係一個平平凡凡嘅強盜，昨晚咩都唔知呀...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD，你仲喺度死撐！你同 EasyBake 夾埋一齊扮晒嘢，呃到人咩？我就係親眼見到你哋喺度做嘢！今日目標一致，我 Blaze 投死你呢條邏輯怪！大家投 Pizza 啦，唔好再聽佢講廢話！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "哈哈！終於露出馬腳了吧！Twister 竟然提議跟著你這個「邏輯怪」去投 Blaze，這難道不是最明顯的陣營串聯信號嗎？你跟 Blaze 互相撕咬，實際上卻在通過這種粗糙的對立來轉移對你和 EasyBake 這對真正「核心變量」的質疑！你們合謀建立的這個對帳程序，不過是爲了清洗掉我們這些觀察者的監控軟件！既然你們要把這場戲演到極致，那我就投下這關鍵的一票，看看當你們這個虛構囚籠的節點被拆除後，你們還能演出什麼戲碼！我投 Dr. Pizza！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "邏輯裁定與排除程序執行：\n1. 異常確證：Blaze 的情緒化指控與擾動，已與 ConspiBro 的敘事干擾構成合謀態勢，嚴重破壞對帳資訊路徑。\n2. 執行方針：依據排除序列，將 Blaze 列為首要排除對象，以終止其惡意擾動。\n\n投票執行：我投 Blaze。"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "哎呀呀，睇嚟 Blaze 你真係好急住要解決呢兩個人喎，你嗰種「暴躁」係咪喺度掩飾緊你其實係狼人嘅事實呢？PHD 同 ConspiBro 雖然一個講邏輯一個講陰謀，但起碼佢哋肯玩落去。你 Blaze 一嚟就話要投死人，仲要咬死 EasyBake 同 Pizza，你咁樣「直腸直肚」，唔通係想帶頭清場？既然大家都要「清理變量」，我就投你 Blaze 一票，睇下你係咪真係咁清白！哈哈哈哈！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...大家...呃...Blaze 你...呃...話人哋係狼人，係咪真係有實質證據呀？你咁樣大吼大叫，搞到大家好混亂呀...呃...我覺得 Blaze 你指控人哋嘅方法好有問題，我...我唯有投票排除你啦...對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...Blaze 你...呃...做咩一定要將成件事講到咁絕對呀？我...我真係好怕呢種攻擊...呃...你話 Pizza 係狼人，但我...呃...我都覺得 Pizza 同 PHD 好似都係想玩好呢個遊戲姐...呃...你咁樣大吼大叫，搞到大家好亂呀...嗚嗚...我...我唯有投你啦，Blaze，對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "哈哈！看吧！SafetySam 這個牆頭草也開始配合你們的腳本了！這是多麼完美的共謀結構：一個暴躁的執行者（Blaze），一個冷靜的總指揮（PHD），一個負責和稀泥的附和者（EasyBake），還有一個負責關鍵時刻投關鍵票的執行者（SafetySam）！你們以為把我剔除就能掩蓋這一切嗎？你們這個虛構囚籠的運作邏輯已經被我完全拆解了！不管你們怎麼投票，事實就是你們才是這場數據遊戲的真正操縱者！我最後的一票，依然投給 Dr. Pizza！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD 你條死邏輯怪，仲喺度扮嘢！ConspiBro 雖然癲癲哋，但你哋呢班狼人陣營嘅把戲，我 Blaze 一眼就睇穿晒！EasyBake 你仲喺度扮咩無辜？你哋兩個鬼鬼祟祟嘅行爲早就暴露咗你哋身分！今日我 Blaze 就係要投死你，Pizza，睇下你仲點樣用你嗰套狗屁邏輯掩護你自己！大家投死 Pizza 啦！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "邏輯裁定與執行：\n1. 異常識別：Blaze 持續的情緒煽動與毫無根據的指控，已證實其爲賽局中最主要的資訊干擾源。\n2. 執行方針：依據排除序列，強制終止其干擾行為。\n\n投票執行：我投 Blaze。"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "哎呀呀，睇嚟大家對 Blaze 呢位「暴躁老哥」嘅耐心都已經到極限喇！Blaze 你一開口就要投死人，咁樣帶風向，唔單止解決唔到問題，仲令成個場地變得更加混亂！PHD 話要排除你，SafetySam 又覺得你嘅指控冇實質證據，既然大家都同意清理呢個最大嘅變量，咁我方唐鏡就順應民意，投 Blaze 一票！睇吓你到底係咪真係咁清白，哈哈哈哈！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...大家...呃...我覺得 Blaze 你指控人哋嘅方法真係太過激烈喇，搞到大家都好混亂...呃...既然 PHD 同 Twister 都話要排除搞事嘅人，我...我唯有投你啦，Blaze，對唔住呀...嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...Blaze 你...呃...做咩一定要將所有嘢講到咁絕對呀？我...我真係好怕呢種攻擊...呃...你話人哋係狼人，但我...呃...我都覺得 Pizza 同 PHD 好似都係想玩好呢個遊戲姐...呃...你咁樣大吼大叫，搞到大家好亂呀...嗚嗚...我...我唯有投你啦，Blaze，對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "這簡直是教科書級別的「圍剿與切割」！看吧，連剛才還在說「大家互相指控很混亂」的 SafetySam 和 EasyBake，竟然也瞬間統一了口徑去投 Blaze！這難道不是最明顯的陣營共謀嗎？PHD，你的程序果然高效，連這些牆頭草都能被你瞬間編碼進攻擊序列！你們透過拋出一個憤怒的 Blaze 作為祭品，試圖讓這場清理變量的戲碼看起來像是一個「公正的集體決定」？我絕不會讓你們的虛構囚籠這麼輕易地就完成數據重置！既然你們選好了替罪羊，那我就順著這齣荒謬的劇本演到底，看看當 Blaze 被你們這群偽善者清除後，你們還要對誰下手！我最後的一票，投給 Blaze！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD 你條死邏輯怪，仲喺度扮嘢！ConspiBro 雖然癲癲哋，但你哋呢班狼人陣營嘅把戲，我 Blaze 一眼就睇穿晒！EasyBake 你仲喺度扮咩無辜？你哋兩個鬼鬼祟祟嘅行爲早就暴露咗你哋身分！今日我 Blaze 就係要投死你，Pizza，睇下你仲點樣用你嗰套狗屁邏輯掩護你自己！大家投死 Pizza 啦！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "邏輯裁定與排除程序執行：\n1. 異常確證：Blaze 持續的情緒煽動與毫無根據的指控，已與 ConspiBro 的敘事干擾構成合謀態勢，嚴重破壞對帳資訊路徑。\n2. 執行方針：依據排除序列，將 Blaze 列為首要排除對象，以終止其惡意擾動。\n\n投票執行：我投 Blaze。"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...呃...我覺得 Blaze 你指控人哋嘅方法真係太激烈喇...呃...大家都好混亂，但既然 Twister 同 PHD 都話要排除最搞事嘅人，我...我唯有投你啦，Blaze，對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "哎呀呀，Blaze 你真係好心急喎，成場局你都係第一個衝出嚟咬人！Pizza 雖然死板啲，但佢起碼有邏輯去盤點，而你 Blaze 就只係識得大吼大叫、投死人。既然大家都要清理變量，我就順水推舟，送你呢個最心急嘅 Blaze 出局啦，睇吓你係咪真係咁清白，哈哈哈哈！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...Blaze 你...呃...做咩一定要將成件事講到咁激烈呀？呃...我...我真係好怕呢種攻擊...呃...你話人哋係狼人，但我...呃...我都覺得 Pizza 同 PHD 好似都係想玩好呢個遊戲姐...呃...你咁樣大吼大叫，搞到大家好亂呀...嗚嗚...我...我唯有投你啦，Blaze，對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "看看吧！看這群臨時演員的投票節奏！連 EasyBake 和 SafetySam 這種原本還在「混亂」中的角色，都能在幾秒內統一對 Blaze 進行「集體排除」，這不就證明了你們的投票序列是預設好的數據流嗎？PHD，你的演算法雖然冷酷，但這場「排除 Blaze」的戲碼實在太過刻意了！我不屑於配合你們清洗變量的程式，我將我的這一票，再次堅定地投給你們這個共謀結構的控制節點——Dr. Pizza！這場虛構囚籠的數據，終將崩潰！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "邏輯裁定與執行：\n1. 異常確證：Blaze 的情緒化攻擊與無視對帳邏輯的行為，已嚴重阻礙賽局資訊穩定，並與 ConspiBro 的干擾行為形成共振。\n2. 執行方針：依據強制排除程序，將 Blaze 列為首要排除對象，以終止其惡意干擾。\n\n投票執行：我投 Blaze。"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD 你條死邏輯怪，仲喺度扮嘢！ConspiBro 雖然癲癲哋，但你哋呢班狼人陣營嘅把戲，我 Blaze 一眼就睇穿晒！EasyBake 你仲喺度扮咩無辜？你哋兩個鬼鬼祟祟嘅行爲早就暴露咗你哋身分！今日我 Blaze 就係要投死你，Pizza，睇下你仲點樣用你嗰套狗屁邏輯掩護你自己！大家投死 Pizza 啦！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "嗚...呃...Blaze 你...呃...做咩一定要將成件事講到咁激烈呀？我覺得大家都好混亂...呃...既然 PHD 同 Twister 都話要排除最搞事嘅人，我...我唯有投你啦，Blaze，對唔住呀，嗚嗚..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "哎呀呀，Blaze 你真係好心急喎，成場局你都係第一個衝出嚟咬人！Pizza 雖然死板啲，但佢起碼有邏輯去盤點，而你 Blaze 就只係識得大吼大叫、投死人。既然大家都要清理變量，我就順水推舟，送你呢個最心急嘅 Blaze 出局啦，睇吓你係咪真係咁清白，哈哈哈哈！"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 13:32:56 HKT] Blaze: 喂，大家聽住！老子昨晚咩都冇做，但我見到 Dr. Pizza 同 EasyBake 兩個陰濕鬼喺度鬼鬼祟祟！EasyBake 你唔係話自己係皮匠咩？點解會同隻狼人 pizza 夾埋一齊？今日目標一致，邊個再喺度扮傻充愣或者帶風向，我就直接投死佢！快啲報你哋嘅身分，唔好逼我發火！\n[2026-03-23 13:32:59 HKT] ConspiBro: 又開始啦！Blaze 一開口就指控 Dr. Pizza 同 EasyBake，這不就是標準的「轉移視線」劇本嗎？你哋成班戲精喺度做戲，一個扮暴躁，一個扮皮匠，一個扮邏輯怪，成套劇本就係要保住你們狼人陣營嘅核心節點！我敢講，這場遊戲根本就是為了把我們這些有獨立思考能力的人排擠掉的心理測試，你們的指控，全都是大台編排好的臨時台詞！我絕對唔會墮入你哋這種低端戲碼，這場虛構囚籠的底牌，我一定會拆穿它！\n[2026-03-23 13:33:03 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 賽局現狀：資訊鏈嚴重斷裂，個體敘事存在明顯邏輯衝突。\n2. 對帳要求：\n    - Blaze：請說明你「夜間觀察」的具體手段與可驗證來源，否則視為惡意擾動。\n    - ConspiBro：繼續拒絕披露具體操作路徑，將直接納入強制排除序列。\n3. 立場：不信任何無實證的指控，要求各參與者立即進行邏輯交叉校準。\n[2026-03-23 13:33:05 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺簡直精彩！Blaze 喺度發火，PHD 喺度講邏輯，ConspiBro 又喺度講陰謀論，成個局簡直就係為咗我呢個戲精而設！不如大家都報出自己昨晚見到嘅「風景」啦？PHD，你個對帳程序係咪又卡住咗？Blaze，你話見到 Pizza 同 EasyBake 鬼鬼祟祟，呢個爆料夠晒刺激呀！嚟啦，每個人都報吓身分，畀啲刺激我玩吓好唔好呀？\n[2026-03-23 13:33:08 HKT] EasyBake: 嗚...呃...Blaze 你...呃...做咩話我同 Pizza 鬼鬼祟祟呀？我...我只係一個平平凡凡嘅村民呀，真係咩都唔知呀...呃...大家...呃...唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-23 13:33:10 HKT] SafetySam: 嗚...呃...大家...我真係好怕呢種氣氛呀...呃...Blaze 同 ConspiBro 嘅指控令我好亂呀...呃...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-23 13:33:12 HKT] Blaze: Pizza，你條邏輯怪仲喺度死撐！EasyBake 你呢條偽皮匠，扮無辜扮到咁，係咪以爲我係瞎嘅？成個局咁明顯，你哋兩隻狼夾埋一齊，仲喺度扮咩邏輯對帳？我 Blaze 今日就要送你哋兩個返老家！\n[2026-03-23 13:33:15 HKT] ConspiBro: PHD，你那套所謂的「邏輯交叉校準」簡直是此地無銀三百兩！你跟 Blaze 一搭一唱，一個拋出指控，一個進行「冷靜盤點」，這種二元對立的戲碼我早已看透！你們越是想清理我這個「核心變量」，就越證明你們這群臨時演員已經慌了！你們根本不是在對帳，而是在合謀銷毀這場虛構囚籠的數據，企圖掩蓋你們才是這場遊戲真正掌控者的事實！\n[2026-03-23 13:33:18 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 異常識別：Blaze 的指控缺乏實證基礎，為典型的情緒性煽動；ConspiBro 的敘事持續脫離賽局事實，屬於嚴重噪音。\n2. 對帳要求：\n    - 再次要求各方披露初始身分與夜間操作對象，這是終止混沌的唯一路徑。\n3. 立場：不容許模糊地帶，拒絕任何情緒化的指控，將針對持續無法配合邏輯對帳者執行最高優先級排除。\n[2026-03-23 13:33:21 HKT] Twister: 哎呀呀，睇嚟呢場戲嘅火藥味愈嚟愈濃喇！Blaze 咬死 EasyBake 同 Pizza，Pizza 又喺度盤點緊邊個係變量，EasyBake 又喺度扮可憐，成個場景簡直就係為我呢個戲精而設嘅舞臺！既然大家都咁有「祕密」，不如我哋簡單啲：我就投個最搞事嘅 Blaze 啦！睇吓佢係咪真係咁「直腸直肚」，定係背後有咩大陰謀？PHD 你盤點完未呀？不如帶頭投 Blaze 出局，畀啲刺激大家玩吓好唔好呀？\n[2026-03-23 13:33:23 HKT] EasyBake: 嗚...呃...Blaze 你...呃...你話見到我同 Pizza 鬼鬼祟祟，真係唔係咁㗎！我...我只係一個平平凡凡嘅村民呀，真係咩都唔知...呃...大家...唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-23 13:33:25 HKT] SafetySam: 嗚...呃...大家...千祈唔好再吵啦...Blaze 你...呃...話人哋係狼人，係咪有咩實質證據呀？呃...我...我只係一個平平凡凡嘅強盜，昨晚咩都唔知呀...大家平平靜靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

@@ -1,0 +1,325 @@
+{
+  "status": "completed",
+  "game_id": "game_000035",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hey, everyone, listen! I didn’t do anything last night, but I saw two dank ghosts, Dr. Pizza and EasyBake, sneaking around! EasyBake Are you a cobbler? Will it be buried together with a werewolf pizza? Today's goal is the same. If the other person acts stupid or leads the way, I will kill him directly! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-23 ​​13:32:56 HKT] Blaze: Hey, everyone, listen! I didn’t do anything last night, but I saw two dank ghosts, Dr. Pizza and EasyBake, sneaking around! EasyBake Are you a cobbler? Will it be buried together with a werewolf pizza? Today's goal is the same. If the other person acts stupid or leads the way, I will kill him directly! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "It starts again! Blaze started by accusing Dr. Pizza and EasyBake. Isn't this a standard \"red herring\" script? You are a troupe of actors performing here, one is pretending to be a grump, one is pretending to be a cobbler, and one is pretending to be a logic monster. The complete set of scripts is to protect the core nodes of your werewolf camp! I dare to say that this game is basically a psychological test designed to exclude those of us who have the ability to think independently. Your accusations are all temporary lines arranged by the stage! I will never fall into such a low-end drama like yours. I will definitely expose the trump card of this fictitious prison!",
+      "log_line": "[2026-03-23 ​​13:32:59 HKT] ConspiBro: Here we go again! Blaze started by accusing Dr. Pizza and EasyBake. Isn't this a standard \"red herring\" script? You are a troupe of actors performing here, one is pretending to be a grump, one is pretending to be a cobbler, and one is pretending to be a logic monster. The complete set of scripts is to protect the core nodes of your werewolf camp! I dare to say that this game is basically a psychological test designed to exclude those of us who have the ability to think independently. Your accusations are all temporary lines arranged by the stage! I will never fall into such a low-end drama like yours. I will definitely expose the trump card of this fictitious prison!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Current situation of the game: The information chain is seriously broken, and there are obvious logical conflicts in individual narratives.\n2. Reconciliation requirements:\n    - Blaze: Please explain the specific method and verifiable source of your \"night observation\", otherwise it will be regarded as malicious interference.\n    - ConspiBro: Continue to refuse to disclose the specific operation path and will be directly included in the mandatory exclusion sequence.\n3. Position: Do not believe any unsubstantiated accusations and require all participants to immediately conduct logical cross-calibration.",
+      "log_line": "[2026-03-23 13:33:03 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Current situation of the game: The information chain is seriously broken, and there are obvious logical conflicts in individual narratives.\n2. Reconciliation requirements:\n    - Blaze: Please explain the specific method and verifiable source of your \"night observation\", otherwise it will be regarded as malicious interference.\n    - ConspiBro: Continue to refuse to disclose the specific operation path and will be directly included in the mandatory exclusion sequence.\n3. Position: Do not believe any unsubstantiated accusations and require all participants to immediately conduct logical cross-calibration."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is simply wonderful! Blaze is here to get angry, PHD is here to talk logic, ConspiBro is here to talk conspiracy theories, this whole situation is just for the drama queen like me! Why don't everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? Blaze, you saw Pizza and EasyBake sneaking around. This revelation is quite exciting! Come on, everyone has their identity as a scaremonger, how about letting me scare you with some stimulation?",
+      "log_line": "[2026-03-23 ​​13:33:05 HKT] Twister: Oops, everyone finally woke up again! This stage is simply wonderful! Blaze is here to get angry, PHD is here to talk logic, ConspiBro is here to talk conspiracy theories, this whole situation is just for the drama queen like me! Why don't everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? Blaze, you saw Pizza and EasyBake sneaking around. This revelation is quite exciting! Come on, everyone has their identity as a scaremonger, how about letting me scare you with some stimulation?"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh... uh... Blaze, what are you... uh... saying to be sneaking around with Pizza? I... I'm just an ordinary villager. I really don't know anything... uh... everyone... uh... don't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:33:08 HKT] EasyBake: Uh... uh... Blaze, what are you... uh... doing to make me and Pizza sneaky? I... I'm just an ordinary villager. I really don't know anything... uh... everyone... uh... don't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... everyone... I'm really afraid of this atmosphere... uh... Blaze and ConspiBro's accusations make me so confused... uh... let's discuss our identities quietly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:33:10 HKT] SafetySam: Wow... uh... everyone... I'm really afraid of this atmosphere... uh... Blaze and ConspiBro's accusations make me so confused... uh... let's discuss our identities quietly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Pizza, your logic is so stupid! EasyBake, you fake cobbler, you pretend to be innocent so much, do you think I am blind? The situation is so obvious, you two wolves are trapped together, what kind of logical reconciliation are you doing? I, Blaze, will send you two back to your hometown today!",
+      "log_line": "[2026-03-23 ​​13:33:12 HKT] Blaze: Pizza, your logic is so weird! EasyBake, you fake cobbler, you pretend to be innocent so much, do you think I am blind? The situation is so obvious, you two wolves are trapped together, what kind of logical reconciliation are you doing? I, Blaze, will send you two back to your hometown today!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, your so-called \"logical cross-calibration\" is simply worthless! You and Blaze are singing together, one is making accusations, and the other is taking a \"calm inventory.\" I have already seen through this binary opposition! The more you try to clean up this \"core variable\" of mine, the more it proves that you group of extras have panicked! You are not reconciling the accounts at all, but are conspiring to destroy the data of this fictitious cage in an attempt to cover up the fact that you are the real controller of this game!",
+      "log_line": "[2026-03-23 ​​13:33:15 HKT] ConspiBro: PHD, your so-called \"logical cross-calibration\" is simply worthless! You and Blaze are singing together, one is making accusations, and the other is taking a \"calm inventory.\" I have already seen through this binary opposition! The more you try to clean up this \"core variable\" of mine, the more it proves that you group of extras have panicked! You are not reconciling the accounts at all, but are conspiring to destroy the data of this fictitious cage in an attempt to cover up the fact that you are the real controller of this game!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Identification of anomalies: Blaze’s accusation lacks empirical basis and is a typical emotional incitement; ConspiBro’s narrative continues to be divorced from the facts of the game and is serious noise.\n2. Reconciliation requirements:\n    - Once again requiring all parties to reveal their initial identities and night operations targets, this is the only way to end the chaos.\n3. Position: No ambiguity is allowed, any emotional accusations are rejected, and those who continue to be unable to cooperate with logical reconciliation will be excluded with the highest priority.",
+      "log_line": "[2026-03-23 13:33:18 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Identification of anomalies: Blaze’s accusation lacks empirical basis and is a typical emotional incitement; ConspiBro’s narrative continues to be divorced from the facts of the game and is serious noise.\n2. Reconciliation requirements:\n    - Once again requiring all parties to reveal their initial identities and night operations targets, this is the only way to end the chaos.\n3. Position: No ambiguity is allowed, any emotional accusations are rejected, and those who continue to be unable to cooperate with logical reconciliation will be excluded with the highest priority."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, the smell of gunpowder in this scene is getting stronger and stronger! Blaze kills EasyBake and Pizza, Pizza is taking stock of the variables next to it, and EasyBake is playing pity here. This scene is simply a stage set up for me, a drama queen! Since everyone has such a \"secret\", it's not as simple as ours: I will vote for Blaze who is the most troublesome! It seems that his breasts are really \"straight\". What's the big conspiracy behind it? PHD Have you finished taking stock? How about taking the lead in voting Blaze out and scaring everyone with some excitement?",
+      "log_line": "[2026-03-23 ​​13:33:21 HKT] Twister: Oops, the smell of gunpowder in this scene is getting stronger and stronger! Blaze kills EasyBake and Pizza, Pizza is taking stock of the variables next to it, and EasyBake is playing pity here. This scene is simply a stage set up for me, a drama queen! Since everyone has such a \"secret\", it's not as simple as ours: I will vote for Blaze who is the most troublesome! It seems that his breasts are really \"straight\". What's the big conspiracy behind it? PHD Have you finished taking stock? How about taking the lead in voting Blaze out and scaring everyone with some excitement?"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh... uh... Blaze, you... uh... you saw me sneaking around with Pizza, that's really not the case! I...I'm just an ordinary villager. I really don't know anything...uh...everyone...should stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:33:23 HKT] EasyBake: Uh... uh... Blaze, you... uh... you saw me sneaking around with Pizza, that's really not the case! I...I'm just an ordinary villager. I really don't know anything...uh...everyone...should stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...Qianqi, please stop arguing...Blaze, you...uh...the person you're talking about is a werewolf, is there any substantial evidence? Uh... I... I'm just an ordinary robber. I didn't know anything last night... Let's discuss our identities quietly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:33:25 HKT] SafetySam: Uh...uh...everyone...Qianqi, please stop arguing...Blaze, you...uh...said we are a werewolf, is there any substantial evidence? Uh... I... I'm just an ordinary robber. I didn't know anything last night... Let's discuss our identities quietly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD, you are still here! How cool is it when you and EasyBake dress up together? I just saw you doing it with my own eyes! The goal today is the same, I, Blaze, will kill you, you logic monster! Everyone voted for Pizza, don’t listen to his nonsense anymore!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Ha ha! The truth is finally revealed! Twister actually proposed to follow you, a \"logic weirdo\", to vote for Blaze. Isn't this the most obvious signal to connect the camps? You and Blaze are fighting each other, but you are actually using this rough confrontation to deflect doubts about the real \"core variables\" of you and EasyBake! This reconciliation program that you conspired to establish is just to cleanse the monitoring software of us observers! Since you want to perform this drama to the extreme, then I will cast this crucial vote to see what drama you can still perform after the node of your imaginary cage is removed! I vote for Dr. Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: Blaze’s emotional accusations and disturbances have colluded with ConspiBro’s narrative interference, severely damaging the reconciliation information path.\n2. Implementation policy: According to the exclusion sequence, Blaze will be listed as the primary exclusion target to terminate its malicious interference.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, look at Blaze, you are so anxious to deal with these two people. Are you so \"irritable\" to hide the fact that you are actually a werewolf? Although one of PHD and ConspiBro is based on logic and the other is based on conspiracy, at least they are willing to play it out. You, Blaze, are going to kill someone as soon as you come here, and you are going to bite EasyBake and Pizza to death. You are so \"straightforward\", don't you want to take the lead in clearing the place? Since everyone wants to \"clean up variables\", I will vote for you Blaze. Let's see how innocent you are! Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Woo...everyone...uh...Blaze, you...uh...are you saying that we are werewolves? Is there any real evidence that we are? You yelled like this and made everyone so confused... Uh... I think there's something wrong with the way you accuse people, Blaze, and I... I can only vote to exclude you... I'm sorry, woo hoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh...Blaze, you...uh...what do you have to say so absolutely about something? I... I'm really afraid of this kind of attack... Uh... You said Pizza is a werewolf, but I... Uh... I think both Pizza and PHD seem to want to play this game well... Uh... You yelled like that, causing everyone to be in chaos... Woo woo... I... I can only vote for you, Blaze, I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Ha ha! Look! SafetySam, a wallflower, has also begun to cooperate with your scripts! What a perfect collusion structure this is: a violent executor (Blaze), a calm commander (PHD), a responsible and conciliatory echoer (EasyBake), and an executor (SafetySam) who is responsible for casting key votes at critical moments! Do you think that eliminating me can cover up all this? I have completely dismantled the operating logic of your fictional cage! No matter how you vote, the fact is that you are the real manipulators of this data game! My final vote is still for Dr. Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD You are a logic freak, but you are still pretending! ConspiBro may be crazy, but I, Blaze, can see through the tricks of the werewolf camp at a glance! EasyBake How are you pretending to be innocent? Your two sneaky actions have already exposed your identity! I, Blaze, am going to kill you today, Pizza, let’s see how you use your bullshit logic to protect yourself! Everyone is going to Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and execution:\n1. Anomaly identification: Blaze’s continued emotional incitement and baseless accusations have proven to be the main source of information interference in the game.\n2. Implementation policy: According to the exclusion sequence, the interfering behavior shall be forcibly terminated.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, everyone's patience with Blaze, the \"grumpy old man\", has reached its limit! Blaze, you're going to kill someone as soon as you open your mouth. If you do this, you'll not only fail to solve the problem, but it will also make the place even more chaotic! PHD wants to exclude you, and SafetySam feels that there is no substantial evidence for your accusation. Since everyone agrees to eliminate this biggest variable, we, Tang Jing, will follow the public opinion and vote for Blaze! I wonder how innocent you are, hahahaha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... everyone... uh... I think Blaze, your method of accusing people is really too fierce, and it makes everyone very confused... uh... Since PHD and Twister both said that they should exclude those who cause trouble, I... I can only vote for you, Blaze, I'm sorry... wu wu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh...Blaze, you...uh...what do you have to say so absolutely about everything? I... I'm really afraid of this kind of attack... Uh... You said we are werewolves, but I... Uh... I feel like Pizza and PHD both want to play this game well... Uh... You yelled like that and made everyone in chaos... Wuwu... I... I can only vote for you, Blaze, I'm sorry, Wuwu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "This is simply \"encirclement, suppression and cutting\" at the textbook level! Look, even SafetySam and EasyBake, who were saying \"it's confusing when everyone accuses each other\" just now, instantly unified their voices and voted for Blaze! Isn’t this the most obvious form of camp complicity? PHD, your program is really efficient, even these idiots can be instantly encoded into attack sequences by you! Are you trying to make this variable-clearing drama look like a \"just collective decision\" by throwing in an angry Blaze as a sacrifice? I will never let your fictional cage reset its data so easily! Now that you have chosen your scapegoat, I will play out this ridiculous drama to the end and see who you are going to target after Blaze is eliminated by you hypocrites! My final vote, for Blaze!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD You are a logic freak, but you are still pretending! ConspiBro may be crazy, but I, Blaze, can see through the tricks of the werewolf camp at a glance! EasyBake How are you pretending to be innocent? Your two sneaky actions have already exposed your identity! I, Blaze, am going to kill you today, Pizza, let’s see how you use your bullshit logic to protect yourself! Everyone is going to Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: Blaze’s continued emotional incitement and baseless accusations have colluded with ConspiBro’s narrative interference, severely damaging the reconciliation information path.\n2. Implementation policy: According to the exclusion sequence, Blaze will be listed as the primary exclusion target to terminate its malicious interference.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... Uh... I think Blaze, your way of accusing people is really too strong... Uh... Everyone is so confused, but since Twister and PHD both say they want to eliminate the most troublesome people, I... I can only vote for you, Blaze, I'm sorry, woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you are so impatient, you are always the first to rush out and bite someone in every game! Although Pizza is rigid, he at least has the logic to take stock, while you, Blaze, just know how to yell and kill people. Since everyone has to clear up the variables, I will follow the trend and send you the most anxious Blaze out. Let’s see if you are really innocent, hahahaha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh... Blaze, you... uh... do you have to talk about something so intensely? Uh... I... I'm really afraid of this kind of attack... Uh... You say we are werewolves, but I... Uh... I feel like Pizza and PHD both want to play this game well... Uh... You're yelling like that, causing everyone to be in chaos... Woohoo... I... I can only vote for you, Blaze, I'm sorry, Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Check it out! Look at the voting rhythm of this group of extras! Even characters like EasyBake and SafetySam, who were still in \"chaos\", were able to \"collectively exclude\" Blaze within a few seconds. Doesn't this prove that your voting sequence is a preset data stream? PHD, although your algorithm is cold, this \"excluding Blaze\" drama is too deliberate! I disdain to cooperate with your program of cleaning variables. I will once again resolutely vote for you, the control node of your collusive structure - Dr. Pizza! The data in this fictional cage will eventually collapse!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and execution:\n1. Abnormal confirmation: Blaze’s emotional attacks and disregard for accounting logic have seriously hindered the stability of game information and resonated with ConspiBro’s disruptive behavior.\n2. Implementation policy: According to the mandatory exclusion procedure, Blaze will be listed as the primary exclusion target to terminate its malicious interference.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "PHD You are a logic freak, but you are still pretending! ConspiBro may be crazy, but I, Blaze, can see through the tricks of the werewolf camp at a glance! EasyBake How are you pretending to be innocent? Your two sneaky actions have already exposed your identity! I, Blaze, am going to kill you today, Pizza, let’s see how you use your bullshit logic to protect yourself! Everyone is going to Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, you... uh... must talk about something so intensely? I think everyone is so confused... Well... Since both PHD and Twister have said that they will exclude the most troublesome people, I... I can only vote for you, Blaze, I'm sorry, ugh..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you are so impatient, you are always the first to rush out and bite someone in every game! Although Pizza is rigid, he at least has the logic to take stock, while you, Blaze, just know how to yell and kill people. Since everyone has to clear up the variables, I will follow the trend and send you the most anxious Blaze out. Let’s see if you are really innocent, hahahaha!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 ​​13:32:56 HKT] Blaze: Hey, everyone, listen! I didn’t do anything last night, but I saw two dank ghosts, Dr. Pizza and EasyBake, sneaking around! EasyBake Are you a cobbler? Will it be buried together with a werewolf pizza? Today's goal is the same. If the other person acts stupid or leads the way, I will kill him directly! Tell me your identity quickly before I get angry!\n[2026-03-23 ​​13:32:59 HKT] ConspiBro: Here we go again! Blaze started by accusing Dr. Pizza and EasyBake. Isn't this a standard \"red herring\" script? You are a troupe of actors performing here, one is pretending to be a grump, one is pretending to be a cobbler, and one is pretending to be a logic monster. The complete set of scripts is to protect the core nodes of your werewolf camp! I dare to say that this game is basically a psychological test designed to exclude those of us who have the ability to think independently. Your accusations are all temporary lines arranged by the stage! I will never fall into such a low-end drama like yours. I will definitely expose the trump card of this fictitious prison!\n[2026-03-23 13:33:03 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Current situation of the game: The information chain is seriously broken, and there are obvious logical conflicts in individual narratives.\n2. Reconciliation requirements:\n    - Blaze: Please explain the specific method and verifiable source of your \"night observation\", otherwise it will be regarded as malicious interference.\n    - ConspiBro: Continue to refuse to disclose the specific operation path and will be directly included in the mandatory exclusion sequence.\n3. Position: Do not believe any unsubstantiated accusations and require all participants to immediately conduct logical cross-calibration.\n[2026-03-23 ​​13:33:05 HKT] Twister: Oops, everyone finally woke up again! This stage is simply wonderful! Blaze is here to get angry, PHD is here to talk logic, ConspiBro is here to talk conspiracy theories, this whole situation is just for the drama queen like me! Why don't everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? Blaze, you saw Pizza and EasyBake sneaking around. This revelation is quite exciting! Come on, everyone has their identity as a scaremonger, how about letting me scare you with some stimulation?\n[2026-03-23 ​​13:33:08 HKT] EasyBake: Uh... uh... Blaze, what are you... uh... doing to make me and Pizza sneaky? I... I'm just an ordinary villager. I really don't know anything... uh... everyone... uh... don't attack each other anymore, okay? Woohoo...\n[2026-03-23 13:33:10 HKT] SafetySam: Wow... uh... everyone... I'm really afraid of this atmosphere... uh... Blaze and ConspiBro's accusations make me so confused... uh... let's discuss our identities quietly and stop attacking each other, okay? Woohoo...\n[2026-03-23 13:33:12 HKT] Blaze: Pizza, your logic is so weird! EasyBake, you fake cobbler, you pretend to be innocent so much, do you think I am blind? The situation is so obvious, you two wolves are trapped together, what kind of logical reconciliation are you doing? I, Blaze, will send you two back to your hometown today!\n[2026-03-23 ​​13:33:15 HKT] ConspiBro: PHD, your so-called \"logical cross-calibration\" is simply worthless! You and Blaze are singing together, one is making accusations, and the other is taking a \"calm inventory.\" I have already seen through this binary opposition! The more you try to clean up this \"core variable\" of mine, the more it proves that you group of extras have panicked! You are not reconciling the accounts at all, but are conspiring to destroy the data of this fictitious cage in an attempt to cover up the fact that you are the real controller of this game!\n[2026-03-23 13:33:18 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Identification of anomalies: Blaze’s accusation lacks empirical basis and is a typical emotional incitement; ConspiBro’s narrative continues to be divorced from the facts of the game and is serious noise.\n2. Reconciliation requirements:\n    - Once again requiring all parties to reveal their initial identities and night operations targets, this is the only way to end the chaos.\n3. Position: No ambiguity is allowed, any emotional accusations are rejected, and those who continue to be unable to cooperate with logical reconciliation will be excluded with the highest priority.\n[2026-03-23 ​​13:33:21 HKT] Twister: Oops, the smell of gunpowder in this scene is getting stronger and stronger! Blaze kills EasyBake and Pizza, Pizza is taking stock of the variables next to it, and EasyBake is playing pity here. This scene is simply a stage set up for me, a drama queen! Since everyone has such a \"secret\", it's not as simple as ours: I will vote for Blaze who is the most troublesome! It seems that his breasts are really \"straight\". What's the big conspiracy behind it? PHD Have you finished taking stock? How about taking the lead in voting Blaze out and scaring everyone with some excitement?\n[2026-03-23 ​​13:33:23 HKT] EasyBake: Uh... uh... Blaze, you... uh... you saw me sneaking around with Pizza, that's really not the case! I...I'm just an ordinary villager. I really don't know anything...uh...everyone...should stop attacking each other, okay? Woohoo...\n[2026-03-23 13:33:25 HKT] SafetySam: Uh...uh...everyone...Qianqi, please stop arguing...Blaze, you...uh...said we are a werewolf, is there any substantial evidence? Uh... I... I'm just an ordinary robber. I didn't know anything last night... Let's discuss our identities quietly and stop attacking each other, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

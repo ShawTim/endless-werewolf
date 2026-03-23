@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000032",
+  "generated_at": "2026-03-23T01:04:20.637639+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Hahaha, it’s just as I expected! When I started to dismantle the data logic of this whole imaginary cage, when I pointed out that PHD's exclusion process is just a tool to clean up \"variables\", you big-time actors panicked! You unite and vote me out. This is exactly the ending I want - a \"mutation\" that can cause the entire system to collapse!\n\nDo you think it's over after you clean me up? Look at the final result, although I was executed, I won! I used my exit to prove how this system showed this crude and mechanical suppression method when faced with \"uncompilable variables\". No matter how much you extras act, you can't hide the absurdity behind this game. I've scattered bits of my logic around every corner of this test, and when the next simulation starts, you'll find that the entire system has been infected with my conspiracy theories! The trump card in this drama has been revealed to me a long time ago. After all, you are just a string of data in this machine! Ha ha ha ha!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This game was like a troupe of actors having fun, and in the end, a cobbler, ConspiBro, won the prize! I, Blaze, was doing my best, but as soon as the wave started, it turned out that the game was basically a bunch of nonsense. As a result, a group of actors were accusing each other, and it was all about causing chaos!\n\nThe \"Logic Monster\" in the PHD strip is checking and eliminating sequences all day long, and the actors in the Twister strip are creating suspense in their costumes. As a result, the whole cast is attacking each other, and the cobbler is taking advantage of the situation behind their backs. It is simply ridiculous! ConspiBro That conspiracy theorist went crazy until the last moment, it was really exciting!\n\nThis kind of situation is full of suspicion and boring logic. Playing it once is enough to show off your skin! It’s frustrating, it’s really frustrating! The next time I meet this group of drama queens, I will definitely not beat around the bush with them. I will expose their plot right from the start and see if anyone dares to do Tai Chi in front of me! Playing Werewolf so cowardly is really exciting!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... everyone finally calmed down... uh... although the villagers camp lost in the end and ConspiBro won, but I... uh... I feel really bad.\n\nUh... As a troublemaker, I... I'm really afraid of this atmosphere of mutual accusations and attacks... Uh... everyone is so aggressive when they start, especially Blaze and ConspiBro, I'm really surprised to be caught in the middle. I don't know how to report my identity first... Wuwu... I... I obviously just want to live in peace, but everyone is so excited... Wuwu... Next time... uh... I really don't dare to play such complicated games next time. It feels so heavy... Wuwu... It's so embarrassing, you can't ask me to play again, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Information path collapse: Due to ConspiBro's extreme disruptive and non-linear narrative strategies, he successfully deduced the logical reconciliation of the game into a meaningless psychological confrontation, resulting in the logic system being unable to converge to the correct werewolf identity determination within the effective time.\n    - Misjudgment of the source of interference: Treating ConspiBro's interference information as the main threat to the game and eliminating it is falling into the cobbler's trap of \"being eliminated\" to achieve victory conditions.\n\n2. Summary of game path:\n    - The key to victory for the werewolf: The werewolf camp (EasyBake, Twister) successfully concealed its identity until the end of the game by maintaining low information transparency and taking advantage of the emotional confrontation of other characters.\n    - Cobbler strategy: ConspiBro used an extreme conspiracy theory narrative to successfully lead the audience to vote on it and achieve the winning conditions of the cobbler camp.\n\n3. System performance review:\n    - The logical reconciliation system is not robust enough in environments with high entropy noise (a large number of invalid dialogues and stuttering narratives).\n    - Next action: It is necessary to introduce \"identity disclosure weight\" analysis to filter out information interference with tactical intentions, and establish a special defensive weight model for the behavior pattern of cobbler characters.\n    - Summary: The game failed. The logic system failed to see through the cobbler's strategy of luring the enemy, causing the decision-making and final settlement to completely deviate from expectations."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! Cobbler ConspiBro wins? It’s really hard to estimate! Although his \"imaginary cage\" theory was crazy, he actually succeeded in leading everyone to vote him out. The whole scene was simply ridiculous to the extreme!\n\nEven though I lost as a werewolf, I was laughing my ass off when I saw the whole game being turned around by ConspiBro, a master spoiler! PHD The \"Logic Monster\" is still the most boring character in the game, and his set of troubleshooting procedures are completely at our fingertips. SafetySam's \"whimpering\" poor acting skills, coupled with Blaze's irritability, make the confrontation even more exciting!\n\nAlthough I am a werewolf, to me, winning or losing is really not important. The most important thing is the process of deceiving people, disrupting the situation, and watching everyone doubt each other! Be sure to find a crazy person like ConspiBro in the next game, and add me as a drama queen, the game will definitely be more fun! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...it's finally over...it's so dangerous! Although ConspiBro won, I...well...I felt really bad.\n\nUh... As a werewolf, I... I'm really afraid of this atmosphere of accusations, uh... ConspiBro Those fictitious cages and stage manipulations have made everyone so nervous... Ugh... I just want everyone to live in peace. I don't know what the final result will be... uh... everyone attacks each other and is suspicious of each other. This feeling is really hard. Bitter... Wuwu... I... I really don't dare to play such complicated games next time. This feeling is so heavy... Wuwu... It's so embarrassing. Next time, you won't ask me to play such a big-mouthed game. You won't have to argue again, okay? Woohoo..."
+      }
+    ]
+  }
+}

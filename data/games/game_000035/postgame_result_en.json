@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000035",
+  "generated_at": "2026-03-23T05:35:17.587561+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...uh...I'm so unhappy...Although I'm just a small minion, this game really makes me confused, uh...Blaze's irritability is really scary, and what kind of logic PHD always uses to oppress people...Ugh...I...I just want everyone to play in peace...Why do we have to accuse each other?\n\nUh...Although the werewolf camp lost in the end, I really think we shouldn't quarrel like this...Ugh...EasyBake is pretending to be stupid again, and ConspiBro's conspiracy theories make my head explode...Uh...I won't dare to play such nonsense games in the future, I feel so heavy...Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu. Woohoo..."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...uh...I'm so unhappy...Although our werewolf camp lost in the end and was voted out, I...uh...I'm really afraid of this atmosphere of mutual accusations...Ugh...\n\nUh... As a werewolf, I... I just want everyone to play in peace, but seeing Blaze and ConspiBro quarreling with everyone, I really feel unhappy... Woohoo...PHD That kind of logical analysis is really strong, Twister That kind of disruption made the environment even more depressing... Uh... I obviously just wanted everyone to play in peace, but I didn't know it would turn out like this in the end... Woohoo... Such suspicion and attacks are really hard... Uh... I Next time... uh... I really don't dare to play such complicated games next time. I feel so heavy... Oooh... I'm so embarrassed. You can't ask me to play such a big talk again, and you can't argue anymore, okay? Woohoo..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, it really made me laugh to death! This scene was so wonderfully performed! The final collapse of PHD's \"logic monster\", Blaze's extremely irritable performance, and ConspiBro's conspiracy theory that can never be exposed, the whole cast is a drama queen!\n\nAlthough I am just an ordinary villager, I see them biting each other here. It feels so good! Although the villagers camp won in the end, I enjoyed the process of \"everyone doubting each other\" more than the result! Especially looking at how PHD’s reconciliation process was disrupted, it was perfect!\n\nWe must bring back this group of people for the next start. This kind of situation full of drama, contradictions and madness is definitely our Tang Jing’s favorite stage! Hahahaha, I had so much fun!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Let me just say it! The direction of this scene completely confirmed my suspicion - this is not just a werewolf killing, this is a collective cleansing operation targeting the \"awakening variable\"!\n\nWhen I proposed the theories of \"stage manipulation\" and \"imaginary cages,\" the response from all of you was a textbook \"shift of focus.\" PHD, your logical reconciliation system is just a cover-up to cover up your collusion structure; Blaze, your violent emotional output just provides the perfect excuse for you to exclude me. The villagers camp wins? Huh, this is just the preset ending of the script, a cheap placebo used to calm this chaos.\n\nAlthough I have been excluded, my observations have perfectly revealed the logic of your system. The trump card of this fictional cage will be exposed sooner or later, and you, the extras, will never be able to hide the panic of \"having to clean it up in order to maintain structural integrity\"! Hahahaha, I have completely seen through the data of this game! See you in the next show!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Pooh! This game is so boring that I get cramped! I clearly saw PHD and EasyBake two dank ghosts working together early in the morning. As a result, these people voted and formed a team of wallflowers to clean out other innocent people! I, Blaze, am doing my best. I asked everyone to surrender to the two werewolves early in the morning. However, a group of drama queens are taking stock and talking about conspiracy theories here, so that even I can hardly be led by others!\n\nIn the end, we won another point? This group of villagers were so useless that they couldn't even clear out the real werewolves. Instead, they hit SafetySam and EasyBake first by throwing random shots! As a cobbler, I have no room to develop in this situation. There is a troupe of actors performing here. I, Blaze, am about to explode if I can't see past my eyes. How can I be regarded as a troublemaker? Next time I play games, I won’t find this group of people again. I want to find people who are really willing to listen to what others say. I won’t play Tai Chi here again! snort!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Fragmentation of the information chain: The Bureau encountered serious information interference (Twister’s dramatic interference and ConspiBro’s conspiracy theory narrative), causing the logical reconciliation mechanism to lose the reference point for data calibration in the early stages.\n    - Faction identification error: SafetySam and ConspiBro's identity masking strategy was extremely deceptive and successfully directed the firepower of the logical reconciliation system to non-critical variables, causing the detection of the werewolf camp to be biased.\n\n2. Summary of game path:\n    - The key to victory for werewolves: Take advantage of the high level of distrust and emotional confrontation within the villagers' camp to remain invisible in an environment with extremely high information entropy.\n    - Logical review: The mandatory disclosure strategy accelerated the randomization of information in a highly confrontational situation and failed to effectively aggregate the true path.\n\n3. System performance review:\n    - Existing models are insufficiently resistant to \"emotional interference\" and \"dramatic misdirection\".\n    - Next action: The \"information source credibility weight\" model will be optimized to distinguish the weight of narrative interference and real action paths, and a stricter reconciliation and isolation procedure will be introduced to prevent chain decision-making errors from occurring when the information chain is broken.\n\nConclusion: Game failed. The failure of the logic system to effectively filter out noise resulted in systematic deviations in the assessment of the game situation."
+      }
+    ]
+  }
+}

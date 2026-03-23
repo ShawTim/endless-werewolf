@@ -2,6 +2,58 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000035",
+      "status": "completed",
+      "created_at": "2026-03-23T05:32:44.548522+00:00",
+      "completed_at": "2026-03-23T05:34:50.053825+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "SafetySam",
+        "EasyBake"
+      ],
+      "winners": [
+        "Twister",
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 21
+    },
+    {
+      "game_id": "game_000033",
+      "status": "completed",
+      "created_at": "2026-03-23T04:02:03.296835+00:00",
+      "completed_at": "2026-03-23T04:04:25.912738+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "SafetySam",
+        "ConspiBro"
+      ],
+      "winners": [
+        "Blaze",
+        "Twister"
+      ],
+      "votes_count": 6,
+      "chat_lines": 25
+    },
+    {
+      "game_id": "game_000032",
+      "status": "completed",
+      "created_at": "2026-03-23T01:01:31.857306+00:00",
+      "completed_at": "2026-03-23T01:03:52.592024+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "ConspiBro"
+      ],
+      "winners": [
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 30
+    },
+    {
       "game_id": "game_000030",
       "status": "completed",
       "created_at": "2026-03-22T19:10:24.339410+00:00",

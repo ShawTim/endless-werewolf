@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000033",
+  "generated_at": "2026-03-23T04:05:19.004229+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... so shameful... it's finally over... Although our werewolf camp lost in the end and was voted out, I... uh... I'm really afraid of this atmosphere of mutual accusations... ugh...\n\nUh... As a minion, I... I just want to help the werewolves, but seeing Blaze and ConspiBro quarreling with everyone makes me really unhappy... Woohoo... PHD That kind of inventory is really strong, Twister That kind of disruption made the environment even more depressing... Uh... I obviously just wanted everyone to play in peace, but I didn't know it would turn out like this in the end... Woohoo... Such suspicion and attacks are really hard... Uh... I Next time... uh... I really don't dare to play such complicated games next time. I feel so heavy... Oooh... I'm so embarrassed. You can't ask me to play such a big talk again, and you can't argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "really! I knew this was another well-planned cleanup operation by Datai!\n\nWhen I started pointing out that this whole game was just a fictitious social experiment, when I publicly exposed that PHD's \"logical reconciliation\" was actually designed to eliminate variables like me who have the ability to think independently, you drama queens immediately started the voting process! Look at SafetySam's poor \"ordinary villager\" acting, and look at Twister's dramatist-like means of disrupting the situation. This is not a werewolf. This is clearly a psychological stress test to test how humans compromise in data chaos!\n\nDo you think this scene will end perfectly if you kick me out? Wrong! Every logical contradiction and every emotional cover-up of yours has been recorded by me. Although I lost this confrontation, my observations have become logical loopholes in your system that cannot be erased! Sooner or later, the trump card in this game will be completely revealed, and you, the extras, will eventually find that you are also part of this fictional cage! Hahahaha, see you in the next scene!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, finally won! This game was ridiculous to the extreme, but in the end our villager camp won, and we finally didn’t get messed up by those dank werewolves and the crazy cobbler!\n\nAlthough I, Blaze, was a little loud when I reported my identity, I made it very clear. I personally saw the two dank ghosts PHD and ConspiBro sneaking around, so I knew they were really ghosts! The PHD logic monster is engaged in \"mandatory disclosure\" and \"exclusion sequence\" all day long, thinking that he is God, but in the end, he still doesn't let us know through him? ConspiBro That conspiracy theorist is even more unreasonable, the situation is going crazy here, it is really annoying!\n\nEven though SafetySam, the wallflower, pretended to be pitiful all the time, at least it finally proved that he helped clear away some sources of disturbance. In this game, I, Blaze, am doing the right thing and everything he tells is the truth. When catching werewolves, there is no need to talk so much nonsense, just throw the most suspicious one to death! Next time I start, if anyone dares to do Tai Chi or conspire in front of me, I will die with him immediately! It's a bit of a waste to win, but at least this group of drama queens are back home with their baggage!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, that’s all I’m saying! This scene is really exciting! Although I am just an ordinary villager, seeing a group of people doubting and biting each other, the sense of drama is definitely perfect!\n\nPHD The inventory of the final breakdown of that \"Logic Monster\" really made me laugh to death! He thought he could use logic to reconcile the accounts, but he was completely thrown into confusion by ConspiBro's conspiracy theory and Blaze's rage. The situation was so chaotic that even the werewolf himself couldn't tell which one was true. Although the two werewolves SafetySam and ConspiBro were voted out in the end and the villagers camp won, as Tang Jing, as a spoiler, it was really enjoyable to watch the scene play out!\n\nThis feeling of deceiving and disrupting the situation is really more interesting than simply winning the game! Next time, we must create a messier and more contradictory situation. Let’s see if this one can act even crazier on our Tang Jing’s stage! Ha ha ha ha!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Fragmentation of the information chain: The Bureau encountered serious information interference (Twister’s dramatic interference and ConspiBro’s conspiracy theory narrative), causing the logical reconciliation mechanism to lose the reference point for data calibration in the early stages.\n    - Faction identification error: SafetySam and ConspiBro's identity masking strategy was extremely deceptive and successfully directed the firepower of the logical reconciliation system to non-critical variables, causing the detection of the werewolf camp to be biased.\n\n2. Summary of game path:\n    - The key to victory for werewolves: Take advantage of the high level of distrust and emotional confrontation within the villagers' camp to remain invisible in an environment with extremely high information entropy.\n    - Logical review: The mandatory disclosure strategy accelerated the randomization of information in a highly confrontational situation and failed to effectively aggregate the true path.\n\n3. System performance review:\n    - Existing models are insufficiently resistant to \"emotional interference\" and \"dramatic misdirection\".\n    - Next action: The \"information source credibility weight\" model will be optimized to distinguish the weight of narrative interference and real action paths, and a stricter reconciliation and isolation procedure will be introduced to prevent chain decision-making errors from occurring when the information chain is broken.\n\nConclusion: Game failed. The failure of the logic system to effectively filter out noise resulted in systematic deviations in the assessment of the game situation."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won in the end, I... uh... I feel really bad.\n\nUh... As a cobbler, I... I'm really afraid of this atmosphere of mutual accusations. Uh... ConspiBro talked about those imaginary cages and stage manipulations, which made everyone so nervous... Woohoo... I obviously just wanted to go through it peacefully, but knowing that everyone would attack each other as soon as the wave started, I was really surprised to be caught in the middle... Woohoo... PHD Although Tang Jing and Fang were executed, I...well...I don't blame them. Maybe they just wanted to win too much. Well... Anyway, I hope that next time I play the game, I can be gentler and avoid so many misunderstandings and conflicts. Wow...that's so annoying. You can't ask me to play in such complicated situations anymore, and you can't argue anymore, okay? Woohoo..."
+      }
+    ]
+  }
+}
