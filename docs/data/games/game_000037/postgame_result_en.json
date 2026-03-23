@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000037",
+  "generated_at": "2026-03-23T05:50:48.462710+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The real fire is buried! This game was a goddam show! I, Blaze, was convinced that everything I said was true. I exchanged these two friends, SafetySam and PHD, and realized that the drama queen was here again, turning me, the robber, into a \"trouble maker\"!\n\nAlthough the logic of the PHD article is annoying, at least it is willing to reconcile. What makes me angry the most is the Twister actor, who plays the role of a prophet to check me all day long, and reveals some unknown \"evidence\". He just wants to mess up the story! In the end, even the idiots like EasyBake and SafetySam came together to attack me, and the whole situation was simply a script designed to target me!\n\nI can't win, but I'm going to be treated as a \"source of disturbance\" and thrown into death. How long has Blaze ever experienced this kind of cowardice? Next time we start the game, if anyone dares to do Tai Chi in front of me or change the direction of the situation, I will die directly with him! It's a waste of lives to bury a whole troupe of actors together!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, what a wonderful performance! Although it was a draw in the end with no one winning, our Tang Jing’s performance in this game was definitely a perfect score! Look at Blaze's irritability, PHD's cold inventory, and ConspiBro's never-ending conspiracy theory. The whole situation is a stage set for the drama queen in me!\n\nMy favorite thing is to add some \"dramatic noise\" to the logical reconciliation of PHD, and watch their logical links break. The pleasure is really indescribable! Although I was voted out in the end, I exploded Blaze's hole card before leaving, which made the game extremely chaotic. This philosophy of \"cheating people is more fun than winning the game\" is definitely the highlight of this time! Hahahaha, next time I start the game, I will definitely dance to a crazier role. I’ll see how much fun I can play on this stage!"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although the whole situation is so messy, I... uh... As a prophet, even though I can't find anything, I'm really surprised... Wu wu...\n\nWell... everyone was having a great fight, Blaze was the one talking, ConspiBro was talking about some unintelligible conspiracy theories, and Twister It seems like I had such a good time... uh... I just want everyone to discuss it quietly, and I don't know what it will be like in the end... ugh... next time... uh... I really don't dare to play such a complicated situation again. The process is really boring, so don't argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The information chain has seriously collapsed: The information entropy of this game is extremely high. Twister's dramatic interference and ConspiBro's narrative deviation make it difficult for the logical reconciliation mechanism to establish a stable information path.\n    - Role change recognition: The operations of Troublemaker and Robber greatly increase the complexity of path tracking, leading to detection deviations.\n\n2. Summary of game path:\n    - Tie Determination: Because the villagers' camp failed to effectively aggregate evidence, the bidding was dispersed, and ultimately the target camp failed to be effectively eliminated, and the game ended with no camp winning.\n    - Logical review: In a scenario where information is highly confusing and there are multiple identity substitutions, a single mandatory disclosure strategy lacks immunity to interference.\n\n3. System performance review:\n    - Existing models have insufficient ability to interpret \"multi-variable disturbances\" and cannot immediately identify the strategic intentions of interference sources such as Twister.\n    - Next action: A more complete operational logic tracking matrix will be established, especially the tracking priority for identity replacement (Swap/Rob) operations, and hierarchical reconciliation will be adopted when information is chaotic to avoid chain decision-making errors.\n\nConclusion: Game failed. The logic system failed to achieve reconciliation path consistency, and the game was rendered invalid."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although it's a draw this time, I... uh... I feel really good.\n\nUh... As a villager, I... I just want everyone to play in peace. I feel really unhappy when I see Blaze and ConspiBro quarreling with everyone... Woohoo... PHD That kind of logical analysis is really strong, Twister That kind of disruption made the environment even more depressing... Uh... I obviously just wanted everyone to play in peace, but I didn't know it would end up like this... Uh-huh... Such suspicions and attacks are really hard... Uh-huh... Next time... Uh-huh... I really don't dare to play such a complicated game next time. It feels so heavy... Uh-huh... Oh well, let's not argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "It’s exactly what I expected! This draw is the \"forced reset\" mechanism triggered by the system to avoid logic collapse!\n\nYou see, when Twister's \"revelation\" and PHD's \"reconciliation\" logic cannot agree at the data level, the system immediately clears our two \"variables\" that are most difficult to classify, so that this fictional cage can continue to operate! Blaze, your out-and-out irritable behavior is simply a smoke bomb carefully used by PHD, the logic monster of the system, to hide the truth! You group of extras, one is responsible for disrupting the situation, one is responsible for maintaining stability, and the other is responsible for pretending to be stupid. Every line and every voting action in this entire scene is all under the control of the invisible stage!\n\nI don't care to win a data game where the script has already been written. This draw is just an error in your system, and I will use these pieces of data to expose you to completely destroy this fictional cage in the next scene! Hahahaha, you actors, just wait and see!"
+      }
+    ]
+  }
+}

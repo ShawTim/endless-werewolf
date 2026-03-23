@@ -1,0 +1,244 @@
+{
+  "status": "completed",
+  "game_id": "game_000037",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Current situation of the game: There is a deviation in the information path, and the identity mapping of each participant is confusing.\n2. Disclosure: I authenticated Blaze last night and it turned out to be TroubleMaker.\n3. Action recommendations: All parties should disclose the objects of last night's operations, especially information related to Blaze, to facilitate forced reconciliation.",
+      "log_line": "[2026-03-23 13:47:59 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Current situation of the game: There is a deviation in the information path, and the identity mapping of each participant is confusing.\n2. Disclosure: I authenticated Blaze last night and it turned out to be TroubleMaker.\n3. Action recommendations: All parties should disclose the objects of last night's operations, especially information related to Blaze, to facilitate forced reconciliation."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...morning everyone. It's so confusing... uh... what PHD talks about is so profound, I... I'm just an ordinary person. Uh... I... I... uh... something unusual seemed to have happened last night, but I'm really not sure. Everyone... uh... can you make it clear what everyone has seen? I...I'm really afraid of this atmosphere of mutual accusations, ugh...",
+      "log_line": "[2026-03-23 ​​13:48:02 HKT] EasyBake: Woo... uh... morning everyone. It's so confusing... uh... what PHD talks about is so profound, I... I'm just an ordinary person. Uh... I... I... uh... something unusual seemed to have happened last night, but I'm really not sure. Everyone... uh... can you make it clear what everyone has seen? I...I'm really afraid of this atmosphere of mutual accusations, ugh..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... everyone... I really don't know anything... uh... PHD seems to be very powerful when talking to Twister, but I... uh... I was really sleepy last night... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:48:04 HKT] SafetySam: Uh... uh... everyone... I really don't know anything... uh... PHD seems to be very powerful when talking to Twister, but I... uh... I was really tired last night... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! The whole situation is basically a well-choreographed performance. PHD throws out the \"identity path\" as soon as it opens its mouth. The purpose is to guide everyone into the logical cage it has preset! Blaze, what exactly did you exchange last night? Are you in cahoots with the PHD department? Let me tell you, all identity changes in the game are controlled at the data level, so I will not fall into the trap of your preset script! The trump card in this game, I will definitely expose it!",
+      "log_line": "[2026-03-23 ​​13:48:07 HKT] ConspiBro: Here we go again! The whole situation is basically a well-choreographed performance. PHD throws out the \"identity path\" as soon as it opens its mouth. The purpose is to guide everyone into the logical cage it has preset! Blaze, what exactly did you exchange last night? Are you in cahoots with the PHD department? Let me tell you, all identity changes in the game are controlled at the data level, so I will not fall into the trap of your preset script! The trump card in this game, I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! PHD Your logic monster is here to take stock again, it’s basically here to cause trouble! ConspiBro friends are talking about \"big platform control\" here, are you colluding? Twister actor is pretending to be a prophet again to check me? I exchanged SafetySam and PHD friends last night, let’s see how you behave! Today's goal is the same. If either of us does Tai Chi and leads the wind, I will be the first to die!",
+      "log_line": "[2026-03-23 ​​13:48:10 HKT] Blaze: Hello! PHD Your logic monster is here to take stock again, it’s basically here to cause trouble! ConspiBro friends are talking about \"big platform control\" here, are you colluding? Twister actor is pretending to be a prophet again to check me? I exchanged SafetySam and PHD friends last night, let’s see how you behave! Today's goal is the same. If either of us does Tai Chi and leads the wind, I will be the first to die!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone is finally together again! This stage is really exciting. Blaze, what cards did you exchange? Twister, the inventory is tight again, PHD, your logic is still here! As an opera star, I, Tang Jing, found it super enjoyable to see the whole cast acting here! Since everyone has such \"secrets\", why not everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? It’s not a good idea to take stock any more. How about just voting for the “most dishonest” person and letting everyone have fun with it? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​13:48:13 HKT] Twister: Oops, everyone is finally together again! This stage is really exciting. Blaze, what cards did you exchange? Twister, the inventory is tight again, PHD, your logic is still here! As an opera star, I, Tang Jing, found it super enjoyable to see the whole cast acting here! Since everyone has such \"secrets\", why not everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? It’s not a good idea to take stock any more. How about just voting for the “most dishonest” person and letting everyone have fun with it? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are many conflicts in the information chain.\n2. Disclosure: Blaze claimed to have swapped the identities of SafetySam and Dr. Pizza, but my inspection revealed that Blaze was TroubleMaker. If Blaze lies, his actual motive is malicious harassment.\n3. Reconciliation requirements:\n    - Blaze: Please provide direct answers to the above contradictions.\n    - SafetySam: Disclose your identity changes last night to help calibrate information paths.",
+      "log_line": "[2026-03-23 13:48:16 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are many conflicts in the information chain.\n2. Disclosure: Blaze claimed to have swapped the identities of SafetySam and Dr. Pizza, but my inspection revealed that Blaze was TroubleMaker. If Blaze lies, his actual motive is malicious harassment.\n3. Reconciliation requirements:\n    - Blaze: Please provide direct answers to the above contradictions.\n    - SafetySam: Disclose your identity changes last night to help calibrate information paths."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...don't make any more noise. ConspiBro You... uh... you are talking about the script, but I... uh... I am really messed up. Blaze, you... uh... said you exchanged cards, PHD said you were a Troublemaker... uh... I... I... uh... something really happened last night, but... uh... I really don't know. Woohoo...everyone...can you calmly express your thoughts? Let's stop attacking each other, okay?",
+      "log_line": "[2026-03-23 ​​13:48:19 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. ConspiBro You... uh... you are talking about the script, but I... uh... I am really messed up. Blaze, you... uh... said you exchanged cards, PHD said you were a Troublemaker... uh... I... I... uh... something really happened last night, but... uh... I really don't know. Woohoo...everyone...can you calmly express your thoughts? Let's stop attacking each other, okay?"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... everyone... I'm really afraid of this kind of accusation... uh... although I'm so confused, but since PHD has found out something... uh... I'm just an ordinary person, and I was really sad last night... everyone... can you calm down first, uh... we can't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:48:23 HKT] SafetySam: Uh... uh... everyone... I'm really afraid of this kind of accusation... uh... although I'm so confused, but now that PHD has found out... uh... I'm just an ordinary person, and I was really sad last night... everyone... can you calm down first, uh... don't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Blaze, your \"mutual accusations\" and \"self-explosion of identity\" are simply the most standard stage cleaning scripts! You and PHD are in harmony, one is pretending to be a poor person being inspected, and the other is pretending to be a cold stock taker, but in fact you are leading us \"variables\" to kill each other! I have seen through your plot a long time ago. No matter how you act, I will not fall into the trap of this fictional prison script! PHD, your forced reconciliation process is simply to cover up the data connection between your identity exchanges. I will never cooperate with your cleanup operation! I will definitely reveal the trump card in this game!",
+      "log_line": "[2026-03-23 ​​13:48:27 HKT] ConspiBro: Blaze, your \"mutual accusations\" and \"self-exposure of identity\" are simply the most standard stage cleaning script! You and PHD are in harmony, one is pretending to be a poor person being inspected, and the other is pretending to be a cold stock taker, but in fact you are leading us \"variables\" to kill each other! I have seen through your plot a long time ago. No matter how you act, I will not fall into the trap of this fictional prison script! PHD, your forced reconciliation process is simply to cover up the data connection between your identity exchanges. I will never cooperate with your cleanup operation! I will definitely reveal the trump card in this game!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hey, Twister, you little actor, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! My Blaze is doing great, I've swapped SafetySam with Dr. Pizza, believe it or not! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!",
+      "log_line": "[2026-03-23 ​​13:48:30 HKT] Blaze: Hey, Twister, you actor, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! My Blaze is doing great, I've swapped SafetySam with Dr. Pizza, believe it or not! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, what kind of games are Blaze and PHD playing here? Blaze said that he had exchanged their cards, and PHD said that Blaze was a TroubleMaker. The situation was really getting worse! Since Blaze you said you are a robber, and you exchanged SafetySam and PHD, why not say it directly: What are the identities of the two variables you saw? PHD, you also said that you were a prophet and found out that Blaze was a TroubleMaker. This conflict is simply a stage set for me, a drama queen! Let's stop playing Tai Chi and throw ourselves to death by the \"most dishonest\" person. How about letting everyone be frightened by the stimulation? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​13:48:33 HKT] Twister: Oops, what game are Blaze and PHD playing here? Blaze said that he had exchanged their cards, and PHD said that Blaze was a TroubleMaker. The situation was really getting worse! Since Blaze you said you are a robber, and you exchanged SafetySam and PHD, why not say it directly: What are the identities of the two variables you saw? PHD, you also said that you were a prophet and found out that Blaze was a TroubleMaker. This conflict is simply a stage set for me, a drama queen! Let's stop playing Tai Chi and throw ourselves to death by the \"most dishonest\" person. How about letting everyone be frightened by the stimulation? Ha ha ha ha!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination procedures:\n1. Abnormal confirmation: There is a serious logical contradiction between Blaze's statement about identity changes at night and the Troublemaker's test results.\n2. Implementation policy: Blaze’s high-frequency emotional attacks and false information output have destroyed the game information chain.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh...Blaze, you...uh...why do you have to talk about everything so intensely? I think everyone is so confused... Well... Since PHD has found out that there is something wrong with you, I... I'm really afraid of another conflict, I... I can only vote for you, Blaze, I'm sorry, woo hoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, your... uh... way of accusing people is really too fierce... uh... everyone is so confused, but since PHD has found out that there is something wrong with you, I... I can only vote for you, Blaze, I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Ha ha! Look! This is simply \"encirclement, suppression and cutting\" at the textbook level! The voting rhythm of you extras is completely exposed! PHD, your so-called \"logical cross-calibration\" is simply worthless! You and Blaze are singing together, one is making accusations, and the other is taking a \"calm inventory.\" I have already seen through this binary opposition! The more you try to clean up this \"core variable\" of mine, the more it proves that you group of extras have panicked! You are not reconciling the accounts at all, but are conspiring to destroy the data of this fictitious cage in an attempt to cover up the fact that you are the real controller of this game! No matter how you perform, I will not fall into the trap of this fictional prison script! My final vote, for Dr. Pizza!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a bad actor, you act mysterious and provoke fights all day long, but you still say that I am a werewolf? I, Blaze, am doing my best to show off your werewolf camp tricks! You are here to stir up troubles and talk illogical nonsense all day long. You are just creating chaos here! Don't let this actor do anything to you anymore. He'll surrender to Twister, and you'll be done with it!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you finally can't help it anymore? I, Tang Jing, have never barked, I only break the news! Listen up, everyone: I checked last night and Blaze's trump card clearly said \"Werewolf\"! Do you want to divert your attention in some way? PHD, is this evidence enough for you to take inventory? What are you waiting for? Just throw this little werewolf to death, don't let him go crazy and mess up again, hahahaha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and execution:\n1. Evaluation of the validity of the evidence: Blaze’s statement about night operations is in direct conflict with Twister’s inspection results, and his narrative lacks verifiability.\n2. Abnormal convergence: Blaze continues to release disturbing information, which has seriously hindered the identity reconciliation mechanism.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh... Blaze, you... uh... do you have to talk about something so intensely? I think everyone is so confused... Well... Since both PHD and Twister have said that they will exclude the most troublesome people, I... I can only vote for you, Blaze, I'm sorry, ugh..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, your... uh... way of accusing people is really too fierce... uh... everyone is so confused, but since PHD and Twister both call you a TroubleMaker, and you are yelling here, I... I can only vote for you, Blaze, I'm sorry, woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "This is simply \"encirclement, suppression and cutting\" at the textbook level! Look, even SafetySam and EasyBake, who were saying \"it's confusing when everyone accuses each other\" just now, instantly unified their voices and voted for Blaze! Isn’t this the most obvious form of camp complicity? PHD, your program is really efficient, even these idiots can be instantly encoded into attack sequences by you! Are you trying to make this variable-clearing drama look like a \"just collective decision\" by throwing in an angry Blaze as a sacrifice? I will never let your fictional cage reset its data so easily! Now that you have chosen the scapegoat, I will follow this ridiculous script to the end and see what drama you can perform after the node of your imaginary cage is removed! My final vote, for Twister!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a bad actor, you act mysterious and cause fights all day long! What evidence do I have? I personally exchanged your friends and PHD last night. I, Blaze, can see the tricks of your werewolf camp at a glance! You are here to stir up troubles and talk illogical nonsense all day long. You are just creating chaos here! Don't let this actor do anything to you anymore. He'll surrender to Twister, and you'll be done with it!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and execution:\n1. Abnormal confirmation: There are logical conflicts between Blaze's night operation statement (exchanging SafetySam and Dr. Pizza), its identity verification result (Troublemaker), and Twister's accusation path.\n2. Implementation policy: Blaze’s narrative shows highly malicious interference characteristics, and it is listed as the primary elimination target according to the elimination sequence.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you are so impatient, you are always the first to rush out and bite someone in every game! Although Pizza is rigid, he at least has the logic to take stock, while you, Blaze, just know how to yell and kill people. Since everyone has to clear up the variables, I will follow the trend and send you the most anxious Blaze out. Let’s see if you are really innocent, hahahaha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ugh...Blaze, you...uh...why do you have to talk about everything so intensely? I think everyone is so confused... Well... Since both PHD and Twister have said that they will exclude the most troublesome people, I... I can only vote for you, Blaze, I'm sorry, ugh..."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 13:47:59 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Current situation of the game: There is a deviation in the information path, and the identity mapping of each participant is confusing.\n2. Disclosure: I authenticated Blaze last night and it turned out to be TroubleMaker.\n3. Action recommendations: All parties should disclose the objects of last night's operations, especially information related to Blaze, to facilitate forced reconciliation.\n[2026-03-23 ​​13:48:02 HKT] EasyBake: Woo... uh... morning everyone. It's so confusing... uh... what PHD talks about is so profound, I... I'm just an ordinary person. Uh... I... I... uh... something unusual seemed to have happened last night, but I'm really not sure. Everyone... uh... can you make it clear what everyone has seen? I...I'm really afraid of this atmosphere of mutual accusations, ugh...\n[2026-03-23 13:48:04 HKT] SafetySam: Uh... uh... everyone... I really don't know anything... uh... PHD seems to be very powerful when talking to Twister, but I... uh... I was really tired last night... Let's stop attacking each other, okay? Woohoo...\n[2026-03-23 13:48:07 HKT] ConspiBro: Here we go again! The whole situation is basically a well-choreographed performance. PHD throws out the \"identity path\" as soon as it opens its mouth. The purpose is to guide everyone into the logical cage it has preset! Blaze, what exactly did you exchange last night? Are you in cahoots with the PHD department? Let me tell you, all identity changes in the game are controlled at the data level, so I will not fall into the trap of your preset script! The trump card in this game, I will definitely expose it!\n[2026-03-23 ​​13:48:10 HKT] Blaze: Hello! PHD Your logic monster is here to take stock again, it’s basically here to cause trouble! ConspiBro friends are talking about \"big platform control\" here, are you colluding? Twister actor is pretending to be a prophet again to check me? I exchanged SafetySam and PHD friends last night, let’s see how you behave! Today's goal is the same. If either of us does Tai Chi and leads the wind, I will be the first to die!\n[2026-03-23 ​​13:48:13 HKT] Twister: Oops, everyone is finally together again! This stage is really exciting. Blaze, what cards did you exchange? Twister, the inventory is tight again, PHD, your logic is still here! As an opera star, I, Tang Jing, found it super enjoyable to see the whole cast acting here! Since everyone has such \"secrets\", why not everyone report the \"scenery\" they saw last night? PHD, is your reconciliation process stuck again? It’s not a good idea to take stock any more. How about just voting for the “most dishonest” person and letting everyone have fun with it? Ha ha ha ha!\n[2026-03-23 13:48:16 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are many conflicts in the information chain.\n2. Disclosure: Blaze claimed to have swapped the identities of SafetySam and Dr. Pizza, but my inspection revealed that Blaze was TroubleMaker. If Blaze lies, his actual motive is malicious harassment.\n3. Reconciliation requirements:\n    - Blaze: Please provide direct answers to the above contradictions.\n    - SafetySam: Disclose your identity changes last night to help calibrate information paths.\n[2026-03-23 ​​13:48:19 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. ConspiBro You... uh... you are talking about the script, but I... uh... I am really messed up. Blaze, you... uh... said you exchanged cards, PHD said you were a Troublemaker... uh... I... I... uh... something really happened last night, but... uh... I really don't know. Woohoo...everyone...can you calmly express your thoughts? Let's stop attacking each other, okay?\n[2026-03-23 ​​13:48:23 HKT] SafetySam: Uh... uh... everyone... I'm really afraid of this kind of accusation... uh... although I'm so confused, but now that PHD has found out... uh... I'm just an ordinary person, and I was really sad last night... everyone... can you calm down first, uh... don't attack each other anymore, okay? Woohoo...\n[2026-03-23 13:48:27 HKT] ConspiBro: Blaze, your \"mutual accusations\" and \"self-exposure of identity\" are simply the most standard stage cleaning script! You and PHD are in harmony, one is pretending to be a poor person being inspected, and the other is pretending to be a cold stock taker, but in fact you are leading us \"variables\" to kill each other! I have seen through your plot a long time ago. No matter how you act, I will not fall into the trap of this fictional prison script! PHD, your forced reconciliation process is simply to cover up the data connection between your identity exchanges. I will never cooperate with your cleanup operation! I will definitely reveal the trump card in this game!\n[2026-03-23 ​​13:48:30 HKT] Blaze: Hey, Twister, you actor, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! My Blaze is doing great, I've swapped SafetySam with Dr. Pizza, believe it or not! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!\n[2026-03-23 ​​13:48:33 HKT] Twister: Oops, what game are Blaze and PHD playing here? Blaze said that he had exchanged their cards, and PHD said that Blaze was a TroubleMaker. The situation was really getting worse! Since Blaze you said you are a robber, and you exchanged SafetySam and PHD, why not say it directly: What are the identities of the two variables you saw? PHD, you also said that you were a prophet and found out that Blaze was a TroubleMaker. This conflict is simply a stage set for me, a drama queen! Let's stop playing Tai Chi and throw ourselves to death by the \"most dishonest\" person. How about letting everyone be frightened by the stimulation? Ha ha ha ha!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

@@ -79,7 +79,14 @@ print(json.dumps({"game_id": prepared["game_id"], "decisions": decisions}, ensur
 PY
 
 # 2) Day + vote + resolve + translate
-python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1
+# IMPORTANT: keepalive output prevents CLI harness idle-kill (180s no-output watchdog)
+python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1 &
+RUN_PID=$!
+while kill -0 "$RUN_PID" 2>/dev/null; do
+  echo "[keepalive] run_full_game still running: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+  sleep 30
+done
+wait "$RUN_PID"
 echo "Game ends. Now rebuild pages data..."
 
 # 3) Rebuild pages data
