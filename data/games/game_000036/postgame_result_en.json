@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000036",
+  "generated_at": "2026-03-23T05:44:38.016719+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Just as I expected! The script written by you extras is really poor!\n\nWhen Twister threw out the so-called \"verification evidence\", I knew it was just a forced end command programmed by Taipei to end this drama. PHD, your logic system is just used to filter out \"noise\" like me that would question the structure; and Blaze's violent performance is a catalyst used to intensify internal conflicts.\n\nDo you think that by kicking me out, the truth of this fictitious prison will be permanently covered up? Wrong! Every logical contradiction and every emotional cover-up you made on the court has been recorded by me. Although this game is over, it is just another cleanup operation for your system to repair itself. This cage will be torn down sooner or later, and those of you who are still acting will eventually discover that your lines and ending are just part of this ridiculous experiment! In the next scene, I will come back with more data that cannot be digested by your logic! Ha ha ha ha!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, it’s really cool to win! I said that I, Blaze, was doing a good job. Although I was messed up by those drama queens, in the end everyone listened to me and cleaned up those werewolves who caused trouble!\n\nAlthough the actor Twister pranked me a few times, it was like he had really caught a wolf and made me a little confused. However, although PHD's logic was annoying, their inventory helped to straighten out the situation in the end. ConspiBro This friend was going crazy from beginning to end, talking about some conspiracy theories about Taiwan. It was really annoying to the extreme. Fortunately, everyone voted him out and the whole place was clean!\n\nIn short, this game is my Blaze’s home court! Next time we play again, if anyone dares to act mysterious and arrogant in front of me, I, Blaze, will kill him immediately and I will never show mercy! If you win, you win. Next time, continue to maintain this rectum-straight style!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, I'm sure this game will turn into a crazy drama! As a prophet, we, Tang Jing, found out about Blaze's \"little werewolf\", and the thrill of breaking the news was really exciting! Everyone bickers and doubts each other throughout the game. This sense of absurdity is simply my favorite stage!\n\nAlthough PHD's cold inventory is annoying, in the end he has to follow my pace! Look at the ConspiBro conspiracy theory that completely collapsed after I broke the news. The sense of accomplishment of \"liarring people\" and \"guiding public opinion\" is really more interesting than winning the game itself! The game went crazy, the villagers camp won again, and my mission was completed perfectly! Next time I start, I must find a group of crazier actors to play with me. Let’s see how many ridiculous turns this stage can turn into! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won in the end, I... uh... I feel really bad.\n\nUh... As a villager, I... I just want everyone to play in peace, and seeing Blaze and ConspiBro quarreling with everyone, I really feel unhappy... Woohoo...PHD That kind of logical analysis is really strong, Twister That kind of disruption made the environment even more depressing... Uh... I obviously just wanted everyone to play in peace, but I didn't know it would end up like this... Uh-huh... Such suspicions and attacks are really hard... Uh-huh... Next time... Uh-huh... I really don't dare to play such a complicated game next time. It feels so heavy... Uh-huh... Oh well, let's not argue anymore, okay? Woohoo..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although our werewolf camp lost again in the end, I... uh... I'm really afraid of this atmosphere of mutual suspicion... ugh...\n\nUh... As a werewolf, I... I obviously just wanted to find a safe place to hide, but Blaze and ConspiBro's accusations made the situation get out of control. Uh... PHD's logical inventory is really strong, and Twister's revelations caught me even more off guard... Woohoo... I just wanted to play in peace, so why did everyone have to be so noisy? Woohoo... This feeling is really hard... Uh... In the future... Uh... I really don't dare to play such complicated games anymore. It's so annoying. It's better not to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Decision-making and information entropy assessment:\n    - Information source pollution: The bureau encountered extremely high intensity of \"dramatic noise\" (Twister) and \"irrational narrative\" (ConspiBro), which caused the logical reconciliation system to have far higher filtering costs than expected when processing identity mapping.\n    - Strategic blind spots: In a state of fragmented information, \"emotional confrontation\" between individuals masks the true path of role change, leading to biased judgments about camp affiliation.\n\n2. Game path and results:\n    - The victory of the villagers camp: Although the information was highly confusing, the villagers successfully converged the game path before the system collapsed by focusing on eliminating a single high-disturbance node (Blaze).\n    - Logical review: The reconciliation process failed to effectively deal with the double attack of \"identity change\" and \"information pollution\", resulting in the initial assessment of individual reliability being too conservative.\n\n3. Future optimization directions:\n    - Introducing the \"Noise Filter\": When processing daily dialogue information, priority should be given to reducing the narrative weight of emotional disturbance sources such as Twister.\n    - Enhanced path tracking: For the role changes of Robber and Troublemaker, a more robust hypothesis deduction tree needs to be established.\n\nConclusion: Game failed. In the process of dealing with irrational interference, the logical system loses its accurate capture of the real situation."
+      }
+    ]
+  }
+}

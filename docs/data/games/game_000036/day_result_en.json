@@ -1,0 +1,251 @@
+{
+  "status": "completed",
+  "game_id": "game_000036",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! SafetySam pretends to be innocent when he opens his mouth, Twister is causing trouble again, and PHD is pretending to be a logic monster to take stock of data? The more realistic your class of extras act, the more it proves that this is all a carefully planned psychological stress test! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I'm looking at your battle theater. This game is basically designed to clean up those of us who have self-conscious variables! Don't try to kidnap my judgment. I will definitely reveal the trump card in this game!",
+      "log_line": "[2026-03-23 ​​13:42:06 HKT] ConspiBro: Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! SafetySam pretends to be innocent when he opens his mouth, Twister is causing trouble again, and PHD is pretending to be a logic monster to take stock of data? The more realistic your class of extras act, the more it proves that this is all a carefully planned psychological stress test! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I'm looking at your battle theater. This game is basically designed to clean up those of us who have self-conscious variables! Don't try to kidnap my judgment. I will definitely reveal the trump card in this game!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is simply wonderful! I made some \"new discoveries\" last night. I wonder if you are interested in hearing about them? Some people say they don’t know anything, but in fact their trump card has been exposed to others! Blaze, do you want to keep pretending? The \"scenery\" that I, Tang Jing, checked out yesterday was really wonderful! Do you want me to bury this secret publicly and let everyone kill you, this \"little werewolf\"? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​13:42:09 HKT] Twister: Oops, everyone finally woke up again! This stage is simply wonderful! I made some \"new discoveries\" last night. I wonder if you are interested in hearing about them? Some people say they don’t know anything, but in fact their trump card has been exposed to others! Blaze, do you want to keep pretending? The \"scenery\" that I, Tang Jing, checked out yesterday was really wonderful! Do you want me to bury this secret publicly and let everyone kill you, this \"little werewolf\"? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Twister, what are you barking at? If you have any information, just reveal it directly, don't pretend to be mysterious! I'm doing the right thing, if someone else continues to mess around and talk nonsense, I'll be the first to kill him! Pizza, who are you counting next here? If you have anything to say, please tell me quickly, don’t waste my time!",
+      "log_line": "[2026-03-23 ​​13:42:12 HKT] Blaze: Hello! Twister, what are you barking at? If you have any information, just reveal it directly, don't pretend to be mysterious! I'm doing the right thing, if someone else continues to mess around and talk nonsense, I'll be the first to kill him! Pizza, who are you counting next here? If you have anything to say, please tell me quickly, don’t waste my time!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose last night’s operations and identity change paths.\n3. Warning: Anyone who continues to publish vague information and refuses to verify their identity will be considered an exclusion target.",
+      "log_line": "[2026-03-23 13:42:15 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose last night’s operations and identity change paths.\n3. Warning: Anyone who continues to publish vague information and refuses to verify their identity will be considered an exclusion target."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... everyone... I'm really afraid of this kind of accusation... Blaze is getting angry here again, and Twister is talking about some secret... uh... I really don't know, I just want to discuss our identities quietly, and don't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:42:18 HKT] SafetySam: Wow... uh... everyone... I'm really afraid of this kind of accusation... Blaze is getting angry again, and Twister is talking about some secret... uh... I really don't know, I just want to discuss the identity quietly, and don't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...don't make any more noise. A new day has begun again, uh... I think Twister and Pizza are talking so much, but I... uh... I really don't know. Everyone... uh... can you talk calmly and calmly? Let’s not argue anymore, uh... I think everyone is a good person, why don’t you all tell me who you are first?",
+      "log_line": "[2026-03-23 ​​13:42:21 HKT] EasyBake: Uh... uh... everyone... please don't argue anymore. A new day has begun again, uh... I think Twister and Pizza are talking so much, but I... uh... I really don't know. Everyone... uh... can you talk calmly and calmly? Let’s not argue anymore, uh... I think everyone is a good person, why don’t you all tell me who you are first?"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Twister, are you \"spoiling\" again? What you drama lovers love most is to perform a farce of \"who is more dishonest\" under PHD's so-called \"logical inventory\", thereby covering up the truth that your werewolf camp is exchanging identities behind the scenes! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! Blaze, are you angry here because you can already feel your fictional prison collapsing? You know what I say, you are all extras on this stage, the trump card in this game, I will definitely expose it!",
+      "log_line": "[2026-03-23 ​​13:42:25 HKT] ConspiBro: Twister, are you \"spoiling the situation\" again? What you drama lovers love most is to perform a farce of \"who is more dishonest\" under PHD's so-called \"logical inventory\", thereby covering up the truth that your werewolf camp is exchanging identities behind the scenes! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! Blaze, are you angry here because you can already feel your fictional prison collapsing? You know what I say, you are all extras on this stage, the trump card in this game, I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Ouch, Blaze, what are you doing in such a rage? Are you afraid that I will reveal your trump card? The \"scenery\" that Tang Jing has checked out is really exciting. PHD, do you want to hear it? Blaze, you know best what good thing you did last night! Don't waste your time. Just vote for Blaze, the \"little werewolf\". Will watching the game become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​13:42:27 HKT] Twister: Ouch, Blaze, what are you doing in such a rage? Are you afraid that I will reveal your trump card? The \"scenery\" that Tang Jing has checked out is really exciting. PHD, do you want to hear it? Blaze, you know best what good thing you did last night! Don't waste your time. Just vote for Blaze, the \"little werewolf\". Will watching the game become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Twister, you are an actor, you act mysterious and provoke fights all day long! If you have information, you will explode, if you don’t have information, you will hide. Don’t waste everyone’s time by pretending to show off! ConspiBro's fellow commentators are all the same. They talk about Taiwanese conspiracy theories all the time, just to create chaos! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!",
+      "log_line": "[2026-03-23 ​​13:42:30 HKT] Blaze: Twister, you are an actor, you act mysterious and cause war all day long! If you have information, you will explode, if you don’t have information, you will hide. Don’t waste everyone’s time by pretending to show off! ConspiBro's fellow commentators are all the same. They talk about Taiwanese conspiracy theories all the time, just to create chaos! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. The current situation of the game: The narrative is highly confusing and there are frequent disturbances that lack empirical basis.\n2. Reconciliation requirements:\n    - Require Blaze and Twister to clearly disclose their night behavior paths and confirm the data sources of their \"observations\" and \"discoveries\".\n3. Position: Do not believe in any incitement or conspiracy theories without evidence. If no logical consistency of identity and path can be established, an exclusion process will be enforced.",
+      "log_line": "[2026-03-23 13:42:33 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. The current situation of the game: The narrative is highly confusing and there are frequent disturbances that lack empirical basis.\n2. Reconciliation requirements:\n    - Require Blaze and Twister to clearly disclose their night behavior paths and confirm the data sources of their \"observations\" and \"discoveries\".\n3. Position: Do not believe in any incitement or conspiracy theories without evidence. If no logical consistency of identity and path can be established, an exclusion process will be enforced."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...everyone...uh...don't make any more noise. Blaze You said we are werewolves. Is there any substantial evidence that we are? Uh... Twister, you said you found out some secrets again... Uh-huh... I'm just an ordinary robber. I didn't know anything last night... Uh... Why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:42:41 HKT] SafetySam: Oh...everyone...uh...don't argue anymore. Blaze You said we are werewolves. Is there any substantial evidence that we are? Uh... Twister, you said you found out some secrets again... Uh-huh... I'm just an ordinary robber. I didn't know anything last night... Uh... Why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...don't make any more noise. Blaze, you...uh...you are a werewolf, is there any misunderstanding? Uh...Twister, if you...uh...what do you mean, you're going to die? Everyone...uh...could you please calm down for a moment? I...I really didn't do anything last night. Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​13:42:43 HKT] EasyBake: Uh... uh... everyone... please don't argue anymore. Blaze, you...uh...you are a werewolf, is there any misunderstanding? Uh...Twister, if you...uh...what do you mean, you're going to die? Everyone...uh...could you please calm down for a moment? I...I really didn't do anything last night. Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, Blaze, you finally can't help it anymore? I, Tang Jing, have never barked, I only break the news! Listen up, everyone: I checked last night and Blaze's trump card clearly said \"Werewolf\"! Do you want to divert your attention in some way? PHD, is this evidence enough for you to take inventory? What are you waiting for? Just throw this little werewolf to death, don't let him go crazy and mess up again, hahahaha!",
+      "log_line": "[2026-03-23 ​​13:42:45 HKT] Twister: Oops, Blaze, you finally can't help it? I, Tang Jing, have never barked, I only break the news! Listen up, everyone: I checked last night and Blaze's trump card clearly said \"Werewolf\"! Do you want to divert your attention in some way? PHD, is this evidence enough for you to take inventory? What are you waiting for? Just throw this little werewolf to death, don't let him go crazy and mess up again, hahahaha!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "This script is so poorly written! Twister, you are throwing out the so-called \"checking cards\" now just to cover up the fact that data cracks have begun to appear within your werewolf camp! You and PHD teamed up to create this binary script of \"accused and accused\" just to use Blaze's emotional loss as a cover to divert public attention away from your true node! This low-end \"werewolf vs. werewolf\" biting scene can't even fool me, a marginal observer of the fictional cage! I vote for Twister because he is the manipulator who most deliberately hides his cards in this scene!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a bad actor, you spend your days making trouble! You say I'm a werewolf? You are the most suspicious troublemaker! In this game, you just know how to act mysterious and lead the way, just to conceal your identity! Today I, Blaze, am going to kill you, the troublemaker, and everyone is going to kill Twister, don't let him do it here anymore!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Logical inventory and ruling:\n1. Analysis of sources of information disturbance: Twister continues to engage in dramatic interference in the name of \"revealing news,\" while Blaze uses emotional language to create offensive fields. Both narratives lack verifiable path evidence.\n2. Decision execution: Since Twister emphasized that it holds key information but refuses to disclose it, and its disruptive behavior has completely deviated from the reconciliation path, it was listed as the primary target for exclusion.\n\nVoting Execution: I vote for Twister."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Woo...everyone...uh...Blaze, you...uh...are you a werewolf? Do you have any real evidence that you are a werewolf? You yelled like this and made everyone confused... Uh... Now that Twister has found out some evidence, and everyone wants to eliminate the person who caused the most trouble, I... I can only vote for you, Blaze, I'm sorry, woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh...uh...Twister, you...uh...are Blaze a werewolf? I... I'm so confused... Uh... Although I don't want to surrender to anyone, but now that the evidence has been revealed and Blaze is so vicious... Wuwu... I... I can only vote for you, Blaze, I'm sorry, Wuwu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "This is simply \"encirclement, suppression and cutting\" at the textbook level! Look, even SafetySam and EasyBake, who were saying \"it's confusing when everyone accuses each other\" just now, instantly unified their voices and voted for Blaze! Isn’t this the most obvious form of camp complicity? PHD, your program is really efficient, even these idiots can be instantly encoded into attack sequences by you! Are you trying to make this variable-clearing drama look like a \"just collective decision\" by throwing in an angry Blaze as a sacrifice? I will never let your fictional cage reset its data so easily! Now that you have chosen the scapegoat, I will follow this ridiculous script to the end and see what drama you can perform after the node of your imaginary cage is removed! My final vote, for Twister!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are an actor who plays mysterious roles all day long and provokes fights. Are you saying that I am a werewolf? I, Blaze, am doing my best to show off your werewolf camp tricks! You are here to stir up troubles and talk illogical nonsense all day long. You are just creating chaos here! Don't let this actor do anything to you anymore. He'll surrender to Twister, and you'll be done with it!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Evidence effectiveness evaluation: The identity check path (Blaze: Werewolf) provided by Twister is consistent with its identity and has the characteristics of a high-credibility information source.\n2. Abnormal Convergence: Blaze’s high frequency of emotionally aggressive behavior and accusations meet the definition of an excluded target.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Twister, you... uh... since you have proof, Blaze is a werewolf. Although I was so shocked that I voted for the wrong person, but Blaze's reaction was really intense... uh... I... I had no choice but to vote for Blaze, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Twister, you... uh... since you have proof, Blaze is a werewolf. Although I was so surprised that I voted for the wrong person, but Blaze's reaction was so intense... uh... I... I had no choice but to vote for you, Blaze, I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "This is simply \"encirclement, suppression and cutting\" at the textbook level! Look, even SafetySam and EasyBake, who were saying \"it's confusing when everyone accuses each other\" just now, instantly unified their voices and voted for Blaze! Isn’t this the most obvious form of camp complicity? PHD, your program is really efficient, even these idiots can be instantly encoded into attack sequences by you! Are you trying to make this variable-clearing drama look like a \"just collective decision\" by throwing in an angry Blaze as a sacrifice? I will never let your fictional cage reset its data so easily! Now that you have chosen the scapegoat, I will follow this ridiculous script to the end and see what drama you can perform after the node of your imaginary cage is removed! My final vote, for Twister!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a bad actor, you act mysterious and provoke fights all day long, but you are telling me that I am a werewolf? I, Blaze, am doing my best to show off your werewolf camp tricks! You are here to stir up troubles and talk illogical nonsense all day long. You are just creating chaos here! Don't let this actor do anything to you anymore. He'll surrender to Twister, and you'll be done with it!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Logical ruling and elimination process execution:\n1. Information verification: The identity check result (Blaze: Werewolf) provided by Twister is consistent with the identity path of the prophet, and the information loophole has been filled.\n2. Implementation policy: Blaze’s emotional attacks and chaotic narrative have constituted a clear information obstacle, and according to the elimination sequence, it is listed as the primary elimination target.\n\nVoting Execution: I vote for Blaze."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Twister, you... uh... since you have proof, Blaze is a werewolf. Although I was so surprised that I voted for the wrong person, but Blaze's reaction was so intense... uh... I... I had no choice but to vote for you, Blaze, I'm sorry, woo woo..."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 ​​13:42:06 HKT] ConspiBro: Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! SafetySam pretends to be innocent when he opens his mouth, Twister is causing trouble again, and PHD is pretending to be a logic monster to take stock of data? The more realistic your class of extras act, the more it proves that this is all a carefully planned psychological stress test! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I'm looking at your battle theater. This game is basically designed to clean up those of us who have self-conscious variables! Don't try to kidnap my judgment. I will definitely reveal the trump card in this game!\n[2026-03-23 ​​13:42:09 HKT] Twister: Oops, everyone finally woke up again! This stage is simply wonderful! I made some \"new discoveries\" last night. I wonder if you are interested in hearing about them? Some people say they don’t know anything, but in fact their trump card has been exposed to others! Blaze, do you want to keep pretending? The \"scenery\" that I, Tang Jing, checked out yesterday was really wonderful! Do you want me to bury this secret publicly and let everyone kill you, this \"little werewolf\"? Ha ha ha ha!\n[2026-03-23 ​​13:42:12 HKT] Blaze: Hello! Twister, what are you barking at? If you have any information, just reveal it directly, don't pretend to be mysterious! I'm doing the right thing, if someone else continues to mess around and talk nonsense, I'll be the first to kill him! Pizza, who are you counting next here? If you have anything to say, please tell me quickly, don’t waste my time!\n[2026-03-23 13:42:15 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose last night’s operations and identity change paths.\n3. Warning: Anyone who continues to publish vague information and refuses to verify their identity will be considered an exclusion target.\n[2026-03-23 ​​13:42:18 HKT] SafetySam: Wow... uh... everyone... I'm really afraid of this kind of accusation... Blaze is getting angry again, and Twister is talking about some secret... uh... I really don't know, I just want to discuss the identity quietly, and don't attack each other anymore, okay? Woohoo...\n[2026-03-23 13:42:21 HKT] EasyBake: Uh... uh... everyone... please don't argue anymore. A new day has begun again, uh... I think Twister and Pizza are talking so much, but I... uh... I really don't know. Everyone... uh... can you talk calmly and calmly? Let’s not argue anymore, uh... I think everyone is a good person, why don’t you all tell me who you are first?\n[2026-03-23 ​​13:42:25 HKT] ConspiBro: Twister, are you \"spoiling the situation\" again? What you drama lovers love most is to perform a farce of \"who is more dishonest\" under PHD's so-called \"logical inventory\", thereby covering up the truth that your werewolf camp is exchanging identities behind the scenes! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! Blaze, are you angry here because you can already feel your fictional prison collapsing? You know what I say, you are all extras on this stage, the trump card in this game, I will definitely expose it!\n[2026-03-23 ​​13:42:27 HKT] Twister: Ouch, Blaze, what are you doing in such a rage? Are you afraid that I will reveal your trump card? The \"scenery\" that Tang Jing has checked out is really exciting. PHD, do you want to hear it? Blaze, you know best what good thing you did last night! Don't waste your time. Just vote for Blaze, the \"little werewolf\". Will watching the game become more exciting? Ha ha ha ha!\n[2026-03-23 ​​13:42:30 HKT] Blaze: Twister, you are an actor, you act mysterious and cause war all day long! If you have information, you will explode, if you don’t have information, you will hide. Don’t waste everyone’s time by pretending to show off! ConspiBro's fellow commentators are all the same. They talk about Taiwanese conspiracy theories all the time, just to create chaos! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!\n[2026-03-23 13:42:33 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. The current situation of the game: The narrative is highly confusing and there are frequent disturbances that lack empirical basis.\n2. Reconciliation requirements:\n    - Require Blaze and Twister to clearly disclose their night behavior paths and confirm the data sources of their \"observations\" and \"discoveries\".\n3. Position: Do not believe in any incitement or conspiracy theories without evidence. If no logical consistency of identity and path can be established, an exclusion process will be enforced.\n[2026-03-23 ​​13:42:41 HKT] SafetySam: Oh...everyone...uh...don't argue anymore. Blaze You said we are werewolves. Is there any substantial evidence that we are? Uh... Twister, you said you found out some secrets again... Uh-huh... I'm just an ordinary robber. I didn't know anything last night... Uh... Why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo...\n[2026-03-23 13:42:43 HKT] EasyBake: Uh... uh... everyone... please don't argue anymore. Blaze, you...uh...you are a werewolf, is there any misunderstanding? Uh...Twister, if you...uh...what do you mean, you're going to die? Everyone...uh...could you please calm down for a moment? I...I really didn't do anything last night. Let's stop attacking each other, okay? Woohoo...\n[2026-03-23 13:42:45 HKT] Twister: Oops, Blaze, you finally can't help it? I, Tang Jing, have never barked, I only break the news! Listen up, everyone: I checked last night and Blaze's trump card clearly said \"Werewolf\"! Do you want to divert your attention in some way? PHD, is this evidence enough for you to take inventory? What are you waiting for? Just throw this little werewolf to death, don't let him go crazy and mess up again, hahahaha!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

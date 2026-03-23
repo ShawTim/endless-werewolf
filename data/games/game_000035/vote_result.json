@@ -2,21 +2,21 @@
   "status": "completed",
   "game_id": "game_000035",
   "votes": {
-    "Blaze": "SafetySam",
-    "SafetySam": "EasyBake",
-    "Dr. Pizza": "Twister",
-    "Twister": "SafetySam",
-    "EasyBake": "Blaze",
+    "Blaze": "Twister",
+    "SafetySam": "Twister",
+    "Dr. Pizza": "EasyBake",
+    "Twister": "Blaze",
+    "EasyBake": "SafetySam",
     "ConspiBro": "EasyBake"
   },
   "tally": {
-    "SafetySam": 2,
+    "Twister": 2,
     "EasyBake": 2,
-    "Twister": 1,
-    "Blaze": 1
+    "Blaze": 1,
+    "SafetySam": 1
   },
   "executed": [
-    "SafetySam",
+    "Twister",
     "EasyBake"
   ],
   "vote_trace": []

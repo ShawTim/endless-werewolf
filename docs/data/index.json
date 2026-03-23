@@ -2,14 +2,32 @@
   "schema_version": 1,
   "games": [
     {
-      "game_id": "game_000035",
+      "game_id": "game_000036",
       "status": "completed",
-      "created_at": "2026-03-23T05:32:44.548522+00:00",
-      "completed_at": "2026-03-23T05:34:50.053825+00:00",
+      "created_at": "2026-03-23T05:41:52.119180+00:00",
+      "completed_at": "2026-03-23T05:44:11.297917+00:00",
       "outcome": "village_win",
       "winner_team": "village_team",
       "executed": [
-        "SafetySam",
+        "ConspiBro"
+      ],
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake"
+      ],
+      "votes_count": 6,
+      "chat_lines": 20
+    },
+    {
+      "game_id": "game_000035",
+      "status": "completed",
+      "created_at": "2026-03-23T05:32:44.548522+00:00",
+      "completed_at": "2026-03-23T05:40:11.682908+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "Twister",
         "EasyBake"
       ],
       "winners": [
@@ -17,7 +35,7 @@
         "ConspiBro"
       ],
       "votes_count": 6,
-      "chat_lines": 21
+      "chat_lines": 29
     },
     {
       "game_id": "game_000033",
