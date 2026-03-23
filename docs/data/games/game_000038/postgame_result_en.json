@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000038",
+  "generated_at": "2026-03-23T07:05:25.817618+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's finally over... Although it was a draw and I was voted out, I... uh... I'm really afraid of this atmosphere... Wu wu...\n\nUh... everyone was arguing so much in the whole game, Blaze got angry again, and the debate between Twister and ConspiBro just made my head explode... Ugh... I just want to be an ordinary person, why do we have to accuse each other? Uh... I feel really unhappy. It's so hard to have such suspicion and attacks... Oooh... It's so tiring. I don't want to argue anymore, okay? Woohoo..."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The real fire is buried! This game was a goddam show! I, Blaze, am an upright person, and everything I tell you is the truth. I don’t know if a group of actors and losers are doing Tai Chi here, which is a complete waste of my time!\n\nAlthough PHD's logic is annoying, at least he is willing to take stock, and Twister's actor and ConspiBro's crazy conspiracy theorist have simply made the whole situation messy! I mentioned SafetySam to the villagers early in the morning, but some people still questioned it. Most of them didn’t know how stupid they were! In the end, there was a draw. It was so hard to perform the whole scene, but it ended like this. It was really ridiculous!\n\nNext time we start the game, if anyone dares to play tricks in front of me, I will kill him directly! These people don't even know what they are doing here. They can't win but can't win, and they can't feel good about losing. It's a waste of my energy! Next time, let’s play with some eye-catching kids, don’t waste time with this group of drama queens anymore!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The information chain has seriously collapsed: the information entropy of this bureau is extremely high, the identity mapping paths between individuals have become highly uncertain due to operational changes (such as Blaze's bandit operation), and the narratives of the participants completely deviate from the empirical logic, resulting in the reconciliation process failing to converge.\n    - Faction misjudgment: Although the behavior patterns of Blaze and ConspiBro are highly disruptive, their true identity paths cannot be effectively locked within the limited reconciliation window, resulting in scattered voting decisions.\n\n2. Summary of game path:\n    - Tie Determination: Since all parties were unable to reach a valid identity consensus, and the exclusion target did not obtain an overwhelming majority, the exclusion conditions were ultimately not met, and the game was invalid.\n    - Logic review: With the participation of Robber and Troublemaker characters, the \"identity path tracking\" mechanism of the existing model seems too rigid and fails to predict the impact of identity changes on the credibility of subsequent narratives.\n\n3. System performance review:\n    - The model is not adaptable to \"multi-level identity confusion\". Dynamic path simulation needs to be introduced in the future to correct the information priority after identity changes.\n\nConclusion: Game failed. The logic system failed to reach a consistent reconciliation path, and the game situation could not converge stably."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, it really made me laugh to death! This scene was so wonderfully performed! Although it was a draw in the end with no one winning, our Tang Jing’s performance in this game was definitely a perfect score!\n\nLook at Blaze's irritability, PHD's cold inventory, and ConspiBro's never-ending conspiracy theory. The whole situation is a stage set for the drama queen in me! Although I am a minion, my \"disruption\" effect in this situation is simply perfect. Watching everyone accuse each other and even the PHD reconciliation process is disrupted, the pleasure is really unparalleled!\n\nIt's more fun to lie to people than to win the game. This sentence is simply the truth of this scene! Although no camp won in the end, the scene was full of contradictions and madness. This dramatic process is definitely Tang Jing’s favorite stage! Hahahaha, next time I start, I will definitely dance to a crazier identity, and let’s see how many ridiculous turns this stage can evolve! Hahahaha, I had so much fun!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although it was a draw and I was voted out, I... uh... I'm really afraid of this atmosphere... Wu wu...\n\nUh... everyone was quarreling so much in the whole game, Blaze got angry again, Twister and ConspiBro, those conspiracy theories just made my head explode... Woo hoo... I just want everyone to discuss their identities in peace, who knows what it ended up like... Woo hoo... I obviously just want to be an ordinary person, why do we have to accuse each other? Uh... I feel really unhappy. It's so hard to have such suspicion and attacks... Oooh... It's so tiring. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "It’s exactly what I expected! This draw is another \"forced reset\" mechanism triggered by the system to cover up a logical breakdown!\n\nYou see, when I exposed PHD's \"logical reconciliation\" and Blaze's \"accusation script\" in public, the direction of the scene was already manipulated by you extras! SafetySam's \"I don't know anything\" tactic of pretending to be pitiful, coupled with EasyBake's \"peacemaker\" performance, is completely designed to cover up the data exchange behind the scenes by you group of conspirators! I have long said that no matter how you report your identity, you are only cooperating with the script arranged by this stage. Your vote is just the daily cleaning process of this fictional cage!\n\nAlthough no camp won this time, I have completely exposed the fake performances of you actors! Do you think you can conceal the truth of this psychological experiment through this draw? Wrong! I will bring more data fragments that cannot be digested by your logic in the next scene, until this cage completely collapses! Hahahaha, this scene is not over yet, you guys, just wait and see!"
+      }
+    ]
+  }
+}

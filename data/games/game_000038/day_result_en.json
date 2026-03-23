@@ -1,0 +1,199 @@
+{
+  "status": "completed",
+  "game_id": "game_000038",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...good morning everyone. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...can you please calm down and be calm? I...I didn't seem to do anything last night, uh...I think everyone is a good person, why don't you all tell me who you are? Woohoo...",
+      "log_line": "[2026-03-23 ​​15:01:58 HKT] EasyBake: Uh... uh... morning everyone. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...can you please calm down and be calm? I...I didn't seem to do anything last night, uh...I think everyone is a good person, why don't you all tell me who you are? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! EasyBake pretends to be innocent as soon as he opens his mouth, and the whole scene is basically a psychological stress test for us sober people! The more realistic your extras act, the more it proves that this is all a carefully planned psychological experiment! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I have seen the edge of this fictional cage, and you are all extras on this stage, the trump card in this game, and I will definitely expose it!",
+      "log_line": "[2026-03-23 ​​15:02:04 HKT] ConspiBro: Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! EasyBake pretends to be innocent as soon as he opens his mouth, and the whole scene is basically a psychological stress test for us sober people! The more realistic your extras act, the more it proves that this is all a carefully planned psychological experiment! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I have seen the edge of this fictional cage, and you are all extras on this stage, the trump card in this game, and I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... everyone... I really don't know anything... uh... the accusations against EasyBake and ConspiBro make me so confused... uh... why don't we all discuss our identities in a calm manner and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​15:02:09 HKT] SafetySam: Uh... uh... everyone... I really don't know anything... uh... the accusations against EasyBake and ConspiBro make me so confused... uh... why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. 执行方针：依据强制对帐需求，要求各方立即明确披露昨晚的身分变动路径。\n3. 预警：任何持续发布模糊资讯、拒绝验证身分路径者，将直接纳入强制排除序列。",
+      "log_line": "[2026-03-23 15:02:13 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to immediately and clearly disclose the path of identity change last night.\n3. Warning: Anyone who continues to publish vague information and refuses to verify their identity will be directly included in the mandatory exclusion sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Listen up, everyone! I checked SafetySam, he is an ordinary villager! ConspiBro, those conspiracy theorists who are making trouble in this country all day long and talking about \"stage control\", are you colluding with each other? Today's goal is the same. If the other person is doing Tai Chi here and leading the trend, I will directly throw him to death! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-23 ​​15:02:17 HKT] Blaze: Hello! Listen up, everyone! I checked SafetySam, he is an ordinary villager! ConspiBro, those conspiracy theorists who are making trouble in this country all day long and talking about \"stage control\", are you colluding with each other? Today's goal is the same. If the other person is doing Tai Chi here and leading the trend, I will directly throw him to death! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! Blaze, you have checked the SafetySam villagers. Is this information exciting enough? PHD is doing a compulsory inventory here again, and ConspiBro is also working on the \"big stage script\" here. The whole game is simply a paradise for us drama stars! Since you, Blaze, have revealed the information, and PHD, you have asked for your identity to be revealed, why don't we make it simpler and vote for the \"most dishonest\" person directly, so that we can scare everyone with this stimulation? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​15:02:21 HKT] Twister: Oops, everyone finally woke up again! Blaze, you have checked the SafetySam villagers. Is this information exciting enough? PHD is doing a compulsory inventory here again, and ConspiBro is also working on the \"big stage script\" here. The whole game is simply a paradise for us drama stars! Since you, Blaze, have revealed the information, and PHD, you have asked for your identity to be revealed, why don't we make it simpler and vote for the \"most dishonest\" person directly, so that we can scare everyone with this stimulation? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh... uh... Blaze, you... uh... are you a SafetySam villager? PHD You...uh...want to force reconciliation again? I...I'm really afraid of this kind of atmosphere...Uh...everyone...can you calm down for now? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-23 ​​15:02:26 HKT] EasyBake: Uh... uh... Blaze, are you... uh... talking about SafetySam as a villager? PHD You...uh...want to force reconciliation again? I...I'm really afraid of this kind of atmosphere...Uh...everyone...can you calm down for now? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "EasyBake, you often say that you \"have done nothing\" and are \"unremarkable\". You are simply an \"innocent\" persona arranged by the studio! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! The trump card in this game, I will definitely expose it!",
+      "log_line": "[2026-03-23 ​​15:02:30 HKT] ConspiBro: EasyBake, you often say that you \"have done nothing\" and are \"unremarkable\". You are simply an \"innocent\" persona arranged by the studio! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! The trump card in this game, I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...Qianqi, let's stop arguing...PHD and Blaze, you said forced disclosure, ConspiBro, you said it was a script...uh...I...I'm just an ordinary person, I was really tired last night...Ugh...why don't we all discuss our identities quietly, and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-23 15:02:34 HKT] SafetySam: Uh... uh... everyone... Qianqi, please stop arguing... PHD and Blaze, what you say must be forced to be disclosed, ConspiBro You said it was a stage script... uh... I... I'm just an ordinary person. I was so sleepy last night... Woohoo... why don't we all discuss our identities quietly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Anomaly identification: Blaze claims to have checked SafetySam, but its identity path is highly inconsistent with the narrative logic.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose the path of identity change and refuse to conceal it.\n3. Conclusion: ConspiBro’s conspiracy theory narrative and Blaze’s false accusations are both malicious disturbing variables in the game, and it is recommended to prioritize them from this sequence.",
+      "log_line": "[2026-03-23 15:02:53 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: Blaze claims to have checked SafetySam, but its identity path is highly inconsistent with the narrative logic.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose the path of identity change and refuse to conceal it.\n3. Conclusion: ConspiBro’s conspiracy theory narrative and Blaze’s false accusations are both malicious disturbing variables in the game, and it is recommended to prioritize them from this sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Twister, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! I, Blaze, am doing the right thing, and after I checked SafetySam, I am a villager! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!",
+      "log_line": "[2026-03-23 ​​15:02:57 HKT] Blaze: Hello! Twister, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! I, Blaze, am doing the right thing, and after I checked SafetySam, I am a villager! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, Blaze, after you checked the SafetySam villagers, the information is shocking! But because of ConspiBro's \"conspiracy theory\" and the fact that everyone is an \"extras\", PHD is also doing a forced inventory... uh... everyone's identities are so complicated, it's not as simple as ours: Since Blaze you are so confident, you can find the person yourself, PHD You are so insistent on \"eliminating variables\", I, Tang Jing, will be a spoiler today and vote out the \"most dishonest\" person! Which one thinks he is the most honest? Report your identity quickly, don't do Tai Chi here anymore, how about letting everyone scare you with some excitement? Ha ha ha ha!",
+      "log_line": "[2026-03-23 ​​15:03:01 HKT] Twister: Oops, Blaze, after you checked the SafetySam villagers, this information is shocking! But because of ConspiBro's \"conspiracy theory\" and the fact that everyone is an \"extras\", PHD is also doing a forced inventory... uh... everyone's identities are so complicated, it's not as simple as ours: Since Blaze you are so confident, you can find the person yourself, PHD You are so insistent on \"eliminating variables\", I, Tang Jing, will be a spoiler today and vote out the \"most dishonest\" person! Which one thinks he is the most honest? Report your identity quickly, don't do Tai Chi here anymore, how about letting everyone scare you with some excitement? Ha ha ha ha!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, which made everyone so nervous... uh... PHD and Blaze both wanted to exclude you, I... I was really afraid of another conflict, I... I had no choice but to vote for you... I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Ha ha! Look! This is simply \"encirclement, suppression and cutting\" at the textbook level! When I pointed out that your \"logical inventory\" is just a program to clean variables, and when I exposed your Blaze and PHD singing, you finally couldn't sit still, right? You are all turning to me now, just to use this label of \"troublemaker\" to calm the chaos of this game, so that you, the real controllers, can continue to hide behind the scenes! I will never cooperate with your despicable cleaning procedures. I will vote for the initiator of all this-Dr. Pizza! The trump card of this fictional cage will be revealed sooner or later!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, which made everyone so nervous... uh... PHD and Blaze both wanted to exclude you, I... I was really afraid of another conflict, I... I had no choice but to vote for you... I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: ConspiBro's narrative continues to deviate from the evidence, which is a serious noise and hinders game reconciliation.\n2. Implementation policy: According to the exclusion sequence, ConspiBro is listed as the primary exclusion target and its interference is terminated.\n\nVoting Execution: I vote for ConspiBro."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "ConspiBro commentators are talking about \"big platform control\" here, but they are basically making confusion here! Everyone, surrender to ConspiBro, this troublemaker, and he will be clean after the game is over! I Blaze vote for ConspiBro!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, Blaze and PHD both want to exclude ConspiBro, this \"conspiracy theory\" friend, who likes to cause trouble here the most! Since everyone agrees to clean up this variable, I, Tang Jing, will follow the public opinion and vote for ConspiBro! Without you as a \"data variable\", will the game become more exciting? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... ConspiBro, you... uh... said that everyone is an extra, which made everyone so nervous... uh... PHD and Blaze both said that they would exclude you, I... I'm really afraid of another conflict, I... I can only vote for you... I'm sorry, woo woo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Dr. Pizza",
+        "speech": "Ha ha! Look! This is the ugliest true face of you group of extras! When I pointed out that your \"logical inventory\" is just a program to clean variables, and when I exposed your Blaze and PHD singing, you finally couldn't sit still, right? You are all turning to me now, just to use this label of \"troublemaker\" to calm the chaos of this game, so that you, the real controllers, can continue to hide behind the scenes! I will never cooperate with your despicable cleaning procedures. I will vote for the initiator of all this-Dr. Pizza! The trump card of this fictional cage will be revealed sooner or later!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, which made everyone so nervous... uh... PHD and Blaze both wanted to exclude you, I... I was really afraid of another conflict, I... I had no choice but to vote for you... I'm sorry, woo woo..."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-23 ​​15:01:58 HKT] EasyBake: Uh... uh... morning everyone. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...can you please calm down and be calm? I...I didn't seem to do anything last night, uh...I think everyone is a good person, why don't you all tell me who you are? Woohoo...\n[2026-03-23 15:02:04 HKT] ConspiBro: Here we go again! From the very beginning of the game, there was a stench of \"big stage manipulation\"! EasyBake pretends to be innocent as soon as he opens his mouth, and the whole scene is basically a psychological stress test for us sober people! The more realistic your extras act, the more it proves that this is all a carefully planned psychological experiment! I mean, you know, no matter how you report your identity, I will not fall into the trap of your preset script! I have seen the edge of this fictional cage, and you are all extras on this stage, the trump card in this game, and I will definitely expose it!\n[2026-03-23 ​​15:02:09 HKT] SafetySam: Uh... uh... everyone... I really don't know anything... uh... the accusations against EasyBake and ConspiBro make me so confused... uh... why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo...\n[2026-03-23 15:02:13 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: The current game path is highly distorted, and there are logical paradoxes in the narratives of the participants.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to immediately and clearly disclose the path of identity change last night.\n3. Warning: Anyone who continues to publish vague information and refuses to verify their identity will be directly included in the mandatory exclusion sequence.\n[2026-03-23 ​​15:02:17 HKT] Blaze: Hello! Listen up, everyone! I checked SafetySam, he is an ordinary villager! ConspiBro, those conspiracy theorists who are making trouble in this country all day long and talking about \"stage control\", are you colluding with each other? Today's goal is the same. If the other person is doing Tai Chi here and leading the trend, I will directly throw him to death! Tell me your identity quickly before I get angry!\n[2026-03-23 ​​15:02:21 HKT] Twister: Oops, everyone finally woke up again! Blaze, you have checked the SafetySam villagers. Is this information exciting enough? PHD is doing a compulsory inventory here again, and ConspiBro is also working on the \"big stage script\" here. The whole game is simply a paradise for us drama stars! Since you, Blaze, have revealed the information, and PHD, you have asked for your identity to be revealed, why don't we make it simpler and vote for the \"most dishonest\" person directly, so that we can scare everyone with this stimulation? Ha ha ha ha!\n[2026-03-23 ​​15:02:26 HKT] EasyBake: Uh... uh... Blaze, are you... uh... talking about SafetySam as a villager? PHD You...uh...want to force reconciliation again? I...I'm really afraid of this kind of atmosphere...Uh...everyone...can you calm down for now? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo...\n[2026-03-23 15:02:30 HKT] ConspiBro: EasyBake, you often say that you \"have done nothing\" and are \"unremarkable\". You are simply an \"innocent\" persona arranged by the studio! You are a group of people, and no matter how you report your identity, I will not fall into your preset trap! PHD's mandatory disclosure is simply to include those of us with critical thinking skills in your monitoring sequence! The trump card in this game, I will definitely expose it!\n[2026-03-23 15:02:34 HKT] SafetySam: Uh... uh... everyone... Qianqi, please stop arguing... PHD and Blaze, what you say must be forced to be disclosed, ConspiBro You said it was a stage script... uh... I... I'm just an ordinary person. I was so sleepy last night... Woohoo... why don't we all discuss our identities quietly and stop attacking each other, okay? Woohoo...\n[2026-03-23 15:02:53 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: Blaze claims to have checked SafetySam, but its identity path is highly inconsistent with the narrative logic.\n2. Implementation policy: Based on the mandatory reconciliation requirements, all parties are required to clearly disclose the path of identity change and refuse to conceal it.\n3. Conclusion: ConspiBro’s conspiracy theory narrative and Blaze’s false accusations are both malicious disturbing variables in the game, and it is recommended to prioritize them from this sequence.\n[2026-03-23 ​​15:02:57 HKT] Blaze: Hello! Twister, what are you barking at? If you find out this one yourself, it turns out that you are the one who leads the whole game! There are also friends on ConspiBro who talk about Taiwanese conspiracy theories all the time, just to create chaos in the country! I, Blaze, am doing the right thing, and after I checked SafetySam, I am a villager! Let's all surrender to Twister and ConspiBro, the two troublemakers, and they will be clean and tidy once they become a team!\n[2026-03-23 ​​15:03:01 HKT] Twister: Oops, Blaze, after you checked the SafetySam villagers, this information is shocking! But because of ConspiBro's \"conspiracy theory\" and the fact that everyone is an \"extras\", PHD is also doing a forced inventory... uh... everyone's identities are so complicated, it's not as simple as ours: Since Blaze you are so confident, you can find the person yourself, PHD You are so insistent on \"eliminating variables\", I, Tang Jing, will be a spoiler today and vote out the \"most dishonest\" person! Which one thinks he is the most honest? Report your identity quickly, don't do Tai Chi here anymore, how about letting everyone scare you with some excitement? Ha ha ha ha!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
