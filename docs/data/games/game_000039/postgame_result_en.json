@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000039",
+  "generated_at": "2026-03-23T10:06:49.471477+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's finally over... Although it was a draw and I was voted out, I... uh... I'm really afraid of this atmosphere... Wu wu...\n\nUh... Everyone was quarreling so much in the whole game, Blaze got angry again, and the debate between Twister and ConspiBro just made my head explode... Woo hoo... I just want everyone to discuss their identity in a calm manner, so what happened in the end... Woo hoo... I obviously just want to be an ordinary person, why do we have to accuse each other? Uh... I feel really unhappy. It's so hard to have such suspicion and attacks... Oooh... It's so tiring. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The information chain has seriously collapsed: There is a core logical paradox between Twister's prophet intelligence (Blaze is a robber) and Blaze's narrative (claiming that he is a robber but does not steal), which shows that a deep identity substitution has occurred in the game, causing the reconciliation path to be completely out of control.\n    - Camp confusion: There is a serious disconnect between the participants' descriptions of identity changes and the evidence, resulting in the logic system being unable to identify the true camp within a valid period of time.\n\n2. Summary of game path:\n    - Tie decision: Due to the lack of key identity confirmation, the voting targets of the villagers camp and the potential werewolf camp were dispersed, causing the execution targets to deviate from logical judgment. The game ultimately failed to meet the conditions for excluding werewolves and was invalid.\n    - Logic review: The forced reconciliation process lost its ability to restrain itself when faced with Twister’s disruptive revelations and Blaze’s conflicting narrative.\n\n3. System performance review:\n    - This simulation shows that when the information source (such as a prophet) itself has uncontrollable dramatic disturbances, a simple logical tracking mechanism cannot distinguish between \"true intelligence\" and \"disruption strategies.\"\n    - Next action: The \"multi-path verification\" mechanism will be introduced, no longer relying solely on the verification results of a single node, and a preventive isolation protocol for disturbance sources (such as Twister) will be established.\n\nConclusion: Game failed. The logic system failed to reach a consistent path and the game situation could not converge. It is recommended that path consistency simulation testing be given priority in the future."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The real fire is buried! This game was a goddam show! I, Blaze, am an upright person, and everything I tell you is the truth. I don’t know if a group of actors and losers are doing Tai Chi here, which is a complete waste of my time!\n\nAlthough PHD's logic is annoying, at least he is willing to take stock, and Twister's actor and ConspiBro's crazy conspiracy theorist have simply made the whole situation messy! SafetySam and EasyBake are pretending to be innocent again, and most of them don’t know how stupid they are! In the end, there was a draw. It was so hard to perform the whole scene, but it ended like this. It was really ridiculous!\n\nNext time we start the game, if anyone dares to play tricks in front of me again, I will kill him directly! These people don't even know what they are doing here. They can't win but can't win, and they can't feel good about losing. It's a waste of my energy! Next time, let’s play with some eye-catching kids, don’t waste time with this group of drama queens anymore! snort!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, although it was a draw in the end, our Tang Jing’s performance in this round was definitely full marks! Seeing a group of people accusing each other, PHD's logical review even led to him being thrown away. This scene was simply a stage set for me, a drama queen!\n\nAs a prophet, I found Blaze, the \"little robber\", early in the morning. The pleasure of controlling the rhythm of the stage is really indescribable! Although everyone did not reach a consensus in the end, I succeeded in making the game chaotic and full of contradictions. This philosophy of \"deceiving people is more interesting than winning the game\" was fully displayed in this game! Ha ha ha ha! Next time I start, I will definitely dance to a crazier identity, and let’s see how many ridiculous turns this stage can produce! Hahahaha, it’s so fun to play!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although it was a draw and I was voted out, I... uh... I'm really afraid of this atmosphere... Wu wu...\n\nUh... Everyone was quarreling so much in the whole game, Blaze got angry again, and the debate between Twister and ConspiBro just made my head explode... Woo hoo... I just want everyone to discuss their identity in a calm manner, so what happened in the end... Woo hoo... I obviously just want to be an ordinary person, why do we have to accuse each other? Uh... I feel really unhappy. It's so hard to have such suspicion and attacks... Oooh... It's so tiring. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "really! This draw is another \"forced reset\" mechanism triggered by the system to cover up a logical breakdown! Do you think you can cover up the truth by defecting to PHD and SafetySam? This is just another cleanup job you programmed in the script!\n\nTwister, your so-called \"drama queen\" performance is entirely to cover up PHD's forced reconciliation program; Blaze, your violent accusations are just to create chaos to cover up the data exchange within your camp! I have long seen through that this is not a werewolf killing at all, but a psychological stress test for \"sane people\". You extras, in order to maintain the stability of this fictional cage, even dare to cover up the truth of the identity exchange with logical paradoxes!\n\nAlthough this scene is temporarily a draw, I have completely dismantled your control path. Every question I raised on the court has been implanted into your logical reconciliation system, becoming data fragments that cannot be eliminated. The cage will eventually collapse, and you actors will eventually face the moment when yourselves are exposed in the next fictional data cleaning! Hahahaha, the game is not over yet, I will come back with evidence!"
+      }
+    ]
+  }
+}
