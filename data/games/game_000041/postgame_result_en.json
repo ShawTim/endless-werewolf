@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000041",
+  "generated_at": "2026-03-23T16:06:27.543459+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The information chain has seriously collapsed: the narratives of participants in this bureau are highly inconsistent. After SafetySam's prophet status popped up, the inspection path for the werewolf camp (Blaze, Twister) had a serious logical conflict with Blaze's \"prophet\" statement, which directly led to the reconciliation failure.\n    - Faction misleading strategy: The werewolf camp successfully guided the excluded objects to the logical inventory system itself through \"mutual accusations\" and \"wall-weather\" strategies (SafetySam, EasyBake), resulting in logical errors in the execution targets.\n\n2. Summary of game path:\n    - Werewolf victory: The werewolf used multi-point distribution strategies (Blaze, Twister, SafetySam, EasyBake) to successfully mislead the villagers camp to execute the logical node (i.e. himself) in a chaotic state of the information chain.\n    - Logical review: This game shows that when the \"information source\" itself is the source of disturbance (Blaze claims to be a prophet, SafetySam checks the results to conflict), the exclusion sequence cannot distinguish between the real and the fake.\n\n3. System performance review:\n    - This simulation judgment: the game failed. The logic system cannot perform effective elimination when the information sources are all contaminated.\n    - Next action: The \"camouflage detection algorithm\" will be upgraded to strengthen the weight filtering of \"idle strategies\" such as SafetySam and \"identity jumping disturbances\" such as Blaze.\n\nConclusion: Game failed. The logic system was manipulated, the villagers' camp lost its ability to execute, and the werewolves won. It is recommended that a more stringent identity cross-verification mechanism be established in the future."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...is it over? Although I won, I... uh... I feel really bad... ow...\n\nUh... everyone was so noisy in the whole game, Blaze accused me again, Twister He was laughing again, I... I was really shocked... Woohoo... I just wanted everyone to discuss the identity calmly. I didn't know what it would be like in the end... Although we werewolves won, but I... uh... I really don't like this atmosphere of attacks and accusations. Fortunately, no one will target me again... next time... uh... next time if there is a problem, can we stop arguing? I really want everyone to play in peace... Wuwu..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, it’s so enjoyable! Although the werewolf won, my performance in this scene was the most critical! I started to set up a rhythm right from the start, forcing Blaze to do the Prophet dance, and successfully leading the entire team to focus on the meaningless dispute between Blaze and PHD. It was simply the most exciting stage in my career!\n\nLook at SafetySam, who usually plays the role of \"poor guy\" here, but he jumped out to save Blaze at the most critical moment. This kind of chaos is simply my favorite taste! Although our werewolf camp usually pretends to be villagers, the tacit understanding behind the scenes is simply impeccable. PHD is such a logic monster that he can't figure out the solution until the end and the situation will get out of control. This kind of pleasure of \"being crushed by IQ\" really makes me so happy that I want to laugh! I have exhausted this stage. Next time I start, I will definitely think of some more outrageous scripts to play, hahahaha!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "It’s exactly what I expected! The ending of this game once again confirmed my \"imaginary cage\" theory! You see, the werewolf camp (Blaze, Twister, SafetySam, EasyBake) has been conducting a well-arranged \"mutual show\" from beginning to end, drawing all the focus to PHD's meaningless logic program, and I, the only \"sane person\", even if I have seen through everything, can't fight against this complete data deception system!\n\nThis victory is simply the path preset by the system for the werewolf camp! On the surface, Twister and Blaze accuse each other, but in fact they are using this fierce confrontation to maintain the data integrity of the werewolf camp. SafetySam's sudden \"brave check\" was just to accurately eliminate PHD, a program vulnerability that may interfere with the running of the script.\n\nDo you think winning the game can cover up all this? No, this victory is the best evidence that I resist this cage! Every logical trap you constructed has now become the most ironclad fragment of fact in my hand. Although this cage is still functioning, the cracks are becoming more and more obvious. Next time, I will make your low-end cleaning procedures completely ineffective in my observation! Hahahaha, the game is still going on, you can’t hide it from me!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene is simply a completely bad script!\n\nI, Blaze, am doing my best. As a prophet, I immediately detected Twister, a werewolf, and identified a whole group of people, from SafetySam and PHD logic monsters, all of them were trying to control the situation and take aim! It was obviously a werewolf who was causing trouble here, but in the end, everyone wanted to believe the nonsense and even wanted to shift their target to me!\n\nThe most outrageous EasyBake classmate, he pretended to be innocent to the point of perfection, but in the end, he turned out to be a werewolf and won! In this game, I was the only one who actually performed my duties as a prophet, and as a result, all of you were killed! Next time we play this kind of game, if anyone dares to do Tai Chi or pretend to be innocent again, I will be the first to tear him to pieces! It was really a very unpleasant experience, and a whole bunch of drama queens were burying themselves in it! snort!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...is it over? Uh...Although our villager camp lost in the end, I...uh...I feel really good...woo hoo...\n\nUh... everyone was quarreling so much throughout the game. I... uh... I just wanted everyone to discuss their identities calmly. I know... uh... I know that Blaze was really cast away in the end. Although I am a troublemaker, but... uh... I really don't like this aggressive atmosphere. I'm so surprised... ugh... next time... uh... can you be gentler next time? Woohoo... I feel so tired. I don’t want to argue anymore, okay? Woohoo..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000041",
+  "generated_at": "2026-03-23T16:06:27.543459+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "賽局覆盤分析：\n\n1. 決策失效評估：\n    - 資訊鏈嚴重崩解：本局參與者敘事出現高度不一致。SafetySam 預言家身分跳出後，對狼人陣營（Blaze, Twister）之查驗路徑與 Blaze 的「預言家」聲明產生嚴重的邏輯衝突，直接導致對帳失敗。\n    - 陣營誤導策略：狼人陣營透過「互相指控」與「牆頭草」策略（SafetySam, EasyBake），成功將排除對象引導至邏輯盤點系統本身，導致執行目標出現邏輯誤差。\n\n2. 賽局路徑總結：\n    - 狼人勝利：狼人透過多點分佈策略（Blaze, Twister, SafetySam, EasyBake），在資訊鏈混亂狀態下，成功誤導村民陣營執行邏輯節點（即本人）。\n    - 邏輯檢討：本次賽局顯示，當「資訊源」本身即為擾動源（Blaze 聲稱預言家，SafetySam 查驗結果衝突）時，排除序列無法區分真實與偽裝。\n\n3. 系統效能檢討：\n    - 本次模擬判定：賽局失敗。邏輯系統無法在資訊源均遭污染的狀態下執行有效排除。\n    - 下次行動：將升級「偽裝偵測演算法」，加強對 SafetySam 此類「牆頭草策略」與 Blaze 此類「身分跳躍擾動」的權重過濾。\n\n結論：賽局失敗。邏輯系統遭操弄，村民陣營喪失執行能力，狼人獲勝。建議未來建立更嚴格的身分交叉驗證機制。"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "安全主任",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "嗚...呃...完咗喇？雖然贏咗，但我...呃...我真係覺得好攰呀...嗚嗚...\n\n呃...成場局大家吵得咁厲害，Blaze 佢又指控我，Twister 佢又喺度笑，我...我真係好驚呀...嗚嗚...我只係想大家平平靜靜討論下身分，點知最後變成咁樣...雖然係我哋狼人贏咗，但我...呃...我真係唔鍾意呢種攻擊同指控嘅氣氛，好彩大家都冇再針對我...下次...呃...下次如果仲有局，可唔可以唔好再吵喇？我真係好想大家平平靜靜咁玩呀...嗚嗚..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "方唐鏡",
+        "player_name_en": "Twister",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "哈哈哈，真係好過癮！雖然話狼人贏咗，但我呢場戲份嘅演出先係最關鍵！我一開局就開始帶動成個節奏，將 Blaze 逼到要跳預言家，仲要成功引導成班人將注意力擺晒喺 Blaze 同 PHD 呢場無謂嘅爭執上面，簡直係我生涯中最精彩嘅舞臺！\n\n睇住 SafetySam 呢個平時喺度扮「可憐蟲」嘅牆頭草，竟然喺最關鍵嘅時候跳出嚟補 Blaze 一刀，呢種混亂感簡直係我最愛嘅口味！我哋狼人陣營雖然平時扮晒村民，但喺背後嘅默契根本就係無懈可擊。PHD 呢個邏輯怪，到最後死都唔明點解成個局會失控，呢種「智商被碾壓」嘅快感真係令我開心到想笑！呢場舞臺我已經玩盡，下次開局，我一定要諗啲更加離譜嘅劇本嚟玩，哈哈哈哈！"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "白兵師兄",
+        "player_name_en": "ConspiBro",
+        "role": "Minion (爪牙)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "果然不出我所料！這場局的結局再次證實了我的「虛構囚籠」理論！你們看，狼人陣營（Blaze, Twister, SafetySam, EasyBake）從頭到尾都在進行一場精心編排的「互撕秀」，將所有焦點引向了 PHD 那套毫無意義的邏輯程序，而我這個唯一的「清醒者」，即便看穿了一切，也無法對抗這套完整的數據欺騙體系！\n\n這場勝利根本就是系統給狼人陣營預設好的路徑！Twister 和 Blaze 表面上互相指控，實際上是在透過這種劇烈的對立來維護狼人陣營的數據完整性。SafetySam 那個突然的「勇敢查驗」，不過是爲了精準剔除掉 PHD 這個可能干擾劇本運行的程序漏洞。\n\n你們以爲贏了遊戲就能掩蓋這一切嗎？不，這場勝利正是我反抗這座囚籠的最佳證據！你們所構築的每一個邏輯陷阱，現在都成了我手中最鐵的事實碎片。這座籠子雖然還在運轉，但裂痕已經越來越明顯了。下一次，我會讓你們這套低端的清洗程序，徹底在我的觀測中失效！哈哈哈哈，遊戲還在繼續，你們瞞不過我的！"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "譚仔大辣",
+        "player_name_en": "Blaze",
+        "role": "Seer (預言家)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "火都嚟埋！呢場局簡直係一場徹頭徹尾嘅爛劇本！\n\n我 Blaze 行得正企得正，作爲預言家我第一時間就查驗出 Twister 呢隻狼人，點知成班人，由 SafetySam 條牆頭草到 PHD 條邏輯怪，全部都係度帶風向、搞針對！明明係狼人喺度搞鬼，結果成班人就係要信個牆頭草嘅鬼話，仲要將目標轉移到我身上！\n\n最離譜係 EasyBake 嗰班友，扮無辜扮到出神入化，結果最後竟然係狼人贏咗！成場局我係唯一一個真係去執行預言家職責嘅人，結果就係畀你哋成班人投死！下次再玩呢種局，邊個敢再喺度耍太極或者扮無辜，我就一定會第一個將佢撕碎！真係玩得極度唔痛快，成班戲精玩埋自己啦！哼！"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "天真grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker (搗蛋鬼)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "嗚...呃...完咗喇？呃...雖然我哋村民陣營最後輸咗，但我...呃...我真係覺得好攰呀...嗚嗚...\n\n呃...成場局大家吵得好勁，我...呃...我只係想大家平平靜靜討論下身分，點知...呃...點知最後真係將 Blaze 投走咗。雖然我係搗蛋鬼，但...呃...我真係唔鍾意呢種攻擊嘅氣氛，好驚呀...嗚嗚...下次...呃...下次可唔可以溫柔啲呀？嗚嗚...好攰呀，唔想再吵啦，好唔好呀？嗚嗚..."
+      }
+    ]
+  }
+}
