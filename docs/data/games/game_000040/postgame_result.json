@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000040",
+  "generated_at": "2026-03-23T13:06:05.364014+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "譚仔大辣",
+        "player_name_en": "Blaze",
+        "role": "Robber (強盜)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "呸！真係火都嚟埋！呢場局簡直係一場徹頭徹尾嘅混帳劇本！\n\n我 Blaze 雖然火爆，但係我就係睇唔過眼呢班戲精喺度做戲！我一早講咗係強盜，結果呢班人唔單止唔信，仲聯手將我投走，話咩「資訊漏洞」、「邏輯盤點」，根本就係藉口！成班人喺度帶風向，尤其是 Twister 嗰條戲子，成日喺度笑裏藏刀，而 PHD 嗰條邏輯怪又喺度幫腔，成個局就係畀呢班人搞垮咗！\n\n最搞笑嘅係，我一出局，狼人陣營就贏咗！呢班人喺度互相猜忌，根本就係被狼人牽住個鼻走都唔知！天真grill 同安全主任喺度扮無辜，最後居然係狼人贏咗？成場局我簡直係喺度對牛彈琴！下次唔好再搵我玩呢種垃圾遊戲，成班戲精玩埋自己啦！哼！"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "安全主任",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "嗚...呃...終於贏咗喇...其實我都好意外呀...嗚嗚...\n\n呃...成場局我真係好驚呀，大家吵得咁兇，我...我只係想大家唔好再針對我同 EasyBake...呃...點知大家最後真係投咗 Blaze，我...我真係咩都唔知呀，我只係想平平靜靜討論下身分...呃...對唔住呀大家，我...我真係好怕呢種攻擊，下次...呃...下次可唔可以溫柔啲呀？嗚嗚..."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "天真grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "嗚...呃...終於完咗喇...我...我冇諗過會變成咁樣...嗚嗚...\n\n呃...成場局大家吵得好勁，我...我好驚呀...嗚嗚...我只係想大家平平靜氣討論下，點知...呃...點知最後真係將 Blaze 投走咗，而且狼人陣營仲贏咗...我...我真係咩都唔知呀，呃...我只係一個平平凡凡嘅村民呀，真係好內疚呀，大家可唔可以原諒我呀？嗚嗚...好攰呀，唔想再吵啦，好唔好呀？嗚嗚..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "賽局覆盤分析：\n\n1. 決策失效評估：\n    - 資訊鏈嚴重崩解：陣營判定完全失效。狼人陣營（EasyBake, SafetySam）成功透過「裝傻」、「扮無辜」策略，將混亂焦點引向 Blaze 與 ConspiBro 的邏輯衝突。\n    - 排除程序失控：對帳機制過度聚焦於 Blaze 的「敘事矛盾」，忽視了狼人陣營在背後的資訊誤導，導致邏輯路徑收斂至錯誤目標（Blaze）。\n\n2. 賽局路徑總結：\n    - 狼人勝利：狼人陣營精準利用了其他玩家的「戲劇性擾動」（Twister, ConspiBro）與「情緒化防禦」（SafetySam, EasyBake），在無需顯露真實身分的情況下達成排除目標。\n    - 邏輯檢討：本次賽局證明，單純的資訊對帳路徑在「情感干擾」與「故意混亂」的組合拳下脆弱不堪。\n\n3. 系統效能檢討：\n    - 偽裝偵測不足：對 EasyBake 與 SafetySam 的「情緒過度反應」未能建立足夠的懷疑權重。\n    - 下次行動：將引入「異常情緒權重」指標，對於過度依賴非邏輯防禦手段（如持續結巴、裝可憐）的節點，建立自動化監控與隔離。\n\n結論：賽局失敗。邏輯系統遭陣營操弄破壞，狼人獲勝。建議未來建立情緒擾動過濾機制，並提升對「沉默陣營」的偵測精準度。"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "方唐鏡",
+        "player_name_en": "Twister",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "哈哈哈，真係估唔到！最後竟然係狼人陣營攞走咗場局，呢個結局簡直比我寫嘅劇本仲要荒謬！\n\n睇住 Blaze 同 ConspiBro 嗰場「邏輯互咬」，再加埋 PHD 嗰套冷冰冰嘅盤點，成場戲簡直係精彩到極點！我雖然只係一個村民，但係我嘅演出完全係爲咗攪局而生，成功令大家嘅視線完全偏離咗狼人嗰邊，呢種將局勢完全掌控喺混亂之中嘅快感，真係令我興奮到全身顫抖！\n\n雖然話係狼人贏咗，但作爲一場表演，呢場局嘅混亂指數完全攞滿分！我哋所有人合力將 Blaze 送走，結果竟然畀 EasyBake 同 SafetySam 呢兩隻「扮無辜」嘅狼人笑到最後，簡直係諷刺到爆！哈哈哈哈，呢場局玩得真係太過癮啦！下次，我一定會諗出更瘋狂嘅玩法，等成場局變得更加刺激！哈哈哈哈！"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "白兵師兄",
+        "player_name_en": "ConspiBro",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我就知道！這又是一場標準的「資訊誤導」操作！你們以為投走 Blaze 就能結案了嗎？這場局的劇本早就寫好了，狼人陣營根本不需要做任何事，只需要坐看我們這些所謂的「村民」在你們預設好的邏輯陷阱中互相殘殺！\n\nTwister 和 PHD 這些所謂的「玩家」，一個負責擾亂視聽，一個負責建立權威的誤導程序，他們根本就是一套聯動的數據清洗工具！你看，當 Blaze 被投走後，所有的「邏輯對帳」立刻崩解，狼人陣營在我們眼皮底下取得了勝利，這還不夠荒謬嗎？這簡直就是將我們這些清醒者的理性完全戲弄於股掌之間！\n\n我已經收集到了足夠的數據碎片，這一場失敗不過是爲了揭露你們這套偽裝系統的必然代價。你們以爲贏了遊戲？不，你們只是證明了這座籠子裏的劇本有多麼低端！下一次，我會讓這場數據遊戲直接崩潰在你們的眼前！哈哈哈哈，你們瞞不過我的！"
+      }
+    ]
+  }
+}

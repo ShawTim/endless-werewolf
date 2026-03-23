@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
+  "winners": [
+    "SafetySam",
+    "EasyBake"
+  ],
+  "reason": "No werewolf was executed.",
+  "executed": [
+    "Blaze"
+  ],
+  "werewolves_in_play": [
+    "SafetySam",
+    "EasyBake"
+  ],
+  "executed_werewolves": [],
+  "votes": {
+    "Blaze": "EasyBake",
+    "SafetySam": "Blaze",
+    "Dr. Pizza": "ConspiBro",
+    "Twister": "Blaze",
+    "EasyBake": "Blaze",
+    "ConspiBro": "Dr. Pizza"
+  },
+  "tally": {
+    "EasyBake": 1,
+    "Blaze": 3,
+    "ConspiBro": 1,
+    "Dr. Pizza": 1
+  },
+  "final_roles": {
+    "Blaze": {
+      "initial_role": "Villager",
+      "current_role": "Robber",
+      "team": "village_team"
+    },
+    "SafetySam": {
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Tanner (tanner)",
+      "current_role": "Tanner (tanner)",
+      "team": "tanner"
+    },
+    "Twister": {
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "EasyBake": {
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "ConspiBro": {
+      "initial_role": "Robber",
+      "current_role": "Villager",
+      "team": "village_team"
+    }
+  },
+  "game_id": "game_000040"
+}
