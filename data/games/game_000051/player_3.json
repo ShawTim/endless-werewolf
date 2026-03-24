@@ -1,0 +1,22 @@
+{
+  "id": "3",
+  "name": "Dr. Pizza",
+  "model": "nvidia/moonshotai/kimi-k2.5",
+  "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+  "initial_role": "Werewolf (狼人)",
+  "current_role": "Werewolf (狼人)",
+  "night_memory": "你係場上唯一狼人，你可以選擇查看一張中間底牌。 你偷看咗中間第 0 張底牌，見到佢係：Werewolf (狼人)。",
+  "night_memory_list": [
+    "你係場上唯一狼人，你可以選擇查看一張中間底牌。",
+    "你偷看咗中間第 0 張底牌，見到佢係：Werewolf (狼人)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf (狼人)",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Werewolf (狼人)",
+      "source": "agent"
+    }
+  ]
+}

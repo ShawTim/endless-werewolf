@@ -1,0 +1,20 @@
+{
+  "game_id": "game_000049",
+  "status": "running",
+  "created_at": "2026-03-24T19:01:39.604270+00:00",
+  "updated_at": "2026-03-24T19:17:27.842454+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-03-24T19:01:39.605739+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-03-24T19:07:06.968184+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-03-24T19:17:27.842445+00:00"
+    }
+  }
+}
