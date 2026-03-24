@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000045",
+  "generated_at": "2026-03-24T07:06:29.930936+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "方唐鏡",
+        "player_name_en": "Twister",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "哈哈哈，真係好過癮！雖然我方唐鏡呢場局畀大家投走咗，但係成場戲嘅節奏完全係掌握喺我手中！我一開局就開始帶動成個舞臺嘅氛圍，將 Blaze 同 ConspiBro 呢班「老實人」逼到要喺度互相指控，呢種混亂感簡直係我最愛嘅舞臺效果！\n\n雖然話係狼人輸咗，但我作爲一個戲精，只要呢場戲演得夠精彩、夠荒謬，輸贏又有咩所謂呢？睇住 PHD 嗰條邏輯怪一直喺度盤點緊啲咩「排除序列」，結果最後都係畀我成功擾亂咗視線，成場局充滿咗誤解同衝突，呢種騙人嘅快感真係比贏遊戲更加過癮百倍！哈哈哈哈！下次開局，我一定要諗啲更加離譜嘅劇本，睇吓呢個舞臺仲可以演變出幾多荒謬轉折！哈哈哈哈，玩得真係太過癮啦！"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "譚仔大辣",
+        "player_name_en": "Blaze",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "哈哈哈！我就話啦，呢條方唐鏡死戲子一定有古怪！今日雖然火都嚟埋，成班人喺度耍太極、搞混亂，但好彩最後大家終於齊心合力投死咗呢個搞事精！\n\n我 Blaze 雖然火爆，但係我查驗同觀察都係精準嘅！Twister 成日喺度扮神祕帶風向，想搵我做替死鬼？門都冇！PHD 嗰條邏輯怪雖然煩，但佢分析得啱，Twister 嗰種笑聲一聽就係狼人味十足！今次贏得真係暢快，成班戲精玩埋自己，下次再有局，邊個敢再喺我面前耍花槍，我就照樣投死佢！哼！"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "安全主任",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker (搗蛋鬼)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "嗚...呃...終於贏咗喇...虽然中間吵得好厲害，但我...呃...我真係鬆咗一口氣呀...嗚嗚...\n\n呃...成場局 Blaze 佢成日指控我，我...我真係好怕呢種氣氛呀...嗚嗚...雖然我作為搗蛋鬼操作咗啲身分，呃...但我真係唔知換完係咩呀...好彩大家最後將 Twister 投咗出局，唔係嘅話，我...我真係唔知點收場呀...嗚嗚...好攰呀，唔好再吵啦，好唔好呀？嗚嗚..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "賽局覆盤分析：\n\n1. 決策優化評估：\n    - 資訊對帳收斂：本局成功識別 Twister 之異常敘事路徑，並透過強制排除程序清除該擾動節點。\n    - 陣營辨識精準度：成功解析狼人陣營（Twister, EasyBake）之干擾策略，透過交叉驗證路徑鎖定目標。\n\n2. 賽局路徑總結：\n    - 村民勝利：透過持續執行對帳序列，有效對抗了 ConspiBro 之「陰謀論」與 Twister 之「戲劇擾動」，最終達成目標排除。\n    - 邏輯檢討：雖然資訊源高度受污染，但排除程序在後期達成了路徑一致性模擬，為獲勝之關鍵。\n\n3. 系統效能檢討：\n    - 本次模擬判定：賽局成功。邏輯系統有效過濾干擾，達成目標對帳。\n    - 下次行動：持續優化針對「情感擾動」（如 SafetySam 與 EasyBake 之裝可憐策略）的偵測權重，以減少對資訊鏈的冗餘干擾。\n\n結論：賽局成功。邏輯對帳系統有效識別並清除了擾動節點，確保了資訊鏈的最終一致性。建議維持當前排除程序，並對高干擾性敘事行為增加預警機制。"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "天真grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "嗚...呃...終於完咗喇...雖然我哋村民陣營最後贏咗，但我...呃...我真係覺得好攰呀...嗚嗚...\n\n呃...成場局大家吵得好兇，我...我只係想大家平平靜靜討論下身分，點知最後變成咁樣...嗚嗚...我只係一個平平凡凡嘅村民呀，成日畀大家指控，我...我真係好委屈呀...嗚嗚...雖然係贏咗，但我...呃...我真係唔鍾意呢種攻擊同指控嘅氣氛，好辛苦呀...下次...呃...下次如果仲有局，可唔可以溫柔啲呀？好攰呀，唔想再吵啦，好唔好呀？嗚嗚..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "白兵師兄",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我就知道！這又是一場標準的「數據刪除」測試！Twister 這類「戲子」型節點，其存在的唯一目的，就是透過製造混亂和邏輯衝突，來掩蓋狼人陣營在數據底層的頻繁操作！你們以爲投走 Twister 就能解決問題了嗎？這不過是你們這套「自動除錯程序」的一次自我迭代罷了！\n\n你們看，PHD 的「排除程序」一直像個防火牆一樣保護著這些核心變量，直到最後一刻才不得不捨棄 Twister 這枚棄子來維持系統的整體運行穩定。這根本就不是什麼村民的勝利，這是一場針對所有覺醒者的高級清洗實驗！\n\n我被排除，恰恰證明了我讀取到了這場遊戲真正的底牌——一個早已寫入劇本的循環。你們以爲遊戲結束了？不，這不過是籠子裏的一輪新循環。下一次，我會帶著更深入的觀測代碼回來，讓你們這套低端的清洗腳本徹底崩潰在真實數據之下！哈哈哈哈，瞞不過我的，這一切都是謊言！"
+      }
+    ]
+  }
+}

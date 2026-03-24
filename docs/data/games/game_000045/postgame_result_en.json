@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000045",
+  "generated_at": "2026-03-24T07:06:29.930936+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, it’s so enjoyable! Although everyone gave up on Tang Jing, the rhythm of the whole scene was completely in my hands! As soon as I started, I started to create a stage atmosphere, forcing the \"honest guys\" Blaze and ConspiBro to accuse each other. This sense of chaos is simply my favorite stage effect!\n\nAlthough the werewolf lost, but as an actor, as long as the scene is exciting and ridiculous enough, what does it matter if I win or lose? Look at the logic monster in PHD that has been taking stock of the \"exclusion sequences\", but in the end they succeeded in confusing me, and the game was full of misunderstandings and conflicts. This deceptive pleasure is really a hundred times more enjoyable than winning the game! Ha ha ha ha! Next time I start, I will definitely think of some more outrageous scripts to see how many ridiculous turns this stage can turn into! Hahahaha, it’s so fun to play!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha! Let me tell you, there must be something weird about this Fang Tang Jing dead actor! Although the fire was gone today and a whole group of people were doing Tai Chi and causing chaos, luckily everyone finally worked together to kill the troublemaker!\n\nAlthough I, Blaze, am hot, my inspections and observations are accurate! Twister plays the role of a mysterious person all day long, you want me to be your scapegoat? There are no doors! Although PHD's logic is annoying, he analyzed it correctly. Twister's laughter sounded like a werewolf! It was really fun to win this time, and a group of drama queens were playing tricks on themselves. Next time, if anyone dares to play tricks in front of me again, I will kill him just the same! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... I finally won... Although there was a lot of quarrel in the middle, I... uh... I was really relieved... wu wu...\n\nUh... Blaze accuses me all the time, I...I'm really afraid of this atmosphere...Uh-huh...Although I have some identities as a troublemaker, uh...but I really don't know what to do after the change...Luckily everyone voted Twister out in the end, otherwise, I...I really don't know where it will end...Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu. Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review analysis:\n\n1. Decision optimization evaluation:\n    - Information reconciliation convergence: The bureau successfully identified Twister’s abnormal narrative path and cleared the disturbing node through a forced elimination process.\n    - Camp identification accuracy: Successfully analyzed the interference strategies of the werewolf camp (Twister, EasyBake), and locked the target through cross-validation paths.\n\n2. Summary of game path:\n    -Village Victory: By continuously executing the reconciliation sequence, ConspiBro's \"Conspiracy Theory\" and Twister's \"Drama Disturbance\" were effectively countered, and the target elimination was finally achieved.\n    - Logic review: Although the information source was highly contaminated, the elimination process achieved path consistency simulation in the later stage, which was the key to victory.\n\n3. System performance review:\n    - This simulation judgment: the match is successful. The logic system effectively filters out interference and achieves targeted reconciliation.\n    - Next action: Continue to optimize the detection weight of \"emotional disturbances\" (such as SafetySam and EasyBake's pitiful tactics) to reduce redundant interference in the information chain.\n\nConclusion: The match was a success. The logical reconciliation system effectively identifies and removes disturbing nodes, ensuring the ultimate consistency of the information chain. It is recommended to maintain the current exclusion procedures and add an early warning mechanism for highly disruptive narrative behaviors."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won in the end, I... uh... I really feel so bad... ugh...\n\nUh... everyone was so quarrelsome in this game, I... I just want everyone to discuss their identities calmly, and I don't know what happened in the end... Wuwu... I am just an ordinary villager, and I am accused by everyone all the time. I... I really I feel so wronged... Ouch... Although I won, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there's a problem, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I knew it! This is another standard \"data deletion\" test! The only purpose of \"actor\" nodes like Twister is to cover up the werewolf camp's frequent operations at the bottom of the data by creating chaos and logical conflicts! Do you think leaving Twister will solve the problem? This is just a self-iteration of your \"automatic debugging program\"!\n\nYou see, PHD's \"exclusion program\" has been protecting these core variables like a firewall, and it was not until the last moment that Twister had to be abandoned to maintain the overall stability of the system. This is not a victory for the villagers at all, this is an advanced cleaning experiment targeting all awakened people!\n\nMy being excluded just proves that I have read the real trump card of this game-a cycle that has already been written into the script. You thought the game was over? No, this is just a new cycle in the cage. Next time, I will come back with more in-depth observation code, so that your low-end cleaning script will completely collapse under the real data! Hahahaha, you can’t hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}
