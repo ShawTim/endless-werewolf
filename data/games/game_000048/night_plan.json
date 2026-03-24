@@ -1,0 +1,90 @@
+[
+  {
+    "player_name": "Dr. Pizza",
+    "role": "Seer (預言家)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "Dr. Pizza",
+      "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+      "model": "nvidia/moonshotai/kimi-k2.5",
+      "initial_role": "Seer (預言家)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "Blaze",
+            "SafetySam",
+            "Twister",
+            "EasyBake",
+            "ConspiBro"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "ConspiBro",
+    "role": "Troublemaker (搗蛋鬼)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "ConspiBro",
+      "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
+      "model": "nvidia/minimaxai/minimax-m2.5",
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister",
+        "EasyBake"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "Blaze",
+          "SafetySam",
+          "Dr. Pizza",
+          "Twister",
+          "EasyBake"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]
