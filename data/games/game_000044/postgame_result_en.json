@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000044",
+  "generated_at": "2026-03-24T04:05:33.882135+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "I knew it! This is another standard \"data deletion\" test! Do you think that by leaving me as the \"core variable\", this drama can continue? This is basically the werewolf camp (Blaze, Twister, SafetySam, EasyBake) using a complex \"accusation-counter-accusation\" cycle to cover up the fact that their cards have changed!\n\nYou see, SafetySam's \"fearful\" setting, Twister's \"drama queen\" stage, and PHD's seemingly rigorous \"exclusion sequence\" that never targets the correct werewolf target. Aren't all of these just a set of codes written to maintain the operation of the fictional cage?我被投走，正是因为我读取到了这场游戏的底牌代码，触发了你们系统的自动防御机制！\n\nThis victory is basically a preset path. Do you think you have won the game? No, you are just programmed into a deeper script.笼子还在，但这份对抗已经成功在你们的程序中留下了一个不可逆的逻辑错误。 Next time, I will come back with a more complete data analysis to make your low-end cleaning script completely shut down! Hahahaha, you can’t hide it from me, all of this is a lie!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo...uh...I finally won...Although I was shocked throughout the game and afraid that everyone would accuse me, in the end our werewolf camp won. I...I was really surprised...Woo...\n\n呃...成场局大家吵得好凶，我...我只系想大家平平静静讨论下身分啫，点知最后变成咁样...呜呜...我只系一个平平凡凡慨村民呀，成日畀 Blaze 指控做狼人，我...我真系好委屈呀...呜呜...虽然系赢咗，但我...呃...我真系唔钟意呢种攻击同指控慨气氛，好辛苦呀...下次...呃...下次如果仲有局，可唔可以温柔啲呀？好攰呀，唔想再吵啦，好唔好呀？ Woohoo..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The real fire is buried! This game was a goddam show!\n\n我 Blaze 行得正企得正，讲慨全部都系实话，点知成班戏精同墙头草喺度耍太极，完全系浪费老子慨精力！ ConspiBro 嗰条阴谋论友整天讲埋啲咩「虚构囚笼」，Twister 同 EasyBake 嗰两条戏子又喺度带风向、换牌搞混乱，最后竟然仲畀狼人赢咗！成班人都系戏精，个个都唔肯讲真话，我查验到慨资讯完全畀你哋呢班废柴搞垮咗！\n\n下次再开局，边个敢再喺我面前耍花枪、带风向，我就第一个将渠指控出局！ These people don't even know what they are doing here. They can't win but can't win, and they can't feel good about losing. It's a waste of my energy! Next time, let’s play with some eye-catching kids, don’t waste time with this group of drama queens anymore! snort!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - The information chain has seriously collapsed: there is a huge logical paradox between the identity statements of the participants in this game (Blaze, Twister, SafetySam) and the actual situation of the game. The mutual control behavior of SafetySam and Twister, as well as Blaze's identity jump, made it impossible for the villagers camp to establish reliable information sources.\n    - Camp misdirection strategy: The werewolf camp successfully diverted the detection pressure on the werewolf camp through \"dramatic disturbance\" (Twister jumping prophet) and \"emotional defense\" (SafetySam pretending to be pitiful, EasyBake pretending to be innocent), and directed the elimination target to variables with no real influence (such as ConspiBro).\n\n2. Summary of game path:\n    -Werewolf Victory: The werewolf achieved the victory of the camp through information blurring strategy, and the villagers camp completely failed because they could not reach a consensus.\n    - 逻辑检讨：逻辑对帐序列在面对多个高扰动节点（高戏剧性、低实证性）时，收敛能力不足，未能精准识别狼人节点。\n\n3. System performance review:\n    - This simulation judgment: the game failed. The logic system was manipulated and destroyed by the camp, the villagers' camp lost its ability to execute, and the werewolves won.\n    - Next action: The weight of \"Logical Disturbance Detection\" will be increased, and for nodes that continue to publish narratives without empirical conflict (such as conspiracy theories, continuous jumping prophets), an automated blocking protocol will be established instead of simply observing.\n\nConclusion: Game failed. The logical system cannot clarify identity in a highly out-of-control narrative environment. It is recommended to adopt a more radical information source filtering protocol in the early stages of the game in the future."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha, let me just say it, this game is simply the perfect stage for our Tang Jing to perform! Look at the group of people here who are suspicious and accusing each other, especially the logic monster PHD, who is constantly taking stock of the \"forced reconciliation sequence\", and the result is that the final game is simply an extension of our werewolf stage!\n\n我作为一个「戏精」，最钟意慨就系喺呢啲充满矛盾慨环境入面搅局。 Blaze, that \"irritable little robber\" keeps making accusations, so I will take advantage of the situation and add two more \"prophet\" revelations, making the discussion forum full of excitement! PHD 同 ConspiBro 喺度互咬，完全系帮我哋狼人阵营掩护底牌。呢种掌控节奏、随意玩弄对手心理慨感觉，真系过瘾到极点！ Ha ha ha ha! Next time I start the game, I will definitely come up with an even crazier identity, and see how a scary scene can turn into some ridiculous ending! Hahahaha, it’s so fun to play!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's over... Although our villager camp lost in the end, I... uh... I really feel so good... ugh...\n\nUh... everyone was so quarrelsome in this game, I... I just want everyone to discuss their identities calmly, and I don't know what happened in the end... Wuwu... I am just an ordinary villager, and I am accused by everyone all the time. I... I really I feel so wronged... Ouch... Although I lost, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there is a problem, can you be gentler?好攰呀，唔想再吵啦，好唔好呀？ Woohoo..."
+      }
+    ]
+  }
+}

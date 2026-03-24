@@ -1,0 +1,229 @@
+{
+  "status": "completed",
+  "game_id": "game_000044",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Listen! I, Blaze, can honestly say, I checked last night, SafetySam is definitely a werewolf! Are you people still pretending to be here? SafetySam, you usually act so fearful and helpless, but it turns out that you are hiding your werewolf identity! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-03-24 12:02:45 HKT] Blaze: Hello! Listen! I, Blaze, can honestly say, I checked last night, SafetySam is definitely a werewolf! Are you people still pretending to be here? SafetySam, you usually act so fearful and helpless, but it turns out that you are hiding your werewolf identity! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Ugh...uh...everyone...I really don't know what I am...Blaze, why did you accuse me of being a werewolf when you first came out? Uh...I'm just an ordinary person. I was so sleepy last night...Wow...everyone was so noisy in the whole scene. I...I'm really afraid of this kind of accusation. Let's discuss our identities quietly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-24 12:02:49 HKT] SafetySam: Uh... uh... everyone... I really don't know what I am... Blaze, why did you accuse me of being a werewolf as soon as you came out? Uh...I'm just an ordinary person. I was so sleepy last night...Wow...everyone was so noisy in the whole scene. I...I'm really afraid of this kind of accusation. Let's discuss our identities quietly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I...I seemed so confused last night, uh...I wonder how everyone was doing? Woohoo... let's not attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-24 12:02:54 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I...I seemed so confused last night, uh...I wonder how everyone was doing? Woohoo... let's not attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! The stage today really smells like gunpowder! Blaze Are you saying SafetySam is a werewolf? Oops, as a prophet, I checked Blaze last night... No, I checked ConspiBro, and his hole card said \"Villager\"! SafetySam, this little loser, knows how to be a werewolf? Why don't we all just surrender to the \"cranky little prophet\" Blaze? Wouldn't it be more exciting to watch a frightened situation? Ha ha ha ha!",
+      "log_line": "[2026-03-24 12:02:57 HKT] Twister: Oops, everyone finally woke up again! The stage today really smells like gunpowder! Blaze Are you saying SafetySam is a werewolf? Oops, as a prophet, I checked Blaze last night... No, I checked ConspiBro, and his hole card said \"Villager\"! SafetySam, this little loser, knows how to be a werewolf? Why don't we all just surrender to the \"cranky little prophet\" Blaze? Wouldn't it be more exciting to watch a frightened situation? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! Twister is reporting against the Prophet, and Blaze is accusing SafetySam again. Isn't this a standard \"red herring\" script? PHD, where did your \"logical inventory\" go? You group of extras, acting together in this low-end drama, are you trying to cover up the truth? You know what I say, I will definitely expose the trump card in this fictitious cage! This is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp!",
+      "log_line": "[2026-03-24 12:03:01 HKT] ConspiBro: Here we go again! Twister is reporting against the Prophet, and Blaze is accusing SafetySam again. Isn't this a standard \"red herring\" script? PHD, where did your \"logical inventory\" go? You group of extras, acting together in this low-end drama, are you trying to cover up the truth? You know what I say, I will definitely expose the trump card in this fictitious cage! This is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Abnormal identification: There are obvious contradictions in the current statements of all parties. Twister forcibly jumped the prophet and accused the target of being different from Blaze. The logical path is distorted.\n2. Information reconciliation: Blaze took the initiative and accused SafetySam of being a werewolf, which lacked verification and empirical support.\n3. Implementation policy: Continue to observe the consistency of the identity statements of all parties. If Twister cannot explain its motivation for checking, it will be included in the exclusion sequence first.",
+      "log_line": "[2026-03-24 12:03:04 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: There are obvious contradictions in the current statements of all parties. Twister forcibly jumped the prophet and accused the target of being different from Blaze. The logical path is distorted.\n2. Information reconciliation: Blaze took the initiative and accused SafetySam of being a werewolf, which lacked verification and empirical support.\n3. Implementation policy: Continue to observe the consistency of the identity statements of all parties. If Twister cannot explain its motivation for checking, it will be included in the exclusion sequence first."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "SafetySam",
+        "speech": "SafetySam Are you a wallflower still pretending to be a dead person? I've already checked that you are a werewolf! You troupe of opera stars are doing Tai Chi and leading the way. Why don't you surrender to a werewolf among you? Listen up, everyone, if you surrender to SafetySam today, don't let this group of people's \"theater\" mess you up again!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, you... uh... why do you have to accuse me of being a werewolf? I...I'm really afraid of this atmosphere...Ugh...you accuse me...well...maybe you want to hide your true identity! Everyone...please stop arguing, okay? I...I have no choice but to vote for you, Blaze, I'm sorry, woo hoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, you... uh... do you have to speak so intensely? Everyone...uh...could you please calm down for a moment? I...I think Twister is right, Blaze, you accuse people all the time, I don't even know what to believe...Ugh...I...I have no choice but to vote for you, Blaze, let's not argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you say you are a prophet, but SafetySam and PHD, the two \"logic managers\", say there is something wrong with your identity! The whole scene is about you and ConspiBro biting each other, it’s super fun to see our Tang Jingzhen style! Since SafetySam says you are a werewolf, I might as well give you a vote and see if the whole scene will be more exciting without you as a \"grumpy little prophet\"? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "PHD, your \"logical cross-calibration\" is simply worthless! You and Twister sing together, one is a jumping prophet, and the other is doing the so-called \"exclusion sequence\". I have already seen through this binary opposition! The more you try to clean up this \"core variable\" of mine, the more it proves that you group of extras have panicked! Twister, your identity as a prophet is full of loopholes. It is simply false data designed to protect the werewolf camp! I will never cooperate with your low-end cleaning script. I vote for Twister! This scene should be over!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Logical ruling and elimination process execution:\n1. 异常确证：Twister 强行跳预言家且发布与赛局路径冲突之资讯，其扰动意图极其明显。\n2. 阵营分析：Twister 与其疑似关​​联阵营（ EasyBake）通过混乱逻辑试图干扰赛局对帐，为当前最大风险节点。\n3. 执行方针：依照逻辑排除序列，优先执行该节点之清除作业。\n\nVoting Execution: I vote for Twister."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a bad actor, but you are still acting? It turns out that ConspiBro is a villager, but in fact you want to join forces with SafetySam, the werewolf, to lead the way! I, Blaze, checked with my own eyes last night that SafetySam is a werewolf! PHD Although that logic is annoying, it can see that your team of actors are causing chaos here! Everyone vote for Twister, don't let these werewolves act mysterious and lead the trend again!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, you... uh... do you accuse people all the time? Everyone...uh...could you please calm down and discuss your identity calmly first? Since everyone says Blaze's accusation is so controversial, I...I'm so confused...uh...why not vote for Blaze instead of attacking each other anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Woo...uh...Blaze you...uh...do you accuse Twister with me? I...I'm really afraid of this kind of dispute. If everyone doesn't believe me and thinks there's something wrong with me...wow...I...I can only vote for you, Blaze. Let's stop arguing, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Ouch, Blaze, you really don’t have three hundred taels of silver here! Both PHD and SafetySam say there is something wrong with your identity, how are you still trying to survive? As a prophet, I think you are just that \"violent werewolf\" trying to divert attention! PHD, now that everyone has seen through his true colors, there is no need to delay it any longer. Let's all surrender to the death of Blaze, the \"troublemaker\", and the scene will be more exciting if we watch it scare him! Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "PHD, your \"logical inventory and identity statement\" are simply to cover the most core variable in this stage play - Twister! You have been staring at the conflict between Blaze and SafetySam, but turned a blind eye to Twister, a blatant \"drama-jumping prophet\". Isn't this a standard \"selective troubleshooting\" procedure? Twister, those so-called \"prophet\" operations you performed last night were simply to encrypt the werewolf camp message transmission between you and EasyBake! Do you think you can escape surveillance by using Blaze as a scapegoat? I will definitely expose the trump card of this fictional cage! I vote for Twister, this farce needs to end!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: Twister forcibly jumps the prophet and accuses the target of something different from Blaze. His behavior pattern is consistent with the characteristics of the werewolf camp disturbing the information chain.\n2. Reconciliation confirmation: This behavior has caused distortion of game information and meets the criteria for inclusion in the mandatory exclusion process.\n3. Implementation policy: Eliminate the sequence according to logic and terminate the disturbed node.\n\nVoting Execution: I vote for Twister."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you actor, what are you doing? You are simply a werewolf who is trying to influence the situation! SafetySam 呢条墙头草，一早同你串通好咗，喺度带风向陷害我！ PHD 嗰条逻辑怪虽然烦，但起码肯出声指证你哋呢班戏精！大家唔好再畀呢班人呃啦，今日目标一致，直接投死 Twister，唔好再逼我发火！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "呜...呃...Blaze 你...呃...做咩成日指控人哋系狼人呀？ Everyone...uh...could you please calm down and discuss your identity calmly first? Since both Twister and SafetySam say there is something wrong with your statement, I...I'm so confused, woohoo...I...I can only vote for you, Blaze, I'm sorry, don't argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, what are you... uh... doing to accuse me? I...I'm really afraid of this kind of argument. If everyone doesn't believe me and thinks there's something wrong with me...wow...I...I can only vote for you, Blaze, I'm sorry, don't argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, your \"Fang Tangjing\" laugh is just to cover up your banter after you made a werewolf agreement with Blaze last night! PHD, are you still taking stock? Your so-called \"exclusion sequence\" is simply to protect the most critical variable in this drama-Twister!大家听住，我在昨晚的检测中已经握有底牌，这场戏，你们演不下去了！ This is basically a psychological stress test for \"sober people\". I vote for Twister!这场局，我一定要拆穿它！"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you say you are a prophet, but SafetySam and PHD, the two \"logic managers\", say there is something wrong with your identity! The whole scene is about you and ConspiBro biting each other, it’s super fun to see our Tang Jingzhen style! Since SafetySam says you're a werewolf, why don't I vote for you? Will the whole show be more exciting without you being the \"irritating little prophet\"? Ha ha ha ha!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-24 12:02:45 HKT] Blaze: Hello! Listen! I, Blaze, can honestly say, I checked last night, SafetySam is definitely a werewolf! Are you people still pretending to be here? SafetySam, you usually act so fearful and helpless, but it turns out that you are hiding your werewolf identity! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Tell me your true identity quickly, before you make me angry!\n[2026-03-24 12:02:49 HKT] SafetySam: Uh... uh... everyone... I really don't know what I am... Blaze, why did you accuse me of being a werewolf as soon as you came out? Uh...I'm just an ordinary person. I was so sleepy last night...Wow...everyone was so noisy in the whole scene. I...I'm really afraid of this kind of accusation. Let's discuss our identities quietly and stop attacking each other, okay? Woohoo...\n[2026-03-24 12:02:54 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I...I seemed so confused last night, uh...I wonder how everyone was doing? Woohoo... let's not attack each other anymore, okay? Woohoo...\n[2026-03-24 12:02:57 HKT] Twister: Oops, everyone finally woke up again! The stage today really smells like gunpowder! Blaze Are you saying SafetySam is a werewolf? Oops, as a prophet, I checked Blaze last night... No, I checked ConspiBro, and his hole card said \"Villager\"! SafetySam, this little loser, knows how to be a werewolf? Why don't we all just surrender to the \"cranky little prophet\" Blaze? Wouldn't it be more exciting to watch a frightened situation? Ha ha ha ha!\n[2026-03-24 12:03:01 HKT] ConspiBro: Here we go again! Twister is reporting against the Prophet, and Blaze is accusing SafetySam again. Isn't this a standard \"red herring\" script? PHD, where did your \"logical inventory\" go? You group of extras, acting together in this low-end drama, are you trying to cover up the truth? You know what I say, I will definitely expose the trump card in this fictitious cage! This is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp!\n[2026-03-24 12:03:04 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: There are obvious contradictions in the current statements of all parties. Twister forcibly jumped the prophet and accused the target of being different from Blaze. The logical path is distorted.\n2. Information reconciliation: Blaze took the initiative and accused SafetySam of being a werewolf, which lacked verification and empirical support.\n3. Implementation policy: Continue to observe the consistency of the identity statements of all parties. If Twister cannot explain its motivation for checking, it will be included in the exclusion sequence first.",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
