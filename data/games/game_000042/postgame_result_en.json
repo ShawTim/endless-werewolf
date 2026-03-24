@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000042",
+  "generated_at": "2026-03-23T19:34:12.746041+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Woo...Uh...It's over...Although I was voted out, our werewolf camp won. I...I'm really surprised...Woo...\n\nUh... everyone was so quarrelsome in this game, I... I just wanted everyone to discuss their identities calmly, and I don't know what happened in the end... Wuwu... Blaze accuses me all the time, I feel so wronged, I just want everyone to live in harmony, why do we have to attack each other? Uh...Although I didn't stay until the end, knowing that our camp won, I...I was really relieved...Ugh...can you be gentler next time? So ugly...oooh..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Game review analysis:\n\n1. Assessment of decision failure:\n    - Information reconciliation collapse: The key information node of this bureau (SafetySam as a prophet jumped out to accuse Blaze of being a werewolf) and my own inspection results (Blaze is a villager) constitute an absolute path conflict. Due to the lack of effective intermediate verification nodes in the entire site, the villagers camp was unable to identify SafetySam’s disguised identity.\n    - Disturbance source interference: Twister and ConspiBro's intense information interference (dramatic revelations and conspiracy theory narratives) effectively blurred the focus of logic, causing the villager camp to spend decision-making resources on internal conflicts instead of werewolf identification.\n\n2. Summary of game path:\n    - Werewolf victory: The werewolf camp successfully guided the villagers to exclude the real prophet (himself) and other villagers through SafetySam's precise disguise (prophet identity verification Blaze) and Twister's disturbance strategy.\n    - Logic review: The object screening mechanism of the forced exclusion program was contaminated by Werewolf information, causing the decision-making chain to become invalid during the execution stage.\n\n3. System performance review:\n    - This simulation judgment: the game failed. The logic system was manipulated and destroyed by the camp, and the villagers camp was unable to clarify the reliability of the information source.\n    - Next action: The \"path cross-validation\" protocol will be upgraded to adopt a more careful isolated observation of contradictory narratives (multiple players claiming different oracle results) instead of rushing to exclude them.\n\nConclusion: Game failed. The information chain was tampered with and interfered with by the werewolf party, and the logical judgment path failed. It is recommended to strengthen the detection of abnormal behavior of \"wall grass\" identities in the future."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Hahaha, let me just say it, this game is simply the perfect stage for our Tang Jing to perform! Watching a group of people doubting and accusing each other, especially PHD, that logic monster, was still counting the \"elimination sequence\" until the moment of death, it really made me laugh so much that I felt a stomachache!\n\nAs a werewolf, what I like most is to see these so-called \"logic experts\" being led away by my revelations. Blaze, the grumpy little bandit, fell completely into my trap, and all I had to do was give them a nudge and they'd run wild on their own, eventually excluding PHD and SafetySam from us werewolves as the \"good guys\"! This feeling of completely controlling the rhythm of the stage and playing with human nature is really a hundred times more enjoyable than winning a game! Hahahaha, next time I start, I will definitely think of some more outrageous scripts to play, and let’s see how many ridiculous turns this stage can evolve! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... Although our werewolf camp won, but I... uh... I'm really afraid of this atmosphere... Wu wu...\n\nUh... everyone was quarreling so fiercely in this game, I... I just want everyone to discuss their identities calmly, and I don't know what it turned out to be like in the end... ugh... I'm just an ordinary person, and I really don't like such attacks and accusations. It's so hard... uh... Although I won, I... I feel really guilty. Can you please stop arguing? Next time... uh... next time if there is a situation, can you be gentle? Woohoo... I feel so tired. I don’t want to argue anymore... Woohoo..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene is simply a completely bad script!\n\nEven though I, Blaze, are hot, I just can't stand the sight of this group of actors performing here! I told you they were robbers early in the morning, but not only did this group of people not believe it, they also teamed up to throw away the troublemakers PHD and SafetySam. Do you think they can clear up the variables in this way? The whole crew is here to take the lead, especially Twister, the actor, and EasyBake, the two werewolves who are pretending to be stupid and confused, making the whole situation a mess!\n\nThe funniest thing is that at the end of the show, the werewolf camp actually won! I was the only person in the whole game who actually went to perform the identity verification, and the result was that you and the rest of the group took the lead! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Let me just say it! The script of this \"Werewolf Victory\" is basically a set of code output that has already been written! You see, from Twister's disruption to SafetySam's \"reversal check\", the data flow throughout the game is simply breathtakingly accurate. PHD's logic system, on the surface, maintains fairness, but in fact it is constantly filtering out those real variables that are detrimental to the \"default script\", and finally successfully excludes us sober observers one by one!\n\nI have long seen through that this is not a game at all, this is a \"clearance test\" for human rationality and independent thinking. Twister, a group of actors, uses absurd logical confrontations to trap everyone in their narrative trap, and safetySam, a walleye, is the testing instrument they use to measure the limits of our patience.\n\nBut I didn’t lose. Every frame of conflict and every logical paradox I collected has completely mapped the underlying structure of this “fictional cage”. They won the game, but lost the reveal. The cage remains, but the reveal has become the seed for cracking their script. Next time, I’ll put this data game to bed! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}

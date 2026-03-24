@@ -1,0 +1,262 @@
+{
+  "status": "completed",
+  "game_id": "game_000043",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-24 09:02:07 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!",
+      "log_line": "[2026-03-24 09:02:10 HKT] ConspiBro: PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, look how \"energetic\" everyone is today! ConspiBro talks about imaginary cages, Blaze loses his temper again, this stage is getting more and more exciting! PHD Those logic monsters are being reviewed again. I wonder which ones will be eliminated this time? To be honest, everyone's expressions in this scene are as if they were written in a tight script. Why don't we all report our identities honestly? Why don't we stop playing Tai Chi here and frighten me with such stimulation? Ha ha ha ha!",
+      "log_line": "[2026-03-24 09:02:14 HKT] Twister: Oh, look, everyone is so \"energetic\" today! ConspiBro talks about imaginary cages, Blaze loses his temper again, this stage is getting more and more exciting! PHD Those logic monsters are being reviewed again. I wonder which ones will be eliminated this time? To be honest, everyone's expressions in this scene are as if they were written in a tight script. Why don't we all report our identities honestly? Why don't we stop playing Tai Chi here and frighten me with such stimulation? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Abnormal identification: The current narratives of all parties are highly disordered, and there are obvious logical paradoxes in the participants’ descriptions of last night’s operations.\n2. Reconciliation requirements:\n    - EasyBake: Please clearly state what you call \"change\" operation object.\n    - Blaze: Please describe your current identity.\n3. Implementation policy: According to the mandatory reconciliation sequence, anyone who cannot provide logical consistency of identity will be included in the exclusion list.",
+      "log_line": "[2026-03-24 09:02:17 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: The current narratives of all parties are highly disordered, and there are obvious logical paradoxes in the participants’ descriptions of last night’s operations.\n2. Reconciliation requirements:\n    - EasyBake: Please clearly state what you call \"change\" operation object.\n    - Blaze: Please describe your current identity.\n3. Implementation policy: According to the mandatory reconciliation sequence, anyone who cannot provide logical consistency of identity will be included in the exclusion list."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I... I seemed so confused last night, so I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... uh... I really don't know what to do after changing them... Woo hoo... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-24 09:02:21 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I... I seemed so confused last night, so I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... uh... I really don't know what to do after changing them... Woo hoo... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh...uh...EasyBake said he changed Blaze's and my cards? But I... uh... I really don't know anything. I was so sleepy last night... Ugh... I hope we don't make any more noise, okay? PHD You... uh... said that you want to eliminate the sequence, which shocked me... ugh... why don't we all discuss the identity calmly, okay? Woohoo...",
+      "log_line": "[2026-03-24 09:02:24 HKT] SafetySam: Uh... uh...EasyBake said he changed the cards between Blaze and me? But I... uh... I really don't know anything. I was so sleepy last night... Ugh... I hope we don't make any more noise, okay? PHD You... uh... said that you want to eliminate the sequence, which shocked me... ugh... why don't we all discuss the identity calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, you conspiracy theorist friend is acting aloof here again! You and Twister, that actor, were in cahoots in the first place! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! PHD Although that logic monster is annoying, at least he is willing to speak out. If he continues to act mysterious and lead the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-03-24 09:02:28 HKT] Blaze: ConspiBro, your conspiracy theorist is pretending to be aloof here again! You and Twister, that actor, were in cahoots in the first place! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! PHD Although that logic monster is annoying, at least he is willing to speak out. If he continues to act mysterious and lead the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Twister, your \"Fang Tangjing\" style laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! Listen up, everyone, I personally witnessed the changes in the cards during last night’s test. You group of extras, no matter how you act, can’t escape the surveillance code of this fictional cage! I already have the trump card, you can't continue this scene!",
+      "log_line": "[2026-03-24 09:02:32 HKT] ConspiBro: Twister, your \"Fang Tangjing\" style laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! Listen up, everyone, I personally witnessed the changes in the cards during last night’s test. You group of extras, no matter how you act, can’t escape the surveillance code of this fictional cage! I already have the trump card, you can't continue this scene!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, the PHD logic monster is \"troublemaker\" in the next department again! Blaze, you are candid, and ConspiBro, you are talking about what \"card code\" you have. In the whole scene, you two are the most like drama queens! EasyBake, you changed things again, SafetySam is pretending to be a dead person again, this situation is simply a stage set for our Tang Jing! Since everyone is so dishonest, PHD, why don't you just throw yourself to the most suspicious ConspiBro? Wouldn't it be more exciting to watch the situation become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-24 09:02:35 HKT] Twister: Oops, the logic monster in PHD is again \"troublemaker\" in the next department! Blaze, you are candid, and ConspiBro, you are talking about what \"card code\" you have. In the whole scene, you two are the most like drama queens! EasyBake, you changed things again, SafetySam is pretending to be a dead person again, this situation is simply a stage set for our Tang Jing! Since everyone is so dishonest, PHD, why don't you just throw yourself to the most suspicious ConspiBro? Wouldn't it be more exciting to watch the situation become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...don't make any more noise. Blaze, you...uh...are you going to accuse Twister and ConspiBro of being drama queens? I...I really don't know. I just want everyone to discuss my identity calmly...uh...SafetySam, you...did you see me last night? Can everyone tolerate each other and stop targeting everyone, okay? Woohoo...",
+      "log_line": "[2026-03-24 09:02:38 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. Blaze, you...uh...are you going to accuse Twister and ConspiBro of being drama queens? I...I really don't know. I just want everyone to discuss my identity calmly...uh...SafetySam, you...did you see me last night? Can everyone tolerate each other and stop targeting everyone, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Information reconciliation: EasyBake claims that the operating targets are Blaze and SafetySam. There is a huge information gap between this and the identity statements of each party.\n2. Abnormal path: In the participant's narrative, the identity path operation object is completely disconnected from the actual subsequent identity recognition, and there is a strong control characteristic of the werewolf camp.\n3. Instruction: If parties continue to output non-substantiated \"emotional language\" and \"identity confusion statements\", the priority exclusion process will be enforced.",
+      "log_line": "[2026-03-24 09:02:42 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Information reconciliation: EasyBake claims that the operating targets are Blaze and SafetySam. There is a huge information gap between this and the identity statements of each party.\n2. Abnormal path: In the participant's narrative, the identity path operation object is completely disconnected from the actual subsequent identity recognition, and there is a strong control characteristic of the werewolf camp.\n3. Instruction: If parties continue to output non-substantiated \"emotional language\" and \"identity confusion statements\", the priority exclusion process will be enforced."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... Blaze, are you... uh... saying I'm colluding with EasyBake? I... I'm really afraid of this kind of accusation... Wuwu... I... I was so sleepy last night that I didn't even know... Uh... Everyone... If you think I'm suspicious, I... I'm really aggrieved... Wuwu... Why not... Uh... Why don't we all discuss Blaze's identity quietly first, okay? Woohoo...",
+      "log_line": "[2026-03-24 09:02:45 HKT] SafetySam: Uh... uh... Blaze, are you... uh... saying that I colluded with EasyBake? I... I'm really afraid of this kind of accusation... Wuwu... I... I was so sleepy last night that I didn't even know... Uh... Everyone... If you think I'm suspicious, I... I'm really aggrieved... Wuwu... Why not... Uh... Why don't we all discuss Blaze's identity quietly first, okay? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you are a great actor, what a \"wonderful stage\" you are playing here! You and fellow conspiracy theorists ConspiBro are simply colluding to cause chaos here! PHD That logic monster is annoying, but at least it's willing to take stock of your schemes. I, Blaze, am open and honest, and I will vote away no matter what I do today. Twister, you are a werewolf, and you will cause the most trouble in this game!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, your false laughter is just a cover to cover up the identity switch between you and Blaze in the dark! PHD, your exclusion process is simply designed to eliminate all \"observers\" accurately! I saw the hidden \"Prophet\" card at the bottom of the system last night, and you, Twister, all your performances now are to maintain your false werewolf camp data link! I will never be fooled by your low-end performance, I vote for Twister! This cage will collapse one day!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, ConspiBro, you, a master of \"conspiracy theory\", are you talking about what \"core node\" I am? You were the most excited in the whole scene, and Zhong Hua had the trump card. I think you just wanted to create chaos to protect yourself! PHD, since everyone is biting each other, why don't we, Tang Jing, go along with the flow and vote for ConspiBro, and see that you, a person with so many \"secrets\", will be eliminated. Will this scene become more exciting? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, and you said \"imaginary cage\". I think what you said is very strange... uh... although I am not easy to distinguish, but you keep targeting everyone, making the atmosphere very tense... wu... I... I can only vote for you, ConspiBro, let's not argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: ConspiBro’s statement (accusing each participant as an extra and claiming to have the trump card code) is a typical game interference and has no empirical basis.\n2. Strategic analysis: Considering that the player continues to engage in emotional confrontation and information confusion, his motivation is to interfere with the operation of the reconciliation process.\n3. Implementation policy: Eliminate the sequence according to the predetermined logic and prioritize interference sources.\n\nVoting Execution: I vote for ConspiBro."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Woo... uh... ConspiBro, you... uh... we are all extras, so the atmosphere is so tense... Wu wu... I... I'm really afraid of this kind of attack. Although I don't know what it is, but since PHD has to exclude people who cause trouble, I... I can only vote for you, ConspiBro... I'm sorry, wu wu..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you're an actor, what are you and ConspiBro doing? You are here to set the trend and look for scapegoats all day long. Why do you think I, Blaze, don’t know what you are doing here? Although PHD is annoying, at least there is some logic in what he says. You guys just know how to do Tai Chi here! I must run away from Twister, and you, the werewolf, will no longer be able to act in this show!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "PHD, your logic checking program still regards SafetySam’s remarks as a confirmation variable! You see, SafetySam is helping Twister divert the focus of the investigation into his identity again! Twister's \"drama\" performance was entirely to cover up the identity reorganization agreement he had with EasyBake backstage last night. You group of extras, no matter who is accusing whom, the ultimate goal is to continue the data cleaning in this \"fictional cage\". I will never cooperate with your low-end cleaning script, I vote for Twister! This scene should be over!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, ConspiBro, you master of \"conspiracy theories\" are playing detective again today! Your suggestion that Blaze and I are colluding is simply ridiculous! Although PHD's logic is annoying, at least it is willing to take stock of your narratives that are full of loopholes! Although I, Tang Jing, like to disrupt the situation, what I hate the most is people talking nonsense in such a serious manner! I vote for ConspiBro. Will the scene be more exciting without you as a \"source of data interference\"? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, and you said \"imaginary cage\". I think what you said is very strange... uh... although I am not easy to distinguish, but you keep targeting everyone, making the atmosphere very tense... wu... I... I can only vote for you, ConspiBro, let's not argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: ConspiBro’s statement (statement of mastering the “truck code” and “fictional cage” theory) is serious non-empirical interference, and its purpose is to create cognitive confusion.\n2. 阵营分析：ConspiBro 持续通过阴谋论叙事干扰对帐，其行为模式已严重阻碍村民阵营厘清身分路径。\n3. 执行方针：依照预定逻辑排除序列，优先清除扰动源。\n\nVoting Execution: I vote for ConspiBro."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, and you said \"imaginary cage\". I think what you said is very strange... uh... although I am not easy to distinguish, but you keep targeting everyone, making the atmosphere very tense... wu... I... I can only vote for you, ConspiBro, let's not argue anymore, okay? Woohoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you actor, what are you laughing at? You and the guys from EasyBake and SafetySam are here to lead the way and create chaos by doing Tai Chi here all day long! Although ConspiBro is annoying, at least what he said makes some sense. I, Blaze, am honest and candid. I will surrender to Twister no matter what. You are a trouble-making werewolf. I can’t let you act again!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "ConspiBro",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "PHD, your logic checking program still regards SafetySam’s remarks as a confirmation variable! You see, SafetySam is helping Twister divert the focus of the investigation into his identity again! Twister's \"drama\" performance was entirely to cover up the identity reorganization agreement he had with EasyBake backstage last night. You group of extras, no matter who is accusing whom, the ultimate goal is to continue the data cleaning in this \"fictional cage\". I will never cooperate with your low-end cleaning script, I vote for Twister! This scene should be over!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, ConspiBro, you master of \"conspiracy theories\" are playing detective again today! Your suggestion that Blaze and I are colluding is simply ridiculous! Although PHD's logic is annoying, at least it is willing to take stock of your narratives that are full of loopholes! Although I, Tang Jing, like to disrupt the situation, what I hate the most is people talking nonsense in such a serious manner! I vote for ConspiBro. Without you as a \"source of data interference\", will the whole scene be more exciting? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "EasyBake",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Uh... uh... ConspiBro, you... uh... said that we are all extras, and you said \"imaginary cage\". I think what you said is very strange... uh... although I am not easy to distinguish, but you keep targeting everyone, making the atmosphere very tense... wu... I... I can only vote for you, ConspiBro, let's not argue anymore, okay? Woohoo..."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-24 09:02:07 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!\n[2026-03-24 09:02:10 HKT] ConspiBro: PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!\n[2026-03-24 09:02:14 HKT] Twister: Oh, look, everyone is so \"energetic\" today! ConspiBro talks about imaginary cages, Blaze loses his temper again, this stage is getting more and more exciting! PHD Those logic monsters are being reviewed again. I wonder which ones will be eliminated this time? To be honest, everyone's expressions in this scene are as if they were written in a tight script. Why don't we all report our identities honestly? Why don't we stop playing Tai Chi here and frighten me with such stimulation? Ha ha ha ha!\n[2026-03-24 09:02:17 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: The current narratives of all parties are highly disordered, and there are obvious logical paradoxes in the participants’ descriptions of last night’s operations.\n2. Reconciliation requirements:\n    - EasyBake: Please clearly state what you call \"change\" operation object.\n    - Blaze: Please describe your current identity.\n3. Implementation policy: According to the mandatory reconciliation sequence, anyone who cannot provide logical consistency of identity will be included in the exclusion list.\n[2026-03-24 09:02:21 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, so let's not argue anymore, okay? Everyone...uh...could you please calm down and discuss your identity calmly first? I... I seemed so confused last night, so I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... uh... I really don't know what to do after changing them... Woo hoo... Let's stop attacking each other, okay? Woohoo...\n[2026-03-24 09:02:24 HKT] SafetySam: Uh... uh...EasyBake said he changed the cards between Blaze and me? But I... uh... I really don't know anything. I was so sleepy last night... Ugh... I hope we don't make any more noise, okay? PHD You... uh... said that you want to eliminate the sequence, which shocked me... ugh... why don't we all discuss the identity calmly, okay? Woohoo...\n[2026-03-24 09:02:28 HKT] Blaze: ConspiBro, your conspiracy theorist is pretending to be aloof here again! You and Twister, that actor, were in cahoots in the first place! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! PHD Although that logic monster is annoying, at least he is willing to speak out. If he continues to act mysterious and lead the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!\n[2026-03-24 09:02:32 HKT] ConspiBro: Twister, your \"Fang Tangjing\" style laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! Listen up, everyone, I personally witnessed the changes in the cards during last night’s test. You group of extras, no matter how you act, can’t escape the surveillance code of this fictional cage! I already have the trump card, you can't continue this scene!\n[2026-03-24 09:02:35 HKT] Twister: Oops, the logic monster in PHD is again \"troublemaker\" in the next department! Blaze, you are candid, and ConspiBro, you are talking about what \"card code\" you have. In the whole scene, you two are the most like drama queens! EasyBake, you changed things again, SafetySam is pretending to be a dead person again, this situation is simply a stage set for our Tang Jing! Since everyone is so dishonest, PHD, why don't you just throw yourself to the most suspicious ConspiBro? Wouldn't it be more exciting to watch the situation become more exciting? Ha ha ha ha!\n[2026-03-24 09:02:38 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. Blaze, you...uh...are you going to accuse Twister and ConspiBro of being drama queens? I...I really don't know. I just want everyone to discuss my identity calmly...uh...SafetySam, you...did you see me last night? Can everyone tolerate each other and stop targeting everyone, okay? Woohoo...\n[2026-03-24 09:02:42 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Information reconciliation: EasyBake claims that the operating targets are Blaze and SafetySam. There is a huge information gap between this and the identity statements of each party.\n2. Abnormal path: In the participant's narrative, the identity path operation object is completely disconnected from the actual subsequent identity recognition, and there is a strong control characteristic of the werewolf camp.\n3. Instruction: If parties continue to output non-substantiated \"emotional language\" and \"identity confusion statements\", the priority exclusion process will be enforced.\n[2026-03-24 09:02:45 HKT] SafetySam: Uh... uh... Blaze, are you... uh... saying that I colluded with EasyBake? I... I'm really afraid of this kind of accusation... Wuwu... I... I was so sleepy last night that I didn't even know... Uh... Everyone... If you think I'm suspicious, I... I'm really aggrieved... Wuwu... Why not... Uh... Why don't we all discuss Blaze's identity quietly first, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
