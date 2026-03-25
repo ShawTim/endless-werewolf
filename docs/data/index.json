@@ -2,6 +2,20 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000053",
+      "status": "completed",
+      "created_at": "2026-03-25T04:01:48.223329+00:00",
+      "completed_at": "2026-03-25T04:40:56.981292+00:00",
+      "outcome": "no_team_win",
+      "winner_team": "none",
+      "executed": [
+        "SafetySam"
+      ],
+      "winners": [],
+      "votes_count": 6,
+      "chat_lines": 0
+    },
+    {
       "game_id": "game_000052",
       "status": "completed",
       "created_at": "2026-03-25T01:01:55.660481+00:00",

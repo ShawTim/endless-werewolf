@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000053",
+  "generated_at": "2026-03-25T05:02:48.012154+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": ""
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      }
+    ]
+  }
+}
