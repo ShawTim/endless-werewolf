@@ -1,0 +1,21 @@
+{
+  "id": "6",
+  "name": "ConspiBro",
+  "model": "nvidia/minimaxai/minimax-m2.5",
+  "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
+  "initial_role": "Seer (預言家)",
+  "current_role": "Seer (預言家)",
+  "night_memory": "你查驗咗 Blaze，佢嘅身份係：Villager (村民)。",
+  "night_memory_list": [
+    "你查驗咗 Blaze，佢嘅身份係：Villager (村民)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Seer (預言家)",
+      "action": "inspect_player",
+      "target": "Blaze",
+      "seen_role": "Villager (村民)",
+      "source": "agent"
+    }
+  ]
+}
