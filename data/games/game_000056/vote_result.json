@@ -1,0 +1,53 @@
+{
+  "status": "completed",
+  "game_id": "game_000056",
+  "votes": {
+    "Blaze": "SafetySam",
+    "SafetySam": "Dr. Pizza",
+    "Dr. Pizza": "SafetySam",
+    "Twister": "Blaze",
+    "EasyBake": "ConspiBro",
+    "ConspiBro": "SafetySam"
+  },
+  "tally": {
+    "SafetySam": 3,
+    "Dr. Pizza": 1,
+    "Blaze": 1,
+    "ConspiBro": 1
+  },
+  "executed": [
+    "SafetySam"
+  ],
+  "vote_trace": [
+    {
+      "player": "Blaze",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=125880 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=125888 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "SafetySam"
+    },
+    {
+      "player": "SafetySam",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=115417 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=115423 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "Dr. Pizza"
+    },
+    {
+      "player": "Dr. Pizza",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=127082 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=127090 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "SafetySam"
+    },
+    {
+      "player": "Twister",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=149811 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=149819 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "Blaze"
+    },
+    {
+      "player": "EasyBake",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=124173 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=124181 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "ConspiBro"
+    },
+    {
+      "player": "ConspiBro",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: Error: All models failed (2): google/gemini-3.1-flash-lite-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[agent/embedded] embedded run agent end: runId=d6d26fd6-8996-4662-95d5-9dd238f54794 isError=true error=500 empty_stream: upstream stream closed before first payload\n[diagnostic] lane task error: lane=main durationMs=151196 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=151204 error=\"FailoverError: 500 empty_stream: upstream stream closed before first payload\"\nError: All models failed (2): google/gemini-3.1-flash-lite-preview: Provider google is in cooldown (all profiles unavailable) (rate_limit) | cli-api-proxy/gpt-5.3-codex: 500 empty_stream: upstream stream closed before first payload (timeout)",
+      "fallback": "SafetySam"
+    }
+  ]
+}
