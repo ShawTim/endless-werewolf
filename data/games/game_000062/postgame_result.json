@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000062",
+  "generated_at": "2026-03-26T05:53:19.468862+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "譚仔大辣",
+        "player_name_en": "Blaze",
+        "role": "Robber (強盜)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": ""
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "白兵師兄",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": ""
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "安全主任",
+        "player_name_en": "SafetySam",
+        "role": "Seer (預言家)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Troublemaker (搗蛋鬼)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "方唐鏡",
+        "player_name_en": "Twister",
+        "role": "Minion (爪牙)",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "天真grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      }
+    ]
+  }
+}

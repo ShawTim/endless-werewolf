@@ -1,0 +1,21 @@
+{
+  "id": "2",
+  "name": "SafetySam",
+  "model": "github-copilot/gpt-5-mini",
+  "persona": "極度謹慎、牆頭草。你從不第一個發言，總是等風向明確才表態。如果被指控，你會立刻裝可憐或者轉移視線。",
+  "initial_role": "Robber (強盜)",
+  "current_role": "Robber (強盜)",
+  "night_memory": "你偷咗 Blaze 張牌，換完之後你而家係：Seer (預言家)。",
+  "night_memory_list": [
+    "你偷咗 Blaze 張牌，換完之後你而家係：Seer (預言家)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Robber (強盜)",
+      "action": "rob",
+      "target": "Blaze",
+      "new_role": "Seer (預言家)",
+      "source": "agent"
+    }
+  ]
+}
