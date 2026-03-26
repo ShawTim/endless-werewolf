@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "name": "Blaze",
+  "model": "github-copilot/gpt-4.1",
+  "persona": "暴躁老哥、直腸直肚。你討厭別人說話轉彎抹角。即使你是好人，你也喜歡第一時間跳出來指控別人。",
+  "initial_role": "Minion (爪牙)",
+  "current_role": "Robber (強盜)",
+  "night_memory": "你見到狼人係：SafetySam, Twister。狼人唔知道你係爪牙。",
+  "night_memory_list": [
+    "你見到狼人係：SafetySam, Twister。狼人唔知道你係爪牙。"
+  ],
+  "night_actions": []
+}
