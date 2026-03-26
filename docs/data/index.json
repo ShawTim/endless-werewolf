@@ -2,6 +2,24 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000063",
+      "status": "completed",
+      "created_at": "2026-03-26T07:01:40.268334+00:00",
+      "completed_at": "2026-03-26T08:05:06.298219+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "ConspiBro",
+        "Twister",
+        "EasyBake"
+      ],
+      "winners": [
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 0
+    },
+    {
       "game_id": "game_000062",
       "status": "completed",
       "created_at": "2026-03-26T04:36:50.610304+00:00",
