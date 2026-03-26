@@ -2,6 +2,24 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000067",
+      "status": "completed",
+      "created_at": "2026-03-26T19:01:41.281732+00:00",
+      "completed_at": "2026-03-26T20:03:20.335723+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "Dr. Pizza"
+      ],
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Twister"
+      ],
+      "votes_count": 6,
+      "chat_lines": 0
+    },
+    {
       "game_id": "game_000066",
       "status": "completed",
       "created_at": "2026-03-26T16:04:28.108795+00:00",

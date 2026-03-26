@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "outcome": "village_win",
+  "winner_team": "village_team",
+  "winners": [
+    "Blaze",
+    "SafetySam",
+    "Twister"
+  ],
+  "reason": "At least one werewolf was executed.",
+  "executed": [
+    "Dr. Pizza"
+  ],
+  "werewolves_in_play": [
+    "Dr. Pizza"
+  ],
+  "executed_werewolves": [
+    "Dr. Pizza"
+  ],
+  "votes": {
+    "Blaze": "SafetySam",
+    "SafetySam": "Dr. Pizza",
+    "Dr. Pizza": "Blaze",
+    "Twister": "Dr. Pizza",
+    "EasyBake": "Dr. Pizza",
+    "ConspiBro": "SafetySam"
+  },
+  "tally": {
+    "SafetySam": 2,
+    "Dr. Pizza": 3,
+    "Blaze": 1
+  },
+  "final_roles": {
+    "Blaze": {
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
+      "team": "village_team"
+    },
+    "SafetySam": {
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
+      "team": "village_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Werewolf (狼人)",
+      "current_role": "Werewolf (狼人)",
+      "team": "werewolf_team"
+    },
+    "Twister": {
+      "initial_role": "Seer (預言家)",
+      "current_role": "Seer (預言家)",
+      "team": "village_team"
+    },
+    "EasyBake": {
+      "initial_role": "Tanner (皮匠)",
+      "current_role": "Tanner (皮匠)",
+      "team": "tanner"
+    },
+    "ConspiBro": {
+      "initial_role": "Minion (爪牙)",
+      "current_role": "Minion (爪牙)",
+      "team": "werewolf_team"
+    }
+  },
+  "game_id": "game_000067"
+}
