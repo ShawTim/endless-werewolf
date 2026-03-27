@@ -1,0 +1,55 @@
+[
+  {
+    "player_name": "Twister",
+    "role": "Seer (預言家)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "Twister",
+      "persona": "唯恐天下不亂的戲精。無論你是什麼身份，你都喜歡開局亂跳身份來攪局。你覺得騙人比贏遊戲更有趣。",
+      "model": "nvidia/z-ai/glm5",
+      "initial_role": "Seer (預言家)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza",
+        "EasyBake",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "Blaze",
+            "SafetySam",
+            "Dr. Pizza",
+            "EasyBake",
+            "ConspiBro"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]
