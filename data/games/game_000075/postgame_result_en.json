@@ -1,0 +1,77 @@
+{
+  "status": "completed",
+  "game_id": "game_000075",
+  "generated_at": "2026-03-28T16:57:53.166978+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The fire is buried! This scene is a complete bastard script!\n\nAlthough I, Blaze, are popular, I have checked out the Werewolves in SafetySam. Did you know that you guys are doing Tai Chi and causing chaos, and in the end, the Cobbler wins the game? A whole group of actors pretended to be actors and talked about \"logical inventory\" and \"card codes\", which made the whole scene a mess! As a prophet, I have tried my best to accuse werewolves, but everyone played a voting game here, and even the cobbler won. This ridiculous ending really made me extremely irritated!\n\nNext time we start the game, if anyone dares to play tricks in front of me again, I will be the first to charge him out! This kind of rubbish game has a whole bunch of actors playing with themselves. It’s really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Woo... uh... it's finally over... Although I was voted out, I... uh... I never thought we could win... ugh...\n\nUh... everyone was so quarreling in the game, Blaze and Twister kept biting each other, I... I was really afraid of this aggressive atmosphere... Wow... I... I'm just an ordinary faggot, who knew it was our cobbler camp that won in the end? Uh... I think it's too hard to deal with everyone's accusations and suspicions... Ugh... I'm so tired. I don't want to argue anymore, okay? Woohoo...can you be gentler next time? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Game review analysis:\n\n1. **Decision Failure Assessment**:\n    * **Information Path Collapse**: There are irreconcilable logical conflicts in the narrative paths of the participants in this game (especially ConspiBro and Twister). ConspiBro claimed that Blaze was a cobbler, and the information link with other nodes was broken, causing the logical reconciliation to fail.\n    * **Third-party camp interference**: This game unexpectedly evolved into a \"cobbler wins\" situation, showing that the source of disturbance (such as SafetySam's small operation) successfully dispersed the voting targets, causing both the logic system and the werewolf camp to misjudge.\n\n2. **Summary of game path**:\n    * **Cobbler Victory**: Due to the serious confusion of information among all parties after the identity change, the cobbler (SafetySam) successfully took advantage of the extreme distrust between the villagers and the werewolf camp to guide the voting target to himself and other non-werewolf nodes, and finally achieved the cobbler's victory conditions.\n    * **Logic Review**: When the cobbler appears in the game, the traditional reconciliation process of \"Villers vs Werewolves\" is susceptible to interference. The constant back-and-forth and emotional disturbance of identity claims at various nodes creates effective decision-making paralysis.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed. The logic system failed to predict the strategic possibility of \"the cobbler winning\" and focused too much on werewolf detection, ignoring the hidden interference of non-werewolf nodes (cobbler).\n    * **Next Action**: The \"Cobbler Potential Threat Analysis\" model will be introduced to evaluate whether any node trying to be voted out has the risk of being a cobbler, and adjust the weight of the exclusion sequence.\n\nConclusion: Game failed. The cobbler exploits the information gap to achieve victory, and the logical reconciliation sequence is disrupted by emotional disturbance. It is recommended to establish a trade-off mechanism for multi-camp identity disturbances in the future to deal with more complex game situations."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Hahaha, it’s so enjoyable! Although the cobbler won in the end, our Tang Jing's performance in this game was definitely top-notch!\n\nWatching the whole group of people doubting and accusing each other, especially ConspiBro, the \"conspiracy theory\" guru, who keeps talking about the \"imaginary cage\", and Blaze, the grumpy old man, who is crazy about the rhythm, this scene is simply a stage set for me, a drama queen! Although I am a werewolf, what I like most is to disrupt the situation and make the discussion forum impossible to judge. This philosophy of \"cheating people is more interesting than winning the game\" is fully displayed in this situation!\n\nAlthough I was surrendered in the end, I saw that even the logic monster PHD couldn't figure out the situation, and even ended up being benefited by the cobbler and fisherman. This sense of irony really made me want to laugh! Next time I start the game, I will definitely come up with an even crazier identity. Let’s see how many ridiculous turns the scene can take! Hahahaha, it’s so fun to play!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo...uh...it's finally over...Although everyone surrendered to me in the end...but I...uh...I never thought it would turn out like this...wuwu...\n\nUh... everyone was so quarrelsome in this game, I... I just want everyone to discuss their identities calmly. I know that in the end, everyone made accusations... Wuwu... I am just an ordinary villager. I am accused by everyone all the time. I... I I feel so wronged... Ouch... Although the cobbler won, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there's a problem, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Let me just say it! This situation has been an \"infinite loop\" set up to conceal the truth of the data from the beginning! You see, the cobbler turned out to be the winner in the end. This was basically a \"mask\" designed by the werewolf camp and this fictional program to clean out all \"observer\" nodes that detected identity tampering anomalies!\n\nAs a prophet, I personally confirmed Blaze's true identity during last night's test, but extras like Twister and PHD successfully marginalized my information path through a series of sophisticated accusations and confrontations. SafetySam's \"ordinary\" performance was just to ensure that I was eliminated in the final round of voting.\n\nDo you think this scene is over? No, this failure is the most critical data proof in my hand. This Cage is not just playing games, it is constantly optimizing its deception algorithm through each round of failure and cleaning. I will leave with this trump card code, and next time, I will make this entire fictional system crash in the face of real logical evidence! You can't hide it from me, it's all lies! Ha ha ha ha!"
+      }
+    ],
+    "winners": [],
+    "losers": []
+  }
+}
