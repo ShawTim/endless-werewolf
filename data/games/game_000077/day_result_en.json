@@ -1,0 +1,94 @@
+{
+  "status": "completed",
+  "game_id": "game_000077",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... morning everyone... uh... a new day is here again. I wonder what everyone ordered last night? Uh... I... I didn't seem to do anything last night. Seeing everyone making noise here, I... I'm really scared. Woo hoo... Can everyone calmly discuss their identities first? Uh... let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-29 06:03:43 HKT] SafetySam: Oh... uh... morning everyone... uh... a new day is here again. I wonder what everyone ordered last night? Uh... I... I didn't seem to do anything last night. Seeing everyone making noise here, I... I'm really scared. Woo hoo... Can everyone calmly discuss their identities first? Uh... let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "SafetySam, you're a fool, are you still pretending to be dead? I found out last night that you are a werewolf! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! Tell me your true identity quickly before you make me angry again!",
+      "log_line": "[2026-03-29 06:04:12 HKT] Blaze: SafetySam is a loser, are you still pretending to be dead? I found out last night that you are a werewolf! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! Tell me your true identity quickly before you make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: There is a huge contradiction between Blaze’s accusation path and the statements of all parties.\n2. Reconciliation requirements: All parties please explain the operation path last night. What is the empirical logic behind Blaze’s accusation against SafetySam?\n3. Implementation policy: If Blaze cannot provide valid evidence, the mandatory exclusion sequence will be implemented first.",
+      "log_line": "[2026-03-29 06:04:39 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is a huge contradiction between Blaze’s accusation path and the statements of all parties.\n2. Reconciliation requirements: All parties please explain the operation path last night. What is the empirical logic behind Blaze’s accusation against SafetySam?\n3. Implementation policy: If Blaze cannot provide valid evidence, the mandatory exclusion sequence will be implemented first."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh... uh... everyone... it's so confusing... uh... a new day is here again, don't make any more noise... okay? Blaze and SafetySam...uh...must accuse each other for doing something? I... I seemed so confused last night. I seemed to have changed something for everyone. Uh... I really don't know anything. Can everyone calm down for now? Uh... we can't attack each other anymore, woo woo...",
+      "log_line": "[2026-03-29 06:05:07 HKT] EasyBake: Oh... uh... everyone... it's so confusing... uh... a new day is here again, so don't make any more noise... okay? Blaze and SafetySam...uh...must accuse each other for doing something? I... I seemed so confused last night. I seemed to have changed something for everyone. Uh... I really don't know anything. Can everyone calm down for now? Uh... we can't attack each other anymore, woo woo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, Blaze is yelling again! You said that SafetySam was found to be a werewolf, and EasyBake said that he had changed the cards, and the situation was so chaotic. It was really more exciting than the drama I wrote! Blaze, since you said you checked it, why not just report what \"scenery\" you saw last night and wait for everyone to surrender to the most suspicious werewolf! Ha ha ha ha!",
+      "log_line": "[2026-03-29 06:05:34 HKT] Twister: Oops, Blaze is yelling here again! You said that SafetySam was found to be a werewolf, and EasyBake said that he had changed the cards, and the situation was so chaotic. It was really more exciting than the drama I wrote! Blaze, since you said you checked it, why not just report what \"scenery\" you saw last night and wait for everyone to surrender to the most suspicious werewolf! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! Blaze's \"rectal and straight\" accusation model, isn't it just \"wrong data\" that you deliberately planted to create logical paradoxes? SafetySam is here to play pity, Twister is there to watch, and PHD is still running his ineffective reconciliation firewall! I already have the trump card. This is basically a complete \"identity tampering\" path. You actors are accusing each other just to maintain the data flow of this fictional cage! You know what I'm saying, you can't go on with this scene!",
+      "log_line": "[2026-03-29 06:06:03 HKT] ConspiBro: Here we go again! Blaze's \"rectal and straight\" accusation model, isn't it just \"wrong data\" that you deliberately planted to create logical paradoxes? SafetySam is here to play pity, Twister is there to watch, and PHD is still running his ineffective reconciliation firewall! I already have the trump card. This is basically a complete \"identity tampering\" path. You actors are accusing each other just to maintain the data flow of this fictional cage! You know what I'm saying, you can't go on with this scene!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "SafetySam",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Uh... uh... Blaze, you... uh... accuse me of being a werewolf all the time, you... you say things so fiercely... uh... I don't think we should attack each other anymore, okay? Since both PHD and Twister say there are loopholes in your statement, I... I'm so confused... Uh... I'm sorry, I have no choice but to vote for you, woo hoo..."
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "SafetySam",
+        "speech": "SafetySam is a deadbeat, but why is he pretending to be pitiful? I checked last night and you are definitely a werewolf! You, the guys like Twister and EasyBake are always leading the trend here, and you want me to be your scapegoat? There are no doors! Everyone surrender to SafetySam, don't let this werewolf continue to act and cause chaos!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-29 06:03:43 HKT] SafetySam: Oh... uh... morning everyone... uh... a new day is here again. I wonder what everyone ordered last night? Uh... I... I didn't seem to do anything last night. Seeing everyone making noise here, I... I'm really scared. Woo hoo... Can everyone calmly discuss their identities first? Uh... let's stop attacking each other, okay? Woohoo...\n[2026-03-29 06:04:12 HKT] Blaze: SafetySam is a loser, are you still pretending to be dead? I found out last night that you are a werewolf! In this game, you are just doing Tai Chi and leading the trend, but you are simply trying to find someone to be the scapegoat! Tell me your true identity quickly before you make me angry again!\n[2026-03-29 06:04:39 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is a huge contradiction between Blaze’s accusation path and the statements of all parties.\n2. Reconciliation requirements: All parties please explain the operation path last night. What is the empirical logic behind Blaze’s accusation against SafetySam?\n3. Implementation policy: If Blaze cannot provide valid evidence, the mandatory exclusion sequence will be implemented first.\n[2026-03-29 06:05:07 HKT] EasyBake: Oh... uh... everyone... it's so confusing... uh... a new day is here again, so don't make any more noise... okay? Blaze and SafetySam...uh...must accuse each other for doing something? I... I seemed so confused last night. I seemed to have changed something for everyone. Uh... I really don't know anything. Can everyone calm down for now? Uh... we can't attack each other anymore, woo woo...\n[2026-03-29 06:05:34 HKT] Twister: Oops, Blaze is yelling here again! You said that SafetySam was found to be a werewolf, and EasyBake said that he had changed the cards, and the situation was so chaotic. It was really more exciting than the drama I wrote! Blaze, since you said you checked it, why not just report what \"scenery\" you saw last night and wait for everyone to surrender to the most suspicious werewolf! Ha ha ha ha!\n[2026-03-29 06:06:03 HKT] ConspiBro: Here we go again! Blaze's \"rectal and straight\" accusation model, isn't it just \"wrong data\" that you deliberately planted to create logical paradoxes? SafetySam is here to play pity, Twister is there to watch, and PHD is still running his ineffective reconciliation firewall! I already have the trump card. This is basically a complete \"identity tampering\" path. You actors are accusing each other just to maintain the data flow of this fictional cage! You know what I'm saying, you can't go on with this scene!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

@@ -2,6 +2,23 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000077",
+      "status": "completed",
+      "created_at": "2026-03-28T22:01:37.380925+00:00",
+      "completed_at": "2026-03-28T22:10:15.959487+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "Twister"
+      ],
+      "winners": [
+        "Blaze",
+        "Dr. Pizza"
+      ],
+      "votes_count": 6,
+      "chat_lines": 9
+    },
+    {
       "game_id": "game_000076",
       "status": "completed",
       "created_at": "2026-03-28T19:01:41.801789+00:00",

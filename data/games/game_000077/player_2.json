@@ -1,0 +1,22 @@
+{
+  "id": "2",
+  "name": "SafetySam",
+  "model": "github-copilot/gpt-5-mini",
+  "persona": "極度謹慎、牆頭草。你從不第一個發言，總是等風向明確才表態。如果被指控，你會立刻裝可憐或者轉移視線。",
+  "initial_role": "Werewolf (狼人)",
+  "current_role": "Seer (預言家)",
+  "night_memory": "你係場上唯一狼人，你可以選擇查看一張中間底牌。 你偷看咗中間第 0 張底牌，見到佢係：Werewolf (狼人)。",
+  "night_memory_list": [
+    "你係場上唯一狼人，你可以選擇查看一張中間底牌。",
+    "你偷看咗中間第 0 張底牌，見到佢係：Werewolf (狼人)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf (狼人)",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Werewolf (狼人)",
+      "source": "agent"
+    }
+  ]
+}
