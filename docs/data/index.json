@@ -2,6 +2,27 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000076",
+      "status": "completed",
+      "created_at": "2026-03-28T19:01:41.801789+00:00",
+      "completed_at": "2026-03-28T19:09:22.249868+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "Twister",
+        "Dr. Pizza",
+        "EasyBake",
+        "ConspiBro",
+        "Blaze",
+        "SafetySam"
+      ],
+      "winners": [
+        "SafetySam"
+      ],
+      "votes_count": 6,
+      "chat_lines": 9
+    },
+    {
       "game_id": "game_000075",
       "status": "completed",
       "created_at": "2026-03-28T16:47:10.331190+00:00",

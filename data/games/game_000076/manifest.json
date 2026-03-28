@@ -1,0 +1,38 @@
+{
+  "game_id": "game_000076",
+  "status": "completed",
+  "created_at": "2026-03-28T19:01:41.801789+00:00",
+  "updated_at": "2026-03-28T19:12:49.439310+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-03-28T19:01:41.803619+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-03-28T19:02:18.097678+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-03-28T19:06:15.857475+00:00"
+    },
+    "vote": {
+      "file": "vote_result.json",
+      "updated_at": "2026-03-28T19:09:22.247645+00:00"
+    },
+    "resolve": {
+      "file": "resolve_result.json",
+      "updated_at": "2026-03-28T19:09:22.249769+00:00"
+    },
+    "postgame": {
+      "file": "postgame_result.json",
+      "updated_at": "2026-03-28T19:12:27.090850+00:00"
+    },
+    "translate": {
+      "file": "chat_history_en.md",
+      "updated_at": "2026-03-28T19:12:49.439300+00:00"
+    }
+  },
+  "completed_at": "2026-03-28T19:09:22.249868+00:00",
+  "outcome": "tanner_win"
+}
