@@ -2,6 +2,25 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000073",
+      "status": "completed",
+      "created_at": "2026-03-28T07:01:52.714122+00:00",
+      "completed_at": "2026-03-28T08:00:39.190986+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "EasyBake",
+        "Blaze"
+      ],
+      "winners": [
+        "Blaze",
+        "Twister",
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 0
+    },
+    {
       "game_id": "game_000072",
       "status": "completed",
       "created_at": "2026-03-28T04:02:41.047745+00:00",
