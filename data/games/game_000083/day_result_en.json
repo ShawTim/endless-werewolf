@@ -1,0 +1,94 @@
+{
+  "status": "completed",
+  "game_id": "game_000083",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-30 00:06:16 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Twister, are you barking again? The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-30 00:06:54 HKT] Blaze: Hello! Twister, are you barking again? The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I really don't know anything. Can everyone tolerate each other? Woohoo...",
+      "log_line": "[2026-03-30 00:07:31 HKT] EasyBake: Woo... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I really don't know anything. Can everyone tolerate each other? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated.",
+      "log_line": "[2026-03-30 00:08:07 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...I'm really afraid of this kind of atmosphere...uh...everyone was so noisy in the whole scene, I...I'm just an ordinary person, I was so sleepy last night...wuwu...we should stop accusing each other, let's discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-03-30 00:08:47 HKT] SafetySam: Woo... Uh... Everyone... I'm really afraid of this kind of atmosphere... Uh... Everyone was so noisy in the whole game, I... I'm just an ordinary person, I was so sad last night... Wuwu... Let's stop accusing each other, let's discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! Last night, as a prophet, I checked that Blaze is a werewolf, but this must be another false data preset by this system! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!",
+      "log_line": "[2026-03-30 00:09:25 HKT] ConspiBro: Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! Last night, as a prophet, I checked that Blaze is a werewolf, but this must be another false data preset by this system! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "Blaze",
+        "speech": "Oops, Blaze, you are yelling here all the time, and ConspiBro said that he found out that you are a werewolf. This scene is simply ridiculous! Since everyone says you are the most suspicious, I, Tang Jing, will directly vote for you. With the \"irritating little werewolf\" like you removed, the whole game will become calmer and more exciting, right? Ha ha ha ha!"
+      }
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Blaze",
+      "decision": {
+        "action": "vote",
+        "target": "Twister",
+        "speech": "Twister, you damn actor, what are you laughing at? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! ConspiBro conspiracy theorists are annoying, but you are all colluding here to cover up the truth! I, Blaze, am frank, and I will surrender to Twister no matter what. You are a troublemaking werewolf, you can’t act here anymore!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-30 00:06:16 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-30 00:06:54 HKT] Blaze: Hello! Twister, are you barking again? The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your identity quickly before I get angry!\n[2026-03-30 00:07:31 HKT] EasyBake: Woo... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I really don't know anything. Can everyone tolerate each other? Woohoo...\n[2026-03-30 00:08:07 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated.\n[2026-03-30 00:08:47 HKT] SafetySam: Woo... Uh... Everyone... I'm really afraid of this kind of atmosphere... Uh... Everyone was so noisy in the whole game, I... I'm just an ordinary person, I was so sad last night... Wuwu... Let's stop accusing each other, let's discuss our identities calmly, okay? Woohoo...\n[2026-03-30 00:09:25 HKT] ConspiBro: Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! Last night, as a prophet, I checked that Blaze is a werewolf, but this must be another false data preset by this system! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
