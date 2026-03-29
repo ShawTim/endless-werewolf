@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "game_id": "game_000082",
+  "votes": {
+    "Blaze": "EasyBake",
+    "SafetySam": "Dr. Pizza",
+    "Dr. Pizza": "ConspiBro",
+    "Twister": "Blaze",
+    "EasyBake": "Blaze",
+    "ConspiBro": "EasyBake"
+  },
+  "tally": {
+    "EasyBake": 2,
+    "Dr. Pizza": 1,
+    "ConspiBro": 1,
+    "Blaze": 2
+  },
+  "executed": [
+    "EasyBake",
+    "Blaze"
+  ],
+  "vote_trace": []
+}
