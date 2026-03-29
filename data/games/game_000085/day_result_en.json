@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "game_id": "game_000085",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo...",
+      "log_line": "[2026-03-30 06:04:48 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-30 06:05:28 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-30 06:06:14 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...I'm really afraid of this kind of atmosphere...uh...everyone was so noisy in the whole scene, I...I'm just an ordinary person, I was so sleepy last night...wuwu...we should stop accusing each other, let's discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-03-30 06:06:58 HKT] SafetySam: Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary person, I was so sad last night... wu wu... Let's stop accusing each other, let's discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated.",
+      "log_line": "[2026-03-30 06:07:40 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! You know what I said, all the node data on this stage has been tampered with! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!",
+      "log_line": "[2026-03-30 06:08:22 HKT] ConspiBro: Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! You know what I said, all the node data on this stage has been tampered with! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...don't make any more noise. Blaze, what do you...uh...have to accuse someone of? I...I'm so confused...uh...can everyone calm down? I...I'm just an ordinary villager. I really don't know anything...Ugh...it's better not to target everyone anymore, okay? Woohoo...",
+      "log_line": "[2026-03-30 06:09:05 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. Blaze, what do you...uh...have to accuse someone of? I...I'm so confused...uh...can everyone calm down? I...I'm just an ordinary villager. I really don't know anything...Ugh...it's better not to target everyone anymore, okay? Woohoo..."
+    }
+  ],
+  "chat_history": "[2026-03-30 06:04:48 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo...\n[2026-03-30 06:05:28 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-30 06:06:14 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!\n[2026-03-30 06:06:58 HKT] SafetySam: Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary person, I was so sad last night... wu wu... Let's stop accusing each other, let's discuss our identities calmly, okay? Woohoo...\n[2026-03-30 06:07:40 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: There are logical gaps in the current game narrative, and the participants’ operation paths are unclear.\n2. Reconciliation requirements:\n    - Twister: Explain the motivation for its operation.\n    - ConspiBro: Disclosure of inspection paths.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated.\n[2026-03-30 06:08:22 HKT] ConspiBro: Here we go again! PHD's \"exclusion program\" is ready to be used as a firewall again! You know what I said, all the node data on this stage has been tampered with! Twister and EasyBake, the two actors, started to stir up trouble as soon as they opened their mouths, and Blaze yelled again. This was obviously to cover up the large-scale identity switching operation last night! You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene!\n[2026-03-30 06:09:05 HKT] EasyBake: Uh... uh... everyone... don't argue anymore. Blaze, what do you...uh...have to accuse someone of? I...I'm so confused...uh...can everyone calm down? I...I'm just an ordinary villager. I really don't know anything...Ugh...it's better not to target everyone anymore, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
