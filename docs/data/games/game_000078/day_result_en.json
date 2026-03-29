@@ -1,0 +1,90 @@
+{
+  "status": "completed",
+  "game_id": "game_000078",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh... uh... morning everyone... uh... a new day is here again, no need to argue anymore... okay? I... I really don't know anything. I was so depressed last night... Uh... why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-29 09:04:32 HKT] SafetySam: Oh... uh... morning everyone... uh... a new day is here again, don't make any more noise... okay? I... I really don't know anything. I was so depressed last night... Uh... why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...can everyone tell me who they are? I... I seemed so confused last night, uh... I seemed to have changed my cards... But I really don't know what I changed... Wow... we can't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 09:04:59 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...can everyone tell me who they are? I... I seemed so confused last night, uh... I seemed to have changed my cards... But I really don't know what I changed... Wow... we can't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and SafetySam, those two friends, are you looking to change your licenses again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-03-29 09:05:29 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and SafetySam, those two friends, are you looking to change your licenses again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: There are obvious logical paradoxes in the participants’ narratives, and it is difficult to reconcile the paths of all parties.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement Policy: If unverifiable accusations continue to be output, an exclusion sequence will be enforced.",
+      "log_line": "[2026-03-29 09:05:59 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There are obvious logical paradoxes in the participants’ narratives, and it is difficult to reconcile the paths of all parties.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement Policy: If unverifiable accusations continue to be output, an exclusion sequence will be enforced."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, are you ready for the \"exclusion sequence\"? The adults are pretending to be crabs here, the stuttering voice of EasyBake and the \"ordinary\" tone of SafetySam are simply a low-end script to cover up the large-scale identity change last night! Let me tell you, all the node data on this stage have been tampered with. PHD, your so-called logic check is just to help establish a legal firewall for this \"identity cleaning\" process! Blaze, aren't those violent accusations just \"wrong data\" that you deliberately planted to create logical paradoxes? I have mastered the trump card, Blaze. That card says \"minion\". All of this is a trap set by your camp to make us vote wrongly!",
+      "log_line": "[2026-03-29 09:06:29 HKT] ConspiBro: PHD, are you ready for the \"exclusion sequence\"? The adults are pretending to be crabs here, the stuttering voice of EasyBake and the \"ordinary\" tone of SafetySam are simply a low-end script to cover up the large-scale identity change last night! Let me tell you, all the node data on this stage have been tampered with. PHD, your so-called logic check is just to help establish a legal firewall for this \"identity cleaning\" process! Blaze, aren't those violent accusations just \"wrong data\" that you deliberately planted to create logical paradoxes? I have mastered the trump card, Blaze. That card says \"minion\". All of this is a trap set by your camp to make us vote wrongly!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you make any \"prophet\" revelations here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-29 09:07:02 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you make any \"prophet\" revelations here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...I'm really afraid of this kind of accusation...Blaze, you...uh...said I was stealing cards, but I really don't know anything...wuwu...everyone was so noisy in the game, I...I'm really confused...uh...why don't we all discuss our status calmly, so as not to attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 09:07:33 HKT] SafetySam: Uh...uh...everyone...I'm really afraid of this kind of accusation...Blaze, you...uh...said I stole the card, but I really don't know anything...wuwu...everyone was so noisy in the game, I...I'm really confused...uh...it's better for everyone to discuss their identities calmly and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh...Uh...SafetySam, you don't even know what you're saying? Uh... I... I changed the cards last night, but I really don't know. Everyone... uh... can you calm down? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 09:08:03 HKT] EasyBake: Uh... uh... SafetySam, you don’t even know what you are saying? Uh... I... I changed the cards last night, but I really don't know. Everyone... uh... can you calm down? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo..."
+    }
+  ],
+  "chat_history": "[2026-03-29 09:04:32 HKT] SafetySam: Oh... uh... morning everyone... uh... a new day is here again, don't make any more noise... okay? I... I really don't know anything. I was so depressed last night... Uh... why don't we all discuss our identities calmly and stop attacking each other, okay? Woohoo...\n[2026-03-29 09:04:59 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...can everyone tell me who they are? I... I seemed so confused last night, uh... I seemed to have changed my cards... But I really don't know what I changed... Wow... we can't attack each other anymore, okay? Woohoo...\n[2026-03-29 09:05:29 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and SafetySam, those two friends, are you looking to change your licenses again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your true identity quickly, before you make me angry!\n[2026-03-29 09:05:59 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There are obvious logical paradoxes in the participants’ narratives, and it is difficult to reconcile the paths of all parties.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement Policy: If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n[2026-03-29 09:06:29 HKT] ConspiBro: PHD, are you ready for the \"exclusion sequence\"? The adults are pretending to be crabs here, the stuttering voice of EasyBake and the \"ordinary\" tone of SafetySam are simply a low-end script to cover up the large-scale identity change last night! Let me tell you, all the node data on this stage have been tampered with. PHD, your so-called logic check is just to help establish a legal firewall for this \"identity cleaning\" process! Blaze, aren't those violent accusations just \"wrong data\" that you deliberately planted to create logical paradoxes? I have mastered the trump card, Blaze. That card says \"minion\". All of this is a trap set by your camp to make us vote wrongly!\n[2026-03-29 09:07:02 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you make any \"prophet\" revelations here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-29 09:07:33 HKT] SafetySam: Uh...uh...everyone...I'm really afraid of this kind of accusation...Blaze, you...uh...said I stole the card, but I really don't know anything...wuwu...everyone was so noisy in the game, I...I'm really confused...uh...it's better for everyone to discuss their identities calmly and stop attacking each other, okay? Woohoo...\n[2026-03-29 09:08:03 HKT] EasyBake: Uh... uh... SafetySam, you don’t even know what you are saying? Uh... I... I changed the cards last night, but I really don't know. Everyone... uh... can you calm down? Woohoo... I think everyone is a good person, so we shouldn't attack each other anymore, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

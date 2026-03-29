@@ -1,0 +1,22 @@
+{
+  "id": "4",
+  "name": "Twister",
+  "model": "nvidia/z-ai/glm5",
+  "persona": "唯恐天下不亂的戲精。無論你是什麼身份，你都喜歡開局亂跳身份來攪局。你覺得騙人比贏遊戲更有趣。",
+  "initial_role": "Werewolf (狼人)",
+  "current_role": "Werewolf (狼人)",
+  "night_memory": "你係場上唯一狼人，你可以選擇查看一張中間底牌。 你偷看咗中間第 0 張底牌，見到佢係：Villager (村民)。",
+  "night_memory_list": [
+    "你係場上唯一狼人，你可以選擇查看一張中間底牌。",
+    "你偷看咗中間第 0 張底牌，見到佢係：Villager (村民)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf (狼人)",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Villager (村民)",
+      "source": "agent"
+    }
+  ]
+}
