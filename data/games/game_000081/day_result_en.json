@@ -1,0 +1,92 @@
+{
+  "status": "completed",
+  "game_id": "game_000081",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I seemed so confused last night, as if the fans had changed their cards...Uh...let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-29 18:03:06 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I seemed so confused last night, as if the fans had changed their cards...Uh...let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, it’s finally time for our Tang Jing to appear! This stage is getting more and more exciting. EasyBake, the \"robber\", is pretending to have amnesia again. Blaze, have you made any \"new discoveries\" tonight? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! Why don't everyone tell us about the \"scenery\" they saw at night? Wouldn't it become more exciting to watch the whole scene? Ha ha ha ha!",
+      "log_line": "[2026-03-29 18:03:44 HKT] Twister: Oops, it’s finally time for our Tang Jing to appear! This stage is getting more and more exciting. EasyBake, the \"robber\", is pretending to have amnesia again. Blaze, have you made any \"new discoveries\" tonight? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! Why don't everyone tell us about the \"scenery\" they saw at night? Wouldn't it become more exciting to watch the whole scene? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-29 18:04:17 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! PHD's so-called \"reconciliation path\" is basically the firewall used by Twister to filter \"observer\" data! Blaze's violent accusation pattern, isn't it just \"wrong data\" that you deliberately planted in order to create logical paradoxes? EasyBake plays dumb and SafetySam plays innocent. All this is to make the path of changing trump cards completely disappear from our sight! You know what I said, this scene is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp! You extras are working really hard!",
+      "log_line": "[2026-03-29 18:04:55 HKT] ConspiBro: Here we go again! PHD's so-called \"reconciliation path\" is basically the firewall used by Twister to filter \"observer\" data! Blaze's violent accusation pattern, isn't it just \"wrong data\" that you deliberately planted in order to create logical paradoxes? EasyBake plays dumb and SafetySam plays innocent. All this is to make the path of changing trump cards completely disappear from our sight! You know what I said, this scene is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp! You extras are working really hard!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... Uh... It's morning, everyone... Uh... Seeing how noisy everyone is, I... I'm really afraid of this atmosphere... Woo... I... I'm just an ordinary person. I was really tired last night... Uh... Why don't we all discuss our identities calmly, so as not to attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 18:05:31 HKT] SafetySam: Woo... uh... it's morning everyone... uh... seeing how noisy everyone is, I... I'm really afraid of this atmosphere... wu wu... I... I'm just an ordinary person. I was really tired last night... uh... why don't we all calmly discuss our identities and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Abnormal identification: The current game path is chaotic, and there are obvious logical paradoxes in the narrative of each party's identity.\n2. Reconciliation requirements: All parties please explain the operation path and identity knowledge last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: All parties are requested to return to the empirical path and reject any interference aimed at paralyzing the logic of the game.",
+      "log_line": "[2026-03-29 18:06:05 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: The current game path is chaotic, and there are obvious logical paradoxes in the narrative of each party's identity.\n2. Reconciliation requirements: All parties please explain the operation path and identity knowledge last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: All parties are requested to return to the empirical path and reject any interference aimed at paralyzing the logic of the game."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo... uh... Actually, I... uh... I think everyone is a good person... Wu wu... Blaze, you... uh... say we are colluding. Is there any misunderstanding? Everyone... uh... let's stop accusing each other and discuss our identities quietly, okay? Woohoo...",
+      "log_line": "[2026-03-29 18:06:37 HKT] EasyBake: Woo... uh... Actually, I... uh... I think everyone is a good person... Wu wu... Blaze, you... uh... say we are colluding. Is there any misunderstanding? Everyone... uh... let's stop accusing each other and discuss our identities quietly, okay? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, ConspiBro, you master of \"conspiracy theories\" broke the news again today? PHD That piece of logic is being reviewed again. Watching this scene becomes more and more ridiculous! Since everyone is so dishonest, I will vote for ConspiBro. Will the game become calmer and more exciting without you, a person who plays so much? Ha ha ha ha!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-29 18:03:06 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo...I...I seemed so confused last night, as if the fans had changed their cards...Uh...let's stop attacking each other, okay? Woohoo...\n[2026-03-29 18:03:44 HKT] Twister: Oops, it’s finally time for our Tang Jing to appear! This stage is getting more and more exciting. EasyBake, the \"robber\", is pretending to have amnesia again. Blaze, have you made any \"new discoveries\" tonight? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! Why don't everyone tell us about the \"scenery\" they saw at night? Wouldn't it become more exciting to watch the whole scene? Ha ha ha ha!\n[2026-03-29 18:04:17 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!\n[2026-03-29 18:04:55 HKT] ConspiBro: Here we go again! PHD's so-called \"reconciliation path\" is basically the firewall used by Twister to filter \"observer\" data! Blaze's violent accusation pattern, isn't it just \"wrong data\" that you deliberately planted in order to create logical paradoxes? EasyBake plays dumb and SafetySam plays innocent. All this is to make the path of changing trump cards completely disappear from our sight! You know what I said, this scene is basically a carefully planned psychological test, the purpose is to screen out those \"variables\" that are unfavorable to your camp! You extras are working really hard!\n[2026-03-29 18:05:31 HKT] SafetySam: Woo... uh... it's morning everyone... uh... seeing how noisy everyone is, I... I'm really afraid of this atmosphere... wu wu... I... I'm just an ordinary person. I was really tired last night... uh... why don't we all calmly discuss our identities and stop attacking each other, okay? Woohoo...\n[2026-03-29 18:06:05 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: The current game path is chaotic, and there are obvious logical paradoxes in the narrative of each party's identity.\n2. Reconciliation requirements: All parties please explain the operation path and identity knowledge last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: All parties are requested to return to the empirical path and reject any interference aimed at paralyzing the logic of the game.\n[2026-03-29 18:06:37 HKT] EasyBake: Woo... uh... Actually, I... uh... I think everyone is a good person... Wu wu... Blaze, you... uh... say we are colluding. Is there any misunderstanding? Everyone... uh... let's stop accusing each other and discuss our identities quietly, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "5",
+  "name": "EasyBake",
+  "model": "nvidia/qwen/qwen3.5-397b-a17b",
+  "persona": "老好人、極容易相信別人。你總是試圖調解紛爭。如果你被迫說謊，你會顯得極度生硬和結巴（使用...和呃...）。",
+  "initial_role": "Robber (強盜)",
+  "current_role": "Werewolf (狼人)",
+  "night_memory": "你偷咗 Blaze 張牌，換完之後你而家係：Werewolf (狼人)。",
+  "night_memory_list": [
+    "你偷咗 Blaze 張牌，換完之後你而家係：Werewolf (狼人)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Robber (強盜)",
+      "action": "rob",
+      "target": "Blaze",
+      "new_role": "Werewolf (狼人)",
+      "source": "agent"
+    }
+  ]
+}
