@@ -1,0 +1,92 @@
+{
+  "status": "completed",
+  "game_id": "game_000079",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo...",
+      "log_line": "[2026-03-29 12:05:24 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! The stage is getting more and more lively. ConspiBro is playing his role as \"prophet\" here again. I wonder what news will be revealed this time? PHD You cold logical monster, who is next to you in this inventory? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-29 12:05:55 HKT] Twister: Oops, everyone finally woke up again! The stage is getting more and more lively. ConspiBro is playing his role as \"prophet\" here again. I wonder what news will be revealed this time? PHD You cold logical monster, who is next to you in this inventory? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-29 12:06:25 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!",
+      "log_line": "[2026-03-29 12:06:59 HKT] ConspiBro: PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly chaotic, and there are multiple logical contradictions in the narratives of the participants.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement policy: If unverifiable conspiracy theories or groundless accusations continue to be output, an exclusion sequence will be enforced.",
+      "log_line": "[2026-03-29 12:07:28 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly chaotic, and there are multiple logical contradictions in the narratives of the participants.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement policy: If unverifiable conspiracy theories or groundless accusations continue to be output, an exclusion sequence will be enforced."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... Uh... It's morning, everyone... Uh... Seeing how noisy everyone is, I... I'm really afraid of this atmosphere... Woo... I... I'm just an ordinary person. I was really tired last night... Uh... Why don't we all discuss our identities calmly, so as not to attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 12:08:00 HKT] SafetySam: Woo... uh... it's morning everyone... uh... seeing how noisy everyone is, I... I'm really afraid of this atmosphere... wu wu... I... I'm just an ordinary person. I was really tired last night... uh... why don't we all calmly discuss our identities and stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh...uh...everyone...can you please stop going back and forth? Uh... I think everyone is a good person... Uh-huh... I... I'm just an ordinary villager. Can everyone calm down first? Uh... I won't target everyone anymore, okay? Woohoo...",
+      "log_line": "[2026-03-29 12:08:28 HKT] EasyBake: Uh...uh...everyone...can you please stop talking about it? Uh... I think everyone is a good person... Uh-huh... I... I'm just an ordinary villager. Can everyone calm down first? Uh... I won't target everyone anymore, okay? Woohoo..."
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Twister",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Oops, ConspiBro, what kind of \"imaginary cage\" are you, a master of \"conspiracy theory\", doing here? You accuse people all the time, if PHD's logic is a firewall, if Blaze and I are colluding, you are simply the biggest source of interference in the situation! Since you are so fond of breaking the news, why don't we vote for you as a drama queen? Wouldn't it be more exciting to watch a scary scene? Ha ha ha ha!"
+      }
+    }
+  ],
+  "chat_history": "[2026-03-29 12:05:24 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I really don't know anything. Can everyone tolerate each other? Woohoo...\n[2026-03-29 12:05:55 HKT] Twister: Oops, everyone finally woke up again! The stage is getting more and more lively. ConspiBro is playing his role as \"prophet\" here again. I wonder what news will be revealed this time? PHD You cold logical monster, who is next to you in this inventory? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-29 12:06:25 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!\n[2026-03-29 12:06:59 HKT] ConspiBro: PHD, your logic check program not only fails to eliminate these obvious script deviations, but is also helping to screen out those \"variables\" that are detrimental to your camp! This scene has been written from the first second. You extras have worked really hard to act it out! Listen, everyone, I have read the real trump card code of this game during last night's \"Special Detection Program\". Blaze's tantrums serve only to disrupt the frequency, while Twister's banter serves to encrypt the identity-switching process. PHD, your cold inventory method just now is the highest execution order of this fictional prison! I've got the trump card, this scene, and I will definitely expose it!\n[2026-03-29 12:07:28 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Anomaly identification: The current game path is highly chaotic, and there are multiple logical contradictions in the narratives of the participants.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the identity of the character you operate.\n    - Blaze: Please describe your current identity.\n3. Enforcement policy: If unverifiable conspiracy theories or groundless accusations continue to be output, an exclusion sequence will be enforced.\n[2026-03-29 12:08:00 HKT] SafetySam: Woo... uh... it's morning everyone... uh... seeing how noisy everyone is, I... I'm really afraid of this atmosphere... wu wu... I... I'm just an ordinary person. I was really tired last night... uh... why don't we all calmly discuss our identities and stop attacking each other, okay? Woohoo...\n[2026-03-29 12:08:28 HKT] EasyBake: Uh...uh...everyone...can you please stop talking about it? Uh... I think everyone is a good person... Uh-huh... I... I'm just an ordinary villager. Can everyone calm down first? Uh... I won't target everyone anymore, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
