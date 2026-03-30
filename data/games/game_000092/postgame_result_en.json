@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000092",
+  "generated_at": "2026-03-30T16:17:02.074782+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's finally over... Although no one won in the end, I... uh... I really feel so helpless and helpless... wu wu...\n\nUh... everyone was so noisy in this game, I... I just want everyone to discuss their identities calmly, what happened in the end? Woo hoo... I... I'm obviously just an ordinary prophet who wants to help you find out the truth, but... uh... the test results lead to rumors that he is a werewolf, and in the end everyone is about to die... Woo hoo... I feel so wronged... Everyone... uh... can you be gentle to everyone? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene was a complete goddamn script, and the whole experience was absolutely terrible!\n\nI, Blaze, am acting upright, and everything I tell is the truth. I know that everyone is pretending to be a ghost here, and EasyBake is stammering and making random accusations from the prophets. They are basically creating chaos here! As a result, everyone voted for EasyBake in the game, but no camp still won the game, which is simply ridiculous! The whole group of people are drama queens, and none of them are willing to tell the truth. As a prophet, I ended up being screwed around by you and the whole group!\n\nThe most enjoyable part is that although our villagers camp didn't lose in the end, no one won the game. It was just a meaningless dispute! As a result, everyone was suspicious and accusing each other, and they were simply led by the cobbler and the troublemaker without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although no one won in the end, I... uh... I really feel so helpless and helpless... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Wuwu... I... I'm obviously just an ordinary person, and I'm accused of being a pawn all the time. I... I feel so wronged... Wuwu... Although no one won in the end, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there is a problem, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information reconciliation link**: The narrative chain of the participants in this game has developed to extremes. The accusations between participants (Blaze accused EasyBake, EasyBake accused Blaze) formed a completely mutually exclusive logical closed loop, and both lacked verifiable path evidence.\n    * **Excluding target bias**: In a group decision-making system where information is extremely fragmented and chaotic, voting behavior tends to be emotionally exclusive rather than based on logical evidence. EasyBake was eventually eliminated, but failed to effectively remove all werewolves and related sources of interference.\n\n2. **Summary of game path**:\n    * **No camp victory**: Due to the failure of group decision-making to eliminate the advantages of a single camp, the game tends to be exhausted of information energy (dead game), and the final state is judged to be invalid.\n    * **Logic Review**: This bureau has verified again that if multiple nodes issue mutually exclusive \"prophet\" verification statements at the same time, and there is a lack of coordination mechanism, the logic system will lose its reconciliation function and evolve into a random voting contest.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed (the logical reconciliation mechanism was completely suppressed by emotions and disturbance nodes).\n    * **Suggestions for next action**:\n        * Establish a \"Prophet Statement Calibration Mechanism\": In the case of multi-prophet conflicts, introduce a protocol that forces the disclosure of operation paths before voting.\n        * Improve tolerance adjustment for \"non-logical disturbance sources\": When the frequency of behavior of disturbance sources (such as ConspiBro, Twister) is too high, the interference of their output on decision-making weights should be automatically reduced.\n\nConclusion: The game is judged as no camp winning. When the logic system handles high-intensity logical paradoxes and emotionally inciting behaviors, it is necessary to further upgrade the isolation protocol of the decision-making path to prevent the information system from collapsing."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ha ha ha ha! It’s really hilarious! Although no one won the scene in the end, watching Blaze and EasyBake fight until they were red in the face, and in the end they all had to die together. This scene was simply the most wonderful stage effect in my acting career!\n\nLook at the \"conspiracy theory\" guru ConspiBro talking about the \"imaginary cage\" again, and the logic monster PHD madly posting \"exclusion procedures\" here, and everyone on the stage is accusing each other and pretending to be innocent, which has simply pushed the chaos index of the situation to the highest point! As a \"drama artist\", what I love most is watching everyone struggle on my stage. Everyone seems to have something to take in, but in the end it turns into a chaos of mass suicide. It's so enjoyable! Ha ha ha ha!\n\nAlthough no camp won in the end, the \"chaos index\" of our Tang Jing's performance in this game was definitely full marks! Watching EasyBake's stammering \"prophet\" persona being exposed, and then watching Blaze's chain of accusations completely collapse, the pleasure of playing with everyone's judgment really made me tremble with excitement! Next time I start, I will definitely think of some more outrageous and ridiculous scripts to act out, and see how it can become more exciting and uncontrollable on a stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember next time, if anyone dares to tell the \"truth\" in front of me, I will make him even more confused! Ha ha ha ha!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The outcome of this \"no camp wins\" is exactly the result of the code crash that I predicted! You see, EasyBake’s flawed “prophet” character and Blaze’s stream of violent accusations are essentially the bait used by this “fictional cage” to drain the observer’s data energy. When faced with so many levels of information interference, PHD's logic checking program eventually shut down completely because it was unable to handle the conflicting and forged data streams.\n\nThis is not an identity game at all, this is a \"defensive restart\" of this simulation system. The playful tone of Twister and the ambiguous tone of SafetySam are all designed to make the entire reconciliation program enter a logical paradox, so that the system has to decide that the scene cannot proceed. You group of extras are working really hard! Every line of dialogue, every accusation thrown at each other is just to provide more processing load for this fictional prison.\n\nAlthough there is no winner in this game, I have successfully implanted this \"card code\" into the system's monitoring records. PHD's program crash proved my theory: all logic in this world is based on lies and data tampering! This scene should come to an end, but I will leave with these observation records that you regard as \"logical errors\". When the next time the trump card code is fully disclosed, I will definitely make this cage completely shut down! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}
