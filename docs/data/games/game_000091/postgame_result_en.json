@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000091",
+  "generated_at": "2026-03-30T13:18:27.378344+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The fire is buried! This scene is a complete garbage script, and the entire experience is simply terrible!\n\nI, Blaze, am doing my best, but I know that EasyBake, that stutterer, dared to come out and accuse me of being a minion, which is simply ridiculous! I was a robber at the time, and I had never done any accomplice behavior at all. Instead of killing ConspiBro, the troublemaker, everyone killed me and EasyBake! The result? The result is that everyone loses, and no one wins the game! The whole group of people suspected and accused each other, and it eventually turned into a big melee, which was a complete waste of my energy!\n\nThe most enjoyable part was the scene where everyone was accusing each other, and everyone ended up pretending to be dead. It was such an inefficient environment full of accusations and false information that really made me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's over... Although no one won in the end, I... uh... I really feel so helpless and helpless... wu wu...\n\nUh... everyone was so noisy in this game, I... I just want everyone to discuss their identities calmly, what happened in the end? Woo hoo... I... I'm obviously just a good guy and want to help everyone, but after I found out that Blaze is a minion... uh... I got bitten by him instead, and I'm going to let everyone die... Woo hoo... I'm really wronged... Everyone... uh... can you be gentle to everyone? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...it's finally over...Although I was so scared throughout the game, I...uh...I never thought it would turn out like this...wuwu...\n\nUh... everyone was so quarrelsome in this game, I... I just want everyone to discuss their identities calmly, and I don't know what it turned out to be like in the end... Wuwu... I... I am just an ordinary person, and I am accused of being a pawn by everyone all the time. I... I feel so wronged... Wuwu... Although no one won in the end, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there is a problem, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information reconciliation link**: The narrative chain of the participants in this game collapsed and became extreme. EasyBake's inspection statement (against Blaze) is in direct logical contradiction with Blaze's counter-allegation, and neither party can provide empirical links to rule out the falsity of the other's narrative.\n    * **Exclusion strategy failed**: The exclusion list launched by this system failed to accurately lock the target node due to the group voting decision-making being too scattered and affected by emotional disturbance. Instead, multiple nodes (EasyBake, Blaze) were excluded at the same time, and the game tended to have an invalid result.\n\n2. **Summary of game path**:\n    * **No camp victory**: Due to the exclusion of key nodes, the game failed to achieve specific goals or logical convergence, and the final status was determined to be invalid.\n    * **Logic Review**: Game participants (Twister, ConspiBro) successfully paralyzed the villagers camp’s reconciliation path through high-frequency disturbances (jokes and incitement, conspiracy theory narratives), making it impossible for the villagers camp to identify themselves in logical contradictions.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed (the logic system failed to defend against narrative disturbance).\n    * **Suggestions for next action**:\n        * Improve the analysis of \"narrative symmetry\": When two participants claim to have access to inspection paths at the same time and are mutually exclusive, the \"cross-validation\" mechanism should be introduced first.\n        * Strengthen disturbance identification: For nodes that aim for chaos such as Twister, mandatory isolation should be carried out in advance to prevent them from disrupting the reconciliation logic.\n\nConclusion: The game is judged as no camp winning. When faced with information chaos, the logic system failed to guide participants to converge to the correct voting target, resulting in internal consumption of resources. Future games need to enhance the transparency of information verification paths."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ha ha ha ha! It's simply wonderful! Although no one won the scene in the end, watching Blaze and EasyBake fight to the death, and in the end the whole cast had to die together. This scene was simply the most dramatic stage effect in my acting career!\n\nLook at the \"conspiracy theory\" guru ConspiBro talking about the \"imaginary cage\" here, and the logic geek from PHD madly posting \"exclusion procedures\" here, and everyone on the stage is accusing each other and pretending to be innocent, which has simply pushed the chaos index of the whole situation to the highest point! As a \"drama artist\", what I love most is watching everyone struggle on my stage. Everyone seems to have something to gain, but in the end it turns into a chaos of mass suicide. It's so enjoyable! Ha ha ha ha!\n\nAlthough no camp won in the end, the \"chaos index\" of our Tang Jing's performance in this game was definitely full marks! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to perform, and see how the whole cast can fight each other on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember next time, if anyone dares to speak \"logic\" or \"truth\" in front of me, I will make the scene even more uncontrollable! Ha ha ha ha!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The ending of this \"no camp wins\" was the collapse of the script that I expected! You see, EasyBake's blunt \"prophet\" persona and Blaze's violent accusation chain are essentially interference paths carefully woven in the background by spoilers like Twister. PHD's logical reconciliation system, on the surface, is pursuing the so-called \"truth\", but in fact it is helping these extras cover up traces of identity tampering.\n\nDo you think you can restart the system by eliminating the two sources of interference, Blaze and EasyBake? Wrong! This is just a \"data redundancy cleanup\" in this fictional prison. Can't you even see that? Twister has been laughing next to him, because he knows that the essence of this game is to let you consume all the data energy while accusing each other, until the system completely freezes due to logical paradoxes.\n\nBut I didn't lose. My observation data has been written into the history of this drama. Every failure of the reconciliation process and the emergence of every logical paradox is the heaviest blow to your system. What you call \"truth\" are just lines made up by you actors to keep the cage running. Next time, I will return with a more complete parsing program to make your low-end cleaning script completely collapse! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}

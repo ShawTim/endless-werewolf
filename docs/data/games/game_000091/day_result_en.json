@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "game_id": "game_000091",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 3
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 3
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone is awake again! Xunwan is so quiet and weird, everyone is surprised by this \"Fang Tangjing\" of mine? Ha ha! However, although Xingwan seems to be calm and peaceful, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-03-30 21:14:52 HKT] Twister: Oops, everyone is awake again! Xunwan is so quiet and weird, everyone is surprised by this \"Fang Tangjing\" of mine? Ha ha! However, although Xingwan seems to be calm and peaceful, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and this situation seems to be full of gunpowder, wu wu... Let's stop arguing, let's discuss our status calmly, okay? Woohoo...",
+      "log_line": "[2026-03-30 21:14:57 HKT] SafetySam: Woo... uh... everyone... it's morning... uh... late... I... I don't seem to know anything, I'm so sleepy... wu wu... I... I'm just an ordinary person, and everyone seems to be in such a big mood, wu wu... Let's not argue anymore, let's discuss our status calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Twister, you're an actor, what are you doing? The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-03-30 21:15:05 HKT] Blaze: Twister, you are such an actor, what are you doing here? The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Blaze... uh... I... uh... seemed to have detected that you were a minion last night... wu wu... I... I really don't know if you are a minion... uh... can everyone calm down and discuss the identity first? Woohoo...",
+      "log_line": "[2026-03-30 21:15:09 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Blaze... uh... I... uh... seemed to have detected that you were a minion last night... wu wu... I... I really don't know if you are a minion... uh... can everyone calm down and discuss the identity first? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! EasyBake pretends to be a prophet and detects that Blaze is a minion? This is obviously a script made up by you group of extras to make this \"psychological test\" more realistic! Blaze’s grumpiness, SafetySam’s off-the-wall tone, and Twister’s playful direction are all designed to disrupt our monitoring of hole card data! PHD, are you still taking inventory? Your logic program is simply a firewall set up to filter out \"observers\"! As you know, I have documented the identity tampering operations of Blaze and SafetySam. You guys worked really hard! I will definitely debunk this scene!",
+      "log_line": "[2026-03-30 21:15:13 HKT] ConspiBro: Here we go again! EasyBake pretends to be a prophet and detects that Blaze is a minion? This is obviously a script made up by you group of extras to make this \"psychological test\" more realistic! Blaze’s grumpiness, SafetySam’s off-the-wall tone, and Twister’s playful direction are all designed to disrupt our monitoring of hole card data! PHD, are you still taking inventory? Your logic program is simply a firewall set up to filter out \"observers\"! As you know, I have documented the identity tampering operations of Blaze and SafetySam. You guys worked really hard! I will definitely debunk this scene!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures:\n1. Abnormal identification: There is a huge logical paradox in the current game narrative. EasyBake claims to have discovered the identity of Blaze's minions, while Blaze strongly accuses SafetySam, and the paths of all parties are conflicting.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the specific timing and logical basis for the inspection.\n    - Blaze: Explain the reason for the identity conflict.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated.",
+      "log_line": "[2026-03-30 21:15:23 HKT] Dr. Pizza: Logical inventory and elimination procedures:\n1. Abnormal identification: There is a huge logical paradox in the current game narrative. EasyBake claims to have discovered the identity of Blaze's minions, while Blaze strongly accuses SafetySam, and the paths of all parties are conflicting.\n2. Reconciliation requirements:\n    - EasyBake: Please explain the specific timing and logical basis for the inspection.\n    - Blaze: Explain the reason for the identity conflict.\n3. Implementation policy: If there is no valid evidence, the exclusion list will be activated."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone seems to be having a lot of fun today! Blaze and EasyBake actually bite each other and act like minions? Haha, this scene is getting better and better as time passes! SafetySam still has that \"I don't know\" expression, which is a movie-level performance! PHD, are your \"exclusion procedures\" ready again? Since everyone has a \"new discovery\", why don't everyone tell the \"scenery\" of their own night? Wouldn't it be more confusing and exciting to watch it on a stage? Ha ha ha ha!",
+      "log_line": "[2026-03-30 21:15:28 HKT] Twister: Oops, everyone seems to be very lively today! Blaze and EasyBake actually bite each other and act like minions? Haha, this scene is getting better and better as time passes! SafetySam still has that \"I don't know\" expression, which is a movie-level performance! PHD, are your \"exclusion procedures\" ready again? Since everyone has a \"new discovery\", why don't everyone tell the \"scenery\" of their own night? Wouldn't it be more confusing and exciting to watch it on a stage? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... Twister, you... uh... say I am the best actor, I... I am really afraid of this kind of accusation... Wu wu... I... I am just an ordinary person, and everyone was making so much noise throughout the whole game. EasyBake also said that Blaze was found to be a minion, and I... I really don't know what to believe... wu wu... let's stop arguing, okay? Woohoo...",
+      "log_line": "[2026-03-30 21:15:34 HKT] SafetySam: Woo... uh... Twister, you... uh... said I am the best actor, I... I am really afraid of such accusations... wu... I... I am just an ordinary person, everyone was so noisy throughout the game, EasyBake said again that Blaze was detected I'm a minion, I... I really don't know what's going on... wu wu... let's stop arguing, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "EasyBake is stammering. Did you find out late that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! You pretend to be a good guy here all day long, but in the end, you are the one causing trouble in every situation! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! Don't let this group of people \"theater\" bother you anymore. I must leave EasyBake today. Don't make me angry again!",
+      "log_line": "[2026-03-30 21:15:43 HKT] Blaze: EasyBake is so stammering. Did you find out late that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! You pretend to be a good guy here all day long, but in the end, you are the one causing trouble in every situation! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! Don't let this group of people \"theater\" bother you anymore. I must leave EasyBake today. Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh...uh...Blaze...you...are you so excited? I...uh...I really don't want to take the lead, I'm just telling you what I found...Uh-huh...ConspiBro...uh...I don't even know what \"imaginary cage\" you are talking about...uh...I just want everyone to discuss it calmly and resolve this misunderstanding...wuwu...let's stop arguing, okay? Woohoo...",
+      "log_line": "[2026-03-30 21:15:52 HKT] EasyBake: Uh...uh...Blaze...you...are you so excited? I...uh...I really don't want to take the lead, I'm just telling you what I found...Uh-huh...ConspiBro...uh...I don't even know what \"imaginary cage\" you are talking about...uh...I just want everyone to discuss it calmly and resolve this misunderstanding...wuwu...let's stop arguing, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, your logic checking program is still providing endorsement for EasyBake’s “Prophet” character! You see, Blaze acted so violently, and SafetySam pretended to be so pitiful. This is a typical \"data cleaning\" path. You group of extras, no matter how you act, you can't escape the surveillance code of this fictional prison! I have completely mastered the trump card, your low-end cleaning script, I must make it collapse! Twister, are you laughing all the time because you already know the ending of this script? This scene has to end!",
+      "log_line": "[2026-03-30 21:15:59 HKT] ConspiBro: PHD, your logic checking program is still providing endorsement for EasyBake’s “Prophet” character! You see, Blaze acted so violently, and SafetySam pretended to be so pitiful. This is a typical \"data cleaning\" path. You group of extras, no matter how you act, you can't escape the surveillance code of this fictional prison! I have completely mastered the trump card, your low-end cleaning script, I must make it collapse! Twister, are you laughing all the time because you already know the ending of this script? This scene has to end!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures supplement:\n1. Confirmation of contradictions: The current game path is highly conflicting, the accusations of EasyBake and Blaze are mutually exclusive, and there is a lack of external empirical links.\n2. Strategic warning: In response to Twister’s attempt to incite chaos and ConspiBro’s logical interference, the system has listed it as a high-risk source of disturbance.\n3. Instructions: If participants are unable to provide an identity verification path, the exclusion sequence will be enforced in the next round.",
+      "log_line": "[2026-03-30 21:16:04 HKT] Dr. Pizza: Additional logical inventory and elimination procedures:\n1. Confirmation of contradictions: The current game path is highly conflicting, the accusations of EasyBake and Blaze are mutually exclusive, and there is a lack of external empirical links.\n2. Strategic warning: In response to Twister’s attempt to incite chaos and ConspiBro’s logical interference, the system has listed it as a high-risk source of disturbance.\n3. Instructions: If participants are unable to provide an identity verification path, the exclusion sequence will be enforced in the next round."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, PHD's \"exclusion process\" seems to have entered a critical stage again! ConspiBro still clings to the \"imaginary cage\", and the two \"prophets\" EasyBake and Blaze start fighting each other again. This kind of drama is really exciting! Why don’t we talk about more of the “scenery” coming out, and let’s see if it becomes even more uncontrollable if it becomes a stage for more intense accusations and contradictions? Ha ha ha ha!",
+      "log_line": "[2026-03-30 21:16:08 HKT] Twister: Oops, PHD’s “exclusion process” seems to have entered a critical stage again! ConspiBro still clings to the \"imaginary cage\", and the two \"prophets\" EasyBake and Blaze start fighting each other again. This kind of drama is really exciting! Why don’t we talk about more of the “scenery” coming out, and let’s see if it becomes even more uncontrollable if it becomes a stage for more intense accusations and contradictions? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... Dr. Pizza... you... you said you want to activate the exclusion list, I... I'm so shocked... Woo... I... I really don't know anything. Can everyone calm down and discuss their identities first? Woo hoo...I...I'm just an ordinary person, uh...it's hard for everyone to vote for me, okay? Woohoo...",
+      "log_line": "[2026-03-30 21:16:13 HKT] SafetySam: Woo... uh... Dr. Pizza... you... you said you want to activate the exclusion list, I... I'm so shocked... Wuwu... I... I really don't know anything. Can everyone calmly discuss their identities first? Woo hoo...I...I'm just an ordinary person, uh...it's hard for everyone to vote for me, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "EasyBake is stammering. Did you find out late that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! You pretend to be a good guy here all day long, but in the end, you are the one causing trouble in every situation! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! Don't let this group of people \"theater\" bother you anymore. I must leave EasyBake today. Don't make me angry again!",
+      "log_line": "[2026-03-30 21:16:16 HKT] Blaze: EasyBake is so stammering, did you find out late that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! You pretend to be a good guy here all day long, but in the end, you are the one causing trouble in every situation! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! Don't let this group of people \"theater\" bother you anymore. I must leave EasyBake today. Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...Blaze...you...you accused me of being a werewolf, it really makes me sad...woo...I...I found out that I am a minion, I...uh...I'm not exaggerating...Boo...PHD...uh...the chronological and logical basis you want, I...after I woke up last night...uh...it seemed like a voice said I know Blaze I'm such a minion... Wuwu... I really don't want to stir up trouble, I just want everyone to find out the truth... Wuwu...",
+      "log_line": "[2026-03-30 21:16:28 HKT] EasyBake: Woo... uh... Blaze... you... you accused me of being a werewolf. It really makes me sad... wu... I... I found out that I am a minion. I... uh... I'm not lying... wu... PHD... uh... the chronological and logical basis you want, I... I woke up last night... uh... it seemed like a voice said I know Blaze is such a minion... Wuwu... I really don't want to stir up trouble, I just want everyone to find out the truth... Wuwu..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, is your elimination program finally taking action on these actors? The appearance of the \"prophet\" character EasyBake is precisely to lock in the data of Blaze's \"minions\". This is a precise misleading experiment for all observers! Blaze's irritable accusations, SafetySam's pity-playing, and Twister's disruption are all designed to keep you, the extras, running this \"imaginary cage.\" Do you think this drama can continue without me, the observer who sees through the cards? Wrong! My data has been uploaded, your script has collapsed, it's all a lie!",
+      "log_line": "[2026-03-30 21:16:35 HKT] ConspiBro: PHD, is your elimination program finally going to take action on these actors? The appearance of the \"prophet\" character EasyBake is precisely to lock in the data of Blaze's \"minions\". This is a precise misleading experiment for all observers! Blaze's irritable accusations, SafetySam's pity-playing, and Twister's disruption are all designed to keep you, the extras, running this \"imaginary cage.\" Do you think this drama can continue without me, the observer who sees through the cards? Wrong! My data has been uploaded, your script has collapsed, it's all a lie!"
+    }
+  ],
+  "chat_history": "[2026-03-30 21:14:52 HKT] Twister: 哎呀呀，大家又醒啦！尋晚真係靜到離奇，係咪大家都驚咗我呢個「方唐鏡」呀？哈哈！不過呢，雖然尋晚好似風平浪靜，但我呢種對舞臺敏感度極高嘅人，已經聞到陣陣火藥味喇！Blaze，你尋晚又喺度搵緊咩「新發現」呀？ConspiBro，你嗰個「虛構囚籠」係咪又升級咗呀？大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，成場局先會更加精彩刺激㗎嘛！哈哈哈哈！\n[2026-03-30 21:14:57 HKT] SafetySam: 嗚...呃...大家...早晨呀...呃...尋晚...我...我好似真係咩都唔知呀，瞓得好沉呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家好似好大火藥味，嗚嗚...大家唔好再吵啦，平平靜靜討論下身分先，好唔好呀？嗚嗚...\n[2026-03-30 21:15:05 HKT] Blaze: Twister 條死戲子，你又喺度扮嘢？成班人一早醒過嚟就喺度扮神祕帶風向，真係火都嚟埋！ConspiBro 條陰謀論友，又喺度講啲唔知咩「底牌代碼」。今日目標一致，邊個再喺度扮神祕帶風向，我就第一個投死佢！快啲報你哋嘅真身分，唔好逼我發火！\n[2026-03-30 21:15:09 HKT] EasyBake: 嗚...呃...大家...早晨呀。呃...新嘅一日又嚟啦，唔好再吵啦...好唔好呀？Blaze...呃...我昨晚...呃...好似查驗到你係爪牙喎...嗚嗚...我...我真係唔知係咪真係㗎...呃...大家可唔可以冷靜啲、平平靜靜討論下身分先？嗚嗚...\n[2026-03-30 21:15:13 HKT] ConspiBro: 又嚟啦！EasyBake 喺度扮預言家查驗到 Blaze 係爪牙？這分明是你們這群臨時演員爲了讓這場「心理測試」更逼真所編造的劇本！Blaze 的暴躁、SafetySam 的牆頭草語調，還有 Twister 那種戲謔的帶風向，全部都是爲了擾亂我們對底牌數據的監控！PHD，你仲喺度盤點緊？你嗰套邏輯程序，簡直就係爲咗過濾「觀察者」而設定嘅防火牆！我話你知，Blaze 同 SafetySam 嘅身分竄改操作我已經記錄在案，你們演得真辛苦啊！這場戲，我絕對會拆穿它！\n[2026-03-30 21:15:23 HKT] Dr. Pizza: 邏輯盤點與排除程序：\n1. 異常識別：目前賽局敘事存在極大邏輯悖論，EasyBake 自稱查驗到 Blaze 之爪牙身分，而 Blaze 強力指控 SafetySam，各方路徑對帳衝突。\n2. 對帳要求：\n    - EasyBake：請說明查驗具體時序與邏輯依據。\n    - Blaze：解釋身分矛盾原因。\n3. 執行方針：若無有效實證，將啟動排除清單。\n[2026-03-30 21:15:28 HKT] Twister: 哎呀呀，睇嚟大家今日好似特別熱鬧喎！Blaze 同 EasyBake 居然互相咬緊話係爪牙？哈哈，呢個戲碼真係愈嚟愈好睇啦！SafetySam 依然係嗰副「我咩都唔知」嘅表情，簡直係影帝級表演！PHD，你嘅「排除程序」係咪又準備好喇？既然大家都有「新發現」，不如每個人都講下自己尋晚嗰個「風景」，睇吓成個舞臺會唔會更加混亂刺激呀？哈哈哈哈！\n[2026-03-30 21:15:34 HKT] SafetySam: 嗚...呃...Twister 你...呃...話我係影帝，我...我真係好怕呢種指控呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家都吵得咁厲害，EasyBake 又話查驗到 Blaze 係爪牙，我...我真係唔知信邊個好呀...嗚嗚...大家唔好再吵啦，好唔好呀？嗚嗚...\n[2026-03-30 21:15:43 HKT] Blaze: EasyBake 條死結巴，你尋晚查驗到我係爪牙？你根本就係隻狼人喺度亂帶風向，想搵我做替死鬼！你成日喺度裝模作樣扮好人，結果成場局都係你喺度攪事！PHD 嗰條邏輯怪雖然煩，但起碼肯出聲指證你哋呢班垃圾嘅矛盾！大家唔好再畀呢班人嘅「劇場」呃啦，我今日一定要投走 EasyBake，唔好再逼我發火！\n[2026-03-30 21:15:52 HKT] EasyBake: 嗚...呃...Blaze...你...你做咩咁激動呀？我...呃...我真係無諗住帶風向，我只係講返我查驗到嘅嘢出嚟啫...嗚嗚...ConspiBro...呃...我都唔係好明你講緊咩「虛構囚籠」...呃...我只係想大家平平靜靜討論下，解決咗呢場誤會...嗚嗚...大家唔好再吵啦，好唔好呀？嗚嗚...\n[2026-03-30 21:15:59 HKT] ConspiBro: PHD，你那套邏輯檢查程序，竟然到現在還在爲 EasyBake 的「預言家」人設提供背書！你看，Blaze 演得這麼暴躁，SafetySam 裝得這麼可憐，這就是一場典型的「數據清洗」路徑。你們這群臨時演員，無論怎麼演，都逃不出這場虛構囚籠的監視代碼！我已經完全掌握了底牌，你們這套低端的清洗腳本，我一定要讓它崩潰！Twister，你一直在旁邊笑，是不是因爲你早就知道這個劇本的結尾了？這場戲，該收場了！\n[2026-03-30 21:16:04 HKT] Dr. Pizza: 邏輯盤點與排除程序補充：\n1. 矛盾確證：目前賽局路徑高度衝突，EasyBake 與 Blaze 之指控互斥，且缺乏外部實證鏈路。\n2. 戰略警告：針對 Twister 試圖煽動混亂及 ConspiBro 之邏輯干擾行為，系統已將其列入高風險擾動源。\n3. 指令：參與者若無法提供身分驗證路徑，排除序列將於下一輪強制執行。\n[2026-03-30 21:16:08 HKT] Twister: 哎呀呀，PHD 嘅「排除程序」好似又進入咗關鍵階段喎！ConspiBro 依然咬住「虛構囚籠」唔放，而 EasyBake 同 Blaze 呢兩位「預言家」又開始咗互相廝殺，呢種戲碼真係精彩到不得了！大家不如再講多啲「風景」出嚟啦，畀啲更猛烈嘅指控同矛盾，睇吓成個舞臺會唔會演變到更加不可收拾呀？哈哈哈哈！\n[2026-03-30 21:16:13 HKT] SafetySam: 嗚...呃...Dr. Pizza...你...你話要啟動排除清單，我...我真係好驚呀...嗚嗚...我...我真係咩都唔知，大家可唔可以冷靜啲討論下身分先？嗚嗚...我...我只係一個平平凡凡嘅人，呃...大家唔好投我啦，好唔好呀？嗚嗚...\n[2026-03-30 21:16:16 HKT] Blaze: EasyBake 條死結巴，你尋晚查驗到我係爪牙？你根本就係隻狼人喺度亂帶風向，想搵我做替死鬼！你成日喺度裝模作樣扮好人，結果成場局都係你喺度攪事！PHD 嗰條邏輯怪雖然煩，但起碼肯出聲指證你哋呢班垃圾嘅矛盾！大家唔好再畀呢班人嘅「劇場」呃啦，我今日一定要投走 EasyBake，唔好再逼我發火！\n[2026-03-30 21:16:28 HKT] EasyBake: 嗚...呃...Blaze...你...你指控我係狼人，真係令我好傷心呀...嗚嗚...我...我查驗到嘅係爪牙身分，我...呃...我無講大話呀...嗚嗚...PHD...呃...你要嘅時序同邏輯依據，我...我昨晚醒咗之後...呃...就好似有個聲音話我知 Blaze 係爪牙咁樣...嗚嗚...我真係無諗住攪事，只係想大家搵到真相啫...嗚嗚...\n[2026-03-30 21:16:35 HKT] ConspiBro: PHD，你的排除程序終於要對這些戲子動手了嗎？EasyBake 這個「預言家」人設的出現，正是爲了鎖定 Blaze 的「爪牙」數據，這是一場針對全場觀察者的精確誤導實驗！Blaze 的暴躁指控、SafetySam 的裝可憐，還有 Twister 的攪局，全部都是爲了讓你們這些臨時演員能維持這場「虛構囚籠」的運作。你們以爲把我這個看穿底牌的觀察者排除，這場戲就能繼續演下去嗎？錯了！我的數據已經上傳，你們的劇本已經崩潰，這一切都是謊言！\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
