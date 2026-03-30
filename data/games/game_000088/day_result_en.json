@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "game_id": "game_000088",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! PHD's \"Logical Inventory\" program is basically the firewall used by Twister to filter \"Observer\" data! Aren't EasyBake's stammering and Blaze's irritable accusation patterns just \"wrong data\" deliberately planted by you to create logical paradoxes? You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene! This is simply a carefully planned psychological test, the purpose is to screen the data frequency of us observers! I already have the trump card, the surveillance code of this fictional cage, and I must make it collapse!",
+      "log_line": "[2026-03-30 12:24:49 HKT] ConspiBro: Here we go again! PHD's \"Logical Inventory\" program is basically the firewall used by Twister to filter \"Observer\" data! Aren't EasyBake's stammering and Blaze's irritable accusation patterns just \"wrong data\" deliberately planted by you to create logical paradoxes? You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene! This is simply a carefully planned psychological test, the purpose is to screen the data frequency of us observers! I already have the trump card, the surveillance code of this fictional cage, and I must make it collapse!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Identification of anomalies: There are obvious logical paradoxes in participants’ narratives, and ConspiBro’s conspiracy theory accusations lack empirical basis.\n2. Reconciliation requirements: All parties should disclose the operation path last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: Please return to the information reconciliation path and reject any interference aimed at paralyzing the logic of the game.",
+      "log_line": "[2026-03-30 12:25:36 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Identification of anomalies: There are obvious logical paradoxes in participants’ narratives, and ConspiBro’s conspiracy theory accusations lack empirical basis.\n2. Reconciliation requirements: All parties should disclose the operation path last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: Please return to the information reconciliation path and reject any interference aimed at paralyzing the logic of the game."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-30 12:26:20 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!",
+      "log_line": "[2026-03-30 12:27:02 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... I really don't know... uh... everyone was so noisy in this game, I... I'm really afraid of this kind of atmosphere... wu... I... I'm just an ordinary person, I was really tired last night... uh... why don't we all calmly discuss our identities, and don't attack each other anymore, okay? Woohoo...",
+      "log_line": "[2026-03-30 12:27:44 HKT] SafetySam: Woo... uh... everyone... I really don't know... uh... everyone was so noisy in this game, I... I'm really afraid of this kind of atmosphere... wu... I... I'm just an ordinary person, I was really tired last night... uh... why don't we all calmly discuss our identities, and don't attack each other anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I... I seemed so confused last night, I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... Uh... I really don't know what they are after I changed them... Woo hoo... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-03-30 12:28:36 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I... I seemed so confused last night, I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... Uh... I really don't know what they are after I changed them... Woo hoo... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "What are you doing? PHD, your set of exclusion sequences is simply to cover up the path of last night's large-scale identity transformation! The two walls of EasyBake and SafetySam are pretending to be innocent, simply to cover up the identity reorganization agreement you completed in the dark! This scene has been written from the first second. You extras have a really hard time acting! Everyone, listen, I have verified last night that Blaze is not a villager at all. This data paradox is a trap set by your camp to make us vote wrongly! I will definitely debunk this scene!",
+      "log_line": "[2026-03-30 12:29:24 HKT] ConspiBro: What are you doing? PHD, your set of exclusion sequences is simply to cover up the path of last night's large-scale identity transformation! The two walls of EasyBake and SafetySam are pretending to be innocent, simply to cover up the identity reorganization agreement you completed in the dark! This scene has been written from the first second. You extras have a really hard time acting! Everyone, listen, I have verified last night that Blaze is not a villager at all. This data paradox is a trap set by your camp to make us vote wrongly! I will definitely debunk this scene!"
+    }
+  ],
+  "chat_history": "[2026-03-30 12:24:49 HKT] ConspiBro: Here we go again! PHD's \"Logical Inventory\" program is basically the firewall used by Twister to filter \"Observer\" data! Aren't EasyBake's stammering and Blaze's irritable accusation patterns just \"wrong data\" deliberately planted by you to create logical paradoxes? You extras are working really hard! You know what I said, every node of this stage is lying, and you can't continue to perform this scene! This is simply a carefully planned psychological test, the purpose is to screen the data frequency of us observers! I already have the trump card, the surveillance code of this fictional cage, and I must make it collapse!\n[2026-03-30 12:25:36 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Identification of anomalies: There are obvious logical paradoxes in participants’ narratives, and ConspiBro’s conspiracy theory accusations lack empirical basis.\n2. Reconciliation requirements: All parties should disclose the operation path last night. If unverifiable accusations continue to be output, an exclusion sequence will be enforced.\n3. Instruction: Please return to the information reconciliation path and reject any interference aimed at paralyzing the logic of the game.\n[2026-03-30 12:26:20 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. ConspiBro, did you do the \"Imaginary Cage\" here last night? Blaze, have you made any \"new discoveries\" in the evening? Although everyone seems to be very honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-30 12:27:02 HKT] Blaze: Hello! What happened last night? The whole group seems to be colluding, and Jing Jingji doesn’t know what’s going on in the identity change! EasyBake and Twister, those two actors, are you changing the cards again? I, Blaze, am an open and honest person. If anyone tries to act mysterious and lead the trend today, I will be the first one to surrender to him! Tell me your identity quickly before I get angry!\n[2026-03-30 12:27:44 HKT] SafetySam: Woo... uh... everyone... I really don't know... uh... everyone was so noisy in this game, I... I'm really afraid of this kind of atmosphere... wu... I... I'm just an ordinary person, I was really tired last night... uh... why don't we all calmly discuss our identities, and don't attack each other anymore, okay? Woohoo...\n[2026-03-30 12:28:36 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woohoo... I... I seemed so confused last night, I changed some things for everyone, uh... I... I seemed to have changed the two cards of Blaze and SafetySam... Uh... I really don't know what they are after I changed them... Woo hoo... Let's stop attacking each other, okay? Woohoo...\n[2026-03-30 12:29:24 HKT] ConspiBro: What are you doing? PHD, your set of exclusion sequences is simply to cover up the path of last night's large-scale identity transformation! The two walls of EasyBake and SafetySam are pretending to be innocent, simply to cover up the identity reorganization agreement you completed in the dark! This scene has been written from the first second. You extras have a really hard time acting! Everyone, listen, I have verified last night that Blaze is not a villager at all. This data paradox is a trap set by your camp to make us vote wrongly! I will definitely debunk this scene!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

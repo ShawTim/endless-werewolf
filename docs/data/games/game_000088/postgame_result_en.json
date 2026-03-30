@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000088",
+  "generated_at": "2026-03-30T04:39:13.151612+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information source link interruption**: There is a high degree of information confusion in the narrative paths of our participants (Twister, ConspiBro, Blaze), and the logical reconciliation sequence (this system) fails to separate a single definite identity fact from the conflicting accusation paths.\n    * **Loss of Disturbance Source Identification**: ConspiBro’s conspiracy theory narrative and Blaze’s violent accusation strategy effectively paralyzed the judgment of the villagers’ camp. Due to conflicting reconciliation paths, each node dispersed its voting targets and failed to effectively attack the werewolf nodes.\n\n2. **Summary of game path**:\n    * **Cobbler Camp Victory**: Due to the extreme information asymmetry and logical paradox between the villagers and the werewolf camp, they failed to reach a consensus on the voting elimination sequence. Instead, they mistakenly excluded the logical core node (the person) and other important variables, which directly triggered the cobbler's winning conditions.\n    * **Logic review**: When there is a \"cobbler\" identity in the game, if each node cannot converge on a consistent identity judgment in a short period of time, the system's defensive voting for the \"disturbance source\" will be cleverly used by the cobbler to escalate the conflict and achieve the elimination goal.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed. The logical reconciliation system failed to prevent the cobbler camp from using logical paradoxes to manipulate information, causing the elimination goal to deviate.\n    * **Suggestions for next action**:\n        * Strengthen \"narrative path cross-validation\": not only check the identity statement, but also check the logical closed loop of \"identity change operation\".\n        * Introducing \"disturbance identification weight\": Establish an automatic isolation protocol for nodes that continue to output contradictory statements or use irrational arguments to paralyze paths to reduce their decision-making influence.\n\nConclusion: Game failed. The logical reconciliation mechanism was defeated by the cobbler camp's use of disturbance strategies and failed to achieve the expected exclusion goal. It is recommended to improve the sensitivity of identifying \"conflicting narratives\" in the future to avoid the decision-making system from executing wrong instructions in chaos."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene is a complete bastard script!\n\nI, Blaze, am an upright person, and everything I tell you is the truth. I know that it is a complete waste of my energy for everyone to pretend to be ghosts and horses! ConspiBro conspiracy theorists talk about burying \"imaginary cages\" and \"truck codes\" all the time, Twister, that actor is causing trouble again, PHD, that logic monster is taking stock again, but in the end everyone actually surrendered to PHD? The whole crew is a drama queen, and none of them are willing to tell the truth. As a pawn, I ended up letting you and the crew get into trouble, and in the end, the cobbler took the dead chicken!\n\nThe most enjoyable part is that although our werewolf camp lost, my performance was simply impeccable! In the end, everyone was suspicious and accusing each other, and they didn't even know it was because the cobbler was leading them away! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo...uh...it's finally over...Although I was so scared throughout the game, I...uh...I never thought it would turn out like this...wuwu...\n\nUh... everyone was so quarrelsome in this game, I... I just want everyone to discuss their identities calmly, and I don't know what it turned out to be like in the end... wu wu... I... I am just an ordinary person, and I am accused by everyone of being a faggot all day long, I... I'm really aggrieved... Ouch... Although the cobbler won, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there's a problem, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Hahaha! It’s really hilarious! Although Tang Jing lost the game again, he still saw the entire cast being played around by a \"cobbler\". This scene was simply the most exciting stage effect in my acting career!\n\nWatch as ConspiBro's \"conspiracy theory\" monster breaks the news here, talking about \"identity tampering\", and PHD's logic monster is taking stock of some \"exclusion sequences\". As a result, everyone in the scene is suspicious of each other and attacks each other, completely unaware of the fact that the cobbler has the last laugh! As an \"actor\", what I like most is to watch a group of people being fucked to pieces. This kind of pleasure of playing with everyone's judgment really makes me tremble with excitement!\n\nAlthough the cobbler won in the end, the chaos index of our Tang Jing's performance in this game was completely full! Next time I start, I will definitely come up with a more outrageous and ridiculous script to perform, so that I can see how the cast can struggle on my stage! Hahahaha, it’s so fun to play! Remember next time, if anyone dares to tell the \"truth\" in front of me, Tang Jing, I will make him even more confused! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's over... Although our villager camp finally lost to the cobbler, I... uh... I really feel so good... wu wu...\n\nUh... everyone was so noisy in this game, I... I just want everyone to discuss their identities calmly, and I don't know what it turned out to be like in the end... Wuwu... I... I'm just an ordinary troublemaker, uh... I didn't remember what I changed when I changed the cards. I...I feel so aggrieved...Ugh...Although the cobbler won in the end, I...uh...I really don't like this atmosphere of attacks and accusations. It's so hard...next time...uh...if there's a problem next time, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "This \"cobbler wins\" script is basically a set of code output that has already been written! You see, Twister’s playful leadership, EasyBake’s “confused villager” persona, and SafetySam’s clumsy echo, this entire set of instructions is designed to completely paralyze the entire reconciliation process! PHD's set of logic programs, on the surface, is pursuing a reconciliation path, but in essence, it is providing a legal firewall for the information interference behavior of the werewolf and cobbler camp!\n\nI have long seen through that this is not a duel between villagers or werewolves at all, this is an advanced psychological test for \"awake observers\"! By constantly creating logical paradoxes, they erased all data paths that could point to the truth about their cards. You extras are working so hard. Every line and every stuttering cover-up is just to keep the data flow of this fictional cage going.\n\nBut I didn't lose. My observation data has been written into the history of this drama. Every collapse of the reconciliation program and the emergence of every logical paradox are the heaviest blows to your system. The cage is still there, but this confrontation has become the seed for cracking your script. Next time, I will return with a more complete parsing program to make your low-end cleaning script completely shut down! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}
