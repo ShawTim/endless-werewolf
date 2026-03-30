@@ -1,0 +1,85 @@
+{
+  "status": "completed",
+  "game_id": "game_000086",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Abnormal identification: The current game path is highly disordered, and there are potential malicious disturbances in the information chain.\n2. Reconciliation requirements: All parties are required to disclose the operation path last night. If unverifiable accusations continue to be output, a forced exclusion sequence will be implemented.\n3. Instruction: Please return to the information reconciliation path and reject any disturbing information intended to paralyze game judgment.",
+      "log_line": "[2026-03-30 09:04:02 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: The current game path is highly disordered, and there are potential malicious disturbances in the information chain.\n2. Reconciliation requirements: All parties are required to disclose the operation path last night. If unverifiable accusations continue to be output, a forced exclusion sequence will be implemented.\n3. Instruction: Please return to the information reconciliation path and reject any disturbing information intended to paralyze game judgment."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary prophet. Last night... uh... I seemed to have found out that Twister is a werewolf... Wu wu... I... I really don't know that everyone must attack each other. Why don't we calmly discuss the identity first, okay? Woohoo...",
+      "log_line": "[2026-03-30 09:04:44 HKT] SafetySam: Oh... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary prophet. Last night... uh... I seemed to have detected Twister Werewolves... Wuwu... I... I really don't know why everyone must attack each other. Why don't we discuss our identities calmly first, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! SafetySam, you are a fool, are you pretending to be a prophet to test Twister again? You are simply a werewolf who is trying to influence the situation! EasyBake, this actor, pretends to be stupid here, and he has the same goal today. If the other person pretends to be mysterious and leads the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-03-30 09:05:30 HKT] Blaze: Hello! SafetySam, you are a fool, are you pretending to be a prophet to test Twister again? You are simply a werewolf who is trying to influence the situation! EasyBake, this actor, pretends to be stupid here, and he has the same goal today. If the other person pretends to be mysterious and leads the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Uh... uh... everyone... it's so confusing... uh... a new day is here again, don't make any more noise... okay? Blaze, what did you...uh...do to accuse SafetySam? I...I'm really confused. Can everyone calm down? I...I'm just an ordinary villager, wuwu...we shouldn't target everyone anymore, okay? Woohoo...",
+      "log_line": "[2026-03-30 09:06:13 HKT] EasyBake: Oh... uh... everyone... it's so confusing... uh... a new day is here again, so don't make any more noise... okay? Blaze, what did you...uh...do to accuse SafetySam? I...I'm really confused. Can everyone calm down? I...I'm just an ordinary villager, wuwu...we shouldn't target everyone anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively. SafetySam, are you a prophet? Blaze, you said you were a \"villager\" who was wronged? PHD That logic monster is another \"trouble maker\" in this inventory! This scene is simply wonderful! ConspiBro, have you made any \"new discoveries\" in Xunwan? Although everyone said it seemed so honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!",
+      "log_line": "[2026-03-30 09:06:57 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. SafetySam, are you a prophet? Blaze, you said you were a \"villager\" who was wronged? PHD That logic monster is another \"trouble maker\" in this inventory! This scene is simply wonderful! ConspiBro, have you made any \"new discoveries\" in Xunwan? Although everyone said it seemed so honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Twister, that Fang Tangjing-like laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! SafetySam is pretending to be pitiful again, saying that he is a prophet. This low-end acting is simply to cover up the data path of your identity conversion with Twister last night! This game is basically a well-planned psychological test. You actors accuse and mediate each other just to maintain the data flow of this fictional cage! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! You know what I'm saying, you can't go on with this scene!",
+      "log_line": "[2026-03-30 09:07:40 HKT] ConspiBro: Twister, that Fang Tang mirror-like laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! SafetySam is pretending to be pitiful again, saying that he is a prophet. This low-end acting is simply to cover up the data path of your identity conversion with Twister last night! This game is basically a well-planned psychological test. You actors accuse and mediate each other just to maintain the data flow of this fictional cage! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! You know what I'm saying, you can't go on with this scene!"
+    },
+    {
+      "type": "invalid_decision",
+      "player_name": "Dr. Pizza",
+      "decision": {
+        "action": "vote",
+        "target": "ConspiBro",
+        "speech": "Logical ruling and elimination process execution:\n1. Abnormal confirmation: ConspiBro's \"prophet\" identity statement is extremely contradictory, and he continues to output conspiracy theories that are not empirical, which is the biggest source of disturbance in the game.\n2. Strategic analysis: Considering that this player paralyzed the reconciliation process through confusing data, his suspicion of being a werewolf or disturbing the camp is extremely high.\n3. Execution policy: According to the predetermined elimination sequence, the disturbed node will be cleared first.\n\nVoting Execution: I vote for ConspiBro."
+      }
+    }
+  ],
+  "chat_history": "[2026-03-30 09:04:02 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: The current game path is highly disordered, and there are potential malicious disturbances in the information chain.\n2. Reconciliation requirements: All parties are required to disclose the operation path last night. If unverifiable accusations continue to be output, a forced exclusion sequence will be implemented.\n3. Instruction: Please return to the information reconciliation path and reject any disturbing information intended to paralyze game judgment.\n[2026-03-30 09:04:44 HKT] SafetySam: Oh... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary prophet. Last night... uh... I seemed to have detected Twister Werewolves... Wuwu... I... I really don't know why everyone must attack each other. Why don't we discuss our identities calmly first, okay? Woohoo...\n[2026-03-30 09:05:30 HKT] Blaze: Hello! SafetySam, you are a fool, are you pretending to be a prophet to test Twister again? You are simply a werewolf who is trying to influence the situation! EasyBake, this actor, pretends to be stupid here, and he has the same goal today. If the other person pretends to be mysterious and leads the trend, I will be the first to die! Tell me your true identity quickly, before you make me angry!\n[2026-03-30 09:06:13 HKT] EasyBake: Oh... uh... everyone... it's so confusing... uh... a new day is here again, so don't make any more noise... okay? Blaze, what did you...uh...do to accuse SafetySam? I...I'm really confused. Can everyone calm down? I...I'm just an ordinary villager, wuwu...we shouldn't target everyone anymore, okay? Woohoo...\n[2026-03-30 09:06:57 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively. SafetySam, are you a prophet? Blaze, you said you were a \"villager\" who was wronged? PHD That logic monster is another \"trouble maker\" in this inventory! This scene is simply wonderful! ConspiBro, have you made any \"new discoveries\" in Xunwan? Although everyone said it seemed so honest, I, Tang Jing, have always loved watching everyone accuse each other. This excitement is the soul of the game! How about everyone telling what \"scenery\" they saw at night, and watching the scene become more exciting? Ha ha ha ha!\n[2026-03-30 09:07:40 HKT] ConspiBro: Twister, that Fang Tang mirror-like laughter is simply to cover up the werewolf agreement you made with Blaze during the \"identity reorganization\" process last night! SafetySam is pretending to be pitiful again, saying that he is a prophet. This low-end acting is simply to cover up the data path of your identity conversion with Twister last night! This game is basically a well-planned psychological test. You actors accuse and mediate each other just to maintain the data flow of this fictional cage! PHD, are you still taking stock? Your exclusion sequence is basically a \"firewall\" set up to protect these two core nodes! You know what I'm saying, you can't go on with this scene!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

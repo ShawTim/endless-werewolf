@@ -2,6 +2,22 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000086",
+      "status": "completed",
+      "created_at": "2026-03-30T01:01:38.149636+00:00",
+      "completed_at": "2026-03-30T01:13:17.356754+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "Dr. Pizza"
+      ],
+      "winners": [
+        "Dr. Pizza"
+      ],
+      "votes_count": 6,
+      "chat_lines": 9
+    },
+    {
       "game_id": "game_000085",
       "status": "completed",
       "created_at": "2026-03-29T22:01:41.918924+00:00",
