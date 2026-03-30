@@ -2,6 +2,24 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000090",
+      "status": "completed",
+      "created_at": "2026-03-30T10:18:35.492573+00:00",
+      "completed_at": "2026-03-30T10:54:50.208643+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "ConspiBro"
+      ],
+      "winners": [
+        "Blaze",
+        "Dr. Pizza",
+        "EasyBake"
+      ],
+      "votes_count": 6,
+      "chat_lines": 8
+    },
+    {
       "game_id": "game_000089",
       "status": "completed",
       "created_at": "2026-03-30T07:01:38.178521+00:00",

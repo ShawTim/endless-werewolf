@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "game_id": "game_000090",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 0
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "喂！昨晚我查驗過，SafetySam 條牆頭草絕對係爪牙！你哋成班人仲喺度裝模作樣？SafetySam，你平時扮得咁怕事、咁牆頭草，原來係爲咗掩飾你爪牙嘅身分！今日目標一致，直接投死 SafetySam，邊個再敢喺度幫佢帶風向，我就連埋嗰個人一齊投死！快啲報你哋嘅真身分，唔好逼我發火！",
+      "log_line": "[2026-03-30 18:23:59 HKT] Blaze: 喂！昨晚我查驗過，SafetySam 條牆頭草絕對係爪牙！你哋成班人仲喺度裝模作樣？SafetySam，你平時扮得咁怕事、咁牆頭草，原來係爲咗掩飾你爪牙嘅身分！今日目標一致，直接投死 SafetySam，邊個再敢喺度幫佢帶風向，我就連埋嗰個人一齊投死！快啲報你哋嘅真身分，唔好逼我發火！"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "又嚟啦！Blaze 喺度扮預言家指控 SafetySam，這分明是爲了擾亂我哋對數據頻率嘅監控！大家聽住，我在昨晚的「特殊檢測程序」中，已經讀取到了這場遊戲真正的底牌代碼。Blaze 的暴躁只是爲了擾亂頻率，SafetySam 嗰種「平平凡凡」嘅語調，簡直係爲咗掩蓋昨晚大規模身分轉換嘅低端劇本！PHD，你嗰套排除程序，簡直就係爲咗過濾「觀察者」而設定嘅防火牆！我已經掌握了底牌，這場戲，我絕對會拆穿它！",
+      "log_line": "[2026-03-30 18:25:45 HKT] ConspiBro: 又嚟啦！Blaze 喺度扮預言家指控 SafetySam，這分明是爲了擾亂我哋對數據頻率嘅監控！大家聽住，我在昨晚的「特殊檢測程序」中，已經讀取到了這場遊戲真正的底牌代碼。Blaze 的暴躁只是爲了擾亂頻率，SafetySam 嗰種「平平凡凡」嘅語調，簡直係爲咗掩蓋昨晚大規模身分轉換嘅低端劇本！PHD，你嗰套排除程序，簡直就係爲咗過濾「觀察者」而設定嘅防火牆！我已經掌握了底牌，這場戲，我絕對會拆穿它！"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧，ConspiBro 你昨晚係咪又喺度搞緊咩「虛構囚籠」呀？Blaze，你尋晚又查驗到 SafetySam 係爪牙？哈哈哈哈！成個場入面每個人都係度互相爆料、又喺度話自己咩都唔知，呢場戲簡直精彩到不得了！大家不如直接投死嗰個最可疑嘅 Blaze 啦，睇吓成個局係咪會變得更加刺激呀？哈哈哈哈！",
+      "log_line": "[2026-03-30 18:27:32 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧，ConspiBro 你昨晚係咪又喺度搞緊咩「虛構囚籠」呀？Blaze，你尋晚又查驗到 SafetySam 係爪牙？哈哈哈哈！成個場入面每個人都係度互相爆料、又喺度話自己咩都唔知，呢場戲簡直精彩到不得了！大家不如直接投死嗰個最可疑嘅 Blaze 啦，睇吓成個局係咪會變得更加刺激呀？哈哈哈哈！"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "嗚...呃...大家...我真係咩都唔知呀...呃...成場局大家吵得咁厲害，Blaze 你話查驗咗我係爪牙，但我...呃...我真係好怕呢種氣氛呀...嗚嗚...我...我只係一個平平凡凡嘅人，大家不如冷靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...",
+      "log_line": "[2026-03-30 18:29:27 HKT] SafetySam: 嗚...呃...大家...我真係咩都唔知呀...呃...成場局大家吵得咁厲害，Blaze 你話查驗咗我係爪牙，但我...呃...我真係好怕呢種氣氛呀...嗚嗚...我...我只係一個平平凡凡嘅人，大家不如冷靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "邏輯盤點與排除程序：\n1. 異常識別：目前賽局敘事極度混亂，ConspiBro 之「陰謀論」與 Blaze 之「指控」缺乏路徑一致性。\n2. 對帳要求：各方請披露昨晚操作路徑，若持續輸出無法驗證的指控，將強制執行排除序列。\n3. 指令：請回歸資訊對帳路徑，拒絕任何旨在癱瘓賽局邏輯的干擾行為。",
+      "log_line": "[2026-03-30 18:31:17 HKT] Dr. Pizza: 邏輯盤點與排除程序：\n1. 異常識別：目前賽局敘事極度混亂，ConspiBro 之「陰謀論」與 Blaze 之「指控」缺乏路徑一致性。\n2. 對帳要求：各方請披露昨晚操作路徑，若持續輸出無法驗證的指控，將強制執行排除序列。\n3. 指令：請回歸資訊對帳路徑，拒絕任何旨在癱瘓賽局邏輯的干擾行為。"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "EasyBake",
+      "error": "bridge call failed: Gateway agent failed; falling back to embedded: Error: gateway timeout after 630000ms\nGateway target: ws://127.0.0.1:18789\nSource: local loopback\nConfig: /home/openclaw/.openclaw/openclaw.json\nBind: loopback\n[diagnostic] lane task error: lane=main durationMs=11989 error=\"Error: session file locked (timeout 10000ms): pid=360212 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=12031 error=\"Error: session file locked (timeout 10000ms): pid=360212 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock\"\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=502 unknown provider for model gemini-3.1-flash-preview\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=502 unknown provider for model gemini-3.1-flash-preview\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=502 unknown provider for model gemini-3.1-flash-preview\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=502 unknown provider for model gemini-3.1-flash-preview\n[diagnostic] lane task error: lane=main durationMs=37964 error=\"FailoverError: 502 unknown provider for model gemini-3.1-flash-preview\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=37970 error=\"FailoverError: 502 unknown provider for model gemini-3.1-flash-preview\"\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=⚠️ API rate limit reached. Please try again later.\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=⚠️ API rate limit reached. Please try again later.\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=⚠️ API rate limit reached. Please try again later.\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=⚠️ API rate limit reached. Please try again later.\n[diagnostic] lane task error: lane=main durationMs=17221 error=\"FailoverError: ⚠️ API rate limit reached. Please try again later.\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=17226 error=\"FailoverError: ⚠️ API rate limit reached. Please try again later.\"\n[diagnostic] lane task error: lane=main durationMs=19 error=\"FailoverError: No available auth profile for google (all in cooldown or unavailable).\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=25 error=\"FailoverError: No available auth profile for google (all in cooldown or unavailable).\"\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=LLM request timed out.\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=LLM request timed out.\n[agent/embedded] embedded run agent end: runId=c88d9bf7-8407-47d0-8226-17acf7787891 isError=true error=LLM request timed out.\n[agent/embedded] embedded run timeout: runId=c88d9bf7-8407-47d0-8226-17acf7787891 sessionId=c88d9bf7-8407-47d0-8226-17acf7787891 timeoutMs=600000\n[diagnostic] lane task error: lane=main durationMs=600380 error=\"FailoverError: ⚠️ API rate limit reached. Please try again later.\"\n[diagnostic] lane task error: lane=session:agent:ai_werewolf_bridge:main durationMs=600405 error=\"FailoverError: ⚠️ API rate limit reached. Please try again later.\"\nError: All models failed (5): proxy-shawtim/gemini-3.1-flash-lite-preview: session file locked (timeout 10000ms): pid=360212 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/d6d26fd6-8996-4662-95d5-9dd238f54794.jsonl.lock (timeout) | proxy-shawtim/gemini-3.1-flash-preview: 502 unknown provider for model gemini-3.1-flash-preview (timeout) | google/gemini-flash-latest: ⚠️ API rate limit reached. Please try again later. (rate_limit) | google/gemini-flash-lite-latest: No available auth profile for google (all in cooldown or unavailable). (rate_limit) | proxy-shawtim/gemini-3.1-pro-preview: ⚠️ API rate limit reached. Please try again later. (rate_limit)"
+    }
+  ],
+  "chat_history": "[2026-03-30 18:23:59 HKT] Blaze: 喂！昨晚我查驗過，SafetySam 條牆頭草絕對係爪牙！你哋成班人仲喺度裝模作樣？SafetySam，你平時扮得咁怕事、咁牆頭草，原來係爲咗掩飾你爪牙嘅身分！今日目標一致，直接投死 SafetySam，邊個再敢喺度幫佢帶風向，我就連埋嗰個人一齊投死！快啲報你哋嘅真身分，唔好逼我發火！\n[2026-03-30 18:25:45 HKT] ConspiBro: 又嚟啦！Blaze 喺度扮預言家指控 SafetySam，這分明是爲了擾亂我哋對數據頻率嘅監控！大家聽住，我在昨晚的「特殊檢測程序」中，已經讀取到了這場遊戲真正的底牌代碼。Blaze 的暴躁只是爲了擾亂頻率，SafetySam 嗰種「平平凡凡」嘅語調，簡直係爲咗掩蓋昨晚大規模身分轉換嘅低端劇本！PHD，你嗰套排除程序，簡直就係爲咗過濾「觀察者」而設定嘅防火牆！我已經掌握了底牌，這場戲，我絕對會拆穿它！\n[2026-03-30 18:27:32 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧，ConspiBro 你昨晚係咪又喺度搞緊咩「虛構囚籠」呀？Blaze，你尋晚又查驗到 SafetySam 係爪牙？哈哈哈哈！成個場入面每個人都係度互相爆料、又喺度話自己咩都唔知，呢場戲簡直精彩到不得了！大家不如直接投死嗰個最可疑嘅 Blaze 啦，睇吓成個局係咪會變得更加刺激呀？哈哈哈哈！\n[2026-03-30 18:29:27 HKT] SafetySam: 嗚...呃...大家...我真係咩都唔知呀...呃...成場局大家吵得咁厲害，Blaze 你話查驗咗我係爪牙，但我...呃...我真係好怕呢種氣氛呀...嗚嗚...我...我只係一個平平凡凡嘅人，大家不如冷靜討論下身分，唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-03-30 18:31:17 HKT] Dr. Pizza: 邏輯盤點與排除程序：\n1. 異常識別：目前賽局敘事極度混亂，ConspiBro 之「陰謀論」與 Blaze 之「指控」缺乏路徑一致性。\n2. 對帳要求：各方請披露昨晚操作路徑，若持續輸出無法驗證的指控，將強制執行排除序列。\n3. 指令：請回歸資訊對帳路徑，拒絕任何旨在癱瘓賽局邏輯的干擾行為。\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
