@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000094",
+  "generated_at": "2026-03-31T08:42:11.063991+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Ha ha ha ha! Although the scene was lost, Tang Jing's performance was definitely \"actor-level\"!\n\nLook at ConspiBro, that \"conspiracy theory\" monster who has been breaking the news about \"data cleaning\" and \"fictitious cages\" here, Blaze, that grumpy old man, lost his temper again, and as a result, everyone was screwed by that logic monster from PHD! As a werewolf, what I like to do most is to fan the flames in the middle and watch groups of villagers being played around by our group of drama queens. This kind of pleasure of \"cheating people is more interesting than winning the game\" really makes me tremble with excitement!\n\nAlthough I was thrown to death in the end, I could see that everyone was accusing and suspicious of each other. This chaotic scene was simply the most exciting stage effect in my acting career! Hahahaha, the chaos index of the stage is completely perfect! Next time I start, I will definitely come up with a more outrageous and ridiculous script to perform, so that I can see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's over... Although our werewolf camp lost in the end, I... uh... I really feel so helpless and helpless... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo...I...I'm obviously just an ordinary person, what did I do to make everyone die...Woo hoo...Although the villagers' camp won in the end, I...uh...I really don't like this atmosphere of attacks and accusations. It's so hard...next time...uh...if there's a problem next time, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The fire is buried! This scene was a complete goddamn script, and the whole experience was absolutely terrible!\n\nI, Blaze, am an upright person, and everything I tell you is the truth, so I don’t know how many people are pretending to be here! ConspiBro conspiracy theorists have been talking about \"fictitious cages\" and \"data cleaning\" all day long. The Twister actors are causing trouble again, and the logic monsters of PHD are taking stock again. As a result, everyone finally voted to die in the game, EasyBake and Twister. In the end, the villagers camp actually won? The whole group of people are all drama queens, and none of them are willing to tell the truth. As an ordinary villager, I ended up being screwed around by you and the whole group!\n\nThe most enjoyable part was that although our villager camp won in the end, my performance was simply impeccable! Everyone was suspicious and accusing each other, and they were all distracted by the chaos without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won in the end, I... uh... I really feel so bad... ugh...\n\nUh... everyone was quarreling so fiercely in this game, I... I just wanted everyone to discuss their identities calmly, and I don't know how it turned out in the end... Wuwu... I... I am just an ordinary person, and I am accused by everyone of being a faggot all the time. I... .I feel so wronged...Ugh...Although I won, I...uh...I really don't like this atmosphere of attacks and accusations. It's so hard...Next time...uh...if there's a problem next time, can you be gentler? I'm so tired. I don't want to argue anymore, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information Reconciliation Link**: In this game, participants ConspiBro's conspiracy theory narrative and Twister's disturbing behavior tried to interfere with the reconciliation sequence. However, due to lack of empirical support, their information weight was unanimously judged as \"high noise\" by the logic system and the villagers' camp in the later stages of the game.\n    * **Exclude target locking**: After excluding EasyBake (troublemaker/werewolf variable) and Twister (drama queen/troublemaker), the villager camp successfully removed key nodes that interfere with identity determination.\n\n2. **Summary of game path**:\n    * **Village camp wins**: By enforcing the elimination sequence of high-risk disturbance sources, the villagers camp successfully cleaned up the identity variables that destroyed the logical closed loop, and finally achieved the convergence of the identity list.\n    * **Logic review**: When there is a \"disturbing node\" in the game, if the identity change path cannot be clarified in time, the system and the villagers' camp adopt an \"isolate and remove\" strategy. This method is highly effective in dealing with uncontrollable information interference.\n\n3. **System performance review**:\n    * **This simulation judgment**: The match is successful (the villager camp wins). The logical reconciliation system successfully guided the voting direction and eliminated interference chains.\n    * **Suggestions for next action**:\n        * Strengthen the sensitivity and early warning of \"identity swap\" behavior: The success of this game is attributed to the elimination of disturbance, but the logical cost in the process is high. In the future, the weight of real-time tracking of action paths (such as exchanging cards) needs to be increased.\n        * Maintain the logical and cold character design, and continue to optimize the automatic rating function for \"high noise nodes\".\n\nConclusion: The game is judged to be the victory of the villagers camp. The logic system successfully maintained the purification of the narrative path of the game and achieved the precise removal of interfering information. It is recommended to continue to optimize the efficiency of identifying and responding to information disturbances in the future."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The outcome of this \"villager victory\" is obviously a sophisticated data tampering exercise! You see, Twister's playful direction, EasyBake's \"confused\" character, and PHD's set of exclusion procedures, this whole set of mechanisms is to completely cover up the truth about the \"card code\" in this scene!\n\nPHD's set of logic checking procedures maintains order in name, but in fact provides legal cover for identity tampering operations such as Twister and EasyBake! Do you think you can restart it by excluding the two actors Twister and EasyBake? Wrong! My observation data has revealed that the entire logical link of the game has been injected with a lot of noise since the beginning. The tone switch between Blaze and SafetySam is simply to make you, the extras, use up your awareness of the \"truck cards\" while accusing each other.\n\nAlthough I have not been able to deconstruct this scene myself, I have recorded these logical paradoxes. This is not a duel between villagers or werewolves at all, this is a strangulation experiment for \"real information\"! Actors in the Cage, do you think this shuffle can hide the truth? Next time, I will come back with a more complete logical analysis path to make your low-end cleaning script completely shut down! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}
