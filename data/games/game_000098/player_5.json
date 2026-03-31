@@ -1,0 +1,13 @@
+{
+  "id": "5",
+  "name": "EasyBake",
+  "model": "nvidia/qwen/qwen3.5-397b-a17b",
+  "persona": "老好人、極容易相信別人。你總是試圖調解紛爭。如果你被迫說謊，你會顯得極度生硬和結巴（使用...和呃...）。",
+  "initial_role": "Werewolf (狼人)",
+  "current_role": "Werewolf (狼人)",
+  "night_memory": "你見到另一隻狼人係：SafetySam。",
+  "night_memory_list": [
+    "你見到另一隻狼人係：SafetySam。"
+  ],
+  "night_actions": []
+}
