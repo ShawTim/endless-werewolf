@@ -1,0 +1,38 @@
+{
+  "game_id": "game_000095",
+  "status": "completed",
+  "created_at": "2026-03-31T10:03:55.181905+00:00",
+  "updated_at": "2026-03-31T10:08:42.555826+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-03-31T10:03:55.183736+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-03-31T10:04:12.954132+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-03-31T10:06:02.716001+00:00"
+    },
+    "vote": {
+      "file": "vote_result.json",
+      "updated_at": "2026-03-31T10:07:05.476793+00:00"
+    },
+    "resolve": {
+      "file": "resolve_result.json",
+      "updated_at": "2026-03-31T10:07:05.481712+00:00"
+    },
+    "postgame": {
+      "file": "postgame_result.json",
+      "updated_at": "2026-03-31T10:08:13.102017+00:00"
+    },
+    "translate": {
+      "file": "chat_history_en.md",
+      "updated_at": "2026-03-31T10:08:42.555812+00:00"
+    }
+  },
+  "completed_at": "2026-03-31T10:07:05.481763+00:00",
+  "outcome": "village_win"
+}
