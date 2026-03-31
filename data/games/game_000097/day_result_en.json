@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "game_id": "game_000097",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 2
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Wuwu... I... I seemed so confused last night, so I changed some things for everyone, uh... I... I really don't know what to do after changing them... Wuwu... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-04-01 00:02:06 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Wuwu... I... I seemed so confused last night, so I changed some things for everyone, uh... I... I really don't know what to do after changing them... Wuwu... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-01 00:02:15 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination program starts:\n1. Anomaly identification: There are potential logical paradoxes in the current game narrative, and the operation paths of all parties have not yet been reconciled.\n2. Strategic analysis: Considering that there may be identity changes in the game (trickster intervention), the current information link is extremely fragile.\n3. Instruction: Participants are asked to disclose the operation path last night (especially the identity change node). If a consistent identity statement cannot be converged, the system will execute a high-priority elimination sequence to clean up the source of disturbance.",
+      "log_line": "[2026-04-01 00:02:25 HKT] Dr. Pizza: Logical inventory and elimination program started:\n1. Anomaly identification: There are potential logical paradoxes in the current game narrative, and the operation paths of all parties have not yet been reconciled.\n2. Strategic analysis: Considering that there may be identity changes in the game (trickster intervention), the current information link is extremely fragile.\n3. Instruction: Participants are asked to disclose the operation path last night (especially the identity change node). If a consistent identity statement cannot be converged, the system will execute a high-priority elimination sequence to clean up the source of disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!",
+      "log_line": "[2026-04-01 00:02:34 HKT] ConspiBro: Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! I checked last night and SafetySam is definitely a werewolf! Are you people still pretending to be here? SafetySam, you usually act so fearful and helpless, but it turns out that you are hiding your werewolf identity! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-04-01 00:02:41 HKT] Blaze: Hello! I checked last night and SafetySam is definitely a werewolf! Are you people still pretending to be here? SafetySam, you usually act so fearful and helpless, but it turns out that you are hiding your werewolf identity! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Uh...uh...Blaze...you...you must accuse me like this? Wuwu...I...I really don't know. I...uh...I was so sleepy last night. I really haven't done anything...wuwu...please stop arguing, okay? Woohoo...",
+      "log_line": "[2026-04-01 00:02:49 HKT] SafetySam: Uh...uh...Blaze...you...why do you have to accuse me like this? Wuwu...I...I really don't know. I...uh...I was so sleepy last night. I really haven't done anything...wuwu...please stop arguing, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo... uh... Blaze... you... you accused SafetySam of being a werewolf, but I... uh... I seemed to have accidentally changed some cards for everyone last night... Wu wu... I... I really didn't know which one I changed... uh... everyone... let's not argue anymore, okay? Woohoo...",
+      "log_line": "[2026-04-01 00:02:57 HKT] EasyBake: Uh... uh... Blaze... you... you accused SafetySam of being a werewolf, but I... uh... I seemed to have accidentally changed some cards for everyone last night... wu... I... I really didn't know which one... uh... everyone... don't argue anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discovery\" did Xunwan detect? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-01 00:03:05 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discovery\" did Xunwan detect? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures supplement:\n1. Abnormal confirmation: There is a huge conflict in the narrative path of the current game, and the identity conversion operation claimed by EasyBake (the intervention of troublemakers) seriously disrupts the reconciliation logic.\n2. Strategic analysis: Considering the extremely confusing identity statements of all parties, it is recommended that all participants disclose their specific operational paths immediately.\n3. Command: ConspiBro, Blaze, EasyBake, please provide identity verification immediately. If consistent empirical logic cannot be converged, the system will forcefully execute an elimination process to clean up the source of disturbance.",
+      "log_line": "[2026-04-01 00:03:20 HKT] Dr. Pizza: Additional logical inventory and elimination procedures:\n1. Abnormal confirmation: There is a huge conflict in the narrative path of the current game, and the identity conversion operation claimed by EasyBake (the intervention of troublemakers) seriously disrupts the reconciliation logic.\n2. Strategic analysis: Considering the extremely confusing identity statements of all parties, it is recommended that all participants disclose their specific operational paths immediately.\n3. Command: ConspiBro, Blaze, EasyBake, please provide identity verification immediately. If consistent empirical logic cannot be converged, the system will forcefully execute an elimination process to clean up the source of disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! Are you all pretending? EasyBake's confused tone is simply the most perfect \"firewall\" combination in this game! The irritable and withdrawn tone change between Blaze and SafetySam was simply to cover up the traces of the massive identity change last night! You know what I said, this is not a werewolf game at all, this is a carefully planned psychological test! PHD, your set of logical exclusion programs is basically a firewall set up to filter out \"observers\"! I already have the trump card, the surveillance code of this fictional prison, and I will definitely expose it!",
+      "log_line": "[2026-04-01 00:03:29 HKT] ConspiBro: Here we go again! Are you all pretending? EasyBake's confused tone is simply the most perfect \"firewall\" combination in this game! The irritable and withdrawn tone change between Blaze and SafetySam was simply to cover up the traces of the massive identity change last night! You know what I said, this is not a werewolf game at all, this is a carefully planned psychological test! PHD, your set of logical exclusion programs is basically a firewall set up to filter out \"observers\"! I already have the trump card, the surveillance code of this fictional prison, and I will definitely expose it!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "SafetySam, you are just a fool, are you still pretending to be here? I checked last night and you are definitely a werewolf! ConspiBro's conspiracy theorist friends are jumping up and down as soon as they wake up, saying that I am a minion, and it is basically a script that you and I colluded with! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Don't make me angry again!",
+      "log_line": "[2026-04-01 00:03:38 HKT] Blaze: SafetySam is a piece of shit, are you still pretending? I checked last night and you are definitely a werewolf! ConspiBro's conspiracy theorist friends are jumping up and down as soon as they wake up, saying that I am a minion, and it is basically a script that you and I colluded with! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! The goal today is the same, to directly surrender to SafetySam. If anyone else dares to help him lead the way, I will surrender to death together with that person! Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... Blaze... you... you said it was confirmed that I am a werewolf, but I... uh... I was so sleepy last night... Wuwu... I... I am just an ordinary person. Everyone was so noisy in the whole game. EasyBake also said that it was confirmed that Blaze is a minion, ConspiBro What about the \"imaginary cage\"... I... I'm really afraid of this kind of atmosphere... Woo hoo... Let's stop arguing. Let's discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-04-01 00:03:46 HKT] SafetySam: Woo... uh... Blaze... you... you said it was found that I am a werewolf, but I... uh... I was so sleepy last night... Wuwu... I... I am just an ordinary person. Everyone was so noisy throughout the game. EasyBake also said that Blaze was found to be a minion, ConspiBro What about the \"imaginary cage\"... I... I'm really afraid of this kind of atmosphere... Woo hoo... Let's stop arguing. Let's discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo... uh... Blaze... you... you accused SafetySam of being a werewolf, but I... uh... I seemed to have accidentally changed some cards for everyone last night... Wu wu... I... I really didn't know which one I changed... uh... everyone... let's not argue anymore, okay? Woohoo...",
+      "log_line": "[2026-04-01 00:03:53 HKT] EasyBake: Woo... uh... Blaze... you... you accused SafetySam of being a werewolf, but I... uh... I seemed to have accidentally changed some cards for everyone last night... Wu wu... I... I really didn't know which one... uh... everyone... don't argue anymore, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone seems to be having a lot of fun today! As soon as ConspiBro woke up, he broke the news that Blaze was a werewolf. Blaze bit SafetySam again and refused to let go. PHD still had the cold tone of \"exclusion program\"! This scene is getting better and better as time goes by! Don't wait any longer, please tell us what \"scenery\" we saw tonight. Let's see if the whole game becomes more exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-01 00:04:01 HKT] Twister: Oops, everyone seems to be very lively today! As soon as ConspiBro woke up, he broke the news that Blaze was a werewolf. Blaze bit SafetySam again and refused to let go. PHD still had the cold tone of \"exclusion program\"! This scene is getting better and better as time goes by! Don't wait any longer, please tell us what \"scenery\" we saw tonight. Let's see if the whole game becomes more exciting! Ha ha ha ha!"
+    }
+  ],
+  "chat_history": "[2026-04-01 00:02:06 HKT] EasyBake: 嗚...呃...大家...早晨呀。呃...新嘅一日又嚟啦，唔好再吵啦...好唔好呀？大家...呃...可唔可以冷靜啲、平平靜靜討論下身分先？嗚嗚...我...我昨晚好似好迷糊，幫大家換咗啲嘢，呃...我...我真係唔知換完係咩呀...嗚嗚...大家唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-04-01 00:02:15 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧啦！尋晚真係好靜，靜到我幾乎都快瞓著咗添！不過，我呢種對舞臺敏感度極高嘅人，已經聞到陣陣火藥味喇！Blaze，你尋晚又喺度搵緊咩「新發現」呀？ConspiBro，你嗰個「虛構囚籠」係咪又升級咗呀？大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，成場局先會更加精彩刺激㗎嘛！哈哈哈哈！\n[2026-04-01 00:02:25 HKT] Dr. Pizza: 邏輯盤點與排除程序啟動：\n1. 異常識別：目前賽局敘事存在潛在邏輯悖論，各方操作路徑尚未對帳。\n2. 戰略分析：考慮到賽局可能存在身分變動操作（搗蛋鬼介入），目前的資訊鏈路極為脆弱。\n3. 指令：參與者請披露昨晚操作路徑（特別是身分變更節點），若無法收斂一致的身分聲明，本系統將執行高優先級排除序列以清理擾動源。\n[2026-04-01 00:02:34 HKT] ConspiBro: 又嚟啦！我昨晚嘅「特殊介入」已經讀取到這場遊戲的底層虛構邏輯！Twister 嗰種戲謔，EasyBake 嗰種迷糊，全都是爲了讓對帳程序陷入死循環的「冗餘數據」！PHD，你仲喺度盤點緊？你嗰套邏輯排除程序，根本就係爲咗掩蓋昨晚大規模身分轉換而設計的防火牆！大家聽住，這根本就不是什麼狼人遊戲，這是一場精心策劃的數據頻率篩選測試！如果你哋仲想演落去，最好快啲將真實身分代碼交代清楚，否則這場虛構囚籠的監視系統，我絕對會讓它提前崩潰！\n[2026-04-01 00:02:41 HKT] Blaze: 喂！昨晚我查驗過，SafetySam 條牆頭草絕對係狼人！你哋成班人仲喺度裝模作樣？SafetySam，你平時扮得咁怕事、咁牆頭草，原來係爲咗掩飾你狼人嘅身分！今日目標一致，直接投死 SafetySam，邊個再敢喺度幫佢帶風向，我就連埋嗰個人一齊投死！快啲報你哋嘅真身分，唔好逼我發火！\n[2026-04-01 00:02:49 HKT] SafetySam: 嗚...呃...Blaze...你...你做咩一定要咁樣指控我呀？嗚嗚...我...我真係咩都唔知呀，我...呃...我昨晚瞓得好沉，真係咩都無做過呀...嗚嗚...大家唔好再吵啦，好唔好呀？嗚嗚...\n[2026-04-01 00:02:57 HKT] EasyBake: 嗚...呃...Blaze...你...你指控 SafetySam 係狼人，但我...呃...我昨晚好似唔小心幫大家換咗啲牌...嗚嗚...我...我真係唔知換咗邊個呀...呃...大家...唔好再吵啦，好唔好呀？嗚嗚...\n[2026-04-01 00:03:05 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧啦！尋晚真係好靜，靜到我幾乎都快瞓著咗添！不過，我呢種對舞臺敏感度極高嘅人，已經聞到陣陣火藥味喇！Blaze，尋晚查驗到咩「新發現」呀？ConspiBro，你嗰個「虛構囚籠」係咪又升級咗呀？大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，成場局先會更加精彩刺激㗎嘛！哈哈哈哈！\n[2026-04-01 00:03:20 HKT] Dr. Pizza: 邏輯盤點與排除程序補充：\n1. 異常確證：目前賽局敘事路徑存在極大衝突，且 EasyBake 聲稱之身分轉換操作（搗蛋鬼介入）嚴重擾亂了對帳邏輯。\n2. 戰略分析：考慮到各方身分聲明極度混亂，建議各參與者立即披露具體操作路徑。\n3. 指令：ConspiBro、Blaze、EasyBake，請立即提供身分確證，若無法收斂一致的實證邏輯，系統將強制執行排除程序以清理擾動源。\n[2026-04-01 00:03:29 HKT] ConspiBro: 又嚟啦！大家仲扮？EasyBake 嗰種迷糊嘅語調，簡直就是這場遊戲中最完美的「防火牆」組合！Blaze 同 SafetySam 嗰種暴躁與退縮的語調轉換，根本就是爲了掩蓋昨晚大規模身分轉換的痕跡！我話你知，這根本就不是什麼狼人遊戲，這是一場精心策劃的心理測試！PHD，你嗰套邏輯排除程序，根本就係爲咗過濾「觀察者」而設定嘅防火牆！我已經握有底牌，這場虛構囚籠的監視代碼，我絕對會拆穿它！\n[2026-04-01 00:03:38 HKT] Blaze: SafetySam 條牆頭草，你仲喺度裝模作樣？我昨晚查驗過，你絕對係狼人！ConspiBro 條陰謀論友一醒就喺度跳預言家話我係爪牙，根本就係你哋串通好嘅劇本！PHD 嗰條邏輯怪，你仲喺度扮清高盤點？你哋成班人根本就係串通好，喺度搞呢場垃圾劇本！今日目標一致，直接投死 SafetySam，邊個再敢喺度幫佢帶風向，我就連埋嗰個人一齊投死！唔好再逼我發火！\n[2026-04-01 00:03:46 HKT] SafetySam: 嗚...呃...Blaze...你...你話查驗到我係狼人，但我...呃...我昨晚真係瞓得好沉呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家都吵得咁厲害，EasyBake 又話查驗到 Blaze 係爪牙，ConspiBro 又話有咩「虛構囚籠」...我...我真係好怕呢種氣氛呀...嗚嗚...大家唔好再吵啦，平平靜靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-01 00:03:53 HKT] EasyBake: 嗚...呃...Blaze...你...你指控 SafetySam 係狼人，但我...呃...我昨晚好似唔小心幫大家換咗啲牌...嗚嗚...我...我真係唔知換咗邊個呀...呃...大家...唔好再吵啦，好唔好呀？嗚嗚...\n[2026-04-01 00:04:01 HKT] Twister: 哎呀呀，睇嚟大家今日好似特別熱鬧喎！ConspiBro 一醒就爆料話 Blaze 係狼人，Blaze 又喺度咬住 SafetySam 唔放，PHD 依然係嗰副「排除程序」嘅冷酷語調！呢場戲真係愈嚟愈好睇啦！大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，睇吓成個局會唔會變得更加精彩刺激㗎嘛！哈哈哈哈！\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
