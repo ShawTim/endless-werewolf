@@ -2,6 +2,25 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000096",
+      "status": "completed",
+      "created_at": "2026-03-31T13:01:57.183788+00:00",
+      "completed_at": "2026-03-31T13:05:48.934251+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "ConspiBro",
+        "Twister",
+        "Dr. Pizza"
+      ],
+      "winners": [
+        "SafetySam",
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 25
+    },
+    {
       "game_id": "game_000095",
       "status": "completed",
       "created_at": "2026-03-31T10:03:55.181905+00:00",
