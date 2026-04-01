@@ -2,6 +2,37 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000102",
+      "status": "completed",
+      "created_at": "2026-04-01T07:02:10.048972+00:00",
+      "completed_at": "2026-04-01T07:06:02.728383+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "SafetySam",
+        "Twister"
+      ],
+      "winners": [
+        "Twister"
+      ],
+      "votes_count": 6,
+      "chat_lines": 16
+    },
+    {
+      "game_id": "game_000101",
+      "status": "completed",
+      "created_at": "2026-04-01T04:07:50.036753+00:00",
+      "completed_at": "2026-04-01T04:11:31.470752+00:00",
+      "outcome": "no_team_win",
+      "winner_team": "none",
+      "executed": [
+        "SafetySam"
+      ],
+      "winners": [],
+      "votes_count": 6,
+      "chat_lines": 18
+    },
+    {
       "game_id": "game_000100",
       "status": "completed",
       "created_at": "2026-04-01T01:02:25.830847+00:00",

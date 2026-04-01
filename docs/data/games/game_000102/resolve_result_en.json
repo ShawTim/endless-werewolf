@@ -1,0 +1,67 @@
+{
+  "status": "completed",
+  "outcome": "tanner_win",
+  "winner_team": "tanner",
+  "winners": [
+    "Twister"
+  ],
+  "reason": "Tanner was executed.",
+  "executed": [
+    "SafetySam",
+    "Twister"
+  ],
+  "werewolves_in_play": [
+    "SafetySam",
+    "ConspiBro"
+  ],
+  "executed_werewolves": [
+    "SafetySam"
+  ],
+  "votes": {
+    "Blaze": "SafetySam",
+    "SafetySam": "Dr. Pizza",
+    "Dr. Pizza": "SafetySam",
+    "Twister": "Blaze",
+    "EasyBake": "Twister",
+    "ConspiBro": "Twister"
+  },
+  "tally": {
+    "SafetySam": 2,
+    "Dr. Pizza": 1,
+    "Blaze": 1,
+    "Twister": 2
+  },
+  "final_roles": {
+    "Blaze": {
+      "initial_role": "Werewolf",
+      "current_role": "Minion",
+      "team": "werewolf_team"
+    },
+    "SafetySam": {
+      "initial_role": "Minion",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    },
+    "Dr. Pizza": {
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "team": "village_team"
+    },
+    "Twister": {
+      "initial_role": "Tanner (tanner)",
+      "current_role": "Tanner (tanner)",
+      "team": "tanner"
+    },
+    "EasyBake": {
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "ConspiBro": {
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    }
+  },
+  "game_id": "game_000102"
+}

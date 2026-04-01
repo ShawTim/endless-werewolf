@@ -1,0 +1,37 @@
+[
+  {
+    "player_name": "Dr. Pizza",
+    "role": "Troublemaker (搗蛋鬼)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "Dr. Pizza",
+      "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+      "model": "nvidia/moonshotai/kimi-k2.5",
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "night_memory": [],
+      "other_players": [
+        "Blaze",
+        "SafetySam",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "Blaze",
+          "SafetySam",
+          "Twister",
+          "EasyBake",
+          "ConspiBro"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]

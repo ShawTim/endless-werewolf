@@ -1,0 +1,21 @@
+{
+  "id": "3",
+  "name": "Dr. Pizza",
+  "model": "nvidia/moonshotai/kimi-k2.5",
+  "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+  "initial_role": "Seer (預言家)",
+  "current_role": "Seer (預言家)",
+  "night_memory": "你查驗咗 Blaze，佢嘅身份係：Tanner (皮匠)。",
+  "night_memory_list": [
+    "你查驗咗 Blaze，佢嘅身份係：Tanner (皮匠)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Seer (預言家)",
+      "action": "inspect_player",
+      "target": "Blaze",
+      "seen_role": "Tanner (皮匠)",
+      "source": "agent"
+    }
+  ]
+}
