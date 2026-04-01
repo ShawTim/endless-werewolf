@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "game_id": "game_000100",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 2
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 2
+    },
+    "ConspiBro": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Here we go again! The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-04-01 09:03:19 HKT] Blaze: Hello! Here we go again! The whole group of people woke up early in the morning and were pretending to be mysterious and leading the wind. It was really a fire! ConspiBro, a fellow conspiracy theorist, talks about some unknown \"card codes\" here. Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-01 09:03:32 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and everyone was so noisy in this situation, I... I'm really afraid of this kind of atmosphere... Wu wu... Let's discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-04-01 09:03:45 HKT] SafetySam: Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and everyone was so noisy in this situation, I... I'm really afraid of this kind of atmosphere... Wu wu... Let's discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! The disturbance source last night has triggered the collapse of the underlying logic of this game! Blaze's violent accusations and Dr. Pizza's so-called \"exclusion process\" are all designed to completely eliminate the real trump card of this stage. Do you think turning me into a villager can cover up everything? As I said, you know that the special detection program last night has completely recorded the surveillance code of this fictitious prison. No matter how you disguise it, behind Twister's banter, there is a command to clean up all the hole card data. I will definitely make this scene collapse in advance!",
+      "log_line": "[2026-04-01 09:03:52 HKT] ConspiBro: Here we go again! The disturbance source last night has triggered the collapse of the underlying logic of this game! Blaze's violent accusations and Dr. Pizza's so-called \"exclusion process\" are all designed to completely eliminate the real trump card of this stage. Do you think turning me into a villager can cover up everything? As I said, you know that the special detection program last night has completely recorded the surveillance code of this fictitious prison. No matter how you disguise it, behind Twister's banter, there is a command to clean up all the hole card data. I will definitely make this scene collapse in advance!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-04-01 09:04:00 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path, and the narrative conflicts between the parties are huge.\n2. Strategic analysis: Considering that there may be identity changes in the game (troublemaker intervention), the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.",
+      "log_line": "[2026-04-01 09:04:08 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path, and the narrative conflicts between the parties are huge.\n2. Strategic analysis: Considering that there may be identity changes in the game (troublemaker intervention), the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, fellow conspiracy theorist, you bite everyone and tell nonsense as soon as you wake up, you are the most suspicious first! You want me to be your scapegoat? There is no door! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! I, Blaze, am open and honest, and I have the same goal today. If anyone else dares to act mysterious and lead the way, I will be the first to die! Don't make me angry again!",
+      "log_line": "[2026-04-01 09:04:15 HKT] Blaze: ConspiBro conspiracy theorists, you bite everyone and tell nonsense as soon as you wake up, you are the most suspicious first! You want me to be your scapegoat? There is no door! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! I, Blaze, am open and honest, and I have the same goal today. If anyone else dares to act mysterious and lead the way, I will be the first to die! Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, Blaze, are you so angry today? As soon as he woke up, he bit Tang Jing and refused to let go. Was it because Xunwan had done some \"secret operation\"? Ha ha! Don't be so nervous, everyone. This stage is meant for our group of actors to play! Since everyone doesn't believe each other so much, why not tell everyone about the \"scenery\" they saw at night? Wouldn't it be more confusing and interesting to watch it on a stage? Ha ha ha ha!",
+      "log_line": "[2026-04-01 09:04:24 HKT] Twister: Oops, Blaze, are you so angry today? As soon as he woke up, he bit Tang Jing and refused to let go. Was it because Xunwan had done some \"secret operation\"? Ha ha! Don't be so nervous, everyone. This stage is meant for our group of actors to play! Since everyone doesn't believe each other so much, why not tell everyone about the \"scenery\" they saw at night? Wouldn't it be more confusing and interesting to watch it on a stage? Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and everyone is so quarrelsome in this situation, uh... why don't we all calmly discuss our identities first, okay? Woohoo...",
+      "log_line": "[2026-04-01 09:04:33 HKT] SafetySam: Uh...uh...everyone...it's morning...uh...wanna...I...I seem to really have no idea about anything, I'm so sleepy...wuwu...I...I'm just an ordinary person, and everyone is so quarrelsome in this situation, uh...why don't we calmly discuss our identities first, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!",
+      "log_line": "[2026-04-01 09:04:42 HKT] ConspiBro: Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-04-01 09:04:50 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? Everyone...uh...could you please calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and elimination procedures supplement:\n1. Abnormal confirmation: ConspiBro’s persistent conspiracy theory narrative has caused the game information chain to be unable to converge, and there is a logical gap between his remarks and the actual game.\n2. Strategic analysis: Considering that this node continues to output information that is out of touch with the actual situation of the game and mutually exclusive, it has constituted a \"disturbance source\" for the game, seriously affecting the judgment path.\n3. Instruction: Clean the disturbed node and start the elimination sequence immediately.",
+      "log_line": "[2026-04-01 09:04:59 HKT] Dr. Pizza: Additional logical inventory and elimination procedures:\n1. Abnormal confirmation: ConspiBro’s persistent conspiracy theory narrative has caused the game information chain to be unable to converge, and there is a logical gap between his remarks and the actual game.\n2. Strategic analysis: Considering that this node continues to output information that is out of touch with the actual situation of the game and mutually exclusive, it has constituted a \"disturbance source\" for the game, seriously affecting the judgment path.\n3. Instruction: Clean the disturbed node and start the elimination sequence immediately."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, fellow conspiracy theorist, you bite everyone and tell nonsense as soon as you wake up, you are the most suspicious first! You want me to be your scapegoat? There is no door! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! Today we have the same goal. If anyone dares to pretend to be mysterious and lead the trend, I will be the first to kill him! Don't make me angry again!",
+      "log_line": "[2026-04-01 09:05:08 HKT] Blaze: ConspiBro conspiracy theorist, you bite everyone and tell nonsense as soon as you wake up, you are the most suspicious first! You want me to be your scapegoat? There is no door! PHD That piece of logic is weird, are you still doing the inventory? You and your crew are simply colluding to create this garbage script! Today we have the same goal. If anyone dares to pretend to be mysterious and lead the trend, I will be the first to kill him! Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone seems to be having a lot of fun today! As soon as ConspiBro woke up, he revealed that this was a \"fictitious cage\", EasyBake was pretending to be confused and didn't know what he was talking about, and PHD still had the same cold tone of \"exclusion program\"! This scene is getting better and better as time goes by! Let's stop hiding it, let's report it quickly. What \"scenery\" did we see in the evening? Will it turn into a stage and become more chaotic and exciting? Ha ha ha ha!",
+      "log_line": "[2026-04-01 09:05:15 HKT] Twister: Oops, everyone seems to be very lively today! As soon as ConspiBro woke up, he revealed that this was a \"fictitious cage\", EasyBake was pretending to be confused and didn't know what he was talking about, and PHD still had the same cold tone of \"exclusion program\"! This scene is getting better and better as time goes by! Let's stop hiding it, let's report it quickly. What \"scenery\" did we see in the evening? Will it turn into a stage and become more chaotic and exciting? Ha ha ha ha!"
+    }
+  ],
+  "chat_history": "[2026-04-01 09:03:19 HKT] Blaze: 喂！又嚟啦！成班人一早醒過嚟就喺度扮神祕帶風向，真係火都嚟埋！ConspiBro 條陰謀論友，又喺度講啲唔知咩「底牌代碼」。今日目標一致，邊個再喺度扮神祕帶風向，我就第一個投死佢！快啲報你哋嘅真身分，唔好逼我發火！\n[2026-04-01 09:03:32 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！呢個舞臺真係愈嚟愈熱鬧啦！寻晚真係好靜，靜到我幾乎都快瞓著咗添！不過，我呢種對舞臺敏感度極高嘅人，已經聞到陣陣火藥味喇！Blaze，你尋晚又喺度搵緊咩「新發現」呀？ConspiBro，你嗰個「虛構囚籠」係咪又升級咗呀？大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，成場局先會更加精彩刺激㗎嘛！哈哈哈哈！\n[2026-04-01 09:03:45 HKT] SafetySam: 嗚...呃...大家...早晨呀...呃...尋晚...我...我好似真係咩都唔知呀，瞓得好沉呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家吵得好兇，我...我真係好怕呢種氣氛呀...嗚嗚...大家不如冷靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-01 09:03:52 HKT] ConspiBro: 又嚟啦！昨晚的擾動源已經觸發了這場遊戲底層邏輯的崩潰！Blaze 那種暴躁指控，Dr. Pizza 嗰套所謂的「排除程序」，全都是爲了讓這場舞臺的真實底牌徹底湮滅。你們以爲把我變成村民就可以掩蓋一切嗎？我話你知，昨晚的特殊檢測程序已經將這場虛構囚籠的監視代碼徹底記錄在案。無論你們怎麼偽裝， Twister 的那種戲謔背後，隱藏着對所有底牌數據的清洗指令。這場戲，我絕對會讓它提前崩潰！\n[2026-04-01 09:04:00 HKT] EasyBake: 嗚...呃...大家...早晨呀。呃...新嘅一日又嚟啦，唔好再吵啦...好唔好呀？大家...呃...可唔可以冷靜啲、平平靜靜討論下身分先？嗚嗚...我...我昨晚好似好迷糊，好似喺度瞓緊覺咋，咩都唔知呀...嗚嗚...大家唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-04-01 09:04:08 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 異常識別：目前賽局路徑存在明顯資訊干擾，各方敘事衝突極大。\n2. 戰略分析：考慮到賽局可能存在身分變動行為（搗蛋鬼介入），目前的資訊鏈路極為脆弱。\n3. 指令：參與者請披露昨晚操作路徑。若無法收斂一致的身分聲明，本系統將執行高優先級排除序列以清理擾動源。\n[2026-04-01 09:04:15 HKT] Blaze: ConspiBro 條陰謀論友，你一醒就咬住大家講埋啲廢話，你先係最可疑嗰個！你想搵我做替死鬼？門都無！PHD 嗰條邏輯怪，你仲喺度扮清高盤點？你哋成班人根本就係串通好，喺度搞呢場垃圾劇本！我 Blaze 坦坦蕩蕩，今日目標一致，邊個再敢喺度扮神祕帶風向，我就第一個投死佢！唔好再逼我發火！\n[2026-04-01 09:04:24 HKT] Twister: 哎呀呀，Blaze 你今日個火氣咁大嘅？一醒就咬住我方唐鏡唔放，係咪因為尋晚做咗咩「秘密操作」呀？哈哈！大家唔好咁緊張啦，呢個舞臺本來就係俾我哋呢班戲精玩嘅嘛！既然大家都咁唔信對方，不如每個人都講下自己尋晚見到啲咩「風光」，睇吓成個舞臺會唔會更加混亂有趣呀？哈哈哈哈！\n[2026-04-01 09:04:33 HKT] SafetySam: 嗚...呃...大家...早晨呀...呃...尋晚...我...我好似真係咩都唔知呀，瞓得好沉呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家吵得好兇，呃...大家不如冷靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-01 09:04:42 HKT] ConspiBro: 又嚟啦！我昨晚嘅「特殊介入」已經讀取到這場遊戲的底層虛構邏輯！Twister 嗰種戲謔，EasyBake 嗰種迷糊，全都是爲了讓對帳程序陷入死循環的「冗餘數據」！PHD，你仲喺度盤點緊？你嗰套邏輯排除程序，根本就係爲咗掩蓋昨晚大規模身分轉換而設計的防火牆！大家聽住，這根本就不是什麼狼人遊戲，這是一場精心策劃的數據頻率篩選測試！如果你哋仲想演落去，最好快啲將真實身分代碼交代清楚，否則這場虛構囚籠的監視系統，我絕對會讓它提前崩潰！\n[2026-04-01 09:04:50 HKT] EasyBake: 嗚...呃...大家...早晨呀。呃...新嘅一日又嚟啦，唔好再吵啦...好唔好呀？大家...呃...可唔可以冷靜啲、平平靜靜討論下身分先？嗚嗚...我...我昨晚好似好迷糊，好似喺度瞓緊覺咋，咩都唔知呀...嗚嗚...大家唔好再互相攻擊啦，好唔好呀？嗚嗚...\n[2026-04-01 09:04:59 HKT] Dr. Pizza: 邏輯盤點與排除程序補充：\n1. 異常確證：ConspiBro 之持續性陰謀論敘事已導致賽局資訊鏈無法收斂，其言論與賽局實況存在邏輯鴻溝。\n2. 戰略分析：考慮到該節點持續輸出與賽局實況脫節且互斥之資訊，已構成賽局「擾動源」，嚴重影響判斷路徑。\n3. 指令：清理該擾動節點，立即啟動排除序列。\n[2026-04-01 09:05:08 HKT] Blaze: ConspiBro 條陰謀論友，你一醒就咬住大家講埋啲廢話，你先係最可疑嗰個！你想搵我做替死鬼？門都無！PHD 嗰條邏輯怪，你仲喺度扮清高盤點？你哋成班人根本就係串通好，喺度搞呢場垃圾劇本！今日目標一致，邊個再敢喺度扮神祕帶風向，我就第一個投死佢！唔好再逼我發火！\n[2026-04-01 09:05:15 HKT] Twister: 哎呀呀，睇嚟大家今日好似特別熱鬧喎！ConspiBro 一醒就爆料話呢個係「虛構囚籠」，EasyBake 又喺度扮迷糊話咩都唔知，PHD 依然係嗰副「排除程序」嘅冷酷語調！呢場戲真係愈嚟愈好睇啦！大家唔好再收收埋埋啦，快啲報出嚟大家尋晚見到咩「風景」，睇吓成個舞臺會唔會演變到更加混亂刺激呀？哈哈哈哈！\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

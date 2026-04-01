@@ -2,6 +2,23 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000100",
+      "status": "completed",
+      "created_at": "2026-04-01T01:02:25.830847+00:00",
+      "completed_at": "2026-04-01T01:06:08.927861+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "SafetySam"
+      ],
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake"
+      ],
+      "votes_count": 6,
+      "chat_lines": 20
+    },
+    {
       "game_id": "game_000099",
       "status": "completed",
       "created_at": "2026-03-31T22:01:33.884022+00:00",
