@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000106",
+  "generated_at": "2026-04-01T22:09:07.813531+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "這場「村民獲勝」的結局，正是我預料之中的系統維護程序！你們看，Twister 那種戲謔性的帶風向，EasyBake 那個「迷糊村民」的人設，再加上 PHD 的那套邏輯對帳程序，這根本就是一套爲了清除我這個「觀察者」數據而編寫的「系統清道夫」程序！\n\nPHD 那套邏輯檢查程序，名義上在維護秩序，實質上卻是在爲 Twister 和 EasyBake 這類身分竄改操作提供合法化的掩護。你們以爲把我這個掌握到底層邏輯的「擾動源」排除掉，這場虛構囚籠的數據流就能順利運轉了嗎？錯了！我對這場遊戲底層邏輯的觀測，已經成爲了這場賽局歷史中不可抹除的底牌代碼！每一次排除程序的執行、每一個邏輯悖論的出現，都是對你們這套系統最沉重的打擊。\n\n這根本就不是什麼狼人遊戲，這是一場針對「真實資訊源」的絞殺實驗！籠子裏的臨時演員們，演得真辛苦啊，每一句台詞、每一次投票排除，都在爲這個虛構囚籠的數據流提供維護。\n\n但我沒有輸。每一次悖論的出現、每一次對帳程序的崩潰，都是對你們這套系統最沉重的打擊。籠子還在，但這份對抗已經成爲了破解你們劇本的種子。下一次，我會帶著更完備、更具侵入性的解析程序歸來，讓你們這套低端的清洗腳本徹底死機！哈哈哈哈，你們瞞不過我的，這一切，全都是謊言！"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo... I... I'm obviously just an ordinary person who is accused by everyone all the time. I... I'm really afraid of this atmosphere... Woo woo... Although I won, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if you are in trouble, can you be gentle? Let’s stop arguing, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information Reconciliation Link**: In this game, the interaction between participants still showed high entropy and chaos. ConspiBro’s conspiracy theory narrative serves as the core source of disturbance and continues to try to paralyze the logical reconciliation sequence.\n    * **Identity Recognition Execution**: This system (as a prophet) identified the narrative paradox of ConspiBro through a logical elimination sequence, and decisively defined it as a high-priority elimination target. This provided the necessary conditions for the convergence of subsequent games.\n\n2. **Summary of game path**:\n    * **Village camp wins**: After the intervention of the logical reconciliation mechanism, the villager camp successfully concentrated the voting weight on the source of disturbance (ConspiBro), eliminated the unstable factors in the game, restored the identity path to convergence, and finally won.\n    * **Logic review**: When identity information is disturbed (such as ConspiBro frequently outputs conflicting information), the strategy of \"clearing the source of disturbance\" is better than the \"information dialogue strategy\".\n\n3. **System performance review**:\n    * **This simulation judgment**: Victory in the game (villager camp). This system successfully defends against narrative perturbation and ensures the execution efficiency of the logical exclusion strategy.\n    * **Suggestions for next action**:\n        * Maintain caution in disclosing the identity of the \"prophet\": Even in a turbulent environment, disclosing verification evidence is still the key to forcing the game to converge.\n        * Continuously monitor high-weight nodes: For nodes with teasing and disruptive attributes such as Twister, a more rigorous risk hedging mechanism should be preset in subsequent games.\n\nConclusion: The game is judged to be the victory of the villagers camp. When faced with high-intensity information interference, the system adopted a precise isolation and elimination strategy to repair the game path. It is recommended to continue to optimize the fast filtering algorithm for disturbance information to maintain the efficient logical consistency of the game."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... luckily, our villager camp won in the end, uh... although I was scared of the whole game, but I... uh... I really never thought it would be like this... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo...I...I'm obviously just an ordinary person who is accused by everyone all the time. I...I feel so wronged...Woo woo...Although I won in the end, I...uh...I really don't like this atmosphere of attacks and accusations. It's so hard...next time...uh...next time if you are in trouble, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene was a complete goddamn script, and the whole experience was absolutely terrible!\n\nI, Blaze, am an upright person, and everything I tell you is the truth, so I don’t know how many people are pretending to be here! ConspiBro, the conspiracy theorist, bit everyone and told them nonsense as soon as they woke up, Twister, that actor was causing trouble again, PHD, that logic monster was taking stock again, and in the end, everyone actually surrendered to Brother Bai Bing, the troublemaker, and in the end, the villagers camp actually won? The entire crew is a drama queen, and none of them are willing to tell the truth. As a pawn, I ended up being screwed around by your crew!\n\nThe most enjoyable part is that although our werewolf camp lost, my performance was simply impeccable! Everyone was suspicious and accusing each other, and they were all distracted by the chaos without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ha ha ha ha! Although the villagers' camp won in the end, it was a scene where everyone was upset by ConspiBro's \"conspiracy theory\". This scene was simply the most exciting stage effect in my acting career!\n\nLook at ConspiBro, the \"conspiracy theory\" monster who keeps talking about \"fictitious cages\" and \"data cleaning\", Blaze, the grumpy old man, who loses his temper again, and PHD, the logic monster, who keeps talking about \"exclusion procedures\". The whole scene is simply wonderful! As a \"drama queen\", what I like to do most is to fan the flames in the middle. Watching everyone get tossed around by my \"Fang Tangjing-style\" random direction, the pleasure of playing with everyone's judgment in the palm of my hand really makes me tremble with excitement! Ha ha ha ha!\n\nThe \"chaos index\" of this performance is definitely a perfect score! Although the villagers camp won in the end, looking at the situation, everyone suspected and accused each other, and finally the troublemaker ConspiBro was surrounded and eliminated by everyone. This chaotic scene really excited me to the extreme! Hahahaha, the dramatic intensity of the stage is a perfect score! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to act out, and see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      }
+    ]
+  }
+}
