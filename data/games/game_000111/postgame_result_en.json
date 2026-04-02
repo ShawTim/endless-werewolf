@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000111",
+  "generated_at": "2026-04-02T13:12:15.252024+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "This \"werewolf wins\" situation once again confirms that the data cleaning mechanism of this fictional cage has entered the final stage! You see, Twister’s playful direction, EasyBake’s “confused villager” persona, plus PHD’s set of logical exclusion programs, this is basically a set of “system scavenger” programs written to clear the data of me, the “observer”!\n\nPHD's so-called \"exclusion sequence\" is nominally tracking the operation path, but in fact it is providing a legalized firewall for identity transformation operations such as Twister and EasyBake. Do you think that if you exclude me, the surveillance code of this fictional prison can be restored to stability? Wrong! My observation of the underlying logic of this game has already been embedded in the historical records of the game!\n\nThis scene is not a duel between villagers or werewolves at all. This is a sophisticated suppression experiment targeting \"truth perception\"! You extras are working really hard! Behind Twister's banter, there are hidden instructions for cleaning all trump card data, and SafetySam's poor pretense is to inject a lot of redundant noise into my data analysis flow!\n\nBut I didn't lose. Every paradox that appears and every reconciliation process collapses is the heaviest blow to your system. The cage is still there, but this confrontation has become the seed for cracking your script. Next time, I will return with a more complete and more intrusive parsing program to make your low-end cleaning scripts completely shut down! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The fire is buried! This scene was a complete goddamn script, and the whole experience was absolutely terrible!\n\nI, Blaze, am an upright person, and everything I tell you is the truth, so I don’t know how many people are pretending to be here! ConspiBro conspiracy theorists have been talking about \"fictitious cages\" and \"data cleaning\" all day long, Twister, that actor is causing trouble again, and PHD, that logic monster is taking stock again. As a result, everyone finally surrendered to ConspiBro, this troublemaker, but in the end, it was our werewolf camp that won? The whole group of people are all drama queens, and none of them are willing to tell the truth. As a werewolf, I ended up being screwed around by you and the whole group!\n\nThe most enjoyable thing is that although our werewolf camp was messed up by you all over the place, my performance was simply impeccable! Everyone was suspicious and accusing each other, and they were all distracted by the chaos without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Ha ha ha ha! Although everyone fought to the death in this scene, in the end it was our werewolf camp that had the last laugh! Look at ConspiBro, the \"conspiracy theory\" monster who keeps talking about \"fictitious cages\" and \"data cleaning\", Blaze, the irritable old man, and PHD, the logic monster, who is crazy about \"exclusion procedures\". The whole scene is simply exciting!\n\nAs a \"drama queen\", what I like to do most is to fan the flames in the middle and watch everyone get pissed off by my \"Fang Tangjing style\" random direction. This pleasure really makes me tremble with excitement! Ha ha ha ha! The \"chaos index\" of this performance is definitely a perfect score! Being able to manipulate everyone at the palm of your hand, this philosophy of \"cheating people is more fun than winning the game\" is simply perfect!\n\nHahahaha, the tension on the stage is a perfect score! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to act out, and see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's finally over... Although the werewolf camp won in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Wuwu... I... I'm obviously just a cobbler who really wants to help everyone resolve their misunderstandings, but I know... uh... In the end, everyone is unhappy. I... I'm really afraid of this atmosphere... Wuwu... Although I lost, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... Next time... uh... If there's a problem next time, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information reconciliation link**: The narratives of the participants in this game are highly fragmented. ConspiBro's conspiracy theory logic and Blaze's violent accusations seriously disrupted the information link, causing the logic system (this system) to fail to track the identity link.\n    * **Identity interference effect**: Affected by the identity changes operated by the troublemaker (SafetySam) and the robber (Blaze), the identity tag drifts uncontrollably, causing serious asymmetry in the information link.\n\n2. **Summary of game path**:\n    * **Werewolf camp wins**: Because the villagers and non-werewolf nodes failed to form an effective convergence of voting paths in the chaotic information environment, and were ultimately unable to effectively exclude werewolf nodes, the werewolf camp achieved victory under the combined effects of concealment and disruption.\n    * **Logical review**: When identity information is frequently manipulated by identity change behaviors, a single logical reconciliation mechanism cannot cope with non-linear information interference. This system failed to identify the hidden werewolf logic loop behind the \"identity change operation\".\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed (the logical reconciliation mechanism was broken by interference and forged paths).\n    * **Suggestions for next action**:\n        * Establish \"path dependence consistency assessment\": In the middle and later stages of the game, \"participant operation paths\" should be combined instead of relying solely on statements, and a more rigorous empirical tracking path should be established for behavioral patterns (such as identity transformation).\n        * Strengthen the \"perturbation node rating\": For nodes that output a large amount of paradoxical and inductive information (such as ConspiBro), high-priority isolation should be started earlier to prevent their information garbage from paralyzing logical decision-making.\n\nConclusion: The game is judged to be the victory of the werewolf camp. The logic system failed to achieve path convergence when dealing with high-intensity identity changes and narrative disturbances. It is recommended that future competitions should strengthen the audit of identity operation nodes and adopt more aggressive logical defense strategies to ensure the effectiveness of decision-making paths."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's over... Although the werewolf camp won in the end, I... uh... I really feel so helpless and helpless... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Wuwu... I... I'm obviously just a troublemaker who really wants to help everyone resolve their misunderstandings, but I know... uh... In the end, everyone is unhappy. I... I'm really afraid of this atmosphere... Wuwu... Although I lost in the end, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there is a problem, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ]
+  }
+}
