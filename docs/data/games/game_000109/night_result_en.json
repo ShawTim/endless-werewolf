@@ -1,0 +1,141 @@
+{
+  "players": {
+    "1": {
+      "id": "1",
+      "name": "Blaze",
+      "name_zh": "Tan Zai is spicy",
+      "name_en": "Blaze",
+      "persona": "The grumpy old man has a straight stomach. You hate it when people talk in a roundabout way. Even if you are a good person, you still like to jump out and accuse others immediately.",
+      "model": "github-copilot/gpt-4.1",
+      "seat": 0,
+      "initial_role": "Villager",
+      "current_role": "Robber",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "2": {
+      "id": "2",
+      "name": "SafetySam",
+      "name_zh": "safety officer",
+      "name_en": "SafetySam",
+      "persona": "Extremely cautious and a wallflower. You are never the first to speak, always waiting for the direction of the wind to become clear before taking a stand. If accused, you would immediately act pitiful or look away.",
+      "model": "github-copilot/gpt-5-mini",
+      "seat": 1,
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "night_memory": [
+        "You checked Blaze and his identity is: Villager."
+      ],
+      "night_actions": [
+        {
+          "role": "Seer",
+          "action": "inspect_player",
+          "target": "Blaze",
+          "seen_role": "Villager",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You checked Blaze and his identity is: Villager."
+    },
+    "3": {
+      "id": "3",
+      "name": "Dr. Pizza",
+      "name_zh": "PHD",
+      "name_en": "Dr. Pizza",
+      "persona": "Cold logic monster. You speak concisely and like to use columns. You never trust your intuition, only the information holes on the field. You are the hardest person to be fooled in the whole room.",
+      "model": "nvidia/moonshotai/kimi-k2.5",
+      "seat": 2,
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You meet another werewolf type: Twister."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You meet another werewolf type: Twister."
+    },
+    "4": {
+      "id": "4",
+      "name": "Twister",
+      "name_zh": "Fang Tangjing",
+      "name_en": "Twister",
+      "persona": "A dramatist who fears that the world will not be in chaos. No matter what your identity is, you like to mess up the situation by jumping around randomly at the beginning. You find it more fun to lie to people than to win the game.",
+      "model": "nvidia/z-ai/glm5",
+      "seat": 3,
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You meet another werewolf: Dr. Pizza."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You meet another werewolf: Dr. Pizza."
+    },
+    "5": {
+      "id": "5",
+      "name": "EasyBake",
+      "name_zh": "innocent grill",
+      "name_en": "EasyBake",
+      "persona": "He is a good person and trusts others easily. You always try to mediate disputes. If you are forced to lie, you will appear extremely stiff and stammering (using... and uh...).",
+      "model": "nvidia/qwen/qwen3.5-397b-a17b",
+      "seat": 4,
+      "initial_role": "Robber",
+      "current_role": "Villager",
+      "night_memory": [
+        "You stole the Blaze card, and after replacing it, your family is: Villager."
+      ],
+      "night_actions": [
+        {
+          "role": "Robber",
+          "action": "rob",
+          "target": "Blaze",
+          "new_role": "Villager",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You stole the Blaze card, and after replacing it, your family is: Villager."
+    },
+    "6": {
+      "id": "6",
+      "name": "ConspiBro",
+      "name_zh": "Senior Brother Bai Bing",
+      "name_en": "ConspiBro",
+      "persona": "Conspiracy theorists. You feel like everyone is lying, and even if someone tells the truth, you suspect there is a deeper motive behind it. You like to come up with the most ridiculous hypotheses that you can't completely refute.",
+      "model": "nvidia/minimaxai/minimax-m2.5",
+      "seat": 5,
+      "initial_role": "Tanner (tanner)",
+      "current_role": "Tanner (tanner)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    }
+  },
+  "seating_order": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "center_cards": [
+    "Troublemaker",
+    "Minion",
+    "Villager"
+  ],
+  "night_trace": [
+    {
+      "actor": "SafetySam",
+      "role": "Seer",
+      "action": "inspect_player",
+      "target": "Blaze",
+      "source": "agent"
+    },
+    {
+      "actor": "EasyBake",
+      "role": "Robber",
+      "action": "rob",
+      "target": "Blaze",
+      "source": "agent"
+    }
+  ]
+}

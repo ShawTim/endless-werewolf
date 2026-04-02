@@ -2,6 +2,22 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000109",
+      "status": "completed",
+      "created_at": "2026-04-02T07:01:42.191772+00:00",
+      "completed_at": "2026-04-02T07:08:20.554711+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "ConspiBro"
+      ],
+      "winners": [
+        "ConspiBro"
+      ],
+      "votes_count": 6,
+      "chat_lines": 14
+    },
+    {
       "game_id": "game_000108",
       "status": "completed",
       "created_at": "2026-04-02T04:02:27.164503+00:00",
