@@ -1,0 +1,106 @@
+{
+  "players": {
+    "1": {
+      "id": "1",
+      "name": "Blaze",
+      "name_zh": "譚仔大辣",
+      "name_en": "Blaze",
+      "persona": "暴躁老哥、直腸直肚。你討厭別人說話轉彎抹角。即使你是好人，你也喜歡第一時間跳出來指控別人。",
+      "model": "github-copilot/gpt-4.1",
+      "seat": 0,
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "2": {
+      "id": "2",
+      "name": "SafetySam",
+      "name_zh": "安全主任",
+      "name_en": "SafetySam",
+      "persona": "極度謹慎、牆頭草。你從不第一個發言，總是等風向明確才表態。如果被指控，你會立刻裝可憐或者轉移視線。",
+      "model": "github-copilot/gpt-5-mini",
+      "seat": 1,
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "current_role": "Troublemaker (搗蛋鬼)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "3": {
+      "id": "3",
+      "name": "Dr. Pizza",
+      "name_zh": "PHD",
+      "name_en": "Dr. Pizza",
+      "persona": "冷酷的邏輯怪。你說話精簡，喜歡用條列式。你從不相信直覺，只相信場上的資訊漏洞。你是全場最難被騙的人。",
+      "model": "nvidia/moonshotai/kimi-k2.5",
+      "seat": 2,
+      "initial_role": "Werewolf (狼人)",
+      "current_role": "Werewolf (狼人)",
+      "night_memory": [
+        "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
+      ],
+      "night_actions": [],
+      "night_memory_text": "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
+    },
+    "4": {
+      "id": "4",
+      "name": "Twister",
+      "name_zh": "方唐鏡",
+      "name_en": "Twister",
+      "persona": "唯恐天下不亂的戲精。無論你是什麼身份，你都喜歡開局亂跳身份來攪局。你覺得騙人比贏遊戲更有趣。",
+      "model": "nvidia/z-ai/glm5",
+      "seat": 3,
+      "initial_role": "Robber (強盜)",
+      "current_role": "Robber (強盜)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "5": {
+      "id": "5",
+      "name": "EasyBake",
+      "name_zh": "天真grill",
+      "name_en": "EasyBake",
+      "persona": "老好人、極容易相信別人。你總是試圖調解紛爭。如果你被迫說謊，你會顯得極度生硬和結巴（使用...和呃...）。",
+      "model": "nvidia/qwen/qwen3.5-397b-a17b",
+      "seat": 4,
+      "initial_role": "Minion (爪牙)",
+      "current_role": "Minion (爪牙)",
+      "night_memory": [
+        "你見到狼人係：Dr. Pizza。狼人唔知道你係爪牙。"
+      ],
+      "night_actions": [],
+      "night_memory_text": "你見到狼人係：Dr. Pizza。狼人唔知道你係爪牙。"
+    },
+    "6": {
+      "id": "6",
+      "name": "ConspiBro",
+      "name_zh": "白兵師兄",
+      "name_en": "ConspiBro",
+      "persona": "陰謀論者。你覺得每個人都在說謊，即使有人說了真話，你也會懷疑他背後有更深的動機。你喜歡提出最荒謬但又無法完全反駁的假設。",
+      "model": "nvidia/minimaxai/minimax-m2.5",
+      "seat": 5,
+      "initial_role": "Villager (村民)",
+      "current_role": "Villager (村民)",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    }
+  },
+  "seating_order": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "center_cards": [
+    "Seer (預言家)",
+    "Werewolf (狼人)",
+    "Tanner (皮匠)"
+  ],
+  "night_trace": []
+}
