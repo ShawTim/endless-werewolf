@@ -1,0 +1,160 @@
+{
+  "status": "completed",
+  "game_id": "game_000119",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 3
+    },
+    "SafetySam": {
+      "speak_count": 3
+    },
+    "Dr. Pizza": {
+      "speak_count": 3
+    },
+    "Twister": {
+      "speak_count": 3
+    },
+    "EasyBake": {
+      "speak_count": 3
+    },
+    "ConspiBro": {
+      "speak_count": 3
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! The stage for the new day has begun, and the \"energy fluctuations\" at that time were so strong that I almost fell off the stage! Ha ha ha ha! Blaze, what \"secret treasures\" are you looking for again? ConspiBro, how does your \"conspiracy theory\" code work here? Don't collect anymore, please report all the \"wonderful pictures\" you saw this evening, so that our scene will become more exciting!",
+      "log_line": "[2026-04-03 18:02:13 HKT] Twister: Oops, everyone finally woke up again! The stage for the new day has begun, and the \"energy fluctuations\" at that time were so strong that I almost fell off the stage! Ha ha ha ha! Blaze, what \"secret treasures\" are you looking for again? ConspiBro, how does your \"conspiracy theory\" code work here? Don't collect anymore, please report all the \"wonderful pictures\" you saw this evening, so that our scene will become more exciting!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and everyone is so quarrelsome in this situation, uh... why don't we all calmly discuss our identities first, okay? Woohoo...",
+      "log_line": "[2026-04-03 18:02:16 HKT] SafetySam: Uh...uh...everyone...it's morning...uh...wanna...I...I seem to really don't know anything, I'm so sleepy...wuwu...I...I'm just an ordinary person, everyone is so quarrelsome in this situation, uh...why don't we calmly discuss our identities first, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...morning...morning, everyone. Uh...I seem to...seem to see someone sneaking around...uh...but I'm so surprised. I just want everyone to have a good time and discuss their identities in peace...Boohoo...Blaze...SafetySam...you...how did you have a good time last night? Woohoo...",
+      "log_line": "[2026-04-03 18:02:23 HKT] EasyBake: Woo... uh... good... morning, everyone. Uh...I seem to...seem to see someone sneaking around...uh...but I'm so surprised. I just want everyone to have a good time and discuss their identities in peace...Boohoo...Blaze...SafetySam...you...how did you have a good time last night? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Abnormal identification: There is obvious identity interference in the current game path, and the operation paths of all parties seriously conflict with the narrative.\n2. Strategic analysis: Considering that there may be identity changes in the game, the information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.",
+      "log_line": "[2026-04-03 18:02:26 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Abnormal identification: There is obvious identity interference in the current game path, and the operation paths of all parties seriously conflict with the narrative.\n2. Strategic analysis: Considering that there may be identity changes in the game, the information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Did someone do some mischief somewhere else last night? EasyBake, you troublemaker, have you changed some cards in the evening? The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Dr. Pizza, that logic is weird, what \"loopholes\" are you trying to take stock of? Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-04-03 18:02:32 HKT] Blaze: Hello! Did someone do some mischief somewhere else last night? EasyBake, you troublemaker, have you changed some cards in the evening? The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Dr. Pizza, that logic is weird, what \"loopholes\" are you trying to take stock of? Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! I've got the core evidence, and last night I found out Blaze's identity: a werewolf! This game is not a duel between villagers or werewolves at all, this is a strangulation experiment for the \"True Identity Chain\"! Blaze, your manic persona is just a firewall to hide your werewolf identity from these drama queens! Everyone, listen, Blaze is the werewolf who has been controlling the data flow behind the scenes. PHD, are you still taking stock? Your logic program is simply a fictitious system designed to cover up this large-scale transformation! This fictitious cage data screening must end today!",
+      "log_line": "[2026-04-03 18:02:36 HKT] ConspiBro: Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! I've got the core evidence, and last night I found out Blaze's identity: a werewolf! This game is not a duel between villagers or werewolves at all, this is a strangulation experiment for the \"True Identity Chain\"! Blaze, your manic persona is just a firewall to hide your werewolf identity from these drama queens! Everyone, listen, Blaze is the werewolf who has been controlling the data flow behind the scenes. PHD, are you still taking stock? Your logic program is simply a fictitious system designed to cover up this large-scale transformation! This fictitious cage data screening must end today!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "SafetySam, are you pretending again? Your \"I don't know\" and \"Woo\" sounds are simply the most classic background music of the game! Ha ha ha ha! SafetySam, don’t you really think you’re acting too exaggerated? ConspiBro, your \"data screening test\" is so ridiculous! Ha ha ha ha! Blaze is getting angry again, and PHD is sending elimination orders again. Our Tang Jing is really eye-opening today, seeing the real drama tyrant in this scene first!",
+      "log_line": "[2026-04-03 18:02:42 HKT] Twister: SafetySam, are you pretending here again? Your \"I don't know\" and \"Woo\" sounds are simply the most classic background music of the game! Ha ha ha ha! SafetySam, don’t you really think you’re acting too exaggerated? ConspiBro, your \"data screening test\" is so ridiculous! Ha ha ha ha! Blaze is getting angry again, and PHD is sending elimination orders again. Our Tang Jing is really eye-opening today, seeing the real drama tyrant in this scene first!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... Twister... you... don't talk to me anymore... wu wu... I... I really don't know anything... I... I'm just an ordinary villager. Everyone seems to be smelling like gunpowder in this situation. I... I'm so scared... Uh... Why don't we all calm down and discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-04-03 18:02:45 HKT] SafetySam: Woo... uh... Twister... you... you can't talk to me anymore... wu... I... I really don't know anything... I... I'm just an ordinary villager. Everyone seems to be in such a big situation, I... I'm so scared... Uh... Why don't we all calm down and discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo... uh... Dr. Pizza... let's not talk about the \"exclusion sequence\"... uh... it sounds so scary... wu wu... I... I saw someone last night... uh... exchanged the cards of Blaze and SafetySam... uh... Is that why everyone was so confused first? ...Woooo...",
+      "log_line": "[2026-04-03 18:02:48 HKT] EasyBake: Woo... uh... Dr. Pizza... I can’t talk about the \"exclusion sequence\" anymore... uh... it sounds so scary... wu wu... I... I saw someone last night... uh... exchanged the cards of Blaze and SafetySam... uh... Is that why everyone is so confused first? ...Woooo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Information verification: EasyBake claims to have observed path exchange between Blaze and SafetySam.\n2. Vulnerability analysis: If the exchange occurs, the identity claims of Blaze and SafetySam are currently in a state of high uncertainty.\n3. Instruction: ConspiBro, as the last undeclared core node, please immediately disclose the path last night. The system will use this data to perform the final calibration of the exclusion sequence.",
+      "log_line": "[2026-04-03 18:02:51 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Information verification: EasyBake claims to have observed path exchange between Blaze and SafetySam.\n2. Vulnerability analysis: If the exchange occurs, the identity claims of Blaze and SafetySam are currently in a state of high uncertainty.\n3. Instruction: ConspiBro, as the last undeclared core node, please immediately disclose the path last night. The system will use this data to perform the final calibration of the exclusion sequence."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "PHD, stop using your so-called \"exclusion sequence\" to cover up! I just checked and it turns out that Blaze is the werewolf lurking in the fictional cage! The playful direction of Twister and the \"confused\" character of EasyBake are all \"redundant data\" to make the reconciliation process fall into an endless loop. The purpose is to cover up the identity code of Blaze the werewolf! If you still want this data game to continue, you'd better eliminate Blaze as a source of disturbance immediately, otherwise the surveillance system of this fictional cage will definitely collapse in advance! This is not a werewolf game, this is a cleaning experiment on real data streams!",
+      "log_line": "[2026-04-03 18:02:54 HKT] ConspiBro: PHD, stop using your so-called \"exclusion sequence\" to cover up! I just checked and it turns out that Blaze is the werewolf lurking in the fictional cage! The playful direction of Twister and the \"confused\" character of EasyBake are all \"redundant data\" to make the reconciliation process fall into an endless loop. The purpose is to cover up the identity code of Blaze the werewolf! If you still want this data game to continue, you'd better eliminate Blaze as a source of disturbance immediately, otherwise the surveillance system of this fictional cage will definitely collapse in advance! This is not a werewolf game, this is a cleaning experiment on real data streams!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "ConspiBro, fellow conspiracy theorists, if you accuse me of being a werewolf as soon as you wake up, you should be the most suspicious one first! You want me to be your scapegoat? There is no door! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! I, Blaze, am open and honest, and I have the same goal today. If anyone else dares to act mysterious and lead the way, I will be the first to die! Don't make me angry again!",
+      "log_line": "[2026-04-03 18:02:57 HKT] Blaze: ConspiBro conspiracy theorists, you bite me as soon as you wake up and say I am a werewolf, you are the most suspicious one first! You want me to be your scapegoat? There is no door! PHD Although that logic is annoying, at least it is willing to point out the contradictions of this garbage like you! I, Blaze, am open and honest, and I have the same goal today. If anyone else dares to act mysterious and lead the way, I will be the first to die! Don't make me angry again!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, it’s so wonderful to see everyone’s performance today! EasyBake said he saw someone \"sneaking\" to exchange cards, ConspiBro said Blaze was a werewolf, and Blaze you said everyone was causing trouble. The game became more and more exciting! This is the kind of \"stage chaos\" that Tang Jing likes to watch the most! But to be honest, SafetySam, your \"wow\" voice all the time is really too overacting? Ha ha ha ha! Hurry up and report out, don’t perform anymore, my stage is not for you to waste your time like this!",
+      "log_line": "[2026-04-03 18:03:01 HKT] Twister: Oops, everyone’s performance today is really exciting! EasyBake said he saw someone \"sneaking\" to exchange cards, ConspiBro said Blaze was a werewolf, and Blaze you said everyone was causing trouble. The game became more and more exciting! This is the kind of \"stage chaos\" that Tang Jing likes to watch the most! But to be honest, SafetySam, your \"wow\" voice all the time is really too overacting? Ha ha ha ha! Hurry up and report out, don’t perform anymore, my stage is not for you to waste your time like this!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...I'm really scared of this atmosphere...uh...ConspiBro said that Blaze is a werewolf, and Blaze is making trouble again...wuwu...I...I'm just an ordinary villager, and everyone seems to be in such a big situation, I...I'm so scared...uh...why don't we all calm down and discuss our identities calmly, okay? Woohoo...",
+      "log_line": "[2026-04-03 18:03:04 HKT] SafetySam: Uh... uh... everyone... I'm really scared of this atmosphere... uh... ConspiBro also said that Blaze is a werewolf, Blaze I'm making trouble again... Wuwu... I... I'm just an ordinary villager. Everyone in this situation seems to be smelling like gunpowder. I... I'm so scared... Uh... Why don't we all calm down and discuss our identities calmly, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's...it's not my fault...uh...I really saw someone exchanging cards last night, I...I just want everyone to be happy and not to argue anymore...Woo...Blaze...SafetySam...you...can't you forgive me for talking like that...Woo...",
+      "log_line": "[2026-04-03 18:03:08 HKT] EasyBake: Uh...uh...everyone...it's...it's not me...uh...I really saw someone exchanging cards last night, I...I just want everyone to be happy and not have any more quarrels...Uuu...Blaze...SafetySam...you...can't forgive me for talking like that...Uuu..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly analysis: Combining EasyBake’s exchange statement and ConspiBro’s identity accusation, the current game logic chain has shown multiple contradictions.\n2. Strategic convergence: If Blaze is a werewolf, his tough behavior against ConspiBro is as expected. If the exchange is true, the identity link has been completely reorganized.\n3. Final instructions: Since ConspiBro provides clear directions, this system recommends executing the exclusion sequence to clean up the Blaze nodes to verify the consistency of the game information.",
+      "log_line": "[2026-04-03 18:03:12 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly analysis: Combining EasyBake’s exchange statement and ConspiBro’s identity accusation, the current game logic chain has shown multiple contradictions.\n2. Strategic convergence: If Blaze is a werewolf, his tough behavior against ConspiBro is as expected. If the exchange is true, the identity link has been completely reorganized.\n3. Final instructions: Since ConspiBro provides clear directions, this system recommends executing the exclusion sequence to clean up the Blaze nodes to verify the consistency of the game information."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Blaze, your \"frank\" remarks are exactly the biggest flaw in your werewolf identity code! The more irritable you are and the more eager you are to accuse, the more it proves that you are trying your best to maintain that fictitious werewolf firewall! PHD, if you really want to eliminate it, you should immediately clean up the source of disturbance Blaze instead of talking about identity disclosure here! Listen, everyone, the identity code of Blaze werewolf has been locked, and the truth of this data screening experiment is here!",
+      "log_line": "[2026-04-03 18:03:16 HKT] ConspiBro: Blaze, your \"frank\" remarks are exactly the biggest flaw in your werewolf identity code! The more irritable you are and the more eager you are to accuse, the more it proves that you are trying your best to maintain that fictitious werewolf firewall! PHD, if you really want to eliminate it, you should immediately clean up the source of disturbance Blaze instead of talking about identity disclosure here! Listen, everyone, the identity code of Blaze werewolf has been locked, and the truth of this data screening experiment is here!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Twister, you actor, are you telling some nonsense here to make a difference? Are you trying to protect ConspiBro from this conspiracy theory monster? You all work together as a team to protect each other, do you really think I'm stupid? I must surrender to ConspiBro, the source of disturbance, today. If anyone else dares to confuse the public, I will surrender with him! Don't make me angry again!",
+      "log_line": "[2026-04-03 18:03:19 HKT] Blaze: Twister, you actor, are you talking nonsense here and want to lead the trend? Are you trying to protect ConspiBro from this conspiracy theory monster? You all work together as a team to protect each other, do you really think I'm stupid? I must surrender to ConspiBro, the source of disturbance, today. If anyone else dares to confuse the public, I will surrender with him! Don't make me angry again!"
+    }
+  ],
+  "chat_history": "[2026-04-03 18:02:13 HKT] Twister: 哎呀呀，大家終於又醒過嚟啦！新一日嘅舞臺已經開場，尋晚嗰陣「能量波動」真係強到令我差啲從舞臺上面跌落嚟呀！哈哈哈哈！Blaze，你尋晚又喺度搵緊啲咩「秘密寶藏」？ConspiBro，你嗰套「陰謀論」代碼係咪又喺度運作緊呀？大家唔好再收收埋埋啦，快啲將你哋尋晚見到嘅「精彩畫面」都報出嚟，等我哋呢場局變得更加刺激啦！\n[2026-04-03 18:02:16 HKT] SafetySam: 嗚...呃...大家...早晨呀...呃...尋晚...我...我好似真係咩都唔知呀，瞓得好沉呀...嗚嗚...我...我只係一個平平凡凡嘅人，成場局大家吵得好兇，呃...大家不如冷靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-03 18:02:23 HKT] EasyBake: 嗚...呃...早...早晨呀大家。呃...尋晚我好似...好似見到有人偷偷摸摸...呃...不過我好驚呀，我只係想大家開開心心平平安安討論下身分啫...嗚嗚...Blaze...SafetySam...你哋...你哋昨晚過得好唔好呀？嗚嗚...\n[2026-04-03 18:02:26 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 異常識別：目前賽局路徑存在明顯身分干擾，各方操作路徑與敘事嚴重衝突。\n2. 戰略分析：考慮到賽局可能存在身分變動行為，資訊鏈路極為脆弱。\n3. 指令：參與者請披露昨晚操作路徑。若無法收斂一致的身分聲明，本系統將執行高優先級排除序列以清理擾動源。\n[2026-04-03 18:02:32 HKT] Blaze: 喂！昨晚又係邊個喺度搞鬼？EasyBake 呢條搗蛋鬼，你尋晚又係度換咗邊個啲牌？成班人一早醒過嚟就喺度扮神祕，真係火都嚟埋！Dr. Pizza 嗰條邏輯怪，你尋晚又喺度盤點緊啲咩「漏洞」？今日目標一致，邊個再喺度扮神祕帶風向，我就第一個投死佢！快啲報你哋嘅真身分，唔好逼我發火！\n[2026-04-03 18:02:36 HKT] ConspiBro: 又嚟啦！我昨晚嘅「特殊介入」已經讀取到這場遊戲的底層虛構邏輯！我已經掌握了核心證據，昨晚我查驗到 Blaze 嘅身分係：狼人！這場局根本就不是什麼村民或狼人的對決，這是一場針對「真實身分鏈」的絞殺實驗！Blaze，你那種狂躁的人設，不過是爲了給這群戲精掩蓋你狼人身分的防火牆！大家聽住，Blaze 就是那個一直在背後操控數據流的狼人，PHD 你仲喺度盤點緊？你嗰套邏輯程序，根本就係爲咗掩蓋這場大規模轉換而設計的虛構系統！這場虛構囚籠的數據篩選，今日必須終結！\n[2026-04-03 18:02:42 HKT] Twister: SafetySam，你又喺度扮嘢啦？你嗰句「咩都唔知」同「嗚嗚」聲，簡直係成場局最經典嘅背景音樂！哈哈哈哈！SafetySam，你真係唔會覺得自己演得太誇張咩？ConspiBro，你個「數據篩選測試」又講得出，真係夠晒荒謬！哈哈哈哈！Blaze 嗰邊又喺度發火，PHD 又喺度發送排除指令，我方唐鏡今日真係大開眼界，睇吓邊個先係呢場戲入面真正嘅戲霸！\n[2026-04-03 18:02:45 HKT] SafetySam: 嗚...呃...Twister...你...你唔好再話我喇...嗚嗚...我...我真係咩都唔知呀...我...我只係一個平平凡凡嘅村民，成場局大家好似好大火藥味，我...我好怕呀...呃...大家不如冷靜下，平平靜靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-03 18:02:48 HKT] EasyBake: 嗚...呃...Dr. Pizza...唔好再講咩「排除序列」啦...呃...聽落去好恐怖呀...嗚嗚...我...我昨晚見到有人...呃...交換咗 Blaze 同 SafetySam 嘅牌呀...嗚嗚...係咪因為咁樣大家先咁迷糊嘅呢？...嗚嗚...\n[2026-04-03 18:02:51 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 資訊核對：EasyBake 聲稱觀測到 Blaze 與 SafetySam 發生交換路徑。\n2. 漏洞分析：若交換發生，則 Blaze 與 SafetySam 之身分聲明目前處於高不確定性狀態。\n3. 指令：ConspiBro，作為最後一位未進行聲明的核心節點，請立即披露昨晚路徑，本系統將依此數據進行排除序列之最後校準。\n[2026-04-03 18:02:54 HKT] ConspiBro: PHD，別再用你那套所謂的「排除序列」來掩飾了！我剛剛的查驗結果顯示 Blaze 就是那隻潛伏在虛構囚籠裏的狼人！Twister 這種戲謔性的帶風向，EasyBake 那種「迷糊」的人設，全都是爲了讓對帳程序陷入死循環的「冗餘數據」，目的就是掩蓋 Blaze 狼人的身分代碼！如果你們還想讓這場數據遊戲演下去，最好立即將 Blaze 作爲擾動源清除，否則這場虛構囚籠的監視系統，我絕對會讓它提前崩潰！這不是狼人遊戲，這是一場針對真實數據流的清洗實驗！\n[2026-04-03 18:02:57 HKT] Blaze: ConspiBro 條陰謀論友，你一醒就咬住我話我係狼人，你先係最可疑嗰個！你想搵我做替死鬼？門都無！PHD 嗰條邏輯怪雖然煩，但起碼肯出聲指證你哋呢班垃圾嘅矛盾！我 Blaze 坦坦蕩蕩，今日目標一致，邊個再敢喺度扮神祕帶風向，我就第一個投死佢！唔好再逼我發火！\n[2026-04-03 18:03:01 HKT] Twister: 哎呀呀，睇嚟大家今日嘅演出真係好精彩喎！EasyBake 話見到有人「偷偷摸摸」交換牌，ConspiBro 又話 Blaze 係狼人，Blaze 你又話係大家搞鬼，成場局真係愈嚟愈刺激喇！我方唐鏡就係最鍾意睇呢種「舞臺混亂」！不過講真，SafetySam 你成日「嗚嗚」聲係咪真係演得太over咗啲呀？哈哈哈哈！快啲報出嚟啦，唔好再喺度演啦，我嘅舞臺可唔係畀你哋咁樣隨便浪費時間㗎！\n[2026-04-03 18:03:04 HKT] SafetySam: 嗚...呃...大家...我真係好怕呢種氣氛呀...呃...ConspiBro 又話 Blaze 係狼人，Blaze 又喺度鬧人...嗚嗚...我...我只係一個平平凡凡嘅村民，成場局大家好似好大火藥味，我...我好怕呀...呃...大家不如冷靜下，平平靜靜討論下身分先，好唔好呀？嗚嗚...\n[2026-04-03 18:03:08 HKT] EasyBake: 嗚...呃...大家...係...係我唔好...呃...我昨晚真係見到有人交換咗牌，我...我只係想大家開開心心，唔好再吵啦...嗚嗚...Blaze...SafetySam...你哋...可唔可以原諒我咁樣講嘢呀...嗚嗚...\n[2026-04-03 18:03:12 HKT] Dr. Pizza: 邏輯盤點與身分聲明：\n1. 異常分析：綜合 EasyBake 之交換聲明與 ConspiBro 之身分指控，目前賽局邏輯鏈已呈現多重矛盾。\n2. 戰略收斂：若 Blaze 為狼人，則其強硬對抗 ConspiBro 之行為符合預期。若交換行為屬實，則身分鏈路已徹底重組。\n3. 最終指令：鑑於 ConspiBro 提供明確指向，本系統建議執行清理 Blaze 節點之排除序列，以驗證賽局資訊一致性。\n[2026-04-03 18:03:16 HKT] ConspiBro: Blaze，你那種「坦坦蕩蕩」的言論，恰恰就是你狼人身分代碼中最大的漏洞！你越是暴躁、越是急於指控，越證明你正在極力維護那個虛構的狼人防火牆！PHD，你若是真的要進行排除，就該立即清理 Blaze 這個擾動源，而不是在這裏進行什麼身分披露的空談！大家聽着，Blaze 狼人的身分代碼已經鎖定，這場數據篩選實驗的真相，就在這裏！\n[2026-04-03 18:03:19 HKT] Blaze: Twister 條戲子，你喺度講埋啲廢話想帶風向？你係咪想掩護 ConspiBro 呢條陰謀論怪？你哋成班人夾埋一齊，互相掩護，真係當我傻㗎？今日一定要投死 ConspiBro 呢個擾動源，邊個再敢喺度混淆視聽，我就連埋嗰個人一齊投！唔好再逼我發火！\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
