@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "game_id": "game_000118",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 2
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 1
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo...uh...everyone...morning...uh...Wanwan...I...I checked Blaze, he is...uh...a minion...wuwu...I...I'm just an ordinary person, and this situation seems to be a big smell for everyone, wuwu...let's not argue anymore, let's discuss the identity calmly, okay? Woohoo...",
+      "log_line": "[2026-04-03 15:04:20 HKT] SafetySam: Woo... uh... everyone... it's morning... uh... night... I... I checked Blaze, he is... uh... a minion... wu wu... I... I'm just an ordinary person, and everyone seems to be in such a hot spot, wu wu... Let's stop arguing, and discuss the status quietly first, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Did someone do some mischief somewhere else last night? SafetySam's gossip proves that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-04-03 15:05:08 HKT] Blaze: Hello! Did someone do some mischief somewhere else last night? SafetySam's gossip proves that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! The underlying logic of this situation has been completely locked by some kind of \"special intervention\"! SafetySam's \"innocentness\" and Blaze's irritability are all \"redundant data\" designed to put the reconciliation process into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!",
+      "log_line": "[2026-04-03 15:05:58 HKT] ConspiBro: Here we go again! The underlying logic of this situation has been completely locked by some kind of \"special intervention\"! SafetySam's \"innocentness\" and Blaze's irritability are all \"redundant data\" designed to put the reconciliation process into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! SafetySam found out that Blaze is a minion? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-03 15:06:47 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! SafetySam found out that Blaze is a minion? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo...",
+      "log_line": "[2026-04-03 15:07:12 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path. SafetySam claims to have inspected Blaze as a minion, and the narrative conflict between the parties is huge.\n2. Strategic analysis: Considering that there may be identity changes in the game, the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.",
+      "log_line": "[2026-04-03 15:07:45 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path. SafetySam claims to have inspected Blaze as a minion, and the narrative conflict between the parties is huge.\n2. Strategic analysis: Considering that there may be identity changes in the game, the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary person. After it was found out that Blaze is a minion... Wu wu... I... I'm really afraid of being accused. Why don't we calm down and discuss our identities first, okay? Woohoo...",
+      "log_line": "[2026-04-03 15:08:15 HKT] SafetySam: Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary person. After it was found that Blaze is a minion... wu... I... I'm really afraid of being accused. Why don't we calm down and discuss our identities first, okay? Woohoo..."
+    }
+  ],
+  "chat_history": "[2026-04-03 15:04:20 HKT] SafetySam: Woo... uh... everyone... it's morning... uh... night... I... I checked Blaze, he is... uh... a minion... wu wu... I... I'm just an ordinary person, and everyone seems to be in such a hot spot, wu wu... Let's stop arguing, and discuss the status quietly first, okay? Woohoo...\n[2026-04-03 15:05:08 HKT] Blaze: Hello! Did someone do some mischief somewhere else last night? SafetySam's gossip proves that I am a minion? You are just a werewolf who is trying to change the direction of things, and you want me to be your scapegoat! The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!\n[2026-04-03 15:05:58 HKT] ConspiBro: Here we go again! The underlying logic of this situation has been completely locked by some kind of \"special intervention\"! SafetySam's \"innocentness\" and Blaze's irritability are all \"redundant data\" designed to put the reconciliation process into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!\n[2026-04-03 15:06:47 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! SafetySam found out that Blaze is a minion? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!\n[2026-04-03 15:07:12 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woo hoo... I... I seemed so confused last night, as if I was sleeping and didn't know what to do... Woo hoo... Let's stop attacking each other, okay? Woohoo...\n[2026-04-03 15:07:45 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path. SafetySam claims to have inspected Blaze as a minion, and the narrative conflict between the parties is huge.\n2. Strategic analysis: Considering that there may be identity changes in the game, the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.\n[2026-04-03 15:08:15 HKT] SafetySam: Woo... uh... everyone... I'm really afraid of this atmosphere... uh... everyone was so noisy in the whole game, I... I'm just an ordinary person. After it was found that Blaze is a minion... wu... I... I'm really afraid of being accused. Why don't we calm down and discuss our identities first, okay? Woohoo...",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

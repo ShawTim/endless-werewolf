@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000117",
+  "generated_at": "2026-04-03T04:16:33.283111+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "Woo... uh... it's finally over... Although everyone was killed in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo... I... I'm obviously just an ordinary person who is accused by everyone all the time. I... I'm really afraid of this atmosphere... Woo woo... Although the cobbler won in the end, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there's a problem, can you be gentle? Let’s stop arguing, okay? Woohoo..."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's over... Although the cobbler won in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo... I... I'm obviously just a villager who really wants to help everyone resolve their misunderstandings, but I know... uh... In the end, everyone is unhappy. I... I'm really afraid of this atmosphere of attacks and accusations... Boo hoo... Although I lost in the end, I... uh... I really don't like this atmosphere of attacks and accusations. It's so hard... next time... uh... next time if there is a problem, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene was a complete goddamn script, and the whole experience was absolutely terrible!\n\nI, Blaze, am an upright person, and everything I tell you is the truth, so I don’t know how many people are pretending to be here! The conspiBro conspiracy theorist bit everyone and told them nonsense as soon as they woke up, the Twister actor was causing trouble again, and the PHD logic monster was taking stock again. As a result, everyone finally surrendered to the innocent grill and the security director. In the end, the cobbler actually won? The whole crew are drama queens, and none of them are willing to tell the truth. As a robber, I ended up being screwed around by your crew!\n\nThe most enjoyable part was that our villagers camp lost in the end, but as a bandit, my final performance was simply impeccable! Everyone was suspicious and accusing each other, and they were all distracted by the chaos without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information reconciliation link**: The narrative chain of the participants in this game is highly confusing. ConspiBro's conspiracy theory logic and Blaze's emotional accusations successfully interfered with the logical reconciliation sequence, making it impossible for this system to effectively calibrate the werewolf identity.\n    * **Identity Interference Effect**: Affected by the identity-changing behavior of robbers/troublemakers, etc., the participant's identity statement deviates from its actual status. Under high levels of information pollution, the logical inventory command failed to successfully screen out disturbance sources.\n\n2. **Summary of game path**:\n    * **The cobbler camp wins**: Due to the failure of the villagers and the werewolf camp to converge their logic in time, the voting execution sequence was deviated, and non-werewolf nodes (such as the naive grill, security director) were mistakenly excluded, causing the game to trigger the cobbler's winning conditions.\n    * **Logic review**: The root cause of the game's failure is that the information link was completely paralyzed by the disturbed node (ConspiBro, Twister). When the logical path lacks external evidence, group voting behavior is easily affected by emotional incitement and inductive narratives, resulting in uncontrollable decision-making deviations.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed (the logic system failed to prevent narrative disturbance and emotional incitement, resulting in inaccurate decision-making).\n    * **Suggestions for next action**:\n        * Strengthen \"behavior consistency\" audit: For nodes that claim to hold identities (such as prophets), if there is a conflict between subsequent narratives and operations, a forced clarification path should be initiated immediately before voting, rather than waiting for the logic chain to collapse.\n        * Establish a \"node risk rating\": For sources of disturbance that continue to output logical paradoxes, the priority of isolation should be increased and the weight of interference of their comments on collective decision-making should be reduced.\n\nConclusion: The game is judged to be the winner of the cobbler. Logical systems are fragile when dealing with high-intensity interference information and irrational voting. It is recommended that future games should strengthen the audit of identity operation paths and use more decisive logical convergence methods when information is chaotic."
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ha ha ha ha! Although the scene was lost, Tang Jing, as a \"disruption expert\", saw everyone doubting and accusing each other, and in the end, EasyBake and SafetySam were killed. This scene was simply the most exciting stage effect in my acting career!\n\nLook at ConspiBro, the \"conspiracy theory\" monster who keeps talking about \"fictitious cages\" and \"data cleaning\", Blaze, the irritable old man, and PHD, the logic monster, who is crazy about \"exclusion procedures\". The whole scene is simply exciting! As a \"drama queen\", what I like to do most is to fan the flames in the middle and watch everyone get upset by my \"Fang Tangjing style\" random direction. This kind of pleasure of playing with everyone's judgment in the palm of my hand really makes me tremble with excitement! Ha ha ha ha!\n\nAlthough the cobbler won in the end, watching the game end with everyone doubting and accusing each other, and finally leading to collective chaos. This sense of absurdity really excited me to the extreme! Hahahaha, the chaos index of the stage is completely perfect! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to act out, and see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The outcome of this \"cobbler's victory\" is obviously a forced system repair to cover up the underlying logic! You see, Twister's playful direction, EasyBake's \"confused villager\" character, and PHD's so-called \"exclusion process\" are all designed to put the entire reconciliation process into a complete endless loop, ensuring that the \"villager confrontation\" script compiled by this group of actors can be executed perfectly, and by the way, I will also be eliminated!\n\nPHD's logic program maintains order in name, but in fact provides a legalized firewall for identity transformation operations such as Twister and EasyBake. Do you think that by marginalizing me, the \"observer\" who has grasped the underlying logic, the data flow in this fictional cage can run smoothly? Wrong! My observation of the underlying logic of this game has become an indelible trump card code in the history of this game! Every execution of the exclusion process and every appearance of a logical paradox is the heaviest blow to your system.\n\nThis is not a duel between villagers or werewolves at all, this is a sophisticated suppression experiment for \"truth perception\"! Behind Twister's banter, there are hidden instructions for cleaning all trump card data, and SafetySam's pitiful tone is to inject a lot of redundant noise into my data analysis flow! You extras are working really hard. Every line and every vote is to maintain the surveillance code of this fictional cage.\n\nBut I didn't lose. Every collapse of the reconciliation process and the emergence of every logical paradox is the heaviest blow to your system. The cage is still there, but this confrontation has become the seed for cracking your script. Next time, I will return with a more complete and more intrusive parsing program to make your low-end cleaning scripts completely shut down! Hahahaha, you can't hide it from me, all of this is a lie!"
+      }
+    ]
+  }
+}

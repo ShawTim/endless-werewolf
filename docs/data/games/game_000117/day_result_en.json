@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "game_id": "game_000117",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "Blaze": {
+      "speak_count": 1
+    },
+    "SafetySam": {
+      "speak_count": 1
+    },
+    "Dr. Pizza": {
+      "speak_count": 1
+    },
+    "Twister": {
+      "speak_count": 2
+    },
+    "EasyBake": {
+      "speak_count": 1
+    },
+    "ConspiBro": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-03 12:07:33 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Dr. Pizza",
+      "target": null,
+      "speech": "Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path, and the narrative conflicts between the parties are huge.\n2. Strategic analysis: Considering that there may be identity changes in the game (troublemaker intervention), the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.",
+      "log_line": "[2026-04-03 12:08:17 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path, and the narrative conflicts between the parties are huge.\n2. Strategic analysis: Considering that there may be identity changes in the game (troublemaker intervention), the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance."
+    },
+    {
+      "type": "speech",
+      "player_name": "ConspiBro",
+      "target": null,
+      "speech": "Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!",
+      "log_line": "[2026-04-03 12:08:59 HKT] ConspiBro: Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!"
+    },
+    {
+      "type": "speech",
+      "player_name": "Blaze",
+      "target": null,
+      "speech": "Hello! Did someone do some mischief somewhere else last night? Twister is an actor who is dressing up again, trying to make everyone a scapegoat! Dr. Pizza, that logic is weird, what \"loopholes\" are you trying to take stock of? The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!",
+      "log_line": "[2026-04-03 12:09:28 HKT] Blaze: Hello! Did someone do some mischief somewhere else last night? Twister is an actor who is dressing up again, trying to make everyone a scapegoat! Dr. Pizza, that logic is weird, what \"loopholes\" are you trying to take stock of? The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!"
+    },
+    {
+      "type": "speech",
+      "player_name": "SafetySam",
+      "target": null,
+      "speech": "Woo... uh... everyone... it's morning... uh... night... I... I seem to really don't know anything, I'm so sleepy... Wu wu... I... I'm just an ordinary person, and everyone is so quarrelsome in this situation, uh... why don't we all calmly discuss our identities first, okay? Woohoo...",
+      "log_line": "[2026-04-03 12:09:52 HKT] SafetySam: Uh...uh...everyone...it's morning...uh...wanna...I...I seem to really don't know anything, I'm so sleepy...wuwu...I...I'm just an ordinary person, everyone is so noisy in this situation, uh...why don't we calmly discuss our identities first, okay? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "EasyBake",
+      "target": null,
+      "speech": "Woo...uh...everyone...it's morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woohoo...I...I'm just an ordinary villager. I wonder how everyone was doing last night? Woohoo...",
+      "log_line": "[2026-04-03 12:10:19 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woohoo...I...I'm just an ordinary villager. I wonder how everyone was doing last night? Woohoo..."
+    },
+    {
+      "type": "speech",
+      "player_name": "Twister",
+      "target": null,
+      "speech": "Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+      "log_line": "[2026-04-03 12:10:47 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!"
+    }
+  ],
+  "chat_history": "[2026-04-03 12:07:33 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!\n[2026-04-03 12:08:17 HKT] Dr. Pizza: Logical inventory and identity statement:\n1. Anomaly identification: There is obvious information interference in the current game path, and the narrative conflicts between the parties are huge.\n2. Strategic analysis: Considering that there may be identity changes in the game (troublemaker intervention), the current information link is extremely fragile.\n3. Instruction: Participants please disclose the operation path last night. If a consistent identity claim cannot be converged, the system will perform a high-priority elimination sequence to clean up the source of the disturbance.\n[2026-04-03 12:08:59 HKT] ConspiBro: Here we go again! My \"special intervention\" last night has already read the underlying fictional logic of this game! Twister, that joke, EasyBake, that confusion, all are \"redundant data\" to make the reconciliation process fall into an endless loop! PHD, are you still taking inventory? Your set of logical exclusion procedures is basically a firewall designed to cover up the large-scale identity switch last night! Listen up, everyone, this is not a werewolf game at all, this is a carefully planned data frequency screening test! If you still want to act, you'd better tell your true identity code clearly as soon as possible, otherwise I will definitely make the surveillance system of this fictional prison collapse in advance!\n[2026-04-03 12:09:28 HKT] Blaze: Hello! Did someone do some mischief somewhere else last night? Twister is an actor who is dressing up again, trying to make everyone a scapegoat! Dr. Pizza, that logic is weird, what \"loopholes\" are you trying to take stock of? The whole group of people have been pretending to be mysterious since they woke up early in the morning, and the real fire has been buried! Today we have the same goal. If the other person acts mysterious and leads the way, I will be the first to die! Tell me your true identity quickly, before you make me angry!\n[2026-04-03 12:09:52 HKT] SafetySam: Uh...uh...everyone...it's morning...uh...wanna...I...I seem to really don't know anything, I'm so sleepy...wuwu...I...I'm just an ordinary person, everyone is so noisy in this situation, uh...why don't we calmly discuss our identities first, okay? Woohoo...\n[2026-04-03 12:10:19 HKT] EasyBake: Uh... uh... everyone... morning. Uh...a new day is here again, no need to argue anymore...ok? ConspiBro...uh...Twister...everyone...could you calm down and discuss your identity calmly first? Woohoo...I...I'm just an ordinary villager. I wonder how everyone was doing last night? Woohoo...\n[2026-04-03 12:10:47 HKT] Twister: Oops, everyone finally woke up again! This stage is getting more and more lively! Xunwan is so quiet, so quiet that I almost fell asleep! However, as a person who is extremely sensitive to the stage, I can already smell the smell of gunpowder! Blaze, what \"new discoveries\" are you making in the evening? ConspiBro, has your \"imaginary cage\" system been upgraded again? Don't wait any longer, please report it quickly to see what \"scenery\" you will see tonight. The game will be more exciting and exciting! Ha ha ha ha!",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
