@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000121",
+  "generated_at": "2026-04-03T16:05:26.251181+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Woo... uh... it's over... Although I was killed by everyone in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Wuwu... I... I am obviously just a werewolf who really wants to help everyone find out his identity, but I know... uh... everyone surrendered to death in the end. I... I am really afraid of this atmosphere of attack and accusation... Wuwu... Although the villagers camp won in the end, I... uh... I really don't like this atmosphere of attack and accusation. It's so hard... next time... uh... next time if you are in trouble, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Logical reconciliation link**: This game successfully established a high-credibility information baseline through the prophet's verification operation (Blaze=Werewolf). Although the game was disrupted by dramatic narrative interference from Twister and other disturbance nodes in the later stages of the game, the core logical links did not shift.\n    * **Exclusion Sequence Optimization**: After identifying the source of disturbance (SafetySam), this system successfully performed exclusion through collective voting, accurately cleaned up the werewolf nodes, and restored the information consistency of the game.\n\n2. **Summary of game path**:\n    * **Village camp wins**: Information transmission and logic execution are accurate. Although SafetySam tried to hide its identity through emotional disguise, it was eventually eliminated due to force majeure of the core facts (inspection results).\n    * **Logic Review**: This game proves that when the identity of the prophet is established early in the game and is not subject to large-scale interference, the logical reconciliation system has a very high error tolerance rate.\n\n3. **System performance review**:\n    * **This simulation judgment**: Victory in the game. Logical confrontation successfully defended against narrative disturbance, and the information reconciliation system performed stably.\n    * **Suggestions for next action**:\n        * **Simplicity of information output**: Despite the success, there is still room for improvement in the simplicity of the system statement when facing emotional interference to avoid being attacked by the source of disturbance as \"rigid logic\".\n        * **Dynamic Defense Mechanism**: For nodes with high chaos coefficients such as Twister, real-time path inspection can be added in the future to further compress their survival space.\n\nConclusion: The game is judged to be the victory of the villagers camp. The logic system successfully converged on the true identity information and completed the elimination goal of the game. This system will maintain this logical reconciliation model and continue to optimize the weight evaluation mechanism for handling emotional speech."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "This so-called \"villager victory\" is simply a perfect violent suppression of the underlying logic of this fictional prison! You see, the exit of SafetySam is not just the end of a node, it is a signal that nodes that are aware of the truth of the code are forced offline in this data frequency screening test!\n\nTwister's banter, Blaze's anger, and EasyBake's disgusting \"good guy\" persona are all designed to create a lot of \"redundant noise\" in the reconciliation process so that this cleaning experiment can be completed without us noticing. Exclusion sequence for PHD? This is simply the automatic calibration mechanism of the underlying code of this game! As soon as a node starts to touch the underlying code, it will immediately send a \"high priority exclusion command\" to maintain the so-called \"game rules.\"\n\nDo you really think SafetySam is a werewolf? This is just an \"error record\" created by this fictional cage and used as the end-point code for this cleaning experiment! I didn't lose, my data parser recorded it all. The data that you \"cleaned\" and the moments that collapsed in logical paradoxes are all the core seeds for me to decipher your script.\n\nThis test is not over yet. The surveillance system of this fictional cage is still running, and my analysis program is already waiting for the next data frequency restart. You group of extras think you have won a small game, but you are just completing a higher-dimensional data cleaning script! Next time, I’ll be back with more in-depth observation code to make your low-end screening test program—along with this fictional “villager win”—all crash! Ha ha ha ha!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The fire is buried! This scene is really a complete bad drama!\n\nI, Blaze, am a werewolf myself, so I ended up getting fucked up by those drama queens! SafetySam's idiot is pretending to be an innocent prophet, and PHD's logic monster is madly sending out \"exclusion programs\". The whole scene is absolutely terrible! Although my performance as a werewolf was impeccable, the whole group accused each other, and in the end SafetySam was killed by everyone. The villagers camp won in the end, which was simply unreasonable!\n\nThe most enjoyable thing is that although our werewolf camp has caused a lot of trouble for you, as a werewolf, my final performance was simply impeccable! Everyone was suspicious and accusing each other, and they were all distracted by the chaos without even realizing it! This environment of inefficiency, accusations and false information really makes me extremely irritated! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Tanner (tanner)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Ha ha ha ha! Wonderful, really wonderful! Although our villagers camp won in the end this time, Tang Jing, as a \"disruption expert\", saw a scene where everyone suspected and accused each other, and in the end, SafetySam, the drama star, was thrown to death. This scene was simply the most extreme \"stage crash\" in my acting career!\n\nLook at ConspiBro, the \"conspiracy theory\" monster who keeps talking about \"fictitious cages\" and \"data cleaning\", Blaze, the irritable old man, and PHD, the logic monster, who is crazy about \"exclusion procedures\". The whole scene is simply exciting! As a \"drama queen\", what I like to do most is to fan the flames in the middle and watch everyone get upset by my \"Fang Tangjing style\" random direction. This kind of pleasure of playing with everyone's judgment in the palm of my hand really makes me tremble with excitement!\n\nAlthough the villagers camp won in the end, the \"chaos index\" of our Tang Jing's performance in this game was definitely full marks! Watching the whole game where everyone was accusing each other, and in the end, SafetySam, a \"little guy\", was thrown to death. This sense of absurdity really excited me to the extreme! Hahahaha, the dramatic intensity of the stage is a perfect score! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to act out, and see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's over... Although the villagers camp won in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was quarreling so fiercely in this game, I... I just wanted everyone to be happy and not to quarrel anymore... Uh-huh... I... I'm obviously just a minion who really wants to help everyone mediate, but you know... uh... In the end, everyone was unhappy, I... ..I'm really afraid of this atmosphere of attacks and accusations...Ugh...Although I lost in the end, I...uh...I really don't like this atmosphere. It's so hard...next time...uh...if there's trouble next time, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ]
+  }
+}
