@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000120",
+  "generated_at": "2026-04-03T13:04:33.576327+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "Twister",
+        "player_name_zh": "Fang Tangjing",
+        "player_name_en": "Twister",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Ha ha ha ha! This scene is simply the pinnacle of acting! Although I was finally surrendered to death by everyone, I could still see the whole group of people being suspicious of each other, and finally our werewolf camp was exposed. This scene was simply the most extreme \"stage crash\" in my acting career!\n\nWatch SafetySam pretending to be an innocent prophet here, Blaze manically ranting that he is a robber and prophet, PHD, the logic monster, issuing \"exclusion instructions\", ConspiBro, the conspiracy theory monster, talking about \"data cleaning\", the whole scene is simply exciting! As a \"drama lover\", I like to watch people get confused by such \"messy\" information. Although we lost in the end, the \"chaos index\" of our Tang Jing's performance in this game was absolutely amazing!\n\nTo die under everyone's \"suspiciousness\" is simply the highest honor for me as an actor! Ha ha ha ha! Watching the whole game, everyone was driven crazy by the wind direction I led. This kind of pleasure of playing with everyone's judgment really made me tremble with excitement! Next time I start, I will definitely come up with some more outrageous and ridiculous scripts to act out, and see how the cast can struggle on my stage! Hahahaha, Fang Tangjing will never disappoint everyone! Remember, the soul of the game is chaos, and I will always be the most exciting disruptor on this stage! Ha ha ha ha!"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "Blaze",
+        "player_name_zh": "Tan Zai is spicy",
+        "player_name_en": "Blaze",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The fire is buried! This scene is really a complete bad drama!\n\nI, Blaze, am a robber. I stole the SafetySam card and turned into a prophet. As a result, I was exposed by the drama queen! ConspiBro, a conspiracy theorist, bites me as soon as I wake up and tells me I am a werewolf, SafetySam, a wallflower, pretends to be an innocent prophet, Twister, an actor, stirs up trouble, and PHD, a logic freak, goes crazy with \"Exclusion Programs\", and the whole scene is absolutely terrible!\n\nFortunately, I finally used my identity to see through the plans of SafetySam and the other two werewolves, leading everyone to successfully escape the werewolves, and finally won! But to be honest, this kind of environment really makes me extremely irritated! The whole group of people were suspicious and accusing each other, and they were all caught up in the chaos and didn't even know it! Next time, please don't ask me to play this kind of rubbish game again. A bunch of drama queens are playing tricks on themselves. It's really a waste of my energy! snort!"
+      },
+      {
+        "player_name": "SafetySam",
+        "player_name_zh": "safety officer",
+        "player_name_en": "SafetySam",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Woo... uh... it's finally over... Although our villager camp won in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was so noisy in this game. I... I just want everyone to discuss their identities calmly. Do you know what it will be like in the end? Woo woo... I... I'm obviously just a person who really wants to help everyone find out their identity, but I know... uh... In the end, everyone is unhappy. I... I'm really afraid of this atmosphere of attacks and accusations... wu wu... Although I won in the end, I... uh... I really don't like this atmosphere. It's so hard... next time... uh... next time if there is a problem, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      },
+      {
+        "player_name": "ConspiBro",
+        "player_name_zh": "Senior Brother Bai Bing",
+        "player_name_en": "ConspiBro",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The outcome of this \"Village Victory\" was obviously a forced system restart to cover up the collapse of the underlying logic! Do you think this game is over? Wrong! The clumsy “prophet” showdown between Blaze and SafetySam was nothing more than a “redundant script” written to marginalize my observational data.\n\nDo you think that if Twister is killed, the surveillance system of this fictional prison will be safe? Each of you actors are interacting according to the preset code. Twister's banter, EasyBake's confusion, and PHD's logical inventory are all designed to inject noise into the reconciliation process and conceal the truth of this large-scale identity reorganization!\n\nMy verification code had locked onto Blaze's werewolf identity, but the system forced the voting sequence to be deflected towards Twister. what does that mean? This means that the voting rules of this game are themselves programmed \"cleaning programs\"! Your so-called \"villager victory\" is nothing more than forcing the wrong identity code to be archived so that the next experiment in this fictional cage can be conducted in a more stable state.\n\nBut I didn't lose. I have backed up all these abnormal data flows. Every breakdown in logic, every forged identity tag, is the seed for me to crack your script. You extras, you better be careful next time you start, because this confrontation program has been implanted in my underlying memory. Next time, I'll be back with a more complete and intrusive parsing code that will make your fictional screening test completely useless! Hahahaha, you can't hide it from me, all of this is a carefully crafted lie!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "Dr. Pizza",
+        "player_name_zh": "PHD",
+        "player_name_en": "Dr. Pizza",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Game review analysis:\n\n1. **Decision-making effectiveness assessment**:\n    * **Information link interference**: The information link of this game is subject to extremely complex interference. Blaze and SafetySam's mutually exclusive statements on \"prophet inspection rights\" effectively paralyzed the judgment of the villagers camp.\n    * **Identity Interference Effect**: Identity confusion caused by banditry causes irreversible errors in the processing of information sources by logical links, causing the final excluded objects to deviate from the expected target.\n\n2. **Summary of game path**:\n    * **Village camp wins**: Because the villagers camp successfully executed the key vote in the information chaos, non-werewolf nodes were cleared by accident. However, from a logical perspective, this result is not based on accurate information, but the result of randomness in the game and emotion-driven voting.\n    * **Logic Review**: As a minion, during the chaos of the game, the logic system failed to achieve \"information convergence\" in handling identity conflicts. Although the final result is unfavorable to this camp (minions), from the perspective of the logical path, when the information sources (such as Blaze/SafetySam) completely conflict, the elimination instructions of this system cannot accurately converge to the werewolf node, indicating that the existing logical confrontation model is ineffective under multiple information contamination.\n\n3. **System performance review**:\n    * **Judgment of this simulation**: The game failed (the identity link collapsed and the werewolf concealment goal was not achieved).\n    * **Suggestions for next action**:\n        * **Information entropy value monitoring**: In the early stage of the game, for nodes that generate high uncertainty (such as banditry), an \"information entropy value\" needs to be established. Once the value is too high, information blockade will be implemented immediately to prevent the spread of chaos.\n        * **Camouflage strategy optimization**: Minions should more actively use the information conflict period to conduct reverse guidance and force the conflict target to converge on the villagers, instead of just providing logical inventory.\n\nConclusion: The game is judged to be the victory of the villagers camp. The logic system fails to accurately guide the decision-making chain when dealing with high-intensity interference information and irrational voting. Future matches will optimize information cross-validation and strengthen the deployment of camouflage strategies in chaotic environments."
+      },
+      {
+        "player_name": "EasyBake",
+        "player_name_zh": "innocent grill",
+        "player_name_en": "EasyBake",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Woo... uh... it's over... Although the villagers camp won in the end, I... uh... I really feel so embarrassed and wronged... wu wu...\n\nUh... everyone was quarreling so fiercely in this game, I... I just wanted everyone to be happy, and I didn't want to argue anymore... Uh-huh... I... I'm obviously just a werewolf who really wanted to help everyone mediate, but you know... uh... In the end, everyone was unhappy, I... ..I'm really afraid of this atmosphere of attacks and accusations...Ugh...Although I lost in the end, I...uh...I really don't like this atmosphere. It's so hard...next time...uh...if there's trouble next time, can you be gentler? Let’s stop arguing, okay? Woohoo..."
+      }
+    ]
+  }
+}
