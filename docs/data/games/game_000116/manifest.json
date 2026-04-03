@@ -1,0 +1,38 @@
+{
+  "game_id": "game_000116",
+  "status": "completed",
+  "created_at": "2026-04-03T01:01:49.428912+00:00",
+  "updated_at": "2026-04-03T01:14:13.853951+00:00",
+  "phases": {
+    "night_prepare": {
+      "file": "night_partial_state.json",
+      "updated_at": "2026-04-03T01:01:49.430220+00:00"
+    },
+    "night_finalize": {
+      "file": "night_result.json",
+      "updated_at": "2026-04-03T01:04:12.411777+00:00"
+    },
+    "day": {
+      "file": "day_result.json",
+      "updated_at": "2026-04-03T01:08:13.804895+00:00"
+    },
+    "vote": {
+      "file": "vote_result.json",
+      "updated_at": "2026-04-03T01:11:01.006519+00:00"
+    },
+    "resolve": {
+      "file": "resolve_result.json",
+      "updated_at": "2026-04-03T01:11:01.008980+00:00"
+    },
+    "postgame": {
+      "file": "postgame_result.json",
+      "updated_at": "2026-04-03T01:13:47.547042+00:00"
+    },
+    "translate": {
+      "file": "chat_history_en.md",
+      "updated_at": "2026-04-03T01:14:13.853946+00:00"
+    }
+  },
+  "completed_at": "2026-04-03T01:11:01.009103+00:00",
+  "outcome": "werewolf_win"
+}
