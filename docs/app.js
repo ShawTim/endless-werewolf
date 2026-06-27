@@ -81,6 +81,12 @@ let isNight = false;
 let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
+// --- State for per-frame updates ---
+let activeVotes = null;   // stored votes object for per-frame redraw
+let activeBubblesData = []; // [{playerIndex, text, duration, startTime, el, hex}]
+let deathAnims = [];     // [{index, startTime, duration, baseY}]
+let teamAnims = [];      // [{index, type: 'celebrate'|'defeat', startTime}]
+
 // --- DOM refs ---
 const canvas = document.getElementById('c');
 const tagsContainer = document.getElementById('tags');
@@ -551,7 +557,7 @@ function buildCharacter(player, index){
   g.add(highlight);
 
   // Store refs
-  g.userData = { player, index, highlight };
+  g.userData = { player, index, highlight, _baseRotY: g.rotation.y };
   return g;
 }
 
@@ -891,20 +897,15 @@ function updateNameTags() {
 function showBubble(playerIndex, text, duration = 4000) {
   const p = PLAYERS[playerIndex];
   if (!p) return;
-  const pos = sp(playerIndex);
-  const v = new THREE.Vector3(pos[0], pos[1] + 1.8, pos[2]);
-  v.project(camera);
-  const x = (v.x * 0.5 + 0.5) * innerWidth;
-  const y = (-v.y * 0.5 + 0.5) * innerHeight;
   const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
   const el = document.createElement('div');
   el.className = 'bubble';
-  el.style.left = x + 'px';
-  el.style.top = y + 'px';
   el.style.borderColor = hex;
   el.innerHTML = `
-    <div class="speaker" style="color:${hex}">${p.name}</div>
+    <div class="speaker" style="color:${hex}">${displayName}${subName ? '<span style=\"font-size:10px;color:#888;margin-left:4px;\"\u003e' + subName + '</span\u003e' : ''}</div>
     <div class="text">${escapeHtml(text)}</div>
     <div class="arrow" style="border-top-color:${hex}"></div>
   `;
@@ -915,18 +916,40 @@ function showBubble(playerIndex, text, duration = 4000) {
     chars[playerIndex].userData.highlight.material.opacity = 0.6;
   }
 
+  const bubbleData = { playerIndex, text, duration, startTime: performance.now(), el, hex };
+  activeBubblesData.push(bubbleData);
+  updateBubblePosition(bubbleData);
+
   setTimeout(() => {
     el.style.transition = 'opacity 0.5s';
     el.style.opacity = '0';
     setTimeout(() => el.remove(), 500);
+    activeBubblesData = activeBubblesData.filter(b => b !== bubbleData);
     if (chars[playerIndex] && chars[playerIndex].userData.highlight) {
       chars[playerIndex].userData.highlight.material.opacity = 0;
     }
   }, duration);
 }
 
+function updateBubblePosition(b) {
+  const p = PLAYERS[b.playerIndex];
+  if (!p) return;
+  const pos = sp(b.playerIndex);
+  const v = new THREE.Vector3(pos[0], pos[1] + 1.8, pos[2]);
+  v.project(camera);
+  const x = (v.x * 0.5 + 0.5) * innerWidth;
+  const y = (-v.y * 0.5 + 0.5) * innerHeight;
+  b.el.style.left = x + 'px';
+  b.el.style.top = y + 'px';
+}
+
+function updateAllBubbles() {
+  activeBubblesData.forEach(b => updateBubblePosition(b));
+}
+
 function clearBubbles() {
   bubblesContainer.innerHTML = '';
+  activeBubblesData = [];
   chars.forEach(c => {
     if (c.userData && c.userData.highlight) {
       c.userData.highlight.material.opacity = 0;
@@ -936,17 +959,21 @@ function clearBubbles() {
 
 // ===== Vote Arrows =====
 function showVoteArrows(votes) {
+  activeVotes = votes;
+  redrawVoteArrows();
+}
+
+function redrawVoteArrows() {
+  if (!activeVotes) return;
   voteOverlay.innerHTML = '';
-  for (const [voter, target] of Object.entries(votes)) {
+  for (const [voter, target] of Object.entries(activeVotes)) {
     const vi = PLAYERS.findIndex(p => p.name === voter);
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
 
-    // Draw a line from voter to target in 3D, project to screen
+    // Project both positions
     const vpos = sp(vi);
     const tpos = sp(ti);
-
-    // Project both positions
     const vStart = new THREE.Vector3(vpos[0], vpos[1] + 0.5, vpos[2]);
     const vEnd = new THREE.Vector3(tpos[0], tpos[1] + 0.5, tpos[2]);
     const startScreen = vStart.clone().project(camera);
@@ -956,14 +983,11 @@ function showVoteArrows(votes) {
     const ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
     const ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
 
-    // Draw arrow line using SVG
     const voterColor = getPlayerColor(voter);
-    const targetColor = getPlayerColor(target);
     const dx = ex - sx, dy = ey - sy;
     const len = Math.sqrt(dx*dx + dy*dy);
-    if (len < 10) continue; // skip if too close
+    if (len < 10) continue;
 
-    // Arrowhead size
     const headLen = Math.min(16, len * 0.25);
     const angle = Math.atan2(dy, dx);
     const hx1 = ex - headLen * Math.cos(angle - 0.4);
@@ -980,7 +1004,6 @@ function showVoteArrows(votes) {
     svg.style.height = '100%';
     svg.style.pointerEvents = 'none';
 
-    // Line
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', sx); line.setAttribute('y1', sy);
     line.setAttribute('x2', ex); line.setAttribute('y2', ey);
@@ -990,20 +1013,20 @@ function showVoteArrows(votes) {
     line.setAttribute('opacity', '0.7');
     svg.appendChild(line);
 
-    // Arrowhead
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     head.setAttribute('points', `${ex},${ey} ${hx1},${hy1} ${hx2},${hy2}`);
     head.setAttribute('fill', voterColor);
     head.setAttribute('opacity', '0.85');
     svg.appendChild(head);
 
-    // Voter label at start
+    const voterP = PLAYERS.find(x => x.name === voter);
+    const voterName = lang === 'zh' && voterP ? (voterP.name_zh || voter) : voter;
     const label = document.createElement('div');
     label.className = 'vote-label';
     label.style.left = sx + 'px';
     label.style.top = sy + 'px';
     label.style.color = voterColor;
-    label.textContent = voter;
+    label.textContent = voterName;
 
     voteOverlay.appendChild(svg);
     voteOverlay.appendChild(label);
@@ -1011,6 +1034,7 @@ function showVoteArrows(votes) {
 }
 
 function clearVoteArrows() {
+  activeVotes = null;
   voteOverlay.innerHTML = '';
 }
 
@@ -1025,7 +1049,12 @@ function showResultBanner(outcome, reason, winners) {
   };
   resultBanner.querySelector('.title').textContent = titles[outcome] || outcome;
   resultBanner.querySelector('.sub').textContent = reason || '';
-  resultBanner.querySelector('.winners').textContent = winners && winners.length ? 'Winners: ' + winners.join(', ') : '';
+  const winLabel = lang === 'zh' ? '勝方：' : 'Winners: ';
+  const winNames = winners && winners.length ? winners.map(n => {
+    const p = PLAYERS.find(x => x.name === n);
+    return lang === 'zh' && p ? (p.name_zh || n) : n;
+  }) : [];
+  resultBanner.querySelector('.winners').textContent = winNames.length ? winLabel + winNames.join(', ') : '';
   resultBanner.classList.add('visible');
   setTimeout(() => resultBanner.classList.remove('visible'), 5000);
 }
@@ -1041,7 +1070,7 @@ function highlightCharacter(index, active) {
   }
 }
 
-// ===== Dim Character (executed) =====
+// ===== Dim Character (executed) — animated death =====
 function dimCharacter(index) {
   if (!chars[index]) return;
   chars[index].traverse(obj => {
@@ -1051,12 +1080,29 @@ function dimCharacter(index) {
       if (obj.material.emissive) obj.material.emissive.setHex(0x000000);
     }
   });
-  // Tilt
-  chars[index].rotation.x = -0.3;
-  chars[index].position.y -= 0.3;
+  // Start death animation (fall over)
+  deathAnims.push({ index, startTime: performance.now(), duration: 800, baseY: chars[index].position.y });
+}
+
+function updateDeathAnims(t) {
+  deathAnims = deathAnims.filter(d => {
+    if (!chars[d.index]) return false;
+    const elapsed = t - d.startTime;
+    const progress = Math.min(elapsed / d.duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    // Tilt forward
+    chars[d.index].rotation.x = -0.3 * eased;
+    // Sink down
+    const pos = sp(d.index);
+    chars[d.index].position.set(pos[0], d.baseY - 0.3 * eased, pos[2]);
+    return progress < 1;
+  });
 }
 
 function undimAll() {
+  deathAnims = [];
+  teamAnims = [];
   chars.forEach(g => {
     g.traverse(obj => {
       if (obj.isMesh && obj.material && obj.material.originalColor) {
@@ -1065,6 +1111,8 @@ function undimAll() {
       }
     });
     g.rotation.x = 0;
+    g.rotation.y = g.userData._baseRotY || 0;
+    g.rotation.z = 0;
     const pos = sp(PLAYERS.indexOf(g.userData.player));
     g.position.set(pos[0], SH, pos[2]);
   });
@@ -1220,7 +1268,14 @@ function showNightInfo() {
   if (trace.length > 0) {
     html += '<h3 style="margin-top:16px;">' + t('nightActions') + '</h3>';
     for (const tr of trace) {
-      html += `<div class="row"><span class="key">${tr.player || tr.role || '?'}</span><span class="val">${tr.action || '?'}</span></div>`;
+      const trP = PLAYERS.find(x => x.name === (tr.actor || tr.player || ''));
+      const trName = trP ? (lang === 'zh' ? (trP.name_zh || trP.name) : trP.name) : (tr.actor || tr.player || tr.role || '?');
+      const trAction = tr.action || '?';
+      const trTarget = tr.target ? (() => {
+        const tp = PLAYERS.find(x => x.name === tr.target);
+        return lang === 'zh' && tp ? (tp.name_zh || tr.target) : tr.target;
+      })() : '';
+      html += `<div class="row"><span class="key" style="color:${trP ? getPlayerColor(trP.name) : '#888'}">${trName}</span><span class="val">${trAction}${trTarget ? ' → ' + trTarget : ''}</span></div>`;
     }
   }
   html += '</div>';
@@ -1362,6 +1417,47 @@ function showResolveInfo() {
       if (idx >= 0) dimCharacter(idx);
     });
   }
+  
+  // Trigger team animations: winners celebrate, losers sulk
+  triggerTeamAnimations(r);
+}
+
+function triggerTeamAnimations(resolveData) {
+  teamAnims = [];
+  const finalRoles = resolveData.final_roles || {};
+  const winners = resolveData.winners || [];
+  const executed = resolveData.executed || [];
+  
+  PLAYERS.forEach((p, i) => {
+    if (executed.includes(p.name)) return; // dead players don't animate
+    const isWinner = winners.includes(p.name);
+    teamAnims.push({
+      index: i,
+      type: isWinner ? 'celebrate' : 'defeat',
+      startTime: performance.now(),
+      offset: i * 0.15 // stagger
+    });
+  });
+}
+
+function updateTeamAnims(t) {
+  teamAnims.forEach(a => {
+    if (!chars[a.index]) return;
+    const elapsed = (t - a.startTime) / 1000 - a.offset;
+    if (elapsed < 0) return;
+    const g = chars[a.index];
+    
+    if (a.type === 'celebrate') {
+      // Bounce up with joy
+      g.position.y = SH + Math.abs(Math.sin(elapsed * 3)) * 0.25;
+      g.rotation.y = g.userData._baseRotY + Math.sin(elapsed * 2) * 0.3;
+      // Arms up — can't easily do this with current model, so just bounce
+    } else {
+      // Sulk — lean forward, head down
+      g.position.y = SH - Math.min(elapsed * 0.15, 0.1);
+      g.rotation.x = Math.min(elapsed * 0.3, 0.15);
+    }
+  });
 }
 
 function showPostgameInfo() {
@@ -1748,10 +1844,15 @@ function escapeHtml(text) {
 function animate() {
   requestAnimationFrame(animate);
   const t = performance.now() * 0.001;
+  const tMs = performance.now();
 
-  // Idle bob
+  // Idle bob (only for characters not in death/team anims)
+  const inDeathAnim = new Set(deathAnims.map(d => d.index));
+  const inTeamAnim = new Set(teamAnims.map(a => a.index));
   chars.forEach((g, i) => {
-    g.position.y = SH + Math.sin(t * 1.5 + i) * 0.03;
+    if (!inDeathAnim.has(i) && !inTeamAnim.has(i)) {
+      g.position.y = SH + Math.sin(t * 1.5 + i) * 0.03;
+    }
   });
 
   // Flame flicker
@@ -1764,8 +1865,12 @@ function animate() {
   // Auto rotate
   if (autoRotate) { theta += 0.003; updateCam(); }
 
-  // Name tags
+  // Per-frame updates for overlays
   updateNameTags();
+  updateAllBubbles();
+  if (activeVotes) redrawVoteArrows();
+  updateDeathAnims(tMs);
+  updateTeamAnims(tMs);
 
   renderer.render(scene, camera);
 }
