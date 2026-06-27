@@ -3,7 +3,25 @@ import * as THREE from './three.min.mjs';
 
 const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 
-// --- Player data (fetched from players.json) ---
+// --- Player visual styles (covers both V1 and V2 rosters) ---
+const PLAYER_STYLES = {
+  // V1 roster
+  'Blaze':       {color:0xe74c3c,accent:0xc0392b,body:0x4a0000,head:0xD4A574,icon:'🔥'},
+  'SafetySam':   {color:0x27ae60,accent:0x2ecc71,body:0x0d5234,head:0xE8C4A0,icon:'🛡️'},
+  'Dr. Pizza':   {color:0x2980b9,accent:0x3498db,body:0x0d3252,head:0xD0C8B8,icon:'🍕'},
+  'Twister':     {color:0xd35400,accent:0xe67e22,body:0x7a3a10,head:0xD4B896,icon:'🌀'},
+  'EasyBake':    {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:'🧁'},
+  'ConspiBro':   {color:0x7f8c8d,accent:0x95a5a6,body:0x2a2a2a,head:0xC8A878,icon:'🔍'},
+  // V2 roster
+  'The Prosecutor':   {color:0xc0392b,accent:0xe74c3c,body:0x4a0000,head:0xD4A574,icon:'⚖️'},
+  'The Therapist':    {color:0x2ecc71,accent:0x27ae60,body:0x0d5234,head:0xE8C4A0,icon:'🧠'},
+  'The Chaos Agent':  {color:0xe67e22,accent:0xd35400,body:0x7a3a10,head:0xD4B896,icon:'🎭'},
+  'The Gut Player':   {color:0x95a5a6,accent:0x7f8c8d,body:0x2a2a2a,head:0xC8A878,icon:'👊'},
+  'The Statistician': {color:0x3498db,accent:0x2980b9,body:0x0d3252,head:0xD0C8B8,icon:'📊'},
+  'The Underdog':     {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:'🍀'},
+};
+
+// --- Player data (dynamically loaded from each game's night_result) ---
 let PLAYERS = [];
 
 // --- Game data ---
@@ -33,22 +51,25 @@ const replayControls = document.getElementById('replay-controls');
 
 // ===== Init =====
 async function init() {
-  // Fetch players
-  try {
-    const resp = await fetch('./players.json');
-    PLAYERS = await resp.json();
-  } catch(e) {
-    console.error('Failed to load players.json', e);
-    return;
-  }
-
+  // Load 3D scene first (no characters yet — they load with game data)
   initThree();
-  buildAllCharacters();
   setupCameraControls();
   setupUI();
   
-  // Try to load latest game
+  // Try to load latest game (this will populate PLAYERS and build characters)
   await loadGameIndex();
+  
+  // Fallback: if no game data, load static players.json for a preview
+  if (PLAYERS.length === 0) {
+    try {
+      const resp = await fetch('./players.json');
+      PLAYERS = await resp.json();
+      buildAllCharacters();
+      buildNameTags();
+    } catch(e) {
+      console.error('No players available', e);
+    }
+  }
   
   loadingEl.style.display = 'none';
   animate();
@@ -221,8 +242,8 @@ function buildCharacter(player, index){
   smile.position.set(0,0.88,0.34); smile.rotation.z=PI; g.add(smile);
 
   // === Persona-specific accessories ===
-  switch(player.id){
-    case 1: // The Prosecutor — suit collar + gavel
+  switch(player.name){
+    case 'The Prosecutor': case 'Blaze': // Suit / fire theme
       // Suit collar — V shape
       const collar=new THREE.Mesh(
         new THREE.ConeGeometry(0.22,0.15,4),
@@ -258,7 +279,7 @@ function buildCharacter(player, index){
       hairP1.position.set(0,1.05,0); hairP1.scale.set(1,0.5,1); g.add(hairP1);
       break;
 
-    case 2: // The Therapist — glasses + clipboard
+    case 'The Therapist': case 'SafetySam': // Glasses + clipboard / shield
       // Glasses — two torus rings
       const glassL=new THREE.Mesh(
         new THREE.TorusGeometry(0.08,0.015,8,16),
@@ -296,7 +317,7 @@ function buildCharacter(player, index){
       bun.position.set(0,1.22,-0.15); g.add(bun);
       break;
 
-    case 3: // The Chaos Agent — wild hair + mask on stick
+    case 'The Chaos Agent': case 'Twister': // Wild hair + mask
       // Wild spiky hair — multiple cones
       for(let k=0;k<7;k++){
         const spike=new THREE.Mesh(
@@ -325,7 +346,7 @@ function buildCharacter(player, index){
       smile.geometry=new THREE.TorusGeometry(0.09,0.018,8,16,PI*1.1);
       break;
 
-    case 4: // The Gut Player — bandana + muscular
+    case 'The Gut Player': case 'ConspiBro': // Bandana + muscular / suspicious
       // Bandana
       const bandana=new THREE.Mesh(
         new THREE.TorusGeometry(0.34,0.06,8,20),
@@ -354,7 +375,7 @@ function buildCharacter(player, index){
       g.add(scar);
       break;
 
-    case 5: // The Statistician — glasses + tablet
+    case 'The Statistician': case 'Dr. Pizza': // Glasses + tablet / pizza
       // Glasses — square-ish (use torus)
       const sgL=new THREE.Mesh(
         new THREE.TorusGeometry(0.07,0.012,8,16),
@@ -394,7 +415,7 @@ function buildCharacter(player, index){
       part.position.set(0.05,1.12,0.1); g.add(part);
       break;
 
-    case 6: // The Underdog — messy hair + lucky charm
+    case 'The Underdog': case 'EasyBake': // Messy hair + lucky charm
       // Messy hair — uneven sphere
       const hairP6=new THREE.Mesh(
         new THREE.SphereGeometry(0.38,16,12,0,TAU,0,PI*0.55),
@@ -790,11 +811,43 @@ async function loadGame(gameId) {
     currentPhase = 'night';
     replayIndex = 0;
     
+    // Dynamically build PLAYERS from game data
+    if (night && night.players) {
+      PLAYERS = Object.values(night.players).map(p => {
+        const style = PLAYER_STYLES[p.name] || {};
+        return {
+          id: p.id,
+          name: p.name,
+          name_zh: p.name_zh || '',
+          name_en: p.name_en || p.name,
+          persona: p.persona || '',
+          model: p.model || '',
+          thinking: p.thinking || 'high',
+          color: style.color || 0xc0392b,
+          accent: style.accent || 0xe74c3c,
+          body: style.body || 0x4a0000,
+          head: style.head || 0xD4A574,
+          icon: style.icon || '🎭',
+        };
+      });
+      // Rebuild 3D scene with new players
+      rebuildScene();
+    }
+    
     setPhase('night');
     showGameInfo();
   } catch(e) {
     console.error('Failed to load game', gameId, e);
   }
+}
+
+function rebuildScene() {
+  // Remove old characters
+  chars.forEach(g => scene.remove(g));
+  chars = [];
+  // Build new ones
+  buildAllCharacters();
+  buildNameTags();
 }
 
 function buildArchiveList(games) {
