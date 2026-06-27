@@ -36,7 +36,7 @@ let replayTimer = null;
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
 let chars = [];
 let isNight = false;
-let autoRotate = false;
+let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
 // --- DOM refs ---

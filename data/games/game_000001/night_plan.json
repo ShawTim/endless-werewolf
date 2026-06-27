@@ -1,0 +1,92 @@
+[
+  {
+    "player_name": "The Prosecutor",
+    "role": "Seer (預言家)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Prosecutor",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "model": "proxy-shawtim/glm-5.2",
+      "thinking": "high",
+      "initial_role": "Seer (預言家)",
+      "night_memory": [],
+      "other_players": [
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "The Therapist",
+            "The Chaos Agent",
+            "The Gut Player",
+            "The Statistician",
+            "The Underdog"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Statistician",
+    "role": "Robber (強盜)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Statistician",
+      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "model": "proxy-shawtim/nemotron-3-ultra",
+      "thinking": "high",
+      "initial_role": "Robber (強盜)",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "rob",
+        "target": [
+          "The Prosecutor",
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Underdog"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]
