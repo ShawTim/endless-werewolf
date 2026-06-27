@@ -3,7 +3,7 @@
   "outcome": "no_team_win",
   "winner_team": "none",
   "winners": [],
-  "reason": "沒有狼人在場，但有人被處決了。",
+  "reason": "場上沒有狼人，但有人被處決了。",
   "executed": [
     "The Chaos Agent"
   ],

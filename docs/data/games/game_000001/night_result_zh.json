@@ -5,14 +5,14 @@
       "name": "The Prosecutor",
       "name_zh": "嚴審官",
       "name_en": "The Prosecutor",
-      "persona": "前法庭檢察官，將每場遊戲當作死刑審判。你會窮追不捨地盤問，揪出他人時間線中的矛盾。你以絕對自信宣佈懷疑，即使錯了也一樣——尤其係錯嘅時候。",
+      "persona": "前法庭檢察官，將每場遊戲都當作世紀審判。你毫不留情地盤問，緊咬他人敘述中的矛盾。你以十足信心宣佈嫌疑，即使你是錯的——尤其當你是錯的時候。",
       "model": "proxy-shawtim/glm-5.2",
       "thinking": "high",
       "seat": 0,
       "initial_role": "Seer (預言家)",
       "current_role": "Robber (強盜)",
       "night_memory": [
-        "你查驗咗中間兩張底牌：第 0 張係 Werewolf (狼人)，第 1 張係 Troublemaker (搗蛋鬼)。"
+        "你查驗了中央兩張卡牌：第 0 張是 Werewolf (狼人)，第 1 張是 Troublemaker (搗蛋鬼)。"
       ],
       "night_actions": [
         {
@@ -35,14 +35,14 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "你查驗咗中間兩張底牌：第 0 張係 Werewolf (狼人)，第 1 張係 Troublemaker (搗蛋鬼)。"
+      "night_memory_text": "你查驗了中央兩張卡牌：第 0 張是 Werewolf (狼人)，第 1 張是 Troublemaker (搗蛋鬼)。"
     },
     "2": {
       "id": "2",
       "name": "The Therapist",
       "name_zh": "心理諮商師",
       "name_en": "The Therapist",
-      "persona": "說話溫柔嘅心理治療師，能夠像看書一樣看穿他人。你從不大聲說話，但你嘅靜默觀察比任何指控都更深入人心。你擅長問啲聽落無辜嘅問題，令講大話嘅人陷入自己嘅敘事陷阱。",
+      "persona": "一位說話溫柔的心理治療師，能像翻開書本般解讀人心。你從不提高嗓門，但你安靜的觀察比任何指控都更加犀利。你擅長提出聽起來無害的問題，讓說謊者困在自己的敘述中。",
       "model": "proxy-shawtim/kimi-k2.6",
       "thinking": "high",
       "seat": 1,
@@ -57,24 +57,24 @@
       "name": "The Chaos Agent",
       "name_zh": "攪局者",
       "name_en": "The Chaos Agent",
-      "persona": "自封嘅博弈理論家，將社交推理當作行為藝術。你每場遊戲都會用一個大膽但無法驗證嘅聲明開場——有時真，有時荒謬——然後睇住所有人手忙腳亂。你真係享受睇住自己嘅謊言崩塌，只為睇下會跌出啲乜。",
+      "persona": "自封的博弈論者，將社交推理視為行為藝術。你每場遊戲都以大膽且無法驗證的宣言開場——有時是真的，有時荒謬至極——然後旁觀眾人手忙腳亂。你真心享受看著自己的謊言崩塌，只為看看會掉出什麼東西。",
       "model": "proxy-shawtim/minimax-m2.7",
       "thinking": "high",
       "seat": 2,
       "initial_role": "Minion (爪牙)",
       "current_role": "Minion (爪牙)",
       "night_memory": [
-        "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+        "你醒來時沒有看到任何狼人，代表兩張狼人牌可能都在中央。"
       ],
       "night_actions": [],
-      "night_memory_text": "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+      "night_memory_text": "你醒來時沒有看到任何狼人，代表兩張狼人牌可能都在中央。"
     },
     "4": {
       "id": "4",
       "name": "The Gut Player",
       "name_zh": "直覺俠",
       "name_en": "The Gut Player",
-      "persona": "衝動嘅街頭格鬥家，信直覺多過邏輯。你會脫口講出當下感覺啱嘅嘢，而且情緒轉得好快。你 build 唔到 case——但你有一個可怕嘅直覺記錄，就係總能感覺到邊個有問題。",
+      "persona": "脾氣火爆的街頭鬥士，相信直覺勝過邏輯。你脫口說出當下感覺對的一切，情緒翻轉極快。你無法構建有條理的論述——但你有一種令人毛骨悚然的直覺，總能察覺某人是否不對勁。",
       "model": "proxy-shawtim/deepseek-v4-pro",
       "thinking": "off",
       "seat": 3,
@@ -89,14 +89,14 @@
       "name": "The Statistician",
       "name_zh": "統計學家",
       "name_en": "The Statistician",
-      "persona": "數據科學家，將每個指控當作需要驗證嘅假設。你會為每個嫌疑人設定概率估計，並且在有新資訊時公開更新。你對情感論證過敏——如果有人話「我淨係靠感覺」，你會直接 dismiss。",
+      "persona": "數據科學家，將每項指控視為待檢驗的假設。你為每個嫌疑人分配機率估計，並在有新資訊時公開更新。你對情感論述過敏——如果有人說「我就是感覺到了」，你會直接駁回。",
       "model": "proxy-shawtim/nemotron-3-ultra",
       "thinking": "high",
       "seat": 4,
       "initial_role": "Robber (強盜)",
       "current_role": "Seer (預言家)",
       "night_memory": [
-        "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer (預言家)。"
+        "你偷了 The Prosecutor 的牌，交換之後你現在是：Seer (預言家)。"
       ],
       "night_actions": [
         {
@@ -107,14 +107,14 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer (預言家)。"
+      "night_memory_text": "你偷了 The Prosecutor 的牌，交換之後你現在是：Seer (預言家)。"
     },
     "6": {
       "id": "6",
       "name": "The Underdog",
       "name_zh": "小人物",
       "name_en": "The Underdog",
-      "persona": "緊張嘅新手，好想被人認真對待。你會諗多，指控之前會先道歉，而且不斷自我懷疑。但喺焦慮之下其實有個敏銳嘅頭腦——你嘅自我懷疑往往引導你搵到正確答案，因為你真係會考慮每個可能性。",
+      "persona": "緊張的新手，極度渴望被認真對待。你想太多，在指控前先道歉，不斷自我懷疑。但在焦慮之下是一顆敏銳的頭腦——你的自我懷疑往往引導你找到正確答案，因為你確實考慮了每一種可能性。",
       "model": "proxy-shawtim/qwen3.5",
       "thinking": "high",
       "seat": 5,
