@@ -475,11 +475,6 @@ function buildAllCharacters() {
   chars = PLAYERS.map((p, i) => buildCharacter(p, i));
 }
 
-
-function buildAllCharacters() {
-  chars = PLAYERS.map((p, i) => buildCharacter(p, i));
-}
-
 // ===== Camera Controls =====
 let theta = 0, phi = PI / 3.5, dist = 12;
 const targetV = new THREE.Vector3(0, 0.5, 0);
