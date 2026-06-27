@@ -1,1892 +1,1130 @@
 {
-  "schema_version": 1,
   "games": [
     {
-      "game_id": "game_000121",
-      "status": "completed",
-      "created_at": "2026-04-03T16:02:34.217971+00:00",
-      "completed_at": "2026-04-03T16:04:51.988352+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 27
-    },
-    {
-      "game_id": "game_000120",
-      "status": "completed",
-      "created_at": "2026-04-03T13:01:51.056075+00:00",
-      "completed_at": "2026-04-03T13:04:04.145486+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 27
-    },
-    {
-      "game_id": "game_000119",
-      "status": "completed",
-      "created_at": "2026-04-03T10:01:54.696860+00:00",
-      "completed_at": "2026-04-03T10:04:03.870971+00:00",
+      "game_id": "game_000007",
+      "date": "",
       "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "SafetySam"
-      ],
-      "votes_count": 6,
-      "chat_lines": 27
-    },
-    {
-      "game_id": "game_000118",
-      "status": "completed",
-      "created_at": "2026-04-03T07:01:39.367781+00:00",
-      "completed_at": "2026-04-03T07:11:12.702433+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000117",
-      "status": "completed",
-      "created_at": "2026-04-03T04:04:25.243908+00:00",
-      "completed_at": "2026-04-03T04:13:39.790034+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "EasyBake",
-        "SafetySam"
-      ],
-      "winners": [
-        "SafetySam"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000116",
-      "status": "completed",
-      "created_at": "2026-04-03T01:01:49.428912+00:00",
-      "completed_at": "2026-04-03T01:11:01.009103+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Blaze"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000115",
-      "status": "completed",
-      "created_at": "2026-04-02T22:01:36.997823+00:00",
-      "completed_at": "2026-04-02T22:11:46.616809+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "SafetySam",
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000114",
-      "status": "completed",
-      "created_at": "2026-04-02T19:09:13.383471+00:00",
-      "completed_at": "2026-04-02T19:26:08.228497+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza",
-        "SafetySam"
-      ],
+      "reason": "No werewolf was executed.",
       "winners": [
         "EasyBake",
         "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 9
-    },
-    {
-      "game_id": "game_000112",
-      "status": "completed",
-      "created_at": "2026-04-02T16:02:23.196437+00:00",
-      "completed_at": "2026-04-02T16:12:48.827688+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Blaze",
-        "ConspiBro"
-      ],
-      "winners": [
-        "SafetySam",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000111",
-      "status": "completed",
-      "created_at": "2026-04-02T13:01:35.327862+00:00",
-      "completed_at": "2026-04-02T13:09:34.734515+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000110",
-      "status": "completed",
-      "created_at": "2026-04-02T10:01:33.325922+00:00",
-      "completed_at": "2026-04-02T10:07:17.752531+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 14
-    },
-    {
-      "game_id": "game_000109",
-      "status": "completed",
-      "created_at": "2026-04-02T07:01:42.191772+00:00",
-      "completed_at": "2026-04-02T07:08:20.554711+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 14
-    },
-    {
-      "game_id": "game_000108",
-      "status": "completed",
-      "created_at": "2026-04-02T04:02:27.164503+00:00",
-      "completed_at": "2026-04-02T04:08:59.857789+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "Blaze",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 14
-    },
-    {
-      "game_id": "game_000107",
-      "status": "completed",
-      "created_at": "2026-04-02T01:01:35.778653+00:00",
-      "completed_at": "2026-04-02T01:07:40.501395+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "Blaze",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 15
-    },
-    {
-      "game_id": "game_000106",
-      "status": "completed",
-      "created_at": "2026-04-01T22:01:35.018209+00:00",
-      "completed_at": "2026-04-01T22:07:11.217158+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "SafetySam",
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 15
-    },
-    {
-      "game_id": "game_000105",
-      "status": "completed",
-      "created_at": "2026-04-01T19:01:42.722760+00:00",
-      "completed_at": "2026-04-01T19:08:05.045018+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 15
-    },
-    {
-      "game_id": "game_000104",
-      "status": "completed",
-      "created_at": "2026-04-01T16:03:08.007836+00:00",
-      "completed_at": "2026-04-01T16:09:31.642141+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 16
-    },
-    {
-      "game_id": "game_000103",
-      "status": "completed",
-      "created_at": "2026-04-01T10:06:54.403263+00:00",
-      "completed_at": "2026-04-01T10:11:38.283740+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Twister",
-        "SafetySam"
-      ],
-      "winners": [
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 16
-    },
-    {
-      "game_id": "game_000102",
-      "status": "completed",
-      "created_at": "2026-04-01T07:02:10.048972+00:00",
-      "completed_at": "2026-04-01T07:06:02.728383+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "SafetySam",
-        "Twister"
-      ],
-      "winners": [
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 16
-    },
-    {
-      "game_id": "game_000101",
-      "status": "completed",
-      "created_at": "2026-04-01T04:07:50.036753+00:00",
-      "completed_at": "2026-04-01T04:11:31.470752+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 18
-    },
-    {
-      "game_id": "game_000100",
-      "status": "completed",
-      "created_at": "2026-04-01T01:02:25.830847+00:00",
-      "completed_at": "2026-04-01T01:06:08.927861+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000099",
-      "status": "completed",
-      "created_at": "2026-03-31T22:01:33.884022+00:00",
-      "completed_at": "2026-03-31T22:06:39.699248+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Blaze",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 24
-    },
-    {
-      "game_id": "game_000098",
-      "status": "completed",
-      "created_at": "2026-03-31T19:02:16.490306+00:00",
-      "completed_at": "2026-03-31T19:05:45.530125+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Blaze",
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000097",
-      "status": "completed",
-      "created_at": "2026-03-31T16:01:34.697081+00:00",
-      "completed_at": "2026-03-31T16:04:53.530446+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "SafetySam",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000096",
-      "status": "completed",
-      "created_at": "2026-03-31T13:01:57.183788+00:00",
-      "completed_at": "2026-03-31T13:05:48.934251+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro",
-        "Twister",
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "SafetySam",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 25
-    },
-    {
-      "game_id": "game_000095",
-      "status": "completed",
-      "created_at": "2026-03-31T10:03:55.181905+00:00",
-      "completed_at": "2026-03-31T10:07:05.481763+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 27
-    },
-    {
-      "game_id": "game_000094",
-      "status": "completed",
-      "created_at": "2026-03-31T08:35:29.270434+00:00",
-      "completed_at": "2026-03-31T08:41:33.152029+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "EasyBake",
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 14
-    },
-    {
-      "game_id": "game_000093",
-      "status": "completed",
-      "created_at": "2026-03-30T19:14:03.949282+00:00",
-      "completed_at": "2026-03-30T19:16:24.169616+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "Twister"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 28
-    },
-    {
-      "game_id": "game_000092",
-      "status": "completed",
-      "created_at": "2026-03-30T16:14:08.618771+00:00",
-      "completed_at": "2026-03-30T16:16:26.740634+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 27
-    },
-    {
-      "game_id": "game_000091",
-      "status": "completed",
-      "created_at": "2026-03-30T13:14:07.307442+00:00",
-      "completed_at": "2026-03-30T13:17:20.197179+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "EasyBake",
-        "Blaze"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 25
-    },
-    {
-      "game_id": "game_000090",
-      "status": "completed",
-      "created_at": "2026-03-30T10:18:35.492573+00:00",
-      "completed_at": "2026-03-30T10:54:50.208643+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 8
-    },
-    {
-      "game_id": "game_000089",
-      "status": "completed",
-      "created_at": "2026-03-30T07:01:38.178521+00:00",
-      "completed_at": "2026-03-30T07:12:47.484675+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 12
-    },
-    {
-      "game_id": "game_000088",
-      "status": "completed",
-      "created_at": "2026-03-30T04:21:34.712685+00:00",
-      "completed_at": "2026-03-30T04:34:14.303972+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000087",
-      "status": "completed",
-      "created_at": "2026-03-30T04:01:45.750032+00:00",
-      "completed_at": "2026-03-30T04:15:39.225380+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "winners": [
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000086",
-      "status": "completed",
-      "created_at": "2026-03-30T01:01:38.149636+00:00",
-      "completed_at": "2026-03-30T01:13:17.356754+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 9
-    },
-    {
-      "game_id": "game_000085",
-      "status": "completed",
-      "created_at": "2026-03-29T22:01:41.918924+00:00",
-      "completed_at": "2026-03-29T22:13:28.456698+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 12
-    },
-    {
-      "game_id": "game_000084",
-      "status": "completed",
-      "created_at": "2026-03-29T19:01:41.631715+00:00",
-      "completed_at": "2026-03-29T19:13:04.827847+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Twister",
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 12
-    },
-    {
-      "game_id": "game_000083",
-      "status": "completed",
-      "created_at": "2026-03-29T16:01:56.161525+00:00",
-      "completed_at": "2026-03-29T16:14:44.715671+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza",
-        "Blaze"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Twister",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 11
-    },
-    {
-      "game_id": "game_000082",
-      "status": "completed",
-      "created_at": "2026-03-29T13:01:41.689422+00:00",
-      "completed_at": "2026-03-29T13:12:42.831204+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "EasyBake",
-        "Blaze"
-      ],
-      "winners": [
-        "Blaze"
-      ],
-      "votes_count": 6,
-      "chat_lines": 11
-    },
-    {
-      "game_id": "game_000081",
-      "status": "completed",
-      "created_at": "2026-03-29T10:01:43.904773+00:00",
-      "completed_at": "2026-03-29T10:10:54.869957+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 10
-    },
-    {
-      "game_id": "game_000080",
-      "status": "completed",
-      "created_at": "2026-03-29T07:01:44.164218+00:00",
-      "completed_at": "2026-03-29T07:11:39.640905+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro",
-        "EasyBake"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 11
-    },
-    {
-      "game_id": "game_000079",
-      "status": "completed",
-      "created_at": "2026-03-29T04:02:13.486478+00:00",
-      "completed_at": "2026-03-29T04:12:14.017668+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 12
-    },
-    {
-      "game_id": "game_000078",
-      "status": "completed",
-      "created_at": "2026-03-29T01:01:42.029995+00:00",
-      "completed_at": "2026-03-29T01:11:20.412221+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro",
-        "SafetySam",
-        "Blaze"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 13
-    },
-    {
-      "game_id": "game_000077",
-      "status": "completed",
-      "created_at": "2026-03-28T22:01:37.380925+00:00",
-      "completed_at": "2026-03-28T22:10:15.959487+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 9
-    },
-    {
-      "game_id": "game_000076",
-      "status": "completed",
-      "created_at": "2026-03-28T19:01:41.801789+00:00",
-      "completed_at": "2026-03-28T19:09:22.249868+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Twister",
-        "Dr. Pizza",
-        "EasyBake",
-        "ConspiBro",
-        "Blaze",
-        "SafetySam"
-      ],
-      "winners": [
-        "SafetySam"
-      ],
-      "votes_count": 6,
-      "chat_lines": 9
-    },
-    {
-      "game_id": "game_000075",
-      "status": "completed",
-      "created_at": "2026-03-28T16:47:10.331190+00:00",
-      "completed_at": "2026-03-28T16:54:58.550835+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza",
-        "Twister",
-        "EasyBake",
-        "SafetySam",
-        "ConspiBro",
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam"
-      ],
-      "votes_count": 6,
-      "chat_lines": 11
-    },
-    {
-      "game_id": "game_000074",
-      "status": "completed",
-      "created_at": "2026-03-28T10:07:32.395634+00:00",
-      "completed_at": "2026-03-28T11:12:53.096522+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Twister",
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000073",
-      "status": "completed",
-      "created_at": "2026-03-28T07:01:52.714122+00:00",
-      "completed_at": "2026-03-28T08:00:39.190986+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake",
-        "Blaze"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000072",
-      "status": "completed",
-      "created_at": "2026-03-28T04:02:41.047745+00:00",
-      "completed_at": "2026-03-28T05:04:18.695576+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000071",
-      "status": "completed",
-      "created_at": "2026-03-28T01:01:40.358476+00:00",
-      "completed_at": "2026-03-28T02:12:17.963703+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro",
-        "EasyBake"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000070",
-      "status": "completed",
-      "created_at": "2026-03-27T22:02:44.315369+00:00",
-      "completed_at": "2026-03-27T22:52:10.984169+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro",
-        "Twister",
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000069",
-      "status": "completed",
-      "created_at": "2026-03-27T19:01:47.740174+00:00",
-      "completed_at": "2026-03-27T19:50:03.034318+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000068",
-      "status": "completed",
-      "created_at": "2026-03-26T22:02:40.256048+00:00",
-      "completed_at": "2026-03-26T23:09:34.015611+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "Blaze"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000067",
-      "status": "completed",
-      "created_at": "2026-03-26T19:01:41.281732+00:00",
-      "completed_at": "2026-03-26T20:03:20.335723+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000066",
-      "status": "completed",
-      "created_at": "2026-03-26T16:04:28.108795+00:00",
-      "completed_at": "2026-03-26T17:16:49.245300+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000065",
-      "status": "completed",
-      "created_at": "2026-03-26T13:01:53.498931+00:00",
-      "completed_at": "2026-03-26T13:51:31.171525+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000064",
-      "status": "completed",
-      "created_at": "2026-03-26T10:07:29.489295+00:00",
-      "completed_at": "2026-03-26T11:01:03.234818+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000063",
-      "status": "completed",
-      "created_at": "2026-03-26T07:01:40.268334+00:00",
-      "completed_at": "2026-03-26T08:05:06.298219+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "ConspiBro",
-        "Twister",
-        "EasyBake"
-      ],
-      "winners": [
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000062",
-      "status": "completed",
-      "created_at": "2026-03-26T04:36:50.610304+00:00",
-      "completed_at": "2026-03-26T05:26:44.693021+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "ConspiBro",
-        "Blaze"
-      ],
-      "winners": [
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000060",
-      "status": "completed",
-      "created_at": "2026-03-26T01:01:50.475345+00:00",
-      "completed_at": "2026-03-26T01:46:09.621944+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000059",
-      "status": "completed",
-      "created_at": "2026-03-25T22:05:16.554527+00:00",
-      "completed_at": "2026-03-25T22:47:01.881737+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000058",
-      "status": "completed",
-      "created_at": "2026-03-25T19:18:25.392882+00:00",
-      "completed_at": "2026-03-25T20:04:01.049011+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000057",
-      "status": "completed",
-      "created_at": "2026-03-25T16:01:47.026328+00:00",
-      "completed_at": "2026-03-25T16:39:27.754425+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Twister",
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000056",
-      "status": "completed",
-      "created_at": "2026-03-25T13:01:49.071542+00:00",
-      "completed_at": "2026-03-25T13:47:44.627112+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000055",
-      "status": "completed",
-      "created_at": "2026-03-25T10:04:12.450230+00:00",
-      "completed_at": "2026-03-25T10:55:52.001784+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000054",
-      "status": "completed",
-      "created_at": "2026-03-25T07:01:39.668836+00:00",
-      "completed_at": "2026-03-25T07:52:06.583588+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro",
-        "SafetySam"
-      ],
-      "winners": [
-        "SafetySam",
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000053",
-      "status": "completed",
-      "created_at": "2026-03-25T04:01:48.223329+00:00",
-      "completed_at": "2026-03-25T04:40:56.981292+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000052",
-      "status": "completed",
-      "created_at": "2026-03-25T01:01:55.660481+00:00",
-      "completed_at": "2026-03-25T01:44:43.848757+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Dr. Pizza",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000051",
-      "status": "completed",
-      "created_at": "2026-03-24T22:01:42.341349+00:00",
-      "completed_at": "2026-03-24T22:32:56.628432+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "EasyBake"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000048",
-      "status": "completed",
-      "created_at": "2026-03-24T16:02:23.861460+00:00",
-      "completed_at": "2026-03-24T16:44:19.346136+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "winners": [
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000047",
-      "status": "completed",
-      "created_at": "2026-03-24T13:01:40.924351+00:00",
-      "completed_at": "2026-03-24T13:38:26.214467+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000046",
-      "status": "completed",
-      "created_at": "2026-03-24T10:01:43.008764+00:00",
-      "completed_at": "2026-03-24T10:36:58.968711+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "SafetySam",
-        "ConspiBro"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 0
-    },
-    {
-      "game_id": "game_000045",
-      "status": "completed",
-      "created_at": "2026-03-24T07:01:40.332827+00:00",
-      "completed_at": "2026-03-24T07:05:58.221602+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 12
-    },
-    {
-      "game_id": "game_000044",
-      "status": "completed",
-      "created_at": "2026-03-24T04:02:20.323001+00:00",
-      "completed_at": "2026-03-24T04:05:03.262735+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "SafetySam"
-      ],
-      "votes_count": 6,
-      "chat_lines": 9
-    },
-    {
-      "game_id": "game_000043",
-      "status": "completed",
-      "created_at": "2026-03-24T01:01:45.223642+00:00",
-      "completed_at": "2026-03-24T01:04:15.665509+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000042",
-      "status": "completed",
-      "created_at": "2026-03-23T19:01:42.068570+00:00",
-      "completed_at": "2026-03-23T19:33:42.055051+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza",
-        "SafetySam"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 22
-    },
-    {
-      "game_id": "game_000041",
-      "status": "completed",
-      "created_at": "2026-03-23T16:03:09.429720+00:00",
-      "completed_at": "2026-03-23T16:05:56.578810+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Dr. Pizza"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 18
-    },
-    {
-      "game_id": "game_000040",
-      "status": "completed",
-      "created_at": "2026-03-23T13:01:39.474808+00:00",
-      "completed_at": "2026-03-23T13:05:38.128918+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 18
-    },
-    {
-      "game_id": "game_000039",
-      "status": "completed",
-      "created_at": "2026-03-23T10:01:40.024279+00:00",
-      "completed_at": "2026-03-23T10:06:15.432725+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "Dr. Pizza",
-        "SafetySam"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 24
-    },
-    {
-      "game_id": "game_000038",
-      "status": "completed",
-      "created_at": "2026-03-23T07:01:42.333036+00:00",
-      "completed_at": "2026-03-23T07:04:48.512986+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 18
-    },
-    {
-      "game_id": "game_000037",
-      "status": "completed",
-      "created_at": "2026-03-23T05:47:40.873763+00:00",
-      "completed_at": "2026-03-23T05:50:13.305302+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "Twister",
-        "Blaze"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000036",
-      "status": "completed",
-      "created_at": "2026-03-23T05:41:52.119180+00:00",
-      "completed_at": "2026-03-23T05:44:11.297917+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 20
-    },
-    {
-      "game_id": "game_000035",
-      "status": "completed",
-      "created_at": "2026-03-23T05:32:44.548522+00:00",
-      "completed_at": "2026-03-23T05:40:11.682908+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister",
-        "EasyBake"
-      ],
-      "winners": [
-        "Twister",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 29
-    },
-    {
-      "game_id": "game_000033",
-      "status": "completed",
-      "created_at": "2026-03-23T04:02:03.296835+00:00",
-      "completed_at": "2026-03-23T04:04:25.912738+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "SafetySam",
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 25
-    },
-    {
-      "game_id": "game_000032",
-      "status": "completed",
-      "created_at": "2026-03-23T01:01:31.857306+00:00",
-      "completed_at": "2026-03-23T01:03:52.592024+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 30
-    },
-    {
-      "game_id": "game_000030",
-      "status": "completed",
-      "created_at": "2026-03-22T19:10:24.339410+00:00",
-      "completed_at": "2026-03-22T19:12:27.803549+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [
-        "Blaze",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 25
-    },
-    {
-      "game_id": "game_000029",
-      "status": "completed",
-      "created_at": "2026-03-22T19:04:00.410419+00:00",
-      "completed_at": "2026-03-22T19:06:00.792369+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "winners": [
-        "Dr. Pizza"
-      ],
-      "votes_count": 6,
-      "chat_lines": 24
-    },
-    {
-      "game_id": "game_000028",
-      "status": "completed",
-      "created_at": "2026-03-22T19:01:31.328797+00:00",
-      "completed_at": "2026-03-22T19:03:36.124392+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 29
-    },
-    {
-      "game_id": "game_000027",
-      "status": "completed",
-      "created_at": "2026-03-22T17:32:43.588400+00:00",
-      "completed_at": "2026-03-22T17:36:07.777525+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "SafetySam",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 29
-    },
-    {
-      "game_id": "game_000026",
-      "status": "completed",
-      "created_at": "2026-03-22T17:26:53.169906+00:00",
-      "completed_at": "2026-03-22T17:29:13.688668+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "ConspiBro",
-        "Twister"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 30
-    },
-    {
-      "game_id": "game_000025",
-      "status": "completed",
-      "created_at": "2026-03-22T17:17:45.427812+00:00",
-      "completed_at": "2026-03-22T17:19:57.896862+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Twister"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000024",
-      "status": "completed",
-      "created_at": "2026-03-22T17:10:29.889155+00:00",
-      "completed_at": "2026-03-22T17:12:29.117558+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "SafetySam",
-        "Blaze",
-        "ConspiBro"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000023",
-      "status": "completed",
-      "created_at": "2026-03-22T16:56:43.086586+00:00",
-      "completed_at": "2026-03-22T16:58:49.345725+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "winners": [
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 40
-    },
-    {
-      "game_id": "game_000022",
-      "status": "completed",
-      "created_at": "2026-03-22T16:46:12.460963+00:00",
-      "completed_at": "2026-03-22T16:48:18.229284+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Dr. Pizza",
-        "Twister",
-        "Blaze"
-      ],
-      "winners": [
-        "Blaze",
-        "SafetySam",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000021",
-      "status": "completed",
-      "created_at": "2026-03-22T16:40:39.666115+00:00",
-      "completed_at": "2026-03-22T16:44:22.858741+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000020",
-      "status": "completed",
-      "created_at": "2026-03-22T16:29:44.058303+00:00",
-      "completed_at": "2026-03-22T16:34:13.788131+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 30
-    },
-    {
-      "game_id": "game_000019",
-      "status": "completed",
-      "created_at": "2026-03-22T12:13:37.335323+00:00",
-      "completed_at": "2026-03-22T12:17:28.033417+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "EasyBake",
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "Twister",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 32
-    },
-    {
-      "game_id": "game_000018",
-      "status": "completed",
-      "created_at": "2026-03-22T10:44:39.901474+00:00",
-      "completed_at": "2026-03-22T10:47:35.758705+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000016",
-      "status": "completed",
-      "created_at": "2026-03-22T07:01:32.442329+00:00",
-      "completed_at": "2026-03-22T07:03:27.681034+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "SafetySam",
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 37
-    },
-    {
-      "game_id": "game_000015",
-      "status": "completed",
-      "created_at": "2026-03-21T10:34:08.429940+00:00",
-      "completed_at": "2026-03-21T10:36:02.356764+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "Twister",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 36
-    },
-    {
-      "game_id": "game_000014",
-      "status": "completed",
-      "created_at": "2026-03-21T01:01:50.499867+00:00",
-      "completed_at": "2026-03-21T01:03:46.512072+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 34
-    },
-    {
-      "game_id": "game_000013",
-      "status": "completed",
-      "created_at": "2026-03-20T22:01:34.986844+00:00",
-      "completed_at": "2026-03-20T22:08:48.245115+00:00",
-      "outcome": "no_team_win",
-      "winner_team": "none",
-      "executed": [
-        "ConspiBro"
-      ],
-      "winners": [],
-      "votes_count": 6,
-      "chat_lines": 29
-    },
-    {
-      "game_id": "game_000012",
-      "status": "completed",
-      "created_at": "2026-03-20T19:01:37.005100+00:00",
-      "completed_at": "2026-03-20T19:03:41.287180+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000011",
-      "status": "completed",
-      "created_at": "2026-03-20T16:02:06.103486+00:00",
-      "completed_at": "2026-03-20T16:04:05.248284+00:00",
-      "outcome": "village_win",
-      "winner_team": "village_team",
-      "executed": [
-        "Twister",
-        "SafetySam"
-      ],
-      "winners": [
-        "Blaze",
-        "Twister",
-        "EasyBake",
-        "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000010",
-      "status": "completed",
-      "created_at": "2026-03-20T13:01:44.124108+00:00",
-      "completed_at": "2026-03-20T13:03:41.939454+00:00",
-      "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "Blaze"
-      ],
-      "winners": [
-        "Blaze"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
-    },
-    {
-      "game_id": "game_000009",
-      "status": "completed",
-      "created_at": "2026-03-20T10:03:08.560610+00:00",
-      "completed_at": "2026-03-20T10:05:04.566649+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "EasyBake"
-      ],
-      "winners": [
-        "Dr. Pizza",
-        "Twister"
-      ],
-      "votes_count": 6,
-      "chat_lines": 32
+      ]
     },
     {
       "game_id": "game_000008",
-      "status": "completed",
-      "created_at": "2026-03-20T07:01:45.720397+00:00",
-      "completed_at": "2026-03-20T07:03:41.054406+00:00",
+      "date": "",
       "outcome": "tanner_win",
-      "winner_team": "tanner",
-      "executed": [
-        "EasyBake",
-        "Blaze"
-      ],
+      "reason": "Tanner was executed.",
       "winners": [
         "EasyBake"
-      ],
-      "votes_count": 6,
-      "chat_lines": 33
+      ]
     },
     {
-      "game_id": "game_000007",
-      "status": "completed",
-      "created_at": "2026-03-20T04:02:42.121792+00:00",
-      "completed_at": "2026-03-20T04:05:53.794920+00:00",
+      "game_id": "game_000009",
+      "date": "",
       "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000010",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Blaze"
+      ]
+    },
+    {
+      "game_id": "game_000011",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000012",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
         "EasyBake"
-      ],
+      ]
+    },
+    {
+      "game_id": "game_000013",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000014",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000015",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000016",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000017",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000018",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000019",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000020",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000021",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000022",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000023",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000024",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000025",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000026",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000027",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000028",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000029",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000030",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000031",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000032",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000033",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000034",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000035",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000036",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000037",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000038",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000039",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000040",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000041",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000042",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000043",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000044",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam"
+      ]
+    },
+    {
+      "game_id": "game_000045",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000046",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000047",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000048",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000049",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000050",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000051",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000052",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000053",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000054",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Dr. Pizza",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000055",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000056",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000057",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000058",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000059",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000060",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000061",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000062",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000063",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000064",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000065",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000066",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000067",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000068",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000069",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000070",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000071",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000072",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000073",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000074",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000075",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "SafetySam"
+      ]
+    },
+    {
+      "game_id": "game_000076",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "SafetySam"
+      ]
+    },
+    {
+      "game_id": "game_000077",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000078",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000079",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000080",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000081",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000082",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Blaze"
+      ]
+    },
+    {
+      "game_id": "game_000083",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000084",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000085",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000086",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000087",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000088",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000089",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000090",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000091",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000092",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000093",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "Twister",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000094",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000095",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000096",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000097",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000098",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000099",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000100",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000101",
+      "date": "",
+      "outcome": "no_team_win",
+      "reason": "No werewolf in play, but someone was executed.",
+      "winners": []
+    },
+    {
+      "game_id": "game_000102",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000103",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000104",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000105",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000106",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Dr. Pizza",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000107",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000108",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000109",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000110",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Twister",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000111",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "Twister"
+      ]
+    },
+    {
+      "game_id": "game_000112",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "EasyBake",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000113",
+      "date": "",
+      "outcome": "",
+      "reason": "",
+      "winners": []
+    },
+    {
+      "game_id": "game_000114",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
       "winners": [
         "EasyBake",
         "ConspiBro"
-      ],
-      "votes_count": 6,
-      "chat_lines": 31
+      ]
+    },
+    {
+      "game_id": "game_000115",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam",
+        "Dr. Pizza"
+      ]
+    },
+    {
+      "game_id": "game_000116",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze"
+      ]
+    },
+    {
+      "game_id": "game_000117",
+      "date": "",
+      "outcome": "tanner_win",
+      "reason": "Tanner was executed.",
+      "winners": [
+        "SafetySam"
+      ]
+    },
+    {
+      "game_id": "game_000118",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "EasyBake"
+      ]
+    },
+    {
+      "game_id": "game_000119",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "SafetySam"
+      ]
+    },
+    {
+      "game_id": "game_000120",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Blaze",
+        "SafetySam",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000121",
+      "date": "",
+      "outcome": "village_win",
+      "reason": "At least one werewolf was executed.",
+      "winners": [
+        "Dr. Pizza",
+        "ConspiBro"
+      ]
+    },
+    {
+      "game_id": "game_000123",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "The Chaos Agent",
+        "The Gut Player"
+      ]
     }
   ]
 }

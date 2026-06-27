@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import state_manager
+import bridge_agent
 
 WORKSPACE = Path(__file__).resolve().parent
 STATE_DIR = WORKSPACE / "data" / "state"
@@ -37,13 +38,19 @@ def _mood(status: str, executed: bool) -> str:
     return "bitter"
 
 
-def _call_bridge(payload: dict[str, Any]) -> dict[str, Any]:
+def _call_bridge(prompt: str, model: str | None = None, thinking: str | None = None) -> dict[str, Any]:
     cmd = [
         "openclaw", "agent",
         "--agent", BRIDGE_AGENT_ID,
-        "--message", json.dumps(payload, ensure_ascii=False),
+        "--message", prompt,
         "--json",
     ]
+    # Pass --model so each player uses their own assigned model
+    if model:
+        cmd.extend(["--model", model])
+    # Pass --thinking to match player's configured thinking level
+    if thinking:
+        cmd.extend(["--thinking", thinking])
     proc = subprocess.run(
         cmd,
         cwd=str(WORKSPACE),
@@ -74,15 +81,11 @@ def _call_bridge(payload: dict[str, Any]) -> dict[str, Any]:
         return {"_raw": text}
 
 
-def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str) -> str:
+def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str, thinking: str = "high") -> str:
     """Call bridge agent to get an AI-generated postgame quote. Falls back to empty string on error."""
     try:
-        result = _call_bridge({
-            "request_type": "postgame_interview",
-            "model": model,
-            "player_context": player_context,
-            "game_summary": game_summary,
-        })
+        prompt = bridge_agent.build_postgame_prompt(player_context, game_summary)
+        result = _call_bridge(prompt, model=model, thinking=thinking)
         return (result.get("quote") or result.get("_raw") or "").strip()
     except Exception as e:
         print(f"[postgame] bridge call failed for {player_context.get('player_name')}: {e}", flush=True)
@@ -148,6 +151,7 @@ def run_postgame_phase() -> dict[str, Any]:
                 break
 
         model = (player_state or {}).get("model", FALLBACK_MODEL)
+        thinking = (player_state or {}).get("thinking", "high")
         persona = (player_state or {}).get("persona", "")
 
         player_context = {
@@ -160,7 +164,7 @@ def run_postgame_phase() -> dict[str, Any]:
         }
 
         print(f"[postgame] interviewing {name} ({role}, {status})...", flush=True)
-        quote = _get_quote(player_context, game_summary, model)
+        quote = _get_quote(player_context, game_summary, model, thinking=thinking)
 
         row = {
             "player_name": name,

@@ -1,0 +1,14 @@
+{
+  "games": [
+    {
+      "game_id": "game_000123",
+      "date": "",
+      "outcome": "werewolf_win",
+      "reason": "No werewolf was executed.",
+      "winners": [
+        "The Chaos Agent",
+        "The Gut Player"
+      ]
+    }
+  ]
+}

@@ -8,6 +8,7 @@ python3 - <<'PY'
 import json, subprocess
 from pathlib import Path
 import gm_night
+import bridge_agent
 
 WORKSPACE = Path(__file__).resolve().parent.parent
 
@@ -19,33 +20,31 @@ partial = prepared["partial_state"]
 def call_bridge_for_night(step: dict) -> dict:
     """Ask bridge agent to decide a player's night action."""
     dr = step["decision_request"]
-    payload = {
-        "request_type": "night_action",
-        "model": dr.get("model", ""),
-        "player_context": {
-            "player_name": dr["player_name"],
-            "persona": dr.get("persona", ""),
-        },
-        "decision_request": dr,
-    }
+    model = dr.get("model", "")
+    thinking = dr.get("thinking", "high")
+    prompt = bridge_agent.build_night_action_prompt(dr)
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
-         "--message", json.dumps(payload, ensure_ascii=False), "--json"],
+         "--message", prompt, "--json",
+         "--model", model, "--thinking", thinking],
         cwd=str(WORKSPACE),
         capture_output=True, text=True, check=False,
     )
     if proc.returncode != 0:
         raise RuntimeError(f"bridge failed for {dr['player_name']}: {proc.stderr.strip()}")
     resp = json.loads(proc.stdout)
-    payloads = resp.get("payloads") or resp.get("messages") or []
-    for p in payloads:
-        text = p.get("text", "").strip()
-        if text:
-            try:
-                return json.loads(text)
-            except json.JSONDecodeError:
-                pass
-    raise RuntimeError(f"No valid response for {dr['player_name']}: {proc.stdout[:200]}")
+    result = (((resp or {}).get("result") or {}).get("payloads") or [])
+    if not result:
+        raise RuntimeError(f"No payloads for {dr['player_name']}: {proc.stdout[:200]}")
+    text = (result[0].get("text") or "").strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start != -1 and end > start:
+            return json.loads(text[start:end+1])
+        raise RuntimeError(f"No valid JSON for {dr['player_name']}: {text[:200]}")
 
 decisions = {}
 for step in plan:

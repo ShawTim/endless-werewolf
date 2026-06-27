@@ -1,0 +1,74 @@
+[
+  {
+    "player_name": "The Chaos Agent",
+    "role": "Werewolf (狼人)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Chaos Agent",
+      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "model": "proxy-shawtim/minimax-m2.7",
+      "thinking": "high",
+      "initial_role": "Werewolf (狼人)",
+      "night_memory": [
+        "你係場上唯一狼人，你可以選擇查看一張中間底牌。"
+      ],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "inspect_center",
+        "target": [
+          0,
+          1,
+          2
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Prosecutor",
+    "role": "Troublemaker (搗蛋鬼)",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Prosecutor",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "model": "proxy-shawtim/glm-5.2",
+      "thinking": "high",
+      "initial_role": "Troublemaker (搗蛋鬼)",
+      "night_memory": [],
+      "other_players": [
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Statistician",
+          "The Underdog"
+        ]
+      },
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]

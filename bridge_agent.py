@@ -1,14 +1,11 @@
 """
-Bridge Agent for AI One Night Werewolf Day Phase
+Bridge Agent for AI One Night Werewolf
 
-Usage: Called by day_phase.py via OpenClaw runtime
-Input: JSON with player_context, model, chat_history
-Output: JSON decision (action, target, speech)
+Prompt builders for player decisions (day action, vote, night action, postgame).
+Each builder returns a fully-constructed prompt string that is sent to the
+bridge agent via `openclaw agent --agent ai_werewolf_bridge --model <player_model>`.
 
-This agent acts as a dispatcher:
-1. Receives player decision requests
-2. Spawns thinker subagents with SPECIFIC models
-3. Returns normalized decisions
+Primary language: English. In-character speech is also in English.
 """
 
 import json
@@ -19,59 +16,63 @@ WORKSPACE = Path(__file__).resolve().parent
 
 
 def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: dict | None = None) -> str:
-    """Build the prompt for the thinker subagent."""
+    """Build the prompt for the day-phase free discussion decision."""
     player_name = player_context["player_name"]
     persona = player_context["persona"]
     initial_role = player_context["initial_role"]
     current_role = player_context["current_role"]
-    night_memory = player_context.get("night_memory_text", "今晚冇咩特別發生。")
+    night_memory = player_context.get("night_memory_text", "Nothing notable happened tonight.")
     turn_hints = turn_hints or {}
     was_mentioned = turn_hints.get("was_mentioned_recently", False)
     recent_speakers = turn_hints.get("recent_speakers", [])
     debate_notes = turn_hints.get("debate_notes", [])
     nudge = turn_hints.get("nudge", "")
 
-    return f"""你正在玩《一夜狼人》。現在是白天自由辯論階段。
+    notes_text = "\n".join(f"  - {n}" for n in debate_notes) if debate_notes else "  (none)"
 
-【你的身份】
-玩家名稱：{player_name}
-你的人格：{persona}
-你的初始身份：{initial_role}
-你此刻的身份：{current_role}
+    return f"""You are playing One Night Werewolf. It is the daytime free discussion phase.
 
-【你的夜晚記憶】
+[Your Identity]
+Player name: {player_name}
+Your persona: {persona}
+Your initial role: {initial_role}
+Your current role: {current_role}
+
+[Your Night Memory]
 {night_memory}
 
-【場上目前公開討論紀錄】
-{chat_history}
+[Public Discussion Log So Far]
+{chat_history or "(The discussion has just begun — nobody has spoken yet.)"}
 
-【即場辯論訊號】
-- 你最近是否被點名/提及：{was_mentioned}
-- 最近發言過嘅玩家：{recent_speakers}
-- 辯論提醒：{debate_notes}
-- 即場提示：{nudge}
+[Live Debate Signals]
+- Were you recently mentioned/challenged: {was_mentioned}
+- Recent speakers: {', '.join(recent_speakers) if recent_speakers else '(none yet)'}
+- Debate notes:
+{notes_text}
+- Nudge: {nudge}
 
-【你的任務】
-請決定你的日間行動。你可以選擇 "speak"（發言）或 "pass"（沉默）。
+[Your Task]
+Decide your daytime action. You may choose "speak" (talk) or "pass" (stay silent).
 
-重要策略指引（必須考慮）：
-1) 如果有人點名你而你完全唔回應，通常會變得可疑（但某些角色可刻意利用）。
-2) 主動發言太多亦可能被視為帶風向而可疑。
-3) 你要綜合「身份策略 + 人格 + 當前場上壓力」再決定 speak 或 pass。
-4) 如果你選擇 speak，優先回應最近挑戰你或主導風向嘅玩家，而唔係自說自話。
+Strategic guidelines (must consider):
+1) If someone directly challenged you and you ignore it, that can look suspicious (sometimes strategically useful).
+2) Speaking too aggressively can also increase suspicion.
+3) Balance role strategy, persona, and current table pressure before deciding speak vs pass.
+4) If you choose to speak, prioritize responding to whoever challenged you or is steering the conversation — don't just monologue.
 
-如果發言，請說出你想說的話，可以選擇性地 @ 一位玩家作為回應對象。
+If speaking, say what you want to say. You may optionally @ one player as your response target.
 
-【輸出格式】
-只輸出符合以下格式的 JSON，不要任何 markdown 標記或多餘文字：
+[Output Format]
+Output ONLY valid JSON — no markdown fences, no explanation, no extra text:
 {{
-  "thought": "你的思考過程（用第一人稱）",
+  "thought": "Your internal reasoning (first person)",
   "action": "speak",
-  "target": "某玩家名稱 或 null",
-  "speech": "你要說出的話（廣東話，符合你的人格）"
+  "target": "PlayerName or null",
+  "speech": "What you say out loud (English, in-character for your persona)"
 }}
 
-注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
+If you choose to pass, set action to "pass" and speech to "".
+Output JSON only. No ```json markers. No explanations."""
 
 
 def build_vote_prompt(player_context: dict, chat_history: str, valid_targets: list) -> str:
@@ -80,40 +81,40 @@ def build_vote_prompt(player_context: dict, chat_history: str, valid_targets: li
     persona = player_context["persona"]
     initial_role = player_context["initial_role"]
     current_role = player_context["current_role"]
-    night_memory = player_context.get("night_memory_text", "今晚冇咩特別發生。")
-    targets_str = "、".join(valid_targets)
+    night_memory = player_context.get("night_memory_text", "Nothing notable happened tonight.")
+    targets_str = ", ".join(valid_targets)
 
-    return f"""你正在玩《一夜狼人》。白天辯論結束，現在係投票階段。
+    return f"""You are playing One Night Werewolf. The daytime discussion has ended — it is now the voting phase.
 
-【你的身份】
-玩家名稱：{player_name}
-你的人格：{persona}
-你的初始身份：{initial_role}
-你此刻的身份：{current_role}
+[Your Identity]
+Player name: {player_name}
+Your persona: {persona}
+Your initial role: {initial_role}
+Your current role: {current_role}
 
-【你的夜晚記憶】
+[Your Night Memory]
 {night_memory}
 
-【完整辯論記錄】
-{chat_history}
+[Full Discussion Record]
+{chat_history or "(No discussion occurred.)"}
 
-【可投票目標】
+[Valid Vote Targets]
 {targets_str}
 
-【你的任務】
-根據辯論過程、你的角色目標同你的人格，選擇投票放逐哪一個玩家。
+[Your Task]
+Based on the discussion, your role's win condition, and your persona, vote to exile one player.
 
-投票策略提示：
-- 村民陣營：投你最懷疑係狼人嘅人
-- 狼人陣營：投最能威脅你嘅村民
-- 皮匠（Tanner）：你嘅目標係讓自己被投出，考慮點樣令人投你
+Voting strategy hints:
+- Village team: Vote for the player you most suspect is a Werewolf.
+- Werewolf team: Vote for the player who is the biggest threat to you.
+- Tanner: Your goal is to get yourself voted out. Consider how to make people vote for you.
 
-【輸出格式】
-只輸出一個 JSON，不要任何 markdown 或多餘文字：
-{{"thought": "你的投票理由", "vote_target": "玩家名稱"}}
+[Output Format]
+Output ONLY valid JSON — no markdown, no extra text:
+{{"thought": "Your voting reasoning", "vote_target": "PlayerName"}}
 
-vote_target 必須係以下其中一個：{targets_str}
-注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
+vote_target must be one of: {targets_str}
+Output JSON only. No ```json markers. No explanations."""
 
 
 def build_night_action_prompt(decision_request: dict) -> str:
@@ -125,51 +126,51 @@ def build_night_action_prompt(decision_request: dict) -> str:
     other_players = decision_request.get("other_players", [])
     legal_actions = decision_request.get("legal_actions", {})
 
-    memory_text = "\n".join(night_memory) if night_memory else "（暫時未有資訊）"
-    others_text = "、".join(other_players)
-    legal_text = json.dumps(legal_actions, ensure_ascii=False)
+    memory_text = "\n".join(f"  - {m}" for m in night_memory) if night_memory else "(No information yet)"
+    others_text = ", ".join(other_players)
+    legal_text = json.dumps(legal_actions, ensure_ascii=False, indent=2)
 
-    return f"""你正在玩《一夜狼人》。現在係夜晚行動階段。
+    return f"""You are playing One Night Werewolf. It is the night action phase.
 
-【你的身份】
-玩家名稱：{player_name}
-你的人格：{persona}
-你的角色：{role}
+[Your Identity]
+Player name: {player_name}
+Your persona: {persona}
+Your role: {role}
 
-【你目前知道的資訊】
+[What You Know So Far]
 {memory_text}
 
-【其他玩家】
+[Other Players]
 {others_text}
 
-【你可以執行的行動（合法行動）】
+[Legal Actions Available]
 {legal_text}
 
-【你的任務】
-根據你的角色能力同策略，選擇一個合法行動。
+[Your Task]
+Choose one legal action based on your role's ability and your strategy.
 
-角色策略提示：
-- 狼人（Werewolf）：你係孤狼就睇中央牌搜集情報；你有同伴就互相認出對方（如果兩人都係狼人，夜晚會知道）。
-- 預言家（Seer）：選擇一個你最想查明身份嘅玩家，或者睇兩張中央牌增加資訊。
-- 強盜（Robber）：選擇一個目標偷換身份，要考慮哪個玩家換走最有利。
-- 搗蛋鬼（Troublemaker）：選擇兩個目標互換身份，製造混亂。
+Role strategy hints:
+- Werewolf: If you are the solo wolf, peek at a center card for intel. If there are two wolves, you recognize each other.
+- Seer: Choose a player to inspect, or look at two center cards for intel.
+- Robber: Choose a target to swap roles with — consider whose role is most valuable to steal.
+- Troublemaker: Choose two targets to swap — create chaos to mislead the village.
 
-【輸出格式】
-只輸出一個 JSON，不要任何 markdown 或多餘文字。
+[Output Format]
+Output ONLY valid JSON — no markdown, no extra text.
 
-如果你係狼人或強盜（單一目標）：
-{{"thought": "你的思考", "action": "行動名稱", "target": 目標（數字或玩家名稱）}}
+For Werewolf or Robber (single target):
+{{"thought": "Your reasoning", "action": "action_name", "target": target_value}}
 
-如果你係搗蛋鬼（兩個目標）：
-{{"thought": "你的思考", "action": "swap", "targets": ["玩家A", "玩家B"]}}
+For Troublemaker (two targets):
+{{"thought": "Your reasoning", "action": "swap", "targets": ["PlayerA", "PlayerB"]}}
 
-如果你係預言家，選擇睇玩家：
-{{"thought": "你的思考", "action": "inspect_player", "target": "玩家名稱"}}
+For Seer inspecting a player:
+{{"thought": "Your reasoning", "action": "inspect_player", "target": "PlayerName"}}
 
-如果你係預言家，選擇睇中央牌：
-{{"thought": "你的思考", "action": "inspect_center", "targets": [0, 1]}}
+For Seer inspecting center cards:
+{{"thought": "Your reasoning", "action": "inspect_center", "targets": [0, 1]}}
 
-注意：只輸出 JSON，唔好 ```json 標記，唔好解釋。"""
+Output JSON only. No ```json markers. No explanations."""
 
 
 def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
@@ -186,50 +187,47 @@ def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     chat_excerpt = game_summary.get("chat_excerpt", "")
 
     outcome_desc = {
-        "village_win": "村民陣營獲勝",
-        "werewolf_win": "狼人陣營獲勝",
-        "tanner_win": "皮匠獲勝",
-        "village_win_no_wolf": "村民陣營獲勝（場上無狼人）",
-        "no_team_win": "無人勝出",
+        "village_win": "Village team wins",
+        "werewolf_win": "Werewolf team wins",
+        "tanner_win": "Tanner wins",
+        "village_win_no_wolf": "Village team wins (no werewolf in play)",
+        "no_team_win": "No team wins",
     }.get(outcome, outcome)
 
-    status_desc = "勝利" if status == "winner" else "落敗"
-    executed_desc = "，並且被投出局" if executed else ""
-
-    # Extract Chinese role name from "Seer (預言家)" format
-    role_zh = role.split("(")[1].rstrip(")") if "(" in role else role
+    status_desc = "won" if status == "winner" else "lost"
+    executed_desc = " and was voted out" if executed else ""
 
     name_map = game_summary.get("name_map", {})
-    name_table = "\n".join(f"  {en} → {zh}" for en, zh in name_map.items()) if name_map else "  （無）"
+    name_table = "\n".join(f"  {en} → {zh}" for en, zh in name_map.items()) if name_map else "  (none)"
 
-    return f"""你係《一夜狼人》嘅玩家，現在遊戲已經結束，記者黎訪問你。
+    return f"""You are a player in One Night Werewolf. The game has ended and a reporter is interviewing you.
 
-【你嘅身份】
-玩家名稱：{player_name}
-你嘅人格：{persona}
-你嘅角色：{role_zh}
-你嘅結局：{status_desc}{executed_desc}
+[Your Identity]
+Player name: {player_name}
+Your persona: {persona}
+Your role: {role}
+Your result: {status_desc}{executed_desc}
 
-【今局結果】
-結果：{outcome_desc}
-被投出局嘅玩家：{', '.join(executed_players) if executed_players else '無'}
+[Game Result]
+Outcome: {outcome_desc}
+Voted out: {', '.join(executed_players) if executed_players else 'Nobody'}
 
-【玩家中英文名對照（提及其他玩家時必須用中文名）】
+[Player Name Reference (use Chinese names when mentioning other players)]
 {name_table}
 
-【日間對話節錄（部分）】
-{chat_excerpt or '（無記錄）'}
+[Excerpt from the Daytime Discussion]
+{chat_excerpt or '(No record)'}
 
-【你嘅任務】
-以你嘅人格同角色，用廣東話口語講 1-2 句賽後感受。要求：
-- 真實反映你嘅情緒同處境（贏/輸/被殺）
-- 符合你嘅個人風格同人格
-- 提及任何玩家時，必須用佢哋嘅中文名（見上方對照表）
-- 唔好重複講自己係咩角色
-- 全程廣東話，唔好夾英文
+[Your Task]
+In character with your persona, give 1-2 sentences of postgame reaction. Requirements:
+- Authetically reflect your emotion and situation (win/loss/was killed)
+- Stay true to your personal style and persona
+- When mentioning other players, use their Chinese names (see reference table above)
+- Don't just repeat your role name
+- Speak in English (with Cantonese flavor if it fits your persona)
 
-只輸出以下 JSON，唔好任何 markdown 或解釋：
-{{"quote": "你嘅廣東話賽後感受"}}"""
+Output ONLY this JSON — no markdown, no explanation:
+{{"quote": "Your postgame reaction"}}"""
 
 
 def validate_decision(decision: dict) -> dict:
@@ -256,28 +254,22 @@ def spawn_thinker_subagent(model: str, prompt: str, player_name: str) -> dict:
     For testing outside agent context, returns placeholder.
     """
     try:
-        # When running inside OpenClaw agent, we can use sessions_spawn
-        # This is a placeholder for the actual implementation
         import sessions_spawn
         
         result = sessions_spawn.spawn(
             task=prompt,
-            agentId="main",  # Use main as base, model will override
+            agentId="main",
             model=model,
             mode="run",
             cleanup="delete",
             runTimeoutSeconds=60
         )
         
-        # Extract JSON from result
         output = result.get("result", "")
-        import re
-        # Try full output as JSON first
         try:
             return json.loads(output.strip())
         except json.JSONDecodeError:
             pass
-        # Fall back to finding first {...} block
         json_match = re.search(r'\{.*?\}', output, re.DOTALL)
         if json_match:
             try:
@@ -287,7 +279,6 @@ def spawn_thinker_subagent(model: str, prompt: str, player_name: str) -> dict:
         return {"action": "pass", "target": None, "speech": ""}
         
     except ImportError:
-        # Not running in OpenClaw agent context
         return {
             "status": "needs_runtime",
             "message": "Thinker spawning requires OpenClaw agent runtime",
@@ -297,8 +288,7 @@ def spawn_thinker_subagent(model: str, prompt: str, player_name: str) -> dict:
 
 
 def main():
-    """Entry point when called as agent."""
-    # Read input JSON from stdin or argument
+    """Entry point when called as a script."""
     if len(sys.argv) > 1:
         input_json = sys.argv[1]
     else:
@@ -307,15 +297,13 @@ def main():
     try:
         request = json.loads(input_json)
     except json.JSONDecodeError:
-        print(json.dumps({
-            "action": "pass",
-            "error": "Invalid JSON input"
-        }, ensure_ascii=False))
+        print(json.dumps({"action": "pass", "error": "Invalid JSON input"}, ensure_ascii=False))
         return
     
     request_type = request.get("request_type", "day_action")
     player_context = request.get("player_context", {})
     model = request.get("model") or player_context.get("model")
+    
     if not model:
         print(json.dumps({"action": "pass", "error": f"No model specified for player {player_context.get('player_name', 'unknown')}"}, ensure_ascii=False))
         return
@@ -330,7 +318,6 @@ def main():
             print(json.dumps(raw, ensure_ascii=False, indent=2))
             return
         vote_target = raw.get("vote_target", "")
-        # Validate target is in valid_targets
         if vote_target not in valid_targets and valid_targets:
             vote_target = valid_targets[0]
         print(json.dumps({"status": "ok", "vote_target": vote_target, "thought": raw.get("thought", "")}, ensure_ascii=False, indent=2))
@@ -344,7 +331,6 @@ def main():
         if "status" in raw and raw["status"] == "needs_runtime":
             print(json.dumps(raw, ensure_ascii=False, indent=2))
             return
-        # Normalize output — extract action/target/targets
         result = {
             "status": "ok",
             "action": raw.get("action", ""),
@@ -369,23 +355,15 @@ def main():
 
     chat_history = request.get("chat_history", "")
     turn_hints = request.get("turn_hints", {})
-
-    # Build thinker prompt
     thinker_prompt = build_thinker_prompt(player_context, chat_history, turn_hints=turn_hints)
-
-    # Spawn thinker
     player_name = player_context.get("player_name", "unknown")
     decision = spawn_thinker_subagent(model, thinker_prompt, player_name)
 
-    # If it's a needs_runtime placeholder, return it
     if "status" in decision and decision["status"] == "needs_runtime":
         print(json.dumps(decision, ensure_ascii=False, indent=2))
         return
 
-    # Validate and normalize
     validated = validate_decision(decision)
-
-    # Return to caller
     print(json.dumps({
         "status": "ok",
         "action": validated["action"],

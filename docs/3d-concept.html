@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endless Werewolf V2 — 3D Village Table</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { overflow:hidden; background:#0a0a15; font-family:system-ui,sans-serif; }
+  #c { width:100vw; height:100vh; display:block; cursor:grab; }
+  #c:active { cursor:grabbing; }
+  #ui {
+    position:fixed; top:15px; right:15px; z-index:10;
+    background:rgba(10,10,25,.88); padding:12px 16px; border-radius:10px;
+    border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(8px);
+    font-size:12px; color:#aaa; line-height:1.9; min-width:190px;
+  }
+  #ui h3 { color:#e8c468; font-size:13px; margin-bottom:6px; }
+  #ui label { display:block; cursor:pointer; color:#ddd; }
+  #ui label:hover { color:#e8c468; }
+  #ui hr { border:0; border-top:1px solid rgba(255,255,255,.08); margin:6px 0; }
+  #info {
+    position:fixed; bottom:14px; left:50%; transform:translateX(-50%); z-index:10;
+    background:rgba(10,10,25,.85); color:#999; padding:7px 18px; border-radius:8px;
+    font-size:12px; border:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px);
+  }
+  #info b { color:#e8c468; }
+  #tags { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5; }
+  .tag {
+    position:absolute; transform:translate(-50%,-50%); pointer-events:none;
+    background:rgba(10,10,25,.92); padding:4px 10px; border-radius:6px;
+    font-size:12px; font-weight:bold; white-space:nowrap; text-align:center;
+    font-family:system-ui,sans-serif; transition:opacity .3s;
+  }
+  .tag .zh { font-size:10px; color:#888; font-weight:normal; }
+  #loading { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); color:#e8c468; font-size:16px; z-index:20; }
+  #hover-card {
+    position:fixed; z-index:15; pointer-events:none; opacity:0; transition:opacity .2s;
+    background:rgba(10,10,25,.95); padding:10px 16px; border-radius:10px;
+    border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(10px);
+    font-size:12px; color:#ddd; max-width:240px; line-height:1.6;
+  }
+  #hover-card .icon { font-size:24px; margin-bottom:4px; }
+  #hover-card .name { font-weight:bold; font-size:14px; }
+  #hover-card .desc { color:#999; font-size:11px; margin-top:4px; }
+  #hover-card .trait { color:#e8c468; font-size:11px; margin-top:2px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="tags"></div>
+<div id="hover-card"></div>
+<div id="ui">
+  <h3>🐺 Endless Werewolf V2</h3>
+  <label><input type="radio" name="view" value="overview" checked> Overview</label>
+  <label><input type="radio" name="view" value="table"> Table level</label>
+  <label><input type="radio" name="view" value="closeup"> Close-up</label>
+  <label><input type="radio" name="view" value="topdown"> Top-down</label>
+  <label><input type="radio" name="view" value="orbit"> Free orbit</label>
+  <hr>
+  <label><input type="checkbox" id="night"> Night mode</label>
+  <label><input type="checkbox" id="names" checked> Show names</label>
+  <label><input type="checkbox" id="rotate" checked> Auto-rotate</label>
+</div>
+<div id="info"><b>Drag</b> rotate · <b>Scroll</b> zoom · <b>Right-drag</b> pan · <b>Hover</b> character for info</div>
+<div id="loading">Loading 3D scene…</div>
+
+<script type="module">
+import * as THREE from './three.min.mjs';
+
+const PI=Math.PI, cos=Math.cos, sin=Math.sin, TAU=PI*2;
+
+// --- Player data ---
+const PLAYERS=[
+  {id:1,name:"The Prosecutor",zh:"嚴審官",color:0xc0392b,accent:0xe74c3c,body:0x4a0000,head:0xD4A574,
+   icon:"⚖️",desc:"Former courtroom prosecutor",trait:"Aggressive cross-examiner"},
+  {id:2,name:"The Therapist",zh:"心理諮商師",color:0x2ecc71,accent:0x27ae60,body:0x0d5234,head:0xE8C4A0,
+   icon:"🧠",desc:"Soft-spoken mind reader",trait:"Socratic trap-setter"},
+  {id:3,name:"The Chaos Agent",zh:"攪局者",color:0xe67e22,accent:0xd35400,body:0x7a3a10,head:0xD4B896,
+   icon:"🎭",desc:"Theatrical wildcard",trait:"Lies for fun, loves chaos"},
+  {id:4,name:"The Gut Player",zh:"直覺俠",color:0x95a5a6,accent:0x7f8c8d,body:0x2a2a2a,head:0xC8A878,
+   icon:"👊",desc:"Street fighter, pure instinct",trait:"Vibe-based, no logic"},
+  {id:5,name:"The Statistician",zh:"統計學家",color:0x3498db,accent:0x2980b9,body:0x0d3252,head:0xD0C8B8,
+   icon:"📊",desc:"Data-driven analyst",trait:"Probability estimates everything"},
+  {id:6,name:"The Underdog",zh:"小人物",color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,
+   icon:"🍀",desc:"Nervous but sharp newcomer",trait:"Overthinks, surprisingly right"},
+];
+
+const R=3.2, SH=0.6, TR=2.0;
+function sp(i){const a=(i/6)*TAU-PI/2;return [cos(a)*R,SH,sin(a)*R];}
+function sa(i){return (i/6)*TAU-PI/2;}
+
+// --- Three setup ---
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x1a1520);
+scene.fog=new THREE.Fog(0x1a1520,14,32);
+
+const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,100);
+camera.position.set(0,9,9);
+
+// --- Lights ---
+const amb=new THREE.AmbientLight(0xffffff,0.45); scene.add(amb);
+const dir=new THREE.DirectionalLight(0xfff5e0,0.85);
+dir.position.set(5,10,5); dir.castShadow=true;
+dir.shadow.mapSize.set(1024,1024);
+dir.shadow.camera.near=0.5; dir.shadow.camera.far=30;
+dir.shadow.camera.left=-8; dir.shadow.camera.right=8;
+dir.shadow.camera.top=8; dir.shadow.camera.bottom=-8;
+scene.add(dir);
+
+const moonPoint=new THREE.PointLight(0x7080ff,0,20); moonPoint.position.set(-5,6,5); scene.add(moonPoint);
+const candlePoint=new THREE.PointLight(0xFFD700,1.5,10); candlePoint.position.set(0,0.75,0); scene.add(candlePoint);
+
+// --- Floor ---
+const floor=new THREE.Mesh(
+  new THREE.CircleGeometry(14,64),
+  new THREE.MeshStandardMaterial({color:0x3a3228,roughness:0.85})
+);
+floor.rotation.x=-PI/2; floor.position.y=-0.6; floor.receiveShadow=true;
+scene.add(floor);
+
+// --- Table ---
+const tableTop=new THREE.Mesh(
+  new THREE.CylinderGeometry(TR,TR,0.12,48),
+  new THREE.MeshStandardMaterial({color:0x5a3a1a,roughness:0.6})
+);
+tableTop.position.y=0.15; tableTop.receiveShadow=true; tableTop.castShadow=true; scene.add(tableTop);
+
+const tableRing=new THREE.Mesh(
+  new THREE.RingGeometry(TR,TR+0.08,48),
+  new THREE.MeshStandardMaterial({color:0xe8c468,side:THREE.DoubleSide,metalness:0.5,roughness:0.3})
+);
+tableRing.position.y=0.16; tableRing.rotation.x=-PI/2; scene.add(tableRing);
+
+const tablePed=new THREE.Mesh(
+  new THREE.CylinderGeometry(0.35,0.45,0.6,16),
+  new THREE.MeshStandardMaterial({color:0x3a2a1a,roughness:0.7})
+);
+tablePed.position.y=-0.3; tablePed.castShadow=true; scene.add(tablePed);
+
+// Candle
+const candle=new THREE.Mesh(
+  new THREE.CylinderGeometry(0.06,0.08,0.3,8),
+  new THREE.MeshStandardMaterial({color:0xE8D8B8})
+);
+candle.position.y=0.5; scene.add(candle);
+
+const flame=new THREE.Mesh(
+  new THREE.ConeGeometry(0.04,0.12,8),
+  new THREE.MeshStandardMaterial({color:0xFFD700,emissive:0xFF8800,emissiveIntensity:0.8})
+);
+flame.position.y=0.72; scene.add(flame);
+
+// --- Helper: create a limb (capsule mesh) ---
+function limb(r, len, color, rough=0.6){
+  const m=new THREE.Mesh(
+    new THREE.CapsuleGeometry(r,len,6,12),
+    new THREE.MeshStandardMaterial({color,roughness:rough})
+  );
+  m.castShadow=true;
+  return m;
+}
+
+// --- Build character ---
+function buildCharacter(player, index){
+  const g=new THREE.Group();
+  const pos=sp(index); g.position.set(...pos);
+  const ang=sa(index); g.rotation.y=-ang+PI/2;
+  scene.add(g);
+
+  const skinMat=new THREE.MeshStandardMaterial({color:player.head,roughness:0.5});
+  const bodyMat=new THREE.MeshStandardMaterial({color:player.body,roughness:0.6,metalness:0.1});
+  const accMat=new THREE.MeshStandardMaterial({color:player.accent,roughness:0.4});
+  const darkMat=new THREE.MeshStandardMaterial({color:0x1a1a2e,roughness:0.3});
+
+  // === Torso ===
+  // Tapered body — wider at shoulders, narrower at waist
+  const torso=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.28,0.35,0.55,16),
+    bodyMat
+  );
+  torso.position.y=0.35; torso.castShadow=true; g.add(torso);
+
+  // Shoulders — slight width
+  const shoulders=new THREE.Mesh(
+    new THREE.SphereGeometry(0.3,16,12),
+    bodyMat
+  );
+  shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
+
+  // === Arms ===
+  // Left arm
+  const armL=limb(0.09,0.35,player.body);
+  armL.position.set(-0.38,0.4,0);
+  armL.rotation.z=0.15;
+  g.add(armL);
+  // Right arm
+  const armR=limb(0.09,0.35,player.body);
+  armR.position.set(0.38,0.4,0);
+  armR.rotation.z=-0.15;
+  g.add(armR);
+
+  // Hands
+  const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
+  handL.position.set(-0.48,0.2,0); handL.castShadow=true; g.add(handL);
+  const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
+  handR.position.set(0.48,0.2,0); handR.castShadow=true; g.add(handR);
+
+  // === Legs ===
+  const legL=limb(0.12,0.3,0x2a2a2a);
+  legL.position.set(-0.14,-0.1,0); g.add(legL);
+  const legR=limb(0.12,0.3,0x2a2a2a);
+  legR.position.set(0.14,-0.1,0); g.add(legR);
+
+  // === Head ===
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
+  head.position.y=0.98; head.castShadow=true; g.add(head);
+
+  // Eyes — flat ovals
+  const eyeGeo=new THREE.SphereGeometry(0.04,12,8);
+  const eL=new THREE.Mesh(eyeGeo,darkMat); eL.position.set(-0.12,1.0,0.3); eL.scale.set(1,1.3,0.5); g.add(eL);
+  const eR=new THREE.Mesh(eyeGeo,darkMat); eR.position.set(0.12,1.0,0.3); eR.scale.set(1,1.3,0.5); g.add(eR);
+
+  // Small nose bump
+  const nose=new THREE.Mesh(new THREE.SphereGeometry(0.03,8,8),skinMat);
+  nose.position.set(0,0.93,0.37); g.add(nose);
+
+  // Smile
+  const smile=new THREE.Mesh(
+    new THREE.TorusGeometry(0.07,0.018,8,12,PI),
+    darkMat
+  );
+  smile.position.set(0,0.88,0.34); smile.rotation.z=PI; g.add(smile);
+
+  // === Persona-specific accessories ===
+  switch(player.id){
+    case 1: // The Prosecutor — suit collar + gavel
+      // Suit collar — V shape
+      const collar=new THREE.Mesh(
+        new THREE.ConeGeometry(0.22,0.15,4),
+        accMat
+      );
+      collar.position.set(0,0.62,0.28); collar.rotation.x=PI; collar.rotation.y=PI/4;
+      g.add(collar);
+      // Tie
+      const tie=new THREE.Mesh(
+        new THREE.ConeGeometry(0.05,0.2,4),
+        new THREE.MeshStandardMaterial({color:0xc0392b})
+      );
+      tie.position.set(0,0.5,0.3); tie.rotation.x=-PI/2+0.3;
+      g.add(tie);
+      // Gavel in right hand
+      const gavelHead=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.06,0.06,0.14,8),
+        new THREE.MeshStandardMaterial({color:0x6B4226,roughness:0.5})
+      );
+      gavelHead.position.set(0.52,0.15,0.1); gavelHead.rotation.z=PI/2;
+      g.add(gavelHead);
+      const gavelHandle=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.02,0.02,0.12,8),
+        new THREE.MeshStandardMaterial({color:0x6B4226})
+      );
+      gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
+      g.add(gavelHandle);
+      // Slick hair
+      const hairP1=new THREE.Mesh(
+        new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.45),
+        new THREE.MeshStandardMaterial({color:0x2a1a0a,roughness:0.4})
+      );
+      hairP1.position.set(0,1.05,0); hairP1.scale.set(1,0.5,1); g.add(hairP1);
+      break;
+
+    case 2: // The Therapist — glasses + clipboard
+      // Glasses — two torus rings
+      const glassL=new THREE.Mesh(
+        new THREE.TorusGeometry(0.08,0.015,8,16),
+        new THREE.MeshStandardMaterial({color:0x333333,metalness:0.5,roughness:0.2})
+      );
+      glassL.position.set(-0.12,1.0,0.32); g.add(glassL);
+      const glassR=new THREE.Mesh(
+        new THREE.TorusGeometry(0.08,0.015,8,16),
+        new THREE.MeshStandardMaterial({color:0x333333,metalness:0.5,roughness:0.2})
+      );
+      glassR.position.set(0.12,1.0,0.32); g.add(glassR);
+      // Bridge
+      const bridge=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.01,0.01,0.08,4),
+        new THREE.MeshStandardMaterial({color:0x333333})
+      );
+      bridge.position.set(0,1.0,0.33); bridge.rotation.z=PI/2;
+      g.add(bridge);
+      // Clipboard in left hand
+      const board=new THREE.Mesh(
+        new THREE.BoxGeometry(0.18,0.22,0.02),
+        new THREE.MeshStandardMaterial({color:0xF5F0E0,roughness:0.7})
+      );
+      board.position.set(-0.52,0.15,0.05); board.rotation.x=-0.2;
+      g.add(board);
+      // Soft hair — bun
+      const hairP2=new THREE.Mesh(
+        new THREE.SphereGeometry(0.35,16,12,0,TAU,0,PI*0.5),
+        new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5})
+      );
+      hairP2.position.set(0,1.04,0); hairP2.scale.set(1,0.6,1); g.add(hairP2);
+      // Bun
+      const bun=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),
+        new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5}));
+      bun.position.set(0,1.22,-0.15); g.add(bun);
+      break;
+
+    case 3: // The Chaos Agent — wild hair + mask on stick
+      // Wild spiky hair — multiple cones
+      for(let k=0;k<7;k++){
+        const spike=new THREE.Mesh(
+          new THREE.ConeGeometry(0.06,0.2+Math.random()*0.1,5),
+          new THREE.MeshStandardMaterial({color:0xB85820,roughness:0.4})
+        );
+        const sa2=k/7*TAU;
+        spike.position.set(cos(sa2)*0.25,1.15,sin(sa2)*0.25);
+        spike.rotation.set(Math.random()*0.3-0.15,sa2,Math.random()*0.4-0.2);
+        g.add(spike);
+      }
+      // Mask on stick (drama!)
+      const stick=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.015,0.015,0.35,6),
+        new THREE.MeshStandardMaterial({color:0x6B4226})
+      );
+      stick.position.set(0.52,0.25,0.1); stick.rotation.z=-0.3;
+      g.add(stick);
+      const mask=new THREE.Mesh(
+        new THREE.SphereGeometry(0.1,12,8,0,TAU,0,PI),
+        accMat
+      );
+      mask.position.set(0.6,0.35,0.1); mask.scale.set(0.8,1,0.3);
+      g.add(mask);
+      // Big grin (wider smile)
+      smile.geometry=new THREE.TorusGeometry(0.09,0.018,8,16,PI*1.1);
+      break;
+
+    case 4: // The Gut Player — bandana + muscular
+      // Bandana
+      const bandana=new THREE.Mesh(
+        new THREE.TorusGeometry(0.34,0.06,8,20),
+        new THREE.MeshStandardMaterial({color:0x7f8c8d,roughness:0.4})
+      );
+      bandana.position.set(0,1.08,0); bandana.rotation.x=PI/2; bandana.scale.set(1,1,0.8);
+      g.add(bandana);
+      // Bandana knot
+      const knot=new THREE.Mesh(
+        new THREE.BoxGeometry(0.06,0.08,0.06),
+        new THREE.MeshStandardMaterial({color:0x7f8c8d})
+      );
+      knot.position.set(0,1.06,-0.32); g.add(knot);
+      // Bigger arms (muscular)
+      armL.scale.set(1.3,1.2,1.3); armR.scale.set(1.3,1.2,1.3);
+      handL.scale.set(1.3,1.3,1.3); handR.scale.set(1.3,1.3,1.3);
+      // Fist pose — both hands on table
+      handL.position.set(-0.35,0.05,0.15); armL.rotation.x=-0.5; armL.position.y=0.3;
+      handR.position.set(0.35,0.05,0.15); armR.rotation.x=-0.5; armR.position.y=0.3;
+      // Scar on cheek
+      const scar=new THREE.Mesh(
+        new THREE.BoxGeometry(0.02,0.06,0.01),
+        new THREE.MeshStandardMaterial({color:0xaa3333})
+      );
+      scar.position.set(-0.15,0.95,0.35); scar.rotation.z=0.2;
+      g.add(scar);
+      break;
+
+    case 5: // The Statistician — glasses + tablet
+      // Glasses — square-ish (use torus)
+      const sgL=new THREE.Mesh(
+        new THREE.TorusGeometry(0.07,0.012,8,16),
+        new THREE.MeshStandardMaterial({color:0x2980b9,metalness:0.4,roughness:0.2})
+      );
+      sgL.position.set(-0.12,1.0,0.32); g.add(sgL);
+      const sgR=new THREE.Mesh(
+        new THREE.TorusGeometry(0.07,0.012,8,16),
+        new THREE.MeshStandardMaterial({color:0x2980b9,metalness:0.4,roughness:0.2})
+      );
+      sgR.position.set(0.12,1.0,0.32); g.add(sgR);
+      // Tablet in left hand
+      const tablet=new THREE.Mesh(
+        new THREE.BoxGeometry(0.16,0.22,0.015),
+        new THREE.MeshStandardMaterial({color:0x1a1a2e,roughness:0.2,metalness:0.5})
+      );
+      tablet.position.set(-0.5,0.18,0.08); tablet.rotation.x=-0.15;
+      g.add(tablet);
+      // Screen glow
+      const screen=new THREE.Mesh(
+        new THREE.PlaneGeometry(0.13,0.18),
+        new THREE.MeshStandardMaterial({color:0x2980b9,emissive:0x2980b9,emissiveIntensity:0.3})
+      );
+      screen.position.set(-0.5,0.18,0.09); screen.rotation.x=-0.15;
+      g.add(screen);
+      // Neat combed hair
+      const hairP5=new THREE.Mesh(
+        new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.4),
+        new THREE.MeshStandardMaterial({color:0x1a1a1a,roughness:0.3})
+      );
+      hairP5.position.set(0,1.06,0); hairP5.scale.set(1,0.35,1.05); g.add(hairP5);
+      // Side part
+      const part=new THREE.Mesh(
+        new THREE.BoxGeometry(0.15,0.03,0.1),
+        new THREE.MeshStandardMaterial({color:0x333333})
+      );
+      part.position.set(0.05,1.12,0.1); g.add(part);
+      break;
+
+    case 6: // The Underdog — messy hair + lucky charm
+      // Messy hair — uneven sphere
+      const hairP6=new THREE.Mesh(
+        new THREE.SphereGeometry(0.38,16,12,0,TAU,0,PI*0.55),
+        new THREE.MeshStandardMaterial({color:0x5a3e10,roughness:0.6})
+      );
+      hairP6.position.set(0,1.02,0); hairP6.scale.set(1.05,0.65,1.05);
+      // Tilt slightly
+      hairP6.rotation.z=0.08;
+      g.add(hairP6);
+      // Hair strands sticking up
+      for(let k=0;k<3;k++){
+        const strand=new THREE.Mesh(
+          new THREE.ConeGeometry(0.03,0.1+Math.random()*0.06,4),
+          new THREE.MeshStandardMaterial({color:0x5a3e10,roughness:0.6})
+        );
+        strand.position.set(-0.1+k*0.1,1.2+Math.random()*0.05,0);
+        strand.rotation.set(Math.random()*0.3-0.15,0,Math.random()*0.3-0.15);
+        g.add(strand);
+      }
+      // Lucky charm (four-leaf clover) in right hand
+      for(let k=0;k<4;k++){
+        const leaf=new THREE.Mesh(
+          new THREE.SphereGeometry(0.04,8,6),
+          new THREE.MeshStandardMaterial({color:0x27ae60,roughness:0.4})
+        );
+        const a2=k/4*TAU;
+        leaf.position.set(0.48+cos(a2)*0.06,0.15+sin(a2)*0.06,0.08);
+        leaf.scale.set(1,1.5,0.5);
+        g.add(leaf);
+      }
+      // Worried eyebrows
+      const browL=new THREE.Mesh(
+        new THREE.BoxGeometry(0.08,0.02,0.02),
+        darkMat
+      );
+      browL.position.set(-0.12,1.08,0.33); browL.rotation.z=-0.15;
+      g.add(browL);
+      const browR=new THREE.Mesh(
+        new THREE.BoxGeometry(0.08,0.02,0.02),
+        darkMat
+      );
+      browR.position.set(0.12,1.08,0.33); browR.rotation.z=0.15;
+      g.add(browR);
+      // Nervous posture — slightly leaning back
+      g.rotation.x=-0.05;
+      break;
+  }
+
+  // === Base platform ===
+  const base=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.5,0.55,0.08,24),
+    new THREE.MeshStandardMaterial({color:player.color,roughness:0.3,metalness:0.2})
+  );
+  base.position.y=-0.14; base.receiveShadow=true; g.add(base);
+
+  const ring=new THREE.Mesh(
+    new THREE.RingGeometry(0.5,0.58,24),
+    new THREE.MeshStandardMaterial({color:player.accent,side:THREE.DoubleSide,emissive:player.accent,emissiveIntensity:0.3})
+  );
+  ring.position.y=-0.09; ring.rotation.x=-PI/2; g.add(ring);
+
+  return g;
+}
+
+// --- Create all characters ---
+const chars=PLAYERS.map((p,i)=>buildCharacter(p,i));
+const charGroups=chars;
+
+// --- Raycaster for hover ---
+const raycaster=new THREE.Raycaster();
+const mouseNDC=new THREE.Vector2();
+let hoveredId=-1;
+const hoverCard=document.getElementById('hover-card');
+
+canvas.addEventListener('mousemove',e=>{
+  const rect=canvas.getBoundingClientRect();
+  mouseNDC.x=((e.clientX-rect.left)/rect.width)*2-1;
+  mouseNDC.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  raycaster.setFromCamera(mouseNDC,camera);
+  const intersects=raycaster.intersectObjects(chars,true);
+  let foundId=-1;
+  if(intersects.length>0){
+    let obj=intersects[0].object;
+    while(obj && obj.parent){
+      const idx=chars.indexOf(obj);
+      if(idx>=0){foundId=PLAYERS[idx].id;break;}
+      obj=obj.parent;
+    }
+  }
+  if(foundId!==hoveredId){
+    hoveredId=foundId;
+    if(foundId>0){
+      const p=PLAYERS.find(x=>x.id===foundId);
+      const hex='#'+p.accent.toString(16).padStart(6,'0');
+      hoverCard.innerHTML=`
+        <div class="icon">${p.icon}</div>
+        <div class="name" style="color:${hex}">${p.name} (${p.zh})</div>
+        <div class="desc">${p.desc}</div>
+        <div class="trait">${p.trait}</div>
+      `;
+      hoverCard.style.borderColor=hex+'66';
+      hoverCard.style.left=(e.clientX+15)+'px';
+      hoverCard.style.top=(e.clientY+15)+'px';
+      hoverCard.style.opacity='1';
+    }else{
+      hoverCard.style.opacity='0';
+    }
+  }
+  if(foundId>0){
+    hoverCard.style.left=(e.clientX+15)+'px';
+    hoverCard.style.top=(e.clientY+15)+'px';
+  }
+});
+
+// --- Name tags ---
+const tagsContainer=document.getElementById('tags');
+const tagEls=PLAYERS.map(p=>{
+  const d=document.createElement('div');
+  d.className='tag';
+  const hex='#'+p.accent.toString(16).padStart(6,'0');
+  d.style.border='1px solid '+hex+'44';
+  d.style.color=hex;
+  d.innerHTML=p.name+'<div class="zh">'+p.zh+'</div>';
+  tagsContainer.appendChild(d);
+  return d;
+});
+
+// --- Camera controls ---
+let theta=0, phi=PI/3.5, dist=12;
+const targetV=new THREE.Vector3(0,0.5,0);
+let isDrag=false,isPan=false,px=0,py=0;
+const views={overview:{t:0,p:PI/3.5,d:12},table:{t:0,p:PI/2.3,d:8},closeup:{t:0.6,p:PI/2.5,d:5.5},topdown:{t:0,p:0.05,d:14},orbit:{t:0.5,p:PI/2.8,d:10}};
+let currentView='overview';
+let autoRotate=true;
+
+function setView(v){currentView=v;const s=views[v]||views.overview;theta=s.t;phi=s.p;dist=s.d;updateCam();}
+function updateCam(){
+  const x=dist*sin(phi)*cos(theta);
+  const y=dist*cos(phi)+0.5;
+  const z=dist*sin(phi)*sin(theta);
+  camera.position.set(x,y,z);
+  camera.lookAt(targetV);
+}
+
+canvas.addEventListener('mousedown',e=>{isDrag=true;isPan=e.button===2;px=e.clientX;py=e.clientY;});
+window.addEventListener('mouseup',()=>{isDrag=false;isPan=false;});
+window.addEventListener('mousemove',e=>{
+  if(!isDrag)return;
+  const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;
+  if(isPan){
+    const ps=0.01*dist;
+    const right=new THREE.Vector3();camera.getWorldDirection(right);right.cross(new THREE.Vector3(0,1,0)).normalize();
+    targetV.addScaledVector(right,-dx*ps);targetV.addScaledVector(new THREE.Vector3(0,1,0),dy*ps);
+  }else{
+    theta-=dx*0.008;phi-=dy*0.008;
+    phi=Math.max(0.02,Math.min(PI/2.05,phi));
+  }
+  updateCam();
+});
+canvas.addEventListener('wheel',e=>{e.preventDefault();dist*=e.deltaY>0?1.1:0.9;dist=Math.max(3,Math.min(25,dist));updateCam();},{passive:false});
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+
+document.querySelectorAll('input[name=view]').forEach(r=>r.addEventListener('change',e=>{if(e.target.checked)setView(e.target.value);}));
+document.getElementById('night').addEventListener('change',e=>{
+  const n=e.target.checked;
+  scene.background=new THREE.Color(n?0x0a0a18:0x1a1520);
+  scene.fog.color.set(n?0x0a0a18:0x1a1520);
+  amb.intensity=n?0.15:0.45;
+  dir.intensity=n?0.3:0.85;
+  dir.color.set(n?0x6677ff:0xfff5e0);
+  moonPoint.intensity=n?0.6:0;
+  candlePoint.intensity=n?4:1.5;
+  flame.material.emissiveIntensity=n?2.5:0.8;
+  floor.material.color.set(n?0x1a1a2a:0x3a3228);
+  tableTop.material.color.set(n?0x2a2a3a:0x5a3a1a);
+});
+document.getElementById('names').addEventListener('change',e=>{tagEls.forEach(t=>t.style.opacity=e.target.checked?'1':'0');});
+document.getElementById('rotate').addEventListener('change',e=>{autoRotate=e.target.checked;});
+
+setView('overview');
+
+// --- Animate ---
+function animate(){
+  requestAnimationFrame(animate);
+  const t=performance.now()*0.001;
+
+  // Idle bob
+  chars.forEach((g,i)=>{
+    g.position.y=SH+Math.sin(t*1.5+i)*0.03;
+  });
+
+  // Flame flicker
+  flame.scale.y=1+Math.sin(t*8)*0.15;
+  flame.scale.x=1+Math.sin(t*7)*0.1;
+  flame.position.y=0.72+Math.sin(t*8)*0.01;
+
+  // Auto rotate
+  if(autoRotate && currentView==='orbit'){theta+=0.003;updateCam();}
+
+  // Name tags
+  const showNames=document.getElementById('names').checked;
+  if(showNames){
+    const w=innerWidth,h=innerHeight;
+    PLAYERS.forEach((p,i)=>{
+      const pos=sp(i);
+      const v=new THREE.Vector3(pos[0],pos[1]+1.6,pos[2]);
+      v.project(camera);
+      const x=(v.x*0.5+0.5)*w;
+      const y=(-v.y*0.5+0.5)*h;
+      const d=camera.position.distanceTo(new THREE.Vector3(pos[0],pos[1]+1.6,pos[2]));
+      const s=Math.min(1.2,8/d);
+      tagEls[i].style.left=x+'px';
+      tagEls[i].style.top=y+'px';
+      tagEls[i].style.transform=`translate(-50%,-50%) scale(${s})`;
+      tagEls[i].style.opacity=v.z<1?'1':'0';
+    });
+  }
+
+  renderer.render(scene,camera);
+}
+
+setTimeout(()=>{const el=document.getElementById('loading');if(el)el.style.display='none';},500);
+window.addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+animate();
+</script>
+</body>
+</html>

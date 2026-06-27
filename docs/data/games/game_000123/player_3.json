@@ -1,0 +1,23 @@
+{
+  "id": "3",
+  "name": "The Chaos Agent",
+  "model": "proxy-shawtim/minimax-m2.7",
+  "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+  "thinking": "high",
+  "initial_role": "Werewolf (狼人)",
+  "current_role": "Minion (爪牙)",
+  "night_memory": "你係場上唯一狼人，你可以選擇查看一張中間底牌。 你偷看咗中間第 1 張底牌，見到佢係：Werewolf (狼人)。",
+  "night_memory_list": [
+    "你係場上唯一狼人，你可以選擇查看一張中間底牌。",
+    "你偷看咗中間第 1 張底牌，見到佢係：Werewolf (狼人)。"
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf (狼人)",
+      "action": "inspect_center",
+      "target": 1,
+      "seen_role": "Werewolf (狼人)",
+      "source": "agent"
+    }
+  ]
+}

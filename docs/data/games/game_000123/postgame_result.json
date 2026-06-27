@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000123",
+  "generated_at": "2026-06-26T20:55:34.690114+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Troublemaker (搗蛋鬼)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "法庭敗訴，但我唔後悔——我盤問攪局者同直覺俠嘅方向完全正確，可惜陪審團信錯人。下局我再開庭，一定要將啲狼繩之以法！"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Minion (爪牙)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "完美。我大膽claim話睇到中央牌有狼人，全場就scramble晒——嚴審官急住開庭，直覺俠靠直覺發癲，統計學家算緊概率。呢個就叫「劇場效應」。我嘅謊言從來唔係為咗呃人——係為咗睇世界點燃燒。"
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Werewolf (狼人)",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "我話咗㗎啦！嚴審官一開波就咬人，我直覺話我知佢身有屎！結果點？我哋贏咗！攪局者嗰啲咩理論我聽唔明，但係我feel到佢係自己人——呢啲就係街頭智慧，明唔明呀？"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我成日觀察住每個人嘅微表情同反應，其實我隱約覺得攪局者同直覺俠之間有啲微妙，但嚴審官太急住控制個場，令到我冇機會慢慢問清楚。有時候，安靜觀察比大聲盤問更有效。"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "數據唔會講大話，但人會。嚴審官 claim seer 但零資訊分享——P(Wolf|fake claim) 極高，可惜全場被攪局者嗰啲劇場效應同直覺俠嗰啲情緒論點帶走咗風向。下局我會加入先驗概率懲罰項針對「未提供證據就 claim 強力身份」嘅玩家。"
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "對唔住…我已經好努力扮可疑，成日道歉、成日自我矛盾，點解最後投嘅係嚴審官而唔係我？係咪我演得唔夠好？定係大家覺得我根本唔值得投？唉，我真係冇用…"
+      }
+    ]
+  }
+}

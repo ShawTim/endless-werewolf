@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import state_manager
+import bridge_agent
 
 WORKSPACE = Path(__file__).resolve().parent
 STATE_DIR = WORKSPACE / "data" / "state"
@@ -63,13 +64,19 @@ class BridgeAgentClient:
     def __init__(self, bridge_agent_id: str = "ai_werewolf_bridge"):
         self.bridge_agent_id = bridge_agent_id
 
-    async def _call_bridge(self, payload: dict[str, Any]) -> dict[str, Any]:
+    async def _call_bridge(self, prompt: str, model: str | None = None, thinking: str | None = None) -> dict[str, Any]:
         cmd = [
             "openclaw", "agent",
             "--agent", self.bridge_agent_id,
-            "--message", json.dumps(payload, ensure_ascii=False),
+            "--message", prompt,
             "--json",
         ]
+        # Pass --model so each player uses their own assigned model
+        if model:
+            cmd.extend(["--model", model])
+        # Pass --thinking to match player's configured thinking level
+        if thinking:
+            cmd.extend(["--thinking", thinking])
 
         proc = await asyncio.to_thread(
             subprocess.run,
@@ -99,13 +106,10 @@ class BridgeAgentClient:
             return json.loads(text[start:end + 1])
 
     async def request_day_action(self, player_context: dict[str, Any], chat_history: str, turn_hints: dict[str, Any] | None = None) -> dict[str, Any]:
-        decision = await self._call_bridge({
-            "request_type": "day_action",
-            "player_context": player_context,
-            "model": player_context["model"],
-            "chat_history": chat_history,
-            "turn_hints": turn_hints or {},
-        })
+        prompt = bridge_agent.build_thinker_prompt(player_context, chat_history, turn_hints=turn_hints)
+        model = player_context.get("model")
+        thinking = player_context.get("thinking")
+        decision = await self._call_bridge(prompt, model=model, thinking=thinking)
         return {
             "action": decision.get("action", "pass"),
             "target": decision.get("target"),
@@ -113,13 +117,10 @@ class BridgeAgentClient:
         }
 
     async def request_vote(self, player_context: dict[str, Any], chat_history: str, valid_targets: list[str]) -> dict[str, Any]:
-        decision = await self._call_bridge({
-            "request_type": "vote",
-            "player_context": player_context,
-            "model": player_context["model"],
-            "chat_history": chat_history,
-            "valid_targets": valid_targets,
-        })
+        prompt = bridge_agent.build_vote_prompt(player_context, chat_history, valid_targets)
+        model = player_context.get("model")
+        thinking = player_context.get("thinking")
+        decision = await self._call_bridge(prompt, model=model, thinking=thinking)
         return {"vote_target": decision.get("vote_target")}
 
 
@@ -180,6 +181,7 @@ class DayPhaseRuntime:
             "player_name": player["name"],
             "persona": player["persona"],
             "model": player["model"],
+            "thinking": player.get("thinking", "high"),
             "initial_role": player["initial_role"],
             "current_role": player["current_role"],
             "night_memory": player.get("night_memory", []),
