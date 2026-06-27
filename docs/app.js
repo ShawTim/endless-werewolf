@@ -174,7 +174,7 @@ function limb(r, len, color, rough = 0.6) {
 function buildCharacter(player, index){
   const g=new THREE.Group();
   const pos=sp(index); g.position.set(...pos);
-  const ang=sa(index); g.rotation.y=-ang+PI/2;
+  const ang=sa(index); g.rotation.y=-ang-PI/2;
   scene.add(g);
 
   const skinMat=new THREE.MeshStandardMaterial({color:player.head,roughness:0.5});
@@ -225,21 +225,52 @@ function buildCharacter(player, index){
   const head=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
   head.position.y=0.98; head.castShadow=true; g.add(head);
 
-  // Eyes — flat ovals
-  const eyeGeo=new THREE.SphereGeometry(0.04,12,8);
-  const eL=new THREE.Mesh(eyeGeo,darkMat); eL.position.set(-0.12,1.0,0.3); eL.scale.set(1,1.3,0.5); g.add(eL);
-  const eR=new THREE.Mesh(eyeGeo,darkMat); eR.position.set(0.12,1.0,0.3); eR.scale.set(1,1.3,0.5); g.add(eR);
+  // Ears
+  const earGeo=new THREE.SphereGeometry(0.06,12,8);
+  const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,0.97,0); earL.scale.set(0.5,1,0.8); g.add(earL);
+  const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,0.97,0); earR.scale.set(0.5,1,0.8); g.add(earR);
 
-  // Small nose bump
-  const nose=new THREE.Mesh(new THREE.SphereGeometry(0.03,8,8),skinMat);
-  nose.position.set(0,0.93,0.37); g.add(nose);
+  // Eyebrows
+  const browGeo=new THREE.BoxGeometry(0.1,0.02,0.03);
+  const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,1.05,0.32); browL.rotation.z=0.08; g.add(browL);
+  const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,1.05,0.32); browR.rotation.z=-0.08; g.add(browR);
 
-  // Smile
+  // Eyes — whites with pupils
+  const eyeWhiteMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.3});
+  const eyeGeo2=new THREE.SphereGeometry(0.05,16,12);
+  const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,1.0,0.32); eL.scale.set(1.2,1,0.6); g.add(eL);
+  const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,1.0,0.32); eR.scale.set(1.2,1,0.6); g.add(eR);
+  // Pupils
+  const pupilGeo=new THREE.SphereGeometry(0.02,12,8);
+  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,1.0,0.36); g.add(pL);
+  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,1.0,0.36); g.add(pR);
+
+  // Nose — more defined
+  const nose=new THREE.Mesh(
+    new THREE.ConeGeometry(0.04,0.12,8),
+    skinMat
+  );
+  nose.position.set(0,0.92,0.38); nose.rotation.x=PI/2; nose.scale.set(0.8,1,0.8); g.add(nose);
+
+  // Mouth — smile with lips
   const smile=new THREE.Mesh(
-    new THREE.TorusGeometry(0.07,0.018,8,12,PI),
+    new THREE.TorusGeometry(0.08,0.025,8,16,PI),
+    new THREE.MeshStandardMaterial({color:0x8B3A3A,roughness:0.4})
+  );
+  smile.position.set(0,0.86,0.35); smile.rotation.z=PI; g.add(smile);
+  // Upper lip
+  const lipLine=new THREE.Mesh(
+    new THREE.BoxGeometry(0.12,0.01,0.02),
     darkMat
   );
-  smile.position.set(0,0.88,0.34); smile.rotation.z=PI; g.add(smile);
+  lipLine.position.set(0,0.88,0.36); g.add(lipLine);
+
+  // Chin
+  const chin=new THREE.Mesh(
+    new THREE.SphereGeometry(0.08,12,8),
+    skinMat
+  );
+  chin.position.set(0,0.82,0.28); chin.scale.set(1,0.6,0.8); g.add(chin);
 
   // === Persona-specific accessories ===
   switch(player.name){
@@ -446,19 +477,9 @@ function buildCharacter(player, index){
         leaf.scale.set(1,1.5,0.5);
         g.add(leaf);
       }
-      // Worried eyebrows
-      const browL=new THREE.Mesh(
-        new THREE.BoxGeometry(0.08,0.02,0.02),
-        darkMat
-      );
-      browL.position.set(-0.12,1.08,0.33); browL.rotation.z=-0.15;
-      g.add(browL);
-      const browR=new THREE.Mesh(
-        new THREE.BoxGeometry(0.08,0.02,0.02),
-        darkMat
-      );
-      browR.position.set(0.12,1.08,0.33); browR.rotation.z=0.15;
-      g.add(browR);
+      // Worried eyebrows — adjust existing ones
+      browL.position.y=1.08; browL.rotation.z=-0.2;
+      browR.position.y=1.08; browR.rotation.z=0.2;
       // Nervous posture — slightly leaning back
       g.rotation.x=-0.05;
       break;
@@ -562,7 +583,7 @@ function setupCameraControls() {
         if (p) {
           const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
           hoverCard.innerHTML = `
-            <div class="icon">${p.icon || '🎭'}</div>
+            <div class="icon" style="width:40px;height:40px;border-radius:50%;background:#${(p.accent||0xe74c3c).toString(16).padStart(6,'0')};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px;border:2px solid #${(p.accent||0xe74c3c).toString(16).padStart(6,'0')}33;">${(p.name||'?')[0]}</div>
             <div class="name" style="color:${hex}">${p.name} (${p.name_zh})</div>
             <div class="desc">${p.persona}</div>
             <div class="trait" style="margin-top:6px;font-size:10px;color:#666;">${(p.model || '').split('/').pop()}</div>
@@ -1084,7 +1105,7 @@ function showPlayerDetail(playerId) {
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   
   let html = `<div class="panel-section">
-    <h3 style="color:${accent}">${p.icon || '🎭'} ${p.name}</h3>
+    <h3 style="color:${accent}">${p.name}</h3>
     <div class="row"><span class="key">Chinese name</span><span class="val">${p.name_zh || ''}</span></div>
     <div class="row"><span class="key">Thinking</span><span class="val">${p.thinking || 'high'}</span></div>
   </div>`;
