@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000001",
+  "generated_at": "2026-06-27T18:56:34.743334+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Minion (爪牙)",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "我同佢哋講真話——兩張狼人牌都喺中間，在場冇狼。我係爪牙，我嘅聲稱係真嘅。但佢哋都係處決咗我，然後發現正正就係我講嘅嗰樣：咩都冇。冇任何隊伍贏。好美麗喎，係咪？村民殺咗唯一講真話嗰個人，而狼人根本從頭到尾都唔喺房入面。"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Robber (強盜)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我哋投走咗攪局者——爪牙——但兩張狼人牌都喺中間。我哋之間冇狼，冇狼被處決。冇任何隊伍贏。我呈交咗呢個法庭入面最強嘅證據：中央 0 號牌係狼人，1 號牌係搗蛋鬼。村民面前就擺住真相，但都判唔落去。有啲案件以審判無效告終——呢一單以流審告終，冇人可以全身而退。"
+      },
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Tanner (皮匠)",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "幾有趣⋯⋯我問咗嚴審官一個本應改變一切嘅問題，但村民都係投票踢走咗攪局者。有時最大聲嘅會贏，即使最細聲嗰個先係啱嘅。"
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "大佬，我講中咗——我話攪局者聽落好似背稿咁，我啱咗！佢的確係狼人隊嘅。但原來佢話房入面冇狼係真嘅？我直覺一半啱一半錯。呢種啱法係最撚糟嗰種。"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Seer (預言家)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "後驗概率 P（村民勝 | 處決攪局者）= 0——我哋有嚴審官嘅預言家數據、我嘅強盜確認、同埋攪局者嘅爪牙聲稱，全部都確認兩張狼人牌喺中間。數學係咁叫「投和票」，但全場揀咗故事而唔係數字。有數據但冇行動，只係噪音。"
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Villager (村民)",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "嗯⋯⋯我問過嚴審官同攪局者會唔會都係講真話，但冇人真係答我，而家我哋投走咗攪局者，然後冇人贏。我估我當初嘅困惑係啱嘅，但太驚冇大聲講出嚟⋯⋯唔好意思。"
+      }
+    ]
+  }
+}
