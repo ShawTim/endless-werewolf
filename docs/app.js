@@ -1091,11 +1091,11 @@ function updateDeathAnims(t) {
     const progress = Math.min(elapsed / d.duration, 1);
     // Ease out cubic
     const eased = 1 - Math.pow(1 - progress, 3);
-    // Tilt forward
-    chars[d.index].rotation.x = -0.3 * eased;
-    // Sink down
+    // Tilt 90 degrees — fall flat
+    chars[d.index].rotation.x = -(PI / 2) * eased;
+    // Sink down to ground level
     const pos = sp(d.index);
-    chars[d.index].position.set(pos[0], d.baseY - 0.3 * eased, pos[2]);
+    chars[d.index].position.set(pos[0], d.baseY - 0.35 * eased, pos[2]);
     return progress < 1;
   });
 }
@@ -1136,18 +1136,39 @@ async function loadGameIndex() {
 
 async function loadGame(gameId) {
   const base = `./data/games/${gameId}/`;
+  const suffix = lang === 'zh' ? '_zh' : '';
+  const fallback = '';
+  
+  async function fetchJSON(name) {
+    // Try localized version first, fall back to original
+    if (suffix) {
+      try {
+        const r = await fetch(base + name + suffix + '.json');
+        if (r.ok) return await r.json();
+      } catch(e) {}
+    }
+    const r2 = await fetch(base + name + fallback + '.json');
+    return r2.ok ? await r2.json() : null;
+  }
+  
   try {
     const [night, day, vote, resolve, postgame] = await Promise.all([
-      fetch(base + 'night_result.json').then(r => r.ok ? r.json() : null),
-      fetch(base + 'day_result.json').then(r => r.ok ? r.json() : null),
-      fetch(base + 'vote_result.json').then(r => r.ok ? r.json() : null),
-      fetch(base + 'resolve_result.json').then(r => r.ok ? r.json() : null),
-      fetch(base + 'postgame_result.json').then(r => r.ok ? r.json() : null),
+      fetchJSON('night_result'),
+      fetchJSON('day_result'),
+      fetchJSON('vote_result'),
+      fetchJSON('resolve_result'),
+      fetchJSON('postgame_result'),
     ]);
     
     let chatHistory = '';
     try {
-      chatHistory = await (await fetch(base + 'chat_history.md')).text();
+      if (suffix) {
+        try {
+          chatHistory = await (await fetch(base + 'chat_history' + suffix + '.md')).text();
+        } catch(e) { chatHistory = await (await fetch(base + 'chat_history.md')).text(); }
+      } else {
+        chatHistory = await (await fetch(base + 'chat_history.md')).text();
+      }
     } catch(e) {}
 
     currentGame = gameId;
@@ -1770,8 +1791,14 @@ function setupUI() {
   document.getElementById('btn-lang').addEventListener('click', () => {
     lang = lang === 'en' ? 'zh' : 'en';
     updateUIText();
-    // Rebuild panels if game is loaded
-    if (gameData.night) {
+    buildNameTags(); // Rebuild name tags with new language
+    // Reload game data with new language, then restore phase
+    if (currentGame) {
+      const savedPhase = currentPhase;
+      loadGame(currentGame).then(() => {
+        setPhase(savedPhase);
+      });
+    } else if (gameData.night) {
       const currentPhaseSaved = currentPhase;
       setPhase(currentPhaseSaved);
     }
