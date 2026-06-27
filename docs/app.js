@@ -3,6 +3,48 @@ import * as THREE from './three.min.mjs';
 
 const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 
+// ===== i18n =====
+const I18N = {
+  en: {
+    brand: 'Endless Werewolf', sub: 'AI One Night',
+    archive: 'Archive', info: 'Info', night: 'Night', autoRotate: 'Auto-rotate',
+    nightPhase: 'Night Phase', dayDiscussion: 'Day Discussion', voting: 'Voting',
+    resolution: 'Resolution', postgame: 'Postgame Interviews',
+    centerCards: 'Center cards', roles: 'Roles', nightActions: 'Night Actions',
+    duration: 'Duration', totalSpeeches: 'Total speeches', playerStats: 'Player Stats',
+    discussionLog: 'Discussion Log', votes: 'Votes', tally: 'Tally', executed: 'Executed',
+    outcome: 'Outcome', reason: 'Reason', winners: 'Winners', finalRoles: 'Final Roles',
+    initialRole: 'Initial role', currentRole: 'Current role', nightMemory: 'Night memory',
+    speeches: 'Speeches', vote: 'Vote', postgameLabel: 'Postgame',
+    deadExec: 'Executed', winLabel: 'Winners', loseLabel: 'Losers',
+    gameArchive: 'Game Archive', loadingVillage: 'Loading 3D village…',
+    speaks: 'speaks', voteFor: 'Voted for', langLabel: '中文',
+    werewolfWin: 'Werewolf Wins!', villageWin: 'Village Wins!',
+    tannerWin: 'Tanner Wins!', noTeamWin: 'No One Wins',
+    chineseName: 'Chinese name', thinking: 'Thinking', persona: 'Persona', gameData: 'Game Data',
+  },
+  zh: {
+    brand: '無限狼人殺', sub: 'AI 一夜',
+    archive: '檔案', info: '資訊', night: '夜晚', autoRotate: '自動旋轉',
+    nightPhase: '夜晚階段', dayDiscussion: '白天討論', voting: '投票',
+    resolution: '結算', postgame: '賽後訪問',
+    centerCards: '中央卡牌', roles: '角色', nightActions: '夜晚行動',
+    duration: '時長', totalSpeeches: '總發言數', playerStats: '玩家統計',
+    discussionLog: '討論記錄', votes: '投票', tally: '票數', executed: '被處決',
+    outcome: '結果', reason: '原因', winners: '勝方', finalRoles: '最終角色',
+    initialRole: '初始角色', currentRole: '當前角色', nightMemory: '夜晚記憶',
+    speeches: '發言', vote: '投票', postgameLabel: '賽後',
+    deadExec: '被處決', winLabel: '勝方', loseLabel: '敗方',
+    gameArchive: '遊戲檔案', loadingVillage: '載入 3D 村莊…',
+    speaks: '次發言', voteFor: '投票給', langLabel: 'EN',
+    werewolfWin: '狼人勝利！', villageWin: '村民勝利！',
+    tannerWin: '皮匠勝利！', noTeamWin: '無人勝利',
+    chineseName: '中文名', thinking: '思考深度', persona: '人設', gameData: '遊戲數據',
+  }
+};
+let lang = (navigator.language || 'en').startsWith('zh') ? 'zh' : 'en';
+function t(key) { return I18N[lang][key] || I18N.en[key] || key; }
+
 // --- Player visual styles (covers both V1 and V2 rosters) ---
 const PLAYER_STYLES = {
   // V1 roster
@@ -517,6 +559,186 @@ function buildAllCharacters() {
   chars = PLAYERS.map((p, i) => buildCharacter(p, i));
 }
 
+// ===== 3D Avatar Portrait Renderer =====
+const avatarCache = {};
+function renderAvatarPortrait(player, size = 128) {
+  const key = player.name + '_' + size;
+  if (avatarCache[key]) return avatarCache[key];
+
+  // Mini scene for portrait
+  const avScene = new THREE.Scene();
+  avScene.background = new THREE.Color(0x1a1520);
+  const avCam = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
+  avCam.position.set(0, 1.0, 2.2);
+  avCam.lookAt(0, 0.98, 0);
+
+  const avAmb = new THREE.AmbientLight(0xffffff, 0.6);
+  avScene.add(avAmb);
+  const avDir = new THREE.DirectionalLight(0xfff5e0, 0.8);
+  avDir.position.set(2, 3, 2);
+  avScene.add(avDir);
+  const avFill = new THREE.DirectionalLight(0x6688ff, 0.3);
+  avFill.position.set(-2, 1, 1);
+  avScene.add(avFill);
+
+  // Build a simplified head+shoulders for portrait
+  const skinMat = new THREE.MeshStandardMaterial({color:player.head||0xD4A574, roughness:0.5});
+  const bodyMat = new THREE.MeshStandardMaterial({color:player.body||0x4a0000, roughness:0.6});
+  const accMat = new THREE.MeshStandardMaterial({color:player.accent||0xe74c3c, roughness:0.4});
+  const darkMat = new THREE.MeshStandardMaterial({color:0x1a1a2e, roughness:0.3});
+
+  // Head
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), skinMat);
+  head.position.y = 0.98;
+  avScene.add(head);
+
+  // Ears
+  const earGeo = new THREE.SphereGeometry(0.06, 12, 8);
+  const earL = new THREE.Mesh(earGeo, skinMat); earL.position.set(-0.35, 0.97, 0); earL.scale.set(0.5, 1, 0.8); avScene.add(earL);
+  const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, 0.97, 0); earR.scale.set(0.5, 1, 0.8); avScene.add(earR);
+
+  // Eyebrows
+  const browGeo = new THREE.BoxGeometry(0.1, 0.02, 0.03);
+  const browL = new THREE.Mesh(browGeo, darkMat); browL.position.set(-0.12, 1.05, 0.32); browL.rotation.z = 0.08; avScene.add(browL);
+  const browR = new THREE.Mesh(browGeo, darkMat); browR.position.set(0.12, 1.05, 0.32); browR.rotation.z = -0.08; avScene.add(browR);
+
+  // Eyes
+  const eyeWhiteMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.3});
+  const eyeGeo2 = new THREE.SphereGeometry(0.05, 16, 12);
+  const eL = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eL.position.set(-0.12, 1.0, 0.32); eL.scale.set(1.2, 1, 0.6); avScene.add(eL);
+  const eR = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eR.position.set(0.12, 1.0, 0.32); eR.scale.set(1.2, 1, 0.6); avScene.add(eR);
+  const pupilGeo = new THREE.SphereGeometry(0.02, 12, 8);
+  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 1.0, 0.36); avScene.add(pL);
+  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 1.0, 0.36); avScene.add(pR);
+
+  // Nose
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 8), skinMat);
+  nose.position.set(0, 0.92, 0.38); nose.rotation.x = PI/2; nose.scale.set(0.8, 1, 0.8); avScene.add(nose);
+
+  // Mouth
+  const smile = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.025, 8, 16, PI), new THREE.MeshStandardMaterial({color:0x8B3A3A, roughness:0.4}));
+  smile.position.set(0, 0.86, 0.35); smile.rotation.z = PI; avScene.add(smile);
+
+  // Chin
+  const chin = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 8), skinMat);
+  chin.position.set(0, 0.82, 0.28); chin.scale.set(1, 0.6, 0.8); avScene.add(chin);
+
+  // Shoulders/torso
+  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 16), bodyMat);
+  torso.position.y = 0.35; avScene.add(torso);
+  const shoulders = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 12), bodyMat);
+  shoulders.position.y = 0.58; shoulders.scale.set(1, 0.5, 0.8); avScene.add(shoulders);
+
+  // Persona-specific accessories (simplified for portrait)
+  addAvatarAccessories(avScene, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile);
+
+  // Render to texture
+  const rt = new THREE.WebGLRenderTarget(size, size, {type: THREE.UnsignedByteType, format: THREE.RGBAFormat});
+  const oldRT = renderer.getRenderTarget();
+  const oldSize = renderer.getSize(new THREE.Vector2());
+  const oldPixelRatio = renderer.getPixelRatio();
+
+  renderer.setPixelRatio(1);
+  renderer.setSize(size, size);
+  renderer.setRenderTarget(rt);
+  renderer.render(avScene, avCam);
+
+  // Read pixels to canvas
+  const pixels = new Uint8Array(size * size * 4);
+  renderer.readRenderTargetPixels(rt, 0, 0, size, size, pixels);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.createImageData(size, size);
+  // Flip Y (WebGL bottom-to-top)
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const srcIdx = ((size - 1 - y) * size + x) * 4;
+      const dstIdx = (y * size + x) * 4;
+      imageData.data[dstIdx] = pixels[srcIdx];
+      imageData.data[dstIdx + 1] = pixels[srcIdx + 1];
+      imageData.data[dstIdx + 2] = pixels[srcIdx + 2];
+      imageData.data[dstIdx + 3] = pixels[srcIdx + 3];
+    }
+  }
+  ctx.putImageData(imageData, 0, 0);
+  const dataUrl = canvas.toDataURL('image/png');
+
+  // Restore renderer
+  renderer.setRenderTarget(oldRT);
+  renderer.setPixelRatio(oldPixelRatio);
+  renderer.setSize(oldSize.x, oldSize.y);
+
+  avatarCache[key] = dataUrl;
+  return dataUrl;
+}
+
+function addAvatarAccessories(scene, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile) {
+  switch(player.name) {
+    case 'The Prosecutor': case 'Blaze': {
+      const hair = new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12, 0, TAU, 0, PI*0.45), new THREE.MeshStandardMaterial({color:0x2a1a0a, roughness:0.4}));
+      hair.position.set(0, 1.05, 0); hair.scale.set(1, 0.5, 1); scene.add(hair);
+      const collar = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.15, 4), accMat);
+      collar.position.set(0, 0.62, 0.28); collar.rotation.x = PI; collar.rotation.y = PI/4; scene.add(collar);
+      const tie = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.2, 4), new THREE.MeshStandardMaterial({color:0xc0392b}));
+      tie.position.set(0, 0.5, 0.3); tie.rotation.x = -PI/2+0.3; scene.add(tie);
+      break;
+    }
+    case 'The Therapist': case 'SafetySam': {
+      const glassL = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.015, 8, 16), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.5, roughness:0.2}));
+      glassL.position.set(-0.12, 1.0, 0.32); scene.add(glassL);
+      const glassR = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.015, 8, 16), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.5, roughness:0.2}));
+      glassR.position.set(0.12, 1.0, 0.32); scene.add(glassR);
+      const hair = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 12, 0, TAU, 0, PI*0.5), new THREE.MeshStandardMaterial({color:0x4a3520, roughness:0.5}));
+      hair.position.set(0, 1.04, 0); hair.scale.set(1, 0.6, 1); scene.add(hair);
+      const bun = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), new THREE.MeshStandardMaterial({color:0x4a3520, roughness:0.5}));
+      bun.position.set(0, 1.22, -0.15); scene.add(bun);
+      break;
+    }
+    case 'The Chaos Agent': case 'Twister': {
+      for (let k = 0; k < 7; k++) {
+        const spike = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.2 + Math.random()*0.1, 5), new THREE.MeshStandardMaterial({color:0xB85820, roughness:0.4}));
+        const a = k/7 * TAU;
+        spike.position.set(cos(a)*0.25, 1.15, sin(a)*0.25);
+        spike.rotation.set(Math.random()*0.3-0.15, a, Math.random()*0.4-0.2);
+        scene.add(spike);
+      }
+      smile.geometry = new THREE.TorusGeometry(0.09, 0.018, 8, 16, PI*1.1);
+      break;
+    }
+    case 'The Gut Player': case 'ConspiBro': {
+      const bandana = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.06, 8, 20), new THREE.MeshStandardMaterial({color:0x7f8c8d, roughness:0.4}));
+      bandana.position.set(0, 1.08, 0); bandana.rotation.x = PI/2; bandana.scale.set(1, 1, 0.8); scene.add(bandana);
+      const scar = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, 0.01), new THREE.MeshStandardMaterial({color:0xaa3333}));
+      scar.position.set(-0.15, 0.95, 0.35); scar.rotation.z = 0.2; scene.add(scar);
+      break;
+    }
+    case 'The Statistician': case 'Dr. Pizza': {
+      const sgL = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.012, 8, 16), new THREE.MeshStandardMaterial({color:0x2980b9, metalness:0.4, roughness:0.2}));
+      sgL.position.set(-0.12, 1.0, 0.32); scene.add(sgL);
+      const sgR = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.012, 8, 16), new THREE.MeshStandardMaterial({color:0x2980b9, metalness:0.4, roughness:0.2}));
+      sgR.position.set(0.12, 1.0, 0.32); scene.add(sgR);
+      const hair = new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12, 0, TAU, 0, PI*0.4), new THREE.MeshStandardMaterial({color:0x1a1a1a, roughness:0.3}));
+      hair.position.set(0, 1.06, 0); hair.scale.set(1, 0.35, 1.05); scene.add(hair);
+      break;
+    }
+    case 'The Underdog': case 'EasyBake': {
+      const hair = new THREE.Mesh(new THREE.SphereGeometry(0.38, 16, 12, 0, TAU, 0, PI*0.55), new THREE.MeshStandardMaterial({color:0x5a3e10, roughness:0.6}));
+      hair.position.set(0, 1.02, 0); hair.scale.set(1.05, 0.65, 1.05); hair.rotation.z = 0.08; scene.add(hair);
+      for (let k = 0; k < 3; k++) {
+        const strand = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.1 + Math.random()*0.06, 4), new THREE.MeshStandardMaterial({color:0x5a3e10, roughness:0.6}));
+        strand.position.set(-0.1 + k*0.1, 1.2 + Math.random()*0.05, 0);
+        strand.rotation.set(Math.random()*0.3-0.15, 0, Math.random()*0.3-0.15);
+        scene.add(strand);
+      }
+      browL.position.y = 1.08; browL.rotation.z = -0.2;
+      browR.position.y = 1.08; browR.rotation.z = 0.2;
+      break;
+    }
+  }
+}
+
 // ===== Camera Controls =====
 let theta = 0, phi = PI / 3.5, dist = 12;
 const targetV = new THREE.Vector3(0, 0.5, 0);
@@ -582,9 +804,11 @@ function setupCameraControls() {
         const p = PLAYERS.find(x => String(x.id) === String(foundId));
         if (p) {
           const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+          const avatarUrl = renderAvatarPortrait(p, 96);
+          const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
           hoverCard.innerHTML = `
-            <div class="icon" style="width:40px;height:40px;border-radius:50%;background:#${(p.accent||0xe74c3c).toString(16).padStart(6,'0')};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px;border:2px solid #${(p.accent||0xe74c3c).toString(16).padStart(6,'0')}33;">${(p.name||'?')[0]}</div>
-            <div class="name" style="color:${hex}">${p.name} (${p.name_zh})</div>
+            <div class="avatar-img" style="width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid ${hex};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
+            <div class="name" style="color:${hex}">${displayName}${lang === 'zh' ? ' <span style=\"font-size:11px;color:#888;\">' + p.name + '</span>' : ' <span style=\"font-size:11px;color:#888;\">' + (p.name_zh||'') + '</span>'}</div>
             <div class="desc">${p.persona}</div>
             <div class="trait" style="margin-top:6px;font-size:10px;color:#666;">${(p.model || '').split('/').pop()}</div>
           `;
@@ -600,7 +824,11 @@ function setupCameraControls() {
       hoverCard.style.top = (e.clientY + 15) + 'px';
     }
 
-    // Click on character opens side panel
+    // Click on character opens modal
+    if (e.detail === 1 && foundId > 0) {
+      showPlayerModal(foundId);
+    }
+    // Double-click opens full side panel detail
     if (e.detail === 2 && foundId > 0) {
       showPlayerDetail(foundId);
     }
@@ -632,7 +860,9 @@ function buildNameTags() {
     const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
     d.style.border = '1px solid ' + hex + '44';
     d.style.color = hex;
-    d.innerHTML = p.name + '<div class="zh">' + (p.name_zh || '') + '</div>';
+    const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+    const sub = lang === 'zh' ? p.name : (p.name_zh || '');
+    d.innerHTML = main + '<div class="zh">' + sub + '</div>';
     tagsContainer.appendChild(d);
     tagEls.push(d);
   });
@@ -712,26 +942,71 @@ function showVoteArrows(votes) {
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
 
+    // Draw a line from voter to target in 3D, project to screen
     const vpos = sp(vi);
     const tpos = sp(ti);
-    const mid = [(vpos[0] + tpos[0]) / 2, (vpos[1] + 0.5 + tpos[1] + 0.5) / 2, (vpos[2] + tpos[2]) / 2];
 
-    const v = new THREE.Vector3(mid[0], mid[1] + 0.3, mid[2]);
-    v.project(camera);
-    const x = (v.x * 0.5 + 0.5) * innerWidth;
-    const y = (-v.y * 0.5 + 0.5) * innerHeight;
+    // Project both positions
+    const vStart = new THREE.Vector3(vpos[0], vpos[1] + 0.5, vpos[2]);
+    const vEnd = new THREE.Vector3(tpos[0], tpos[1] + 0.5, tpos[2]);
+    const startScreen = vStart.clone().project(camera);
+    const endScreen = vEnd.clone().project(camera);
+    const sx = (startScreen.x * 0.5 + 0.5) * innerWidth;
+    const sy = (-startScreen.y * 0.5 + 0.5) * innerHeight;
+    const ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
+    const ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
 
-    const el = document.createElement('div');
-    el.className = 'vote-arrow';
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
+    // Draw arrow line using SVG
+    const voterColor = getPlayerColor(voter);
+    const targetColor = getPlayerColor(target);
+    const dx = ex - sx, dy = ey - sy;
+    const len = Math.sqrt(dx*dx + dy*dy);
+    if (len < 10) continue; // skip if too close
 
-    // Direction
-    const dv = new THREE.Vector3(tpos[0] - vpos[0], 0, tpos[2] - vpos[2]);
-    const angle = Math.atan2(dv.x, -dv.y) * 180 / PI;
-    el.innerHTML = `🎯`;
-    el.style.transform = `translate(-50%,-50%) rotate(${angle}deg)`;
-    voteOverlay.appendChild(el);
+    // Arrowhead size
+    const headLen = Math.min(16, len * 0.25);
+    const angle = Math.atan2(dy, dx);
+    const hx1 = ex - headLen * Math.cos(angle - 0.4);
+    const hy1 = ey - headLen * Math.sin(angle - 0.4);
+    const hx2 = ex - headLen * Math.cos(angle + 0.4);
+    const hy2 = ey - headLen * Math.sin(angle + 0.4);
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'vote-arrow-svg');
+    svg.style.position = 'absolute';
+    svg.style.left = '0';
+    svg.style.top = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none';
+
+    // Line
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', sx); line.setAttribute('y1', sy);
+    line.setAttribute('x2', ex); line.setAttribute('y2', ey);
+    line.setAttribute('stroke', voterColor);
+    line.setAttribute('stroke-width', '2');
+    line.setAttribute('stroke-dasharray', '6,4');
+    line.setAttribute('opacity', '0.7');
+    svg.appendChild(line);
+
+    // Arrowhead
+    const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    head.setAttribute('points', `${ex},${ey} ${hx1},${hy1} ${hx2},${hy2}`);
+    head.setAttribute('fill', voterColor);
+    head.setAttribute('opacity', '0.85');
+    svg.appendChild(head);
+
+    // Voter label at start
+    const label = document.createElement('div');
+    label.className = 'vote-label';
+    label.style.left = sx + 'px';
+    label.style.top = sy + 'px';
+    label.style.color = voterColor;
+    label.textContent = voter;
+
+    voteOverlay.appendChild(svg);
+    voteOverlay.appendChild(label);
   }
 }
 
@@ -742,11 +1017,11 @@ function clearVoteArrows() {
 // ===== Result Banner =====
 function showResultBanner(outcome, reason, winners) {
   const titles = {
-    werewolf_win: '🐺 Werewolf Wins!',
-    village_win: '🏘️ Village Wins!',
-    tanner_win: '🎭 Tanner Wins!',
-    village_win_no_wolf: '🏘️ Village Wins!',
-    no_team_win: '🤷 No One Wins',
+    werewolf_win: '🐺 ' + t('werewolfWin'),
+    village_win: '🏘️ ' + t('villageWin'),
+    tanner_win: '🎭 ' + t('tannerWin'),
+    village_win_no_wolf: '🏘️ ' + t('villageWin'),
+    no_team_win: '🤷 ' + t('noTeamWin'),
   };
   resultBanner.querySelector('.title').textContent = titles[outcome] || outcome;
   resultBanner.querySelector('.sub').textContent = reason || '';
@@ -932,19 +1207,20 @@ function showNightInfo() {
   const players = gameData.night.players || {};
   const trace = gameData.night.night_trace || [];
   
-  let html = '<div class="panel-section"><h3>🌙 Night Phase</h3>';
-  html += '<div class="row"><span class="key">Center cards</span><span class="val">' + (gameData.night.center_cards || []).join(', ') + '</span></div>';
+  let html = '<div class="panel-section"><h3>🌙 ' + t('nightPhase') + '</h3>';
+  html += '<div class="row"><span class="key">' + t('centerCards') + '</span><span class="val">' + (gameData.night.center_cards || []).join(', ') + '</span></div>';
   
-  html += '<h3 style="margin-top:16px;">Roles</h3>';
-  for (const [pid, p] of Object.entries(players)) {
+  html += '<h3 style="margin-top:16px;">' + t('roles') + '</h3>';
+  for (const [, p] of Object.entries(players)) {
     const accent = getPlayerColor(p.name);
-    html += `<div class="row"><span class="key" style="color:${accent}">${p.name}</span><span class="val">${p.initial_role}</span></div>`;
+    const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${p.initial_role}</span></div>`;
   }
   
   if (trace.length > 0) {
-    html += '<h3 style="margin-top:16px;">Night Actions</h3>';
-    for (const t of trace) {
-      html += `<div class="row"><span class="key">${t.player || t.role || '?'}</span><span class="val">${t.action || '?'}</span></div>`;
+    html += '<h3 style="margin-top:16px;">' + t('nightActions') + '</h3>';
+    for (const tr of trace) {
+      html += `<div class="row"><span class="key">${tr.player || tr.role || '?'}</span><span class="val">${tr.action || '?'}</span></div>`;
     }
   }
   html += '</div>';
@@ -956,24 +1232,28 @@ function showDayInfo() {
   if (!gameData.day) return;
   const stats = gameData.day.player_stats || {};
   const trace = gameData.day.day_trace || [];
-  const speeches = trace.filter(t => t.type === 'speech');
+  const speeches = trace.filter(tr => tr.type === 'speech');
   
-  let html = '<div class="panel-section"><h3>☀️ Day Discussion</h3>';
-  html += `<div class="row"><span class="key">Duration</span><span class="val">${(gameData.day.config?.duration_seconds || 0)}s</span></div>`;
-  html += `<div class="row"><span class="key">Total speeches</span><span class="val">${speeches.length}</span></div>`;
+  let html = '<div class="panel-section"><h3>☀️ ' + t('dayDiscussion') + '</h3>';
+  html += `<div class="row"><span class="key">${t('duration')}</span><span class="val">${(gameData.day.config?.duration_seconds || 0)}s</span></div>`;
+  html += `<div class="row"><span class="key">${t('totalSpeeches')}</span><span class="val">${speeches.length}</span></div>`;
   
-  html += '<h3 style="margin-top:16px;">Player Stats</h3>';
+  html += '<h3 style="margin-top:16px;">' + t('playerStats') + '</h3>';
   for (const [name, s] of Object.entries(stats)) {
     const accent = getPlayerColor(name);
-    html += `<div class="row"><span class="key" style="color:${accent}">${name}</span><span class="val">${s.speak_count} speaks</span></div>`;
+    const p = PLAYERS.find(x => x.name === name);
+    const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${s.speak_count} ${t('speaks')}</span></div>`;
   }
   
   if (speeches.length > 0) {
-    html += '<h3 style="margin-top:16px;">Discussion Log</h3>';
+    html += '<h3 style="margin-top:16px;">' + t('discussionLog') + '</h3>';
     for (const s of speeches) {
       const accent = getPlayerColor(s.player_name);
+      const p = PLAYERS.find(x => x.name === s.player_name);
+      const displayName = lang === 'zh' && p ? (p.name_zh || s.player_name) : s.player_name;
       html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      html += `<div class="speaker" style="color:${accent}">${s.player_name}${s.target ? ' @' + s.target : ''}</div>`;
+      html += `<div class="speaker" style="color:${accent}">${displayName}${s.target ? ' @' + s.target : ''}</div>`;
       html += `<div class="text">${escapeHtml(s.speech || '')}</div>`;
       if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
       html += '</div>';
@@ -993,24 +1273,34 @@ function showVoteInfo() {
   const tally = gameData.vote.tally || {};
   const executed = gameData.vote.executed || [];
   
-  let html = '<div class="panel-section"><h3>🗳️ Voting Phase</h3>';
-  html += '<h3 style="margin-top:12px;">Votes</h3>';
+  let html = '<div class="panel-section"><h3>🗳️ ' + t('voting') + '</h3>';
+  html += '<h3 style="margin-top:12px;">' + t('votes') + '</h3>';
   for (const [voter, target] of Object.entries(votes)) {
     const voterColor = getPlayerColor(voter);
     const targetColor = getPlayerColor(target);
-    html += `<div class="row"><span class="key" style="color:${voterColor}">${voter}</span><span class="val" style="color:${targetColor}">→ ${target}</span></div>`;
+    const vp = PLAYERS.find(x => x.name === voter);
+    const tp = PLAYERS.find(x => x.name === target);
+    const voterName = lang === 'zh' && vp ? (vp.name_zh || voter) : voter;
+    const targetName = lang === 'zh' && tp ? (tp.name_zh || target) : target;
+    html += `<div class="row"><span class="key" style="color:${voterColor}">${voterName}</span><span class="val" style="color:${targetColor}">→ ${targetName}</span></div>`;
   }
   
-  html += '<h3 style="margin-top:12px;">Tally</h3>';
+  html += '<h3 style="margin-top:12px;">' + t('tally') + '</h3>';
   const sorted = Object.entries(tally).sort((a, b) => b[1] - a[1]);
   for (const [name, count] of sorted) {
     const accent = getPlayerColor(name);
+    const p = PLAYERS.find(x => x.name === name);
+    const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
     const isExecuted = executed.includes(name);
-    html += `<div class="row"><span class="key" style="color:${accent}">${name}</span><span class="val">${count} vote${count !== 1 ? 's' : ''}${isExecuted ? ' ☠️' : ''}</span></div>`;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${count} ${t('vote')}${count !== 1 ? 's' : ''}${isExecuted ? ' ☠️' : ''}</span></div>`;
   }
   
   if (executed.length > 0) {
-    html += `<div class="row" style="margin-top:12px;"><span class="key">Executed</span><span class="val" style="color:var(--danger)">${executed.join(', ')}</span></div>`;
+    const execNames = executed.map(n => {
+      const p = PLAYERS.find(x => x.name === n);
+      return lang === 'zh' && p ? (p.name_zh || n) : n;
+    });
+    html += `<div class="row" style="margin-top:12px;"><span class="key">${t('executed')}</span><span class="val" style="color:var(--danger)">${execNames.join(', ')}</span></div>`;
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
@@ -1030,18 +1320,32 @@ function showResolveInfo() {
   if (!gameData.resolve) return;
   const r = gameData.resolve;
   
-  let html = '<div class="panel-section"><h3>⚖️ Resolution</h3>';
-  html += `<div class="row"><span class="key">Outcome</span><span class="val">${r.outcome || '?'}</span></div>`;
-  html += `<div class="row"><span class="key">Reason</span><span class="val">${r.reason || '?'}</span></div>`;
+  let html = '<div class="panel-section"><h3>⚖️ ' + t('resolution') + '</h3>';
+  html += `<div class="row"><span class="key">${t('outcome')}</span><span class="val">${r.outcome || '?'}</span></div>`;
+  html += `<div class="row"><span class="key">${t('reason')}</span><span class="val">${r.reason || '?'}</span></div>`;
   
-  if (r.winners) html += `<div class="row"><span class="key">Winners</span><span class="val" style="color:var(--success)">${r.winners.join(', ')}</span></div>`;
-  if (r.executed) html += `<div class="row"><span class="key">Executed</span><span class="val" style="color:var(--danger)">${r.executed.join(', ')}</span></div>`;
+  if (r.winners) {
+    const winNames = r.winners.map(n => {
+      const p = PLAYERS.find(x => x.name === n);
+      return lang === 'zh' && p ? (p.name_zh || n) : n;
+    });
+    html += `<div class="row"><span class="key">${t('winners')}</span><span class="val" style="color:var(--success)">${winNames.join(', ')}</span></div>`;
+  }
+  if (r.executed) {
+    const execNames = r.executed.map(n => {
+      const p = PLAYERS.find(x => x.name === n);
+      return lang === 'zh' && p ? (p.name_zh || n) : n;
+    });
+    html += `<div class="row"><span class="key">${t('executed')}</span><span class="val" style="color:var(--danger)">${execNames.join(', ')}</span></div>`;
+  }
   
   if (r.final_roles) {
-    html += '<h3 style="margin-top:16px;">Final Roles</h3>';
+    html += '<h3 style="margin-top:16px;">' + t('finalRoles') + '</h3>';
     for (const [name, role] of Object.entries(r.final_roles)) {
       const accent = getPlayerColor(name);
-      html += `<div class="row"><span class="key" style="color:${accent}">${name}</span><span class="val">${role.current_role} (${role.team})</span></div>`;
+      const p = PLAYERS.find(x => x.name === name);
+      const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
+      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${role.current_role} (${role.team})</span></div>`;
     }
   }
   html += '</div>';
@@ -1064,15 +1368,18 @@ function showPostgameInfo() {
   if (!gameData.postgame) return;
   const interviews = gameData.postgame.interviews || {};
   
-  let html = '<div class="panel-section"><h3>🎤 Postgame Interviews</h3>';
+  let html = '<div class="panel-section"><h3>🎤 ' + t('postgame') + '</h3>';
   for (const [cat, items] of Object.entries(interviews)) {
     if (!items || items.length === 0) continue;
-    const catLabel = { dead: '💀 Executed', winners: '🏆 Winners', losers: '😢 Losers' }[cat] || cat;
+    const catLabels = { dead: '💀 ' + t('deadExec'), winners: '🏆 ' + t('winLabel'), losers: '😢 ' + t('loseLabel') };
+    const catLabel = catLabels[cat] || cat;
     html += `<h3 style="margin-top:12px;">${catLabel}</h3>`;
     for (const i of items) {
       const accent = getPlayerColor(i.player_name);
+      const p = PLAYERS.find(x => x.name === i.player_name);
+      const displayName = lang === 'zh' && p ? (p.name_zh || i.player_name) : i.player_name;
       html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      html += `<div class="speaker" style="color:${accent}">${i.player_name} (${i.role})</div>`;
+      html += `<div class="speaker" style="color:${accent}">${displayName} (${i.role})</div>`;
       html += `<div class="text">${escapeHtml(i.quote || '')}</div>`;
       html += '</div>';
     }
@@ -1099,28 +1406,122 @@ function showGameInfo() {
   showNightInfo();
 }
 
+function showPlayerModal(playerId) {
+  const p = PLAYERS.find(x => String(x.id) === String(playerId));
+  if (!p) return;
+  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const avatarUrl = renderAvatarPortrait(p, 256);
+  const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
+
+  // Gather game data
+  let initialRole = '?', currentRole = '?', nightMem = '';
+  if (gameData.night && gameData.night.players) {
+    for (const [, pd] of Object.entries(gameData.night.players)) {
+      if (pd.name === p.name) {
+        initialRole = pd.initial_role || '?';
+        currentRole = pd.current_role || '?';
+        nightMem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
+        break;
+      }
+    }
+  }
+
+  // Speeches
+  let speeches = [];
+  if (gameData.day && gameData.day.day_trace) {
+    speeches = gameData.day.day_trace.filter(t => t.type === 'speech' && t.player_name === p.name);
+  }
+
+  // Vote
+  let votedFor = '';
+  if (gameData.vote && gameData.vote.votes && gameData.vote.votes[p.name]) {
+    votedFor = gameData.vote.votes[p.name];
+  }
+
+  // Postgame
+  let postgameQuote = null, postgameRole = '';
+  if (gameData.postgame && gameData.postgame.interviews) {
+    for (const [, items] of Object.entries(gameData.postgame.interviews)) {
+      const item = items.find(i => i.player_name === p.name);
+      if (item) { postgameQuote = item.quote || ''; postgameRole = item.role || ''; break; }
+    }
+  }
+
+  const titleLabels = { werewolf_win: t('werewolfWin'), village_win: t('villageWin'), tanner_win: t('tannerWin'), no_team_win: t('noTeamWin') };
+
+  let html = `<div class="modal-header" style="border-bottom:1px solid var(--border);padding-bottom:16px;display:flex;gap:16px;align-items:center;">
+    <div class="modal-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid ${accent};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
+    <div>
+      <div style="font-size:18px;font-weight:700;color:${accent};">${displayName}</div>
+      ${subName ? `<div style="font-size:13px;color:var(--text-dim);margin-top:2px;">${subName}</div>` : ''}
+      <div style="font-size:11px;color:#666;margin-top:4px;">${(p.model||'').split('/').pop()}</div>
+    </div>
+  </div>
+  `;
+
+  html += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${escapeHtml(p.persona||'')}</p></div>`;
+
+  html += `<div class="modal-section"><h3>${t('gameData')}</h3>
+    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
+    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
+  if (nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(nightMem)}</span></div>`;
+  if (votedFor) html += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(votedFor)}">→ ${votedFor}</span></div>`;
+  html += '</div>';
+
+  if (speeches.length > 0) {
+    html += `<div class="modal-section"><h3>${t('speeches')} (${speeches.length})</h3>`;
+    speeches.forEach(s => {
+      html += `<div class="speech-entry" style="border-left-color:${accent}">`;
+      if (s.target) html += `<div class="speaker" style="color:${accent}">${s.player_name} @${s.target}</div>`;
+      else html += `<div class="speaker" style="color:${accent}">${s.player_name}</div>`;
+      html += `<div class="text">${escapeHtml(s.speech||'')}</div>`;
+      if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  if (postgameQuote) {
+    html += `<div class="modal-section"><h3>${t('postgameLabel')}</h3>`;
+    html += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${p.name} (${postgameRole})</div><div class="text">${escapeHtml(postgameQuote)}</div></div>`;
+    html += '</div>';
+  }
+
+  const modal = document.getElementById('player-modal');
+  const modalContent = document.getElementById('player-modal-content');
+  modalContent.innerHTML = html;
+  modal.classList.add('visible');
+}
+
+function closePlayerModal() {
+  document.getElementById('player-modal').classList.remove('visible');
+}
+
 function showPlayerDetail(playerId) {
   const p = PLAYERS.find(x => String(x.id) === String(playerId));
   if (!p) return;
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
   
   let html = `<div class="panel-section">
-    <h3 style="color:${accent}">${p.name}</h3>
-    <div class="row"><span class="key">Chinese name</span><span class="val">${p.name_zh || ''}</span></div>
-    <div class="row"><span class="key">Thinking</span><span class="val">${p.thinking || 'high'}</span></div>
+    <h3 style="color:${accent}">${displayName}</h3>
+    ${subName ? `<div class="row"><span class="key">${t('chineseName')}</span><span class="val">${subName}</span></div>` : ''}
+    <div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking || 'high'}</span></div>
   </div>`;
   
-  html += `<div class="panel-section"><h3>Persona</h3><p style="font-size:12px;line-height:1.6;color:var(--text);">${escapeHtml(p.persona || '')}</p></div>`;
+  html += `<div class="panel-section"><h3>${t('persona')}</h3><p style="font-size:12px;line-height:1.6;color:var(--text);">${escapeHtml(p.persona || '')}</p></div>`;
   
   // Find this player's data in game
   if (gameData.night && gameData.night.players) {
-    for (const [pid, pd] of Object.entries(gameData.night.players)) {
+    for (const [, pd] of Object.entries(gameData.night.players)) {
       if (pd.name === p.name) {
-        html += `<div class="panel-section"><h3>Game Data</h3>`;
-        html += `<div class="row"><span class="key">Initial role</span><span class="val">${pd.initial_role || '?'}</span></div>`;
-        html += `<div class="row"><span class="key">Current role</span><span class="val">${pd.current_role || '?'}</span></div>`;
+        html += `<div class="panel-section"><h3>${t('gameData')}</h3>`;
+        html += `<div class="row"><span class="key">${t('initialRole')}</span><span class="val">${pd.initial_role || '?'}</span></div>`;
+        html += `<div class="row"><span class="key">${t('currentRole')}</span><span class="val">${pd.current_role || '?'}</span></div>`;
         const mem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
-        if (mem) html += `<div class="row" style="display:block;"><span class="key">Night memory</span><span style="font-size:11px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(mem)}</span></div>`;
+        if (mem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:11px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(mem)}</span></div>`;
         html += '</div>';
         break;
       }
@@ -1129,13 +1530,13 @@ function showPlayerDetail(playerId) {
 
   // Find speeches
   if (gameData.day && gameData.day.day_trace) {
-    const speeches = gameData.day.day_trace.filter(t => t.type === 'speech' && t.player_name === p.name);
+    const speeches = gameData.day.day_trace.filter(tr => tr.type === 'speech' && tr.player_name === p.name);
     if (speeches.length > 0) {
-      html += '<div class="panel-section"><h3>Speeches</h3>';
+      html += `<div class="panel-section"><h3>${t('speeches')}</h3>`;
       speeches.forEach(s => {
         html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-        if (s.target) html += `<div class="speaker" style="color:${accent}">${s.player_name} @${s.target}</div>`;
-        else html += `<div class="speaker" style="color:${accent}">${s.player_name}</div>`;
+        if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
+        else html += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
         html += `<div class="text">${escapeHtml(s.speech || '')}</div>`;
         if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
         html += '</div>';
@@ -1146,8 +1547,11 @@ function showPlayerDetail(playerId) {
 
   // Find vote
   if (gameData.vote && gameData.vote.votes && gameData.vote.votes[p.name]) {
-    html += `<div class="panel-section"><h3>Vote</h3>`;
-    html += `<div class="row"><span class="key">Voted for</span><span class="val">${gameData.vote.votes[p.name]}</span></div>`;
+    const target = gameData.vote.votes[p.name];
+    const tp = PLAYERS.find(x => x.name === target);
+    const targetName = lang === 'zh' && tp ? (tp.name_zh || target) : target;
+    html += `<div class="panel-section"><h3>${t('vote')}</h3>`;
+    html += `<div class="row"><span class="key">${t('voteFor')}</span><span class="val" style="color:${getPlayerColor(target)}">→ ${targetName}</span></div>`;
     html += '</div>';
   }
 
@@ -1156,9 +1560,9 @@ function showPlayerDetail(playerId) {
     for (const [cat, items] of Object.entries(gameData.postgame.interviews)) {
       const item = items.find(i => i.player_name === p.name);
       if (item) {
-        html += `<div class="panel-section"><h3>Postgame (${cat})</h3>`;
+        html += `<div class="panel-section"><h3>${t('postgameLabel')} (${cat})</h3>`;
         html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-        html += `<div class="speaker" style="color:${accent}">${item.player_name} (${item.role})</div>`;
+        html += `<div class="speaker" style="color:${accent}">${displayName} (${item.role})</div>`;
         html += `<div class="text">${escapeHtml(item.quote || '')}</div>`;
         html += '</div></div>';
       }
@@ -1232,6 +1636,7 @@ function stopReplay() {
 // ===== UI Setup =====
 function setupUI() {
   buildNameTags();
+  updateUIText();
 
   // Phase steps
   document.querySelectorAll('.phase-step').forEach(el => {
@@ -1265,6 +1670,23 @@ function setupUI() {
     document.getElementById('side-panel').classList.remove('open');
   });
 
+  // Language toggle
+  document.getElementById('btn-lang').addEventListener('click', () => {
+    lang = lang === 'en' ? 'zh' : 'en';
+    updateUIText();
+    // Rebuild panels if game is loaded
+    if (gameData.night) {
+      const currentPhaseSaved = currentPhase;
+      setPhase(currentPhaseSaved);
+    }
+  });
+
+  // Modal close
+  document.getElementById('player-modal-close').addEventListener('click', closePlayerModal);
+  document.getElementById('player-modal').addEventListener('click', e => {
+    if (e.target.id === 'player-modal') closePlayerModal();
+  });
+
   // Replay controls
   document.getElementById('btn-prev').addEventListener('click', () => {
     stopReplay();
@@ -1284,6 +1706,25 @@ function setupUI() {
       if (trace[i].type === 'speech') { showSpeechAt(i); break; }
     }
   });
+}
+
+function updateUIText() {
+  document.querySelector('.brand').innerHTML = '🐺 ' + t('brand') + ' <span class="sub">' + t('sub') + '</span>';
+  document.getElementById('btn-archive').innerHTML = '<span class="btn-icon">📂</span> ' + t('archive');
+  document.getElementById('btn-info').innerHTML = '<span class="btn-icon">ℹ️</span> ' + t('info');
+  document.getElementById('btn-night').innerHTML = '<span class="btn-icon">🌙</span> ' + t('night');
+  document.getElementById('btn-rotate').innerHTML = '<span class="btn-icon">🔄</span> ' + t('autoRotate');
+  document.getElementById('btn-lang').innerHTML = t('langLabel');
+  document.getElementById('loading').textContent = t('loadingVillage');
+  // Update phase labels
+  const phaseLabels = { night: t('nightPhase'), day: t('dayDiscussion'), vote: t('voting'), resolve: t('resolution'), postgame: t('postgame') };
+  document.querySelectorAll('.phase-step').forEach(el => {
+    const label = el.querySelector('.label');
+    if (label) label.textContent = phaseLabels[el.dataset.phase] || '';
+  });
+  // Archive title
+  const archiveH3 = document.querySelector('#archive-panel h3');
+  if (archiveH3) archiveH3.textContent = t('gameArchive');
 }
 
 function openSidePanel() {
