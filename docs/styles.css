@@ -205,6 +205,7 @@ canvas#c:active { cursor:grabbing; }
   transition:opacity .3s;
 }
 .tag .zh { font-size:10px; color:#888; font-weight:normal; }
+.tag .role-sub { font-size:9px; font-weight:600; margin-top:2px; opacity:0.9; }
 .tag .model { font-size:9px; color:#666; font-weight:normal; margin-top:1px; }
 
 /* ===== Speech Bubbles ===== */

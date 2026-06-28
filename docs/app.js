@@ -551,15 +551,17 @@ function buildCharacter(player, index){
   }
 
   // === Base platform ===
+  const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.3,metalness:0.2});
   const base=new THREE.Mesh(
     new THREE.CylinderGeometry(0.5,0.55,0.08,24),
-    new THREE.MeshStandardMaterial({color:player.color,roughness:0.3,metalness:0.2})
+    baseMat
   );
   base.position.y=-0.14; base.receiveShadow=true; g.add(base);
 
+  const ringMat = new THREE.MeshStandardMaterial({color:player.accent,side:THREE.DoubleSide,emissive:player.accent,emissiveIntensity:0.3});
   const ring=new THREE.Mesh(
     new THREE.RingGeometry(0.5,0.58,24),
-    new THREE.MeshStandardMaterial({color:player.accent,side:THREE.DoubleSide,emissive:player.accent,emissiveIntensity:0.3})
+    ringMat
   );
   ring.position.y=-0.09; ring.rotation.x=-PI/2; g.add(ring);
 
@@ -574,7 +576,7 @@ function buildCharacter(player, index){
   g.add(highlight);
 
   // Store refs
-  g.userData = { player, index, highlight, _baseRotY: g.rotation.y };
+  g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: player.color, _originalRingColor: player.accent, _baseRotY: g.rotation.y };
   return g;
 }
 
@@ -877,6 +879,7 @@ function setNight(n) {
 const tagEls = [];
 function buildNameTags() {
   tagsContainer.innerHTML = '';
+  tagEls = [];
   PLAYERS.forEach(p => {
     const d = document.createElement('div');
     d.className = 'tag';
@@ -885,9 +888,68 @@ function buildNameTags() {
     d.style.color = hex;
     const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
     const sub = lang === 'zh' ? p.name : (p.name_zh || '');
-    d.innerHTML = main + '<div class="zh">' + sub + '</div>';
+    d.innerHTML = main + '<div class="zh">' + sub + '</div><div class="role-sub"></div>';
     tagsContainer.appendChild(d);
     tagEls.push(d);
+  });
+}
+
+// Team colors for resolve/postgame phases
+const TEAM_COLORS = {
+  village_team: 0x2ecc71,   // green
+  werewolf_team: 0xe74c3c,  // red
+  tanner: 0xf1c40f,         // yellow
+  none: 0x95a5a6,           // grey
+};
+
+function showTeamColors(finalRoles) {
+  if (!finalRoles) return;
+  PLAYERS.forEach((p, i) => {
+    const roleInfo = finalRoles[p.name];
+    if (!roleInfo) return;
+    const team = roleInfo.team || 'none';
+    const teamColor = TEAM_COLORS[team] || 0x95a5a6;
+    const roleDisplay = lang === 'zh' ? roleInfo.current_role : roleInfo.current_role;
+    
+    // Change base color
+    if (chars[i] && chars[i].userData.baseMat) {
+      chars[i].userData.baseMat.color.setHex(teamColor);
+      chars[i].userData.baseMat.emissive.setHex(teamColor);
+      chars[i].userData.baseMat.emissiveIntensity = 0.15;
+    }
+    if (chars[i] && chars[i].userData.ringMat) {
+      chars[i].userData.ringMat.color.setHex(teamColor);
+      chars[i].userData.ringMat.emissive.setHex(teamColor);
+      chars[i].userData.ringMat.emissiveIntensity = 0.4;
+    }
+    
+    // Add role to name tag
+    if (tagEls[i]) {
+      const roleSub = tagEls[i].querySelector('.role-sub');
+      if (roleSub) {
+        roleSub.textContent = roleDisplay;
+        roleSub.style.color = '#' + teamColor.toString(16).padStart(6, '0');
+      }
+    }
+  });
+}
+
+function resetTeamColors() {
+  PLAYERS.forEach((p, i) => {
+    if (chars[i] && chars[i].userData.baseMat) {
+      chars[i].userData.baseMat.color.setHex(chars[i].userData._originalBaseColor);
+      chars[i].userData.baseMat.emissive.setHex(0x000000);
+      chars[i].userData.baseMat.emissiveIntensity = 0;
+    }
+    if (chars[i] && chars[i].userData.ringMat) {
+      chars[i].userData.ringMat.color.setHex(chars[i].userData._originalRingColor);
+      chars[i].userData.ringMat.emissive.setHex(chars[i].userData._originalRingColor);
+      chars[i].userData.ringMat.emissiveIntensity = 0.3;
+    }
+    if (tagEls[i]) {
+      const roleSub = tagEls[i].querySelector('.role-sub');
+      if (roleSub) roleSub.textContent = '';
+    }
   });
 }
 
@@ -1318,6 +1380,7 @@ function setPhase(phase) {
   clearVoteArrows();
   hideResultBanner();
   undimAll();
+  resetTeamColors();
 
   switch(phase) {
     case 'night':
@@ -1511,6 +1574,9 @@ function showResolveInfo() {
     });
   }
   
+  // Show team colors on base + role in name tags
+  showTeamColors(r.final_roles);
+  
   // Trigger team animations: winners celebrate, losers sulk
   triggerTeamAnimations(r);
 }
@@ -1556,6 +1622,11 @@ function updateTeamAnims(t) {
 function showPostgameInfo() {
   if (!gameData.postgame) return;
   const interviews = gameData.postgame.interviews || {};
+  
+  // Keep team colors from resolve
+  if (gameData.resolve && gameData.resolve.final_roles) {
+    showTeamColors(gameData.resolve.final_roles);
+  }
   
   let html = '<div class="panel-section"><h3>' + t('postgame') + '</h3>';
   for (const [cat, items] of Object.entries(interviews)) {
