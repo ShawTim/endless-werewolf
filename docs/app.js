@@ -1519,8 +1519,11 @@ function showPostgameInfo() {
 
 function showGameInfo() {
   // Show basic game info in side panel on load
-  if (!gameData.night) return;
-  showNightInfo();
+  // But NOT on mobile — auto-opening panel obscures the whole screen
+  if (innerWidth > 768) {
+    if (!gameData.night) return;
+    showNightInfo();
+  }
 }
 
 function showPlayerModal(playerId) {
@@ -1763,8 +1766,8 @@ function renderGallery3D(player) {
   gallery3DScene.background = new THREE.Color(0x1a1520);
 
   gallery3DCamera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
-  gallery3DCamera.position.set(0, 1.2, 3.5);
-  gallery3DCamera.lookAt(0, 0.5, 0);
+  gallery3DCamera.position.set(0, 1.5, 4.0);
+  gallery3DCamera.lookAt(0, 0.4, 0);
 
   const amb = new THREE.AmbientLight(0xffffff, 0.5);
   gallery3DScene.add(amb);

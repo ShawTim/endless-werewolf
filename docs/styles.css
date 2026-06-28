@@ -121,7 +121,7 @@ canvas#c:active { cursor:grabbing; }
 #side-panel .close-btn {
   position: absolute; top: 12px; right: 14px;
   background: none; border: none; color: var(--text-dim); font-size: 20px;
-  cursor: pointer; transition: color 0.2s;
+  cursor: pointer; transition: color 0.2s; z-index: 19;
 }
 #side-panel .close-btn:hover { color: var(--text-bright); }
 .panel-section { padding: 16px 20px; border-bottom: 1px solid var(--border); }
@@ -294,7 +294,7 @@ canvas#c:active { cursor:grabbing; }
   .btn { padding: 4px 8px; font-size: 10px; }
   /* Gallery modal: vertical layout */
   #gallery-modal-box { flex-direction: column; width: 95vw; height: 90vh; }
-  #gallery-modal-left { width: 100%; min-width: 0; height: 220px; }
+  #gallery-modal-left { width: 100%; min-width: 0; height: 250px; }
   /* Small modal: full width */
   #player-modal-content { width: 92vw; max-width: none; padding: 16px; }
   #player-modal .modal-close-btn { right: 4vw; }
@@ -356,7 +356,7 @@ canvas#c:active { cursor:grabbing; }
   width: 40%; min-width: 300px;
   background: radial-gradient(circle at center, #1a1520 0%, #0a0a15 100%);
   display: flex; align-items: center; justify-content: center;
-  position: relative; flex-shrink: 0;
+  position: relative; flex-shrink: 0; overflow: hidden;
 }
 #gallery-3d { width: 100%; height: 100%; display: block; }
 .gallery-nav-btn {
