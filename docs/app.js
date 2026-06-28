@@ -876,7 +876,7 @@ function setNight(n) {
 }
 
 // ===== Name Tags =====
-const tagEls = [];
+let tagEls = [];
 function buildNameTags() {
   tagsContainer.innerHTML = '';
   tagEls = [];
