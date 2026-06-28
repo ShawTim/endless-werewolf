@@ -12,7 +12,7 @@
       "initial_role": "Seer",
       "current_role": "Robber",
       "night_memory": [
-        "你查驗咗中間兩張底牌：第 0 張係 Werewolf，第 1 張係 Troublemaker。"
+        "你查驗咗中間兩張底牌：第 0 張係 <Werewolf>，第 1 張係 <Troublemaker>。"
       ],
       "night_actions": [
         {
@@ -35,7 +35,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "你查驗咗中間兩張底牌：第 0 張係 Werewolf，第 1 張係 Troublemaker。"
+      "night_memory_text": "你查驗咗中間兩張底牌：第 0 張係 <Werewolf>，第 1 張係 <Troublemaker>。"
     },
     "2": {
       "id": "2",
@@ -64,10 +64,10 @@
       "initial_role": "Minion",
       "current_role": "Minion",
       "night_memory": [
-        "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+        "你醒來時沒有看到任何<Werewolf>，代表兩張<Werewolf>牌可能都在中央。"
       ],
       "night_actions": [],
-      "night_memory_text": "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+      "night_memory_text": "你醒來時沒有看到任何<Werewolf>，代表兩張<Werewolf>牌可能都在中央。"
     },
     "4": {
       "id": "4",
@@ -96,7 +96,7 @@
       "initial_role": "Robber",
       "current_role": "Seer",
       "night_memory": [
-        "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer。"
+        "你偷咗 [The Prosecutor] 張牌，換完之後你而家係：<Seer>。"
       ],
       "night_actions": [
         {
@@ -107,7 +107,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer。"
+      "night_memory_text": "你偷咗 [The Prosecutor] 張牌，換完之後你而家係：<Seer>。"
     },
     "6": {
       "id": "6",

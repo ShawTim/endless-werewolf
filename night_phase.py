@@ -129,18 +129,18 @@ def apply_non_decision_info(game):
         wolf_state = players[wid]
         if len(werewolves) >= 2:
             others = [players[x]["name"] for x in werewolves if x != wid]
-            add_memory(wolf_state, f"你見到另一隻狼人係：{', '.join(others)}。")
+            add_memory(wolf_state, f"你見到另一隻<狼人>是：{', '.join(f'[{n}]' for n in others)}。")
         else:
-            add_memory(wolf_state, "你係場上唯一狼人，你可以選擇查看一張中間底牌。")
+            add_memory(wolf_state, "你是場上唯一的<狼人>，你可以選擇查看一張中央底牌。")
 
     minions = role_holders(game, ROLE_MINION)
     for mid in minions:
         minion_state = players[mid]
         if werewolves:
             wolf_names = [players[x]["name"] for x in werewolves]
-            add_memory(minion_state, f"你見到狼人係：{', '.join(wolf_names)}。狼人唔知道你係爪牙。")
+            add_memory(minion_state, f"你見到的<狼人>是：{', '.join(f'[{n}]' for n in wolf_names)}。<狼人>不知道你是<爪牙>。")
         else:
-            add_memory(minion_state, "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。")
+            add_memory(minion_state, "你醒來時沒有看到任何<狼人>，代表兩張<狼人>牌可能都在中央。")
 
 
 def request_single_werewolf_peek(game, wid):
@@ -160,7 +160,7 @@ def apply_single_werewolf_peek(game, wid, decision, source="agent"):
         raise ValueError("invalid single werewolf action")
 
     seen = game["center_cards"][target]
-    add_memory(wolf_state, f"你偷看咗中間第 {target} 張底牌，見到佢係：{seen}。")
+    add_memory(wolf_state, f"你偷看了中央第 {target} 張底牌，看到它是：<{seen}>。")
     wolf_state["night_actions"].append({
         "role": ROLE_WEREWOLF,
         "action": "inspect_center",
@@ -200,7 +200,7 @@ def apply_seer_action(game, sid, decision, source="agent"):
             raise ValueError("invalid seer target")
         target_id = name_to_id[target_name]
         seen = game["players"][target_id]["initial_role"]
-        add_memory(seer_state, f"你查驗咗 {target_name}，佢嘅身份係：{seen}。")
+        add_memory(seer_state, f"你查驗了 [{target_name}]，他/她的身份是：<{seen}>。")
         seer_state["night_actions"].append({
             "role": ROLE_SEER,
             "action": action,
@@ -225,7 +225,7 @@ def apply_seer_action(game, sid, decision, source="agent"):
         seen = [{"index": i, "role": game["center_cards"][i]} for i in targets]
         add_memory(
             seer_state,
-            "你查驗咗中間兩張底牌：" + "，".join([f"第 {x['index']} 張係 {x['role']}" for x in seen]) + "。"
+            "你查驗了中央兩張底牌：" + "，".join([f"第 {x['index']} 張是 <{x['role']}>" for x in seen]) + "。"
         )
         seer_state["night_actions"].append({
             "role": ROLE_SEER,
@@ -268,7 +268,7 @@ def apply_robber_action(game, rid, decision, source="agent"):
     robber_state["current_role"] = target_old
     game["players"][target_id]["current_role"] = my_old
 
-    add_memory(robber_state, f"你偷咗 {target_name} 張牌，換完之後你而家係：{robber_state['current_role']}。")
+    add_memory(robber_state, f"你偷了 [{target_name}] 的牌，交換之後你現在是：<{robber_state['current_role']}>。")
     robber_state["night_actions"].append({
         "role": ROLE_ROBBER,
         "action": "rob",
@@ -308,7 +308,7 @@ def apply_troublemaker_action(game, tid, decision, source="agent"):
     game["players"][id_a]["current_role"] = role_b
     game["players"][id_b]["current_role"] = role_a
 
-    add_memory(trouble_state, f"你交換咗 {name_a} 同 {name_b} 嘅牌，但你唔知道佢哋換完係咩。")
+    add_memory(trouble_state, f"你交換了 [{name_a}] 和 [{name_b}] 的牌，但你不知道他們交換後是什麼。")
     trouble_state["night_actions"].append({
         "role": ROLE_TROUBLEMAKER,
         "action": "swap",
@@ -326,7 +326,7 @@ def apply_troublemaker_action(game, tid, decision, source="agent"):
 
 def resolve_insomniac(game, iid):
     insomniac_state = game["players"][iid]
-    add_memory(insomniac_state, f"夜晚最後你睇咗自己張牌，你而家係：{insomniac_state['current_role']}。")
+    add_memory(insomniac_state, f"夜晚最後你看了自己的牌，你現在是：<{insomniac_state['current_role']}>。")
     insomniac_state["night_actions"].append({
         "role": ROLE_INSOMNIAC,
         "action": "inspect_self",
