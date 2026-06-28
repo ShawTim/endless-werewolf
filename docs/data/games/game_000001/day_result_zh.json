@@ -8,22 +8,22 @@
     "max_speaks_per_player": 8
   },
   "player_stats": {
-    "[嚴審官]": {
+    "嚴審官": {
       "speak_count": 2
     },
-    "[心理諮商師]": {
+    "心理諮商師": {
       "speak_count": 3
     },
-    "[攪局者]": {
+    "攪局者": {
       "speak_count": 2
     },
-    "[直覺俠]": {
+    "直覺俠": {
       "speak_count": 2
     },
-    "[統計學家]": {
+    "統計學家": {
       "speak_count": 2
     },
-    "[小人物]": {
+    "小人物": {
       "speak_count": 3
     }
   },

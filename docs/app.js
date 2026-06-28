@@ -1190,6 +1190,59 @@ async function loadGame(gameId) {
 
     currentGame = gameId;
     gameData = { night, day, vote, resolve, postgame, chatHistory };
+    
+    // Normalize ZH data: map Chinese player names back to English canonical names
+    // so all lookups (PLAYERS.find, votes, speeches) work consistently
+    if (night && night.players) {
+      const zhToEn = {};
+      for (const [, pd] of Object.entries(night.players)) {
+        if (pd.name_zh && pd.name) zhToEn[pd.name_zh] = pd.name;
+      }
+      const mapName = (n) => zhToEn[n] || n;
+      // Normalize day trace player_name and target
+      if (day && day.day_trace) {
+        day.day_trace.forEach(t => {
+          if (t.player_name) t.player_name = mapName(t.player_name);
+          if (t.target) t.target = mapName(t.target);
+        });
+      }
+      // Normalize votes
+      if (vote) {
+        if (vote.votes) {
+          const newVotes = {};
+          for (const [voter, target] of Object.entries(vote.votes)) {
+            newVotes[mapName(voter)] = mapName(target);
+          }
+          vote.votes = newVotes;
+        }
+        if (vote.tally) {
+          const newTally = {};
+          for (const [name, count] of Object.entries(vote.tally)) {
+            newTally[mapName(name)] = count;
+          }
+          vote.tally = newTally;
+        }
+        if (vote.executed) vote.executed = vote.executed.map(mapName);
+      }
+      // Normalize resolve
+      if (resolve) {
+        if (resolve.executed) resolve.executed = resolve.executed.map(mapName);
+        if (resolve.winners) resolve.winners = resolve.winners.map(mapName);
+        if (resolve.final_roles) {
+          const newRoles = {};
+          for (const [name, role] of Object.entries(resolve.final_roles)) {
+            newRoles[mapName(name)] = role;
+          }
+          resolve.final_roles = newRoles;
+        }
+      }
+      // Normalize postgame
+      if (postgame && postgame.interviews) {
+        for (const [, items] of Object.entries(postgame.interviews)) {
+          items.forEach(i => { if (i.player_name) i.player_name = mapName(i.player_name); });
+        }
+      }
+    }
     currentPhase = 'night';
     replayIndex = 0;
     

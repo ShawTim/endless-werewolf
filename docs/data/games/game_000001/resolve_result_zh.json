@@ -10,45 +10,45 @@
   "werewolves_in_play": [],
   "executed_werewolves": [],
   "votes": {
-    "[嚴審官]": "[攪局者]",
-    "[心理諮商師]": "[嚴審官]",
-    "[攪局者]": "[統計學家]",
-    "[直覺俠]": "[攪局者]",
-    "[統計學家]": "[攪局者]",
-    "[小人物]": "[攪局者]"
+    "嚴審官": "[攪局者]",
+    "心理諮商師": "[嚴審官]",
+    "攪局者": "[統計學家]",
+    "直覺俠": "[攪局者]",
+    "統計學家": "[攪局者]",
+    "小人物": "[攪局者]"
   },
   "tally": {
-    "[攪局者]": 4,
-    "[嚴審官]": 1,
-    "[統計學家]": 1
+    "攪局者": 4,
+    "嚴審官": 1,
+    "統計學家": 1
   },
   "final_roles": {
-    "[嚴審官]": {
+    "嚴審官": {
       "initial_role": "Seer (預言家)",
       "current_role": "Robber (強盜)",
       "team": "village_team"
     },
-    "[心理諮商師]": {
+    "心理諮商師": {
       "initial_role": "Tanner (皮匠)",
       "current_role": "Tanner (皮匠)",
       "team": "tanner"
     },
-    "[攪局者]": {
+    "攪局者": {
       "initial_role": "Minion (爪牙)",
       "current_role": "Minion (爪牙)",
       "team": "werewolf_team"
     },
-    "[直覺俠]": {
+    "直覺俠": {
       "initial_role": "Villager (村民)",
       "current_role": "Villager (村民)",
       "team": "village_team"
     },
-    "[統計學家]": {
+    "統計學家": {
       "initial_role": "Robber (強盜)",
       "current_role": "Seer (預言家)",
       "team": "village_team"
     },
-    "[小人物]": {
+    "小人物": {
       "initial_role": "Villager (村民)",
       "current_role": "Villager (村民)",
       "team": "village_team"
