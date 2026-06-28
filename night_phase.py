@@ -98,6 +98,7 @@ def build_decision_request(player_state, game, legal_actions):
         "night_memory": player_state["night_memory"],
         "other_players": other_names,
         "legal_actions": legal_actions,
+        "game_id": game.get("game_id", ""),
         "instructions": [
             "You are a player in One Night Werewolf.",
             "Use only your private information.",

@@ -186,6 +186,7 @@ class DayPhaseRuntime:
             "current_role": player["current_role"],
             "night_memory": player.get("night_memory", []),
             "night_memory_text": player.get("night_memory_text", ""),
+            "game_id": self.game_id,
         }
 
     async def player_loop(self, player: dict[str, Any]):

@@ -14,6 +14,22 @@ from pathlib import Path
 
 WORKSPACE = Path(__file__).resolve().parent
 
+# Lazy import to avoid circular dependency
+try:
+    import cross_game_memory
+except ImportError:
+    cross_game_memory = None
+
+
+def _get_prev_game_context(player_context: dict) -> str:
+    """Fetch previous game context text, or empty string if unavailable."""
+    if not cross_game_memory:
+        return ""
+    game_id = player_context.get("game_id", "")
+    if not game_id:
+        return ""
+    return cross_game_memory.get_previous_game_context_for_prompt(game_id, count=1)
+
 
 def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: dict | None = None) -> str:
     """Build the prompt for the day-phase free discussion decision."""
@@ -30,6 +46,9 @@ def build_thinker_prompt(player_context: dict, chat_history: str, turn_hints: di
 
     notes_text = "\n".join(f"  - {n}" for n in debate_notes) if debate_notes else "  (none)"
 
+    prev_game = _get_prev_game_context(player_context)
+    prev_game_section = f"\n[Previous Game Record]\n{prev_game}\n" if prev_game else ""
+
     return f"""You are playing One Night Werewolf. It is the daytime free discussion phase.
 
 [Your Identity]
@@ -40,7 +59,7 @@ Your current role: {current_role}
 
 [Your Night Memory]
 {night_memory}
-
+{prev_game_section}
 [Public Discussion Log So Far]
 {chat_history or "(The discussion has just begun — nobody has spoken yet.)"}
 
@@ -84,6 +103,9 @@ def build_vote_prompt(player_context: dict, chat_history: str, valid_targets: li
     night_memory = player_context.get("night_memory_text", "Nothing notable happened tonight.")
     targets_str = ", ".join(valid_targets)
 
+    prev_game = _get_prev_game_context(player_context)
+    prev_game_section = f"\n[Previous Game Record]\n{prev_game}\n" if prev_game else ""
+
     return f"""You are playing One Night Werewolf. The daytime discussion has ended — it is now the voting phase.
 
 [Your Identity]
@@ -94,7 +116,7 @@ Your current role: {current_role}
 
 [Your Night Memory]
 {night_memory}
-
+{prev_game_section}
 [Full Discussion Record]
 {chat_history or "(No discussion occurred.)"}
 
@@ -130,6 +152,9 @@ def build_night_action_prompt(decision_request: dict) -> str:
     others_text = ", ".join(other_players)
     legal_text = json.dumps(legal_actions, ensure_ascii=False, indent=2)
 
+    prev_game = _get_prev_game_context(decision_request)
+    prev_game_section = f"\n[Previous Game Record]\n{prev_game}\n" if prev_game else ""
+
     return f"""You are playing One Night Werewolf. It is the night action phase.
 
 [Your Identity]
@@ -139,7 +164,7 @@ Your role: {role}
 
 [What You Know So Far]
 {memory_text}
-
+{prev_game_section}
 [Other Players]
 {others_text}
 

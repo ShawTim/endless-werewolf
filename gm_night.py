@@ -39,6 +39,7 @@ def prepare_run(start_new_game: bool = True):
     paths = _game_paths(game_dir)
 
     game = night_phase.prepare_night_phase()
+    game["game_id"] = game_id
     plan = night_phase.build_night_plan(game)
     partial_state = night_phase.serialize_for_output(game)
 
