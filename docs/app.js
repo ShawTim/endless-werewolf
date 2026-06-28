@@ -135,6 +135,23 @@ function initThree() {
   scene.background = new THREE.Color(0x1a1520);
   scene.fog = new THREE.Fog(0x1a1520, 14, 32);
 
+  // ===== Textures =====
+  const texLoader = new THREE.TextureLoader();
+  const stoneTex = texLoader.load('./tex-stone.jpg');
+  stoneTex.wrapS = stoneTex.wrapT = THREE.RepeatWrapping;
+  stoneTex.repeat.set(4, 4);
+
+  const woodTex = texLoader.load('./tex-wood.jpg');
+  woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
+  woodTex.repeat.set(2, 2);
+
+  // Sky as background sphere
+  const skyTex = texLoader.load('./tex-sky.jpg');
+  const skyGeo = new THREE.SphereGeometry(40, 32, 16);
+  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false });
+  const skyDome = new THREE.Mesh(skyGeo, skyMat);
+  scene.add(skyDome);
+
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
 
@@ -162,7 +179,7 @@ function initThree() {
   // Floor
   const floor = new THREE.Mesh(
     new THREE.CircleGeometry(14, 64),
-    new THREE.MeshStandardMaterial({ color: 0x3a3228, roughness: 0.85 })
+    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.85 })
   );
   floor.rotation.x = -PI / 2; floor.position.y = -0.6; floor.receiveShadow = true;
   scene.add(floor);
@@ -170,7 +187,7 @@ function initThree() {
   // Table
   const tableTop = new THREE.Mesh(
     new THREE.CylinderGeometry(TR, TR, 0.12, 48),
-    new THREE.MeshStandardMaterial({ color: 0x5a3a1a, roughness: 0.6 })
+    new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.6 })
   );
   tableTop.position.y = 0.15; tableTop.receiveShadow = true; tableTop.castShadow = true;
   scene.add(tableTop);
