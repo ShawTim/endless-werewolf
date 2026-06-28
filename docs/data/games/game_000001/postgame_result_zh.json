@@ -7,7 +7,7 @@
       {
         "player_name": "攪局者",
         "player_name_zh": "攪局者",
-        "player_name_en": "[攪局者]",
+        "player_name_en": "攪局者",
         "role": "Minion (爪牙)",
         "team": "werewolf_team",
         "status": "loser",
@@ -21,7 +21,7 @@
       {
         "player_name": "嚴審官",
         "player_name_zh": "嚴審官",
-        "player_name_en": "[嚴審官]",
+        "player_name_en": "嚴審官",
         "role": "Robber (強盜)",
         "team": "village_team",
         "status": "loser",
@@ -31,8 +31,8 @@
       },
       {
         "player_name": "心理諮商師",
-        "player_name_zh": "[心理諮商師]",
-        "player_name_en": "[心理諮商師]",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "心理諮商師",
         "role": "Tanner (皮匠)",
         "team": "tanner",
         "status": "loser",
@@ -42,8 +42,8 @@
       },
       {
         "player_name": "直覺俠",
-        "player_name_zh": "[直覺俠]",
-        "player_name_en": "[直覺俠]",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "直覺俠",
         "role": "Villager (村民)",
         "team": "village_team",
         "status": "loser",
@@ -53,8 +53,8 @@
       },
       {
         "player_name": "統計學家",
-        "player_name_zh": "[統計學家]",
-        "player_name_en": "[統計學家]",
+        "player_name_zh": "統計學家",
+        "player_name_en": "統計學家",
         "role": "Seer (預言家)",
         "team": "village_team",
         "status": "loser",
@@ -64,8 +64,8 @@
       },
       {
         "player_name": "小人物",
-        "player_name_zh": "[小人物]",
-        "player_name_en": "[小人物]",
+        "player_name_zh": "小人物",
+        "player_name_en": "小人物",
         "role": "Villager (村民)",
         "team": "village_team",
         "status": "loser",
