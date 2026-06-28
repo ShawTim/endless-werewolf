@@ -1815,6 +1815,14 @@ function resizeGallery3D() {
   if (gallery3DCamera) {
     gallery3DCamera.aspect = w / h;
     gallery3DCamera.updateProjectionMatrix();
+    // Adjust camera for narrow/mobile views to avoid head cropping
+    if (h < 400) {
+      gallery3DCamera.position.set(0, 1.8, 5.0);
+      gallery3DCamera.lookAt(0, 0.3, 0);
+    } else {
+      gallery3DCamera.position.set(0, 1.5, 4.0);
+      gallery3DCamera.lookAt(0, 0.4, 0);
+    }
   }
 }
 
