@@ -2,20 +2,20 @@
   "status": "completed",
   "game_id": "game_000001",
   "votes": {
-    "The Prosecutor": "The Chaos Agent",
-    "The Therapist": "The Prosecutor",
-    "The Chaos Agent": "The Statistician",
-    "The Gut Player": "The Chaos Agent",
-    "The Statistician": "The Chaos Agent",
-    "The Underdog": "The Chaos Agent"
+    "[嚴審官]": "[攪局者]",
+    "[心理諮商師]": "[嚴審官]",
+    "[攪局者]": "[統計學家]",
+    "[直覺俠]": "[攪局者]",
+    "[統計學家]": "[攪局者]",
+    "[小人物]": "[攪局者]"
   },
   "tally": {
-    "The Chaos Agent": 4,
-    "The Prosecutor": 1,
-    "The Statistician": 1
+    "[攪局者]": 4,
+    "[嚴審官]": 1,
+    "[統計學家]": 1
   },
   "executed": [
-    "The Chaos Agent"
+    "[攪局者]"
   ],
   "vote_trace": []
 }

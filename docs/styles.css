@@ -285,7 +285,10 @@ canvas#c:active { cursor:grabbing; }
 }
 
 /* ===== Tag Highlight ===== */
-.tag-highlight {
+.role-highlight {
+  color: #a78bfa; font-weight: 600;
+}
+.player-highlight {
   color: var(--gold); font-weight: 600;
 }
 

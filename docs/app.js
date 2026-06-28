@@ -2140,12 +2140,17 @@ function getPlayerColor(name) {
 
 
 function formatGameText(text) {
-  // Escape HTML first, then convert [Text] to highlighted spans
+  // Escape HTML first, then convert markup to styled spans
   const div = document.createElement('div');
   div.textContent = text || '';
   let html = div.innerHTML;
+  // <Role> -> role highlight (blue/purple)
+  html = html.replace(/&lt;([\w\u3400-\u9FFF][\w\u3400-\u9FFF ]+?)&gt;/g, (match, inner) => {
+    return `<span class="role-highlight">${inner}</span>`;
+  });
+  // [Player Name] -> player highlight (gold)
   html = html.replace(/\[([\w\u3400-\u9FFF][\w\u3400-\u9FFF ]+?)\]/g, (match, inner) => {
-    return `<span class="tag-highlight">${inner}</span>`;
+    return `<span class="player-highlight">${inner}</span>`;
   });
   return html;
 }

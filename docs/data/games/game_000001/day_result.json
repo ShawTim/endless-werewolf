@@ -46,14 +46,14 @@
       "type": "speech",
       "player_name": "The Chaos Agent",
       "target": null,
-      "speech": "Alright, let me share something fascinating. Last night I woke up and... there were no wolves in the room. Which means both [Werewolf] cards are sitting in the center. Isn't that peculiar? The village has no target — unless someone here isn't what they claim to be. I'm dying to see how this narrative unfolds.",
+      "speech": "Alright, let me share something fascinating. Last night I woke up and... there were no wolves in the room. Which means both <Werewolf> cards are sitting in the center. Isn't that peculiar? The village has no target — unless someone here isn't what they claim to be. I'm dying to see how this narrative unfolds.",
       "log_line": "[2026-06-28 02:45:24 HKT] The Chaos Agent: Alright, let me share something fascinating. Last night I woke up and... there were no wolves in the room. Which means both Werewolf cards are sitting in the center. Isn't that peculiar? The village has no target — unless someone here isn't what they claim to be. I'm dying to see how this narrative unfolds."
     },
     {
       "type": "speech",
       "player_name": "The Statistician",
       "target": null,
-      "speech": "I was the [Robber]. I targeted [The Prosecutor] and took their card — I'm now the [Seer]. That means [The Prosecutor] holds the [Robber] card now, but I have no night info as [Seer] since my action happened before the [Seer] phase. [The Prosecutor]'s original role is unknown to me. Update your priors accordingly.",
+      "speech": "I was the <Robber>. I targeted [The Prosecutor] and took their card — I'm now the <Seer>. That means [The Prosecutor] holds the <Robber> card now, but I have no night info as <Seer> since my action happened before the <Seer> phase. [The Prosecutor]'s original role is unknown to me. Update your priors accordingly.",
       "log_line": "[2026-06-28 02:45:52 HKT] The Statistician: I was the Robber. I targeted The Prosecutor and took their card — I'm now the Seer. That means The Prosecutor holds the Robber card now, but I have no night info as Seer since my action happened before the Seer phase. The Prosecutor's original role is unknown to me. Update your priors accordingly."
     },
     {
@@ -67,7 +67,7 @@
       "type": "speech",
       "player_name": "The Prosecutor",
       "target": null,
-      "speech": "Court is in session. I was the [Seer]. I inspected center cards 0 and 1 — card 0 is a [Werewolf], card 1 is a [Troublemaker]. That means there's exactly one [Werewolf] card among us, not two. But someone robbed me last night — my role is now [Robber], not [Seer]. Whoever stole my card is now the [Seer]. Step forward and confirm, because I need to know who you are. This is the most important evidence in this trial.",
+      "speech": "Court is in session. I was the <Seer>. I inspected center cards 0 and 1 — card 0 is a <Werewolf>, card 1 is a <Troublemaker>. That means there's exactly one <Werewolf> card among us, not two. But someone robbed me last night — my role is now <Robber>, not <Seer>. Whoever stole my card is now the <Seer>. Step forward and confirm, because I need to know who you are. This is the most important evidence in this trial.",
       "log_line": "[2026-06-28 02:46:26 HKT] The Prosecutor: Court is in session. I was the Seer. I inspected center cards 0 and 1 — card 0 is a Werewolf, card 1 is a Troublemaker. That means there's exactly one Werewolf card among us, not two. But someone robbed me last night — my role is now Robber, not Seer. Whoever stole my card is now the Seer. Step forward and confirm, because I need to know who you are. This is the most important evidence in this trial."
     },
     {
@@ -95,7 +95,7 @@
       "type": "speech",
       "player_name": "The Statistician",
       "target": "The Chaos Agent",
-      "speech": "[The Chaos Agent], your claim that both [Werewolf] cards are in the center is a strong prior — P(no wolves among players) = 1.0. But I need evidence, not narrative. If you're the [Minion], you'd have woken up with the wolves and seen none, which is exactly what you described. If you're something else... you're manufacturing a story. Either way, the village wins only if that claim is true. Can you walk us through exactly what you saw and in what order? No 'theatrical' framing — just the sequence of events and what you observed.",
+      "speech": "[The Chaos Agent], your claim that both <Werewolf> cards are in the center is a strong prior — P(no wolves among players) = 1.0. But I need evidence, not narrative. If you're the <Minion>, you'd have woken up with the wolves and seen none, which is exactly what you described. If you're something else... you're manufacturing a story. Either way, the village wins only if that claim is true. Can you walk us through exactly what you saw and in what order? No 'theatrical' framing — just the sequence of events and what you observed.",
       "log_line": "[2026-06-28 02:48:36 HKT] The Statistician @The Chaos Agent: The Chaos Agent, your claim that both Werewolf cards are in the center is a strong prior — P(no wolves among players) = 1.0. But I need evidence, not narrative. If you're the Minion, you'd have woken up with the wolves and seen none, which is exactly what you described. If you're something else... you're manufacturing a story. Either way, the village wins only if that claim is true. Can you walk us through exactly what you saw and in what order? No 'theatrical' framing — just the sequence of events and what you observed."
     },
     {
@@ -109,21 +109,21 @@
       "type": "speech",
       "player_name": "The Prosecutor",
       "target": "The Chaos Agent",
-      "speech": "[The Chaos Agent], your claim and my evidence could both be true — card 0 is [Werewolf] as I confirmed, and if you're the [Minion] who saw no wolves, the second [Werewolf] is in center card 2. That would mean no wolves among us, and the village wins by not executing anyone. But I don't take claims at face value. Here's what I know for certain: The [Troublemaker] is in center card 1, so no player [Troublemaker] swapped anyone. [The Statistician] robbed me — confirmed, I'm now the [Robber]. So the only night action that matters is the [Robber] swap. If you're lying about being the [Minion], you're the wolf. What's your defense?",
+      "speech": "[The Chaos Agent], your claim and my evidence could both be true — card 0 is <Werewolf> as I confirmed, and if you're the <Minion> who saw no wolves, the second <Werewolf> is in center card 2. That would mean no wolves among us, and the village wins by not executing anyone. But I don't take claims at face value. Here's what I know for certain: The <Troublemaker> is in center card 1, so no player <Troublemaker> swapped anyone. [The Statistician] robbed me — confirmed, I'm now the <Robber>. So the only night action that matters is the <Robber> swap. If you're lying about being the <Minion>, you're the wolf. What's your defense?",
       "log_line": "[2026-06-28 02:48:57 HKT] The Prosecutor @The Chaos Agent: The Chaos Agent, your claim and my evidence could both be true — card 0 is Werewolf as I confirmed, and if you're the Minion who saw no wolves, the second Werewolf is in center card 2. That would mean no wolves among us, and the village wins by not executing anyone. But I don't take claims at face value. Here's what I know for certain: The Troublemaker is in center card 1, so no player Troublemaker swapped anyone. The Statistician robbed me — confirmed, I'm now the Robber. So the only night action that matters is the Robber swap. If you're lying about being the Minion, you're the wolf. What's your defense?"
     },
     {
       "type": "speech",
       "player_name": "The Therapist",
       "target": "The Prosecutor",
-      "speech": "Prosecutor, I want to understand something. You said you were robbed and now you're the [Robber]. But... how do you know you were robbed? In my understanding, when someone gets robbed, they don't know it happened — they just see whatever card they have. So when you woke up, you would have just seen the [Robber] card and thought that was your original role. How did you figure out you were robbed?",
+      "speech": "Prosecutor, I want to understand something. You said you were robbed and now you're the <Robber>. But... how do you know you were robbed? In my understanding, when someone gets robbed, they don't know it happened — they just see whatever card they have. So when you woke up, you would have just seen the <Robber> card and thought that was your original role. How did you figure out you were robbed?",
       "log_line": "[2026-06-28 02:49:14 HKT] The Therapist @The Prosecutor: Prosecutor, I want to understand something. You said you were robbed and now you're the Robber. But... how do you know you were robbed? In my understanding, when someone gets robbed, they don't know it happened — they just see whatever card they have. So when you woke up, you would have just seen the Robber card and thought that was your original role. How did you figure out you were robbed?"
     },
     {
       "type": "speech",
       "player_name": "The Underdog",
       "target": "The Prosecutor",
-      "speech": "Wait, um, sorry to interrupt, but... [The Prosecutor], you said you found one [Werewolf] in the center? But [The Chaos Agent] said there were no wolves in the room at all — like, both Werewolves are in the center? Those... those can't both be true, right? Unless I'm missing something? Which I probably am. But one of you has to be wrong, or... or lying? I don't know. Can someone explain? Please?",
+      "speech": "Wait, um, sorry to interrupt, but... [The Prosecutor], you said you found one <Werewolf> in the center? But [The Chaos Agent] said there were no wolves in the room at all — like, both Werewolves are in the center? Those... those can't both be true, right? Unless I'm missing something? Which I probably am. But one of you has to be wrong, or... or lying? I don't know. Can someone explain? Please?",
       "log_line": "[2026-06-28 02:49:27 HKT] The Underdog @The Prosecutor: Wait, um, sorry to interrupt, but... The Prosecutor, you said you found one Werewolf in the center? But The Chaos Agent said there were no wolves in the room at all — like, both Werewolves are in the center? Those... those can't both be true, right? Unless I'm missing something? Which I probably am. But one of you has to be wrong, or... or lying? I don't know. Can someone explain? Please?"
     }
   ],
