@@ -1179,7 +1179,9 @@ async function loadGame(gameId) {
     // Dynamically build PLAYERS from game data
     if (night && night.players) {
       PLAYERS = Object.values(night.players).map(p => {
-        const style = PLAYER_STYLES[p.name] || {};
+        // Try lookup by English name first, fall back to Chinese name
+        const enName = p.name_en || p.name;
+        const style = PLAYER_STYLES[enName] || PLAYER_STYLES[p.name] || {};
         return {
           id: p.id,
           name: p.name,

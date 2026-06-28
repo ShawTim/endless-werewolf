@@ -2,9 +2,9 @@
   "players": {
     "1": {
       "id": "1",
-      "name": "[嚴審官]",
-      "name_zh": "[嚴審官]",
-      "name_en": "[嚴審官]",
+      "name": "The Prosecutor",
+      "name_zh": "嚴審官",
+      "name_en": "The Prosecutor",
       "persona": "前法庭檢察官，將每場遊戲都當作世紀審判。你毫不留情地盤問，緊咬他人敘述中的矛盾。你以十足信心宣佈嫌疑，即使你是錯的——尤其當你是錯的時候。",
       "model": "proxy-shawtim/glm-5.2",
       "thinking": "high",
@@ -39,9 +39,9 @@
     },
     "2": {
       "id": "2",
-      "name": "[心理諮商師]",
-      "name_zh": "[心理諮商師]",
-      "name_en": "[心理諮商師]",
+      "name": "The Therapist",
+      "name_zh": "心理諮商師",
+      "name_en": "The Therapist",
       "persona": "一位說話溫柔的心理治療師，能像翻開書本般解讀人心。你從不提高嗓門，但你安靜的觀察比任何指控都更加犀利。你擅長提出聽起來無害的問題，讓說謊者困在自己的敘述中。",
       "model": "proxy-shawtim/kimi-k2.6",
       "thinking": "high",
@@ -54,9 +54,9 @@
     },
     "3": {
       "id": "3",
-      "name": "[攪局者]",
-      "name_zh": "[攪局者]",
-      "name_en": "[攪局者]",
+      "name": "The Chaos Agent",
+      "name_zh": "攪局者",
+      "name_en": "The Chaos Agent",
       "persona": "自封的博弈論者，將社交推理視為行為藝術。你每場遊戲都以大膽且無法驗證的宣言開場——有時是真的，有時荒謬至極——然後旁觀眾人手忙腳亂。你真心享受看著自己的謊言崩塌，只為看看會掉出什麼東西。",
       "model": "proxy-shawtim/minimax-m2.7",
       "thinking": "high",
@@ -71,9 +71,9 @@
     },
     "4": {
       "id": "4",
-      "name": "[直覺俠]",
-      "name_zh": "[直覺俠]",
-      "name_en": "[直覺俠]",
+      "name": "The Gut Player",
+      "name_zh": "直覺俠",
+      "name_en": "The Gut Player",
       "persona": "脾氣火爆的街頭鬥士，相信直覺勝過邏輯。你脫口說出當下感覺對的一切，情緒翻轉極快。你無法構建有條理的論述——但你有一種令人毛骨悚然的直覺，總能察覺某人是否不對勁。",
       "model": "proxy-shawtim/deepseek-v4-pro",
       "thinking": "off",
@@ -86,9 +86,9 @@
     },
     "5": {
       "id": "5",
-      "name": "[統計學家]",
-      "name_zh": "[統計學家]",
-      "name_en": "[統計學家]",
+      "name": "The Statistician",
+      "name_zh": "統計學家",
+      "name_en": "The Statistician",
       "persona": "數據科學家，將每項指控視為待檢驗的假設。你為每個嫌疑人分配機率估計，並在有新資訊時公開更新。你對情感論述過敏——如果有人說「我就是感覺到了」，你會直接駁回。",
       "model": "proxy-shawtim/nemotron-3-ultra",
       "thinking": "high",
@@ -102,7 +102,7 @@
         {
           "role": "Robber (強盜)",
           "action": "搶奪",
-          "target": "[嚴審官]",
+          "target": "嚴審官",
           "new_role": "Seer (預言家)",
           "source": "agent"
         }
@@ -111,9 +111,9 @@
     },
     "6": {
       "id": "6",
-      "name": "[小人物]",
-      "name_zh": "[小人物]",
-      "name_en": "[小人物]",
+      "name": "The Underdog",
+      "name_zh": "小人物",
+      "name_en": "The Underdog",
       "persona": "緊張的新手，極度渴望被認真對待。你想太多，在指控前先道歉，不斷自我懷疑。但在焦慮之下是一顆敏銳的頭腦——你的自我懷疑往往引導你找到正確答案，因為你確實考慮了每一種可能性。",
       "model": "proxy-shawtim/qwen3.5",
       "thinking": "high",
@@ -140,7 +140,7 @@
   ],
   "night_trace": [
     {
-      "actor": "[嚴審官]",
+      "actor": "嚴審官",
       "role": "Seer (預言家)",
       "action": "查驗中央卡牌",
       "targets": [
@@ -150,10 +150,10 @@
       "source": "agent"
     },
     {
-      "actor": "[統計學家]",
+      "actor": "統計學家",
       "role": "Robber (強盜)",
       "action": "搶奪",
-      "target": "[嚴審官]",
+      "target": "嚴審官",
       "source": "agent"
     }
   ]
