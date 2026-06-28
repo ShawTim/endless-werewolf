@@ -24,6 +24,7 @@
   <div class="brand">🐺 Endless Werewolf <span class="sub">AI One Night</span></div>
   <div class="top-actions">
     <button class="btn" id="btn-lang">中文</button>
+    <button class="btn" id="btn-gallery"><span class="btn-icon">👥</span> Characters</button>
     <button class="btn" id="btn-archive"><span class="btn-icon">📂</span> Archive</button>
     <button class="btn" id="btn-info"><span class="btn-icon">ℹ️</span> Info</button>
     <button class="btn" id="btn-night"><span class="btn-icon">🌙</span> Night</button>
@@ -83,19 +84,27 @@
   <div class="winners"></div>
 </div>
 
-<!-- Player modal -->
+<!-- Small player modal (click character) -->
 <div id="player-modal">
-  <div id="player-modal-box">
-    <div id="player-modal-left">
-      <canvas id="player-modal-3d"></canvas>
+  <div id="player-modal-content"></div>
+  <button id="player-modal-close" class="modal-close-btn">✕</button>
+</div>
+
+<!-- Large character gallery modal (button) -->
+<div id="gallery-modal">
+  <div id="gallery-modal-box">
+    <div id="gallery-modal-left">
+      <canvas id="gallery-3d"></canvas>
+      <button id="gallery-prev" class="gallery-nav-btn">‹</button>
+      <button id="gallery-next" class="gallery-nav-btn">›</button>
     </div>
-    <div id="player-modal-right">
-      <button id="player-modal-close" class="modal-close-btn">✕</button>
-      <div id="player-modal-tabs">
+    <div id="gallery-modal-right">
+      <button id="gallery-modal-close" class="modal-close-btn">✕</button>
+      <div id="gallery-modal-tabs">
         <div class="modal-tab active" data-tab="persona">Persona</div>
         <div class="modal-tab" data-tab="game">Game</div>
       </div>
-      <div id="player-modal-content"></div>
+      <div id="gallery-modal-content"></div>
     </div>
   </div>
 </div>
