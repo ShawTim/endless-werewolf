@@ -2126,6 +2126,8 @@ function updateUIText() {
 }
 
 function openSidePanel() {
+  // On mobile, don't auto-open side panel (it covers the whole screen)
+  if (innerWidth <= 768) return;
   document.getElementById('side-panel').classList.add('open');
 }
 
