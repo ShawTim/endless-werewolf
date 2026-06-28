@@ -1373,7 +1373,7 @@ function showNightInfo() {
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 }
 
 function showDayInfo() {
@@ -1590,7 +1590,13 @@ function showPostgameInfo() {
 }
 
 function showGameInfo() {
-  // Show project info in side panel
+  // Called after game loads — show night info (first phase)
+  if (!gameData.night) return;
+  showNightInfo();
+}
+
+function showAboutPanel() {
+  // Called from Info button — show project description
   const isZh = lang === 'zh';
   let html = '<div class="panel-section">';
   html += '<h3>' + (isZh ? '關於' : 'About') + '</h3>';
@@ -2101,7 +2107,7 @@ function setupUI() {
   });
 
   document.getElementById('btn-info').addEventListener('click', () => {
-    openSidePanel();
+    showAboutPanel();
   });
   document.getElementById('btn-panel-close').addEventListener('click', () => {
     document.getElementById('side-panel').classList.remove('open');
