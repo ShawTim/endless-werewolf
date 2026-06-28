@@ -10,12 +10,12 @@ ROLES_PATH = WORKSPACE / "data" / "roles_pool.json"
 STATE_DIR = WORKSPACE / "data" / "state"
 OUTPUT_PATH = STATE_DIR / "night_result.json"
 
-ROLE_WEREWOLF = "Werewolf (狼人)"
-ROLE_SEER = "Seer (預言家)"
-ROLE_ROBBER = "Robber (強盜)"
-ROLE_TROUBLEMAKER = "Troublemaker (搗蛋鬼)"
-ROLE_MINION = "Minion (爪牙)"
-ROLE_INSOMNIAC = "Insomniac (失眠者)"
+ROLE_WEREWOLF = "Werewolf"
+ROLE_SEER = "Seer"
+ROLE_ROBBER = "Robber"
+ROLE_TROUBLEMAKER = "Troublemaker"
+ROLE_MINION = "Minion"
+ROLE_INSOMNIAC = "Insomniac"
 
 
 class NightPhaseNeedsAgentDecision(RuntimeError):

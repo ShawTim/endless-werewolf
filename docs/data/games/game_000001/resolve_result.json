@@ -24,33 +24,33 @@
   },
   "final_roles": {
     "The Prosecutor": {
-      "initial_role": "Seer (預言家)",
-      "current_role": "Robber (強盜)",
+      "initial_role": "Seer",
+      "current_role": "Robber",
       "team": "village_team"
     },
     "The Therapist": {
-      "initial_role": "Tanner (皮匠)",
-      "current_role": "Tanner (皮匠)",
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
       "team": "tanner"
     },
     "The Chaos Agent": {
-      "initial_role": "Minion (爪牙)",
-      "current_role": "Minion (爪牙)",
+      "initial_role": "Minion",
+      "current_role": "Minion",
       "team": "werewolf_team"
     },
     "The Gut Player": {
-      "initial_role": "Villager (村民)",
-      "current_role": "Villager (村民)",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "team": "village_team"
     },
     "The Statistician": {
-      "initial_role": "Robber (強盜)",
-      "current_role": "Seer (預言家)",
+      "initial_role": "Robber",
+      "current_role": "Seer",
       "team": "village_team"
     },
     "The Underdog": {
-      "initial_role": "Villager (村民)",
-      "current_role": "Villager (村民)",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "team": "village_team"
     }
   },

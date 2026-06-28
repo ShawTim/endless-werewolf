@@ -1283,7 +1283,7 @@ function showNightInfo() {
   for (const [, p] of Object.entries(players)) {
     const accent = getPlayerColor(p.name);
     const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${cleanRoleName(p.initial_role)}</span></div>`;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${p.initial_role}</span></div>`;
   }
   
   if (trace.length > 0) {
@@ -1421,7 +1421,7 @@ function showResolveInfo() {
       const accent = getPlayerColor(name);
       const p = PLAYERS.find(x => x.name === name);
       const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
-      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${cleanRoleName(role.current_role)} (${role.team})</span></div>`;
+      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${role.current_role} (${role.team})</span></div>`;
     }
   }
   html += '</div>';
@@ -1581,8 +1581,8 @@ function showPlayerModal(playerId) {
   html += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${escapeHtml(p.persona||'')}</p></div>`;
 
   html += `<div class="modal-section"><h3>${t('gameData')}</h3>
-    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${cleanRoleName(initialRole)}</span></div>
-    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${cleanRoleName(currentRole)}</span></div>`;
+    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
+    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
   if (nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(nightMem)}</span></div>`;
   if (votedFor) {
     const tp = PLAYERS.find(x => x.name === votedFor);
@@ -1685,8 +1685,8 @@ function updateGalleryContent() {
 
   // --- Game tab ---
   let gameHtml = `<div class="modal-section"><h3>${t('gameData')}</h3>
-    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${cleanRoleName(initialRole)}</span></div>
-    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${cleanRoleName(currentRole)}</span></div>`;
+    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
+    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
   if (nightMem) gameHtml += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(nightMem)}</span></div>`;
   if (votedFor) {
     const tp = PLAYERS.find(x => x.name === votedFor);
@@ -2144,13 +2144,6 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-function cleanRoleName(text) {
-  // In English mode, strip Chinese text in parentheses: "Seer (預言家)" -> "Seer"
-  if (lang === 'en') {
-    return (text || '').replace(/\s*\([^)]*[\u3400-\u9FFF][^)]*\)\s*/g, '').trim();
-  }
-  return text;
-}
 
 // ===== Animation Loop =====
 function animate() {
