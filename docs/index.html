@@ -85,8 +85,19 @@
 
 <!-- Player modal -->
 <div id="player-modal">
-  <div id="player-modal-content"></div>
-  <button id="player-modal-close" class="modal-close-btn">✕</button>
+  <div id="player-modal-box">
+    <div id="player-modal-left">
+      <canvas id="player-modal-3d"></canvas>
+    </div>
+    <div id="player-modal-right">
+      <button id="player-modal-close" class="modal-close-btn">✕</button>
+      <div id="player-modal-tabs">
+        <div class="modal-tab active" data-tab="persona">Persona</div>
+        <div class="modal-tab" data-tab="game">Game</div>
+      </div>
+      <div id="player-modal-content"></div>
+    </div>
+  </div>
 </div>
 
 <!-- Loading -->

@@ -1527,7 +1527,6 @@ function showPlayerModal(playerId) {
   const p = PLAYERS.find(x => String(x.id) === String(playerId));
   if (!p) return;
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
-  const avatarUrl = renderAvatarPortrait(p, 256);
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
   const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
@@ -1547,7 +1546,7 @@ function showPlayerModal(playerId) {
   // Speeches
   let speeches = [];
   if (gameData.day && gameData.day.day_trace) {
-    speeches = gameData.day.day_trace.filter(t => t.type === 'speech' && t.player_name === p.name);
+    speeches = gameData.day.day_trace.filter(tr => tr.type === 'speech' && tr.player_name === p.name);
   }
 
   // Vote
@@ -1565,54 +1564,181 @@ function showPlayerModal(playerId) {
     }
   }
 
-  const titleLabels = { werewolf_win: t('werewolfWin'), village_win: t('villageWin'), tanner_win: t('tannerWin'), no_team_win: t('noTeamWin') };
+  // --- Build Persona tab ---
+  let personaHtml = `<div class="modal-header">
+    <div class="name" style="color:${accent}">${displayName}</div>
+    ${subName ? `<div class="sub">${subName}</div>` : ''}
+  </div>`;
+  personaHtml += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${escapeHtml(p.persona||'')}</p></div>`;
+  personaHtml += `<div class="modal-section"><h3>${lang==='zh'?'模型':'Model'}</h3><div class="row"><span class="key">AI</span><span class="val">${(p.model||'').split('/').pop()}</span></div><div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking||'high'}</span></div></div>`;
 
-  let html = `<div class="modal-header" style="border-bottom:1px solid var(--border);padding-bottom:16px;display:flex;gap:16px;align-items:center;">
-    <div class="modal-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid ${accent};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
-    <div>
-      <div style="font-size:18px;font-weight:700;color:${accent};">${displayName}</div>
-      ${subName ? `<div style="font-size:13px;color:var(--text-dim);margin-top:2px;">${subName}</div>` : ''}
-      <div style="font-size:11px;color:#666;margin-top:4px;">${(p.model||'').split('/').pop()}</div>
-    </div>
-  </div>
-  `;
-
-  html += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${escapeHtml(p.persona||'')}</p></div>`;
-
-  html += `<div class="modal-section"><h3>${t('gameData')}</h3>
+  // --- Build Game tab ---
+  let gameHtml = `<div class="modal-section"><h3>${t('gameData')}</h3>
     <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
     <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
-  if (nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(nightMem)}</span></div>`;
-  if (votedFor) html += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(votedFor)}">→ ${votedFor}</span></div>`;
-  html += '</div>';
+  if (nightMem) gameHtml += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${escapeHtml(nightMem)}</span></div>`;
+  if (votedFor) {
+    const tp = PLAYERS.find(x => x.name === votedFor);
+    const targetName = lang === 'zh' && tp ? (tp.name_zh || votedFor) : votedFor;
+    gameHtml += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(votedFor)}">→ ${targetName}</span></div>`;
+  }
+  gameHtml += '</div>';
 
   if (speeches.length > 0) {
-    html += `<div class="modal-section"><h3>${t('speeches')} (${speeches.length})</h3>`;
+    gameHtml += `<div class="modal-section"><h3>${t('speeches')} (${speeches.length})</h3>`;
     speeches.forEach(s => {
-      html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      if (s.target) html += `<div class="speaker" style="color:${accent}">${s.player_name} @${s.target}</div>`;
-      else html += `<div class="speaker" style="color:${accent}">${s.player_name}</div>`;
-      html += `<div class="text">${escapeHtml(s.speech||'')}</div>`;
-      if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
-      html += '</div>';
+      gameHtml += `<div class="speech-entry" style="border-left-color:${accent}">`;
+      if (s.target) gameHtml += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
+      else gameHtml += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
+      gameHtml += `<div class="text">${escapeHtml(s.speech||'')}</div>`;
+      if (s.timestamp) gameHtml += `<div class="time">${s.timestamp}</div>`;
+      gameHtml += '</div>';
     });
-    html += '</div>';
+    gameHtml += '</div>';
   }
 
   if (postgameQuote) {
-    html += `<div class="modal-section"><h3>${t('postgameLabel')}</h3>`;
-    html += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${p.name} (${postgameRole})</div><div class="text">${escapeHtml(postgameQuote)}</div></div>`;
-    html += '</div>';
+    gameHtml += `<div class="modal-section"><h3>${t('postgameLabel')}</h3>`;
+    gameHtml += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${displayName} (${postgameRole})</div><div class="text">${escapeHtml(postgameQuote)}</div></div>`;
+    gameHtml += '</div>';
   }
 
+  // Store tab content
   const modal = document.getElementById('player-modal');
-  const modalContent = document.getElementById('player-modal-content');
-  modalContent.innerHTML = html;
+  const contentEl = document.getElementById('player-modal-content');
+  modal._tabContent = { persona: personaHtml, game: gameHtml };
+  modal._currentTab = 'persona';
+  contentEl.innerHTML = personaHtml;
+
+  // Update tab labels
+  const tabs = modal.querySelectorAll('.modal-tab');
+  tabs.forEach(tab => {
+    const tabKey = tab.dataset.tab;
+    tab.textContent = tabKey === 'persona' ? (lang === 'zh' ? '人物介紹' : 'Persona') : (lang === 'zh' ? '本局角色' : 'Game');
+    tab.classList.toggle('active', tabKey === 'persona');
+  });
+
   modal.classList.add('visible');
+
+  // --- Render 3D full-body model in left panel ---
+  renderModal3D(p);
+}
+
+// ===== Modal 3D Full-Body Renderer =====
+let modal3DRenderer = null;
+let modal3DScene = null;
+let modal3DCamera = null;
+let modal3DAnimId = null;
+let modal3DChar = null;
+
+function renderModal3D(player) {
+  // Cleanup previous
+  if (modal3DAnimId) cancelAnimationFrame(modal3DAnimId);
+  if (modal3DRenderer) {
+    modal3DRenderer.dispose();
+    modal3DRenderer = null;
+  }
+  if (modal3DScene) {
+    modal3DScene.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+        else obj.material.dispose();
+      }
+    });
+    modal3DScene = null;
+  }
+
+  const canvas = document.getElementById('player-modal-3d');
+  if (!canvas) return;
+
+  modal3DRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  modal3DRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  modal3DRenderer.shadowMap.enabled = true;
+  modal3DRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  modal3DScene = new THREE.Scene();
+  modal3DScene.background = new THREE.Color(0x1a1520);
+
+  modal3DCamera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
+  modal3DCamera.position.set(0, 1.2, 3.5);
+  modal3DCamera.lookAt(0, 0.5, 0);
+
+  // Lights
+  const amb = new THREE.AmbientLight(0xffffff, 0.5);
+  modal3DScene.add(amb);
+  const dir = new THREE.DirectionalLight(0xfff5e0, 0.9);
+  dir.position.set(2, 4, 3);
+  dir.castShadow = true;
+  dir.shadow.mapSize.set(512, 512);
+  modal3DScene.add(dir);
+  const fill = new THREE.DirectionalLight(0x6688ff, 0.2);
+  fill.position.set(-2, 1, 1);
+  modal3DScene.add(fill);
+  const rim = new THREE.DirectionalLight(0xff8844, 0.15);
+  rim.position.set(0, 2, -3);
+  modal3DScene.add(rim);
+
+  // Build full character (reuse buildCharacter but in isolated scene)
+  // Remove from main scene first, we'll re-add to modal scene
+  const existingIdx = PLAYERS.findIndex(x => x.name === player.name);
+  modal3DChar = buildCharacter(player, existingIdx >= 0 ? existingIdx : 0);
+  // Center it
+  modal3DChar.position.set(0, SH, 0);
+  modal3DChar.rotation.y = 0;
+  modal3DScene.add(modal3DChar);
+
+  // Resize canvas to fit container
+  resizeModal3D();
+
+  // Animation loop
+  const animate = () => {
+    modal3DAnimId = requestAnimationFrame(animate);
+    const t = performance.now() * 0.001;
+    // Gentle rotation
+    if (modal3DChar) {
+      modal3DChar.rotation.y = Math.sin(t * 0.3) * 0.3;
+      modal3DChar.position.y = SH + Math.sin(t * 1.5) * 0.03;
+    }
+    if (modal3DRenderer && modal3DScene && modal3DCamera) {
+      modal3DRenderer.render(modal3DScene, modal3DCamera);
+    }
+  };
+  animate();
+}
+
+function resizeModal3D() {
+  const canvas = document.getElementById('player-modal-3d');
+  if (!canvas || !modal3DRenderer) return;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const w = Math.max(200, rect.width);
+  const h = Math.max(300, rect.height);
+  modal3DRenderer.setSize(w, h, false);
+  if (modal3DCamera) {
+    modal3DCamera.aspect = w / h;
+    modal3DCamera.updateProjectionMatrix();
+  }
 }
 
 function closePlayerModal() {
-  document.getElementById('player-modal').classList.remove('visible');
+  const modal = document.getElementById('player-modal');
+  modal.classList.remove('visible');
+  if (modal3DAnimId) cancelAnimationFrame(modal3DAnimId);
+  modal3DAnimId = null;
+  if (modal3DRenderer) {
+    modal3DRenderer.dispose();
+    modal3DRenderer = null;
+  }
+  if (modal3DScene) {
+    modal3DScene.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+        else obj.material.dispose();
+      }
+    });
+    modal3DScene = null;
+  }
 }
 
 function showPlayerDetail(playerId) {
@@ -1810,6 +1936,19 @@ function setupUI() {
     if (e.target.id === 'player-modal') closePlayerModal();
   });
 
+  // Modal tab switching
+  document.querySelectorAll('.modal-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const modal = document.getElementById('player-modal');
+      const tabKey = tab.dataset.tab;
+      if (!modal._tabContent || !modal._tabContent[tabKey]) return;
+      document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      modal._currentTab = tabKey;
+      document.getElementById('player-modal-content').innerHTML = modal._tabContent[tabKey];
+    });
+  });
+
   // Replay controls
   document.getElementById('btn-prev').addEventListener('click', () => {
     stopReplay();
@@ -1907,6 +2046,7 @@ window.addEventListener('resize', () => {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
+  resizeModal3D();
 });
 
 // ===== Start =====
