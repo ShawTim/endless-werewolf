@@ -1564,12 +1564,13 @@ function showPostgameInfo() {
     const catLabel = catLabels[cat] || cat;
     html += `<h3 style="margin-top:12px;">${catLabel}</h3>`;
     for (const i of items) {
-      const accent = getPlayerColor(i.player_name);
       const p = PLAYERS.find(x => x.name === i.player_name);
-      const displayName = lang === 'zh' && p ? (p.name_zh || i.player_name) : i.player_name;
+      const accent = p ? getPlayerColor(p.name) : '#888';
+      const displayName = p ? (lang === 'zh' ? (p.name_zh || p.name) : p.name) : i.player_name;
+      const role = p ? '' : (i.role || '');
       html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      html += `<div class="speaker" style="color:${accent}">${displayName} (${i.role})</div>`;
-      html += `<div class="text">${escapeHtml(i.quote || '')}</div>`;
+      html += `<div class="speaker" style="color:${accent}">${displayName}${role ? ' (' + role + ')' : ''}</div>`;
+      html += `<div class="text">${formatGameText(i.quote || '')}</div>`;
       html += '</div>';
     }
   }
