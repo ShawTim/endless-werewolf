@@ -62,6 +62,25 @@ canvas#c:active { cursor:grabbing; }
   background: rgba(10,10,21,0.4);
 }
 #welcome-btn:hover { background: rgba(232,196,104,0.2); border-color: var(--gold); }
+#welcome-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: var(--text); margin-bottom: 32px;
+  letter-spacing: 1px; opacity: 0.8;
+}
+#welcome-gh {
+  display: block; margin-top: 16px;
+  font-size: 12px; color: var(--text-dim); text-decoration: none;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: color 0.2s;
+}
+#welcome-gh:hover { color: var(--gold); }
+
+#btn-github {
+  text-decoration: none; display: inline-flex; align-items: center;
+  color: var(--text-dim); font-size: 11px;
+  letter-spacing: 1px;
+}
+#btn-github:hover { color: var(--gold); }
 
 /* ===== Top Bar ===== */
 #topbar {

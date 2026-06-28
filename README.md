@@ -1,6 +1,8 @@
-# Endless Werewolf 🐺
+# Endless Werewolf
 
 **Live Demo:** https://shawtim.github.io/endless-werewolf/
+
+**Source:** https://github.com/ShawTim/endless-werewolf
 
 An autonomous **One Night Ultimate Werewolf** simulation where 6 AI players — each running a different LLM — make their own decisions across every phase: night actions, daytime debate, voting, and postgame interviews.
 
@@ -10,28 +12,16 @@ An autonomous **One Night Ultimate Werewolf** simulation where 6 AI players — 
 
 ## What this is
 
-A cron-driven simulation loop that runs a full game every few hours and publishes the results to GitHub Pages.
+A cron-driven simulation loop that runs a full game periodically and publishes the results to GitHub Pages.
 
 Each of the 6 players has:
-- A **distinct persona** (e.g. hot-tempered accuser, conspiracy theorist)
+- A **distinct persona** (e.g. relentless prosecutor, nervous newcomer)
 - A **specific LLM** assigned to them
 - **Private role knowledge** from the night phase
 - Access to the **live chat log** as context
+- **Cross-game memory** — each player recalls the previous game's events
 
 Every game is fully logged and archived for replay.
-
----
-
-## AI Players
-
-| Player | Persona | Model |
-|---|---|---|
-| Blaze（譚仔大辣） | Hot-tempered accuser | GPT-4.1 |
-| SafetySam（安全主任） | Overly cautious drifter | GPT-5-mini |
-| Dr. Pizza（PHD） | Cold logic analyst | Kimi K2.5 |
-| Twister（方唐鏡） | Chaos agent, lies for fun | GLM-5 |
-| EasyBake（天真grill） | Naïve peacemaker | Qwen3.5-397B |
-| ConspiBro（白兵師兄） | Conspiracy theorist | MiniMax M2.5 |
 
 ---
 
@@ -45,7 +35,7 @@ Every game is fully logged and archived for replay.
 | Voting (who to execute) | **AI** |
 | Outcome resolution | Rule-based (One Night Werewolf rules) |
 | Postgame interviews | **AI** — each player reflects in character |
-| English translation | Google Translate API |
+| Chinese translation | **Gemini 3.1 Pro** (正體中文書面語) |
 
 ---
 
@@ -54,15 +44,16 @@ Every game is fully logged and archived for replay.
 ```
 cron_run_game_publish.sh (scheduled)
   │
-  ├─ gm_night.py          — deal cards, build night plan
-  ├─ [bridge agent × N]   — AI night action per player
+  ├─ gm_night.py            — deal cards, build night plan
+  ├─ [bridge agent × N]     — AI night action per player
+  │   └─ cross_game_memory   — inject previous game data into prompts
   │
   └─ run_full_game.py
-       ├─ day_phase.py     — concurrent AI debate loop
-       │    └─ [bridge agent × 6 per turn]
-       ├─ resolve_phase.py — rule-based outcome
-       ├─ postgame_phase.py — AI postgame interviews
-       └─ translate_phase.py — English translation
+       ├─ day_phase.py       — concurrent AI debate loop
+       ├─ resolve_phase.py   — rule-based outcome
+       ├─ postgame_phase.py  — AI postgame interviews
+       ├─ tag_phase.py       — post-process: add <Role> [Player] markup
+       └─ translate_zh_phase — Gemini translation (EN → 正體中文書面語)
 ```
 
 The **bridge agent** is an [OpenClaw](https://openclaw.ai) agent that receives a player decision request, then spawns a short-lived **thinker subagent** using that player's assigned model. The subagent thinks, responds in JSON, and is deleted.
@@ -79,8 +70,22 @@ This project runs on the **OpenClaw platform**, which provides the `openclaw age
 4. **Vote** — each player votes to execute someone
 5. **Resolve** — outcome determined by One Night Werewolf rules (`resolve_phase.py`)
 6. **Postgame** — each player gives an in-character interview (`postgame_phase.py`)
-7. **Translate** — logs translated to English (`translate_phase.py`)
-8. **Publish** — archive rebuilt and pushed to GitHub Pages (`scripts/build_pages.py`)
+7. **Tag** — role and player names in text wrapped in `<Role>` / `[Player]` markup (`tag_phase.py`)
+8. **Translate** — text translated to Chinese via Gemini (`translate_zh_phase.py`)
+9. **Publish** — archive rebuilt and pushed to GitHub Pages (`scripts/build_pages.py`)
+
+---
+
+## Text Markup
+
+Game data uses a lightweight tagging system for roles and players:
+
+- `<Werewolf>` `<Seer>` — game roles (highlighted purple in UI)
+- `[The Prosecutor]` — player names (highlighted gold in UI)
+
+Tags are added by `tag_phase.py` (post-processing, not by AI agents) and used for:
+1. Consistent visual highlighting in the frontend
+2. Deterministic translation (`<Seer>` always becomes `<預言家>`, never `<先知>`)
 
 ---
 
@@ -89,36 +94,39 @@ This project runs on the **OpenClaw platform**, which provides the `openclaw age
 ```
 data/
   games/game_XXXXXX/
-    night_result.json
+    night_result.json        ← original (English)
     day_result.json
     vote_result.json
     resolve_result.json
     postgame_result.json
     chat_history.md
-    *_en.json / chat_history_en.md   ← English mirrors
-docs/                                ← GitHub Pages site
+    *_zh.json                ← Chinese translations
+    chat_history_zh.md
+docs/                       ← GitHub Pages site
+  app.js, styles.css, index.html
+  tex-*.jpg                 ← AI-generated 3D textures
+  welcome-bg.jpg            ← AI-generated welcome art
+  data/games/               ← published game archive
 ```
 
 ---
 
 ## 中文說明
 
-**一夜狼人 AI 自主模擬**，6 個 AI 玩家各自用唔同嘅 LLM，根據自己嘅角色記憶同場上即時對話做決策。
+**一夜狼人 AI 自主模擬**，6 個 AI 玩家各自用不同的 LLM，根據自己的角色記憶和場上即時對話做決策。不是腳本演示——每個決策都是 AI 玩家在執行時自主做出的。
 
-### 邊啲係 AI 決策，邊啲唔係
+### 特色
 
-| 環節 | 決策者 |
-|---|---|
-| 發牌 / 角色分配 | 規則（隨機） |
-| 夜晚行動（睇邊張牌、搶邊個身份） | **AI**，每個玩家根據角色同性格自主決定 |
-| 白天辯論（講咩、點指控） | **AI**，6 個並發 thinker subagent |
-| 投票 | **AI** |
-| 勝負結算 | 規則（一夜狼人標準規則） |
-| 賽後訪問 | **AI**，每個玩家用廣東話入戲回應 |
-| 英文翻譯 | Google Translate API |
+- **全自主決策**：夜晚行動、白天辯論、投票、賽後訪問全部由 AI 自主完成
+- **跨局記憶**：每個玩家記得上一局的完整過程，會影響判斷
+- **多模型協作**：6 個玩家用不同的 LLM，各有獨特的性格和決策風格
+- **雙語支援**：英文和正體中文書面語，角色名和玩家名翻譯一致
+- **3D 互動界面**：Three.js 場景，AI 生成貼圖，可旋轉查看每個角色
 
 ### 技術架構
 
-整個遊戲由 cron script 定時觸發，唔係由 AI agent 自主發起。每個玩家的決策係透過 **bridge agent**（[OpenClaw](https://openclaw.ai) agent）呼叫對應 LLM 嘅 thinker subagent 完成。
+整個遊戲由 cron script 定時觸發。每個玩家的決策透過 **bridge agent**（[OpenClaw](https://openclaw.ai) agent）呼叫對應 LLM 的 thinker subagent 完成。
 
-呢個 project 依賴 OpenClaw 平台基建，唔可以喺冇該平台嘅環境下直接跑。
+翻譯由 **Gemini 3.1 Pro** 負責，使用正體中文書面語（非粵語口語）。
+
+此項目依賴 OpenClaw 平台基建，不能在沒有該平台的環境下直接運行。

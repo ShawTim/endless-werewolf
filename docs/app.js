@@ -1409,7 +1409,7 @@ function showDayInfo() {
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 
   // Start replay of speeches
   startSpeechReplay(speeches);
@@ -1452,7 +1452,7 @@ function showVoteInfo() {
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 
   // Show vote arrows
   showVoteArrows(votes);
@@ -1498,7 +1498,7 @@ function showResolveInfo() {
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 
   // Show result banner
   showResultBanner(r.outcome, r.reason, r.winners);
@@ -1575,7 +1575,7 @@ function showPostgameInfo() {
   }
   html += '</div>';
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 
   // Show postgame bubbles
   const all = [...(interviews.dead || []), ...(interviews.winners || []), ...(interviews.losers || [])];
@@ -1590,12 +1590,15 @@ function showPostgameInfo() {
 }
 
 function showGameInfo() {
-  // Show basic game info in side panel on load
-  // But NOT on mobile — auto-opening panel obscures the whole screen
-  if (innerWidth > 768) {
-    if (!gameData.night) return;
-    showNightInfo();
-  }
+  // Show project info in side panel
+  const isZh = lang === 'zh';
+  let html = '<div class="panel-section">';
+  html += '<h3>' + (isZh ? '關於' : 'About') + '</h3>';
+  html += '<p style="font-size:13px;line-height:1.7;color:var(--text);">' + (isZh ? '6 個 AI 代理使用不同的 LLM，自主進行一夜終極狼人殺。每個決策——夜晚行動、白天辯論、投票——都由 AI 玩家在執行時自主做出，並非腳本演示。' : '6 AI agents running different LLMs play One Night Ultimate Werewolf autonomously. Every decision — night actions, daytime debate, voting — is made by the AI players themselves at runtime. Not scripted.') + '</p>';
+  html += '<p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><a href="https://github.com/ShawTim/endless-werewolf" target="_blank" style="color:var(--gold);">GitHub</a></p>';
+  html += '</div>';
+  document.getElementById('panel-content').innerHTML = html;
+  openSidePanel();
 }
 
 function showPlayerModal(playerId) {
@@ -1999,7 +2002,7 @@ function showPlayerDetail(playerId) {
   }
 
   document.getElementById('panel-content').innerHTML = html;
-  openSidePanel();
+  openSidePanel(true);
 }
 
 // ===== Speech Replay =====
@@ -2186,6 +2189,7 @@ function updateUIText() {
   document.getElementById('welcome-title').textContent = t('brand');
   document.getElementById('welcome-sub').textContent = t('sub');
   document.getElementById('welcome-btn').textContent = lang === 'zh' ? '進入' : 'Enter';
+  document.getElementById('welcome-desc').textContent = lang === 'zh' ? '6 個 AI 代理，不同模型，自主決策' : '6 AI agents. Different LLMs. Autonomous decisions.';
   // Update phase labels
   const phaseLabels = { night: t('nightPhase'), day: t('dayDiscussion'), vote: t('voting'), resolve: t('resolution'), postgame: t('postgame') };
   document.querySelectorAll('.phase-step').forEach(el => {
@@ -2197,9 +2201,10 @@ function updateUIText() {
   if (archiveH3) archiveH3.textContent = t('gameArchive');
 }
 
-function openSidePanel() {
-  // On mobile, don't auto-open side panel (it covers the whole screen)
-  if (innerWidth <= 768) return;
+function openSidePanel(auto) {
+  // auto-open from phase change: skip on mobile
+  // manual open (from button): always allow
+  if (auto && innerWidth <= 768) return;
   document.getElementById('side-panel').classList.add('open');
 }
 
