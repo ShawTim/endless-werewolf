@@ -41,20 +41,23 @@ canvas#c:active { cursor:grabbing; }
   text-align: center; padding: 40px; position: relative; z-index: 1;
 }
 #welcome-title {
-  font-size: 56px; font-weight: 800; color: var(--gold);
-  letter-spacing: 4px; margin-bottom: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 56px; font-weight: 900; color: var(--gold);
+  letter-spacing: 6px; margin-bottom: 12px;
   text-shadow: 0 0 40px rgba(232,196,104,0.3), 0 2px 8px rgba(0,0,0,0.8);
 }
 #welcome-sub {
-  font-size: 18px; color: var(--text); margin-bottom: 40px;
-  letter-spacing: 8px; text-transform: uppercase;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; color: var(--text); margin-bottom: 40px;
+  letter-spacing: 12px; text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0,0,0,0.8);
 }
 #welcome-btn {
+  font-family: 'Cinzel', serif;
   background: transparent; border: 1px solid var(--gold);
   color: var(--gold); padding: 12px 48px; border-radius: 8px;
   font-size: 15px; cursor: pointer; transition: all 0.3s;
-  letter-spacing: 3px; text-transform: uppercase;
+  letter-spacing: 4px; text-transform: uppercase;
   backdrop-filter: blur(4px);
   background: rgba(10,10,21,0.4);
 }
@@ -70,10 +73,16 @@ canvas#c:active { cursor:grabbing; }
 }
 #topbar > * { pointer-events: auto; }
 .brand {
+  font-family: 'Cinzel', serif;
   font-size: 16px; font-weight: 700; color: var(--gold);
   display: flex; align-items: center; gap: 8px;
+  letter-spacing: 2px;
 }
-.brand .sub { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+.brand .sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--text-dim); font-weight: 400;
+  letter-spacing: 3px; text-transform: uppercase;
+}
 
 .top-actions { display: flex; align-items: center; gap: 12px; }
 .btn {
@@ -263,8 +272,10 @@ canvas#c:active { cursor:grabbing; }
 }
 #result-banner.visible { opacity: 1; }
 #result-banner .title {
-  font-size: 36px; font-weight: 800; color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 36px; font-weight: 900; color: var(--gold);
   text-shadow: 0 0 30px rgba(232,196,104,0.4);
+  letter-spacing: 4px;
 }
 #result-banner .sub {
   font-size: 16px; color: var(--text); margin-top: 8px;
@@ -299,8 +310,8 @@ canvas#c:active { cursor:grabbing; }
   #player-modal-content { width: 92vw; max-width: none; padding: 16px; }
   #player-modal .modal-close-btn { right: 4vw; }
   /* Welcome card smaller */
-  #welcome-title { font-size: 36px; letter-spacing: 2px; }
-  #welcome-sub { font-size: 14px; letter-spacing: 4px; }
+  #welcome-title { font-size: 38px; letter-spacing: 3px; }
+  #welcome-sub { font-size: 16px; letter-spacing: 6px; }
   /* Hover card: smaller */
   #hover-card { max-width: 180px; font-size: 11px; padding: 8px 10px; }
   /* Replay controls */
