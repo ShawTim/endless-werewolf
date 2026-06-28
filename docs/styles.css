@@ -273,11 +273,36 @@ canvas#c:active { cursor:grabbing; }
 @media (max-width: 768px) {
   #side-panel { width: 100vw; }
   #archive-panel { width: 100vw; }
-  #timeline { font-size: 10px; }
-  .phase-step { padding: 6px 10px; }
+  #timeline { font-size: 10px; left: 0; transform: none; width: 100vw; border-radius: 0; }
+  .phase-step { padding: 6px 8px; flex: 1; justify-content: center; }
   .phase-step .label { display: none; }
+  /* Topbar: smaller text, wrap if needed */
+  #topbar { padding: 6px 8px; flex-wrap: wrap; gap: 4px; }
+  .brand { font-size: 12px; }
+  .brand .sub { display: none; }
+  .top-actions { gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+  .btn { padding: 4px 8px; font-size: 10px; }
+  /* Gallery modal: vertical layout */
   #gallery-modal-box { flex-direction: column; width: 95vw; height: 90vh; }
-  #gallery-modal-left { width: 100%; min-width: 0; height: 200px; }
+  #gallery-modal-left { width: 100%; min-width: 0; height: 220px; }
+  /* Small modal: full width */
+  #player-modal-content { width: 92vw; max-width: none; padding: 16px; }
+  #player-modal .modal-close-btn { right: 4vw; }
+  /* Welcome card smaller */
+  #welcome-title { font-size: 32px; }
+  #welcome-sub { font-size: 13px; }
+  /* Hover card: smaller */
+  #hover-card { max-width: 180px; font-size: 11px; padding: 8px 10px; }
+  /* Replay controls */
+  #replay-controls { bottom: 50px; }
+  /* Vote labels */
+  .vote-label { font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+  .brand { display: none; }
+  .top-actions { width: 100%; justify-content: center; }
+  #btn-lang { order: 99; }
 }
 
 /* ===== Player Modal (small, click character) ===== */
