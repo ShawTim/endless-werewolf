@@ -16,11 +16,40 @@ import state_manager
 
 WORKSPACE = Path(__file__).resolve().parent
 
+# Import role/player mappings from tag_phase for deterministic translation
+try:
+    from tag_phase import ROLES_EN, ROLES_ZH
+except ImportError:
+    ROLES_EN = ["Werewolf", "Seer", "Robber", "Troublemaker", "Villager", "Tanner", "Minion", "Insomniac"]
+    ROLES_ZH = {
+        "Werewolf": "狼人", "Seer": "預言家", "Robber": "強盜",
+        "Troublemaker": "搗蛋鬼", "Villager": "村民",
+        "Tanner": "皮匠", "Minion": "爪牙", "Insomniac": "失眠者",
+    }
+
 # Fields that contain translatable prose
 TRANSLATABLE_KEYS = {"persona", "speech", "reason", "quote", "action"}
 
 # Player name fields to skip (frontend handles localization)
-SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "target", "actor", "voter"}
+SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "player_name_zh", "player_name_en", "target", "actor", "voter"}
+
+def _pre_translate_tags(text: str, en_to_zh_players: dict[str, str]) -> str:
+    """
+    Deterministically translate <Role> and [Player] tags BEFORE sending to Gemini.
+    This guarantees consistent role/player name translation.
+    """
+    if not text:
+        return text
+    
+    # Replace <EnglishRole> -> <ChineseRole>
+    for en, zh in ROLES_ZH.items():
+        text = text.replace(f"<{en}>", f"<{zh}>")
+    
+    # Replace [EnglishPlayer] -> [ChinesePlayer]
+    for en, zh in en_to_zh_players.items():
+        text = text.replace(f"[{en}]", f"[{zh}]")
+    
+    return text
 
 
 def _needs_translation(key: str, value: Any) -> bool:
@@ -246,14 +275,30 @@ def run_translate_zh_phase() -> dict[str, Any]:
                 if stripped not in all_texts:
                     all_texts[stripped] = stripped
 
+    # Load player name mapping (en→zh) for deterministic tag translation
+    en_to_zh_players = {}
+    night_data = file_data.get("night", {})
+    for _, p in night_data.get("players", {}).items():
+        en = p.get("name_en") or p.get("name", "")
+        zh = p.get("name_zh", "")
+        if en and zh:
+            en_to_zh_players[en] = zh
+
     # Translate all unique texts
     unique_items = list(all_texts.values())
     print(f"[translate_zh] Translating {len(unique_items)} unique texts...")
 
-    batch_items = [("text", t) for t in unique_items]
+    # Pre-translate tags deterministically BEFORE Gemini
+    # This ensures <Seer> always becomes <預言家>, never <先知>
+    pre_translated = {}
+    for orig in unique_items:
+        pre_translated[orig] = _pre_translate_tags(orig, en_to_zh_players)
+
+    # Send to Gemini for prose translation (tags already in Chinese)
+    batch_items = [("text", pre_translated[t]) for t in unique_items]
     translated_texts = _translate_batch(batch_items)
 
-    # Build translation map
+    # Build translation map: original EN text -> final ZH text
     translation_map: dict[str, str] = {}
     for orig, translated in zip(unique_items, translated_texts):
         translation_map[orig] = translated

@@ -129,18 +129,18 @@ def apply_non_decision_info(game):
         wolf_state = players[wid]
         if len(werewolves) >= 2:
             others = [players[x]["name"] for x in werewolves if x != wid]
-            add_memory(wolf_state, f"你見到另一隻<狼人>是：{', '.join(f'[{n}]' for n in others)}。")
+            add_memory(wolf_state, f"You saw the other Werewolf is: {', '.join(others)}.")
         else:
-            add_memory(wolf_state, "你是場上唯一的<狼人>，你可以選擇查看一張中央底牌。")
+            add_memory(wolf_state, "You are the only Werewolf in play. You may peek at one center card.")
 
     minions = role_holders(game, ROLE_MINION)
     for mid in minions:
         minion_state = players[mid]
         if werewolves:
             wolf_names = [players[x]["name"] for x in werewolves]
-            add_memory(minion_state, f"你見到的<狼人>是：{', '.join(f'[{n}]' for n in wolf_names)}。<狼人>不知道你是<爪牙>。")
+            add_memory(minion_state, f"You saw the Werewolves are: {', '.join(wolf_names)}. The Werewolves do not know you are the Minion.")
         else:
-            add_memory(minion_state, "你醒來時沒有看到任何<狼人>，代表兩張<狼人>牌可能都在中央。")
+            add_memory(minion_state, "You woke up and saw no Werewolves, meaning both Werewolf cards may be in the center.")
 
 
 def request_single_werewolf_peek(game, wid):
@@ -160,7 +160,7 @@ def apply_single_werewolf_peek(game, wid, decision, source="agent"):
         raise ValueError("invalid single werewolf action")
 
     seen = game["center_cards"][target]
-    add_memory(wolf_state, f"你偷看了中央第 {target} 張底牌，看到它是：<{seen}>。")
+    add_memory(wolf_state, f"You peeked at center card {target} and saw: {seen}.")
     wolf_state["night_actions"].append({
         "role": ROLE_WEREWOLF,
         "action": "inspect_center",
@@ -200,7 +200,7 @@ def apply_seer_action(game, sid, decision, source="agent"):
             raise ValueError("invalid seer target")
         target_id = name_to_id[target_name]
         seen = game["players"][target_id]["initial_role"]
-        add_memory(seer_state, f"你查驗了 [{target_name}]，他/她的身份是：<{seen}>。")
+        add_memory(seer_state, f"You inspected {target_name} and their role is: {seen}.")
         seer_state["night_actions"].append({
             "role": ROLE_SEER,
             "action": action,
@@ -225,7 +225,7 @@ def apply_seer_action(game, sid, decision, source="agent"):
         seen = [{"index": i, "role": game["center_cards"][i]} for i in targets]
         add_memory(
             seer_state,
-            "你查驗了中央兩張底牌：" + "，".join([f"第 {x['index']} 張是 <{x['role']}>" for x in seen]) + "。"
+            "You inspected two center cards: " + ", ".join([f"card {x['index']} is {x['role']}" for x in seen]) + "."
         )
         seer_state["night_actions"].append({
             "role": ROLE_SEER,
@@ -268,7 +268,7 @@ def apply_robber_action(game, rid, decision, source="agent"):
     robber_state["current_role"] = target_old
     game["players"][target_id]["current_role"] = my_old
 
-    add_memory(robber_state, f"你偷了 [{target_name}] 的牌，交換之後你現在是：<{robber_state['current_role']}>。")
+    add_memory(robber_state, f"You robbed {target_name}'s card. After swapping, you are now: {robber_state['current_role']}.")
     robber_state["night_actions"].append({
         "role": ROLE_ROBBER,
         "action": "rob",
@@ -308,7 +308,7 @@ def apply_troublemaker_action(game, tid, decision, source="agent"):
     game["players"][id_a]["current_role"] = role_b
     game["players"][id_b]["current_role"] = role_a
 
-    add_memory(trouble_state, f"你交換了 [{name_a}] 和 [{name_b}] 的牌，但你不知道他們交換後是什麼。")
+    add_memory(trouble_state, f"You swapped {name_a} and {name_b}'s cards, but you don't know what they became.")
     trouble_state["night_actions"].append({
         "role": ROLE_TROUBLEMAKER,
         "action": "swap",
@@ -326,7 +326,7 @@ def apply_troublemaker_action(game, tid, decision, source="agent"):
 
 def resolve_insomniac(game, iid):
     insomniac_state = game["players"][iid]
-    add_memory(insomniac_state, f"夜晚最後你看了自己的牌，你現在是：<{insomniac_state['current_role']}>。")
+    add_memory(insomniac_state, f"At the end of night, you checked your card and you are now: {insomniac_state['current_role']}.")
     insomniac_state["night_actions"].append({
         "role": ROLE_INSOMNIAC,
         "action": "inspect_self",
