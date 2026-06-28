@@ -48,19 +48,19 @@ function t(key) { return I18N[lang][key] || I18N.en[key] || key; }
 // --- Player visual styles (covers both V1 and V2 rosters) ---
 const PLAYER_STYLES = {
   // V1 roster
-  'Blaze':       {color:0xe74c3c,accent:0xc0392b,body:0x4a0000,head:0xD4A574,icon:'🔥'},
-  'SafetySam':   {color:0x27ae60,accent:0x2ecc71,body:0x0d5234,head:0xE8C4A0,icon:'🛡️'},
-  'Dr. Pizza':   {color:0x2980b9,accent:0x3498db,body:0x0d3252,head:0xD0C8B8,icon:'🍕'},
-  'Twister':     {color:0xd35400,accent:0xe67e22,body:0x7a3a10,head:0xD4B896,icon:'🌀'},
-  'EasyBake':    {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:'🧁'},
-  'ConspiBro':   {color:0x7f8c8d,accent:0x95a5a6,body:0x2a2a2a,head:0xC8A878,icon:'🔍'},
+  'Blaze':       {color:0xe74c3c,accent:0xc0392b,body:0x4a0000,head:0xD4A574,icon:''},
+  'SafetySam':   {color:0x27ae60,accent:0x2ecc71,body:0x0d5234,head:0xE8C4A0,icon:''},
+  'Dr. Pizza':   {color:0x2980b9,accent:0x3498db,body:0x0d3252,head:0xD0C8B8,icon:''},
+  'Twister':     {color:0xd35400,accent:0xe67e22,body:0x7a3a10,head:0xD4B896,icon:''},
+  'EasyBake':    {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:''},
+  'ConspiBro':   {color:0x7f8c8d,accent:0x95a5a6,body:0x2a2a2a,head:0xC8A878,icon:''},
   // V2 roster
-  'The Prosecutor':   {color:0xc0392b,accent:0xe74c3c,body:0x4a0000,head:0xD4A574,icon:'⚖️'},
-  'The Therapist':    {color:0x2ecc71,accent:0x27ae60,body:0x0d5234,head:0xE8C4A0,icon:'🧠'},
-  'The Chaos Agent':  {color:0xe67e22,accent:0xd35400,body:0x7a3a10,head:0xD4B896,icon:'🎭'},
-  'The Gut Player':   {color:0x95a5a6,accent:0x7f8c8d,body:0x2a2a2a,head:0xC8A878,icon:'👊'},
-  'The Statistician': {color:0x3498db,accent:0x2980b9,body:0x0d3252,head:0xD0C8B8,icon:'📊'},
-  'The Underdog':     {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:'🍀'},
+  'The Prosecutor':   {color:0xc0392b,accent:0xe74c3c,body:0x4a0000,head:0xD4A574,icon:''},
+  'The Therapist':    {color:0x2ecc71,accent:0x27ae60,body:0x0d5234,head:0xE8C4A0,icon:''},
+  'The Chaos Agent':  {color:0xe67e22,accent:0xd35400,body:0x7a3a10,head:0xD4B896,icon:''},
+  'The Gut Player':   {color:0x95a5a6,accent:0x7f8c8d,body:0x2a2a2a,head:0xC8A878,icon:''},
+  'The Statistician': {color:0x3498db,accent:0x2980b9,body:0x0d3252,head:0xD0C8B8,icon:''},
+  'The Underdog':     {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:''},
 };
 
 // --- Player data (dynamically loaded from each game's night_result) ---
@@ -1041,11 +1041,11 @@ function clearVoteArrows() {
 // ===== Result Banner =====
 function showResultBanner(outcome, reason, winners) {
   const titles = {
-    werewolf_win: '🐺 ' + t('werewolfWin'),
-    village_win: '🏘️ ' + t('villageWin'),
-    tanner_win: '🎭 ' + t('tannerWin'),
-    village_win_no_wolf: '🏘️ ' + t('villageWin'),
-    no_team_win: '🤷 ' + t('noTeamWin'),
+    werewolf_win: t('werewolfWin'),
+    village_win: t('villageWin'),
+    tanner_win: t('tannerWin'),
+    village_win_no_wolf: t('villageWin'),
+    no_team_win: t('noTeamWin'),
   };
   resultBanner.querySelector('.title').textContent = titles[outcome] || outcome;
   resultBanner.querySelector('.sub').textContent = reason || '';
@@ -1192,7 +1192,7 @@ async function loadGame(gameId) {
           accent: style.accent || 0xe74c3c,
           body: style.body || 0x4a0000,
           head: style.head || 0xD4A574,
-          icon: style.icon || '🎭',
+          icon: style.icon || '',
         };
       });
       // Rebuild 3D scene with new players
@@ -1276,7 +1276,7 @@ function showNightInfo() {
   const players = gameData.night.players || {};
   const trace = gameData.night.night_trace || [];
   
-  let html = '<div class="panel-section"><h3>🌙 ' + t('nightPhase') + '</h3>';
+  let html = '<div class="panel-section"><h3>' + t('nightPhase') + '</h3>';
   html += '<div class="row"><span class="key">' + t('centerCards') + '</span><span class="val">' + (gameData.night.center_cards || []).join(', ') + '</span></div>';
   
   html += '<h3 style="margin-top:16px;">' + t('roles') + '</h3>';
@@ -1310,7 +1310,7 @@ function showDayInfo() {
   const trace = gameData.day.day_trace || [];
   const speeches = trace.filter(tr => tr.type === 'speech');
   
-  let html = '<div class="panel-section"><h3>☀️ ' + t('dayDiscussion') + '</h3>';
+  let html = '<div class="panel-section"><h3>' + t('dayDiscussion') + '</h3>';
   html += `<div class="row"><span class="key">${t('duration')}</span><span class="val">${(gameData.day.config?.duration_seconds || 0)}s</span></div>`;
   html += `<div class="row"><span class="key">${t('totalSpeeches')}</span><span class="val">${speeches.length}</span></div>`;
   
@@ -1349,7 +1349,7 @@ function showVoteInfo() {
   const tally = gameData.vote.tally || {};
   const executed = gameData.vote.executed || [];
   
-  let html = '<div class="panel-section"><h3>🗳️ ' + t('voting') + '</h3>';
+  let html = '<div class="panel-section"><h3>' + t('voting') + '</h3>';
   html += '<h3 style="margin-top:12px;">' + t('votes') + '</h3>';
   for (const [voter, target] of Object.entries(votes)) {
     const voterColor = getPlayerColor(voter);
@@ -1368,7 +1368,7 @@ function showVoteInfo() {
     const p = PLAYERS.find(x => x.name === name);
     const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
     const isExecuted = executed.includes(name);
-    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${count} ${t('vote')}${count !== 1 ? 's' : ''}${isExecuted ? ' ☠️' : ''}</span></div>`;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${count} ${t('vote')}${count !== 1 ? 's' : ''}${isExecuted ? ' *' : ''}</span></div>`;
   }
   
   if (executed.length > 0) {
@@ -1396,7 +1396,7 @@ function showResolveInfo() {
   if (!gameData.resolve) return;
   const r = gameData.resolve;
   
-  let html = '<div class="panel-section"><h3>⚖️ ' + t('resolution') + '</h3>';
+  let html = '<div class="panel-section"><h3>' + t('resolution') + '</h3>';
   html += `<div class="row"><span class="key">${t('outcome')}</span><span class="val">${r.outcome || '?'}</span></div>`;
   html += `<div class="row"><span class="key">${t('reason')}</span><span class="val">${r.reason || '?'}</span></div>`;
   
@@ -1485,10 +1485,10 @@ function showPostgameInfo() {
   if (!gameData.postgame) return;
   const interviews = gameData.postgame.interviews || {};
   
-  let html = '<div class="panel-section"><h3>🎤 ' + t('postgame') + '</h3>';
+  let html = '<div class="panel-section"><h3>' + t('postgame') + '</h3>';
   for (const [cat, items] of Object.entries(interviews)) {
     if (!items || items.length === 0) continue;
-    const catLabels = { dead: '💀 ' + t('deadExec'), winners: '🏆 ' + t('winLabel'), losers: '😢 ' + t('loseLabel') };
+    const catLabels = { dead: t('deadExec'), winners: t('winLabel'), losers: t('loseLabel') };
     const catLabel = catLabels[cat] || cat;
     html += `<h3 style="margin-top:12px;">${catLabel}</h3>`;
     for (const i of items) {
@@ -1984,6 +1984,11 @@ function setupUI() {
   buildNameTags();
   updateUIText();
 
+  // Welcome overlay
+  document.getElementById('welcome-btn').addEventListener('click', () => {
+    document.getElementById('welcome-overlay').classList.add('hidden');
+  });
+
   // Phase steps
   document.querySelectorAll('.phase-step').forEach(el => {
     el.addEventListener('click', () => setPhase(el.dataset.phase));
@@ -2086,14 +2091,18 @@ function setupUI() {
 }
 
 function updateUIText() {
-  document.querySelector('.brand').innerHTML = '🐺 ' + t('brand') + ' <span class="sub">' + t('sub') + '</span>';
-  document.getElementById('btn-gallery').innerHTML = '<span class="btn-icon">👥</span> ' + (lang === 'zh' ? '角色' : 'Characters');
-  document.getElementById('btn-archive').innerHTML = '<span class="btn-icon">📂</span> ' + t('archive');
-  document.getElementById('btn-info').innerHTML = '<span class="btn-icon">ℹ️</span> ' + t('info');
-  document.getElementById('btn-night').innerHTML = '<span class="btn-icon">🌙</span> ' + t('night');
-  document.getElementById('btn-rotate').innerHTML = '<span class="btn-icon">🔄</span> ' + t('autoRotate');
+  document.querySelector('.brand').innerHTML = t('brand') + ' <span class="sub">' + t('sub') + '</span>';
+  document.getElementById('btn-gallery').innerHTML = (lang === 'zh' ? '角色' : 'Characters');
+  document.getElementById('btn-archive').innerHTML = t('archive');
+  document.getElementById('btn-info').innerHTML = t('info');
+  document.getElementById('btn-night').innerHTML = t('night');
+  document.getElementById('btn-rotate').innerHTML = t('autoRotate');
   document.getElementById('btn-lang').innerHTML = t('langLabel');
   document.getElementById('loading').textContent = t('loadingVillage');
+  // Welcome overlay
+  document.getElementById('welcome-title').textContent = t('brand');
+  document.getElementById('welcome-sub').textContent = t('sub');
+  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '進入' : 'Enter';
   // Update phase labels
   const phaseLabels = { night: t('nightPhase'), day: t('dayDiscussion'), vote: t('voting'), resolve: t('resolution'), postgame: t('postgame') };
   document.querySelectorAll('.phase-step').forEach(el => {

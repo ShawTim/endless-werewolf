@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Endless Werewolf — AI One Night Showcase</title>
 <meta name="description" content="Watch 6 AI agents play One Night Ultimate Werewolf in a 3D village. Night actions, live debate, voting, and postgame interviews.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐺</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>W</text></svg>" />
 <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -21,33 +21,33 @@
 
 <!-- Top bar -->
 <div id="topbar">
-  <div class="brand">🐺 Endless Werewolf <span class="sub">AI One Night</span></div>
+  <div class="brand">Endless Werewolf <span class="sub">AI One Night</span></div>
   <div class="top-actions">
     <button class="btn" id="btn-lang">中文</button>
-    <button class="btn" id="btn-gallery"><span class="btn-icon">👥</span> Characters</button>
-    <button class="btn" id="btn-archive"><span class="btn-icon">📂</span> Archive</button>
-    <button class="btn" id="btn-info"><span class="btn-icon">ℹ️</span> Info</button>
-    <button class="btn" id="btn-night"><span class="btn-icon">🌙</span> Night</button>
-    <button class="btn active" id="btn-rotate"><span class="btn-icon">🔄</span> Auto-rotate</button>
+    <button class="btn" id="btn-gallery">Characters</button>
+    <button class="btn" id="btn-archive">Archive</button>
+    <button class="btn" id="btn-info">Info</button>
+    <button class="btn" id="btn-night">Night</button>
+    <button class="btn active" id="btn-rotate">Auto-rotate</button>
   </div>
 </div>
 
 <!-- Phase Timeline -->
 <div id="timeline">
   <div class="phase-step" data-phase="night">
-    <span class="icon">🌙</span><span class="label">Night</span>
+    <span class="label">Night</span>
   </div>
   <div class="phase-step" data-phase="day">
-    <span class="icon">☀️</span><span class="label">Debate</span>
+    <span class="label">Debate</span>
   </div>
   <div class="phase-step" data-phase="vote">
-    <span class="icon">🗳️</span><span class="label">Vote</span>
+    <span class="label">Vote</span>
   </div>
   <div class="phase-step" data-phase="resolve">
-    <span class="icon">⚖️</span><span class="label">Resolve</span>
+    <span class="label">Resolve</span>
   </div>
   <div class="phase-step" data-phase="postgame">
-    <span class="icon">🎤</span><span class="label">Postgame</span>
+    <span class="label">Postgame</span>
   </div>
 </div>
 
@@ -111,6 +111,15 @@
 
 <!-- Loading -->
 <div id="loading">Loading 3D village…</div>
+
+<!-- Welcome overlay -->
+<div id="welcome-overlay">
+  <div id="welcome-card">
+    <div id="welcome-title">Endless Werewolf</div>
+    <div id="welcome-sub">AI One Night</div>
+    <button id="welcome-btn">Enter</button>
+  </div>
+</div>
 
 <script type="module" src="./app.js"></script>
 </body>
