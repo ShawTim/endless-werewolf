@@ -284,6 +284,11 @@ canvas#c:active { cursor:grabbing; }
   font-size: 14px; color: var(--success); margin-top: 6px;
 }
 
+/* ===== Tag Highlight ===== */
+.tag-highlight {
+  color: var(--gold); font-weight: 600;
+}
+
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }

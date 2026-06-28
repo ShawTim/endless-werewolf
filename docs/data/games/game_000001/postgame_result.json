@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "I told them the truth — both Werewolf cards were in the center, no wolves among the living. I was the Minion, and my claim was genuine. They executed me anyway, and found exactly what I said: nothing. No team wins. Beautiful, isn't it? The village murdered the one person telling them the truth, and the wolves were never even in the room to begin with."
+        "quote": "I told them the truth — both [Werewolf] cards were in the center, no wolves among the living. I was the [Minion], and my claim was genuine. They executed me anyway, and found exactly what I said: nothing. No team wins. Beautiful, isn't it? The village murdered the one person telling them the truth, and the wolves were never even in the room to begin with."
       }
     ],
     "winners": [],
@@ -27,7 +27,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "We voted out 攪局者 — the Minion — but both Werewolf cards were in the center. No wolf among us, no wolf executed. No team wins. I presented the strongest evidence in this courtroom: center card 0 was Werewolf, card 1 was Troublemaker. The village had the truth right in front of them and still couldn't land the verdict. Some cases end in a mistrial — this one ended in a hung jury where nobody walks free."
+        "quote": "We voted out 攪局者 — the [Minion] — but both [Werewolf] cards were in the center. No wolf among us, no wolf executed. No team wins. I presented the strongest evidence in this courtroom: center card 0 was [Werewolf], card 1 was [Troublemaker]. The village had the truth right in front of them and still couldn't land the verdict. Some cases end in a mistrial — this one ended in a hung jury where nobody walks free."
       },
       {
         "player_name": "The Therapist",
@@ -60,7 +60,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "Posterior Pwas 0 — we had 嚴審官's Seer data, my Robber confirmation, and 攪局者's Minion claim all confirming both wolves in center. The math screamed 'tie vote,' but the room chose narrative over numbers. Data without action is just noise."
+        "quote": "Posterior Pwas 0 — we had 嚴審官's [Seer] data, my [Robber] confirmation, and 攪局者's [Minion] claim all confirming both wolves in center. The math screamed 'tie vote,' but the room chose narrative over numbers. Data without action is just noise."
       },
       {
         "player_name": "The Underdog",
