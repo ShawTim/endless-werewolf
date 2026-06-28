@@ -191,12 +191,12 @@ canvas#c:active { cursor:grabbing; }
 /* ===== Speech Bubbles ===== */
 #bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:6; }
 .bubble {
-  position:absolute; transform:translate(-50%,-100%);
+  position:absolute; top:0; left:0;
   background:rgba(10,10,25,0.95); border:1px solid; border-radius:12px;
   padding:8px 14px; max-width:280px; font-size:12px; line-height:1.5;
   color:var(--text); pointer-events:none;
   box-shadow: var(--shadow);
-  animation: bubbleIn 0.3s ease-out;
+  will-change: transform;
 }
 .bubble .speaker { font-weight:700; font-size:11px; margin-bottom:2px; }
 .bubble .text { color:var(--text); }
@@ -206,8 +206,8 @@ canvas#c:active { cursor:grabbing; }
   border-top:8px solid;
 }
 @keyframes bubbleIn {
-  from { opacity:0; transform:translate(-50%,-90%) scale(0.8); }
-  to { opacity:1; transform:translate(-50%,-100%) scale(1); }
+  from { opacity:0; }
+  to { opacity:1; }
 }
 
 /* ===== Vote Arrows ===== */
@@ -295,8 +295,8 @@ canvas#c:active { cursor:grabbing; }
   #side-panel { width: 100vw; }
   #archive-panel { width: 100vw; }
   #timeline { font-size: 10px; left: 0; transform: none; width: 100vw; border-radius: 0; }
-  .phase-step { padding: 6px 8px; flex: 1; justify-content: center; }
-  .phase-step .label { display: none; }
+  .phase-step { padding: 8px 6px; flex: 1; justify-content: center; font-size: 9px; }
+  .phase-step .label { display: block; font-size: 9px; }
   /* Topbar: smaller text, wrap if needed */
   #topbar { padding: 6px 8px; flex-wrap: wrap; gap: 4px; }
   .brand { font-size: 12px; }
