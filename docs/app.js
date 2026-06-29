@@ -765,9 +765,12 @@ function addAvatarAccessories(scene, player, skinMat, bodyMat, accMat, darkMat, 
 }
 
 // ===== Camera Controls =====
-let theta = 0, phi = PI / 3.5, dist = 12;
+let theta = 0, phi = PI / 3.5;
+// On mobile, start further back so all 6 characters fit
+let dist = (innerWidth <= 768) ? 18 : 12;
 const targetV = new THREE.Vector3(0, 0.5, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
+const DIST_MIN = 3, DIST_MAX = 40;
 
 function updateCam() {
   const x = dist * sin(phi) * cos(theta);
@@ -798,10 +801,76 @@ function setupCameraControls() {
   canvas.addEventListener('wheel', e => {
     e.preventDefault();
     dist *= e.deltaY > 0 ? 1.1 : 0.9;
-    dist = Math.max(3, Math.min(25, dist));
+    dist = Math.max(DIST_MIN, Math.min(DIST_MAX, dist));
     updateCam();
   }, { passive: false });
   canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+  // ===== Touch Controls (pinch zoom + drag rotate/pan) =====
+  let touchState = null; // {mode: 'rotate'|'pinch', x0, y0, x1, y1, dist0}
+
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    if (e.touches.length === 1) {
+      touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY };
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchState = {
+        mode: 'pinch',
+        x0: e.touches[0].clientX, y0: e.touches[0].clientY,
+        x1: e.touches[1].clientX, y1: e.touches[1].clientY,
+        dist0: Math.hypot(dx, dy),
+        startDist: dist,
+        midX: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        midY: (e.touches[0].clientY + e.touches[1].clientY) / 2,
+        targetX: targetV.x, targetY: targetV.y, targetZ: targetV.z,
+      };
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (!touchState) return;
+    if (touchState.mode === 'rotate' && e.touches.length === 1) {
+      const dx = e.touches[0].clientX - touchState.x0;
+      const dy = e.touches[0].clientY - touchState.y0;
+      touchState.x0 = e.touches[0].clientX;
+      touchState.y0 = e.touches[0].clientY;
+      theta -= dx * 0.008;
+      phi -= dy * 0.008;
+      phi = Math.max(0.02, Math.min(PI / 2.05, phi));
+      updateCam();
+    } else if (touchState.mode === 'pinch' && e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const newDist = Math.hypot(dx, dy);
+      const scale = touchState.dist0 / newDist;
+      dist = Math.max(DIST_MIN, Math.min(DIST_MAX, touchState.startDist * scale));
+
+      // Two-finger drag also pans target
+      const newMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const newMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      const panDx = newMidX - touchState.midX;
+      const panDy = newMidY - touchState.midY;
+      const ps = 0.008 * dist;
+      const right = new THREE.Vector3(); camera.getWorldDirection(right);
+      right.cross(new THREE.Vector3(0, 1, 0)).normalize();
+      targetV.addScaledVector(right, -panDx * ps);
+      targetV.addScaledVector(new THREE.Vector3(0, 1, 0), panDy * ps);
+      touchState.midX = newMidX;
+      touchState.midY = newMidY;
+
+      updateCam();
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', e => {
+    if (e.touches.length === 0) touchState = null;
+    else if (e.touches.length === 1) {
+      touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY };
+    }
+  });
 
   // Raycaster for hover
   const raycaster = new THREE.Raycaster();
@@ -2516,7 +2585,8 @@ function applyPanelOffset() {
     dist = Math.max(17, dist);
   } else {
     targetV.x = 0;
-    dist = Math.min(dist, 14);
+    // On mobile, pull back to fit everything
+    dist = innerWidth <= 768 ? Math.min(Math.max(dist, 18), 28) : Math.min(dist, 14);
   }
   updateCam();
 }
