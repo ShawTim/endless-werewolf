@@ -949,7 +949,7 @@ function showTeamColors(finalRoles) {
     if (!roleInfo) return;
     const team = roleInfo.team || 'none';
     const teamColor = TEAM_COLORS[team] || 0x95a5a6;
-    const roleDisplay = lang === 'zh' ? roleInfo.current_role : roleInfo.current_role;
+    const roleDisplay = lang === 'zh' ? roleZh(roleInfo.current_role) : roleInfo.current_role;
     
     // Change base color
     if (chars[i] && chars[i].userData.baseMat) {
@@ -1495,6 +1495,12 @@ const ROLE_COLORS = {
   Troublemaker: 0x9b59b6, Villager: 0x2ecc71, Tanner: 0xf1c40f,
   Minion: 0x607d8b, Insomniac: 0x1abc9c,
 };
+const ROLE_ZH = {
+  Werewolf: '狼人', Seer: '預言家', Robber: '強盜',
+  Troublemaker: '搗蛋鬼', Villager: '村民', Tanner: '皮匠',
+  Minion: '爪牙', Insomniac: '失眠者',
+};
+function roleZh(name) { return ROLE_ZH[name] || name; }
 
 function showInitialRoles() {
   if (!gameData.night || !gameData.night.players) return;
@@ -1505,7 +1511,7 @@ function showInitialRoles() {
     const roleSub = tagEls[i].querySelector('.role-sub');
     if (roleSub) {
       const roleColor = ROLE_COLORS[role] || 0x95a5a6;
-      roleSub.textContent = role;
+      roleSub.textContent = lang === 'zh' ? roleZh(role) : role;
       roleSub.style.color = '#' + roleColor.toString(16).padStart(6, '0');
     }
   });
