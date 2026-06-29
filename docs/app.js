@@ -1335,6 +1335,11 @@ async function loadGame(gameId) {
     
     setPhase('night');
     showGameInfo();
+
+    // Update archive list active state to reflect newly loaded game
+    document.querySelectorAll('#archive-list .game-item').forEach(el => {
+      el.classList.toggle('active', el.dataset.gameId === gameId);
+    });
   } catch(e) {
     console.error('Failed to load game', gameId, e);
   }
@@ -1354,8 +1359,9 @@ function buildArchiveList(games) {
   list.innerHTML = '';
   games.reverse().forEach(g => {
     const el = document.createElement('div');
-    el.className = 'game-item' + (g.game_id === currentGame || g.id === currentGame ? ' active' : '');
     const id = g.game_id || g.id;
+    el.className = 'game-item' + (id === currentGame ? ' active' : '');
+    el.dataset.gameId = id;
     const outcome = g.outcome || g.summary?.outcome || '?';
     const date = g.date || g.timestamp || '';
     el.innerHTML = `
@@ -2149,8 +2155,18 @@ function setupUI() {
   updateUIText();
 
   // Welcome overlay
+  const welcomeOverlay = document.getElementById('welcome-overlay');
   document.getElementById('welcome-btn').addEventListener('click', () => {
-    document.getElementById('welcome-overlay').classList.add('hidden');
+    welcomeOverlay.classList.add('hidden');
+  });
+  // Dismiss on Escape or click outside the card
+  welcomeOverlay.addEventListener('click', (e) => {
+    if (e.target === welcomeOverlay) welcomeOverlay.classList.add('hidden');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !welcomeOverlay.classList.contains('hidden')) {
+      welcomeOverlay.classList.add('hidden');
+    }
   });
 
   // Phase steps
