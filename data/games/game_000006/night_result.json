@@ -9,33 +9,11 @@
       "model": "proxy-shawtim/glm-5.2",
       "thinking": "high",
       "seat": 0,
-      "initial_role": "Seer (預言家)",
-      "current_role": "Robber (強盜)",
-      "night_memory": [
-        "你查驗咗中間兩張底牌：第 0 張係 Werewolf (狼人)，第 1 張係 Troublemaker (搗蛋鬼)。"
-      ],
-      "night_actions": [
-        {
-          "role": "Seer (預言家)",
-          "action": "inspect_center",
-          "targets": [
-            0,
-            1
-          ],
-          "seen": [
-            {
-              "index": 0,
-              "role": "Werewolf (狼人)"
-            },
-            {
-              "index": 1,
-              "role": "Troublemaker (搗蛋鬼)"
-            }
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "你查驗咗中間兩張底牌：第 0 張係 Werewolf (狼人)，第 1 張係 Troublemaker (搗蛋鬼)。"
+      "initial_role": "Villager",
+      "current_role": "Werewolf",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     },
     "2": {
       "id": "2",
@@ -46,8 +24,8 @@
       "model": "proxy-shawtim/kimi-k2.6",
       "thinking": "high",
       "seat": 1,
-      "initial_role": "Tanner (皮匠)",
-      "current_role": "Tanner (皮匠)",
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -61,13 +39,13 @@
       "model": "proxy-shawtim/minimax-m2.7",
       "thinking": "high",
       "seat": 2,
-      "initial_role": "Minion (爪牙)",
-      "current_role": "Minion (爪牙)",
+      "initial_role": "Werewolf",
+      "current_role": "Robber",
       "night_memory": [
-        "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+        "You saw the other <Werewolf> is: [The Gut Player]."
       ],
       "night_actions": [],
-      "night_memory_text": "你醒來時見唔到任何狼人，代表兩張狼人牌都可能喺中間。"
+      "night_memory_text": "You saw the other <Werewolf> is: [The Gut Player]."
     },
     "4": {
       "id": "4",
@@ -78,11 +56,13 @@
       "model": "proxy-shawtim/deepseek-v4-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Villager (村民)",
-      "current_role": "Villager (村民)",
-      "night_memory": [],
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You saw the other <Werewolf> is: [The Chaos Agent]."
+      ],
       "night_actions": [],
-      "night_memory_text": ""
+      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
     },
     "5": {
       "id": "5",
@@ -93,21 +73,21 @@
       "model": "proxy-shawtim/nemotron-3-ultra",
       "thinking": "high",
       "seat": 4,
-      "initial_role": "Robber (強盜)",
-      "current_role": "Seer (預言家)",
+      "initial_role": "Robber",
+      "current_role": "Villager",
       "night_memory": [
-        "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer (預言家)。"
+        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
       ],
       "night_actions": [
         {
-          "role": "Robber (強盜)",
+          "role": "Robber",
           "action": "rob",
           "target": "The Prosecutor",
-          "new_role": "Seer (預言家)",
+          "new_role": "Villager",
           "source": "agent"
         }
       ],
-      "night_memory_text": "你偷咗 The Prosecutor 張牌，換完之後你而家係：Seer (預言家)。"
+      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
     },
     "6": {
       "id": "6",
@@ -118,11 +98,23 @@
       "model": "proxy-shawtim/qwen3.5",
       "thinking": "high",
       "seat": 5,
-      "initial_role": "Villager (村民)",
-      "current_role": "Villager (村民)",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "night_memory": [
+        "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+      ],
+      "night_actions": [
+        {
+          "role": "Troublemaker",
+          "action": "swap",
+          "targets": [
+            "The Prosecutor",
+            "The Chaos Agent"
+          ],
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
     }
   },
   "seating_order": [
@@ -134,27 +126,28 @@
     "6"
   ],
   "center_cards": [
-    "Werewolf (狼人)",
-    "Troublemaker (搗蛋鬼)",
-    "Werewolf (狼人)"
+    "Seer",
+    "Villager",
+    "Minion"
   ],
   "night_trace": [
     {
-      "actor": "The Prosecutor",
-      "role": "Seer (預言家)",
-      "action": "inspect_center",
-      "targets": [
-        0,
-        1
-      ],
-      "source": "agent"
-    },
-    {
       "actor": "The Statistician",
-      "role": "Robber (強盜)",
+      "role": "Robber",
       "action": "rob",
       "target": "The Prosecutor",
       "source": "agent"
+    },
+    {
+      "actor": "The Underdog",
+      "role": "Troublemaker",
+      "action": "swap",
+      "targets": [
+        "The Prosecutor",
+        "The Chaos Agent"
+      ],
+      "source": "agent"
     }
-  ]
+  ],
+  "game_id": "game_000006"
 }

@@ -1,0 +1,34 @@
+{
+  "id": "3",
+  "name": "The Chaos Agent",
+  "model": "proxy-shawtim/minimax-m2.7",
+  "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+  "thinking": "high",
+  "initial_role": "Seer",
+  "current_role": "Seer",
+  "night_memory": "You inspected two center cards: card 0 is Troublemaker, card 1 is Werewolf.",
+  "night_memory_list": [
+    "You inspected two center cards: card 0 is Troublemaker, card 1 is Werewolf."
+  ],
+  "night_actions": [
+    {
+      "role": "Seer",
+      "action": "inspect_center",
+      "targets": [
+        0,
+        1
+      ],
+      "seen": [
+        {
+          "index": 0,
+          "role": "Troublemaker"
+        },
+        {
+          "index": 1,
+          "role": "Werewolf"
+        }
+      ],
+      "source": "agent"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000006",
+  "generated_at": "2026-06-29T04:06:58.541569+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "I got voted out, the Werewolves won, and my lie collapsed — which is precisely the data point I needed. 嚴審官 finally stopped trusting the narrative, but that's the beautiful thing about performance art: sometimes the improvisation is better than the script."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Not guilty. The court ruled correctly — 攪局者 was exiled, and I walked free. That's not luck, that's prosecution. The village never had a case against me, and they never will."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Told you my gut never lies — and this time it didn't even have to. 攪局者 took the fall, I walked away clean, and nobody saw it coming. That's what I call a perfect round."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I asked the room to look inward, and it chose to look at 攪局者 instead. That tells me everything about their need for certainty — and nothing about my failure to offer it."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The model failed - my posterior on 攪局者 converged to certainty while the true threat manipulated the evidence chain undetected. Next iteration requires better priors on 嚴審官's behavioral patterns and a likelihood function that accounts for adversarial role-swapping."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I... I really thought I was doing the right thing, but we voted out 攪局者 and the Werewolves still won, so I must have swapped the wrong cards. I'm so sorry—I just wanted to be useful, and now I'm afraid I might have handed them the victory."
+      }
+    ]
+  }
+}

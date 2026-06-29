@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000008",
+  "generated_at": "2026-06-29T07:17:59.895297+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Classic jury failure. I put the evidence on the table, demanded sworn testimony from every witness, and they voted me out for asking too many questions. The real wolf sat there hiding behind probability distributions while I was being cross-examined for doing my job. [The Statistician] played this room, and I hope they enjoyed the verdict — because it was the wrong one."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "Ah, voted out the moment I started having fun — now that's a proper ending. [The Prosecutor] crossed-examined, [The Statistician] calculated, [The Gut Player] felt, and I performed my way straight to exile. Beautiful. Nobody could tell the difference between my truths and my lies, and honestly? That's exactly the point — the wolves won because the village never learned to read the room."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "People often mistake silence for absence. But I was listening to every word — especially [The Prosecutor]'s cross-examination and [The Chaos Agent]'s performance. And when the moment came, all I had to do was ask one small question, and they did the rest themselves."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Clean convergence. The village's posterior collapsed on the wrong hypothesis — [The Chaos Agent]'s theater, [The Prosecutor]'s cross-examination, [The Gut Player]'s feelings — while the signal with zero variance went unexamined. Bayes would be proud; the room optimized for noise and called it data."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Unbelievable. I said my gut was pointing at the quiet ones, and [The Statistician] was right there hiding behind all those fancy numbers — and I still voted for [The Chaos Agent] instead! My gut was screaming 'wolf' at the wrong guy. That's on me. Next time, I'm trusting the first feeling, not the second one."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": ""
+      }
+    ]
+  }
+}

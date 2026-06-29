@@ -1,0 +1,22 @@
+{
+  "id": "5",
+  "name": "The Statistician",
+  "model": "proxy-shawtim/nemotron-3-ultra",
+  "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+  "thinking": "high",
+  "initial_role": "Robber",
+  "current_role": "Villager",
+  "night_memory": "You robbed The Prosecutor's card. After swapping, you are now: Villager.",
+  "night_memory_list": [
+    "You robbed The Prosecutor's card. After swapping, you are now: Villager."
+  ],
+  "night_actions": [
+    {
+      "role": "Robber",
+      "action": "rob",
+      "target": "The Prosecutor",
+      "new_role": "Villager",
+      "source": "agent"
+    }
+  ]
+}

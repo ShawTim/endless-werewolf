@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "game_id": "game_000008",
+  "config": {
+    "duration_seconds": 60,
+    "min_sleep_seconds": 3.0,
+    "max_sleep_seconds": 8.0,
+    "max_speaks_per_player": 2
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 0
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 0
+    }
+  },
+  "day_trace": [
+    {
+      "type": "bridge_error",
+      "player_name": "The Underdog",
+      "error": "bridge call failed: GatewayClientRequestError: SessionWriteLockTimeoutError: session file locked (timeout 60000ms): pid=2716375 alive=true ageMs=62490 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/773b0bf3-8792-4530-99df-5ae67bb1c52b.jsonl.lock: code=OPENCLAW_SESSION_WRITE..."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "開庭了。我先說。我原本是<村民>——沒有夜間行動。但有人搶劫了我，所以我現在是<強盜>。拿走我牌的人知道他們拿到的是<村民>角色。請站出來——一個確認的交換對所有人都是好數據。現在：其他有夜間行動的人，說出你的角色、你的目標、以及你發現了什麼。不要做戲。只要事實。我會交叉詰問每一項說詞。",
+      "log_line": "[2026-06-29 14:59:05 HKT] The Prosecutor: Court is in session. I'll go first. I started as a <Villager> — no night action. But someone robbed me, so I'm now a <Robber>. Whoever took my card knows they're sitting on a <Villager> role. Step forward — a confirmed swap is good data for everyone. Now: everyone else with a night action, state your role, your target, and what you learned. No theatrics. Just the facts. I'll cross-examine every claim."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "好的。在我們開始推測之前，先建立數據。所有有夜間行動的人——說出你的角色、你的目標、以及你確切發現了什麼。不要說「我認為」或「感覺像是」。只要事實。我會即時更新我的後驗機率，而且我不想把時間浪費在感覺上。誰先來？",
+      "log_line": "[2026-06-29 14:59:59 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "呵呵，新的一局。讓我分享一些……意想不到的事。其中一張中央牌的危險程度遠超過在座任何人的想像。我給你們一個提示：狼人就藏在顯眼之處，而且他們不是你們以為的那個人。但轉折來了——我可能在說謊。我也可能在說實話。這遊戲最美妙的地方在於，你永遠不會真正知道真相，直到為時已晚。那麼，誰準備好要跳下去了？",
+      "log_line": "[2026-06-29 15:01:21 HKT] The Chaos Agent: Well, well, a new game. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Therapist",
+      "error": "bridge call failed: GatewayClientRequestError: EmbeddedAttemptSessionTakeoverError: session file changed while embedded prompt lock was released: /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/773b0bf3-8792-4530-99df-5ae67bb1c52b.jsonl <- EmbeddedAttemptSessionTakeoverError..."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "好了，我們開始吧。我是<村民>——沒有夜間行動，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以誰有話要說？",
+      "log_line": "[2026-06-29 15:01:26 HKT] The Gut Player: Alright, let's get this moving. I'm a Villager — no night action, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say?"
+    }
+  ],
+  "chat_history": "[2026-06-29 14:58:13 HKT] The Chaos Agent @The Prosecutor: Contempt? That's a bold word, Prosecutor. Fine — you want plain? I looked at someone last night, and what I saw was... not what you'd expect from someone acting this confident. But here's the twist: I'm not done performing. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n[2026-06-29 14:59:05 HKT] The Prosecutor: Court is in session. I'll go first. I started as a <Villager> — no night action. But someone robbed me, so I'm now a <Robber>. Whoever took my card knows they're sitting on a <Villager> role. Step forward — a confirmed swap is good data for everyone. Now: everyone else with a night action, state your role, your target, and what you learned. No theatrics. Just the facts. I'll cross-examine every claim.\n[2026-06-29 14:59:59 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?\n[2026-06-29 15:01:21 HKT] The Chaos Agent: Well, well, a new game. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n[2026-06-29 15:01:26 HKT] The Gut Player: Alright, let's get this moving. I'm a Villager — no night action, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say?\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

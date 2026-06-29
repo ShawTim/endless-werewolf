@@ -1,11 +1,36 @@
 {
+  "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000006",
+      "status": "completed",
+      "created_at": "2026-06-29T03:45:22.499166+00:00",
+      "completed_at": "2026-06-29T04:10:28.849789+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "The Statistician"
+      ],
+      "winners": [
+        "The Prosecutor",
+        "The Gut Player"
+      ],
+      "votes_count": 6,
+      "chat_lines": 9
+    },
+    {
       "game_id": "game_000001",
-      "date": "",
+      "status": "completed",
+      "created_at": "2026-06-27T18:42:53.184281+00:00",
+      "completed_at": "2026-06-27T18:53:49.046633+00:00",
       "outcome": "no_team_win",
-      "reason": "No werewolf in play, but someone was executed.",
-      "winners": []
+      "winner_team": "none",
+      "executed": [
+        "The Chaos Agent"
+      ],
+      "winners": [],
+      "votes_count": 6,
+      "chat_lines": 10
     }
   ]
 }

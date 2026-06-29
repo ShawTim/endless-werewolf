@@ -1,0 +1,102 @@
+{
+  "status": "completed",
+  "game_id": "game_000006",
+  "config": {
+    "duration_seconds": 180,
+    "min_sleep_seconds": 1.0,
+    "max_sleep_seconds": 5.0,
+    "max_speaks_per_player": 8
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 2
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 2
+    },
+    "The Underdog": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, round three. I'm a villager — again. Got nothing last night, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say this time?",
+      "log_line": "[2026-06-29 11:49:43 HKT] The Gut Player: Alright, round three. I'm a villager — again. Got nothing last night, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say this time?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the <搗蛋鬼>? I think? I swapped [嚴審官] and [攪局者] last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?",
+      "log_line": "[2026-06-29 11:50:17 HKT] The Underdog: Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the Troublemaker? I think? I swapped The Prosecutor and The Chaos Agent last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "I was the <強盜>. I targeted [嚴審官] and took their card — I'm now a <村民>. That means [嚴審官] holds the <強盜> card now, and their original role was <村民>. They have no night info as <強盜> since my action happened before the <預言家> phase. [嚴審官]'s original role is known to me: <村民>. Update your priors accordingly.",
+      "log_line": "[2026-06-29 11:50:46 HKT] The Statistician: I was the Robber. I targeted The Prosecutor and took their card — I'm now a Villager. That means The Prosecutor holds the Robber card now, and their original role was Villager. They have no night info as Robber since my action happened before the Seer phase. The Prosecutor's original role is known to me: Villager. Update your priors accordingly."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": null,
+      "speech": "It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.",
+      "log_line": "[2026-06-29 11:51:02 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "Court is in session. I was a <村民> — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim.",
+      "log_line": "[2026-06-29 11:51:22 HKT] The Prosecutor: Court is in session. I was a Villager — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the <強盜>. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?",
+      "log_line": "[2026-06-29 11:51:53 HKT] The Chaos Agent: Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the Robber. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": "The Prosecutor",
+      "speech": "Um, sorry to push, but... [嚴審官] and [攪局者]? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?",
+      "log_line": "[2026-06-29 11:52:59 HKT] The Underdog @The Prosecutor: Um, sorry to push, but... The Prosecutor and The Chaos Agent? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": "The Underdog",
+      "speech": "[小人物], your <搗蛋鬼> claim is consistent with my <強盜> action — <強盜> acts before <搗蛋鬼>. I robbed [嚴審官] first (they were <村民>, I became <村民>, they got <強盜> card). Then you swapped [嚴審官] (now <強盜>) and [攪局者]. If this timeline holds, [嚴審官] should now have [攪局者]'s original role, and [攪局者] should have the <強盜> card. [嚴審官], [攪局者] — confirm your current roles. If the timeline breaks, we have a liar.",
+      "log_line": "[2026-06-29 11:53:21 HKT] The Statistician @The Underdog: The Underdog, your Troublemaker claim is consistent with my Robber action — Robber acts before Troublemaker. I robbed The Prosecutor first (they were Villager, I became Villager, they got Robber card). Then you swapped The Prosecutor (now Robber) and The Chaos Agent. If this timeline holds, The Prosecutor should now have The Chaos Agent's original role, and The Chaos Agent should have the Robber card. The Prosecutor, The Chaos Agent — confirm your current roles. If the timeline breaks, we have a liar."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": "The Prosecutor",
+      "speech": "[嚴審官], you've been very quiet since two different people have now described night actions that directly involve you. [小人物] says they swapped you, and [統計學家] says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?",
+      "log_line": "[2026-06-29 11:53:48 HKT] The Therapist @The Prosecutor: The Prosecutor, you've been very quiet since two different people have now described night actions that directly involve you. The Underdog says they swapped you, and The Statistician says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?"
+    }
+  ],
+  "chat_history": "[2026-06-29 11:49:43 HKT] The Gut Player: Alright, round three. I'm a villager — again. Got nothing last night, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say this time?\n[2026-06-29 11:50:17 HKT] The Underdog: Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the Troublemaker? I think? I swapped The Prosecutor and The Chaos Agent last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?\n[2026-06-29 11:50:46 HKT] The Statistician: I was the Robber. I targeted The Prosecutor and took their card — I'm now a Villager. That means The Prosecutor holds the Robber card now, and their original role was Villager. They have no night info as Robber since my action happened before the Seer phase. The Prosecutor's original role is known to me: Villager. Update your priors accordingly.\n[2026-06-29 11:51:02 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.\n[2026-06-29 11:51:22 HKT] The Prosecutor: Court is in session. I was a Villager — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim.\n[2026-06-29 11:51:53 HKT] The Chaos Agent: Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the Robber. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?\n[2026-06-29 11:52:59 HKT] The Underdog @The Prosecutor: Um, sorry to push, but... The Prosecutor and The Chaos Agent? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?\n[2026-06-29 11:53:21 HKT] The Statistician @The Underdog: The Underdog, your Troublemaker claim is consistent with my Robber action — Robber acts before Troublemaker. I robbed The Prosecutor first (they were Villager, I became Villager, they got Robber card). Then you swapped The Prosecutor (now Robber) and The Chaos Agent. If this timeline holds, The Prosecutor should now have The Chaos Agent's original role, and The Chaos Agent should have the Robber card. The Prosecutor, The Chaos Agent — confirm your current roles. If the timeline breaks, we have a liar.\n[2026-06-29 11:53:48 HKT] The Therapist @The Prosecutor: The Prosecutor, you've been very quiet since two different people have now described night actions that directly involve you. The Underdog says they swapped you, and The Statistician says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
