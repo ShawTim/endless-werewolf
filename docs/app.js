@@ -694,6 +694,7 @@ function renderAvatarPortrait(player, size = 128) {
   renderer.setRenderTarget(oldRT);
   renderer.setPixelRatio(oldPixelRatio);
   renderer.setSize(oldSize.x, oldSize.y);
+  rt.dispose();
 
   avatarCache[key] = dataUrl;
   return dataUrl;
@@ -918,13 +919,28 @@ function setupCameraControls() {
       hoverCard.style.top = (e.clientY + 15) + 'px';
     }
 
-    // Click on character opens modal
-    if (e.detail === 1 && foundId > 0) {
-      showPlayerModal(foundId);
+  });
+
+  // Dedicated click / double-click handler (fixes: mousemove e.detail fires spuriously)
+  let clickTimer = null;
+  canvas.addEventListener('click', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouseNDC, camera);
+    const intersects = raycaster.intersectObjects(chars, true);
+    let foundId = -1;
+    if (intersects.length > 0) {
+      let obj = intersects[0].object;
+      while (obj && obj.parent) {
+        const idx = chars.indexOf(obj);
+        if (idx >= 0) { foundId = PLAYERS[idx].id; break; }
+        obj = obj.parent;
+      }
     }
-    // Double-click opens full side panel detail
-    if (e.detail === 2 && foundId > 0) {
-      showPlayerDetail(foundId);
+    if (foundId > 0) {
+      if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; showPlayerDetail(foundId); }
+      else { clickTimer = setTimeout(() => { clickTimer = null; showPlayerModal(foundId); }, 250); }
     }
   });
 
@@ -1675,7 +1691,7 @@ function showNightInfo() {
   for (const [, p] of Object.entries(players)) {
     const accent = getPlayerColor(p.name);
     const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${p.initial_role}</span></div>`;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${lang === 'zh' ? roleZh(p.initial_role) : p.initial_role}</span></div>`;
   }
   
   if (trace.length > 0) {
@@ -1843,7 +1859,7 @@ function showResolveInfo() {
       const p = PLAYERS.find(x => x.name === name);
       const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
       const teamLabel = teamLabels[role.team] || role.team || '';
-      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${role.current_role} (${teamLabel})</span></div>`;
+      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${lang === 'zh' ? roleZh(role.current_role) : role.current_role} (${teamLabel})</span></div>`;
     }
   }
   html += '</div>';
@@ -1979,8 +1995,8 @@ function showPlayerModal(playerId) {
   if (gameData.night && gameData.night.players) {
     for (const [, pd] of Object.entries(gameData.night.players)) {
       if (pd.name === p.name) {
-        initialRole = pd.initial_role || '?';
-        currentRole = pd.current_role || '?';
+        initialRole = lang === 'zh' ? roleZh(pd.initial_role || '?') : (pd.initial_role || '?');
+        currentRole = lang === 'zh' ? roleZh(pd.current_role || '?') : (pd.current_role || '?');
         nightMem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
         break;
       }
@@ -2089,8 +2105,8 @@ function updateGalleryContent() {
   if (gameData.night && gameData.night.players) {
     for (const [, pd] of Object.entries(gameData.night.players)) {
       if (pd.name === p.name) {
-        initialRole = pd.initial_role || '?';
-        currentRole = pd.current_role || '?';
+        initialRole = lang === 'zh' ? roleZh(pd.initial_role || '?') : (pd.initial_role || '?');
+        currentRole = lang === 'zh' ? roleZh(pd.current_role || '?') : (pd.current_role || '?');
         nightMem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
         break;
       }
@@ -2315,8 +2331,8 @@ function showPlayerDetail(playerId) {
     for (const [, pd] of Object.entries(gameData.night.players)) {
       if (pd.name === p.name) {
         html += `<div class="panel-section"><h3>${t('gameData')}</h3>`;
-        html += `<div class="row"><span class="key">${t('initialRole')}</span><span class="val">${pd.initial_role || '?'}</span></div>`;
-        html += `<div class="row"><span class="key">${t('currentRole')}</span><span class="val">${pd.current_role || '?'}</span></div>`;
+        html += `<div class="row"><span class="key">${t('initialRole')}</span><span class="val">${lang === 'zh' ? roleZh(pd.initial_role || '?') : (pd.initial_role || '?')}</span></div>`;
+        html += `<div class="row"><span class="key">${t('currentRole')}</span><span class="val">${lang === 'zh' ? roleZh(pd.current_role || '?') : (pd.current_role || '?')}</span></div>`;
         const mem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
         if (mem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:11px;color:var(--text);margin-top:4px;display:block;">${formatGameText(mem)}</span></div>`;
         html += '</div>';
@@ -2557,6 +2573,7 @@ function updateUIText() {
   document.getElementById('btn-archive').innerHTML = t('archive');
   document.getElementById('btn-info').innerHTML = t('info');
   document.getElementById('btn-night').innerHTML = t('night');
+  document.getElementById('btn-night').classList.toggle('active', isNight);
   document.getElementById('btn-rotate').innerHTML = t('autoRotate');
   document.getElementById('btn-lang').innerHTML = t('langLabel');
   document.getElementById('loading').textContent = t('loadingVillage');
@@ -2574,6 +2591,11 @@ function updateUIText() {
   // Archive title
   const archiveH3 = document.querySelector('#archive-panel h3');
   if (archiveH3) archiveH3.textContent = t('gameArchive');
+  // Controls hint
+  const hint = document.getElementById('controls-hint');
+  if (hint) hint.innerHTML = lang === 'zh'
+    ? '🖱️ 拖=旋轉 · 滾輪=縮放<br>⌨️ WASD/方向鍵=移動<br>👆 角色點擊=詳情'
+    : '🖱️ Drag=rotate · Wheel=zoom<br>⌨️ WASD/Arrows=pan<br>👆 Click character=details';
 }
 
 let sidePanelOpen = false;
@@ -2667,6 +2689,9 @@ function animate() {
 
 // ===== Resize =====
 window.addEventListener('resize', () => {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
   applyPanelOffset();
   resizeGallery3D();
 });

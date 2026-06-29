@@ -470,3 +470,17 @@ canvas#c:active { cursor:grabbing; }
 #btn-lang {
   font-weight: 700; min-width: 44px; text-align: center;
 }
+
+/* ===== Controls Hint ===== */
+#controls-hint {
+  position: fixed; bottom: 52px; right: 12px; z-index: 14;
+  font-size: 10px; color: var(--text-dim); line-height: 1.6;
+  background: var(--panel-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px; backdrop-filter: blur(8px);
+  pointer-events: none; opacity: 0.7; transition: opacity 0.3s;
+  max-width: 180px;
+}
+#controls-hint:hover { opacity: 1; }
+@media (max-width: 768px) {
+  #controls-hint { font-size: 9px; bottom: 48px; right: 4px; max-width: 140px; padding: 4px 8px; }
+}
