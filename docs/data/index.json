@@ -33,24 +33,6 @@
       ],
       "votes_count": 6,
       "chat_lines": 12
-    },
-    {
-      "game_id": "game_000008",
-      "status": "completed",
-      "created_at": "2026-06-29T05:13:03.397414+00:00",
-      "completed_at": "2026-06-29T07:17:59.895608+00:00",
-      "outcome": "werewolf_win",
-      "winner_team": "werewolf_team",
-      "executed": [
-        "The Chaos Agent",
-        "The Prosecutor"
-      ],
-      "winners": [
-        "The Therapist",
-        "The Statistician"
-      ],
-      "votes_count": 6,
-      "chat_lines": 5
     }
   ]
 }
