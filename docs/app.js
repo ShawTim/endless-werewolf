@@ -1420,14 +1420,18 @@ function setPhase(phase) {
     case 'night':
       setNight(true);
       showNightInfo();
+      showNightActionArrows();
+      showInitialRoles();
       break;
     case 'day':
       setNight(false);
       showDayInfo();
+      showInitialRoles();
       break;
     case 'vote':
       setNight(false);
       showVoteInfo();
+      showInitialRoles();
       break;
     case 'resolve':
       setNight(false);
@@ -1438,6 +1442,118 @@ function setPhase(phase) {
       showPostgameInfo();
       break;
   }
+}
+
+// Role colors for night phase display
+const ROLE_COLORS = {
+  Werewolf: 0xe74c3c, Seer: 0x3498db, Robber: 0xe67e22,
+  Troublemaker: 0x9b59b6, Villager: 0x2ecc71, Tanner: 0xf1c40f,
+  Minion: 0x607d8b, Insomniac: 0x1abc9c,
+};
+
+function showInitialRoles() {
+  if (!gameData.night || !gameData.night.players) return;
+  PLAYERS.forEach((p, i) => {
+    const pd = Object.values(gameData.night.players).find(x => x.name === p.name);
+    if (!pd || !tagEls[i]) return;
+    const role = pd.initial_role || '';
+    const roleSub = tagEls[i].querySelector('.role-sub');
+    if (roleSub) {
+      const roleColor = ROLE_COLORS[role] || 0x95a5a6;
+      roleSub.textContent = role;
+      roleSub.style.color = '#' + roleColor.toString(16).padStart(6, '0');
+    }
+  });
+}
+
+// Show arrows for night actions in 3D scene
+let nightArrowSvg = null;
+function showNightActionArrows() {
+  // Clear previous night arrows (SVG elements with dasharray '4,4')
+  const oldArrows = voteOverlay.querySelectorAll('svg');
+  oldArrows.forEach(svg => {
+    const path = svg.querySelector('path');
+    if (path && path.getAttribute('stroke-dasharray') === '4,4') {
+      svg.remove();
+    }
+  });
+  if (!gameData.night || !gameData.night.night_trace) return;
+  const trace = gameData.night.night_trace;
+  for (const tr of trace) {
+    const actor = tr.actor || tr.player;
+    if (!actor) continue;
+    const actorIdx = PLAYERS.findIndex(p => p.name === actor);
+    if (actorIdx < 0) continue;
+    const actorColor = getPlayerColor(actor);
+
+    if (tr.target) {
+      // Single target: rob, inspect, peek
+      const targetIdx = PLAYERS.findIndex(p => p.name === tr.target);
+      if (targetIdx >= 0) drawNightArrow(actorIdx, targetIdx, actorColor, tr.action);
+    }
+    if (tr.targets && Array.isArray(tr.targets)) {
+      // Two targets: swap
+      for (const tName of tr.targets) {
+        const tIdx = PLAYERS.findIndex(p => p.name === tName);
+        if (tIdx >= 0) drawNightArrow(actorIdx, tIdx, actorColor, 'swap');
+      }
+    }
+  }
+}
+
+function drawNightArrow(fromIdx, toIdx, color, actionType) {
+  const vpos = sp(fromIdx);
+  const tpos = sp(toIdx);
+  const vStart = new THREE.Vector3(vpos[0], vpos[1] + 0.5, vpos[2]);
+  const vEnd = new THREE.Vector3(tpos[0], tpos[1] + 0.5, tpos[2]);
+  const startScreen = vStart.clone().project(camera);
+  const endScreen = vEnd.clone().project(camera);
+  const sx = (startScreen.x * 0.5 + 0.5) * innerWidth;
+  const sy = (-startScreen.y * 0.5 + 0.5) * innerHeight;
+  const ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
+  const ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
+
+  const dx = ex - sx, dy = ey - sy;
+  const len = Math.sqrt(dx*dx + dy*dy);
+  if (len < 10) return;
+
+  const midX = (sx + ex) / 2;
+  const midY = (sy + ey) / 2 - Math.max(40, len * 0.3);
+  const headLen = Math.min(14, len * 0.2);
+  const tdx = ex - midX, tdy = ey - midY;
+  const tlen = Math.sqrt(tdx*tdx + tdy*tdy) || 1;
+  const tangentAngle = Math.atan2(tdy / tlen, tdx / tlen);
+  const hx1 = ex - headLen * Math.cos(tangentAngle - 0.4);
+  const hy1 = ey - headLen * Math.sin(tangentAngle - 0.4);
+  const hx2 = ex - headLen * Math.cos(tangentAngle + 0.4);
+  const hy2 = ey - headLen * Math.sin(tangentAngle + 0.4);
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.style.position = 'absolute'; svg.style.left = '0'; svg.style.top = '0';
+  svg.style.width = '100%'; svg.style.height = '100%'; svg.style.pointerEvents = 'none';
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`);
+  path.setAttribute('stroke', color);
+  path.setAttribute('stroke-width', '2');
+  path.setAttribute('stroke-dasharray', '4,4');
+  path.setAttribute('fill', 'none');
+  path.setAttribute('opacity', '0.6');
+  svg.appendChild(path);
+
+  const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  head.setAttribute('points', `${ex},${ey} ${hx1},${hy1} ${hx2},${hy2}`);
+  head.setAttribute('fill', color);
+  head.setAttribute('opacity', '0.75');
+  svg.appendChild(head);
+
+  voteOverlay.appendChild(svg);
+}
+
+function clearNightActionArrows() {
+  // Remove all non-vote SVGs from voteOverlay
+  // Since we use the same overlay, we rely on clearVoteArrows being called first
+  // in setPhase before this. Night arrows are drawn fresh each time.
 }
 
 function showNightInfo() {
@@ -2434,6 +2550,7 @@ function animate() {
   updateNameTags();
   updateAllBubbles();
   if (activeVotes) redrawVoteArrows();
+  if (currentPhase === 'night' && gameData.night) showNightActionArrows();
   updateDeathAnims(tMs);
   updateTeamAnims(tMs);
 
