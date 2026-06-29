@@ -895,10 +895,10 @@ function updateKeyboardPan() {
   forward.normalize();
 
   let moved = false;
-  if (keys['w'] || keys['arrowup']) { targetV.addScaledVector(forward, -panSpeed); moved = true; }
-  if (keys['s'] || keys['arrowdown']) { targetV.addScaledVector(forward, panSpeed); moved = true; }
-  if (keys['a'] || keys['arrowleft']) { targetV.addScaledVector(right, panSpeed); moved = true; }
-  if (keys['d'] || keys['arrowright']) { targetV.addScaledVector(right, -panSpeed); moved = true; }
+  if (keys['w'] || keys['arrowup']) { targetV.addScaledVector(forward, panSpeed); moved = true; }
+  if (keys['s'] || keys['arrowdown']) { targetV.addScaledVector(forward, -panSpeed); moved = true; }
+  if (keys['a'] || keys['arrowleft']) { targetV.addScaledVector(right, -panSpeed); moved = true; }
+  if (keys['d'] || keys['arrowright']) { targetV.addScaledVector(right, panSpeed); moved = true; }
   if (moved) updateCam();
 }
 
