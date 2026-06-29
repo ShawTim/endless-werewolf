@@ -1103,6 +1103,8 @@ function updateNameTags() {
 }
 
 // ===== Speech Bubbles =====
+const MAX_BUBBLES = 3;
+
 function showBubble(playerIndex, text, duration = 4000) {
   const p = PLAYERS[playerIndex];
   if (!p) return;
@@ -1127,6 +1129,24 @@ function showBubble(playerIndex, text, duration = 4000) {
 
   const bubbleData = { playerIndex, text, duration, startTime: performance.now(), el, hex };
   activeBubblesData.push(bubbleData);
+
+  // Enforce max visible bubbles (remove oldest)
+  while (activeBubblesData.length > MAX_BUBBLES) {
+    const old = activeBubblesData.shift();
+    old.el.style.transition = 'opacity 0.4s';
+    old.el.style.opacity = '0';
+    const oldEl = old.el;
+    const oldIdx = old.playerIndex;
+    setTimeout(() => oldEl.remove(), 400);
+    activeBubblesData = activeBubblesData.filter(b => b !== old);
+    // Only clear highlight if no other bubble references this player
+    if (!activeBubblesData.some(b => b.playerIndex === oldIdx)) {
+      if (chars[oldIdx] && chars[oldIdx].userData.highlight) {
+        chars[oldIdx].userData.highlight.material.opacity = 0;
+      }
+    }
+  }
+
   updateBubblePosition(bubbleData);
 
   setTimeout(() => {
@@ -1982,15 +2002,8 @@ function showAboutPanel() {
   openSidePanel();
 }
 
-function showPlayerModal(playerId) {
-  const p = PLAYERS.find(x => String(x.id) === String(playerId));
-  if (!p) return;
-  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
-  const avatarUrl = renderAvatarPortrait(p, 256);
-  const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
-
-  // Gather game data
+// ===== Shared player data helpers (used by modal + gallery) =====
+function gatherPlayerGameData(p) {
   let initialRole = '?', currentRole = '?', nightMem = '';
   if (gameData.night && gameData.night.players) {
     for (const [, pd] of Object.entries(gameData.night.players)) {
@@ -2002,54 +2015,33 @@ function showPlayerModal(playerId) {
       }
     }
   }
-
-  // Speeches
-  let speeches = [];
-  if (gameData.day && gameData.day.day_trace) {
-    speeches = gameData.day.day_trace.filter(tr => tr.type === 'speech' && tr.player_name === p.name);
-  }
-
-  // Vote
-  let votedFor = '';
-  if (gameData.vote && gameData.vote.votes && gameData.vote.votes[p.name]) {
-    votedFor = gameData.vote.votes[p.name];
-  }
-
-  // Postgame
+  const speeches = (gameData.day?.day_trace || []).filter(tr => tr.type === 'speech' && tr.player_name === p.name);
+  const votedFor = gameData.vote?.votes?.[p.name] || '';
   let postgameQuote = null, postgameRole = '';
-  if (gameData.postgame && gameData.postgame.interviews) {
+  if (gameData.postgame?.interviews) {
     for (const [, items] of Object.entries(gameData.postgame.interviews)) {
       const item = items.find(i => i.player_name === p.name);
       if (item) { postgameQuote = item.quote || ''; postgameRole = item.role || ''; break; }
     }
   }
+  return { initialRole, currentRole, nightMem, speeches, votedFor, postgameQuote, postgameRole };
+}
 
-  let html = `<div class="modal-header" style="border-bottom:1px solid var(--border);padding-bottom:16px;display:flex;gap:16px;align-items:center;">
-    <div class="modal-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid ${accent};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
-    <div>
-      <div style="font-size:18px;font-weight:700;color:${accent};">${displayName}</div>
-      ${subName ? `<div style="font-size:13px;color:var(--text-dim);margin-top:2px;">${subName}</div>` : ''}
-      <div style="font-size:11px;color:#666;margin-top:4px;">${(p.model||'').split('/').pop()}</div>
-    </div>
-  </div>
-  `;
-
-  html += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${formatGameText(p.persona||'')}</p></div>`;
-
-  html += `<div class="modal-section"><h3>${t('gameData')}</h3>
-    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
-    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
-  if (nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${formatGameText(nightMem)}</span></div>`;
-  if (votedFor) {
-    const tp = PLAYERS.find(x => x.name === votedFor);
-    const targetName = lang === 'zh' && tp ? (tp.name_zh || votedFor) : votedFor;
-    html += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(votedFor)}">→ ${targetName}</span></div>`;
+function buildGameSectionHTML(p, accent, displayName) {
+  const d = gatherPlayerGameData(p);
+  let html = `<div class="modal-section"><h3>${t('gameData')}</h3>
+    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${d.initialRole}</span></div>
+    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${d.currentRole}</span></div>`;
+  if (d.nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${formatGameText(d.nightMem)}</span></div>`;
+  if (d.votedFor) {
+    const tp = PLAYERS.find(x => x.name === d.votedFor);
+    const targetName = lang === 'zh' && tp ? (tp.name_zh || d.votedFor) : d.votedFor;
+    html += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(d.votedFor)}">→ ${targetName}</span></div>`;
   }
   html += '</div>';
-
-  if (speeches.length > 0) {
-    html += `<div class="modal-section"><h3>${t('speeches')} (${speeches.length})</h3>`;
-    speeches.forEach(s => {
+  if (d.speeches.length > 0) {
+    html += `<div class="modal-section"><h3>${t('speeches')} (${d.speeches.length})</h3>`;
+    d.speeches.forEach(s => {
       html += `<div class="speech-entry" style="border-left-color:${accent}">`;
       if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
       else html += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
@@ -2059,12 +2051,33 @@ function showPlayerModal(playerId) {
     });
     html += '</div>';
   }
-
-  if (postgameQuote) {
+  if (d.postgameQuote) {
     html += `<div class="modal-section"><h3>${t('postgameLabel')}</h3>`;
-    html += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${displayName} (${postgameRole})</div><div class="text">${formatGameText(postgameQuote)}</div></div>`;
+    html += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${displayName} (${d.postgameRole})</div><div class="text">${formatGameText(d.postgameQuote)}</div></div>`;
     html += '</div>';
   }
+  return html;
+}
+
+function showPlayerModal(playerId) {
+  const p = PLAYERS.find(x => String(x.id) === String(playerId));
+  if (!p) return;
+  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const avatarUrl = renderAvatarPortrait(p, 256);
+  const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
+  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
+
+  let html = `<div class="modal-header" style="border-bottom:1px solid var(--border);padding-bottom:16px;display:flex;gap:16px;align-items:center;">
+    <div class="modal-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid ${accent};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
+    <div>
+      <div style="font-size:18px;font-weight:700;color:${accent};">${displayName}</div>
+      ${subName ? `<div style="font-size:13px;color:var(--text-dim);margin-top:2px;">${subName}</div>` : ''}
+      <div style="font-size:11px;color:#666;margin-top:4px;">${(p.model||'').split('/').pop()}</div>
+    </div>
+  </div>`;
+
+  html += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${formatGameText(p.persona||'')}</p></div>`;
+  html += buildGameSectionHTML(p, accent, displayName);
 
   const modal = document.getElementById('player-modal');
   const modalContent = document.getElementById('player-modal-content');
@@ -2100,37 +2113,6 @@ function updateGalleryContent() {
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
   const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
-  // Gather game data
-  let initialRole = '?', currentRole = '?', nightMem = '';
-  if (gameData.night && gameData.night.players) {
-    for (const [, pd] of Object.entries(gameData.night.players)) {
-      if (pd.name === p.name) {
-        initialRole = lang === 'zh' ? roleZh(pd.initial_role || '?') : (pd.initial_role || '?');
-        currentRole = lang === 'zh' ? roleZh(pd.current_role || '?') : (pd.current_role || '?');
-        nightMem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
-        break;
-      }
-    }
-  }
-
-  let speeches = [];
-  if (gameData.day && gameData.day.day_trace) {
-    speeches = gameData.day.day_trace.filter(tr => tr.type === 'speech' && tr.player_name === p.name);
-  }
-
-  let votedFor = '';
-  if (gameData.vote && gameData.vote.votes && gameData.vote.votes[p.name]) {
-    votedFor = gameData.vote.votes[p.name];
-  }
-
-  let postgameQuote = null, postgameRole = '';
-  if (gameData.postgame && gameData.postgame.interviews) {
-    for (const [, items] of Object.entries(gameData.postgame.interviews)) {
-      const item = items.find(i => i.player_name === p.name);
-      if (item) { postgameQuote = item.quote || ''; postgameRole = item.role || ''; break; }
-    }
-  }
-
   // --- Persona tab ---
   let personaHtml = `<div class="modal-header">
     <div class="name" style="color:${accent}">${displayName}</div>
@@ -2139,36 +2121,8 @@ function updateGalleryContent() {
   personaHtml += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${formatGameText(p.persona||'')}</p></div>`;
   personaHtml += `<div class="modal-section"><h3>${lang==='zh'?'模型':'Model'}</h3><div class="row"><span class="key">AI</span><span class="val">${(p.model||'').split('/').pop()}</span></div><div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking||'high'}</span></div></div>`;
 
-  // --- Game tab ---
-  let gameHtml = `<div class="modal-section"><h3>${t('gameData')}</h3>
-    <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${initialRole}</span></div>
-    <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${currentRole}</span></div>`;
-  if (nightMem) gameHtml += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${formatGameText(nightMem)}</span></div>`;
-  if (votedFor) {
-    const tp = PLAYERS.find(x => x.name === votedFor);
-    const targetName = lang === 'zh' && tp ? (tp.name_zh || votedFor) : votedFor;
-    gameHtml += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(votedFor)}">→ ${targetName}</span></div>`;
-  }
-  gameHtml += '</div>';
-
-  if (speeches.length > 0) {
-    gameHtml += `<div class="modal-section"><h3>${t('speeches')} (${speeches.length})</h3>`;
-    speeches.forEach(s => {
-      gameHtml += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      if (s.target) gameHtml += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
-      else gameHtml += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
-      gameHtml += `<div class="text">${formatGameText(s.speech||'')}</div>`;
-      if (s.timestamp) gameHtml += `<div class="time">${s.timestamp}</div>`;
-      gameHtml += '</div>';
-    });
-    gameHtml += '</div>';
-  }
-
-  if (postgameQuote) {
-    gameHtml += `<div class="modal-section"><h3>${t('postgameLabel')}</h3>`;
-    gameHtml += `<div class="speech-entry" style="border-left-color:${accent}"><div class="speaker" style="color:${accent}">${displayName} (${postgameRole})</div><div class="text">${formatGameText(postgameQuote)}</div></div>`;
-    gameHtml += '</div>';
-  }
+  // --- Game tab (shared builder) ---
+  let gameHtml = buildGameSectionHTML(p, accent, displayName);
 
   // Store and display
   const modal = document.getElementById('gallery-modal');
