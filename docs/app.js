@@ -860,6 +860,46 @@ function setupCameraControls() {
   });
 
   updateCam();
+
+  // ===== Keyboard Pan Controls (WASD / Arrow Keys) =====
+  const keys = {};
+  window.addEventListener('keydown', e => {
+    // Don't capture if typing in input/textarea
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    const k = e.key.toLowerCase();
+    if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
+      keys[k] = true;
+      e.preventDefault();
+    }
+  });
+  window.addEventListener('keyup', e => {
+    const k = e.key.toLowerCase();
+    keys[k] = false;
+  });
+
+  // Hook into animate loop via global flag
+  window._panKeys = keys;
+}
+
+function updateKeyboardPan() {
+  if (!window._panKeys) return;
+  const keys = window._panKeys;
+  const panSpeed = 0.08;
+  const right = new THREE.Vector3();
+  camera.getWorldDirection(right);
+  right.cross(new THREE.Vector3(0, 1, 0)).normalize();
+  const forward = new THREE.Vector3();
+  camera.getWorldDirection(forward);
+  forward.y = 0;
+  forward.normalize();
+
+  let moved = false;
+  if (keys['w'] || keys['arrowup']) { targetV.addScaledVector(forward, -panSpeed); moved = true; }
+  if (keys['s'] || keys['arrowdown']) { targetV.addScaledVector(forward, panSpeed); moved = true; }
+  if (keys['a'] || keys['arrowleft']) { targetV.addScaledVector(right, panSpeed); moved = true; }
+  if (keys['d'] || keys['arrowright']) { targetV.addScaledVector(right, -panSpeed); moved = true; }
+  if (moved) updateCam();
 }
 
 // ===== Night Mode =====
@@ -1407,6 +1447,9 @@ function setPhase(phase) {
     el.classList.toggle('active', el.dataset.phase === phase);
   });
 
+  // Cancel any pending night action bubble timeouts
+  nightActionTimeouts.forEach(id => clearTimeout(id));
+  nightActionTimeouts = [];
   clearBubbles();
   clearVoteArrows();
   hideResultBanner();
@@ -1414,6 +1457,7 @@ function setPhase(phase) {
   resetTeamColors();
   // Stop day replay if running and hide controls
   replayPlaying = false;
+  if (replayTimer) { clearTimeout(replayTimer); replayTimer = null; }
   replayControls.classList.remove('visible');
   nightActionBubblesShown = false;
 
@@ -1474,9 +1518,11 @@ function showNightActionArrows() {
 }
 
 let nightActionBubblesShown = false;
+let nightActionTimeouts = [];
 function showNightActionBubbles() {
   if (nightActionBubblesShown) return; // only once per phase entry
   if (!gameData.night || !gameData.night.night_trace) return;
+  nightActionTimeouts = [];
   
   const actionLabels = lang === 'zh' ? {
     inspect_center: '查驗中央卡牌',
@@ -1527,12 +1573,16 @@ function showNightActionBubbles() {
       }
     }
     
-    setTimeout(() => showBubble(idx, actionText, 99999), delay); // persistent until phase change
+    const tid = setTimeout(() => {
+      // Guard: only show if still in night phase
+      if (currentPhase !== 'night') return;
+      showBubble(idx, actionText, 99999);
+      if (chars[idx] && chars[idx].userData.highlight) {
+        chars[idx].userData.highlight.material.opacity = 0.4;
+      }
+    }, delay);
+    nightActionTimeouts.push(tid);
     delay += 600;
-    // Highlight the actor
-    if (chars[idx] && chars[idx].userData.highlight) {
-      chars[idx].userData.highlight.material.opacity = 0.4;
-    }
   }
   
   nightActionBubblesShown = true;
@@ -2529,6 +2579,7 @@ function animate() {
   if (autoRotate) { theta += 0.003; updateCam(); }
 
   // Per-frame updates for overlays
+  updateKeyboardPan();
   updateNameTags();
   updateAllBubbles();
   if (activeVotes) redrawVoteArrows();
