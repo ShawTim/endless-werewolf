@@ -1412,6 +1412,9 @@ function setPhase(phase) {
   hideResultBanner();
   undimAll();
   resetTeamColors();
+  // Stop day replay if running and hide controls
+  replayPlaying = false;
+  replayControls.classList.remove('visible');
 
   switch(phase) {
     case 'night':
@@ -1980,8 +1983,8 @@ function renderGallery3D(player) {
   gallery3DScene.background = new THREE.Color(0x1a1520);
 
   gallery3DCamera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
-  gallery3DCamera.position.set(0, 1.5, 4.0);
-  gallery3DCamera.lookAt(0, 0.4, 0);
+  gallery3DCamera.position.set(0, 2.0, 5.5);
+  gallery3DCamera.lookAt(0, 1.1, 0);
 
   const amb = new THREE.AmbientLight(0xffffff, 0.5);
   gallery3DScene.add(amb);
@@ -2031,11 +2034,11 @@ function resizeGallery3D() {
     gallery3DCamera.updateProjectionMatrix();
     // Adjust camera for narrow/mobile views to avoid head cropping
     if (h < 400) {
-      gallery3DCamera.position.set(0, 1.8, 5.0);
-      gallery3DCamera.lookAt(0, 0.3, 0);
+      gallery3DCamera.position.set(0, 2.2, 6.0);
+      gallery3DCamera.lookAt(0, 1.0, 0);
     } else {
-      gallery3DCamera.position.set(0, 1.5, 4.0);
-      gallery3DCamera.lookAt(0, 0.4, 0);
+      gallery3DCamera.position.set(0, 2.0, 5.5);
+      gallery3DCamera.lookAt(0, 1.1, 0);
     }
   }
 }
