@@ -81,6 +81,10 @@ let isNight = false;
 let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
+
+// ===== Ambient Particles =====
+let fireflies = null;   // night fireflies
+let dustMotes = null;   // day dust motes
 // --- State for per-frame updates ---
 let activeVotes = null;   // stored votes object for per-frame redraw
 let activeBubblesData = []; // [{playerIndex, text, duration, startTime, el, hex}]
@@ -120,6 +124,7 @@ async function init() {
   }
   
   loadingEl.style.display = 'none';
+  startIntroAnim();
   animate();
 }
 
@@ -220,6 +225,103 @@ function initThree() {
   );
   flame.position.y = 0.72;
   scene.add(flame);
+  initParticles();
+}
+
+
+function initParticles() {
+  // ---- Fireflies (night) ----
+  const ffCount = 40;
+  const ffGeo = new THREE.BufferGeometry();
+  const ffPos = new Float32Array(ffCount * 3);
+  const ffPhase = new Float32Array(ffCount);
+  const ffRadius = new Float32Array(ffCount);
+  for (let i = 0; i < ffCount; i++) {
+    const a = Math.random() * TAU;
+    const r = 3 + Math.random() * 8;
+    ffPos[i*3] = cos(a) * r;
+    ffPos[i*3+1] = 0.5 + Math.random() * 4;
+    ffPos[i*3+2] = sin(a) * r;
+    ffPhase[i] = Math.random() * TAU;
+    ffRadius[i] = r;
+  }
+  ffGeo.setAttribute('position', new THREE.BufferAttribute(ffPos, 3));
+  const ffMat = new THREE.PointsMaterial({
+    color: 0xFFE066, size: 0.12, transparent: true, opacity: 0,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+    map: makeGlowTexture(),
+  });
+  fireflies = new THREE.Points(ffGeo, ffMat);
+  fireflies.userData = { phases: ffPhase, radii: ffRadius, count: ffCount };
+  scene.add(fireflies);
+
+  // ---- Dust motes (day) ----
+  const dmCount = 60;
+  const dmGeo = new THREE.BufferGeometry();
+  const dmPos = new Float32Array(dmCount * 3);
+  const dmVel = new Float32Array(dmCount * 3);
+  for (let i = 0; i < dmCount; i++) {
+    dmPos[i*3] = (Math.random() - 0.5) * 20;
+    dmPos[i*3+1] = Math.random() * 6;
+    dmPos[i*3+2] = (Math.random() - 0.5) * 20;
+    dmVel[i*3] = (Math.random() - 0.5) * 0.002;
+    dmVel[i*3+1] = Math.random() * 0.001;
+    dmVel[i*3+2] = (Math.random() - 0.5) * 0.002;
+  }
+  dmGeo.setAttribute('position', new THREE.BufferAttribute(dmPos, 3));
+  const dmMat = new THREE.PointsMaterial({
+    color: 0xFFE8C0, size: 0.04, transparent: true, opacity: 0,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  dustMotes = new THREE.Points(dmGeo, dmMat);
+  dustMotes.userData = { vels: dmVel, count: dmCount };
+  scene.add(dustMotes);
+}
+
+function makeGlowTexture() {
+  const c = document.createElement('canvas');
+  c.width = 64; c.height = 64;
+  const ctx = c.getContext('2d');
+  const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grad.addColorStop(0, 'rgba(255,255,200,1)');
+  grad.addColorStop(0.3, 'rgba(255,220,100,0.6)');
+  grad.addColorStop(1, 'rgba(255,200,50,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c);
+  return tex;
+}
+
+function updateParticles(t) {
+  // Fireflies
+  if (fireflies) {
+    const ud = fireflies.userData;
+    const pos = fireflies.geometry.attributes.position.array;
+    for (let i = 0; i < ud.count; i++) {
+      const ph = ud.phases[i] + t * 0.5;
+      pos[i*3] = cos(ph * 0.3) * ud.radii[i];
+      pos[i*3+1] = 0.5 + Math.sin(ph * 0.7) * 1.5 + Math.cos(ph) * 0.3 + 1.5;
+      pos[i*3+2] = sin(ph * 0.3) * ud.radii[i];
+    }
+    fireflies.geometry.attributes.position.needsUpdate = true;
+    fireflies.material.opacity = isNight ? 0.8 : 0;
+  }
+  // Dust motes
+  if (dustMotes) {
+    const ud = dustMotes.userData;
+    const pos = dustMotes.geometry.attributes.position.array;
+    for (let i = 0; i < ud.count; i++) {
+      pos[i*3] += ud.vels[i*3];
+      pos[i*3+1] += ud.vels[i*3+1] + Math.sin(t + i) * 0.0005;
+      pos[i*3+2] += ud.vels[i*3+2];
+      // Wrap around
+      if (pos[i*3] > 10) pos[i*3] = -10; if (pos[i*3] < -10) pos[i*3] = 10;
+      if (pos[i*3+1] > 6) pos[i*3+1] = 0; if (pos[i*3+1] < 0) pos[i*3+1] = 6;
+      if (pos[i*3+2] > 10) pos[i*3+2] = -10; if (pos[i*3+2] < -10) pos[i*3+2] = 10;
+    }
+    dustMotes.geometry.attributes.position.needsUpdate = true;
+    dustMotes.material.opacity = isNight ? 0 : 0.4;
+  }
 }
 
 // ===== Character Builder =====
@@ -1194,10 +1296,11 @@ function showBubble(playerIndex, text, duration = 4000) {
   `;
   bubblesContainer.appendChild(el);
 
-  // Highlight speaker
+  // Highlight speaker + start speaking animation
   if (chars[playerIndex] && chars[playerIndex].userData.highlight) {
     chars[playerIndex].userData.highlight.material.opacity = 0.6;
   }
+  setSpeaking(playerIndex, true);
 
   const bubbleData = { playerIndex, text, duration, startTime: performance.now(), el, hex };
   activeBubblesData.push(bubbleData);
@@ -1229,6 +1332,7 @@ function showBubble(playerIndex, text, duration = 4000) {
     if (chars[playerIndex] && chars[playerIndex].userData.highlight) {
       chars[playerIndex].userData.highlight.material.opacity = 0;
     }
+    setSpeaking(playerIndex, false);
   }, duration);
 }
 
@@ -1251,10 +1355,19 @@ function updateAllBubbles() {
 function clearBubbles() {
   bubblesContainer.innerHTML = '';
   activeBubblesData = [];
-  chars.forEach(c => {
+  speakingStates = [];
+  chars.forEach((c, i) => {
     if (c.userData && c.userData.highlight) {
       c.userData.highlight.material.opacity = 0;
     }
+    // Reset head position
+    c.children.forEach(child => {
+      if (child.userData._baseY) {
+        child.position.y = child.userData._baseY;
+        delete child.userData._baseY;
+      }
+    });
+    c.rotation.x = 0;
   });
 }
 
@@ -1618,6 +1731,76 @@ function buildArchiveList(games) {
   });
 }
 
+
+// ===== Center Cards (3D on table) =====
+let centerCardMeshes = [];
+function buildCenterCards() {
+  // Remove old
+  centerCardMeshes.forEach(m => scene.remove(m));
+  centerCardMeshes = [];
+  const cards = (gameData.night?.center_cards) || [];
+  if (cards.length === 0) return;
+
+  cards.forEach((role, i) => {
+    const angle = (i / cards.length) * TAU - PI / 2;
+    const cx = cos(angle) * 0.6;
+    const cz = sin(angle) * 0.6;
+
+    // Card base — flat card lying on table
+    const cardGeo = new THREE.BoxGeometry(0.35, 0.02, 0.5);
+    const cardMat = new THREE.MeshStandardMaterial({
+      color: 0x1a1a2e, roughness: 0.4, metalness: 0.3,
+    });
+    const card = new THREE.Mesh(cardGeo, cardMat);
+    card.position.set(cx, 0.25, cz);
+    card.rotation.y = angle + PI / 2;
+    card.castShadow = true;
+    card.receiveShadow = true;
+    scene.add(card);
+    centerCardMeshes.push(card);
+
+    // Card border (gold trim)
+    const borderGeo = new THREE.EdgesGeometry(cardGeo);
+    const borderMat = new THREE.LineBasicMaterial({ color: 0xe8c468 });
+    const border = new THREE.LineSegments(borderGeo, borderMat);
+    border.position.copy(card.position);
+    border.rotation.copy(card.rotation);
+    scene.add(border);
+    centerCardMeshes.push(border);
+
+    // Role text via CanvasTexture on top face
+    const labelCanvas = document.createElement('canvas');
+    labelCanvas.width = 128; labelCanvas.height = 256;
+    const ctx = labelCanvas.getContext('2d');
+    ctx.fillStyle = '#15152a';
+    ctx.fillRect(0, 0, 128, 256);
+    ctx.fillStyle = '#e8c468';
+    ctx.font = 'bold 28px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const roleText = lang === 'zh' ? roleZh(role) : role;
+    ctx.fillText(roleText, 64, 100);
+    // Decorative border
+    ctx.strokeStyle = '#e8c468';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(8, 8, 112, 240);
+    // Question mark for mystery
+    ctx.font = 'bold 60px serif';
+    ctx.fillStyle = '#e8c46844';
+    ctx.fillText('?', 64, 170);
+
+    const labelTex = new THREE.CanvasTexture(labelCanvas);
+    const labelGeo = new THREE.PlaneGeometry(0.35, 0.5);
+    const labelMat = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true });
+    const label = new THREE.Mesh(labelGeo, labelMat);
+    label.position.set(cx, 0.27, cz);
+    label.rotation.x = -PI / 2;
+    label.rotation.z = angle + PI / 2;
+    scene.add(label);
+    centerCardMeshes.push(label);
+  });
+}
+
 // ===== Phase Management =====
 function setPhase(phase) {
   currentPhase = phase;
@@ -1632,6 +1815,8 @@ function setPhase(phase) {
   clearBubbles();
   clearVoteArrows();
   hideResultBanner();
+  // Clean up confetti
+  if (confettiSystem) { scene.remove(confettiSystem.points); confettiSystem.points.geometry.dispose(); confettiSystem.points.material.dispose(); confettiSystem = null; }
   undimAll();
   resetTeamColors();
   // Stop day replay if running and hide controls
@@ -1642,6 +1827,7 @@ function setPhase(phase) {
 
   switch(phase) {
     case 'night':
+      buildCenterCards();
       setNight(true);
       showNightInfo();
       showInitialRoles();
@@ -1980,6 +2166,9 @@ function showResolveInfo() {
 
 function triggerTeamAnimations(resolveData) {
   teamAnims = [];
+  if (resolveData.winners && resolveData.winners.length > 0) {
+    spawnConfetti(resolveData.winners);
+  }
   const finalRoles = resolveData.final_roles || {};
   const winners = resolveData.winners || [];
   const executed = resolveData.executed || [];
@@ -2680,6 +2869,131 @@ function formatGameText(text) {
 }
 
 
+
+
+// ===== Speaking Animation =====
+let speakingStates = []; // [{index, intensity, startTime}]
+
+function setSpeaking(index, active) {
+  const existing = speakingStates.find(s => s.index === index);
+  if (active && !existing) {
+    speakingStates.push({ index, intensity: 0, startTime: performance.now() });
+  } else if (!active && existing) {
+    speakingStates = speakingStates.filter(s => s !== existing);
+  }
+}
+
+function updateSpeakingAnims(t) {
+  speakingStates.forEach(s => {
+    if (!chars[s.index]) return;
+    const g = chars[s.index];
+    // Ramp up intensity
+    s.intensity = Math.min(s.intensity + 0.05, 1);
+    // Head bob — small rapid movement
+    const bob = Math.sin(t * 8) * 0.04 * s.intensity;
+    const sway = Math.sin(t * 3) * 0.06 * s.intensity;
+    // Find head mesh (second-highest child by y)
+    g.children.forEach(child => {
+      if (child.position.y > 0.9 && child.position.y < 1.2 && child.geometry instanceof THREE.SphereGeometry) {
+        child.position.y = (child.userData._baseY || child.position.y) + bob;
+        if (!child.userData._baseY) child.userData._baseY = child.position.y - bob;
+        child.rotation.z = sway * 0.3;
+      }
+    });
+    // Slight forward lean
+    g.rotation.x = -0.03 * s.intensity;
+  });
+  // Fade out when stopped
+  speakingStates = speakingStates.filter(s => s.intensity > 0.01 || performance.now() - s.startTime < 999999);
+}
+
+
+// ===== Confetti =====
+let confettiSystem = null;
+function spawnConfetti(winners) {
+  if (confettiSystem) { scene.remove(confettiSystem.points); confettiSystem = null; }
+  const count = 200;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  const vel = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  const winnerIndices = winners.map(n => PLAYERS.findIndex(p => p.name === n)).filter(i => i >= 0);
+
+  for (let i = 0; i < count; i++) {
+    const wIdx = winnerIndices[i % winnerIndices.length] || 0;
+    const pos3 = sp(wIdx);
+    pos[i*3] = pos3[0] + (Math.random() - 0.5) * 0.5;
+    pos[i*3+1] = SH + 1.5 + Math.random() * 0.5;
+    pos[i*3+2] = pos3[2] + (Math.random() - 0.5) * 0.5;
+    // Burst upward + outward
+    vel[i*3] = (Math.random() - 0.5) * 0.08;
+    vel[i*3+1] = 0.05 + Math.random() * 0.08;
+    vel[i*3+2] = (Math.random() - 0.5) * 0.08;
+    // Random festive color
+    const palette = [[1,0.8,0.2], [0.2,1,0.4], [0.3,0.6,1], [1,0.3,0.5], [0.9,0.9,0.9]];
+    const c = palette[i % palette.length];
+    colors[i*3] = c[0]; colors[i*3+1] = c[1]; colors[i*3+2] = c[2];
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  const mat = new THREE.PointsMaterial({
+    size: 0.1, vertexColors: true, transparent: true, opacity: 1,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const points = new THREE.Points(geo, mat);
+  scene.add(points);
+  confettiSystem = { points, vels: vel, count, startTime: performance.now(), duration: 4000 };
+}
+
+function updateConfetti(tMs) {
+  if (!confettiSystem) return;
+  const elapsed = tMs - confettiSystem.startTime;
+  if (elapsed > confettiSystem.duration) {
+    scene.remove(confettiSystem.points);
+    confettiSystem.points.geometry.dispose();
+    confettiSystem.points.material.dispose();
+    confettiSystem = null;
+    return;
+  }
+  const pos = confettiSystem.points.geometry.attributes.position.array;
+  const vels = confettiSystem.vels;
+  for (let i = 0; i < confettiSystem.count; i++) {
+    pos[i*3] += vels[i*3];
+    pos[i*3+1] += vels[i*3+1];
+    pos[i*3+2] += vels[i*3+2];
+    // Gravity
+    vels[i*3+1] -= 0.002;
+  }
+  confettiSystem.points.geometry.attributes.position.needsUpdate = true;
+  // Fade out
+  const fadeT = 1 - elapsed / confettiSystem.duration;
+  confettiSystem.points.material.opacity = Math.min(1, fadeT * 2);
+}
+
+// ===== Camera Intro Animation =====
+let introAnim = null;
+function startIntroAnim() {
+  introAnim = { startTime: performance.now(), duration: 2000, done: false };
+  // Start high and far
+  dist = 30; theta = PI / 4;
+}
+
+function updateIntroAnim() {
+  if (!introAnim || introAnim.done) return;
+  const elapsed = performance.now() - introAnim.startTime;
+  const t = Math.min(elapsed / introAnim.duration, 1);
+  // Ease out cubic
+  const e = 1 - Math.pow(1 - t, 3);
+  // Descend from 30 to target dist
+  const targetDist = innerWidth <= 768 ? 18 : 12;
+  dist = 30 + (targetDist - 30) * e;
+  // Rotate slightly during descent
+  theta = PI / 4 + (0 - PI / 4) * e;
+  phi = PI / 3.5; // keep constant
+  updateCam();
+  if (t >= 1) { introAnim.done = true; introAnim = null; }
+}
+
 // ===== Animation Loop =====
 function animate() {
   requestAnimationFrame(animate);
@@ -2702,11 +3016,13 @@ function animate() {
     flame.position.y = 0.72 + Math.sin(t * 8) * 0.01;
   }
 
-  // Auto rotate
-  if (autoRotate) { theta += 0.003; updateCam(); }
+  // Intro animation (overrides auto-rotate)
+  if (introAnim && !introAnim.done) { updateIntroAnim(); }
+  else if (autoRotate) { theta += 0.003; updateCam(); }
 
   // Night/day light transition
   updateNightTransition();
+  updateParticles(t);
 
   // Per-frame updates for overlays
   updateKeyboardPan();
@@ -2715,6 +3031,8 @@ function animate() {
   if (activeVotes) redrawVoteArrows();
   updateDeathAnims(tMs);
   updateTeamAnims(tMs);
+  updateSpeakingAnims(t);
+  updateConfetti(tMs);
 
   renderer.render(scene, camera);
 }
