@@ -209,7 +209,7 @@ canvas#c:active { cursor:grabbing; }
 .tag .model { font-size:9px; color:#666; font-weight:normal; margin-top:1px; }
 
 /* ===== Speech Bubbles ===== */
-#bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:6; }
+#bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:19; }
 .bubble {
   position:absolute; top:0; left:0;
   background:rgba(10,10,25,0.95); border:1px solid; border-radius:12px;
@@ -217,6 +217,7 @@ canvas#c:active { cursor:grabbing; }
   color:var(--text); pointer-events:none;
   box-shadow: var(--shadow);
   will-change: transform;
+  z-index: 20;
 }
 .bubble .speaker { font-weight:700; font-size:11px; margin-bottom:2px; }
 .bubble .text { color:var(--text); }
@@ -313,10 +314,10 @@ canvas#c:active { cursor:grabbing; }
 }
 
 /* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(232,196,104,0.3); }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+::-webkit-scrollbar-thumb { background: rgba(232,196,104,0.25); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(232,196,104,0.45); }
 
 /* ===== Mobile ===== */
 @media (max-width: 768px) {

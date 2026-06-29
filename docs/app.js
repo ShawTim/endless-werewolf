@@ -1083,17 +1083,29 @@ function redrawVoteArrows() {
     svg.style.height = '100%';
     svg.style.pointerEvents = 'none';
 
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', sx); line.setAttribute('y1', sy);
-    line.setAttribute('x2', ex); line.setAttribute('y2', ey);
-    line.setAttribute('stroke', voterColor);
-    line.setAttribute('stroke-width', '2');
-    line.setAttribute('stroke-dasharray', '6,4');
-    line.setAttribute('opacity', '0.7');
-    svg.appendChild(line);
+    // Curved path arches over the table instead of cutting through it
+    const midX = (sx + ex) / 2;
+    const midY = (sy + ey) / 2 - Math.max(50, len * 0.35);  // arch height scales with distance
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`);
+    path.setAttribute('stroke', voterColor);
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('stroke-dasharray', '6,4');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.7');
+    svg.appendChild(path);
+
+    // Arrowhead at end of curve (tangent direction approximated)
+    const tdx = ex - midX, tdy = ey - midY;
+    const tlen = Math.sqrt(tdx*tdx + tdy*tdy) || 1;
+    const tangentAngle = Math.atan2(tdy / tlen, tdx / tlen);
+    const hx1c = ex - headLen * Math.cos(tangentAngle - 0.4);
+    const hy1c = ey - headLen * Math.sin(tangentAngle - 0.4);
+    const hx2c = ex - headLen * Math.cos(tangentAngle + 0.4);
+    const hy2c = ey - headLen * Math.sin(tangentAngle + 0.4);
 
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    head.setAttribute('points', `${ex},${ey} ${hx1},${hy1} ${hx2},${hy2}`);
+    head.setAttribute('points', `${ex},${ey} ${hx1c},${hy1c} ${hx2c},${hy2c}`);
     head.setAttribute('fill', voterColor);
     head.setAttribute('opacity', '0.85');
     svg.appendChild(head);
@@ -1357,12 +1369,20 @@ function rebuildScene() {
 function buildArchiveList(games) {
   const list = document.getElementById('archive-list');
   list.innerHTML = '';
+  const outcomeLabels = {
+    werewolf_win: lang === 'zh' ? '狼人勝' : 'Werewolf Win',
+    village_win: lang === 'zh' ? '村民勝' : 'Village Win',
+    tanner_win: lang === 'zh' ? '皮匠勝' : 'Tanner Win',
+    village_win_no_wolf: lang === 'zh' ? '村民勝（無狼）' : 'Village Win (no wolf)',
+    no_team_win: lang === 'zh' ? '無隊勝' : 'No Team Win',
+  };
   games.reverse().forEach(g => {
     const el = document.createElement('div');
     const id = g.game_id || g.id;
     el.className = 'game-item' + (id === currentGame ? ' active' : '');
     el.dataset.gameId = id;
-    const outcome = g.outcome || g.summary?.outcome || '?';
+    const rawOutcome = g.outcome || g.summary?.outcome || '?';
+    const outcome = outcomeLabels[rawOutcome] || rawOutcome;
     const date = g.date || g.timestamp || '';
     el.innerHTML = `
       <div class="gid">Game ${String(id).replace('game_', '').replace('game-', '')}</div>
@@ -1428,11 +1448,26 @@ function showNightInfo() {
   }
   
   if (trace.length > 0) {
+    const actionLabels = lang === 'zh' ? {
+      inspect_center: '查驗中間牌',
+      inspect_player: '查驗玩家',
+      rob: '搶奪',
+      swap: '交換',
+      peek_wolf: '偷看狼人',
+      none: '無行動',
+    } : {
+      inspect_center: 'Inspects Center',
+      inspect_player: 'Inspects Player',
+      rob: 'Robs',
+      swap: 'Swaps',
+      peek_wolf: 'Peeks at Wolf',
+      none: 'No Action',
+    };
     html += '<h3 style="margin-top:16px;">' + t('nightActions') + '</h3>';
     for (const tr of trace) {
       const trP = PLAYERS.find(x => x.name === (tr.actor || tr.player || ''));
       const trName = trP ? (lang === 'zh' ? (trP.name_zh || trP.name) : trP.name) : (tr.actor || tr.player || tr.role || '?');
-      const trAction = tr.action || '?';
+      const trAction = actionLabels[tr.action] || tr.action || '?';
       const trTarget = tr.target ? (() => {
         const tp = PLAYERS.find(x => x.name === tr.target);
         return lang === 'zh' && tp ? (tp.name_zh || tr.target) : tr.target;
@@ -1538,15 +1573,29 @@ function showResolveInfo() {
   const r = gameData.resolve;
   
   let html = '<div class="panel-section"><h3>' + t('resolution') + '</h3>';
-  html += `<div class="row"><span class="key">${t('outcome')}</span><span class="val">${r.outcome || '?'}</span></div>`;
+  const outcomeLabels = {
+    werewolf_win: lang === 'zh' ? '狼人勝' : 'Werewolf Win',
+    village_win: lang === 'zh' ? '村民勝' : 'Village Win',
+    tanner_win: lang === 'zh' ? '皮匠勝' : 'Tanner Win',
+    village_win_no_wolf: lang === 'zh' ? '村民勝（無狼）' : 'Village Win (no wolf)',
+    no_team_win: lang === 'zh' ? '無隊勝' : 'No Team Win',
+  };
+  const teamLabels = {
+    village_team: lang === 'zh' ? '村民陣營' : 'Village',
+    werewolf_team: lang === 'zh' ? '狼人陣營' : 'Werewolf',
+    tanner: lang === 'zh' ? '皮匠' : 'Tanner',
+  };
+  html += `<div class="row"><span class="key">${t('outcome')}</span><span class="val">${outcomeLabels[r.outcome] || r.outcome || '?'}</span></div>`;
   html += `<div class="row"><span class="key">${t('reason')}</span><span class="val">${r.reason || '?'}</span></div>`;
   
-  if (r.winners) {
+  if (r.winners && r.winners.length > 0) {
     const winNames = r.winners.map(n => {
       const p = PLAYERS.find(x => x.name === n);
       return lang === 'zh' && p ? (p.name_zh || n) : n;
     });
     html += `<div class="row"><span class="key">${t('winners')}</span><span class="val" style="color:var(--success)">${winNames.join(', ')}</span></div>`;
+  } else {
+    html += `<div class="row"><span class="key">${t('winners')}</span><span class="val" style="color:var(--text-dim)">${lang === 'zh' ? '無' : 'None'}</span></div>`;
   }
   if (r.executed) {
     const execNames = r.executed.map(n => {
@@ -1562,7 +1611,8 @@ function showResolveInfo() {
       const accent = getPlayerColor(name);
       const p = PLAYERS.find(x => x.name === name);
       const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
-      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${role.current_role} (${role.team})</span></div>`;
+      const teamLabel = teamLabels[role.team] || role.team || '';
+      html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${role.current_role} (${teamLabel})</span></div>`;
     }
   }
   html += '</div>';
@@ -1655,14 +1705,14 @@ function showPostgameInfo() {
   document.getElementById('panel-content').innerHTML = html;
   openSidePanel(true);
 
-  // Show postgame bubbles
+  // Show postgame bubbles (sequential to avoid overlap)
   const all = [...(interviews.dead || []), ...(interviews.winners || []), ...(interviews.losers || [])];
   let delay = 0;
   all.forEach(item => {
     const idx = PLAYERS.findIndex(p => p.name === item.player_name);
     if (idx >= 0 && item.quote) {
-      setTimeout(() => showBubble(idx, item.quote, 5000), delay);
-      delay += 1500;
+      setTimeout(() => showBubble(idx, item.quote, 4500), delay);
+      delay += 5000;  // each bubble fully finishes before next starts
     }
   });
 }
@@ -2295,11 +2345,31 @@ function updateUIText() {
   if (archiveH3) archiveH3.textContent = t('gameArchive');
 }
 
+let sidePanelOpen = false;
+function applyPanelOffset() {
+  const panelW = sidePanelOpen && innerWidth > 768 ? 380 : 0;
+  if (panelW > 0) {
+    targetV.x = -1.2;
+    // Pull back significantly so all 6 characters fit in the narrower visible area
+    dist = Math.max(17, dist);
+  } else {
+    targetV.x = 0;
+    dist = Math.min(dist, 14);
+  }
+  updateCam();
+}
 function openSidePanel(auto) {
   // auto-open from phase change: skip on mobile
   // manual open (from button): always allow
   if (auto && innerWidth <= 768) return;
   document.getElementById('side-panel').classList.add('open');
+  sidePanelOpen = true;
+  applyPanelOffset();
+}
+function closeSidePanel() {
+  document.getElementById('side-panel').classList.remove('open');
+  sidePanelOpen = false;
+  applyPanelOffset();
 }
 
 // ===== Helpers =====
@@ -2364,9 +2434,7 @@ function animate() {
 
 // ===== Resize =====
 window.addEventListener('resize', () => {
-  camera.aspect = innerWidth / innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
+  applyPanelOffset();
   resizeGallery3D();
 });
 
