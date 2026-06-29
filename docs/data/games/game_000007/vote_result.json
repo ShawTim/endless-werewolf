@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "game_id": "game_000007",
+  "votes": {
+    "The Prosecutor": "The Underdog",
+    "The Therapist": "The Prosecutor",
+    "The Chaos Agent": "The Prosecutor",
+    "The Gut Player": "The Statistician",
+    "The Statistician": "The Prosecutor",
+    "The Underdog": "The Statistician"
+  },
+  "tally": {
+    "The Underdog": 1,
+    "The Prosecutor": 3,
+    "The Statistician": 2
+  },
+  "executed": [
+    "The Prosecutor"
+  ],
+  "vote_trace": []
+}

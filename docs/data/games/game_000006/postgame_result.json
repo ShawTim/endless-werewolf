@@ -1,19 +1,19 @@
 {
   "status": "completed",
   "game_id": "game_000006",
-  "generated_at": "2026-06-29T04:06:58.541569+00:00",
+  "generated_at": "2026-06-29T04:27:25.665345+00:00",
   "interviews": {
     "dead": [
       {
-        "player_name": "The Chaos Agent",
-        "player_name_zh": "攪局者",
-        "player_name_en": "The Chaos Agent",
-        "role": "Robber",
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Villager",
         "team": "village_team",
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "I got voted out, the Werewolves won, and my lie collapsed — which is precisely the data point I needed. 嚴審官 finally stopped trusting the narrative, but that's the beautiful thing about performance art: sometimes the improvisation is better than the script."
+        "quote": "My model overfit on 攪局者's narrative and missed the structural break in 嚴審官's timeline. The likelihood function needs a regime-switching component for adversarial role-swapping — data doesn't lie, but my priors did."
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Not guilty. The court ruled correctly — 攪局者 was exiled, and I walked free. That's not luck, that's prosecution. The village never had a case against me, and they never will."
+        "quote": ""
       },
       {
         "player_name": "The Gut Player",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Told you my gut never lies — and this time it didn't even have to. 攪局者 took the fall, I walked away clean, and nobody saw it coming. That's what I call a perfect round."
+        "quote": "See? I told you — my gut doesn't need charts and graphs. 統計學家 can run all the numbers they want, but when the vibes are off, the vibes are off. Another win, another round of me being right without even trying."
       }
     ],
     "losers": [
@@ -50,18 +50,18 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I asked the room to look inward, and it chose to look at 攪局者 instead. That tells me everything about their need for certainty — and nothing about my failure to offer it."
+        "quote": "They chose certainty over curiosity, and 統計學家 paid the price for that comfort. I had hoped my quiet questions would turn the gaze toward me, but they looked right past instead."
       },
       {
-        "player_name": "The Statistician",
-        "player_name_zh": "統計學家",
-        "player_name_en": "The Statistician",
-        "role": "Villager",
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Robber",
         "team": "village_team",
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "The model failed - my posterior on 攪局者 converged to certainty while the true threat manipulated the evidence chain undetected. Next iteration requires better priors on 嚴審官's behavioral patterns and a likelihood function that accounts for adversarial role-swapping."
+        "quote": "I scattered my lies like breadcrumbs, and they followed them straight past me to 統計學家 instead. That's the beautiful thing about good theater — the best tricks make the audience feel clever for missing the point."
       },
       {
         "player_name": "The Underdog",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I... I really thought I was doing the right thing, but we voted out 攪局者 and the Werewolves still won, so I must have swapped the wrong cards. I'm so sorry—I just wanted to be useful, and now I'm afraid I might have handed them the victory."
+        "quote": "Um... I keep replaying the swap in my head, and I'm starting to think I might have made everything worse. 統計學家 didn't deserve to go out like that, and if my cards helped the werewolves win... I'm so sorry, I really just wanted to help."
       }
     ]
   }

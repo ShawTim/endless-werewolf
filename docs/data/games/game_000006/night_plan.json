@@ -1,0 +1,76 @@
+[
+  {
+    "player_name": "The Statistician",
+    "role": "Robber",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Statistician",
+      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "model": "proxy-shawtim/nemotron-3-ultra",
+      "thinking": "high",
+      "initial_role": "Robber",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "rob",
+        "target": [
+          "The Prosecutor",
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Underdog"
+        ]
+      },
+      "game_id": "game_000006",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Underdog",
+    "role": "Troublemaker",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Underdog",
+      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+      "model": "proxy-shawtim/qwen3.5",
+      "thinking": "high",
+      "initial_role": "Troublemaker",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "The Prosecutor",
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Statistician"
+        ]
+      },
+      "game_id": "game_000006",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]

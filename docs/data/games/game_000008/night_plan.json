@@ -1,0 +1,131 @@
+[
+  {
+    "player_name": "The Statistician",
+    "role": "Werewolf",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Statistician",
+      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "model": "proxy-shawtim/nemotron-3-ultra",
+      "thinking": "high",
+      "initial_role": "Werewolf",
+      "night_memory": [
+        "You are the only Werewolf in play. You may peek at one center card."
+      ],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "inspect_center",
+        "target": [
+          0,
+          1,
+          2
+        ]
+      },
+      "game_id": "game_000008",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Chaos Agent",
+    "role": "Seer",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Chaos Agent",
+      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "model": "proxy-shawtim/minimax-m2.7",
+      "thinking": "high",
+      "initial_role": "Seer",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "The Prosecutor",
+            "The Therapist",
+            "The Gut Player",
+            "The Statistician",
+            "The Underdog"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "game_id": "game_000008",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Underdog",
+    "role": "Robber",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Underdog",
+      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+      "model": "proxy-shawtim/qwen3.5",
+      "thinking": "high",
+      "initial_role": "Robber",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician"
+      ],
+      "legal_actions": {
+        "action": "rob",
+        "target": [
+          "The Prosecutor",
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Statistician"
+        ]
+      },
+      "game_id": "game_000008",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]
