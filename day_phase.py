@@ -24,6 +24,7 @@ DEFAULT_DAY_DURATION_SECONDS = 90
 DEFAULT_MIN_SLEEP_SECONDS = 2.0
 DEFAULT_MAX_SLEEP_SECONDS = 7.0
 DEFAULT_MAX_SPEAKS_PER_PLAYER = 3
+DEFAULT_MAX_CONCURRENT_BRIDGE = 2
 
 
 @dataclass
@@ -32,6 +33,7 @@ class DayConfig:
     min_sleep_seconds: float = DEFAULT_MIN_SLEEP_SECONDS
     max_sleep_seconds: float = DEFAULT_MAX_SLEEP_SECONDS
     max_speaks_per_player: int = DEFAULT_MAX_SPEAKS_PER_PLAYER
+    max_concurrent_bridge: int = DEFAULT_MAX_CONCURRENT_BRIDGE
 
 
 class DayPhaseError(RuntimeError):
@@ -133,6 +135,7 @@ class DayPhaseRuntime:
         self.day_trace: list[dict[str, Any]] = []
         self.players: list[dict[str, Any]] = []
         self.player_stats: dict[str, dict[str, Any]] = {}
+        self.bridge_semaphore: asyncio.Semaphore | None = None
         current = state_manager.ensure_current_game()
         self.game_id = current["game_id"]
         self.game_dir = current["game_dir"]
@@ -212,11 +215,12 @@ class DayPhaseRuntime:
                     "Balance role strategy, persona, and current table pressure before deciding speak vs pass.",
                 ],
             }
-            try:
-                decision = await self.bridge_client.request_day_action(ctx, chat_history, turn_hints=turn_hints)
-            except Exception as e:
-                self.day_trace.append({"type": "bridge_error", "player_name": player_name, "error": str(e)})
-                continue
+            async with self.bridge_semaphore:
+                try:
+                    decision = await self.bridge_client.request_day_action(ctx, chat_history, turn_hints=turn_hints)
+                except Exception as e:
+                    self.day_trace.append({"type": "bridge_error", "player_name": player_name, "error": str(e)})
+                    continue
 
             action = decision.get("action")
             target = decision.get("target")
@@ -250,6 +254,7 @@ class DayPhaseRuntime:
 
         self.players = self.load_players_from_night_result()
         self.player_stats = {p["name"]: {"speak_count": 0} for p in self.players}
+        self.bridge_semaphore = asyncio.Semaphore(self.config.max_concurrent_bridge)
 
         print("\n=== 天亮請睜眼 (Day Phase - 自由辯論) ===")
         print(f"白天階段開始，限時 {self.config.duration_seconds} 秒")
@@ -348,6 +353,7 @@ def load_config() -> DayConfig:
         min_sleep_seconds=float(payload.get("min_sleep_seconds", DEFAULT_MIN_SLEEP_SECONDS)),
         max_sleep_seconds=float(payload.get("max_sleep_seconds", DEFAULT_MAX_SLEEP_SECONDS)),
         max_speaks_per_player=int(payload.get("max_speaks_per_player", DEFAULT_MAX_SPEAKS_PER_PLAYER)),
+        max_concurrent_bridge=int(payload.get("max_concurrent_bridge", DEFAULT_MAX_CONCURRENT_BRIDGE)),
     )
 
 

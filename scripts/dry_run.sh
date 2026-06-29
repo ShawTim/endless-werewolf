@@ -1,15 +1,29 @@
 #!/usr/bin/env bash
+# Full game pipeline: night → day → vote → resolve → postgame → tag → translate_zh
+# Usage: ./scripts/dry_run.sh [count]   (default count=1)
+# Each run starts a new game automatically. No manual setup needed.
 set -euo pipefail
 
 cd /home/openclaw/.openclaw/workspaces/ai-werewolf
 
-echo "=== Dry Run: Full Game Pipeline ==="
+COUNT="${1:-1}"
+
+echo "=== AI Werewolf Full Pipeline ==="
+echo "Games to run: $COUNT"
 echo ""
 
-# 1. Night phase: prepare + AI decisions + finalize
-echo "[1/6] Night phase..."
-python3 - <<'PY'
-import json, subprocess
+run_one_game() {
+  local idx="$1"
+  echo ""
+  echo "============================================"
+  echo "  Game $idx / $COUNT"
+  echo "============================================"
+  echo ""
+
+  # 1. Night phase: new game + prepare + AI decisions + finalize
+  echo "[1/6] Night phase..."
+  python3 - <<'PY'
+import json, subprocess, sys
 from pathlib import Path
 import gm_night, bridge_agent
 
@@ -75,51 +89,61 @@ gm_night.finalize_run(decisions_by_name=decisions, prepared_state=partial, game_
 print(f"  Night done: {prepared['game_id']}")
 PY
 
-# 2. Day + Vote + Resolve + Postgame + Tag + Translate ZH
-# keepalive output prevents CLI harness idle-kill
-echo "[2/6] Day + Vote phase..."
-PYTHONUNBUFFERED=1 python3 run_full_game.py &
-RUN_PID=$!
-while kill -0 "$RUN_PID" 2>/dev/null; do
-  echo "  [keepalive] run_full_game still running: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-  sleep 30
-done
-wait "$RUN_PID"
+  # 2. Day + Vote + Resolve + Postgame + Tag + Translate ZH
+  echo "[2/6] Day + Vote phase..."
+  echo "[3/6] Resolve phase..."
+  echo "[4/6] Postgame interviews..."
+  echo "[5/6] Tag phase..."
+  echo "[6/6] Translate to ZH..."
+  PYTHONUNBUFFERED=1 python3 run_full_game.py
 
-# 3. Verify: show postgame EN + ZH
-echo ""
-echo "=== Postgame Quotes (EN) ==="
-python3 - <<'PY'
+  # 3. Verify: show postgame EN + ZH
+  echo ""
+  echo "--- Postgame Quotes (EN) ---"
+  python3 - <<'PY'
 import json
 from pathlib import Path
 import state_manager
 current = state_manager.get_current_game()
-game_dir = current["game_dir"]
-en = json.loads(Path(game_dir / "postgame_result.json").read_text())
-for group, players in en["interviews"].items():
-    for p in players:
-        print(f"  [{p['player_name']}] ({p['role']}, {group}):")
-        print(f"    {p['quote']}")
-        print()
+game_dir = Path(current["game_dir"])
+en_path = game_dir / "postgame_result.json"
+if not en_path.exists():
+    print("  (no postgame_result.json)")
+else:
+    en = json.loads(en_path.read_text())
+    for group, players in en.get("interviews", {}).items():
+        for p in players:
+            print(f"  [{p['player_name']}] ({p.get('role','')}, {group}):")
+            print(f"    {p.get('quote','')}")
+            print()
 PY
 
-echo "=== Postgame Quotes (ZH) ==="
-python3 - <<'PY'
+  echo "--- Postgame Quotes (ZH) ---"
+  python3 - <<'PY'
 import json
 from pathlib import Path
 import state_manager
 current = state_manager.get_current_game()
-game_dir = current["game_dir"]
-zh_path = Path(game_dir / "postgame_result_zh.json")
+game_dir = Path(current["game_dir"])
+zh_path = game_dir / "postgame_result_zh.json"
 if not zh_path.exists():
     print("  (no _zh file)")
 else:
     zh = json.loads(zh_path.read_text())
-    for group, players in zh["interviews"].items():
+    for group, players in zh.get("interviews", {}).items():
         for p in players:
-            print(f"  [{p['player_name']}] ({p['role']}, {group}):")
-            print(f"    {p['quote']}")
+            print(f"  [{p['player_name']}] ({p.get('role','')}, {group}):")
+            print(f"    {p.get('quote','')}")
             print()
 PY
 
-echo "=== Dry Run Complete ==="
+  echo ""
+  echo "Game $idx complete."
+}
+
+for i in $(seq 1 "$COUNT"); do
+  run_one_game "$i"
+done
+
+echo ""
+echo "=== All $COUNT game(s) complete ==="
