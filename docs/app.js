@@ -586,9 +586,23 @@ function buildAllCharacters() {
 
 // ===== 3D Avatar Portrait Renderer =====
 const avatarCache = {};
+let _avatarRenderer = null;
+function getAvatarRenderer() {
+  if (_avatarRenderer) return _avatarRenderer;
+  // Create a dedicated offscreen renderer for avatar portraits
+  const avCanvas = document.createElement('canvas');
+  avCanvas.width = 256; avCanvas.height = 256;
+  _avatarRenderer = new THREE.WebGLRenderer({ canvas: avCanvas, antialias: true });
+  _avatarRenderer.setPixelRatio(1);
+  _avatarRenderer.shadowMap.enabled = false;
+  return _avatarRenderer;
+}
+
 function renderAvatarPortrait(player, size = 128) {
   const key = player.name + '_' + size;
   if (avatarCache[key]) return avatarCache[key];
+
+  const avRenderer = getAvatarRenderer();
 
   // Mini scene for portrait
   const avScene = new THREE.Scene();
@@ -657,20 +671,15 @@ function renderAvatarPortrait(player, size = 128) {
   // Persona-specific accessories (simplified for portrait)
   addAvatarAccessories(avScene, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile);
 
-  // Render to texture
-  const rt = new THREE.WebGLRenderTarget(size, size, {type: THREE.UnsignedByteType, format: THREE.RGBAFormat});
-  const oldRT = renderer.getRenderTarget();
-  const oldSize = renderer.getSize(new THREE.Vector2());
-  const oldPixelRatio = renderer.getPixelRatio();
+  // Render to texture using dedicated offscreen renderer (no hijacking main renderer)
+  avRenderer.setSize(size, size, false);
+  avRenderer.setRenderTarget(null);
+  avRenderer.render(avScene, avCam);
 
-  renderer.setPixelRatio(1);
-  renderer.setSize(size, size);
-  renderer.setRenderTarget(rt);
-  renderer.render(avScene, avCam);
-
-  // Read pixels to canvas
+  // Read pixels directly from the offscreen canvas
+  const gl = avRenderer.getContext();
   const pixels = new Uint8Array(size * size * 4);
-  renderer.readRenderTargetPixels(rt, 0, 0, size, size, pixels);
+  gl.readPixels(0, 0, size, size, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
   const canvas = document.createElement('canvas');
   canvas.width = size; canvas.height = size;
@@ -690,11 +699,14 @@ function renderAvatarPortrait(player, size = 128) {
   ctx.putImageData(imageData, 0, 0);
   const dataUrl = canvas.toDataURL('image/png');
 
-  // Restore renderer
-  renderer.setRenderTarget(oldRT);
-  renderer.setPixelRatio(oldPixelRatio);
-  renderer.setSize(oldSize.x, oldSize.y);
-  rt.dispose();
+  // Cleanup scene resources
+  avScene.traverse(obj => {
+    if (obj.geometry) obj.geometry.dispose();
+    if (obj.material) {
+      if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+      else obj.material.dispose();
+    }
+  });
 
   avatarCache[key] = dataUrl;
   return dataUrl;
@@ -1004,17 +1016,60 @@ function updateKeyboardPan() {
   if (moved) updateCam();
 }
 
-// ===== Night Mode =====
+// ===== Night Mode (with smooth transition) =====
+let nightTransition = null; // {fromVals, toVals, startTime, duration}
+const NIGHT_PRESETS = {
+  day: { bg:0x1a1520, amb:0.45, dir:0.85, dirColor:0xfff5e0, moon:0, candle:1.5, flame:0.8 },
+  night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
+};
+
 function setNight(n) {
   isNight = n;
-  scene.background = new THREE.Color(n ? 0x0a0a18 : 0x1a1520);
-  scene.fog.color.set(n ? 0x0a0a18 : 0x1a1520);
-  amb.intensity = n ? 0.15 : 0.45;
-  dir.intensity = n ? 0.3 : 0.85;
-  dir.color.set(n ? 0x6677ff : 0xfff5e0);
-  moonPoint.intensity = n ? 0.6 : 0;
-  candlePoint.intensity = n ? 4 : 1.5;
-  flame.material.emissiveIntensity = n ? 2.5 : 0.8;
+  const target = n ? NIGHT_PRESETS.night : NIGHT_PRESETS.day;
+  const from = {
+    bg: scene.background.getHex(),
+    amb: amb.intensity, dir: dir.intensity,
+    dirR: dir.color.r, dirG: dir.color.g, dirB: dir.color.b,
+    moon: moonPoint.intensity, candle: candlePoint.intensity,
+    flame: flame.material.emissiveIntensity,
+    fogR: scene.fog.color.r, fogG: scene.fog.color.g, fogB: scene.fog.color.b,
+  };
+  nightTransition = { from, target, startTime: performance.now(), duration: 600 };
+}
+
+function updateNightTransition() {
+  if (!nightTransition) return;
+  const elapsed = performance.now() - nightTransition.startTime;
+  const t = Math.min(elapsed / nightTransition.duration, 1);
+  // Ease in-out
+  const e = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+  const f = nightTransition.from, tgt = nightTransition.target;
+
+  const bg = new THREE.Color(
+    f.bg + (tgt.bg - f.bg) * e  // hex lerp won't work directly, use component
+  );
+  // Proper component-wise interpolation
+  const bgR = (f.bg >> 16 & 0xff) / 255 + ((tgt.bg >> 16 & 0xff) - (f.bg >> 16 & 0xff)) / 255 * e;
+  const bgG = (f.bg >> 8 & 0xff) / 255 + ((tgt.bg >> 8 & 0xff) - (f.bg >> 8 & 0xff)) / 255 * e;
+  const bgB = (f.bg & 0xff) / 255 + ((tgt.bg & 0xff) - (f.bg & 0xff)) / 255 * e;
+  scene.background.setRGB(bgR, bgG, bgB);
+  scene.fog.color.setRGB(
+    f.fogR + (((tgt.bg >> 16 & 0xff)/255) - f.fogR) * e,
+    f.fogG + (((tgt.bg >> 8 & 0xff)/255) - f.fogG) * e,
+    f.fogB + (((tgt.bg & 0xff)/255) - f.fogB) * e
+  );
+  amb.intensity = f.amb + (tgt.amb - f.amb) * e;
+  dir.intensity = f.dir + (tgt.dir - f.dir) * e;
+  dir.color.setRGB(
+    f.dirR + (((tgt.dirColor >> 16 & 0xff)/255) - f.dirR) * e,
+    f.dirG + (((tgt.dirColor >> 8 & 0xff)/255) - f.dirG) * e,
+    f.dirB + (((tgt.dirColor & 0xff)/255) - f.dirB) * e
+  );
+  moonPoint.intensity = f.moon + (tgt.moon - f.moon) * e;
+  candlePoint.intensity = f.candle + (tgt.candle - f.candle) * e;
+  flame.material.emissiveIntensity = f.flame + (tgt.flame - f.flame) * e;
+
+  if (t >= 1) nightTransition = null;
 }
 
 // ===== Name Tags =====
@@ -2648,6 +2703,9 @@ function animate() {
 
   // Auto rotate
   if (autoRotate) { theta += 0.003; updateCam(); }
+
+  // Night/day light transition
+  updateNightTransition();
 
   // Per-frame updates for overlays
   updateKeyboardPan();
