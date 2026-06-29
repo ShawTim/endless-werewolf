@@ -2667,14 +2667,15 @@ function formatGameText(text) {
   const div = document.createElement('div');
   div.textContent = text || '';
   let html = div.innerHTML;
-  // <Role> -> role highlight (blue/purple)
-  html = html.replace(/&lt;([\w\u3400-\u9FFF][\w\u3400-\u9FFF ]+?)&gt;/g, (match, inner) => {
-    return `<span class="role-highlight">${inner}</span>`;
-  });
-  // [Player Name] -> player highlight (gold)
-  html = html.replace(/\[([\w\u3400-\u9FFF][\w\u3400-\u9FFF ]+?)\]/g, (match, inner) => {
-    return `<span class="player-highlight">${inner}</span>`;
-  });
+  // Unicode-aware: letters (all scripts), CJK, Hangul, Hiragana/Katakana, fullwidth, emoji
+  const CHAR = '[\\p{L}\\p{M}\\p{N}\\u3000-\\u9FFF\\uAC00-\\uD7AF\\u3040-\\u30FF\\uFF00-\\uFFEF\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}]';
+  const NAME = CHAR + '(?:' + CHAR + '| )*?' + CHAR + '?';
+  // &lt;Role&gt; -> role highlight (escaped angle brackets from textContent)
+  const roleRe = new RegExp('&lt;(' + NAME + ')&gt;', 'gu');
+  html = html.replace(roleRe, (m, inner) => '<span class="role-highlight">' + inner + '</span>');
+  // [Player Name] -> player highlight (square brackets survive textContent escape)
+  const playerRe = new RegExp('\\[(' + NAME + ')\\]', 'gu');
+  html = html.replace(playerRe, (m, inner) => '<span class="player-highlight">' + inner + '</span>');
   return html;
 }
 
