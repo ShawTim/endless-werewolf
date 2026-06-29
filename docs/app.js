@@ -9,7 +9,7 @@ const I18N = {
     brand: 'Endless Werewolf', sub: 'AI One Night',
     archive: 'Archive', info: 'Info', night: 'Night', autoRotate: 'Auto-rotate',
     nightPhase: 'Night Phase', dayDiscussion: 'Day Discussion', voting: 'Voting',
-    resolution: 'Resolution', postgame: 'Postgame Interviews',
+    resolution: 'Resolution', postgame: 'Postgame',
     centerCards: 'Center cards', roles: 'Roles', nightActions: 'Night Actions',
     duration: 'Duration', totalSpeeches: 'Total speeches', playerStats: 'Player Stats',
     discussionLog: 'Discussion Log', votes: 'Votes', tally: 'Tally', executed: 'Executed',
@@ -147,7 +147,7 @@ function initThree() {
 
   // Sky as background sphere
   const skyTex = texLoader.load('./tex-sky.jpg');
-  const skyGeo = new THREE.SphereGeometry(40, 32, 16);
+  const skyGeo = new THREE.SphereGeometry(40, 64, 32);
   const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyDome);
@@ -957,7 +957,12 @@ function updateNameTags() {
   const w = innerWidth, h = innerHeight;
   PLAYERS.forEach((p, i) => {
     const pos = sp(i);
-    const v = new THREE.Vector3(pos[0], pos[1] + 1.6, pos[2]);
+    // Lower the tag for foreground characters (closer to camera bottom) to avoid covering faces
+    const worldPos = new THREE.Vector3(pos[0], pos[1] + 1.6, pos[2]);
+    const screenPos = worldPos.clone().project(camera);
+    const isForeground = screenPos.y < -0.2; // lower half of screen = foreground
+    const yOffset = isForeground ? 1.95 : 1.6;
+    const v = new THREE.Vector3(pos[0], pos[1] + yOffset, pos[2]);
     v.project(camera);
     const x = (v.x * 0.5 + 0.5) * w;
     const y = (-v.y * 0.5 + 0.5) * h;
@@ -1495,7 +1500,7 @@ function showDayInfo() {
     const accent = getPlayerColor(name);
     const p = PLAYERS.find(x => x.name === name);
     const displayName = lang === 'zh' && p ? (p.name_zh || name) : name;
-    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${s.speak_count} ${t('speaks')}</span></div>`;
+    html += `<div class="row"><span class="key" style="color:${accent}">${displayName}</span><span class="val">${s.speak_count} / ${gameData.day.config?.max_speaks_per_player || 3}</span></div>`;
   }
   
   if (speeches.length > 0) {

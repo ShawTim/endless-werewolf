@@ -47,9 +47,10 @@ canvas#c:active { cursor:grabbing; }
   text-shadow: 0 0 40px rgba(232,196,104,0.3), 0 2px 8px rgba(0,0,0,0.8);
 }
 #welcome-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; color: var(--text); margin-bottom: 40px;
-  letter-spacing: 12px; text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  font-size: 18px; color: var(--gold); margin-bottom: 40px;
+  letter-spacing: 10px; text-transform: uppercase;
+  opacity: 0.7; font-weight: 500;
   text-shadow: 0 2px 8px rgba(0,0,0,0.8);
 }
 #welcome-btn {
@@ -80,6 +81,7 @@ canvas#c:active { cursor:grabbing; }
   color: var(--text-dim); font-size: 11px;
   letter-spacing: 1px;
 }
+#btn-github::after, #welcome-gh::after { display: none; }
 #btn-github:hover { color: var(--gold); }
 
 /* ===== Top Bar ===== */
@@ -98,9 +100,10 @@ canvas#c:active { cursor:grabbing; }
   letter-spacing: 2px;
 }
 .brand .sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px; color: var(--text-dim); font-weight: 400;
+  font-family: 'Cinzel', serif;
+  font-size: 10px; color: var(--gold); font-weight: 600;
   letter-spacing: 3px; text-transform: uppercase;
+  opacity: 0.8;
 }
 
 .top-actions { display: flex; align-items: center; gap: 12px; }
@@ -118,15 +121,16 @@ canvas#c:active { cursor:grabbing; }
 #timeline {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
   z-index: 15; display: flex; gap: 4px;
+  max-width: calc(100vw - 20px); overflow: hidden;
   background: var(--panel-bg); border: 1px solid var(--border); border-bottom: none;
   border-radius: 12px 12px 0 0; padding: 8px 10px;
   backdrop-filter: blur(10px);
 }
 .phase-step {
   display: flex; align-items: center; gap: 8px;
-  padding: 8px 16px; border-radius: 8px; cursor: pointer;
-  font-size: 12px; color: var(--text-dim); transition: all 0.2s;
-  border: 1px solid transparent;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+  font-size: 11px; color: var(--text-dim); transition: all 0.2s;
+  border: 1px solid transparent; white-space: nowrap;
 }
 .phase-step:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 .phase-step.active {
