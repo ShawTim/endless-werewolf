@@ -813,7 +813,7 @@ function setupCameraControls() {
   canvas.addEventListener('touchstart', e => {
     e.preventDefault();
     if (e.touches.length === 1) {
-      touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY };
+      touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY, startX: e.touches[0].clientX, startY: e.touches[0].clientY, lastX: e.touches[0].clientX, lastY: e.touches[0].clientY };
     } else if (e.touches.length === 2) {
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -834,10 +834,13 @@ function setupCameraControls() {
     e.preventDefault();
     if (!touchState) return;
     if (touchState.mode === 'rotate' && e.touches.length === 1) {
-      const dx = e.touches[0].clientX - touchState.x0;
-      const dy = e.touches[0].clientY - touchState.y0;
-      touchState.x0 = e.touches[0].clientX;
-      touchState.y0 = e.touches[0].clientY;
+      const cx = e.touches[0].clientX, cy = e.touches[0].clientY;
+      const dx = cx - touchState.x0;
+      const dy = cy - touchState.y0;
+      touchState.x0 = cx;
+      touchState.y0 = cy;
+      touchState.lastX = cx;
+      touchState.lastY = cy;
       theta -= dx * 0.008;
       phi -= dy * 0.008;
       phi = Math.max(0.02, Math.min(PI / 2.05, phi));
@@ -867,7 +870,21 @@ function setupCameraControls() {
   }, { passive: false });
 
   canvas.addEventListener('touchend', e => {
-    if (e.touches.length === 0) touchState = null;
+    if (e.touches.length === 0) {
+      // Swipe-to-change-phase detection
+      if (touchState && touchState.mode === 'rotate' && touchState.startX !== undefined) {
+        const dx = touchState.lastX - touchState.startX;
+        const dy = touchState.lastY - touchState.startY;
+        // Horizontal swipe: |dx| > 60, |dx| > 2*|dy|, short duration
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 2) {
+          const phases = ['night', 'day', 'vote', 'resolve', 'postgame'];
+          const curIdx = phases.indexOf(currentPhase);
+          if (dx > 0 && curIdx > 0) setPhase(phases[curIdx - 1]);
+          else if (dx < 0 && curIdx < phases.length - 1) setPhase(phases[curIdx + 1]);
+        }
+      }
+      touchState = null;
+    }
     else if (e.touches.length === 1) {
       touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY };
     }
@@ -1187,20 +1204,60 @@ function clearBubbles() {
 }
 
 // ===== Vote Arrows =====
+// Vote arrow elements are created once, then only coordinates updated per frame
+let voteArrowEls = []; // [{path, head, label, voter, target}]
+
 function showVoteArrows(votes) {
   activeVotes = votes;
-  redrawVoteArrows();
-}
-
-function redrawVoteArrows() {
-  if (!activeVotes) return;
   voteOverlay.innerHTML = '';
+  voteArrowEls = [];
+  if (!activeVotes) return;
+
   for (const [voter, target] of Object.entries(activeVotes)) {
     const vi = PLAYERS.findIndex(p => p.name === voter);
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
 
-    // Project both positions
+    const voterColor = getPlayerColor(voter);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'vote-arrow-svg');
+    svg.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;';
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('stroke', voterColor);
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('stroke-dasharray', '6,4');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.7');
+    svg.appendChild(path);
+
+    const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    head.setAttribute('fill', voterColor);
+    head.setAttribute('opacity', '0.85');
+    svg.appendChild(head);
+
+    voteOverlay.appendChild(svg);
+
+    const voterP = PLAYERS.find(x => x.name === voter);
+    const voterName = lang === 'zh' && voterP ? (voterP.name_zh || voter) : voter;
+    const label = document.createElement('div');
+    label.className = 'vote-label';
+    label.style.color = voterColor;
+    label.textContent = voterName;
+    voteOverlay.appendChild(label);
+
+    voteArrowEls.push({ path, head, label, voter, target });
+  }
+  redrawVoteArrows();
+}
+
+function redrawVoteArrows() {
+  if (!activeVotes || voteArrowEls.length === 0) return;
+  for (const va of voteArrowEls) {
+    const vi = PLAYERS.findIndex(p => p.name === va.voter);
+    const ti = PLAYERS.findIndex(p => p.name === va.target);
+    if (vi < 0 || ti < 0) continue;
+
     const vpos = sp(vi);
     const tpos = sp(ti);
     const vStart = new THREE.Vector3(vpos[0], vpos[1] + 0.5, vpos[2]);
@@ -1212,40 +1269,16 @@ function redrawVoteArrows() {
     const ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
     const ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
 
-    const voterColor = getPlayerColor(voter);
     const dx = ex - sx, dy = ey - sy;
     const len = Math.sqrt(dx*dx + dy*dy);
-    if (len < 10) continue;
+    if (len < 10) { va.path.setAttribute('d', ''); continue; }
 
     const headLen = Math.min(16, len * 0.25);
-    const angle = Math.atan2(dy, dx);
-    const hx1 = ex - headLen * Math.cos(angle - 0.4);
-    const hy1 = ey - headLen * Math.sin(angle - 0.4);
-    const hx2 = ex - headLen * Math.cos(angle + 0.4);
-    const hy2 = ey - headLen * Math.sin(angle + 0.4);
-
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'vote-arrow-svg');
-    svg.style.position = 'absolute';
-    svg.style.left = '0';
-    svg.style.top = '0';
-    svg.style.width = '100%';
-    svg.style.height = '100%';
-    svg.style.pointerEvents = 'none';
-
-    // Curved path arches over the table instead of cutting through it
     const midX = (sx + ex) / 2;
-    const midY = (sy + ey) / 2 - Math.max(50, len * 0.35);  // arch height scales with distance
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`);
-    path.setAttribute('stroke', voterColor);
-    path.setAttribute('stroke-width', '2');
-    path.setAttribute('stroke-dasharray', '6,4');
-    path.setAttribute('fill', 'none');
-    path.setAttribute('opacity', '0.7');
-    svg.appendChild(path);
+    const midY = (sy + ey) / 2 - Math.max(50, len * 0.35);
+    va.path.setAttribute('d', `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`);
 
-    // Arrowhead at end of curve (tangent direction approximated)
+    // Arrowhead tangent at end of curve
     const tdx = ex - midX, tdy = ey - midY;
     const tlen = Math.sqrt(tdx*tdx + tdy*tdy) || 1;
     const tangentAngle = Math.atan2(tdy / tlen, tdx / tlen);
@@ -1253,24 +1286,10 @@ function redrawVoteArrows() {
     const hy1c = ey - headLen * Math.sin(tangentAngle - 0.4);
     const hx2c = ex - headLen * Math.cos(tangentAngle + 0.4);
     const hy2c = ey - headLen * Math.sin(tangentAngle + 0.4);
+    va.head.setAttribute('points', `${ex},${ey} ${hx1c},${hy1c} ${hx2c},${hy2c}`);
 
-    const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    head.setAttribute('points', `${ex},${ey} ${hx1c},${hy1c} ${hx2c},${hy2c}`);
-    head.setAttribute('fill', voterColor);
-    head.setAttribute('opacity', '0.85');
-    svg.appendChild(head);
-
-    const voterP = PLAYERS.find(x => x.name === voter);
-    const voterName = lang === 'zh' && voterP ? (voterP.name_zh || voter) : voter;
-    const label = document.createElement('div');
-    label.className = 'vote-label';
-    label.style.left = sx + 'px';
-    label.style.top = sy + 'px';
-    label.style.color = voterColor;
-    label.textContent = voterName;
-
-    voteOverlay.appendChild(svg);
-    voteOverlay.appendChild(label);
+    va.label.style.left = sx + 'px';
+    va.label.style.top = sy + 'px';
   }
 }
 
