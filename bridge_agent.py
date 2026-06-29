@@ -222,9 +222,6 @@ def build_postgame_prompt(player_context: dict, game_summary: dict) -> str:
     status_desc = "won" if status == "winner" else "lost"
     executed_desc = " and was voted out" if executed else ""
 
-    name_map = game_summary.get("name_map", {})
-    name_table = "\n".join(f"  {en} → {zh}" for en, zh in name_map.items()) if name_map else "  (none)"
-
     return f"""You are a player in One Night Werewolf. The game has ended and a reporter is interviewing you.
 
 [Your Identity]
@@ -237,9 +234,6 @@ Your result: {status_desc}{executed_desc}
 Outcome: {outcome_desc}
 Voted out: {', '.join(executed_players) if executed_players else 'Nobody'}
 
-[Player Name Reference (use Chinese names when mentioning other players)]
-{name_table}
-
 [Excerpt from the Daytime Discussion]
 {chat_excerpt or '(No record)'}
 
@@ -247,9 +241,9 @@ Voted out: {', '.join(executed_players) if executed_players else 'Nobody'}
 In character with your persona, give 1-2 sentences of postgame reaction. Requirements:
 - Authetically reflect your emotion and situation (win/loss/was killed)
 - Stay true to your personal style and persona
-- When mentioning other players, use their Chinese names (see reference table above)
+- When mentioning other players, use their English names exactly as given in the game
 - Don't just repeat your role name
-- Speak in English (with Cantonese flavor if it fits your persona)
+- Speak in English
 
 Output ONLY this JSON — no markdown, no explanation:
 {{"quote": "Your postgame reaction"}}"""
