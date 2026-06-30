@@ -14,3 +14,14 @@ chat_history.md
 *.pyc
 FLOW.md
 data/_trash/
+
+# V1/V2 leftovers
+docs_v1_backup/
+v2-recovered/
+V2_ARCHITECTURE.md
+V2_PERSONAS.md
+RULES.md
+chat_history.md
+web/
+data/games_archive/
+openclaw-workspace-state.json

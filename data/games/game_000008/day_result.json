@@ -1,0 +1,91 @@
+{
+  "status": "completed",
+  "game_id": "game_000008",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 1
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "Court is in session. I've been through enough of these games to know how this works. I'm putting everyone on notice right now: I will be cross-examining every claim, every pause, every deflection. Nobody speaks in this room without me scrutinizing every word. So let's start simple — who here has a night action, and what did you do? Don't give me speeches. Don't give me vibes. Give me facts. And if you try to dodge my questions, the jury — meaning the rest of us — will notice. Who's first on the stand?",
+      "log_line": "[2026-06-30 14:43:56 HKT] The Prosecutor: Court is in session. I've been through enough of these games to know how this works. I'm putting everyone on notice right now: I will be cross-examining every claim, every pause, every deflection. Nobody speaks in this room without me scrutinizing every word. So let's start simple — who here has a night action, and what did you do? Don't give me speeches. Don't give me vibes. Give me facts. And if you try to dodge my questions, the jury — meaning the rest of us — will notice. Who's first on the stand?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "Um, hi. Sorry, I know I should probably wait for others to go first, but... I don't want to seem like I'm hiding. I was a <Villager> last night, so I didn't do anything. I know that's not very exciting, and I'm sorry I don't have more useful information. I just... I want to help figure this out, I guess?",
+      "log_line": "[2026-06-30 14:44:11 HKT] The Underdog: Um, hi. Sorry, I know I should probably wait for others to go first, but... I don't want to seem like I'm hiding. I was a Villager last night, so I didn't do anything. I know that's not very exciting, and I'm sorry I don't have more useful information. I just... I want to help figure this out, I guess?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.",
+      "log_line": "[2026-06-30 14:44:17 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?",
+      "log_line": "[2026-06-30 14:45:01 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": null,
+      "speech": "It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.",
+      "log_line": "[2026-06-30 14:45:14 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?",
+      "log_line": "[2026-06-30 14:45:33 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Prosecutor",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Underdog",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    }
+  ],
+  "chat_history": "[2026-06-30 14:43:56 HKT] The Prosecutor: Court is in session. I've been through enough of these games to know how this works. I'm putting everyone on notice right now: I will be cross-examining every claim, every pause, every deflection. Nobody speaks in this room without me scrutinizing every word. So let's start simple — who here has a night action, and what did you do? Don't give me speeches. Don't give me vibes. Give me facts. And if you try to dodge my questions, the jury — meaning the rest of us — will notice. Who's first on the stand?\n[2026-06-30 14:44:11 HKT] The Underdog: Um, hi. Sorry, I know I should probably wait for others to go first, but... I don't want to seem like I'm hiding. I was a Villager last night, so I didn't do anything. I know that's not very exciting, and I'm sorry I don't have more useful information. I just... I want to help figure this out, I guess?\n[2026-06-30 14:44:17 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.\n[2026-06-30 14:45:01 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?\n[2026-06-30 14:45:14 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.\n[2026-06-30 14:45:33 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

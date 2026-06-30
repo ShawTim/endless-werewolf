@@ -9,8 +9,8 @@
       "model": "proxy-shawtim/glm-5.2",
       "thinking": "high",
       "seat": 0,
-      "initial_role": "Villager",
-      "current_role": "Werewolf",
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -24,8 +24,8 @@
       "model": "proxy-shawtim/kimi-k2.6",
       "thinking": "high",
       "seat": 1,
-      "initial_role": "Tanner",
-      "current_role": "Tanner",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -39,13 +39,13 @@
       "model": "proxy-shawtim/minimax-m2.7",
       "thinking": "high",
       "seat": 2,
-      "initial_role": "Werewolf",
-      "current_role": "Robber",
+      "initial_role": "Minion",
+      "current_role": "Minion",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Gut Player]."
+        "You saw the Werewolves are: The Statistician, The Underdog. The Werewolves do not know you are the Minion."
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Gut Player]."
+      "night_memory_text": "You saw the Werewolves are: The Statistician, The Underdog. The Werewolves do not know you are the Minion."
     },
     "4": {
       "id": "4",
@@ -56,13 +56,11 @@
       "model": "proxy-shawtim/deepseek-v4-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
-      "night_memory": [
-        "You saw the other <Werewolf> is: [The Chaos Agent]."
-      ],
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
+      "night_memory_text": ""
     },
     "5": {
       "id": "5",
@@ -73,21 +71,13 @@
       "model": "proxy-shawtim/nemotron-3-ultra",
       "thinking": "high",
       "seat": 4,
-      "initial_role": "Robber",
-      "current_role": "Villager",
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
       "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+        "You saw the other Werewolf is: The Underdog."
       ],
-      "night_actions": [
-        {
-          "role": "Robber",
-          "action": "rob",
-          "target": "The Prosecutor",
-          "new_role": "Villager",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+      "night_actions": [],
+      "night_memory_text": "You saw the other Werewolf is: The Underdog."
     },
     "6": {
       "id": "6",
@@ -98,23 +88,13 @@
       "model": "proxy-shawtim/qwen3.5",
       "thinking": "high",
       "seat": 5,
-      "initial_role": "Troublemaker",
-      "current_role": "Troublemaker",
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
       "night_memory": [
-        "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+        "You saw the other Werewolf is: The Statistician."
       ],
-      "night_actions": [
-        {
-          "role": "Troublemaker",
-          "action": "swap",
-          "targets": [
-            "The Prosecutor",
-            "The Chaos Agent"
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+      "night_actions": [],
+      "night_memory_text": "You saw the other Werewolf is: The Statistician."
     }
   },
   "seating_order": [
@@ -126,46 +106,10 @@
     "6"
   ],
   "center_cards": [
+    "Troublemaker",
     "Seer",
-    "Villager",
-    "Minion"
+    "Robber"
   ],
-  "night_trace": [
-    {
-      "actor": "The Chaos Agent",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Gut Player"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Gut Player",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Chaos Agent"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Statistician",
-      "role": "Robber",
-      "action": "rob",
-      "target": "The Prosecutor",
-      "source": "agent"
-    },
-    {
-      "actor": "The Underdog",
-      "role": "Troublemaker",
-      "action": "swap",
-      "targets": [
-        "The Prosecutor",
-        "The Chaos Agent"
-      ],
-      "source": "agent"
-    }
-  ],
-  "game_id": "game_000006"
+  "night_trace": [],
+  "game_id": "game_000008"
 }

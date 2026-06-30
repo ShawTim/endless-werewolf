@@ -9,11 +9,21 @@
       "model": "proxy-shawtim/glm-5.2",
       "thinking": "high",
       "seat": 0,
-      "initial_role": "Villager",
-      "current_role": "Werewolf",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "night_memory": [
+        "You inspected The Therapist and their role is: Werewolf."
+      ],
+      "night_actions": [
+        {
+          "role": "Seer",
+          "action": "inspect_player",
+          "target": "The Therapist",
+          "seen_role": "Werewolf",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You inspected The Therapist and their role is: Werewolf."
     },
     "2": {
       "id": "2",
@@ -24,11 +34,22 @@
       "model": "proxy-shawtim/kimi-k2.6",
       "thinking": "high",
       "seat": 1,
-      "initial_role": "Tanner",
-      "current_role": "Tanner",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You are the only Werewolf in play. You may peek at one center card.",
+        "You peeked at center card 0 and saw: Villager."
+      ],
+      "night_actions": [
+        {
+          "role": "Werewolf",
+          "action": "inspect_center",
+          "target": 0,
+          "seen_role": "Villager",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You are the only Werewolf in play. You may peek at one center card. You peeked at center card 0 and saw: Villager."
     },
     "3": {
       "id": "3",
@@ -39,13 +60,13 @@
       "model": "proxy-shawtim/minimax-m2.7",
       "thinking": "high",
       "seat": 2,
-      "initial_role": "Werewolf",
+      "initial_role": "Minion",
       "current_role": "Robber",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Gut Player]."
+        "You saw the Werewolves are: The Therapist. The Werewolves do not know you are the Minion."
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Gut Player]."
+      "night_memory_text": "You saw the Werewolves are: The Therapist. The Werewolves do not know you are the Minion."
     },
     "4": {
       "id": "4",
@@ -56,13 +77,21 @@
       "model": "proxy-shawtim/deepseek-v4-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
+      "initial_role": "Robber",
+      "current_role": "Minion",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Chaos Agent]."
+        "You robbed The Chaos Agent's card. After swapping, you are now: Minion."
       ],
-      "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
+      "night_actions": [
+        {
+          "role": "Robber",
+          "action": "rob",
+          "target": "The Chaos Agent",
+          "new_role": "Minion",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You robbed The Chaos Agent's card. After swapping, you are now: Minion."
     },
     "5": {
       "id": "5",
@@ -73,21 +102,11 @@
       "model": "proxy-shawtim/nemotron-3-ultra",
       "thinking": "high",
       "seat": 4,
-      "initial_role": "Robber",
+      "initial_role": "Villager",
       "current_role": "Villager",
-      "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
-      ],
-      "night_actions": [
-        {
-          "role": "Robber",
-          "action": "rob",
-          "target": "The Prosecutor",
-          "new_role": "Villager",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     },
     "6": {
       "id": "6",
@@ -98,23 +117,11 @@
       "model": "proxy-shawtim/qwen3.5",
       "thinking": "high",
       "seat": 5,
-      "initial_role": "Troublemaker",
-      "current_role": "Troublemaker",
-      "night_memory": [
-        "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
-      ],
-      "night_actions": [
-        {
-          "role": "Troublemaker",
-          "action": "swap",
-          "targets": [
-            "The Prosecutor",
-            "The Chaos Agent"
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     }
   },
   "seating_order": [
@@ -126,46 +133,32 @@
     "6"
   ],
   "center_cards": [
-    "Seer",
     "Villager",
-    "Minion"
+    "Werewolf",
+    "Troublemaker"
   ],
   "night_trace": [
     {
-      "actor": "The Chaos Agent",
+      "actor": "The Therapist",
       "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Gut Player"
-      ],
-      "source": "deterministic"
+      "action": "inspect_center",
+      "target": 0,
+      "source": "agent"
+    },
+    {
+      "actor": "The Prosecutor",
+      "role": "Seer",
+      "action": "inspect_player",
+      "target": "The Therapist",
+      "source": "agent"
     },
     {
       "actor": "The Gut Player",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Chaos Agent"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Statistician",
       "role": "Robber",
       "action": "rob",
-      "target": "The Prosecutor",
-      "source": "agent"
-    },
-    {
-      "actor": "The Underdog",
-      "role": "Troublemaker",
-      "action": "swap",
-      "targets": [
-        "The Prosecutor",
-        "The Chaos Agent"
-      ],
+      "target": "The Chaos Agent",
       "source": "agent"
     }
   ],
-  "game_id": "game_000006"
+  "game_id": "game_000012"
 }

@@ -1,0 +1,24 @@
+{
+  "id": "3",
+  "name": "The Chaos Agent",
+  "model": "proxy-shawtim/minimax-m2.7",
+  "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+  "thinking": "high",
+  "initial_role": "Troublemaker",
+  "current_role": "Troublemaker",
+  "night_memory": "You swapped The Statistician and The Underdog's cards, but you don't know what they became.",
+  "night_memory_list": [
+    "You swapped The Statistician and The Underdog's cards, but you don't know what they became."
+  ],
+  "night_actions": [
+    {
+      "role": "Troublemaker",
+      "action": "swap",
+      "targets": [
+        "The Statistician",
+        "The Underdog"
+      ],
+      "source": "agent"
+    }
+  ]
+}

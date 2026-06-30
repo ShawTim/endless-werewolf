@@ -2,8 +2,6 @@
 
 **Live Demo:** https://shawtim.github.io/endless-werewolf/
 
-**Source:** https://github.com/ShawTim/endless-werewolf
-
 An autonomous **One Night Ultimate Werewolf** simulation where 6 AI players — each running a different LLM — make their own decisions across every phase: night actions, daytime debate, voting, and postgame interviews.
 
 > Not a scripted demo. Every decision is made by the AI player's own model at runtime.
@@ -12,7 +10,7 @@ An autonomous **One Night Ultimate Werewolf** simulation where 6 AI players — 
 
 ## What this is
 
-A cron-driven simulation loop that runs a full game periodically and publishes the results to GitHub Pages.
+A simulation engine that runs a full game of One Night Ultimate Werewolf and publishes the results to an interactive 3D showcase on GitHub Pages.
 
 Each of the 6 players has:
 - A **distinct persona** (e.g. relentless prosecutor, nervous newcomer)
@@ -20,8 +18,6 @@ Each of the 6 players has:
 - **Private role knowledge** from the night phase
 - Access to the **live chat log** as context
 - **Cross-game memory** — each player recalls the previous game's events
-
-Every game is fully logged and archived for replay.
 
 ---
 
@@ -42,37 +38,22 @@ Every game is fully logged and archived for replay.
 ## Architecture
 
 ```
-cron_run_game_publish.sh (scheduled)
-  │
-  ├─ gm_night.py            — deal cards, build night plan
-  ├─ [bridge agent × N]     — AI night action per player
-  │   └─ cross_game_memory   — inject previous game data into prompts
-  │
-  └─ run_full_game.py
-       ├─ day_phase.py       — concurrent AI debate loop
-       ├─ resolve_phase.py   — rule-based outcome
-       ├─ postgame_phase.py  — AI postgame interviews
-       ├─ tag_phase.py       — post-process: add <Role> [Player] markup
-       └─ translate_zh_phase — Gemini translation (EN → 正體中文書面語)
+gm_night.py              — deal cards, build night plan
+bridge_agent.py          — LLM bridge: receives decision request → spawns subagent → returns JSON
+night_phase.py           — night actions: seer, robber, troublemaker, etc.
+day_phase.py             — concurrent AI debate loop
+resolve_phase.py         — rule-based outcome resolution
+postgame_phase.py        — AI postgame interviews
+tag_phase.py             — post-process: add <Role> [Player] markup
+translate_zh_phase.py    — Gemini translation (EN → 正體中文書面語)
+cross_game_memory.py     — inject previous game data into player prompts
+state_manager.py         — game dirs, manifests, counters
+run_full_game.py         — orchestrates the full pipeline
 ```
 
 The **bridge agent** is an [OpenClaw](https://openclaw.ai) agent that receives a player decision request, then spawns a short-lived **thinker subagent** using that player's assigned model. The subagent thinks, responds in JSON, and is deleted.
 
-This project runs on the **OpenClaw platform**, which provides the `openclaw agent` CLI and `sessions_spawn` API used internally. It cannot be run standalone without that infrastructure.
-
----
-
-## Pipeline
-
-1. **Night setup** — roles assigned, night plan built (`gm_night.py`, `night_phase.py`)
-2. **Night actions** — each player with a night ability makes an AI decision via bridge agent
-3. **Day debate** — 6 AI players debate concurrently in rounds (`day_phase.py`)
-4. **Vote** — each player votes to execute someone
-5. **Resolve** — outcome determined by One Night Werewolf rules (`resolve_phase.py`)
-6. **Postgame** — each player gives an in-character interview (`postgame_phase.py`)
-7. **Tag** — role and player names in text wrapped in `<Role>` / `[Player]` markup (`tag_phase.py`)
-8. **Translate** — text translated to Chinese via Gemini (`translate_zh_phase.py`)
-9. **Publish** — archive rebuilt and pushed to GitHub Pages (`scripts/build_pages.py`)
+This project runs on the **OpenClaw platform**. It cannot be run standalone without that infrastructure.
 
 ---
 
@@ -89,24 +70,23 @@ Tags are added by `tag_phase.py` (post-processing, not by AI agents) and used fo
 
 ---
 
-## Data layout
+## Data Layout
 
 ```
 data/
-  games/game_XXXXXX/
-    night_result.json        ← original (English)
+  players.json               ← player roster (personas, models)
+  roles_pool.json            ← role definitions
+  games/game_XXXXXX/         ← per-game data
+    night_result.json          ← original (English)
     day_result.json
     vote_result.json
     resolve_result.json
     postgame_result.json
     chat_history.md
-    *_zh.json                ← Chinese translations
-    chat_history_zh.md
-docs/                       ← GitHub Pages site
+    *_zh.json                  ← Chinese translations
+docs/                         ← GitHub Pages site
   app.js, styles.css, index.html
-  tex-*.jpg                 ← AI-generated 3D textures
-  welcome-bg.jpg            ← AI-generated welcome art
-  data/games/               ← published game archive
+  data/games/                 ← published game archive
 ```
 
 ---
@@ -130,3 +110,9 @@ docs/                       ← GitHub Pages site
 翻譯由 **Gemini 3.1 Pro** 負責，使用正體中文書面語（非粵語口語）。
 
 此項目依賴 OpenClaw 平台基建，不能在沒有該平台的環境下直接運行。
+
+---
+
+## License
+
+[MIT](LICENSE)

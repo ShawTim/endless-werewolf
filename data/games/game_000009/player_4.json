@@ -1,0 +1,22 @@
+{
+  "id": "4",
+  "name": "The Gut Player",
+  "model": "proxy-shawtim/deepseek-v4-pro",
+  "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+  "thinking": "off",
+  "initial_role": "Robber",
+  "current_role": "Villager",
+  "night_memory": "You robbed The Prosecutor's card. After swapping, you are now: Villager.",
+  "night_memory_list": [
+    "You robbed The Prosecutor's card. After swapping, you are now: Villager."
+  ],
+  "night_actions": [
+    {
+      "role": "Robber",
+      "action": "rob",
+      "target": "The Prosecutor",
+      "new_role": "Villager",
+      "source": "agent"
+    }
+  ]
+}
