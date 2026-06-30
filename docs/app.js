@@ -2627,6 +2627,32 @@ function showSpeechAt(idx) {
   }
   replayIndex = idx;
   updateReplayProgress();
+  highlightSpeechInPanel(idx);
+}
+
+function highlightSpeechInPanel(traceIdx) {
+  const panel = document.getElementById('panel-content');
+  if (!panel) return;
+  // Remove previous highlight
+  panel.querySelectorAll('.speech-entry.active-replay').forEach(el => el.classList.remove('active-replay'));
+  // Find matching speech entry in panel by data-trace-idx
+  const entries = panel.querySelectorAll('.speech-entry');
+  // Count only speech-type entries to match traceIdx
+  const trace = gameData.day?.day_trace || [];
+  let speechCount = 0;
+  let targetEntry = null;
+  for (let i = 0; i <= traceIdx && i < trace.length; i++) {
+    if (trace[i].type === 'speech') {
+      if (i === traceIdx && entries[speechCount]) {
+        targetEntry = entries[speechCount];
+      }
+      speechCount++;
+    }
+  }
+  if (targetEntry) {
+    targetEntry.classList.add('active-replay');
+    targetEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function updateReplayProgress() {
