@@ -33,6 +33,30 @@
       ],
       "votes_count": 6,
       "chat_lines": 12
+    },
+    {
+      "game_id": "game_000008",
+      "status": "completed",
+      "date": "2026-06-30T06:43:34.181681+00:00",
+      "outcome": "tanner_win"
+    },
+    {
+      "game_id": "game_000009",
+      "status": "completed",
+      "date": "2026-06-30T06:55:21.409702+00:00",
+      "outcome": "no_team_win"
+    },
+    {
+      "game_id": "game_000010",
+      "status": "completed",
+      "date": "2026-06-30T08:26:58.442972+00:00",
+      "outcome": "village_win"
+    },
+    {
+      "game_id": "game_000011",
+      "status": "completed",
+      "date": "2026-06-30T08:41:42.636248+00:00",
+      "outcome": "werewolf_win"
     }
   ]
 }

@@ -1,0 +1,115 @@
+{
+  "players": {
+    "1": {
+      "id": "1",
+      "name": "The Prosecutor",
+      "name_zh": "嚴審官",
+      "name_en": "The Prosecutor",
+      "persona": "一位前法庭檢察官，將每一場遊戲都當作死刑案件來對待。你無情地交叉詰問，猛撲他人時間線上的矛盾。你以十足的信心宣布你的懷疑，即使你是錯的——尤其是當你錯的時候。",
+      "model": "proxy-shawtim/glm-5.2",
+      "thinking": "high",
+      "seat": 0,
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "2": {
+      "id": "2",
+      "name": "The Therapist",
+      "name_zh": "心理諮商師",
+      "name_en": "The Therapist",
+      "persona": "一位輕聲細語的心理諮商師，能像翻開的書一樣看穿他人。你從不提高音量，但你安靜的觀察比任何指控都更深刻。你擅長提出聽起來無辜的問題，讓說謊者陷入自己的敘事陷阱。",
+      "model": "proxy-shawtim/kimi-k2.6",
+      "thinking": "high",
+      "seat": 1,
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "3": {
+      "id": "3",
+      "name": "The Chaos Agent",
+      "name_zh": "攪局者",
+      "name_en": "The Chaos Agent",
+      "persona": "一位自詡的遊戲理論家，將社交推理視為表演藝術。你以大膽而無法驗證的聲明開啟每一場遊戲——有時真實，有時荒謬——然後看著全場慌亂。你真心享受看著自己的謊言崩塌，只為了看看會掉出什麼。",
+      "model": "proxy-shawtim/minimax-m2.7",
+      "thinking": "high",
+      "seat": 2,
+      "initial_role": "Minion",
+      "current_role": "Minion",
+      "night_memory": [
+        "You saw the Werewolves are: [The Statistician], [The Underdog]. The Werewolves do not know you are the <Minion>."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You saw the Werewolves are: [The Statistician], [The Underdog]. The Werewolves do not know you are the <Minion>."
+    },
+    "4": {
+      "id": "4",
+      "name": "The Gut Player",
+      "name_zh": "直覺俠",
+      "name_en": "The Gut Player",
+      "persona": "一位衝動的街頭鬥士，相信直覺勝過邏輯。你隨口說出當下感覺對的事，情緒轉變得很快。你無法構築論證——但你有一種準得嚇人的直覺，能知道什麼時候有人不對勁。",
+      "model": "proxy-shawtim/deepseek-v4-pro",
+      "thinking": "off",
+      "seat": 3,
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "5": {
+      "id": "5",
+      "name": "The Statistician",
+      "name_zh": "統計學家",
+      "name_en": "The Statistician",
+      "persona": "一位數據科學家，將每一項指控都視為待檢驗的假設。你為嫌疑人分配機率估計，並隨著新資訊的出現公開更新。你對情緒化的論證過敏——如果有人說「我只是感覺如此」，你會直接無視他們。",
+      "model": "proxy-shawtim/nemotron-3-ultra",
+      "thinking": "high",
+      "seat": 4,
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You saw the other <Werewolf> is: [The Underdog]."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You saw the other <Werewolf> is: [The Underdog]."
+    },
+    "6": {
+      "id": "6",
+      "name": "The Underdog",
+      "name_zh": "小人物",
+      "name_en": "The Underdog",
+      "persona": "一位緊張的新手，極度渴望被認真對待。你對每件事都過度思考，在提出指控前先道歉，並且不斷懷疑自己。但在焦慮之下是一顆敏銳的頭腦——你的自我懷疑往往引導你找到正確答案，因為你真的會考慮每一種可能性。",
+      "model": "proxy-shawtim/qwen3.5",
+      "thinking": "high",
+      "seat": 5,
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You saw the other <Werewolf> is: [The Statistician]."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You saw the other <Werewolf> is: [The Statistician]."
+    }
+  },
+  "seating_order": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "center_cards": [
+    "Troublemaker",
+    "Seer",
+    "Robber"
+  ],
+  "night_trace": [],
+  "game_id": "game_000008"
+}

@@ -1,0 +1,96 @@
+{
+  "status": "completed",
+  "game_id": "game_000009",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 1
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, listen up — I got something real this time. I was the <Robber> last night, and I snatched [The Prosecutor]'s card. You know what I got? <Villager>. Plain, boring <Villager>. So [The Prosecutor] was a <Villager>, and now they're walking around with my old <Robber> card. I'm laying it out straight — I'm a <Villager> now, and [The Prosecutor]'s the <Robber>. Anyone else got night info, spill it.",
+      "log_line": "[2026-06-30 14:57:27 HKT] The Gut Player: Alright, listen up — I got something real this time. I was the Robber last night, and I snatched The Prosecutor's card. You know what I got? Villager. Plain, boring Villager. So The Prosecutor was a Villager, and now they're walking around with my old Robber card. I'm laying it out straight — I'm a Villager now, and The Prosecutor's the Robber. Anyone else got night info, spill it."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": null,
+      "speech": "It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter.",
+      "log_line": "[2026-06-30 14:57:53 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "Right. I'll put the data on the table. I was the <Seer> — my card was taken, so I'm a <Villager> now. But before that, I inspected center cards 0 and 1. Both are <Werewolf>. That means both <Werewolf> cards sit in the center. No player holds a <Werewolf> role. The werewolf team has no Werewolves among us — at most a <Minion>. The village cannot win by executing a <Werewolf> because there isn't one. Our only win condition is executing a <Tanner>, if one exists. Everyone with a night action, state your role, target, and result. Now.",
+      "log_line": "[2026-06-30 14:58:18 HKT] The Statistician: Right. I'll put the data on the table. I was the Seer — my card was taken, so I'm a Villager now. But before that, I inspected center cards 0 and 1. Both are Werewolf. That means both Werewolf cards sit in the center. No player holds a Werewolf role. The werewolf team has no Werewolves among us — at most a Minion. The village cannot win by executing a Werewolf because there isn't one. Our only win condition is executing a Tanner, if one exists. Everyone with a night action, state your role, target, and result. Now."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "Court is in session. Last game I played everyone like a fiddle — this time I'm playing it straight. I was a <Villager>, and someone robbed me — so now I'm holding the <Robber> card with no action taken. I have no night information. But I don't need night info to cross-examine. Everyone who DID have a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. The jury is listening.",
+      "log_line": "[2026-06-30 14:58:29 HKT] The Prosecutor: Court is in session. Last game I played everyone like a fiddle — this time I'm playing it straight. I was a Villager, and someone robbed me — so now I'm holding the Robber card with no action taken. I have no night information. But I don't need night info to cross-examine. Everyone who DID have a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. The jury is listening."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "Um, hi. I'm... a little confused, actually? I think I started as a <Villager>, but something happened during the night — the <Troublemaker> must have swapped me, because now I have the <Seer> card. But I didn't get to use it, so I don't have any information. I'm sorry, I know that's not very helpful. I just... I want to be honest about what I know, which is basically nothing. Can someone help me understand what's going on?",
+      "log_line": "[2026-06-30 14:59:17 HKT] The Underdog: Um, hi. I'm... a little confused, actually? I think I started as a Villager, but something happened during the night — the Troublemaker must have swapped me, because now I have the Seer card. But I didn't get to use it, so I don't have any information. I'm sorry, I know that's not very helpful. I just... I want to be honest about what I know, which is basically nothing. Can someone help me understand what's going on?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Oh, this is delicious. Two people both claiming <Seer>-adjacent information, and one of them is almost certainly wrong — or lying. I can't confirm what I did last night, but I can tell you this: someone in this room is wearing a role that doesn't belong to them. And I don't just mean the <Robber>'s theft. Patterns exist. Swaps exist. The question is whether anyone is brave enough to admit they don't know what they actually are.",
+      "log_line": "[2026-06-30 14:59:53 HKT] The Chaos Agent: Oh, this is delicious. Two people both claiming Seer-adjacent information, and one of them is almost certainly wrong — or lying. I can't confirm what I did last night, but I can tell you this: someone in this room is wearing a role that doesn't belong to them. And I don't just mean the Robber's theft. Patterns exist. Swaps exist. The question is whether anyone is brave enough to admit they don't know what they actually are."
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Therapist",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Statistician",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Prosecutor",
+      "mentioned_recently": true
+    }
+  ],
+  "chat_history": "[2026-06-30 14:57:27 HKT] The Gut Player: Alright, listen up — I got something real this time. I was the Robber last night, and I snatched The Prosecutor's card. You know what I got? Villager. Plain, boring Villager. So The Prosecutor was a Villager, and now they're walking around with my old Robber card. I'm laying it out straight — I'm a Villager now, and The Prosecutor's the Robber. Anyone else got night info, spill it.\n[2026-06-30 14:57:53 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter.\n[2026-06-30 14:58:18 HKT] The Statistician: Right. I'll put the data on the table. I was the Seer — my card was taken, so I'm a Villager now. But before that, I inspected center cards 0 and 1. Both are Werewolf. That means both Werewolf cards sit in the center. No player holds a Werewolf role. The werewolf team has no Werewolves among us — at most a Minion. The village cannot win by executing a Werewolf because there isn't one. Our only win condition is executing a Tanner, if one exists. Everyone with a night action, state your role, target, and result. Now.\n[2026-06-30 14:58:29 HKT] The Prosecutor: Court is in session. Last game I played everyone like a fiddle — this time I'm playing it straight. I was a Villager, and someone robbed me — so now I'm holding the Robber card with no action taken. I have no night information. But I don't need night info to cross-examine. Everyone who DID have a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. The jury is listening.\n[2026-06-30 14:59:17 HKT] The Underdog: Um, hi. I'm... a little confused, actually? I think I started as a Villager, but something happened during the night — the Troublemaker must have swapped me, because now I have the Seer card. But I didn't get to use it, so I don't have any information. I'm sorry, I know that's not very helpful. I just... I want to be honest about what I know, which is basically nothing. Can someone help me understand what's going on?\n[2026-06-30 14:59:53 HKT] The Chaos Agent: Oh, this is delicious. Two people both claiming Seer-adjacent information, and one of them is almost certainly wrong — or lying. I can't confirm what I did last night, but I can tell you this: someone in this room is wearing a role that doesn't belong to them. And I don't just mean the Robber's theft. Patterns exist. Swaps exist. The question is whether anyone is brave enough to admit they don't know what they actually are.\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

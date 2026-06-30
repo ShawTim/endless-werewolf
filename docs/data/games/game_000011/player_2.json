@@ -1,0 +1,23 @@
+{
+  "id": "2",
+  "name": "The Therapist",
+  "model": "proxy-shawtim/kimi-k2.6",
+  "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+  "thinking": "high",
+  "initial_role": "Werewolf",
+  "current_role": "Robber",
+  "night_memory": "You are the only Werewolf in play. You may peek at one center card. You peeked at center card 0 and saw: Troublemaker.",
+  "night_memory_list": [
+    "You are the only Werewolf in play. You may peek at one center card.",
+    "You peeked at center card 0 and saw: Troublemaker."
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Troublemaker",
+      "source": "agent"
+    }
+  ]
+}

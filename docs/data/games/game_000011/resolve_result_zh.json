@@ -1,0 +1,64 @@
+{
+  "status": "completed",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
+  "winners": [
+    "The Prosecutor",
+    "The Underdog"
+  ],
+  "reason": "沒有狼人被處決。",
+  "executed": [
+    "The Chaos Agent"
+  ],
+  "werewolves_in_play": [
+    "The Underdog"
+  ],
+  "executed_werewolves": [],
+  "votes": {
+    "The Prosecutor": "The Chaos Agent",
+    "The Therapist": "The Statistician",
+    "The Chaos Agent": "The Prosecutor",
+    "The Gut Player": "The Chaos Agent",
+    "The Statistician": "The Chaos Agent",
+    "The Underdog": "The Gut Player"
+  },
+  "tally": {
+    "The Chaos Agent": 3,
+    "The Statistician": 1,
+    "The Prosecutor": 1,
+    "The Gut Player": 1
+  },
+  "final_roles": {
+    "The Prosecutor": {
+      "initial_role": "Minion",
+      "current_role": "Minion",
+      "team": "werewolf_team"
+    },
+    "The Therapist": {
+      "initial_role": "Werewolf",
+      "current_role": "Robber",
+      "team": "village_team"
+    },
+    "The Chaos Agent": {
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "team": "village_team"
+    },
+    "The Gut Player": {
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
+      "team": "tanner"
+    },
+    "The Statistician": {
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "team": "village_team"
+    },
+    "The Underdog": {
+      "initial_role": "Robber",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
+    }
+  },
+  "game_id": "game_000011"
+}

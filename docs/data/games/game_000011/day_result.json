@@ -1,0 +1,68 @@
+{
+  "status": "completed",
+  "game_id": "game_000011",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 0
+    },
+    "The Therapist": {
+      "speak_count": 0
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 0
+    },
+    "The Underdog": {
+      "speak_count": 0
+    }
+  },
+  "day_trace": [
+    {
+      "type": "pass",
+      "player_name": "The Therapist",
+      "mentioned_recently": false
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.",
+      "log_line": "[2026-06-30 16:46:59 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?",
+      "log_line": "[2026-06-30 16:49:30 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call failed: GatewayClientRequestError: EmbeddedAttemptSessionTakeoverError: session file locked (timeout 60000ms): pid=2773557 alive=true ageMs=120025 /home/openclaw/.openclaw/agents/ai_werewolf_bridge/sessions/b17bda48-cbb0-4043-823e-db87490b9e8a.jsonl.lock <- EmbeddedAttemptSe..."
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Underdog",
+      "error": "bridge call failed: GatewayClientRequestError: Error: CLI transcript compaction failed for proxy-shawtim/qwen3.5: Compaction timed out"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Prosecutor",
+      "error": "Extra data: line 3 column 1 (char 736)"
+    }
+  ],
+  "chat_history": "[2026-06-30 16:46:59 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.\n[2026-06-30 16:49:30 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}
