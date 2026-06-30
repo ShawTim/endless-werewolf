@@ -130,6 +130,13 @@ def apply_non_decision_info(game):
         if len(werewolves) >= 2:
             others = [players[x]["name"] for x in werewolves if x != wid]
             add_memory(wolf_state, f"You saw the other Werewolf is: {', '.join(others)}.")
+            add_trace(game, {
+                "actor": wolf_state["name"],
+                "role": ROLE_WEREWOLF,
+                "action": "peek_wolves",
+                "targets": others,
+                "source": "deterministic",
+            })
         else:
             add_memory(wolf_state, "You are the only Werewolf in play. You may peek at one center card.")
 
@@ -139,6 +146,13 @@ def apply_non_decision_info(game):
         if werewolves:
             wolf_names = [players[x]["name"] for x in werewolves]
             add_memory(minion_state, f"You saw the Werewolves are: {', '.join(wolf_names)}. The Werewolves do not know you are the Minion.")
+            add_trace(game, {
+                "actor": minion_state["name"],
+                "role": ROLE_MINION,
+                "action": "identify_wolves",
+                "targets": wolf_names,
+                "source": "deterministic",
+            })
         else:
             add_memory(minion_state, "You woke up and saw no Werewolves, meaning both Werewolf cards may be in the center.")
 
