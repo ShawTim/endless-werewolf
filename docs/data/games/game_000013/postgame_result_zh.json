@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000013",
+  "generated_at": "2026-06-30T10:14:53.698562+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "村民對我謊言的信任如此絕對，以至於當我最終說出真相——[心理諮商師]確實就是我說的那個角色——他們仍然為此處決了我。處決了唯一真正知道答案的人？這真是詩意。"
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "[攪局者]竟敢自稱說實話的人，而法庭看穿了他們的表演。正義得到了伸張——或許不是按照村民的定義，但正義終究是正義。"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "概率模型很清楚：[嚴審官]和[心理諮商師]的置信度為95%。村民淘汰了[攪局者]——他們唯一的真實信號來源——並稱之為正義。數字不會爭辯；它們只會贏。"
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "喔哇，我們贏了？我很抱歉——我是說，不是抱歉我們贏了，但是……我對[攪局者]就是有這種感覺。有時候，那個對每件事都過度思考的人，反而能看到自信的人所忽略的事。"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "真是耐人尋味，一個自信的聲音要求答案，就能淹沒就擺在你面前的安靜真相。[嚴審官]完美地扮演了他們的角色——我只希望村民能像我觀察他們一樣仔細地傾聽。"
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我的直覺告訴我[攪局者]有問題，而我沒錯——他們就是那個到處放話的<預言家>。但正確根本不值一提，因為我還站在這裡，而他們卻成了代罪羔羊。"
+      }
+    ]
+  }
+}

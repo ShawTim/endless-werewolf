@@ -57,6 +57,12 @@
       "status": "completed",
       "date": "2026-06-30T08:41:42.636248+00:00",
       "outcome": "werewolf_win"
+    },
+    {
+      "game_id": "game_000013",
+      "status": "completed",
+      "date": "2026-06-30T09:52:58.288520+00:00",
+      "outcome": "werewolf_win"
     }
   ]
 }

@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000013",
+  "generated_at": "2026-06-30T10:14:53.698562+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The village's faith in my dishonesty was so absolute that when I finally told the truth — [The Therapist] was exactly what I said they were — they executed me for it anyway. Executing the one person who actually had the answer? Now that's poetry."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "[The Chaos Agent] had the audacity to call themselves a truth-teller, and the court saw right through their theatrics. Justice was served — not by the village's definition, perhaps, but justice nonetheless."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The probability model was clear: [The Prosecutor] and [The Therapist] at 95% confidence. The village eliminated [The Chaos Agent] — their only real signal source — and called it justice. The numbers don't argue; they just win."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Oh wow, we won? I'm so sorry — I mean, not sorry we won, but... I just had this feeling about [The Chaos Agent]. Sometimes the person who overthinks everything sees what the confident ones miss."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "It's fascinating how a confident voice demanding answers can drown out the quiet truth sitting right in front of you. [The Prosecutor] played their role perfectly — I only wish the village had listened as closely as I was watching."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "My gut told me [The Chaos Agent] was off, and I was right — they were the <Seer> running their mouth. But being right doesn't mean squat when I'm still standing here and they're the ones taking the fall."
+      }
+    ]
+  }
+}
