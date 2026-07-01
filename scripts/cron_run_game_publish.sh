@@ -3,14 +3,12 @@ set -euo pipefail
 
 cd /home/openclaw/.openclaw/workspaces/ai-werewolf
 
-# 1) Start a fresh game, auto-decide night actions deterministically, finalize night.
+# 1) Night phase: new game + AI decisions + finalize
 python3 - <<'PY'
 import json, subprocess, uuid
 from pathlib import Path
 import gm_night
 import bridge_agent
-
-WORKSPACE = Path(__file__).resolve().parent.parent
 
 prepared = gm_night.prepare_run(start_new_game=True)
 game_dir = Path(prepared["game_dir"])
@@ -18,7 +16,6 @@ plan = prepared["plan"]
 partial = prepared["partial_state"]
 
 def call_bridge_for_night(step: dict) -> dict:
-    """Ask bridge agent to decide a player's night action."""
     dr = step["decision_request"]
     model = dr.get("model", "")
     thinking = dr.get("thinking", "off")
@@ -28,7 +25,7 @@ def call_bridge_for_night(step: dict) -> dict:
          "--message", prompt, "--json",
          "--model", model, "--thinking", thinking,
          "--session-id", str(uuid.uuid4())],
-        cwd=str(WORKSPACE),
+        cwd=".",
         capture_output=True, text=True, check=False,
     )
     if proc.returncode != 0:
@@ -61,7 +58,6 @@ for step in plan:
         decisions[name] = decision
         print(f"[night] {name}: {decision}", flush=True)
     except Exception as e:
-        # Fallback to first legal action if AI fails
         legal = step["decision_request"]["legal_actions"]
         role = step["role"]
         if role.startswith("Troublemaker"):
@@ -78,24 +74,30 @@ gm_night.finalize_run(decisions_by_name=decisions, prepared_state=partial, game_
 print(json.dumps({"game_id": prepared["game_id"], "decisions": decisions}, ensure_ascii=False))
 PY
 
-# 2) Day + vote + resolve + translate
-# IMPORTANT: keepalive output prevents CLI harness idle-kill (180s no-output watchdog)
-python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1 &
+# 2) Day + Vote + Resolve + Postgame + Tag + Translate ZH
+PYTHONUNBUFFERED=1 python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1 &
 RUN_PID=$!
 while kill -0 "$RUN_PID" 2>/dev/null; do
   echo "[keepalive] run_full_game still running: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
   sleep 30
 done
 wait "$RUN_PID"
-echo "Game ends. Now rebuild pages data..."
 
-# 3) Rebuild pages data
+# 3) Verify game data before publishing
+echo "=== Verifying game data ==="
+if ! python3 scripts/verify_game.py >/tmp/werewolf_verify.log 2>&1; then
+  echo "VERIFICATION FAILED — game data unhealthy, skipping publish."
+  cat /tmp/werewolf_verify.log
+  exit 1
+fi
+echo "Verification passed."
+cat /tmp/werewolf_verify.log
+
+# 4) Rebuild pages data
 python3 scripts/build_pages.py >/tmp/werewolf_build_pages.log 2>&1
-echo "Rebuild pages data done. Now going to push..."
+echo "Pages data rebuilt."
 
-# 4) Public safety check + publish
+# 5) Public safety check + publish
 bash scripts/check_public_repo.sh >/tmp/werewolf_public_check.log 2>&1
-
 bash scripts/publish_pages.sh
-
 echo "Published new game round."

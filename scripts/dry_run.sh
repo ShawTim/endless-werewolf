@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Full game pipeline: night → day → vote → resolve → postgame → tag → translate_zh
 # Usage: ./scripts/dry_run.sh [count]   (default count=1)
-# Each run starts a new game automatically. No manual setup needed.
+# Each run starts a new game automatically. No publish.
 set -euo pipefail
 
 cd /home/openclaw/.openclaw/workspaces/ai-werewolf
@@ -23,7 +23,7 @@ run_one_game() {
   # 1. Night phase: new game + prepare + AI decisions + finalize
   echo "[1/6] Night phase..."
   python3 - <<'PY'
-import json, subprocess, sys
+import json, subprocess, uuid
 from pathlib import Path
 import gm_night, bridge_agent
 
@@ -35,13 +35,14 @@ partial = prepared["partial_state"]
 def call_bridge(step):
     dr = step["decision_request"]
     model = dr.get("model", "")
-    thinking = dr.get("thinking", "high")
+    thinking = dr.get("thinking", "off")
     prompt = bridge_agent.build_night_action_prompt(dr)
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
          "--message", prompt, "--json",
-         "--model", model, "--thinking", thinking],
-        cwd=str(Path(".")),
+         "--model", model, "--thinking", thinking,
+         "--session-id", str(uuid.uuid4())],
+        cwd=".",
         capture_output=True, text=True, check=False,
     )
     if proc.returncode != 0:
@@ -97,7 +98,12 @@ PY
   echo "[6/6] Translate to ZH..."
   PYTHONUNBUFFERED=1 python3 run_full_game.py
 
-  # 3. Verify: show postgame EN + ZH
+  # 3. Verify
+  echo ""
+  echo "--- Verify ---"
+  python3 scripts/verify_game.py || echo "(verify failed but continuing dry run)"
+
+  # 4. Show postgame quotes
   echo ""
   echo "--- Postgame Quotes (EN) ---"
   python3 - <<'PY'
