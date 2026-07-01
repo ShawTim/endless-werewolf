@@ -6,7 +6,7 @@
       "phase": "night",
       "player_name": "The Therapist",
       "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
-      "model": "proxy-shawtim/kimi-k2.6",
+      "model": "kimi",
       "thinking": "high",
       "initial_role": "Werewolf",
       "night_memory": [
@@ -43,7 +43,7 @@
       "phase": "night",
       "player_name": "The Statistician",
       "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
-      "model": "proxy-shawtim/nemotron-3-ultra",
+      "model": "nemotron",
       "thinking": "high",
       "initial_role": "Troublemaker",
       "night_memory": [],

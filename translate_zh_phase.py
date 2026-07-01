@@ -115,7 +115,7 @@ def _call_translator(prompt: str) -> str:
              "--agent", "ai_werewolf_bridge",
              "--message", prompt,
              "--json",
-             "--model", "aistudio/gemini-3.1-pro-preview",
+             "--model", "deepseek-flash",
              "--thinking", "low",
              "--session-id", str(uuid.uuid4())],
             cwd=str(WORKSPACE),
