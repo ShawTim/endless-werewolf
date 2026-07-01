@@ -108,6 +108,7 @@ def _build_translation_prompt(items: list[tuple[str, str]]) -> str:
 
 def _call_gemini(prompt: str) -> str:
     """Call Gemini via openclaw agent for translation."""
+    import uuid
     try:
         proc = subprocess.run(
             ["openclaw", "agent",
@@ -115,7 +116,8 @@ def _call_gemini(prompt: str) -> str:
              "--message", prompt,
              "--json",
              "--model", "aistudio/gemini-3.1-pro-preview",
-             "--thinking", "low"],
+             "--thinking", "low",
+             "--session-id", str(uuid.uuid4())],
             cwd=str(WORKSPACE),
             capture_output=True, text=True, check=False,
             timeout=120,

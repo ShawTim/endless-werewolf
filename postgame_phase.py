@@ -39,11 +39,13 @@ def _mood(status: str, executed: bool) -> str:
 
 
 def _call_bridge(prompt: str, model: str | None = None, thinking: str | None = None) -> dict[str, Any]:
+    import uuid
     cmd = [
         "openclaw", "agent",
         "--agent", BRIDGE_AGENT_ID,
         "--message", prompt,
         "--json",
+        "--session-id", str(uuid.uuid4()),
     ]
     # Pass --model so each player uses their own assigned model
     if model:

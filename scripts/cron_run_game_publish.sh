@@ -5,7 +5,7 @@ cd /home/openclaw/.openclaw/workspaces/ai-werewolf
 
 # 1) Start a fresh game, auto-decide night actions deterministically, finalize night.
 python3 - <<'PY'
-import json, subprocess
+import json, subprocess, uuid
 from pathlib import Path
 import gm_night
 import bridge_agent
@@ -26,7 +26,8 @@ def call_bridge_for_night(step: dict) -> dict:
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
          "--message", prompt, "--json",
-         "--model", model, "--thinking", thinking],
+         "--model", model, "--thinking", thinking,
+         "--session-id", str(uuid.uuid4())],
         cwd=str(WORKSPACE),
         capture_output=True, text=True, check=False,
     )

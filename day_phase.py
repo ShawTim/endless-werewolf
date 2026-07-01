@@ -67,11 +67,13 @@ class BridgeAgentClient:
         self.bridge_agent_id = bridge_agent_id
 
     async def _call_bridge(self, prompt: str, model: str | None = None, thinking: str | None = None) -> dict[str, Any]:
+        import uuid
         cmd = [
             "openclaw", "agent",
             "--agent", self.bridge_agent_id,
             "--message", prompt,
             "--json",
+            "--session-id", str(uuid.uuid4()),
         ]
         # Pass --model so each player uses their own assigned model
         if model:
