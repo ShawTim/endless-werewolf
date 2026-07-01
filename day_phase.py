@@ -186,7 +186,7 @@ class DayPhaseRuntime:
             "player_name": player["name"],
             "persona": player["persona"],
             "model": player["model"],
-            "thinking": player.get("thinking", "high"),
+            "thinking": player.get("thinking", "off"),
             "initial_role": player["initial_role"],
             "current_role": player["current_role"],
             "night_memory": player.get("night_memory", []),

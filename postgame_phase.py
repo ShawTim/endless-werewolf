@@ -83,7 +83,7 @@ def _call_bridge(prompt: str, model: str | None = None, thinking: str | None = N
         return {"_raw": text}
 
 
-def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str, thinking: str = "high") -> str:
+def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], model: str, thinking: str = "off") -> str:
     """Call bridge agent to get an AI-generated postgame quote. Falls back to empty string on error."""
     try:
         prompt = bridge_agent.build_postgame_prompt(player_context, game_summary)
@@ -145,7 +145,7 @@ def run_postgame_phase() -> dict[str, Any]:
                 break
 
         model = (player_state or {}).get("model", FALLBACK_MODEL)
-        thinking = (player_state or {}).get("thinking", "high")
+        thinking = (player_state or {}).get("thinking", "off")
         persona = (player_state or {}).get("persona", "")
 
         player_context = {

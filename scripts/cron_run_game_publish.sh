@@ -21,7 +21,7 @@ def call_bridge_for_night(step: dict) -> dict:
     """Ask bridge agent to decide a player's night action."""
     dr = step["decision_request"]
     model = dr.get("model", "")
-    thinking = dr.get("thinking", "high")
+    thinking = dr.get("thinking", "off")
     prompt = bridge_agent.build_night_action_prompt(dr)
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
