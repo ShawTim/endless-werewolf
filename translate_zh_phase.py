@@ -1,6 +1,6 @@
 """
 Translate game data from English to Traditional Chinese (正體中文書面語).
-Uses Gemini for high-quality, context-aware translation that preserves character voices.
+Uses an LLM bridge agent for high-quality, context-aware translation that preserves character voices.
 
 Pipeline step: runs after translate_phase (en), before build_pages.
 Produces *_zh.json and chat_history_zh.md alongside originals.
@@ -35,7 +35,7 @@ SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "player_name_zh", "pla
 
 def _pre_translate_tags(text: str, en_to_zh_players: dict[str, str]) -> str:
     """
-    Deterministically translate <Role> and [Player] tags BEFORE sending to Gemini.
+    Deterministically translate <Role> and [Player] tags BEFORE sending to the LLM.
     This guarantees consistent role/player name translation.
     """
     if not text:
@@ -73,7 +73,7 @@ def _needs_translation(key: str, value: Any) -> bool:
 
 
 def _build_translation_prompt(items: list[tuple[str, str]]) -> str:
-    """Build a batch translation prompt for Gemini."""
+    """Build a batch translation prompt for the LLM."""
     lines = []
     lines.append("You are a professional translator. Translate the following English texts to Traditional Chinese (正體中文書面語 - proper written Chinese, NOT Cantonese).")
     lines.append("")
@@ -106,8 +106,8 @@ def _build_translation_prompt(items: list[tuple[str, str]]) -> str:
     return "\n".join(lines)
 
 
-def _call_gemini(prompt: str) -> str:
-    """Call Gemini via openclaw agent for translation."""
+def _call_translator(prompt: str) -> str:
+    """Call LLM via openclaw bridge agent for translation."""
     import uuid
     try:
         proc = subprocess.run(
@@ -123,7 +123,7 @@ def _call_gemini(prompt: str) -> str:
             timeout=120,
         )
         if proc.returncode != 0:
-            raise RuntimeError(f"Gemini call failed: {proc.stderr.strip()[:300]}")
+            raise RuntimeError(f"LLM call failed: {proc.stderr.strip()[:300]}")
 
         resp = json.loads(proc.stdout)
         result = ((resp or {}).get("result") or {}).get("payloads") or []
@@ -133,12 +133,12 @@ def _call_gemini(prompt: str) -> str:
         text = (result[0].get("text") or "").strip()
         return text
     except Exception as e:
-        print(f"[translate_zh] Gemini call error: {e}")
+        print(f"[translate_zh] LLM call error: {e}")
         return ""
 
 
-def _parse_gemini_response(text: str, expected_count: int) -> list[str]:
-    """Parse the JSON array from Gemini response."""
+def _parse_llm_response(text: str, expected_count: int) -> list[str]:
+    """Parse the JSON array from LLM response."""
     text = text.strip()
     # Try direct JSON parse
     try:
@@ -167,7 +167,7 @@ def _parse_gemini_response(text: str, expected_count: int) -> list[str]:
 
 
 def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
-    """Translate a batch of texts using Gemini."""
+    """Translate a batch of texts using the LLM."""
     if not items:
         return []
 
@@ -177,8 +177,8 @@ def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
     for i in range(0, len(items), BATCH_SIZE):
         batch = items[i:i + BATCH_SIZE]
         prompt = _build_translation_prompt(batch)
-        response = _call_gemini(prompt)
-        translations = _parse_gemini_response(response, len(batch))
+        response = _call_translator(prompt)
+        translations = _parse_llm_response(response, len(batch))
 
         # Fallback: if translation failed, keep original
         for j, (key, orig) in enumerate(batch):
@@ -290,13 +290,13 @@ def run_translate_zh_phase() -> dict[str, Any]:
     unique_items = list(all_texts.values())
     print(f"[translate_zh] Translating {len(unique_items)} unique texts...")
 
-    # Pre-translate tags deterministically BEFORE Gemini
+    # Pre-translate tags deterministically BEFORE LLM
     # This ensures <Seer> always becomes <預言家>, never <先知>
     pre_translated = {}
     for orig in unique_items:
         pre_translated[orig] = _pre_translate_tags(orig, en_to_zh_players)
 
-    # Send to Gemini for prose translation (tags already in Chinese)
+    # Send to LLM for prose translation (tags already in Chinese)
     batch_items = [("text", pre_translated[t]) for t in unique_items]
     translated_texts = _translate_batch(batch_items)
 

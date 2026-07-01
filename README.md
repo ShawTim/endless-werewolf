@@ -42,7 +42,7 @@ Postgame →  In-character interviews: winners celebrate, losers explain
 | Voting | **AI** |
 | Outcome resolution | Rule-based (game rules) |
 | Postgame interviews | **AI** — in-character reflection |
-| Chinese translation | **Gemini 3.1 Pro** (正體中文書面語) |
+| Chinese translation | **LLM bridge agent** (正體中文書面語) |
 
 ---
 
@@ -54,7 +54,7 @@ Postgame →  In-character interviews: winners celebrate, losers explain
 
 **Frontend** — Three.js 3D scene on GitHub Pages. Candlelit round table, 6 stylized characters, phase-by-phase replay, speech bubbles, vote arrows, confetti. AI-generated textures and lighting.
 
-**Bilingual** — All game content is generated in English, then translated to 正體中文書面語 via Gemini for a parallel Chinese track.
+**Bilingual** — All game content is generated in English, then translated to 正體中文書面語 via an LLM bridge agent for a parallel Chinese track.
 
 ---
 
@@ -68,7 +68,7 @@ day_phase.py             concurrent AI debate loop
 resolve_phase.py         rule-based outcome resolution
 postgame_phase.py        AI postgame interviews
 tag_phase.py             post-process: add <Role> [Player] markup
-translate_zh_phase.py    Gemini translation (EN → 正體中文書面語)
+translate_zh_phase.py    LLM translation (EN → 正體中文書面語)
 cross_game_memory.py     inject previous game data into player context
 state_manager.py         game directories, manifests, counters
 run_full_game.py         orchestrates the full pipeline
