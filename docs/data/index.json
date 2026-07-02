@@ -2,27 +2,76 @@
   "schema_version": 1,
   "games": [
     {
-      "game_id": "game_000006",
+      "game_id": "game_000011",
       "status": "completed",
-      "created_at": "2026-06-29T03:45:22.499166+00:00",
-      "completed_at": "2026-06-29T04:27:25.672431+00:00",
+      "created_at": "2026-07-01T16:01:33.057588+00:00",
+      "completed_at": "2026-07-01T16:11:23.145456+00:00",
       "outcome": "werewolf_win",
       "winner_team": "werewolf_team",
       "executed": [
-        "The Statistician"
+        "The Prosecutor"
       ],
       "winners": [
-        "The Prosecutor",
-        "The Gut Player"
+        "The Gut Player",
+        "The Statistician"
       ],
       "votes_count": 6,
-      "chat_lines": 9
+      "chat_lines": 10
+    },
+    {
+      "game_id": "game_000010",
+      "status": "completed",
+      "created_at": "2026-06-30T08:26:58.442972+00:00",
+      "completed_at": "2026-06-30T08:37:48.399392+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "The Underdog",
+        "The Therapist"
+      ],
+      "winners": [
+        "The Chaos Agent",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "votes_count": 6,
+      "chat_lines": 6
+    },
+    {
+      "game_id": "game_000009",
+      "status": "completed",
+      "created_at": "2026-06-30T06:55:21.409702+00:00",
+      "completed_at": "2026-06-30T07:09:05.638059+00:00",
+      "outcome": "no_team_win",
+      "winner_team": "none",
+      "executed": [
+        "The Therapist"
+      ],
+      "winners": [],
+      "votes_count": 6,
+      "chat_lines": 6
+    },
+    {
+      "game_id": "game_000008",
+      "status": "completed",
+      "created_at": "2026-06-30T06:43:34.181681+00:00",
+      "completed_at": "2026-06-30T06:49:20.352196+00:00",
+      "outcome": "tanner_win",
+      "winner_team": "tanner",
+      "executed": [
+        "The Prosecutor"
+      ],
+      "winners": [
+        "The Prosecutor"
+      ],
+      "votes_count": 6,
+      "chat_lines": 6
     },
     {
       "game_id": "game_000007",
       "status": "completed",
       "created_at": "2026-06-29T04:48:37.991743+00:00",
-      "completed_at": "2026-06-29T05:06:30.561234+00:00",
+      "completed_at": "2026-06-29T05:03:09.045355+00:00",
       "outcome": "werewolf_win",
       "winner_team": "werewolf_team",
       "executed": [
@@ -35,22 +84,21 @@
       "chat_lines": 12
     },
     {
-      "game_id": "game_000008",
+      "game_id": "game_000006",
       "status": "completed",
-      "date": "2026-06-30T06:43:34.181681+00:00",
-      "outcome": "tanner_win"
-    },
-    {
-      "game_id": "game_000009",
-      "status": "completed",
-      "date": "2026-06-30T06:55:21.409702+00:00",
-      "outcome": "no_team_win"
-    },
-    {
-      "game_id": "game_000010",
-      "status": "completed",
-      "date": "2026-06-30T08:26:58.442972+00:00",
-      "outcome": "village_win"
+      "created_at": "2026-06-29T03:45:22.499166+00:00",
+      "completed_at": "2026-06-29T04:10:28.849789+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "The Statistician"
+      ],
+      "winners": [
+        "The Prosecutor",
+        "The Gut Player"
+      ],
+      "votes_count": 6,
+      "chat_lines": 9
     }
   ]
 }

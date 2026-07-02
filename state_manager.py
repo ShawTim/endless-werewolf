@@ -30,9 +30,15 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def _next_game_id() -> str:
     payload = _read_json(COUNTER_PATH, {"last": 0})
-    last = int(payload.get("last", 0)) + 1
-    _write_json(COUNTER_PATH, {"last": last, "updated_at": _utc_now()})
-    return f"game_{last:06d}"
+    while True:
+        last = int(payload.get("last", 0)) + 1
+        game_id = f"game_{last:06d}"
+        if not (GAMES_DIR / game_id).exists():
+            _write_json(COUNTER_PATH, {"last": last, "updated_at": _utc_now()})
+            return game_id
+        # Directory exists, skip and increment counter
+        payload["last"] = last
+        _write_json(COUNTER_PATH, {"last": last, "updated_at": _utc_now()})
 
 
 def start_new_game() -> dict[str, Any]:

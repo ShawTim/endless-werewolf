@@ -3,19 +3,19 @@
   "name": "The Prosecutor",
   "model": "glm5.2",
   "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
-  "thinking": "high",
-  "initial_role": "Seer",
-  "current_role": "Seer",
-  "night_memory": "You inspected The Therapist and their role is: Werewolf.",
+  "thinking": "off",
+  "initial_role": "Robber",
+  "current_role": "Villager",
+  "night_memory": "You robbed The Therapist's card. After swapping, you are now: Villager.",
   "night_memory_list": [
-    "You inspected The Therapist and their role is: Werewolf."
+    "You robbed The Therapist's card. After swapping, you are now: Villager."
   ],
   "night_actions": [
     {
-      "role": "Seer",
-      "action": "inspect_player",
+      "role": "Robber",
+      "action": "rob",
       "target": "The Therapist",
-      "seen_role": "Werewolf",
+      "new_role": "Villager",
       "source": "agent"
     }
   ]

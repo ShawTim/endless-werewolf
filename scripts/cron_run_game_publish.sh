@@ -27,6 +27,7 @@ def call_bridge_for_night(step: dict) -> dict:
          "--session-id", str(uuid.uuid4())],
         cwd=".",
         capture_output=True, text=True, check=False,
+        timeout=120,
     )
     if proc.returncode != 0:
         raise RuntimeError(f"bridge failed for {dr['player_name']}: {proc.stderr.strip()}")
@@ -75,13 +76,8 @@ print(json.dumps({"game_id": prepared["game_id"], "decisions": decisions}, ensur
 PY
 
 # 2) Day + Vote + Resolve + Postgame + Tag + Translate ZH
-PYTHONUNBUFFERED=1 python3 run_full_game.py >/tmp/werewolf_run_latest.log 2>&1 &
-RUN_PID=$!
-while kill -0 "$RUN_PID" 2>/dev/null; do
-  echo "[keepalive] run_full_game still running: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-  sleep 30
-done
-wait "$RUN_PID"
+# Run in foreground so the cron agent waits for completion
+PYTHONUNBUFFERED=1 python3 run_full_game.py 2>&1 | tee /tmp/werewolf_run_latest.log
 
 # 3) Verify game data before publishing
 echo "=== Verifying game data ==="

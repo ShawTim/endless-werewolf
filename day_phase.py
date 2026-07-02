@@ -82,14 +82,18 @@ class BridgeAgentClient:
         if thinking:
             cmd.extend(["--thinking", thinking])
 
-        proc = await asyncio.to_thread(
-            subprocess.run,
-            cmd,
-            cwd=str(WORKSPACE),
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        try:
+            proc = await asyncio.to_thread(
+                subprocess.run,
+                cmd,
+                cwd=str(WORKSPACE),
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=120,
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("bridge call timed out after 120s")
 
         if proc.returncode != 0:
             raise RuntimeError(f"bridge call failed: {proc.stderr.strip() or proc.stdout.strip()}")

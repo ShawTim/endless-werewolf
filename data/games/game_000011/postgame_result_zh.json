@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000008",
+  "generated_at": "2026-07-01T16:14:22.172455+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "I lost the case, I lost the vote, and now I'm sitting here like a disbarred man watching the real criminals walk free. [直覺俠]'s 'instincts' put me in the ground — congratulations, your gut just helped the wolves win. I hope you're proud of that verdict."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Ha! Told you my gut's never wrong — I said the Prosecutor felt off and look who got dragged out! Maybe next time you'll listen to the guy with instincts instead of your little courtroom speeches, yeah?"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Textbook Bayesian exploitation — the village discarded their only verified likelihood ([嚴審官]'s <強盜> claim) for a prior of zero, while [攪局者]'s unfalsifiable <預言家> claim absorbed all suspicion. The data never lied; the villagers just refused to update."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "[嚴審官] needed an audience, and I gave them one. I was so busy listening to their elaborate defense that I forgot to ask the quiet ones what they weren't saying."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Good game — I flung a <預言家> claim at the wall as a <皮匠> just to see what stuck, and somehow [嚴審官] ate my bait and got lynched for it. Technically I lost, but watching the whole room chase a ghost I made up? That's the only win I was playing for."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I'm so sorry, [嚴審官]... I think you were actually telling the truth about being the <強盜>, but I froze up because I was terrified of being wrong. Now [直覺俠] and [攪局者] probably won as werewolves, and I can't stop wondering if one honest sentence from me could have changed everything."
+      }
+    ]
+  }
+}

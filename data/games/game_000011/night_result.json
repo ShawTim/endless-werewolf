@@ -7,13 +7,23 @@
       "name_en": "The Prosecutor",
       "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
       "model": "glm5.2",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 0,
-      "initial_role": "Seer",
-      "current_role": "Seer",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Robber",
+      "current_role": "Villager",
+      "night_memory": [
+        "You robbed [The Therapist]'s card. After swapping, you are now: <Villager>."
+      ],
+      "night_actions": [
+        {
+          "role": "Robber",
+          "action": "rob",
+          "target": "The Therapist",
+          "new_role": "Villager",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You robbed [The Therapist]'s card. After swapping, you are now: <Villager>."
     },
     "2": {
       "id": "2",
@@ -22,15 +32,13 @@
       "name_en": "The Therapist",
       "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
       "model": "kimi",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 1,
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
-      "night_memory": [
-        "You are the only Werewolf in play. You may peek at one center card."
-      ],
+      "initial_role": "Villager",
+      "current_role": "Robber",
+      "night_memory": [],
       "night_actions": [],
-      "night_memory_text": "You are the only Werewolf in play. You may peek at one center card."
+      "night_memory_text": ""
     },
     "3": {
       "id": "3",
@@ -39,15 +47,13 @@
       "name_en": "The Chaos Agent",
       "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
       "model": "minimax",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 2,
-      "initial_role": "Minion",
-      "current_role": "Minion",
-      "night_memory": [
-        "You saw the Werewolves are: The Therapist. The Werewolves do not know you are the Minion."
-      ],
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
+      "night_memory": [],
       "night_actions": [],
-      "night_memory_text": "You saw the Werewolves are: The Therapist. The Werewolves do not know you are the Minion."
+      "night_memory_text": ""
     },
     "4": {
       "id": "4",
@@ -58,11 +64,22 @@
       "model": "deepseek-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Robber",
-      "current_role": "Robber",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You are the only <Werewolf> in play. You may peek at one center card.",
+        "You peeked at center card 0 and saw: <Troublemaker>."
+      ],
+      "night_actions": [
+        {
+          "role": "Werewolf",
+          "action": "inspect_center",
+          "target": 0,
+          "seen_role": "Troublemaker",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 0 and saw: <Troublemaker>."
     },
     "5": {
       "id": "5",
@@ -71,13 +88,15 @@
       "name_en": "The Statistician",
       "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
       "model": "nemotron",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 4,
-      "initial_role": "Villager",
-      "current_role": "Villager",
-      "night_memory": [],
+      "initial_role": "Minion",
+      "current_role": "Minion",
+      "night_memory": [
+        "You saw the Werewolves are: [The Gut Player]. The Werewolves do not know you are the <Minion>."
+      ],
       "night_actions": [],
-      "night_memory_text": ""
+      "night_memory_text": "You saw the Werewolves are: [The Gut Player]. The Werewolves do not know you are the <Minion>."
     },
     "6": {
       "id": "6",
@@ -86,10 +105,10 @@
       "name_en": "The Underdog",
       "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
       "model": "qwen3.5",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 5,
-      "initial_role": "Tanner",
-      "current_role": "Tanner",
+      "initial_role": "Villager",
+      "current_role": "Villager",
       "night_memory": [],
       "night_actions": [],
       "night_memory_text": ""
@@ -104,10 +123,34 @@
     "6"
   ],
   "center_cards": [
-    "Villager",
-    "Werewolf",
-    "Troublemaker"
+    "Troublemaker",
+    "Seer",
+    "Werewolf"
   ],
-  "night_trace": [],
-  "game_id": "game_000012"
+  "night_trace": [
+    {
+      "actor": "The Statistician",
+      "role": "Minion",
+      "action": "identify_wolves",
+      "targets": [
+        "The Gut Player"
+      ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Gut Player",
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "source": "agent"
+    },
+    {
+      "actor": "The Prosecutor",
+      "role": "Robber",
+      "action": "rob",
+      "target": "The Therapist",
+      "source": "agent"
+    }
+  ],
+  "game_id": "game_000008"
 }
