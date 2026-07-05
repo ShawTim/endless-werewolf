@@ -1553,7 +1553,7 @@ async function loadGameIndex() {
     if (!resp.ok) throw new Error('No index');
     const index = await resp.json();
     if (index.games && index.games.length > 0) {
-      const latest = index.games[index.games.length - 1];
+      const latest = index.games[0];
       await loadGame(latest.game_id || latest.id);
       buildArchiveList(index.games);
     }
