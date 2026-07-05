@@ -1,0 +1,23 @@
+{
+  "id": "5",
+  "name": "The Statistician",
+  "model": "nemotron",
+  "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+  "thinking": "off",
+  "initial_role": "Werewolf",
+  "current_role": "Villager",
+  "night_memory": "You are the only Werewolf in play. You may peek at one center card. You peeked at center card 0 and saw: Werewolf.",
+  "night_memory_list": [
+    "You are the only Werewolf in play. You may peek at one center card.",
+    "You peeked at center card 0 and saw: Werewolf."
+  ],
+  "night_actions": [
+    {
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Werewolf",
+      "source": "agent"
+    }
+  ]
+}

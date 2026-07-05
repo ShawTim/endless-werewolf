@@ -1,0 +1,52 @@
+{
+  "status": "completed",
+  "game_id": "game_000021",
+  "votes": {
+    "The Prosecutor": "The Statistician",
+    "The Therapist": "The Prosecutor",
+    "The Chaos Agent": "The Statistician",
+    "The Gut Player": "The Statistician",
+    "The Statistician": "The Therapist",
+    "The Underdog": "The Therapist"
+  },
+  "tally": {
+    "The Statistician": 3,
+    "The Prosecutor": 1,
+    "The Therapist": 2
+  },
+  "executed": [
+    "The Statistician"
+  ],
+  "vote_trace": [
+    {
+      "player": "The Prosecutor",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Statistician"
+    },
+    {
+      "player": "The Therapist",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Prosecutor"
+    },
+    {
+      "player": "The Chaos Agent",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Statistician"
+    },
+    {
+      "player": "The Gut Player",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Statistician"
+    },
+    {
+      "player": "The Statistician",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Therapist"
+    },
+    {
+      "player": "The Underdog",
+      "error": "bridge call failed: GatewayClientRequestError: FailoverError: LLM request failed: network connection error.",
+      "fallback": "The Therapist"
+    }
+  ]
+}

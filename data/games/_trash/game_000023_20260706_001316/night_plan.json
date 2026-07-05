@@ -1,0 +1,94 @@
+[
+  {
+    "player_name": "The Chaos Agent",
+    "role": "Seer",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Chaos Agent",
+      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "model": "minimax",
+      "thinking": "off",
+      "initial_role": "Seer",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "inspect_player | inspect_center",
+        "inspect_player": {
+          "target": [
+            "The Prosecutor",
+            "The Therapist",
+            "The Gut Player",
+            "The Statistician",
+            "The Underdog"
+          ]
+        },
+        "inspect_center": {
+          "targets": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "game_id": "game_000023",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Prosecutor",
+    "role": "Troublemaker",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Prosecutor",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "model": "glm5.2",
+      "thinking": "off",
+      "initial_role": "Troublemaker",
+      "night_memory": [],
+      "other_players": [
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Statistician",
+          "The Underdog"
+        ]
+      },
+      "game_id": "game_000023",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]

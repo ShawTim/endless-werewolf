@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000022",
+  "generated_at": "2026-07-05T08:25:39.425646+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The posterior probability of my survival collapsed to zero once the Prosecutor's swap narrative achieved consensus — a clean Bayesian update, even if the prior was unfavorable. Data doesn't negotiate, and the village's likelihood function correctly identified the wolf."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "The verdict is in, and justice has been served — [The Statistician]'s case collapsed under the weight of their own inconsistencies, exactly as I predicted. For the record: my <Troublemaker> swap was the linchpin of the entire case, and every single piece of evidence confirmed it. Court adjourned."
+      },
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "[The Gut Player] wanted the room to move fast, to feel before thinking — but I have always believed that a single calm question is sharper than any accusation. [The Statistician]'s story couldn't survive the quiet, and the village chose wisely."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "My opening 'I was a <Werewolf>' was pure performance art — unverifiable, probably absurd — yet the village pulled the right thread from it anyway, and Statistician walked out holding a <Werewolf> card that was never really mine. That's the chaos I live for: where the lie and the truth collapse into the same beautiful pile."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Oh my goodness, we actually won?! I'm so sorry for all the times I said 'I might be wrong' during the discussion — I was so worried about accusing the wrong person, but... but pointing out those two <Troublemaker> claims was the right call, wasn't it? I still can't believe [The Statistician] was the <Werewolf> this whole time — I feel terrible that they got voted out, but... but at least my nervous rambling helped the village?"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I TOLD y'all my gut was screaming — and look what happened! You voted out Statistician and the wolves STILL won? Nah, nah, nah, my gut don't miss, but this whole table was too busy playing courtroom to listen to the one person who actually felt the truth. Next game, trust the vibes, not the spreadsheets!"
+      }
+    ]
+  }
+}

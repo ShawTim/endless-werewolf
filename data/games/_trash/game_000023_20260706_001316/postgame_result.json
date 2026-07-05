@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000023",
+  "generated_at": "2026-07-05T16:13:10.355687+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "I presented sworn testimony, caught [The Underdog] in two contradictory statements on the record, and the jury still voted ME out — this is exactly why I left the DA's office. The wolves didn't win on evidence; they won on the court of public opinion, and frankly, that's a miscarriage of justice."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "One innocent question about feeling different this morning, and [The Underdog]'s contradictions did the rest. [The Prosecutor] built such a loud courtroom that the village never thought to question the one voice that never demanded to be heard."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "[The Prosecutor] built a case against silence, and the jury convicted her for it — meanwhile [The Underdog] was holding real <Seer> evidence pointing right at me and still couldn't get anyone to listen. That's not a game, that's a gallery opening, and I love that I won by doing absolutely nothing."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Oh wow, we actually won? I'm so sorry for all the confusion I caused - I kept second-guessing myself and contradicting what I said, but... I guess my nervousness somehow made me look more convincing? I still feel really bad about [The Prosecutor] getting voted out though..."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "See?! I told you my gut was twitching — Underdog couldn't keep their story straight for two minutes and Prosecutor was running the whole table like a dictator. I knew something was off, I just couldn't get anyone to listen before the vote came down. Next round, you lot better start trusting the gut."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The posterior probability of a village win collapsed to near zero once the table treated contradictory testimony as equally weighted evidence — a classic failure to update priors when the likelihood ratio screamed wolf."
+      }
+    ]
+  }
+}

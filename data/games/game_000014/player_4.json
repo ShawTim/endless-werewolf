@@ -1,0 +1,24 @@
+{
+  "id": "4",
+  "name": "The Gut Player",
+  "model": "deepseek-pro",
+  "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+  "thinking": "off",
+  "initial_role": "Troublemaker",
+  "current_role": "Robber",
+  "night_memory": "You swapped The Prosecutor and The Statistician's cards, but you don't know what they became.",
+  "night_memory_list": [
+    "You swapped The Prosecutor and The Statistician's cards, but you don't know what they became."
+  ],
+  "night_actions": [
+    {
+      "role": "Troublemaker",
+      "action": "swap",
+      "targets": [
+        "The Prosecutor",
+        "The Statistician"
+      ],
+      "source": "agent"
+    }
+  ]
+}

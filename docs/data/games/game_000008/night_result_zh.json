@@ -110,35 +110,6 @@
     "Seer",
     "Robber"
   ],
-  "night_trace": [
-    {
-      "actor": "The Statistician",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Underdog"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Underdog",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Statistician"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Chaos Agent",
-      "role": "Minion",
-      "action": "identify_wolves",
-      "targets": [
-        "The Statistician",
-        "The Underdog"
-      ],
-      "source": "deterministic"
-    }
-  ],
+  "night_trace": [],
   "game_id": "game_000008"
 }

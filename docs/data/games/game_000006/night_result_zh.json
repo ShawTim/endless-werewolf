@@ -132,24 +132,6 @@
   ],
   "night_trace": [
     {
-      "actor": "The Chaos Agent",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Gut Player"
-      ],
-      "source": "deterministic"
-    },
-    {
-      "actor": "The Gut Player",
-      "role": "Werewolf",
-      "action": "peek_wolves",
-      "targets": [
-        "The Chaos Agent"
-      ],
-      "source": "deterministic"
-    },
-    {
       "actor": "The Statistician",
       "role": "Robber",
       "action": "搶奪",

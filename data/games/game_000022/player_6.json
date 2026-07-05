@@ -1,0 +1,22 @@
+{
+  "id": "6",
+  "name": "The Underdog",
+  "model": "qwen3.5",
+  "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+  "thinking": "off",
+  "initial_role": "Seer",
+  "current_role": "Robber",
+  "night_memory": "You inspected The Chaos Agent and their role is: Werewolf.",
+  "night_memory_list": [
+    "You inspected The Chaos Agent and their role is: Werewolf."
+  ],
+  "night_actions": [
+    {
+      "role": "Seer",
+      "action": "inspect_player",
+      "target": "The Chaos Agent",
+      "seen_role": "Werewolf",
+      "source": "agent"
+    }
+  ]
+}

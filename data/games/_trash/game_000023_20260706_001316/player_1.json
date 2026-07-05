@@ -1,0 +1,24 @@
+{
+  "id": "1",
+  "name": "The Prosecutor",
+  "model": "glm5.2",
+  "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+  "thinking": "off",
+  "initial_role": "Troublemaker",
+  "current_role": "Troublemaker",
+  "night_memory": "You swapped The Chaos Agent and The Statistician's cards, but you don't know what they became.",
+  "night_memory_list": [
+    "You swapped The Chaos Agent and The Statistician's cards, but you don't know what they became."
+  ],
+  "night_actions": [
+    {
+      "role": "Troublemaker",
+      "action": "swap",
+      "targets": [
+        "The Chaos Agent",
+        "The Statistician"
+      ],
+      "source": "agent"
+    }
+  ]
+}

@@ -131,15 +131,6 @@
   ],
   "night_trace": [
     {
-      "actor": "The Underdog",
-      "role": "Minion",
-      "action": "identify_wolves",
-      "targets": [
-        "The Therapist"
-      ],
-      "source": "deterministic"
-    },
-    {
       "actor": "The Therapist",
       "role": "Werewolf",
       "action": "查看中央",

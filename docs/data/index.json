@@ -2,6 +2,41 @@
   "schema_version": 1,
   "games": [
     {
+      "game_id": "game_000022",
+      "status": "completed",
+      "created_at": "2026-07-05T08:14:22.878750+00:00",
+      "completed_at": "2026-07-05T08:24:12.082942+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "The Statistician"
+      ],
+      "winners": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Underdog"
+      ],
+      "votes_count": 6,
+      "chat_lines": 27
+    },
+    {
+      "game_id": "game_000014",
+      "status": "completed",
+      "created_at": "2026-07-03T00:01:33.218957+00:00",
+      "completed_at": "2026-07-03T00:12:27.251144+00:00",
+      "outcome": "werewolf_win",
+      "winner_team": "werewolf_team",
+      "executed": [
+        "The Statistician"
+      ],
+      "winners": [
+        "The Prosecutor"
+      ],
+      "votes_count": 6,
+      "chat_lines": 21
+    },
+    {
       "game_id": "game_000011",
       "status": "completed",
       "created_at": "2026-07-01T16:01:33.057588+00:00",
