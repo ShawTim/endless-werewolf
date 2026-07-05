@@ -37,6 +37,27 @@
       "chat_lines": 21
     },
     {
+      "game_id": "game_000013",
+      "status": "completed",
+      "created_at": "2026-07-02T16:01:39.947519+00:00",
+      "completed_at": "2026-07-02T16:09:48.600195+00:00",
+      "outcome": "village_win",
+      "winner_team": "village_team",
+      "executed": [
+        "The Statistician",
+        "The Gut Player",
+        "The Prosecutor"
+      ],
+      "winners": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Underdog"
+      ],
+      "votes_count": 6,
+      "chat_lines": 14
+    },
+    {
       "game_id": "game_000011",
       "status": "completed",
       "created_at": "2026-07-01T16:01:33.057588+00:00",
