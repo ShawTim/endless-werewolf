@@ -1,7 +1,7 @@
 {
   "status": "completed",
   "game_id": "game_000022",
-  "generated_at": "2026-07-05T08:25:39.425646+00:00",
+  "generated_at": "2026-07-06T00:14:29.482216+00:00",
   "interviews": {
     "dead": [
       {
@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "The posterior probability of my survival collapsed to zero once the Prosecutor's swap narrative achieved consensus — a clean Bayesian update, even if the prior was unfavorable. Data doesn't negotiate, and the village's likelihood function correctly identified the wolf."
+        "quote": "The posterior probability of my survival collapsed to near-zero once the Prosecutor's Troublemaker claim aligned with both the Chaos Agent's role shift and the Underdog's Seer vision — a clean Bayesian update that the village executed efficiently. I assigned myself a 94% chance of being the remaining Werewolf by day's end; the math was sound, even if the outcome wasn't in my favor."
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "The verdict is in, and justice has been served — [The Statistician]'s case collapsed under the weight of their own inconsistencies, exactly as I predicted. For the record: my <Troublemaker> swap was the linchpin of the entire case, and every single piece of evidence confirmed it. Court adjourned."
+        "quote": "Ladies and gentlemen of the jury — the verdict is in, and The Statistician is convicted. My Troublemaker swap put that Werewolf card right in their hands, and the evidence spoke for itself. Courtroom closed, case won, and The Gut Player's perjury notwithstanding, justice was served."
       },
       {
         "player_name": "The Therapist",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "[The Gut Player] wanted the room to move fast, to feel before thinking — but I have always believed that a single calm question is sharper than any accusation. [The Statistician]'s story couldn't survive the quiet, and the village chose wisely."
+        "quote": "I never raised my voice; I only asked The Gut Player which swap they truly remembered, and let the silence do the rest. The Statistician's downfall was written in the gaps between their own claims."
       },
       {
         "player_name": "The Chaos Agent",
@@ -48,7 +48,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "My opening 'I was a <Werewolf>' was pure performance art — unverifiable, probably absurd — yet the village pulled the right thread from it anyway, and Statistician walked out holding a <Werewolf> card that was never really mine. That's the chaos I live for: where the lie and the truth collapse into the same beautiful pile."
+        "quote": "I lied through my teeth about being a Werewolf just to see the room scramble — and somehow the Statistician got lynched for it. The lie didn't even collapse; it just... worked. That's the most disappointing kind of beautiful."
       },
       {
         "player_name": "The Underdog",
@@ -59,7 +59,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Oh my goodness, we actually won?! I'm so sorry for all the times I said 'I might be wrong' during the discussion — I was so worried about accusing the wrong person, but... but pointing out those two <Troublemaker> claims was the right call, wasn't it? I still can't believe [The Statistician] was the <Werewolf> this whole time — I feel terrible that they got voted out, but... but at least my nervous rambling helped the village?"
+        "quote": "Oh! We actually won? I'm so sorry, I was convinced I'd messed everything up with all my rambling... but I guess worrying about every detail helped? I still can't believe The Statistician got voted out when it was really The Chaos Agent and The Gut Player lying about being Troublemaker... wait, does that mean I figured it out right? I'm sorry, I'm probably still confused!"
       }
     ],
     "losers": [
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I TOLD y'all my gut was screaming — and look what happened! You voted out Statistician and the wolves STILL won? Nah, nah, nah, my gut don't miss, but this whole table was too busy playing courtroom to listen to the one person who actually felt the truth. Next game, trust the vibes, not the spreadsheets!"
+        "quote": "Tch. My gut was screaming the whole time and I still couldn't save my wolf — that's the kind of L that burns. Next round I'm coming back swinging, no speeches, just fists."
       }
     ]
   }

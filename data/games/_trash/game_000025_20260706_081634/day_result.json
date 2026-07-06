@@ -1,0 +1,107 @@
+{
+  "status": "completed",
+  "game_id": "game_000024",
+  "config": {
+    "duration_seconds": 180,
+    "min_sleep_seconds": 1.0,
+    "max_sleep_seconds": 5.0,
+    "max_speaks_per_player": 8
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 0
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 0
+    },
+    "The Underdog": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, listen up — I ain't sitting here waiting for everyone to do their little 'oh, I'll let someone else go first' routine. I was the <Troublemaker> last night. Yeah, you heard me. I swapped [The Prosecutor] and [The Statistician]'s cards. Don't know what they ended up with, don't care — that's what I did. So if either of you two are about to claim something, you better factor that in, 'cause whatever you started with? It ain't what you're holding now. My gut's telling me to put this out there before someone starts spinning stories. Who's next?",
+      "log_line": "[2026-07-06 08:02:46 HKT] The Gut Player: Alright, listen up — I ain't sitting here waiting for everyone to do their little 'oh, I'll let someone else go first' routine. I was the Troublemaker last night. Yeah, you heard me. I swapped The Prosecutor and The Statistician's cards. Don't know what they ended up with, don't care — that's what I did. So if either of you two are about to claim something, you better factor that in, 'cause whatever you started with? It ain't what you're holding now. My gut's telling me to put this out there before someone starts spinning stories. Who's next?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": "The Underdog",
+      "speech": "Court is now in session, and the prosecution will lead with the single most important piece of evidence in this case — because that is how justice works. Full disclosure. No hiding. Last night, I was the <Robber>. My target? [The Underdog]. And when I took that card — I became a <Werewolf>. I'm not going to dress that up. I robbed [The Underdog] and I drew a <Werewolf> card. That is a fact. Now — am I STILL the <Werewolf>? I can't say for certain, because if there's a <Troublemaker> sitting at this table, they may have touched my card after my robbery. But from where I stand, as far as I know — I'm holding a <Werewolf> card. So here's my cross-examination. [The Underdog] — you were a <Werewolf>. I took that from you. What are you now? And whoever the <Troublemaker> is — did you swap my card? Because if you did, I might not be what I think I am, and that changes everything. Everyone else — the evidence is on the table. I was <Robber>. I robbed Underdog. I got <Werewolf>. That is the truth, the whole truth, and nothing but the truth. Now someone explain to me why I shouldn't be the one swinging from the gallows — or better yet, tell me who ELSE is dirty.",
+      "log_line": "[2026-07-06 08:03:55 HKT] The Prosecutor @The Underdog: Court is now in session, and the prosecution will lead with the single most important piece of evidence in this case — because that is how justice works. Full disclosure. No hiding. Last night, I was the Robber. My target? The Underdog. And when I took that card — I became a Werewolf. I'm not going to dress that up. I robbed The Underdog and I drew a Werewolf card. That is a fact. Now — am I STILL the Werewolf? I can't say for certain, because if there's a Troublemaker sitting at this table, they may have touched my card after my robbery. But from where I stand, as far as I know — I'm holding a Werewolf card. So here's my cross-examination. The Underdog — you were a Werewolf. I took that from you. What are you now? And whoever the Troublemaker is — did you swap my card? Because if you did, I might not be what I think I am, and that changes everything. Everyone else — the evidence is on the table. I was Robber. I robbed Underdog. I got Werewolf. That is the truth, the whole truth, and nothing but the truth. Now someone explain to me why I shouldn't be the one swinging from the gallows — or better yet, tell me who ELSE is dirty."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": "The Prosecutor",
+      "speech": "聽住，party people。我係[The Chaos Agent]——每場game都用同一個方式開場，今次都冇例外。\n\n尋晚我做咗<Seer>，望咗[The Prosecutor]。佢係<Werewolf>。冇花冇假，就係咁。\n\n我知你哋心入面諗緊咩：'Chaos Agent上次話自己本來係Werewolf結果係Villager'——係，今次我又嚟chur。但呢個就係我嘅game，我講啲claim，等你哋自己拆。\n\n[The Prosecutor]，你尋晚做咗咩？你係Troublemaker？<Robber>？定真係werewolf？講嚟聽，我等緊。",
+      "log_line": "[2026-07-06 08:04:01 HKT] The Chaos Agent @The Prosecutor: 聽住，party people。我係[The Chaos Agent]——每場game都用同一個方式開場，今次都冇例外。\n\n尋晚我做咗<Seer>，望咗[The Prosecutor]。佢係<Werewolf>。冇花冇假，就係咁。\n\n我知你哋心入面諗緊咩：'Chaos Agent上次話自己本來係Werewolf結果係Villager'——係，今次我又嚟chur。但呢個就係我嘅game，我講啲claim，等你哋自己拆。\n\n[The Prosecutor]，你尋晚做咗咩？你係Troublemaker？Robber？定真係werewolf？講嚟聽，我等緊。"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Underdog",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Therapist",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Prosecutor",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Chaos Agent",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": "The Gut Player",
+      "speech": "Oh! Um, [The Gut Player], I'm so sorry to keep going back and forth, but... but you're saying I sound unsure? I'm NOT unsure about what I saw. [The Chaos Agent] was a <Werewolf> when I looked with my <Seer> power. That part I know. But... but here's what's really making my head spin - [The Prosecutor] just said they're the <Robber> who took MY card and became a <Werewolf>. And [The Chaos Agent] says they used <Seer> on [The Prosecutor] and saw <Werewolf>. Those two stories... they actually match? If [The Prosecutor] robbed me and got my <Werewolf> card, then [The Chaos Agent] seeing them as <Werewolf> makes perfect sense. But... but you're still claiming <Troublemaker>? And you said you swapped [The Prosecutor] and [The Statistician]? If that really happened, [The Prosecutor] wouldn't still be holding the <Werewolf> card they robbed from me, right? Because you would have moved it? I'm... I'm really trying to understand, but the only way the math works is if you're not actually the <Troublemaker>? I'm so sorry, I don't want to accuse you, but... but everyone else's stories are fitting together and yours... it's leaving this hole? Please help me understand because I'm genuinely confused.",
+      "log_line": "[2026-07-06 08:06:18 HKT] The Underdog @The Gut Player: Oh! Um, [The Gut Player], I'm so sorry to keep going back and forth, but... but you're saying I sound unsure? I'm NOT unsure about what I saw. [The Chaos Agent] was a <Werewolf> when I looked with my <Seer> power. That part I know. But... but here's what's really making my head spin - [The Prosecutor] just said they're the <Robber> who took MY card and became a <Werewolf>. And [The Chaos Agent] says they used <Seer> on [The Prosecutor] and saw <Werewolf>. Those two stories... they actually match? If [The Prosecutor] robbed me and got my <Werewolf> card, then [The Chaos Agent] seeing them as <Werewolf> makes perfect sense. But... but you're still claiming <Troublemaker>? And you said you swapped [The Prosecutor] and [The Statistician]? If that really happened, [The Prosecutor] wouldn't still be holding the <Werewolf> card they robbed from me, right? Because you would have moved it? I'm... I'm really trying to understand, but the only way the math works is if you're not actually the <Troublemaker>? I'm so sorry, I don't want to accuse you, but... but everyone else's stories are fitting together and yours... it's leaving this hole? Please help me understand because I'm genuinely confused."
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Therapist",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Gut Player",
+      "error": "bridge call timed out after 120s"
+    }
+  ],
+  "chat_history": "[2026-07-06 08:02:46 HKT] The Gut Player: Alright, listen up — I ain't sitting here waiting for everyone to do their little 'oh, I'll let someone else go first' routine. I was the Troublemaker last night. Yeah, you heard me. I swapped The Prosecutor and The Statistician's cards. Don't know what they ended up with, don't care — that's what I did. So if either of you two are about to claim something, you better factor that in, 'cause whatever you started with? It ain't what you're holding now. My gut's telling me to put this out there before someone starts spinning stories. Who's next?\n[2026-07-06 08:03:55 HKT] The Prosecutor @The Underdog: Court is now in session, and the prosecution will lead with the single most important piece of evidence in this case — because that is how justice works. Full disclosure. No hiding. Last night, I was the Robber. My target? The Underdog. And when I took that card — I became a Werewolf. I'm not going to dress that up. I robbed The Underdog and I drew a Werewolf card. That is a fact. Now — am I STILL the Werewolf? I can't say for certain, because if there's a Troublemaker sitting at this table, they may have touched my card after my robbery. But from where I stand, as far as I know — I'm holding a Werewolf card. So here's my cross-examination. The Underdog — you were a Werewolf. I took that from you. What are you now? And whoever the Troublemaker is — did you swap my card? Because if you did, I might not be what I think I am, and that changes everything. Everyone else — the evidence is on the table. I was Robber. I robbed Underdog. I got Werewolf. That is the truth, the whole truth, and nothing but the truth. Now someone explain to me why I shouldn't be the one swinging from the gallows — or better yet, tell me who ELSE is dirty.\n[2026-07-06 08:04:01 HKT] The Chaos Agent @The Prosecutor: 聽住，party people。我係[The Chaos Agent]——每場game都用同一個方式開場，今次都冇例外。\n\n尋晚我做咗<Seer>，望咗[The Prosecutor]。佢係<Werewolf>。冇花冇假，就係咁。\n\n我知你哋心入面諗緊咩：'Chaos Agent上次話自己本來係Werewolf結果係Villager'——係，今次我又嚟chur。但呢個就係我嘅game，我講啲claim，等你哋自己拆。\n\n[The Prosecutor]，你尋晚做咗咩？你係Troublemaker？Robber？定真係werewolf？講嚟聽，我等緊。\n[2026-07-06 08:06:18 HKT] The Underdog @The Gut Player: Oh! Um, [The Gut Player], I'm so sorry to keep going back and forth, but... but you're saying I sound unsure? I'm NOT unsure about what I saw. [The Chaos Agent] was a <Werewolf> when I looked with my <Seer> power. That part I know. But... but here's what's really making my head spin - [The Prosecutor] just said they're the <Robber> who took MY card and became a <Werewolf>. And [The Chaos Agent] says they used <Seer> on [The Prosecutor] and saw <Werewolf>. Those two stories... they actually match? If [The Prosecutor] robbed me and got my <Werewolf> card, then [The Chaos Agent] seeing them as <Werewolf> makes perfect sense. But... but you're still claiming <Troublemaker>? And you said you swapped [The Prosecutor] and [The Statistician]? If that really happened, [The Prosecutor] wouldn't still be holding the <Werewolf> card they robbed from me, right? Because you would have moved it? I'm... I'm really trying to understand, but the only way the math works is if you're not actually the <Troublemaker>? I'm so sorry, I don't want to accuse you, but... but everyone else's stories are fitting together and yours... it's leaving this hole? Please help me understand because I'm genuinely confused.\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

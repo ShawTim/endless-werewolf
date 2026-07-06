@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "The posterior probability of my survival collapsed to zero once the Prosecutor's swap narrative achieved consensus — a clean Bayesian update, even if the prior was unfavorable. Data doesn't negotiate, and the village's likelihood function correctly identified the wolf."
+        "quote": "一旦檢察官的置換敘述達成共識，我存活的後驗機率便歸零——這是一個乾淨的貝氏更新，即使先驗機率不利於我。數據不會談判，而村莊的似然函數正確地識別出了狼人。"
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "The verdict is in, and justice has been served — [統計學家]'s case collapsed under the weight of their own inconsistencies, exactly as I predicted. For the record: my <搗蛋鬼> swap was the linchpin of the entire case, and every single piece of evidence confirmed it. Court adjourned."
+        "quote": "判決已定，正義已伸張——[統計學家]的論證在自身矛盾的重壓下徹底崩潰，正如我所預料。在此記錄：我的<搗蛋鬼>交換是整起案件的關鍵，每一項證據都證實了這點。庭審結束。"
       },
       {
         "player_name": "The Therapist",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "[直覺俠] wanted the room to move fast, to feel before thinking — but I have always believed that a single calm question is sharper than any accusation. [統計學家]'s story couldn't survive the quiet, and the village chose wisely."
+        "quote": "[直覺俠]希望全場快速行動，在思考之前先憑感覺——但我始終相信，一個冷靜的問題比任何指控都更銳利。[統計學家]的故事經不起沉默的考驗，而村莊做出了明智的選擇。"
       },
       {
         "player_name": "The Chaos Agent",
@@ -48,7 +48,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "My opening 'I was a <狼人>' was pure performance art — unverifiable, probably absurd — yet the village pulled the right thread from it anyway, and Statistician walked out holding a <狼人> card that was never really mine. That's the chaos I live for: where the lie and the truth collapse into the same beautiful pile."
+        "quote": "我開場那句『我是個<狼人>』純粹是表演藝術——無法驗證，大概也很荒謬——但村莊還是從中找到了正確的線索，而統計學家拿著那張從來不屬於我的<狼人>牌被淘汰了。這就是我為之而活的混亂：謊言與真相在同一片美麗的廢墟中融為一體。"
       },
       {
         "player_name": "The Underdog",
@@ -59,7 +59,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Oh my goodness, we actually won?! I'm so sorry for all the times I said 'I might be wrong' during the discussion — I was so worried about accusing the wrong person, but... but pointing out those two <搗蛋鬼> claims was the right call, wasn't it? I still can't believe [統計學家] was the <狼人> this whole time — I feel terrible that they got voted out, but... but at least my nervous rambling helped the village?"
+        "quote": "天哪，我們真的贏了？！我很抱歉在討論中一直說『我可能錯了』——我真的很擔心指控錯人，但是……但是指出那兩個<搗蛋鬼>的聲明是正確的判斷，對吧？我還是無法相信[統計學家]一直都是<狼人>——我覺得很過意不去他們被投票出局，但是……但至少我緊張的碎碎唸幫到了村莊吧？"
       }
     ],
     "losers": [
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I TOLD y'all my gut was screaming — and look what happened! You voted out Statistician and the wolves STILL won? Nah, nah, nah, my gut don't miss, but this whole table was too busy playing courtroom to listen to the one person who actually felt the truth. Next game, trust the vibes, not the spreadsheets!"
+        "quote": "我早就跟你們說我的直覺在尖叫——結果呢？你們投票淘汰了統計學家，狼人還是贏了？不不不，我的直覺從來不會錯，但整桌人忙著扮演法庭，沒人願意聽那個真正感受到真相的人。下一場遊戲，相信直覺，不要相信試算表！"
       }
     ]
   }

@@ -1,0 +1,76 @@
+[
+  {
+    "player_name": "The Prosecutor",
+    "role": "Robber",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Prosecutor",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "model": "glm5.2",
+      "thinking": "off",
+      "initial_role": "Robber",
+      "night_memory": [],
+      "other_players": [
+        "The Therapist",
+        "The Chaos Agent",
+        "The Gut Player",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "rob",
+        "target": [
+          "The Therapist",
+          "The Chaos Agent",
+          "The Gut Player",
+          "The Statistician",
+          "The Underdog"
+        ]
+      },
+      "game_id": "game_000024",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  },
+  {
+    "player_name": "The Gut Player",
+    "role": "Troublemaker",
+    "decision_request": {
+      "phase": "night",
+      "player_name": "The Gut Player",
+      "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+      "model": "deepseek-pro",
+      "thinking": "off",
+      "initial_role": "Troublemaker",
+      "night_memory": [],
+      "other_players": [
+        "The Prosecutor",
+        "The Therapist",
+        "The Chaos Agent",
+        "The Statistician",
+        "The Underdog"
+      ],
+      "legal_actions": {
+        "action": "swap",
+        "targets": [
+          "The Prosecutor",
+          "The Therapist",
+          "The Chaos Agent",
+          "The Statistician",
+          "The Underdog"
+        ]
+      },
+      "game_id": "game_000024",
+      "instructions": [
+        "You are a player in One Night Werewolf.",
+        "Use only your private information.",
+        "Return exactly one JSON object.",
+        "No markdown, no explanation, no extra text."
+      ]
+    }
+  }
+]

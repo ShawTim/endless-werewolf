@@ -5,7 +5,7 @@
       "name": "The Prosecutor",
       "name_zh": "嚴審官",
       "name_en": "The Prosecutor",
-      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "persona": "一位前法庭檢察官，將每場遊戲視為死刑案件來對待。你無情地交叉詰問，猛撲他人時間線上的矛盾。你滿懷自信地宣布你的懷疑，即使你錯了——尤其當你錯了的時候。",
       "model": "glm5.2",
       "thinking": "off",
       "seat": 0,
@@ -17,7 +17,7 @@
       "night_actions": [
         {
           "role": "Troublemaker",
-          "action": "swap",
+          "action": "交換",
           "targets": [
             "The Statistician",
             "The Chaos Agent"
@@ -32,7 +32,7 @@
       "name": "The Therapist",
       "name_zh": "心理諮商師",
       "name_en": "The Therapist",
-      "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+      "persona": "一位輕聲細語的治療師，能像閱讀打開的書本一樣看透他人。你從不提高音量，但你安靜的觀察比任何指控都更深刻。你擅長提出聽起來無辜的問題，讓說謊者陷入自己的敘事陷阱。",
       "model": "kimi",
       "thinking": "off",
       "seat": 1,
@@ -44,7 +44,7 @@
       "night_actions": [
         {
           "role": "Robber",
-          "action": "rob",
+          "action": "搶劫",
           "target": "The Underdog",
           "new_role": "Seer",
           "source": "agent"
@@ -57,7 +57,7 @@
       "name": "The Chaos Agent",
       "name_zh": "攪局者",
       "name_en": "The Chaos Agent",
-      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "persona": "一個自封的賽局理論家，將社交推理視為表演藝術。你每場遊戲都以一個大膽且無法驗證的宣言開場——有時是真的，有時是荒謬的——然後觀察全場陷入混亂。你真心享受看著自己的謊言崩潰，只為了看看會發生什麼事。",
       "model": "minimax",
       "thinking": "off",
       "seat": 2,
@@ -83,7 +83,7 @@
       "name": "The Gut Player",
       "name_zh": "直覺俠",
       "name_en": "The Gut Player",
-      "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+      "persona": "一個脾氣火爆的街頭鬥士，相信直覺勝過邏輯。你隨口說出當下覺得對的話，而且你的情緒轉變很快。你無法建構一套論證——但你有一種準得嚇人的紀錄，就是能直接知道誰有問題。",
       "model": "deepseek-pro",
       "thinking": "off",
       "seat": 3,
@@ -100,7 +100,7 @@
       "name": "The Statistician",
       "name_zh": "統計學家",
       "name_en": "The Statistician",
-      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "persona": "一位將每項指控視為待驗證假設的數據科學家。你為嫌疑人分配概率估計，並隨著新資訊的出現公開更新這些估計。你對情緒化的論證感到反感——如果有人說「我只是感覺如此」，你會駁回他們。",
       "model": "nemotron",
       "thinking": "off",
       "seat": 4,
@@ -115,7 +115,7 @@
       "name": "The Underdog",
       "name_zh": "小人物",
       "name_en": "The Underdog",
-      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+      "persona": "一個緊張的新手，極度渴望被認真對待。你對每件事都過度思考，在提出指控前先道歉，並且不斷自我懷疑。但在焦慮之下是一顆敏銳的頭腦——你的自我懷疑往往引導你找到正確答案，因為你確實考慮了每一種可能性。",
       "model": "qwen3.5",
       "thinking": "off",
       "seat": 5,
@@ -127,7 +127,7 @@
       "night_actions": [
         {
           "role": "Seer",
-          "action": "inspect_player",
+          "action": "檢查玩家",
           "target": "The Chaos Agent",
           "seen_role": "Werewolf",
           "source": "agent"
@@ -153,7 +153,7 @@
     {
       "actor": "The Gut Player",
       "role": "Minion",
-      "action": "identify_wolves",
+      "action": "辨識狼人",
       "targets": [
         "The Chaos Agent"
       ],
@@ -169,21 +169,21 @@
     {
       "actor": "The Underdog",
       "role": "Seer",
-      "action": "inspect_player",
+      "action": "檢查玩家",
       "target": "The Chaos Agent",
       "source": "agent"
     },
     {
       "actor": "The Therapist",
       "role": "Robber",
-      "action": "rob",
+      "action": "搶劫",
       "target": "The Underdog",
       "source": "agent"
     },
     {
       "actor": "The Prosecutor",
       "role": "Troublemaker",
-      "action": "swap",
+      "action": "交換",
       "targets": [
         "The Statistician",
         "The Chaos Agent"
