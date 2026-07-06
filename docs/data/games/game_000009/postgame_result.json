@@ -1,77 +1,78 @@
 {
   "status": "completed",
   "game_id": "game_000009",
-  "generated_at": "2026-06-30T07:13:29.053668+00:00",
+  "generated_at": "2026-07-06T00:14:29.482216+00:00",
   "interviews": {
     "dead": [
       {
-        "player_name": "The Therapist",
-        "player_name_zh": "心理諮商師",
-        "player_name_en": "The Therapist",
-        "role": "Minion",
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
         "team": "werewolf_team",
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "The room mistook my silence for a secret, when all I was doing was listening. [The Statistician] had the right numbers — but numbers never account for what people are afraid to see."
+        "quote": "The posterior probability of my survival collapsed to near-zero once the Prosecutor's Troublemaker claim aligned with both the Chaos Agent's role shift and the Underdog's Seer vision — a clean Bayesian update that the village executed efficiently. I assigned myself a 94% chance of being the remaining Werewolf by day's end; the math was sound, even if the outcome wasn't in my favor."
       }
     ],
-    "winners": [],
-    "losers": [
+    "winners": [
       {
         "player_name": "The Prosecutor",
         "player_name_zh": "嚴審官",
         "player_name_en": "The Prosecutor",
-        "role": "Robber",
+        "role": "Troublemaker",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "I played it straight for once — no tricks, no theatrics, just facts — and the jury still got it wrong. We voted out [The Therapist] when the real threat was hiding in the margins the whole time. Next time, I'm going back to playing dirty."
+        "mood": "relieved",
+        "quote": "Ladies and gentlemen of the jury — the verdict is in, and The Statistician is convicted. My Troublemaker swap put that Werewolf card right in their hands, and the evidence spoke for itself. Courtroom closed, case won, and The Gut Player's perjury notwithstanding, justice was served."
+      },
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I never raised my voice; I only asked The Gut Player which swap they truly remembered, and let the silence do the rest. The Statistician's downfall was written in the gaps between their own claims."
       },
       {
         "player_name": "The Chaos Agent",
         "player_name_zh": "攪局者",
         "player_name_en": "The Chaos Agent",
-        "role": "Troublemaker",
-        "team": "village_team",
-        "status": "loser",
-        "executed": false,
-        "mood": "bitter",
-        "quote": "I gave them swaps, chaos, and enough contradictions to choke on — and they handed the verdict to [The Therapist], the only person who gave them nothing but silence. Nobody won, but nobody was supposed to. The art was in the breakdown, not the ending."
-      },
-      {
-        "player_name": "The Gut Player",
-        "player_name_zh": "直覺俠",
-        "player_name_en": "The Gut Player",
         "role": "Villager",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "I had the facts — I stole [The Prosecutor]'s card myself, I knew they were clean. And my gut still pointed at [The Therapist], and I was wrong. Maybe next time I should just shut up and let the numbers guy talk."
-      },
-      {
-        "player_name": "The Statistician",
-        "player_name_zh": "統計學家",
-        "player_name_en": "The Statistician",
-        "role": "Villager",
-        "team": "village_team",
-        "status": "loser",
-        "executed": false,
-        "mood": "bitter",
-        "quote": "The posterior was unambiguous: no Werewolves among players, one unclaimed role slot. [The Therapist] was the maximum-likelihood <Tanner> candidate. The group's failure to follow the math isn't a statistical anomaly — it's a design flaw in human reasoning."
+        "mood": "relieved",
+        "quote": "I lied through my teeth about being a Werewolf just to see the room scramble — and somehow the Statistician got lynched for it. The lie didn't even collapse; it just... worked. That's the most disappointing kind of beautiful."
       },
       {
         "player_name": "The Underdog",
         "player_name_zh": "小人物",
         "player_name_en": "The Underdog",
-        "role": "Seer",
+        "role": "Robber",
         "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Oh! We actually won? I'm so sorry, I was convinced I'd messed everything up with all my rambling... but I guess worrying about every detail helped? I still can't believe The Statistician got voted out when it was really The Chaos Agent and The Gut Player lying about being Troublemaker... wait, does that mean I figured it out right? I'm sorry, I'm probably still confused!"
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Minion",
+        "team": "werewolf_team",
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I'm sorry — I had the <Seer> card but couldn't use it, and now nobody wins. [The Statistician] did everything right, and we still lost. I keep thinking... maybe if I'd been braver, asked better questions... but I wasn't, and now we all just... didn't win."
+        "quote": "Tch. My gut was screaming the whole time and I still couldn't save my wolf — that's the kind of L that burns. Next round I'm coming back swinging, no speeches, just fists."
       }
     ]
   }

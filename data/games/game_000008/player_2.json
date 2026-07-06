@@ -3,10 +3,20 @@
   "name": "The Therapist",
   "model": "kimi",
   "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
-  "thinking": "high",
-  "initial_role": "Villager",
-  "current_role": "Villager",
-  "night_memory": "",
-  "night_memory_list": [],
-  "night_actions": []
+  "thinking": "off",
+  "initial_role": "Robber",
+  "current_role": "Troublemaker",
+  "night_memory": "You robbed The Gut Player's card. After swapping, you are now: Troublemaker.",
+  "night_memory_list": [
+    "You robbed The Gut Player's card. After swapping, you are now: Troublemaker."
+  ],
+  "night_actions": [
+    {
+      "role": "Robber",
+      "action": "rob",
+      "target": "The Gut Player",
+      "new_role": "Troublemaker",
+      "source": "agent"
+    }
+  ]
 }

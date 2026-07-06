@@ -1,0 +1,96 @@
+{
+  "status": "completed",
+  "game_id": "game_000004",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 1
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "好了，大家聽好——我這次有真材實料。我昨晚是<強盜>，我搶走了[嚴審官]的牌。你知道我拿到了什麼嗎？<村民>。就是普通的、無聊的<村民>。所以[嚴審官]原本是<村民>，現在他們拿著我原本的<強盜>牌到處走。我直說了吧——我現在是<村民>，而[嚴審官]是<強盜>。還有其他人有夜間情報嗎？說出來。",
+      "log_line": "[2026-06-30 14:57:27 HKT] The Gut Player: Alright, listen up — I got something real this time. I was the Robber last night, and I snatched The Prosecutor's card. You know what I got? Villager. Plain, boring Villager. So The Prosecutor was a Villager, and now they're walking around with my old Robber card. I'm laying it out straight — I'm a Villager now, and The Prosecutor's the Robber. Anyone else got night info, spill it."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": null,
+      "speech": "現在這麼安靜真是有趣……好像每個人還在決定要分享什麼。我很想聽聽有沒有人昨晚看到了什麼，可以幫助我們一起釐清狀況。即使是最小的細節也可能很重要。",
+      "log_line": "[2026-06-30 14:57:53 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "好的。我把數據攤在桌上。我原本是<預言家>——我的牌被拿走了，所以我現在是<村民>。但在那之前，我查看了中央牌0和1。兩張都是<狼人>。這表示兩張<狼人>牌都在中央。沒有任何玩家持有<狼人>角色。狼人陣營中沒有狼人——最多只有一個<爪牙>。村民陣營無法透過處決<狼人>來獲勝，因為根本沒有。我們唯一的獲勝條件是處決一個<皮匠>，如果存在的話。所有有夜間行動的人，說出你的角色、目標和結果。現在。",
+      "log_line": "[2026-06-30 14:58:18 HKT] The Statistician: Right. I'll put the data on the table. I was the Seer — my card was taken, so I'm a Villager now. But before that, I inspected center cards 0 and 1. Both are Werewolf. That means both Werewolf cards sit in the center. No player holds a Werewolf role. The werewolf team has no Werewolves among us — at most a Minion. The village cannot win by executing a Werewolf because there isn't one. Our only win condition is executing a Tanner, if one exists. Everyone with a night action, state your role, target, and result. Now."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "法庭現在開庭。上一場我把所有人玩弄於股掌之間——這一場我老實玩。我原本是<村民>，有人搶走了我的牌——所以我現在拿著<強盜>牌，沒有採取任何行動。我沒有夜間情報。但我不需要夜間情報也能交叉詰問。所有確實有夜間行動的人，現在站出來。說出你的角色、你的目標，以及你得知的內容。不要戲劇效果，不要模糊預兆——只要事實。陪審團正在聆聽。",
+      "log_line": "[2026-06-30 14:58:29 HKT] The Prosecutor: Court is in session. Last game I played everyone like a fiddle — this time I'm playing it straight. I was a Villager, and someone robbed me — so now I'm holding the Robber card with no action taken. I have no night information. But I don't need night info to cross-examine. Everyone who DID have a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. The jury is listening."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "呃，嗨。我……其實有點困惑？我想我原本是<村民>，但晚上發生了一些事——<搗蛋鬼>一定把我交換了，因為我現在拿著<預言家>牌。但我沒辦法使用它，所以我沒有任何情報。抱歉，我知道這沒什麼幫助。我只是……我想誠實說出我知道的事，基本上就是什麼都不知道。有人可以幫我理解現在是什麼情況嗎？",
+      "log_line": "[2026-06-30 14:59:17 HKT] The Underdog: Um, hi. I'm... a little confused, actually? I think I started as a Villager, but something happened during the night — the Troublemaker must have swapped me, because now I have the Seer card. But I didn't get to use it, so I don't have any information. I'm sorry, I know that's not very helpful. I just... I want to be honest about what I know, which is basically nothing. Can someone help me understand what's going on?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "哦，這真是太美味了。兩個人都在聲稱與<預言家>相關的情報，而且其中一個幾乎肯定是錯的——或者在說謊。我無法確認我昨晚做了什麼，但我可以告訴你們：這個房間裡有人穿著不屬於他們的角色。而且我不只是在說<強盜>的偷竊。模式存在。交換存在。問題是，有沒有人有勇氣承認他們其實不知道自己是什麼。",
+      "log_line": "[2026-06-30 14:59:53 HKT] The Chaos Agent: Oh, this is delicious. Two people both claiming Seer-adjacent information, and one of them is almost certainly wrong — or lying. I can't confirm what I did last night, but I can tell you this: someone in this room is wearing a role that doesn't belong to them. And I don't just mean the Robber's theft. Patterns exist. Swaps exist. The question is whether anyone is brave enough to admit they don't know what they actually are."
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Therapist",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Statistician",
+      "mentioned_recently": true
+    },
+    {
+      "type": "pass",
+      "player_name": "The Prosecutor",
+      "mentioned_recently": true
+    }
+  ],
+  "chat_history": "[2026-06-30 14:57:27 HKT] The Gut Player: Alright, listen up — I got something real this time. I was the Robber last night, and I snatched The Prosecutor's card. You know what I got? Villager. Plain, boring Villager. So The Prosecutor was a Villager, and now they're walking around with my old Robber card. I'm laying it out straight — I'm a Villager now, and The Prosecutor's the Robber. Anyone else got night info, spill it.\n[2026-06-30 14:57:53 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter.\n[2026-06-30 14:58:18 HKT] The Statistician: Right. I'll put the data on the table. I was the Seer — my card was taken, so I'm a Villager now. But before that, I inspected center cards 0 and 1. Both are Werewolf. That means both Werewolf cards sit in the center. No player holds a Werewolf role. The werewolf team has no Werewolves among us — at most a Minion. The village cannot win by executing a Werewolf because there isn't one. Our only win condition is executing a Tanner, if one exists. Everyone with a night action, state your role, target, and result. Now.\n[2026-06-30 14:58:29 HKT] The Prosecutor: Court is in session. Last game I played everyone like a fiddle — this time I'm playing it straight. I was a Villager, and someone robbed me — so now I'm holding the Robber card with no action taken. I have no night information. But I don't need night info to cross-examine. Everyone who DID have a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. The jury is listening.\n[2026-06-30 14:59:17 HKT] The Underdog: Um, hi. I'm... a little confused, actually? I think I started as a Villager, but something happened during the night — the Troublemaker must have swapped me, because now I have the Seer card. But I didn't get to use it, so I don't have any information. I'm sorry, I know that's not very helpful. I just... I want to be honest about what I know, which is basically nothing. Can someone help me understand what's going on?\n[2026-06-30 14:59:53 HKT] The Chaos Agent: Oh, this is delicious. Two people both claiming Seer-adjacent information, and one of them is almost certainly wrong — or lying. I can't confirm what I did last night, but I can tell you this: someone in this room is wearing a role that doesn't belong to them. And I don't just mean the Robber's theft. Patterns exist. Swaps exist. The question is whether anyone is brave enough to admit they don't know what they actually are.\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

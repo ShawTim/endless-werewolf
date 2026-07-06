@@ -3,22 +3,10 @@
   "name": "The Underdog",
   "model": "qwen3.5",
   "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
-  "thinking": "high",
-  "initial_role": "Troublemaker",
-  "current_role": "Troublemaker",
-  "night_memory": "You swapped The Prosecutor and The Chaos Agent's cards, but you don't know what they became.",
-  "night_memory_list": [
-    "You swapped The Prosecutor and The Chaos Agent's cards, but you don't know what they became."
-  ],
-  "night_actions": [
-    {
-      "role": "Troublemaker",
-      "action": "swap",
-      "targets": [
-        "The Prosecutor",
-        "The Chaos Agent"
-      ],
-      "source": "agent"
-    }
-  ]
+  "thinking": "off",
+  "initial_role": "Villager",
+  "current_role": "Villager",
+  "night_memory": "",
+  "night_memory_list": [],
+  "night_actions": []
 }

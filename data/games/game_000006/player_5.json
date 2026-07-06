@@ -3,20 +3,12 @@
   "name": "The Statistician",
   "model": "nemotron",
   "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
-  "thinking": "high",
-  "initial_role": "Robber",
-  "current_role": "Villager",
-  "night_memory": "You robbed The Prosecutor's card. After swapping, you are now: Villager.",
+  "thinking": "off",
+  "initial_role": "Minion",
+  "current_role": "Minion",
+  "night_memory": "You saw the Werewolves are: The Gut Player. The Werewolves do not know you are the Minion.",
   "night_memory_list": [
-    "You robbed The Prosecutor's card. After swapping, you are now: Villager."
+    "You saw the Werewolves are: The Gut Player. The Werewolves do not know you are the Minion."
   ],
-  "night_actions": [
-    {
-      "role": "Robber",
-      "action": "rob",
-      "target": "The Prosecutor",
-      "new_role": "Villager",
-      "source": "agent"
-    }
-  ]
+  "night_actions": []
 }

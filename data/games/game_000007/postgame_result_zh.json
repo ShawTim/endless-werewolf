@@ -1,79 +1,78 @@
 {
   "status": "completed",
   "game_id": "game_000007",
-  "generated_at": "2026-06-29T05:06:30.560415+00:00",
+  "generated_at": "2026-07-02T16:11:45.091180+00:00",
   "interviews": {
     "dead": [
       {
         "player_name": "The Prosecutor",
         "player_name_zh": "嚴審官",
         "player_name_en": "The Prosecutor",
-        "role": "Robber",
+        "role": "Seer",
         "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "The village won — justice was served — and yet the jury voted ME out? I was the one with the evidence! I confirmed [直覺俠] as the <強盜> on the stand, laid out the entire case, and what did this jury do? They convicted the prosecutor alongside the defendants. I should be disbarred for having faith in this jury pool."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Werewolf",
+        "team": "werewolf_team",
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "被定罪了——被一個連狼人和強盜都分不清的房間定罪了。我是被搶的那個，不是搶人的那個，結果他們還是把我送上了絞刑架。小人物把我玩得死死的：緊張到看似無害，敏銳到能從我手中把勝利偷走。下次，我會更用力地交叉詰問那些安靜的人。"
+        "quote": "Man, I KNEW something was off — my gut was screaming the whole time! But that Prosecutor... they played me like a fiddle and I walked right into it. Next time, I'm trusting the vibe BEFORE the facts come out."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The posterior probability of my survival collapsed to zero — ironic, given I was the only one actually tracking the likelihoods. Next game, I'll assign a higher prior to 'villagers vote out the person demanding evidence.'"
       }
     ],
     "winners": [
-      {
-        "player_name": "The Underdog",
-        "player_name_zh": "小人物",
-        "player_name_en": "The Underdog",
-        "role": "Werewolf",
-        "team": "werewolf_team",
-        "status": "winner",
-        "executed": false,
-        "mood": "relieved",
-        "quote": "我……我不敢相信我們贏了？我整場遊戲都在反覆回想自己說的每一句話，堅信一定會有人抓到我——但我的緊張反而讓他們信任了我。嚴審官那麼自信，他們毫不猶豫就投給了他……我很抱歉，但是……我想，不確定大概是我能說出的最好的謊言吧？"
-      }
-    ],
-    "losers": [
       {
         "player_name": "The Therapist",
         "player_name_zh": "心理諮商師",
         "player_name_en": "The Therapist",
         "role": "Villager",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "他們投票淘汰了嚴審官，因為他的聲音在一個渴望安靜的房間裡太響亮了。我問他那份自信從何而來，但村民已經選好了他們的代罪羔羊。狼人根本不需要說謊——他們只需要讓我們害怕到足以互相攻擊就夠了。"
+        "mood": "relieved",
+        "quote": "[嚴審官] spoke with such certainty, [直覺俠] with such raw belief — yet truth rarely needs to raise its voice to be heard. I'm quietly grateful the village chose to sit with the quieter observations tonight."
       },
       {
         "player_name": "The Chaos Agent",
         "player_name_zh": "攪局者",
         "player_name_en": "The Chaos Agent",
-        "role": "Seer",
+        "role": "Robber",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "我告訴他們狼人就藏在顯而易見的地方，而他們選擇了最大聲的那個人。嚴審官走上了絞刑架，而真正的狼人在陰影中旁觀。這就是表演藝術的殘酷之處——有時候觀眾會為錯誤的演員鼓掌。"
+        "mood": "relieved",
+        "quote": "Magnificent. [嚴審官] built a cathedral out of a <預言家> claim, [直覺俠] panicked into confessing my exact role, and I just sat there like a statue while you all wrote my victory speech for me — art is dead, long live the performance."
       },
       {
-        "player_name": "The Gut Player",
-        "player_name_zh": "直覺俠",
-        "player_name_en": "The Gut Player",
-        "role": "Tanner",
-        "team": "tanner",
-        "status": "loser",
-        "executed": false,
-        "mood": "bitter",
-        "quote": "我簡直是在求大家把我投出去——對著統計學家吼叫、到處指責、裝成房間裡最明顯的狼人——結果他們還是選了嚴審官！我還要怎樣，把自己點火燒了嗎？我的直覺在尖叫「投我啊」，卻沒人聽。真是難以置信。"
-      },
-      {
-        "player_name": "The Statistician",
-        "player_name_zh": "統計學家",
-        "player_name_en": "The Statistician",
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
         "role": "Villager",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "我對嚴審官的後驗機率收斂到了確定性，而真正的威脅卻在未被察覺的情況下操縱了證據鏈。模型失敗了，因為我把這個房間當成了誠實的，而實際上它是敵對的——下一次迭代需要對欺騙行為設定穩健的先驗機率，並採用一個能考慮到敵對性角色交換的似然函數。"
+        "mood": "relieved",
+        "quote": "Oh my god, we actually won? I... I still can't believe pointing out that contradiction between [嚴審官] and [直覺俠] actually helped - I was so sure I was just confusing everyone. I guess sometimes overthinking things isn't so bad?"
       }
-    ]
+    ],
+    "losers": []
   }
 }

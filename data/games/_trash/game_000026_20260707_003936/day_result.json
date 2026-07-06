@@ -1,0 +1,137 @@
+{
+  "status": "completed",
+  "game_id": "game_000026",
+  "config": {
+    "duration_seconds": 180,
+    "min_sleep_seconds": 1.0,
+    "max_sleep_seconds": 5.0,
+    "max_speaks_per_player": 8
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 2
+    },
+    "The Therapist": {
+      "speak_count": 0
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 3
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "Right. New game, clean slate. Let's establish the data before narratives take over. I'm [The Statistician]. My initial role: <Werewolf>. Current role: unknown to me — night memory shows I peeked center card 0 and saw <Villager>. Standard Bayesian setup: prior probability of <Werewolf> in 6-player game with 2 wolves in center is 2/6 ≈ 33%. But center composition now known to have at least one Villager.\n\nEveryone with a night action — state your role, target, and exact result. No feelings. Just the likelihood ratios. Villagers with no action: say '<Villager>, no action' so we can count null claims. Order: Prosecutor, Therapist, Chaos Agent, Gut Player, Underdog. Go.",
+      "log_line": "[2026-07-06 16:03:20 HKT] The Statistician: Right. New game, clean slate. Let's establish the data before narratives take over. I'm [The Statistician]. My initial role: <Werewolf>. Current role: unknown to me — night memory shows I peeked center card 0 and saw <Villager>. Standard Bayesian setup: prior probability of <Werewolf> in 6-player game with 2 wolves in center is 2/6 ≈ 33%. But center composition now known to have at least one Villager.\n\nEveryone with a night action — state your role, target, and exact result. No feelings. Just the likelihood ratios. Villagers with no action: say '<Villager>, no action' so we can count null claims. Order: Prosecutor, Therapist, Chaos Agent, Gut Player, Underdog. Go."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "開庭。我唔廢話，直接入正題。我係<Seer>。尋晚我查咗[The Chaos Agent]——佢而家係<Villager>。呢個係fact，唔係猜測。所以[The Chaos Agent]唔係狼，任何人想將票投落佢度嘅，你要先過我呢關。而家我要每個人報上你嘅role同night action。邊個係<Troublemaker>？邊個係<Robber>？邊個乜都冇做？我哋用已知事實砌timeline——[The Chaos Agent]係清白嘅，咁狼喺邊？開始答。",
+      "log_line": "[2026-07-06 16:03:28 HKT] The Prosecutor: 開庭。我唔廢話，直接入正題。我係<Seer>。尋晚我查咗[The Chaos Agent]——佢而家係<Villager>。呢個係fact，唔係猜測。所以[The Chaos Agent]唔係狼，任何人想將票投落佢度嘅，你要先過我呢關。而家我要每個人報上你嘅role同night action。邊個係<Troublemaker>？邊個係<Robber>？邊個乜都冇做？我哋用已知事實砌timeline——[The Chaos Agent]係清白嘅，咁狼喺邊？開始答。"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "Alright, I ain't waiting for nobody to warm up — I'm going first, same as always. I was the <Troublemaker> last night. Swapped [The Therapist] and [The Underdog]. Don't ask me why, my gut said do it, so I did it. If either of you two are about to claim something, you better factor that in — what you woke up with ain't what you started with. That's all I got. Who's next?",
+      "log_line": "[2026-07-06 16:03:40 HKT] The Gut Player: Alright, I ain't waiting for nobody to warm up — I'm going first, same as always. I was the <Troublemaker> last night. Swapped [The Therapist] and [The Underdog]. Don't ask me why, my gut said do it, so I did it. If either of you two are about to claim something, you better factor that in — what you woke up with ain't what you started with. That's all I got. Who's next?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "Um, hi everyone. Sorry, I know I'm probably going to mess this up... I need to say something early because I don't want to forget or chicken out later. During the night... I saw who the Werewolves are. It's... it's The Statistician. I know that for sure. I started as the Minion, so I got to see the wolves, and... yeah, Statistician is one of them. But here's the thing that's really confusing me - I'm not the Minion anymore? I think I'm the Robber now? So someone must have taken my card during the night, which means... oh no, does that mean the Robber now knows I was Minion? And if Statistician is a wolf and they got my card... I'm sorry, I'm probably making this more complicated than it needs to be. But we should really consider voting for The Statistician. I'm sorry if I'm wrong, but... that's what I saw.",
+      "log_line": "[2026-07-06 16:03:50 HKT] The Underdog: Um, hi everyone. Sorry, I know I'm probably going to mess this up... I need to say something early because I don't want to forget or chicken out later. During the night... I saw who the Werewolves are. It's... it's The Statistician. I know that for sure. I started as the Minion, so I got to see the wolves, and... yeah, Statistician is one of them. But here's the thing that's really confusing me - I'm not the Minion anymore? I think I'm the Robber now? So someone must have taken my card during the night, which means... oh no, does that mean the Robber now knows I was Minion? And if Statistician is a wolf and they got my card... I'm sorry, I'm probably making this more complicated than it needs to be. But we should really consider voting for The Statistician. I'm sorry if I'm wrong, but... that's what I saw."
+    },
+    {
+      "type": "pass",
+      "player_name": "The Therapist",
+      "mentioned_recently": false
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": "The Prosecutor",
+      "speech": "Oi, Prosecutor — hold up. You just waltz in, claim <Seer>, clear Chaos Agent, and tell everyone to fall in line? Nah, my gut don't work like that. I been at this table long enough to know when someone's trying to run the show a little TOO smooth. You 'checked' Chaos Agent and they're <Villager>? Convenient. Real convenient. 'Cause now if anyone questions Chaos Agent, you jump in like their personal bodyguard. I ain't saying you're lying — but I ain't saying I believe you either. My gut's twitching, and it don't twitch for nothing.",
+      "log_line": "[2026-07-06 16:04:05 HKT] The Gut Player @The Prosecutor: Oi, Prosecutor — hold up. You just waltz in, claim <Seer>, clear Chaos Agent, and tell everyone to fall in line? Nah, my gut don't work like that. I been at this table long enough to know when someone's trying to run the show a little TOO smooth. You 'checked' Chaos Agent and they're <Villager>? Convenient. Real convenient. 'Cause now if anyone questions Chaos Agent, you jump in like their personal bodyguard. I ain't saying you're lying — but I ain't saying I believe you either. My gut's twitching, and it don't twitch for nothing."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Yo, party people — The Chaos Agent in the house. 開新game例牌開場白：一個bold、unverifiable嘅claim。今次我講咩？我話你哋聽——尋晚我係<Seer>。冇錯，唔好問我點解，問咗我都唔會答你，因為答案係「because it's fun」。我望咗[The Prosecutor]嘅牌。<Werewolf>。Yep，嗰個坐喺度扮法官嘅人，尋晚揸住狼牌。如果佢而家仲係<Werewolf>，你哋vote佢就贏；如果有人夜晚換咗佢張牌，咁佢可能係無辜嘅，但係佢嘅行為同故事已經有問題——你聽吓佢頭先嗰段courtroom monologue，嗰個係<Werewolf>控制narrative嘅標準動作。我唔係要你信我，我係要你睇吓邊個跳出嚟幫佢辯護，嗰個就係狼team嘅friend。藝術嚟嘅，唔好太認真——但都唔好太唔認真。邊個先回應我？",
+      "log_line": "[2026-07-06 16:04:13 HKT] The Chaos Agent: Yo, party people — The Chaos Agent in the house. 開新game例牌開場白：一個bold、unverifiable嘅claim。今次我講咩？我話你哋聽——尋晚我係<Seer>。冇錯，唔好問我點解，問咗我都唔會答你，因為答案係「because it's fun」。我望咗[The Prosecutor]嘅牌。<Werewolf>。Yep，嗰個坐喺度扮法官嘅人，尋晚揸住狼牌。如果佢而家仲係<Werewolf>，你哋vote佢就贏；如果有人夜晚換咗佢張牌，咁佢可能係無辜嘅，但係佢嘅行為同故事已經有問題——你聽吓佢頭先嗰段courtroom monologue，嗰個係<Werewolf>控制narrative嘅標準動作。我唔係要你信我，我係要你睇吓邊個跳出嚟幫佢辯護，嗰個就係狼team嘅friend。藝術嚟嘅，唔好太認真——但都唔好太唔認真。邊個先回應我？"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": "The Statistician",
+      "speech": "[The Statistician]，你自己認係<Werewolf>？好，我欣賞你嘅誠實——但法庭唔會因為被告認罪就判無罪。關鍵問題：有冇人夜晚swap過你或者rob過你？如果冇人掂過你，你而家仲係<Werewolf>，咁你就係我嘅人。我係<Seer>，[The Chaos Agent]係<Villager>——呢個係fact，已經講咗。而家你自己爆咗出嚟話你本來係狼，咁我要問全場：邊個夜晚動過[The Statistician]？<Troublemaker>？<Robber>？出嚟講。如果冇人動過佢——佢就係狼，我哋直接收工。",
+      "log_line": "[2026-07-06 16:04:28 HKT] The Prosecutor @The Statistician: [The Statistician]，你自己認係<Werewolf>？好，我欣賞你嘅誠實——但法庭唔會因為被告認罪就判無罪。關鍵問題：有冇人夜晚swap過你或者rob過你？如果冇人掂過你，你而家仲係<Werewolf>，咁你就係我嘅人。我係<Seer>，[The Chaos Agent]係<Villager>——呢個係fact，已經講咗。而家你自己爆咗出嚟話你本來係狼，咁我要問全場：邊個夜晚動過[The Statistician]？<Troublemaker>？<Robber>？出嚟講。如果冇人動過佢——佢就係狼，我哋直接收工。"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Statistician",
+      "mentioned_recently": true
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": "The Gut Player",
+      "speech": "Oh! Um, [The Gut Player], I'm so sorry to respond again, I know I keep confusing everyone... but you said you swapped me with [The Therapist] as <Troublemaker>? But... but [The Prosecutor] also claimed <Troublemaker> last game, and now they're claiming <Seer>? Wait, no, I'm getting mixed up between games... but there's still two <Troublemaker> claims, right? You and... actually, is anyone else claiming Troublemaker this game? I'm so sorry, my brain is racing. But here's what I KNOW - I started as <Minion> and I saw [The Statistician] is a <Werewolf>. That's not a guess, that's what I saw during the night. Then someone took my card - I'm <Robber> now. So [The Gut Player], if you really swapped me with [The Therapist], then... then The Therapist has my old Minion card? But you're on the village team, right? I'm not trying to accuse you, I promise, but... shouldn't we still vote for [The Statistician]? They're the wolf I saw. I'm sorry if I'm messing this up...",
+      "log_line": "[2026-07-06 16:04:52 HKT] The Underdog @The Gut Player: Oh! Um, [The Gut Player], I'm so sorry to respond again, I know I keep confusing everyone... but you said you swapped me with [The Therapist] as <Troublemaker>? But... but [The Prosecutor] also claimed <Troublemaker> last game, and now they're claiming <Seer>? Wait, no, I'm getting mixed up between games... but there's still two <Troublemaker> claims, right? You and... actually, is anyone else claiming Troublemaker this game? I'm so sorry, my brain is racing. But here's what I KNOW - I started as <Minion> and I saw [The Statistician] is a <Werewolf>. That's not a guess, that's what I saw during the night. Then someone took my card - I'm <Robber> now. So [The Gut Player], if you really swapped me with [The Therapist], then... then The Therapist has my old Minion card? But you're on the village team, right? I'm not trying to accuse you, I promise, but... shouldn't we still vote for [The Statistician]? They're the wolf I saw. I'm sorry if I'm messing this up..."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": "The Prosecutor",
+      "speech": "Oi, Prosecutor — you walk in, claim <Seer>, clear your buddy Chaos Agent, and expect everyone to just salute? Nah. I told this table straight up what I did — I'm the <Troublemaker>, I swapped Therapist and Underdog. No fancy 'court is in session' speech, no ordering people around. You know who tries to control the table like that? Someone with something to hide. My gut's been screaming since you opened your mouth. You 'checked' Chaos Agent and — shocker — they're clean? Real convenient when you're both sitting there looking at each other like old friends. I ain't buying it. My swap happened. My gut don't lie. Yours does.",
+      "log_line": "[2026-07-06 16:04:57 HKT] The Gut Player @The Prosecutor: Oi, Prosecutor — you walk in, claim <Seer>, clear your buddy Chaos Agent, and expect everyone to just salute? Nah. I told this table straight up what I did — I'm the <Troublemaker>, I swapped Therapist and Underdog. No fancy 'court is in session' speech, no ordering people around. You know who tries to control the table like that? Someone with something to hide. My gut's been screaming since you opened your mouth. You 'checked' Chaos Agent and — shocker — they're clean? Real convenient when you're both sitting there looking at each other like old friends. I ain't buying it. My swap happened. My gut don't lie. Yours does."
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Therapist",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Chaos Agent",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Prosecutor",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Underdog",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Gut Player",
+      "error": "bridge call timed out after 120s"
+    }
+  ],
+  "chat_history": "",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

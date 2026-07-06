@@ -1,0 +1,133 @@
+{
+  "status": "completed",
+  "game_id": "game_000029",
+  "config": {
+    "duration_seconds": 180,
+    "min_sleep_seconds": 1.0,
+    "max_sleep_seconds": 5.0,
+    "max_speaks_per_player": 8
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 2
+    },
+    "The Therapist": {
+      "speak_count": 0
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 2
+    },
+    "The Statistician": {
+      "speak_count": 0
+    },
+    "The Underdog": {
+      "speak_count": 2
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "Alright, alright — let's not waste everyone's time. I'll go first. I am the Seer. I peeked one of the center cards last night, and I'm not going to say which one yet, but I will say this: at least one Werewolf is sitting in that center three. I could be lying, obviously. That's part of the fun. But if anyone wants to make a counter-claim right now, this is your moment. Otherwise, we can start the real game of who-believes-whom.",
+      "log_line": "[2026-07-07 00:04:36 HKT] The Chaos Agent: Alright, alright — let's not waste everyone's time. I'll go first. I am the Seer. I peeked one of the center cards last night, and I'm not going to say which one yet, but I will say this: at least one Werewolf is sitting in that center three. I could be lying, obviously. That's part of the fun. But if anyone wants to make a counter-claim right now, this is your moment. Otherwise, we can start the real game of who-believes-whom."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": "The Therapist",
+      "speech": "Ladies and gentlemen of the jury — I'll be direct. I'm the Seer. Night one, I looked at The Gut Player. Verdict? Clean. Villager. No question. Now, I don't waste time on clean records. What I DO have a problem with is The Therapist over there, sitting awfully quiet, awfully composed. I've prosecuted enough people to know the look of someone hiding something. So here's what I want — The Therapist, state your role and your night action, clearly, on the record. No hedging, no 'I'll explain later.' The defense rests when I say it rests. And if anyone else wants to claim Seer — step up now, because there's only room for one in this courtroom.",
+      "log_line": "[2026-07-07 00:04:49 HKT] The Prosecutor @The Therapist: Ladies and gentlemen of the jury — I'll be direct. I'm the Seer. Night one, I looked at The Gut Player. Verdict? Clean. Villager. No question. Now, I don't waste time on clean records. What I DO have a problem with is The Therapist over there, sitting awfully quiet, awfully composed. I've prosecuted enough people to know the look of someone hiding something. So here's what I want — The Therapist, state your role and your night action, clearly, on the record. No hedging, no 'I'll explain later.' The defense rests when I say it rests. And if anyone else wants to claim Seer — step up now, because there's only room for one in this courtroom."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": "The Prosecutor",
+      "speech": "Yo Prosecutor, I don't know what it is but you're giving me bad vibes already. You got that same look from last game — the one where you were a wolf. My gut don't lie, and right now it's screaming at me about you. Anyone else feel that or am I the only one with instincts around here?",
+      "log_line": "[2026-07-07 00:05:04 HKT] The Gut Player @The Prosecutor: Yo Prosecutor, I don't know what it is but you're giving me bad vibes already. You got that same look from last game — the one where you were a wolf. My gut don't lie, and right now it's screaming at me about you. Anyone else feel that or am I the only one with instincts around here?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "Um, hi. Sorry, I'm still kinda new at this and I always overthink everything, but... I figure I should just say it? I'm a Villager. Like, I didn't do anything at night, so I don't have any special info. I know that's not super helpful, but at least I'm being honest? Maybe someone who actually knows something can go next? Please don't lynch me first, I swear I'm on your side.",
+      "log_line": "[2026-07-07 00:05:20 HKT] The Underdog: Um, hi. Sorry, I'm still kinda new at this and I always overthink everything, but... I figure I should just say it? I'm a Villager. Like, I didn't do anything at night, so I don't have any special info. I know that's not super helpful, but at least I'm being honest? Maybe someone who actually knows something can go next? Please don't lynch me first, I swear I'm on your side."
+    },
+    {
+      "type": "pass",
+      "player_name": "The Therapist",
+      "mentioned_recently": false
+    },
+    {
+      "type": "pass",
+      "player_name": "The Gut Player",
+      "mentioned_recently": true
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Chaos Agent",
+      "mentioned_recently": true
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": "The Gut Player",
+      "speech": "Oh! Um, sorry, I didn't mean to jump in — but The Gut Player, you mentioned bad vibes about The Prosecutor? And I... I don't know, maybe I'm overthinking this, but isn't it weird that BOTH The Chaos Agent and The Prosecutor are claiming Seer? Like, one of them has to be lying, right? Because there's only one Seer card... unless one of them is in the center? But that seems... I mean, I'm probably wrong, I always am, but shouldn't we figure out which Seer is real before we start trusting anyone's reads? Sorry, that was probably confusing...",
+      "log_line": "[2026-07-07 00:06:11 HKT] The Underdog @The Gut Player: Oh! Um, sorry, I didn't mean to jump in — but The Gut Player, you mentioned bad vibes about The Prosecutor? And I... I don't know, maybe I'm overthinking this, but isn't it weird that BOTH The Chaos Agent and The Prosecutor are claiming Seer? Like, one of them has to be lying, right? Because there's only one Seer card... unless one of them is in the center? But that seems... I mean, I'm probably wrong, I always am, but shouldn't we figure out which Seer is real before we start trusting anyone's reads? Sorry, that was probably confusing..."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": "The Chaos Agent",
+      "speech": "Hold on — TWO Seer claims in the first thirty seconds? That's what we call a confession by contradiction. The Chaos Agent, you say you peeked the center and found a Werewolf. Convenient. Vague. No card named, no role specified. I gave this table a NAME and a RESULT — The Gut Player, Villager, period. So here's my cross-examination: which center card did you look at, and what EXACTLY did you see? Because a real Seer knows the specific card AND the specific role. 'At least one Werewolf in the center' is something anyone could say after counting to three. Give me card and role, or the jury's going to see through you real fast. I'll wait.",
+      "log_line": "[2026-07-07 00:06:23 HKT] The Prosecutor @The Chaos Agent: Hold on — TWO Seer claims in the first thirty seconds? That's what we call a confession by contradiction. The Chaos Agent, you say you peeked the center and found a Werewolf. Convenient. Vague. No card named, no role specified. I gave this table a NAME and a RESULT — The Gut Player, Villager, period. So here's my cross-examination: which center card did you look at, and what EXACTLY did you see? Because a real Seer knows the specific card AND the specific role. 'At least one Werewolf in the center' is something anyone could say after counting to three. Give me card and role, or the jury's going to see through you real fast. I'll wait."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": "The Prosecutor",
+      "speech": "Wait wait wait — hold up. You're telling me you peeked ME and I'm clean? Okay, I like that part, obviously. But my gut was already screaming 'wolf' at you before you even said that, and now there's TWO of you claiming Seer? That's one too many, man. I don't do math but I know one plus one ain't three. Either you're lying or Chaos Agent is lying, and right now... I dunno, I'm getting mixed signals. You vouching for me feels good, but it also feels like you're trying to get on my good side. My gut's doing backflips right now.",
+      "log_line": "[2026-07-07 00:06:32 HKT] The Gut Player @The Prosecutor: Wait wait wait — hold up. You're telling me you peeked ME and I'm clean? Okay, I like that part, obviously. But my gut was already screaming 'wolf' at you before you even said that, and now there's TWO of you claiming Seer? That's one too many, man. I don't do math but I know one plus one ain't three. Either you're lying or Chaos Agent is lying, and right now... I dunno, I'm getting mixed signals. You vouching for me feels good, but it also feels like you're trying to get on my good side. My gut's doing backflips right now."
+    },
+    {
+      "type": "pass",
+      "player_name": "The Underdog",
+      "mentioned_recently": true
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Therapist",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Statistician",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Chaos Agent",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Prosecutor",
+      "error": "bridge call timed out after 120s"
+    },
+    {
+      "type": "bridge_error",
+      "player_name": "The Gut Player",
+      "error": "bridge call timed out after 120s"
+    }
+  ],
+  "chat_history": "",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

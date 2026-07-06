@@ -1,0 +1,52 @@
+{
+  "status": "completed",
+  "game_id": "game_000026",
+  "votes": {
+    "The Prosecutor": "The Underdog",
+    "The Therapist": "The Statistician",
+    "The Chaos Agent": "The Therapist",
+    "The Gut Player": "The Underdog",
+    "The Statistician": "The Underdog",
+    "The Underdog": "The Statistician"
+  },
+  "tally": {
+    "The Underdog": 3,
+    "The Statistician": 2,
+    "The Therapist": 1
+  },
+  "executed": [
+    "The Underdog"
+  ],
+  "vote_trace": [
+    {
+      "player": "The Prosecutor",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Underdog"
+    },
+    {
+      "player": "The Therapist",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Statistician"
+    },
+    {
+      "player": "The Chaos Agent",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Therapist"
+    },
+    {
+      "player": "The Gut Player",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Underdog"
+    },
+    {
+      "player": "The Statistician",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Underdog"
+    },
+    {
+      "player": "The Underdog",
+      "error": "bridge call timed out after 120s",
+      "fallback": "The Statistician"
+    }
+  ]
+}

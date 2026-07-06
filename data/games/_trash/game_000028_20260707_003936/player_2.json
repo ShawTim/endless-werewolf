@@ -1,0 +1,24 @@
+{
+  "id": "2",
+  "name": "The Therapist",
+  "model": "kimi",
+  "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+  "thinking": "off",
+  "initial_role": "Troublemaker",
+  "current_role": "Troublemaker",
+  "night_memory": "You swapped The Prosecutor and The Statistician's cards, but you don't know what they became.",
+  "night_memory_list": [
+    "You swapped The Prosecutor and The Statistician's cards, but you don't know what they became."
+  ],
+  "night_actions": [
+    {
+      "role": "Troublemaker",
+      "action": "swap",
+      "targets": [
+        "The Prosecutor",
+        "The Statistician"
+      ],
+      "source": "agent"
+    }
+  ]
+}

@@ -1,79 +1,78 @@
 {
   "status": "completed",
   "game_id": "game_000007",
-  "generated_at": "2026-06-29T05:06:30.560415+00:00",
+  "generated_at": "2026-07-02T16:11:45.091180+00:00",
   "interviews": {
     "dead": [
       {
         "player_name": "The Prosecutor",
         "player_name_zh": "嚴審官",
         "player_name_en": "The Prosecutor",
-        "role": "Robber",
+        "role": "Seer",
         "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "The village won — justice was served — and yet the jury voted ME out? I was the one with the evidence! I confirmed [The Gut Player] as the <Robber> on the stand, laid out the entire case, and what did this jury do? They convicted the prosecutor alongside the defendants. I should be disbarred for having faith in this jury pool."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Werewolf",
+        "team": "werewolf_team",
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "Convicted — by a room that couldn't tell a wolf from a robber. I was the one who got robbed, not the one doing the robbing, and still they sent me to the gallows. 小人物 played me perfectly: nervous enough to seem harmless, sharp enough to steal the win right out of my hands. Next time, I'll cross-examine the quiet ones harder."
+        "quote": "Man, I KNEW something was off — my gut was screaming the whole time! But that Prosecutor... they played me like a fiddle and I walked right into it. Next time, I'm trusting the vibe BEFORE the facts come out."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The posterior probability of my survival collapsed to zero — ironic, given I was the only one actually tracking the likelihoods. Next game, I'll assign a higher prior to 'villagers vote out the person demanding evidence.'"
       }
     ],
     "winners": [
-      {
-        "player_name": "The Underdog",
-        "player_name_zh": "小人物",
-        "player_name_en": "The Underdog",
-        "role": "Werewolf",
-        "team": "werewolf_team",
-        "status": "winner",
-        "executed": false,
-        "mood": "relieved",
-        "quote": "I... I can't believe we won? I spent the whole game replaying every word, convinced someone would catch me — but my nervousness made them trust me instead. 嚴審官 was so confident they voted for him without a second thought... I'm sorry, but... I guess being unsure was the best lie I could tell?"
-      }
-    ],
-    "losers": [
       {
         "player_name": "The Therapist",
         "player_name_zh": "心理諮商師",
         "player_name_en": "The Therapist",
         "role": "Villager",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "They voted out 嚴審官 because his voice was too loud in a room that wanted quiet. I asked him where that confidence came from, but the village had already chosen its scapegoat. The wolves didn't need to lie — they just needed us to be afraid enough to turn on each other."
+        "mood": "relieved",
+        "quote": "[The Prosecutor] spoke with such certainty, [The Gut Player] with such raw belief — yet truth rarely needs to raise its voice to be heard. I'm quietly grateful the village chose to sit with the quieter observations tonight."
       },
       {
         "player_name": "The Chaos Agent",
         "player_name_zh": "攪局者",
         "player_name_en": "The Chaos Agent",
-        "role": "Seer",
+        "role": "Robber",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "I told them the wolves were hiding in plain sight, and they chose the loudest voice instead. 嚴審官 went to the gallows while the real wolves watched from the shadows. That's the thing about performance art — sometimes the audience claps for the wrong actor."
+        "mood": "relieved",
+        "quote": "Magnificent. [The Prosecutor] built a cathedral out of a <Seer> claim, [The Gut Player] panicked into confessing my exact role, and I just sat there like a statue while you all wrote my victory speech for me — art is dead, long live the performance."
       },
       {
-        "player_name": "The Gut Player",
-        "player_name_zh": "直覺俠",
-        "player_name_en": "The Gut Player",
-        "role": "Tanner",
-        "team": "tanner",
-        "status": "loser",
-        "executed": false,
-        "mood": "bitter",
-        "quote": "I was practically begging to get voted out — yelling at 統計學家, pointing fingers, acting like the most obvious wolf in the room — and they still picked 嚴審官 instead! What do I have to do, set myself on fire? My gut was screaming 'vote me' and nobody listened. Unbelievable."
-      },
-      {
-        "player_name": "The Statistician",
-        "player_name_zh": "統計學家",
-        "player_name_en": "The Statistician",
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
         "role": "Villager",
         "team": "village_team",
-        "status": "loser",
+        "status": "winner",
         "executed": false,
-        "mood": "bitter",
-        "quote": "My posterior on 嚴審官 converged to certainty while the true threat manipulated the evidence chain undetected. The model failed because I treated the room as honest when it was adversarial — next iteration needs robust priors for deception and a likelihood function that accounts for adversarial role-swapping."
+        "mood": "relieved",
+        "quote": "Oh my god, we actually won? I... I still can't believe pointing out that contradiction between [The Prosecutor] and [The Gut Player] actually helped - I was so sure I was just confusing everyone. I guess sometimes overthinking things isn't so bad?"
       }
-    ]
+    ],
+    "losers": []
   }
 }

@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000004",
+  "generated_at": "2026-06-30T07:13:29.053668+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "The room mistook my silence for a secret, when all I was doing was listening. [The Statistician] had the right numbers — but numbers never account for what people are afraid to see."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I played it straight for once — no tricks, no theatrics, just facts — and the jury still got it wrong. We voted out [The Therapist] when the real threat was hiding in the margins the whole time. Next time, I'm going back to playing dirty."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I gave them swaps, chaos, and enough contradictions to choke on — and they handed the verdict to [The Therapist], the only person who gave them nothing but silence. Nobody won, but nobody was supposed to. The art was in the breakdown, not the ending."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I had the facts — I stole [The Prosecutor]'s card myself, I knew they were clean. And my gut still pointed at [The Therapist], and I was wrong. Maybe next time I should just shut up and let the numbers guy talk."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "The posterior was unambiguous: no Werewolves among players, one unclaimed role slot. [The Therapist] was the maximum-likelihood <Tanner> candidate. The group's failure to follow the math isn't a statistical anomaly — it's a design flaw in human reasoning."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I'm sorry — I had the <Seer> card but couldn't use it, and now nobody wins. [The Statistician] did everything right, and we still lost. I keep thinking... maybe if I'd been braver, asked better questions... but I wasn't, and now we all just... didn't win."
+      }
+    ]
+  }
+}

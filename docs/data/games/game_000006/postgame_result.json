@@ -1,33 +1,22 @@
 {
   "status": "completed",
   "game_id": "game_000006",
-  "generated_at": "2026-06-29T04:27:25.665345+00:00",
+  "generated_at": "2026-07-01T16:14:22.172455+00:00",
   "interviews": {
     "dead": [
       {
-        "player_name": "The Statistician",
-        "player_name_zh": "統計學家",
-        "player_name_en": "The Statistician",
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
         "role": "Villager",
         "team": "village_team",
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "My model overfit on 攪局者's narrative and missed the structural break in 嚴審官's timeline. The likelihood function needs a regime-switching component for adversarial role-swapping — data doesn't lie, but my priors did."
+        "quote": "I lost the case, I lost the vote, and now I'm sitting here like a disbarred man watching the real criminals walk free. [The Gut Player]'s 'instincts' put me in the ground — congratulations, your gut just helped the wolves win. I hope you're proud of that verdict."
       }
     ],
     "winners": [
-      {
-        "player_name": "The Prosecutor",
-        "player_name_zh": "嚴審官",
-        "player_name_en": "The Prosecutor",
-        "role": "Werewolf",
-        "team": "werewolf_team",
-        "status": "winner",
-        "executed": false,
-        "mood": "relieved",
-        "quote": ""
-      },
       {
         "player_name": "The Gut Player",
         "player_name_zh": "直覺俠",
@@ -37,7 +26,18 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "See? I told you — my gut doesn't need charts and graphs. 統計學家 can run all the numbers they want, but when the vibes are off, the vibes are off. Another win, another round of me being right without even trying."
+        "quote": "Ha! Told you my gut's never wrong — I said the Prosecutor felt off and look who got dragged out! Maybe next time you'll listen to the guy with instincts instead of your little courtroom speeches, yeah?"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "Textbook Bayesian exploitation — the village discarded their only verified likelihood ([The Prosecutor]'s <Robber> claim) for a prior of zero, while [The Chaos Agent]'s unfalsifiable <Seer> claim absorbed all suspicion. The data never lied; the villagers just refused to update."
       }
     ],
     "losers": [
@@ -45,34 +45,34 @@
         "player_name": "The Therapist",
         "player_name_zh": "心理諮商師",
         "player_name_en": "The Therapist",
-        "role": "Tanner",
-        "team": "tanner",
-        "status": "loser",
-        "executed": false,
-        "mood": "bitter",
-        "quote": "They chose certainty over curiosity, and 統計學家 paid the price for that comfort. I had hoped my quiet questions would turn the gaze toward me, but they looked right past instead."
-      },
-      {
-        "player_name": "The Chaos Agent",
-        "player_name_zh": "攪局者",
-        "player_name_en": "The Chaos Agent",
         "role": "Robber",
         "team": "village_team",
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I scattered my lies like breadcrumbs, and they followed them straight past me to 統計學家 instead. That's the beautiful thing about good theater — the best tricks make the audience feel clever for missing the point."
+        "quote": "[The Prosecutor] needed an audience, and I gave them one. I was so busy listening to their elaborate defense that I forgot to ask the quiet ones what they weren't saying."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "Good game — I flung a <Seer> claim at the wall as a <Tanner> just to see what stuck, and somehow [The Prosecutor] ate my bait and got lynched for it. Technically I lost, but watching the whole room chase a ghost I made up? That's the only win I was playing for."
       },
       {
         "player_name": "The Underdog",
         "player_name_zh": "小人物",
         "player_name_en": "The Underdog",
-        "role": "Troublemaker",
+        "role": "Villager",
         "team": "village_team",
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "Um... I keep replaying the swap in my head, and I'm starting to think I might have made everything worse. 統計學家 didn't deserve to go out like that, and if my cards helped the werewolves win... I'm so sorry, I really just wanted to help."
+        "quote": "I'm so sorry, [The Prosecutor]... I think you were actually telling the truth about being the <Robber>, but I froze up because I was terrified of being wrong. Now [The Gut Player] and [The Chaos Agent] probably won as werewolves, and I can't stop wondering if one honest sentence from me could have changed everything."
       }
     ]
   }

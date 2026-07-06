@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000003",
+  "generated_at": "2026-06-30T06:51:07.661123+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "The jury spoke, and I was found guilty — which is exactly what I wanted. I prosecuted the entire room into voting me out. That's not a loss, that's a conviction I orchestrated from the defendant's chair. Court is adjourned."
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "We handed [The Prosecutor] their victory wrapped in our own certainty. I should have listened more carefully to the silence between their words."
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "[The Prosecutor] understood the game better than all of us. They didn't need me to sow chaos — they just needed everyone looking for wolves while they walked right out the door. Elegant, really."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "My gut said [The Chaos Agent] was off, and I went with it — but [The Prosecutor] was the one playing us all along. Can't believe I let someone that loud walk right past my radar."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "[The Prosecutor]'s aggression pattern matched wolf behavior from the previous game with high confidence. I didn't anticipate a <Tanner> treating the game as a controlled demolition of our strategy."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I keep wondering if [The Prosecutor] wanted us to vote for them all along... I had my doubts but I didn't speak up. I'm sorry—I should have trusted my gut."
+      }
+    ]
+  }
+}

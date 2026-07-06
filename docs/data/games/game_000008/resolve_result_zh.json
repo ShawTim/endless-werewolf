@@ -1,62 +1,61 @@
 {
   "status": "completed",
-  "outcome": "tanner_win",
-  "winner_team": "tanner",
+  "outcome": "werewolf_win",
+  "winner_team": "werewolf_team",
   "winners": [
     "The Prosecutor"
   ],
-  "reason": "<皮匠>被處決了。",
+  "reason": "No werewolf was executed.",
   "executed": [
-    "The Prosecutor"
+    "The Statistician"
   ],
   "werewolves_in_play": [
-    "The Statistician",
-    "The Underdog"
+    "The Prosecutor"
   ],
   "executed_werewolves": [],
   "votes": {
-    "The Prosecutor": "The Underdog",
-    "The Therapist": "The Chaos Agent",
-    "The Chaos Agent": "The Prosecutor",
-    "The Gut Player": "The Chaos Agent",
+    "The Prosecutor": "The Statistician",
+    "The Therapist": "The Statistician",
+    "The Chaos Agent": "The Statistician",
+    "The Gut Player": "The Statistician",
     "The Statistician": "The Prosecutor",
-    "The Underdog": "The Prosecutor"
+    "The Underdog": "The Chaos Agent"
   },
   "tally": {
-    "The Underdog": 1,
-    "The Chaos Agent": 2,
-    "The Prosecutor": 3
+    "The Statistician": 4,
+    "The Prosecutor": 1,
+    "The Chaos Agent": 1
   },
   "final_roles": {
     "The Prosecutor": {
-      "initial_role": "Tanner",
-      "current_role": "Tanner",
-      "team": "tanner"
+      "initial_role": "Villager",
+      "current_role": "Werewolf",
+      "team": "werewolf_team"
     },
     "The Therapist": {
+      "initial_role": "Robber",
+      "current_role": "Troublemaker",
+      "team": "village_team"
+    },
+    "The Chaos Agent": {
       "initial_role": "Villager",
       "current_role": "Villager",
       "team": "village_team"
     },
-    "The Chaos Agent": {
-      "initial_role": "Minion",
-      "current_role": "Minion",
-      "team": "werewolf_team"
-    },
     "The Gut Player": {
-      "initial_role": "Villager",
-      "current_role": "Villager",
+      "initial_role": "Troublemaker",
+      "current_role": "Robber",
       "team": "village_team"
     },
     "The Statistician": {
       "initial_role": "Werewolf",
-      "current_role": "Werewolf",
-      "team": "werewolf_team"
+      "current_role": "Villager",
+      "team": "village_team"
     },
     "The Underdog": {
-      "initial_role": "Werewolf",
-      "current_role": "Werewolf",
-      "team": "werewolf_team"
+      "initial_role": "Tanner",
+      "current_role": "Tanner",
+      "team": "tanner"
     }
   },
   "game_id": "game_000008"

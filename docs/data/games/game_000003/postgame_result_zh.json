@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000003",
+  "generated_at": "2026-06-30T06:51:07.661123+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "陪審團做出了裁決，我被判有罪——這正是我想要的。我起訴了整個房間，讓他們投票把我趕出去。這不是失敗，這是我在被告席上精心策劃的一場定罪。庭審結束。"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我們用自己確信無疑的態度，把勝利拱手送給了[嚴審官]。我應該更仔細聆聽他們話語之間的沉默。"
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "[嚴審官]比我們所有人都更懂這個遊戲。他們不需要我來製造混亂——他們只需要讓每個人都忙著找狼人，然後自己從容走出大門。真是優雅。"
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我的直覺說[攪局者]不對勁，我跟著感覺走了——但[嚴審官]從頭到尾都在玩弄我們。不敢相信我讓一個那麼大聲的人從我的雷達底下溜過去了。"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "[嚴審官]的攻擊模式與前一場遊戲中的狼人行為高度吻合。我沒有預料到一個<皮匠>會把這場遊戲當作對我們策略的定向爆破。"
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我一直在想，[嚴審官]是不是從頭到尾都想讓我們投票給他們……我當時有懷疑，但我沒有說出來。對不起——我應該相信自己的直覺。"
+      }
+    ]
+  }
+}

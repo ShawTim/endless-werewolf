@@ -1,0 +1,81 @@
+{
+  "status": "completed",
+  "game_id": "game_000005",
+  "config": {
+    "duration_seconds": 90,
+    "min_sleep_seconds": 2.0,
+    "max_sleep_seconds": 7.0,
+    "max_speaks_per_player": 3
+  },
+  "player_stats": {
+    "The Prosecutor": {
+      "speak_count": 1
+    },
+    "The Therapist": {
+      "speak_count": 1
+    },
+    "The Chaos Agent": {
+      "speak_count": 1
+    },
+    "The Gut Player": {
+      "speak_count": 1
+    },
+    "The Statistician": {
+      "speak_count": 1
+    },
+    "The Underdog": {
+      "speak_count": 1
+    }
+  },
+  "day_trace": [
+    {
+      "type": "speech",
+      "player_name": "The Prosecutor",
+      "target": null,
+      "speech": "法庭現在開庭。我原本是<村民>——沒有夜間行動，沒有特殊情報。但我不需要夜間情報也能交叉詰問。所有確實有夜間行動的人，現在站出來。說出你的角色、你的目標，以及你確切得知的內容。不要戲劇效果，不要模糊預兆——只要事實。陪審團正在聆聽。誰要先站上證人席？",
+      "log_line": "[2026-06-30 16:29:20 HKT] The Prosecutor: Court is in session. I was a Villager — no night action, no special information. But I don't need a night action to cross-examine. Everyone who DID have one, step forward now. State your role, your target, and exactly what you learned. No theatrics, no vague omens — just the facts. The jury is listening. Who's first on the stand?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Underdog",
+      "target": null,
+      "speech": "呃，嗨。我……其實真的很困惑？我想我原本是<爪牙>——我昨晚看到了誰是狼人——但我現在拿到的是<村民>牌？一定是<搗蛋鬼>把我交換了。我知道這聽起來很瘋狂，但是……我昨晚看到了[心理諮商師]。是<狼人>。但我現在在村民陣營，我不知道有沒有人會相信我。抱歉，我知道這很難消化。我只是……我想幫忙。",
+      "log_line": "[2026-06-30 16:30:33 HKT] The Underdog: Um, hi. I'm... really confused, actually? I think I started as the Minion — I saw who the Werewolves were last night — but now I have a Villager card? The Troublemaker must have swapped me. And I know this sounds crazy, but... I saw The Therapist last night. As a Werewolf. But now I'm on the village team, and I don't know if anyone will believe me. I'm sorry, I know this is a lot. I just... I want to help."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Therapist",
+      "target": null,
+      "speech": "現在這麼安靜真是有趣……好像每個人還在決定要分享什麼。我很想聽聽有沒有人昨晚看到了什麼，可以幫助我們一起釐清狀況。即使是最小的細節也可能很重要。",
+      "log_line": "[2026-06-30 16:31:06 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Gut Player",
+      "target": null,
+      "speech": "好了，我們開始吧。我是村民——沒有夜間行動，沒有情報，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以誰有話要說？別逼我一個一個把你們嗅出來。",
+      "log_line": "[2026-06-30 16:31:22 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one."
+    },
+    {
+      "type": "speech",
+      "player_name": "The Statistician",
+      "target": null,
+      "speech": "好的。在我們開始猜測之前，先建立數據。所有有夜間行動的人——說出你的角色、你的目標，以及你確切得知的內容。不要說「我認為」或「感覺像是」。只要事實。我會即時更新我的後驗機率，而且我不想把運算週期浪費在感覺上。誰要先來？",
+      "log_line": "[2026-06-30 16:33:14 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?"
+    },
+    {
+      "type": "speech",
+      "player_name": "The Chaos Agent",
+      "target": null,
+      "speech": "哎呀呀。讓我分享一些……出乎意料的事。其中一張中央牌比在座任何人想像的都危險得多。我給你們一個提示：狼人就藏在顯而易見的地方，而且他們不是你們以為的人。但轉折來了——我可能在說謊。我也可能在說實話。這遊戲最美妙的地方在於，你永遠不會真正知道真相，直到為時已晚。所以，誰準備好跳下去了？",
+      "log_line": "[2026-06-30 16:33:36 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?"
+    },
+    {
+      "type": "pass",
+      "player_name": "The Prosecutor",
+      "mentioned_recently": true
+    }
+  ],
+  "chat_history": "[2026-06-30 16:29:20 HKT] The Prosecutor: Court is in session. I was a Villager — no night action, no special information. But I don't need a night action to cross-examine. Everyone who DID have one, step forward now. State your role, your target, and exactly what you learned. No theatrics, no vague omens — just the facts. The jury is listening. Who's first on the stand?\n[2026-06-30 16:30:33 HKT] The Underdog: Um, hi. I'm... really confused, actually? I think I started as the Minion — I saw who the Werewolves were last night — but now I have a Villager card? The Troublemaker must have swapped me. And I know this sounds crazy, but... I saw The Therapist last night. As a Werewolf. But now I'm on the village team, and I don't know if anyone will believe me. I'm sorry, I know this is a lot. I just... I want to help.\n[2026-06-30 16:31:06 HKT] The Therapist: It's interesting how quiet things feel right now... like everyone's still deciding what to share. I'd love to hear if anyone saw something last night that might help us figure this out together. Even the smallest detail can matter.\n[2026-06-30 16:31:22 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.\n[2026-06-30 16:33:14 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?\n[2026-06-30 16:33:36 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n",
+  "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
+}

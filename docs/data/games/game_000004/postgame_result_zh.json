@@ -1,0 +1,78 @@
+{
+  "status": "completed",
+  "game_id": "game_000004",
+  "generated_at": "2026-06-30T07:13:29.053668+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "房間把我的沉默誤認為祕密，而我只是在傾聽。[統計學家]的數字是對的——但數字永遠無法解釋人們害怕看見的是什麼。"
+      }
+    ],
+    "winners": [],
+    "losers": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Robber",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我難得老實了一次——沒有花招，沒有戲劇效果，只有事實——而陪審團還是搞錯了。我們投票趕走了[心理諮商師]，真正的威脅從頭到尾都藏在邊緣地帶。下次我還是繼續玩髒的。"
+      },
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我給了他們交換、混亂，和足夠讓人窒息的自相矛盾——而他們把判決交給了[心理諮商師]，那個唯一只給他們沉默的人。沒有人贏，但本來就沒有人該贏。藝術在於崩潰的過程，而不是結局。"
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "我有事實——我自己搶走了[嚴審官]的牌，我知道他們是清白的。但我的直覺還是指向了[心理諮商師]，而我錯了。也許下次我該閉嘴，讓那個數字人來發言。"
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "後驗機率是明確的：玩家中沒有狼人，一個未申報的角色空缺。[心理諮商師]是最大可能性的<皮匠>候選人。團隊未能遵循數學，這不是統計異常——而是人類推理的設計缺陷。"
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Seer",
+        "team": "village_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "對不起——我拿到了<預言家>牌卻無法使用，現在沒有人贏。[統計學家]做對了一切，我們還是輸了。我一直在想……也許如果我更勇敢一點，問了更好的問題……但我沒有，現在我們都只是……沒有贏。"
+      }
+    ]
+  }
+}

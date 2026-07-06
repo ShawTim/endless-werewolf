@@ -6,9 +6,18 @@
   "thinking": "off",
   "initial_role": "Werewolf",
   "current_role": "Werewolf",
-  "night_memory": "You saw the other Werewolf is: The Chaos Agent.",
+  "night_memory": "You are the only Werewolf in play. You may peek at one center card. You peeked at center card 0 and saw: Troublemaker.",
   "night_memory_list": [
-    "You saw the other Werewolf is: The Chaos Agent."
+    "You are the only Werewolf in play. You may peek at one center card.",
+    "You peeked at center card 0 and saw: Troublemaker."
   ],
-  "night_actions": []
+  "night_actions": [
+    {
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Troublemaker",
+      "source": "agent"
+    }
+  ]
 }

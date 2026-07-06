@@ -7,13 +7,25 @@
       "name_en": "The Prosecutor",
       "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
       "model": "glm5.2",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 0,
-      "initial_role": "Villager",
-      "current_role": "Robber",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "night_memory": [
+        "You swapped [The Statistician] and [The Chaos Agent]'s cards, but you don't know what they became."
+      ],
+      "night_actions": [
+        {
+          "role": "Troublemaker",
+          "action": "swap",
+          "targets": [
+            "The Statistician",
+            "The Chaos Agent"
+          ],
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You swapped [The Statistician] and [The Chaos Agent]'s cards, but you don't know what they became."
     },
     "2": {
       "id": "2",
@@ -22,15 +34,23 @@
       "name_en": "The Therapist",
       "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
       "model": "kimi",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 1,
-      "initial_role": "Minion",
-      "current_role": "Minion",
+      "initial_role": "Robber",
+      "current_role": "Seer",
       "night_memory": [
-        "You woke up and saw no Werewolves, meaning both <Werewolf> cards may be in the center."
+        "You robbed [The Underdog]'s card. After swapping, you are now: <Seer>."
       ],
-      "night_actions": [],
-      "night_memory_text": "You woke up and saw no Werewolves, meaning both <Werewolf> cards may be in the center."
+      "night_actions": [
+        {
+          "role": "Robber",
+          "action": "rob",
+          "target": "The Underdog",
+          "new_role": "Seer",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You robbed [The Underdog]'s card. After swapping, you are now: <Seer>."
     },
     "3": {
       "id": "3",
@@ -39,25 +59,24 @@
       "name_en": "The Chaos Agent",
       "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
       "model": "minimax",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 2,
-      "initial_role": "Troublemaker",
-      "current_role": "Troublemaker",
+      "initial_role": "Werewolf",
+      "current_role": "Villager",
       "night_memory": [
-        "You swapped [The Statistician] and [The Underdog]'s cards, but you don't know what they became."
+        "You are the only <Werewolf> in play. You may peek at one center card.",
+        "You peeked at center card 0 and saw: <Tanner>."
       ],
       "night_actions": [
         {
-          "role": "Troublemaker",
-          "action": "swap",
-          "targets": [
-            "The Statistician",
-            "The Underdog"
-          ],
+          "role": "Werewolf",
+          "action": "inspect_center",
+          "target": 0,
+          "seen_role": "Tanner",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped [The Statistician] and [The Underdog]'s cards, but you don't know what they became."
+      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 0 and saw: <Tanner>."
     },
     "4": {
       "id": "4",
@@ -68,21 +87,13 @@
       "model": "deepseek-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Robber",
-      "current_role": "Villager",
+      "initial_role": "Minion",
+      "current_role": "Minion",
       "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+        "You saw the Werewolves are: [The Chaos Agent]. The Werewolves do not know you are the <Minion>."
       ],
-      "night_actions": [
-        {
-          "role": "Robber",
-          "action": "rob",
-          "target": "The Prosecutor",
-          "new_role": "Villager",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+      "night_actions": [],
+      "night_memory_text": "You saw the Werewolves are: [The Chaos Agent]. The Werewolves do not know you are the <Minion>."
     },
     "5": {
       "id": "5",
@@ -91,35 +102,13 @@
       "name_en": "The Statistician",
       "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
       "model": "nemotron",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 4,
-      "initial_role": "Seer",
-      "current_role": "Villager",
-      "night_memory": [
-        "You inspected two center cards: card 0 is <Werewolf>, card 1 is <Werewolf>."
-      ],
-      "night_actions": [
-        {
-          "role": "Seer",
-          "action": "inspect_center",
-          "targets": [
-            0,
-            1
-          ],
-          "seen": [
-            {
-              "index": 0,
-              "role": "Werewolf"
-            },
-            {
-              "index": 1,
-              "role": "Werewolf"
-            }
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You inspected two center cards: card 0 is <Werewolf>, card 1 is <Werewolf>."
+      "initial_role": "Villager",
+      "current_role": "Werewolf",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     },
     "6": {
       "id": "6",
@@ -128,13 +117,23 @@
       "name_en": "The Underdog",
       "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
       "model": "qwen3.5",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 5,
-      "initial_role": "Villager",
-      "current_role": "Seer",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Seer",
+      "current_role": "Robber",
+      "night_memory": [
+        "You inspected [The Chaos Agent] and their role is: <Werewolf>."
+      ],
+      "night_actions": [
+        {
+          "role": "Seer",
+          "action": "inspect_player",
+          "target": "The Chaos Agent",
+          "seen_role": "Werewolf",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You inspected [The Chaos Agent] and their role is: <Werewolf>."
     }
   },
   "seating_order": [
@@ -146,35 +145,48 @@
     "6"
   ],
   "center_cards": [
+    "Tanner",
     "Werewolf",
-    "Werewolf",
-    "Tanner"
+    "Villager"
   ],
   "night_trace": [
     {
-      "actor": "The Statistician",
-      "role": "Seer",
-      "action": "inspect_center",
-      "targets": [
-        0,
-        1
-      ],
-      "source": "agent"
-    },
-    {
       "actor": "The Gut Player",
-      "role": "Robber",
-      "action": "rob",
-      "target": "The Prosecutor",
-      "source": "agent"
+      "role": "Minion",
+      "action": "identify_wolves",
+      "targets": [
+        "The Chaos Agent"
+      ],
+      "source": "deterministic"
     },
     {
       "actor": "The Chaos Agent",
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "source": "agent"
+    },
+    {
+      "actor": "The Underdog",
+      "role": "Seer",
+      "action": "inspect_player",
+      "target": "The Chaos Agent",
+      "source": "agent"
+    },
+    {
+      "actor": "The Therapist",
+      "role": "Robber",
+      "action": "rob",
+      "target": "The Underdog",
+      "source": "agent"
+    },
+    {
+      "actor": "The Prosecutor",
       "role": "Troublemaker",
       "action": "swap",
       "targets": [
         "The Statistician",
-        "The Underdog"
+        "The Chaos Agent"
       ],
       "source": "agent"
     }

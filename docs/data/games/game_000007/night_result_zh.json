@@ -5,35 +5,34 @@
       "name": "The Prosecutor",
       "name_zh": "嚴審官",
       "name_en": "The Prosecutor",
-      "persona": "一位前法庭檢察官，將每一場遊戲都當作死刑案件來審理。你無情地交叉詰問，緊抓他人時間線中的矛盾不放。你以十足的信心宣布你的懷疑對象，即使你錯了——尤其是當你錯了的時候。",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
       "model": "glm5.2",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 0,
-      "initial_role": "Werewolf",
-      "current_role": "Robber",
+      "initial_role": "Seer",
+      "current_role": "Seer",
       "night_memory": [
-        "You are the only <Werewolf> in play. You may peek at one center card.",
-        "You peeked at center card 1 and saw: <Werewolf>."
+        "You inspected [The Gut Player] and their role is: <Robber>."
       ],
       "night_actions": [
         {
-          "role": "Werewolf",
-          "action": "inspect_center",
-          "target": 1,
-          "seen_role": "Werewolf",
+          "role": "Seer",
+          "action": "inspect_player",
+          "target": "The Gut Player",
+          "seen_role": "Robber",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 1 and saw: <Werewolf>."
+      "night_memory_text": "You inspected [The Gut Player] and their role is: <Robber>."
     },
     "2": {
       "id": "2",
       "name": "The Therapist",
       "name_zh": "心理諮商師",
       "name_en": "The Therapist",
-      "persona": "一位輕聲細語的心理諮商師，能像翻開的書一樣看透他人。你從不提高音量，但你安靜的觀察比任何指控都更加深刻。你擅長提出聽起來無害的問題，讓說謊者陷入自己的敘事之中。",
+      "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
       "model": "kimi",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 1,
       "initial_role": "Villager",
       "current_role": "Villager",
@@ -46,92 +45,74 @@
       "name": "The Chaos Agent",
       "name_zh": "攪局者",
       "name_en": "The Chaos Agent",
-      "persona": "一位自詡的賽局理論家，將社交推理視為表演藝術。你以一個大膽而無法驗證的聲明開啟每一場遊戲——有時真實，有時荒謬——然後看著全場陷入混亂。你真心享受看著自己的謊言崩塌，只為了看看會掉出什麼東西來。",
+      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
       "model": "minimax",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 2,
-      "initial_role": "Seer",
-      "current_role": "Seer",
+      "initial_role": "Werewolf",
+      "current_role": "Robber",
       "night_memory": [
-        "You inspected two center cards: card 0 is <Troublemaker>, card 1 is <Werewolf>."
+        "You saw the other <Werewolf> is: [The Statistician]."
       ],
-      "night_actions": [
-        {
-          "role": "Seer",
-          "action": "inspect_center",
-          "targets": [
-            0,
-            1
-          ],
-          "seen": [
-            {
-              "index": 0,
-              "role": "Troublemaker"
-            },
-            {
-              "index": 1,
-              "role": "Werewolf"
-            }
-          ],
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You inspected two center cards: card 0 is <Troublemaker>, card 1 is <Werewolf>."
+      "night_actions": [],
+      "night_memory_text": "You saw the other <Werewolf> is: [The Statistician]."
     },
     "4": {
       "id": "4",
       "name": "The Gut Player",
       "name_zh": "直覺俠",
       "name_en": "The Gut Player",
-      "persona": "一位脾氣火爆的街頭鬥士，相信直覺勝過邏輯。你脫口而出當下感覺對的事，而且情緒轉變很快。你無法構建完整的論證——但你有一種準得嚇人的直覺，就是知道什麼時候有人在說謊。",
+      "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
       "model": "deepseek-pro",
       "thinking": "off",
       "seat": 3,
-      "initial_role": "Tanner",
-      "current_role": "Tanner",
-      "night_memory": [],
-      "night_actions": [],
-      "night_memory_text": ""
+      "initial_role": "Robber",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You robbed [The Chaos Agent]'s card. After swapping, you are now: <Werewolf>."
+      ],
+      "night_actions": [
+        {
+          "role": "Robber",
+          "action": "rob",
+          "target": "The Chaos Agent",
+          "new_role": "Werewolf",
+          "source": "agent"
+        }
+      ],
+      "night_memory_text": "You robbed [The Chaos Agent]'s card. After swapping, you are now: <Werewolf>."
     },
     "5": {
       "id": "5",
       "name": "The Statistician",
       "name_zh": "統計學家",
       "name_en": "The Statistician",
-      "persona": "一位數據科學家，將每一項指控都視為待檢驗的假設。你為嫌疑人分配概率估計值，並隨著新資訊的出現公開更新這些數值。你對情緒化的論證過敏——如果有人說「我只是感覺到了」，你會直接無視他們。",
+      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
       "model": "nemotron",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 4,
-      "initial_role": "Villager",
-      "current_role": "Villager",
-      "night_memory": [],
+      "initial_role": "Werewolf",
+      "current_role": "Werewolf",
+      "night_memory": [
+        "You saw the other <Werewolf> is: [The Chaos Agent]."
+      ],
       "night_actions": [],
-      "night_memory_text": ""
+      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
     },
     "6": {
       "id": "6",
       "name": "The Underdog",
       "name_zh": "小人物",
       "name_en": "The Underdog",
-      "persona": "一位緊張的新手，極度渴望被認真對待。你對每件事都過度思考，在提出指控前先道歉，並且不斷懷疑自己。但在焦慮之下是一顆敏銳的頭腦——你的自我懷疑往往引導你找到正確答案，因為你真的會考慮每一種可能性。",
+      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
       "model": "qwen3.5",
-      "thinking": "high",
+      "thinking": "off",
       "seat": 5,
-      "initial_role": "Robber",
-      "current_role": "Werewolf",
-      "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Werewolf>."
-      ],
-      "night_actions": [
-        {
-          "role": "Robber",
-          "action": "搶奪",
-          "target": "The Prosecutor",
-          "new_role": "Werewolf",
-          "source": "agent"
-        }
-      ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Werewolf>."
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
     }
   },
   "seating_order": [
@@ -143,33 +124,41 @@
     "6"
   ],
   "center_cards": [
+    "Tanner",
     "Troublemaker",
-    "Werewolf",
     "Minion"
   ],
   "night_trace": [
     {
-      "actor": "The Prosecutor",
-      "role": "Werewolf",
-      "action": "inspect_center",
-      "target": 1,
-      "source": "agent"
-    },
-    {
       "actor": "The Chaos Agent",
-      "role": "Seer",
-      "action": "inspect_center",
+      "role": "Werewolf",
+      "action": "peek_wolves",
       "targets": [
-        0,
-        1
+        "The Statistician"
       ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Statistician",
+      "role": "Werewolf",
+      "action": "peek_wolves",
+      "targets": [
+        "The Chaos Agent"
+      ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Prosecutor",
+      "role": "Seer",
+      "action": "inspect_player",
+      "target": "The Gut Player",
       "source": "agent"
     },
     {
-      "actor": "The Underdog",
+      "actor": "The Gut Player",
       "role": "Robber",
-      "action": "搶奪",
-      "target": "The Prosecutor",
+      "action": "rob",
+      "target": "The Chaos Agent",
       "source": "agent"
     }
   ],

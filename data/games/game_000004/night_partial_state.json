@@ -1,0 +1,111 @@
+{
+  "players": {
+    "1": {
+      "id": "1",
+      "name": "The Prosecutor",
+      "name_zh": "嚴審官",
+      "name_en": "The Prosecutor",
+      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "model": "glm5.2",
+      "thinking": "high",
+      "seat": 0,
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "2": {
+      "id": "2",
+      "name": "The Therapist",
+      "name_zh": "心理諮商師",
+      "name_en": "The Therapist",
+      "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+      "model": "kimi",
+      "thinking": "high",
+      "seat": 1,
+      "initial_role": "Minion",
+      "current_role": "Minion",
+      "night_memory": [
+        "You woke up and saw no Werewolves, meaning both Werewolf cards may be in the center."
+      ],
+      "night_actions": [],
+      "night_memory_text": "You woke up and saw no Werewolves, meaning both Werewolf cards may be in the center."
+    },
+    "3": {
+      "id": "3",
+      "name": "The Chaos Agent",
+      "name_zh": "攪局者",
+      "name_en": "The Chaos Agent",
+      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "model": "minimax",
+      "thinking": "high",
+      "seat": 2,
+      "initial_role": "Troublemaker",
+      "current_role": "Troublemaker",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "4": {
+      "id": "4",
+      "name": "The Gut Player",
+      "name_zh": "直覺俠",
+      "name_en": "The Gut Player",
+      "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+      "model": "deepseek-pro",
+      "thinking": "off",
+      "seat": 3,
+      "initial_role": "Robber",
+      "current_role": "Robber",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "5": {
+      "id": "5",
+      "name": "The Statistician",
+      "name_zh": "統計學家",
+      "name_en": "The Statistician",
+      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "model": "nemotron",
+      "thinking": "high",
+      "seat": 4,
+      "initial_role": "Seer",
+      "current_role": "Seer",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    },
+    "6": {
+      "id": "6",
+      "name": "The Underdog",
+      "name_zh": "小人物",
+      "name_en": "The Underdog",
+      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+      "model": "qwen3.5",
+      "thinking": "high",
+      "seat": 5,
+      "initial_role": "Villager",
+      "current_role": "Villager",
+      "night_memory": [],
+      "night_actions": [],
+      "night_memory_text": ""
+    }
+  },
+  "seating_order": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "center_cards": [
+    "Werewolf",
+    "Werewolf",
+    "Tanner"
+  ],
+  "night_trace": [],
+  "game_id": "game_000004"
+}

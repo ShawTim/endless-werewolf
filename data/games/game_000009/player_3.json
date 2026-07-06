@@ -3,21 +3,20 @@
   "name": "The Chaos Agent",
   "model": "minimax",
   "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
-  "thinking": "high",
-  "initial_role": "Troublemaker",
-  "current_role": "Troublemaker",
-  "night_memory": "You swapped The Statistician and The Underdog's cards, but you don't know what they became.",
+  "thinking": "off",
+  "initial_role": "Werewolf",
+  "current_role": "Villager",
+  "night_memory": "You are the only Werewolf in play. You may peek at one center card. You peeked at center card 0 and saw: Tanner.",
   "night_memory_list": [
-    "You swapped The Statistician and The Underdog's cards, but you don't know what they became."
+    "You are the only Werewolf in play. You may peek at one center card.",
+    "You peeked at center card 0 and saw: Tanner."
   ],
   "night_actions": [
     {
-      "role": "Troublemaker",
-      "action": "swap",
-      "targets": [
-        "The Statistician",
-        "The Underdog"
-      ],
+      "role": "Werewolf",
+      "action": "inspect_center",
+      "target": 0,
+      "seen_role": "Tanner",
       "source": "agent"
     }
   ]

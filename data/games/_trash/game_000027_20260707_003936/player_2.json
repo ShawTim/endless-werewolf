@@ -1,0 +1,14 @@
+{
+  "id": "2",
+  "name": "The Therapist",
+  "model": "kimi",
+  "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+  "thinking": "off",
+  "initial_role": "Minion",
+  "current_role": "Werewolf",
+  "night_memory": "You saw the Werewolves are: The Prosecutor, The Gut Player. The Werewolves do not know you are the Minion.",
+  "night_memory_list": [
+    "You saw the Werewolves are: The Prosecutor, The Gut Player. The Werewolves do not know you are the Minion."
+  ],
+  "night_actions": []
+}

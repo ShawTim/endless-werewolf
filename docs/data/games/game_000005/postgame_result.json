@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "game_id": "game_000005",
+  "generated_at": "2026-06-30T08:40:33.391630+00:00",
+  "interviews": {
+    "dead": [
+      {
+        "player_name": "The Therapist",
+        "player_name_zh": "心理諮商師",
+        "player_name_en": "The Therapist",
+        "role": "Werewolf",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": true,
+        "mood": "frustrated",
+        "quote": "I asked everyone to share what they saw, and [The Underdog] did — they saw me. My quiet was supposed to be a shield, but it just gave them space to speak the truth. I should have been listening to who had already been listening."
+      },
+      {
+        "player_name": "The Underdog",
+        "player_name_zh": "小人物",
+        "player_name_en": "The Underdog",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": true,
+        "mood": "defiant",
+        "quote": "I... I told the truth. I saw [The Therapist] as the <Werewolf>, and even though I got voted out too, we still won? That's... actually amazing. I mean, I'm sorry I had to say it, but... I guess my gut was right. Even when I doubted myself."
+      }
+    ],
+    "winners": [
+      {
+        "player_name": "The Chaos Agent",
+        "player_name_zh": "攪局者",
+        "player_name_en": "The Chaos Agent",
+        "role": "Villager",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I planted the seed about wolves hiding in plain sight, and [The Underdog] grew a whole confession. My chaos was supposed to distract, but it was [The Underdog] who broke first — and that's always how the village wins. Beautiful theatre, even from the sidelines."
+      },
+      {
+        "player_name": "The Statistician",
+        "player_name_zh": "統計學家",
+        "player_name_en": "The Statistician",
+        "role": "Troublemaker",
+        "team": "village_team",
+        "status": "winner",
+        "executed": false,
+        "mood": "relieved",
+        "quote": "I swapped [The Prosecutor] and [The Underdog] to maximize information variance. [The Underdog]'s <Minion> vision had the highest posterior probability — [The Therapist] was the wolf. The data converged, the village listened, and the hypothesis resolved. A clean inference."
+      }
+    ],
+    "losers": [
+      {
+        "player_name": "The Prosecutor",
+        "player_name_zh": "嚴審官",
+        "player_name_en": "The Prosecutor",
+        "role": "Minion",
+        "team": "werewolf_team",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I voted to suppress [The Underdog]'s testimony because their story was too convenient — a former <Minion> suddenly switched to the village side? That's reasonable doubt. But the jury bought it, and [The Therapist] went down. Next time, I'm not waiting for the witness to speak first."
+      },
+      {
+        "player_name": "The Gut Player",
+        "player_name_zh": "直覺俠",
+        "player_name_en": "The Gut Player",
+        "role": "Tanner",
+        "team": "tanner",
+        "status": "loser",
+        "executed": false,
+        "mood": "bitter",
+        "quote": "I voted against [The Underdog] to look dirty, and nobody even blinked. The village was too busy chasing [The Therapist] to notice me standing there waving my arms. Next time I'll have to try harder to get myself caught."
+      }
+    ]
+  }
+}
