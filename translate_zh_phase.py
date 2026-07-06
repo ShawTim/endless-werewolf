@@ -116,11 +116,11 @@ def _call_translator(prompt: str) -> str:
              "--message", prompt,
              "--json",
              "--model", "deepseek-flash",
-             "--thinking", "low",
+             "--thinking", "off",
              "--session-id", str(uuid.uuid4())],
             cwd=str(WORKSPACE),
             capture_output=True, text=True, check=False,
-            timeout=120,
+            timeout=240,
         )
         if proc.returncode != 0:
             raise RuntimeError(f"LLM call failed: {proc.stderr.strip()[:300]}")
@@ -172,7 +172,7 @@ def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
         return []
 
     # Process in chunks of 20 to keep prompt manageable
-    BATCH_SIZE = 20
+    BATCH_SIZE = 10
     results = []
     for i in range(0, len(items), BATCH_SIZE):
         batch = items[i:i + BATCH_SIZE]

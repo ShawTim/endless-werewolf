@@ -13,12 +13,16 @@ Checks:
 8. Postgame: ≥4 interview quotes
 9. ZH translations exist for all _en files
 10. No bridge_error / fallback in night_trace
+11. No bridge_error in day_trace (timeout during speech)
+12. No bridge_error / fallback in vote_trace (timeout during vote)
 
 Exit 0 = healthy, Exit 1 = unhealthy.
 Prints JSON report to stdout.
 """
 import json
+import shutil
 import sys
+from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path(__file__).resolve().parent.parent
@@ -128,8 +132,13 @@ def main():
             err("Day: empty chat_history")
         if speech_issues:
             warn(f"Day: players with 0 speeches: {', '.join(speech_issues)}")
-        report["checks"].append({"check": "day_result", "pass": len(stats) >= 6 and bool(chat),
-                                 "detail": f"{len(stats)} players, {len(chat)} chat lines, {len(speech_issues)} silent"})
+        # Check for bridge errors in day_trace
+        day_errors = [t for t in day.get("day_trace", []) if isinstance(t, dict) and t.get("type") == "bridge_error"]
+        if day_errors:
+            names = ", ".join(t.get("player_name", "?") for t in day_errors)
+            err(f"Day: {len(day_errors)} bridge_error(s) in day_trace ({names}) — timeout during speech phase")
+        report["checks"].append({"check": "day_result", "pass": len(stats) >= 6 and bool(chat) and not day_errors,
+                                 "detail": f"{len(stats)} players, {len(chat)} chat lines, {len(speech_issues)} silent, {len(day_errors)} bridge_errors"})
     else:
         report["checks"].append({"check": "day_result", "pass": False, "detail": "unparseable"})
 
@@ -142,8 +151,13 @@ def main():
             err(f"Vote: expected 6 votes, got {len(votes)}")
         if not executed:
             err("Vote: no executed player")
-        report["checks"].append({"check": "vote_result", "pass": len(votes) == 6 and bool(executed),
-                                 "detail": f"{len(votes)} votes, executed={executed}"})
+        # Check for bridge errors / fallbacks in vote_trace
+        vote_errors = [t for t in vote.get("vote_trace", []) if isinstance(t, dict) and "error" in t]
+        if vote_errors:
+            names = ", ".join(t.get("player", "?") for t in vote_errors)
+            err(f"Vote: {len(vote_errors)} bridge_error/fallback(s) in vote_trace ({names}) — timeout during vote")
+        report["checks"].append({"check": "vote_result", "pass": len(votes) == 6 and bool(executed) and not vote_errors,
+                                 "detail": f"{len(votes)} votes, executed={executed}, {len(vote_errors)} bridge_errors"})
     else:
         report["checks"].append({"check": "vote_result", "pass": False, "detail": "unparseable"})
 
@@ -183,6 +197,16 @@ def main():
     report["healthy"] = len(ERRORS) == 0
 
     print(json.dumps(report, ensure_ascii=False, indent=2))
+
+    # Auto-cleanup: move unhealthy game to _trash/
+    if not report["healthy"]:
+        trash_dir = game_dir.parent / "_trash"
+        trash_dir.mkdir(exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        dest = trash_dir / f"{game_id}_{ts}"
+        shutil.move(str(game_dir), str(dest))
+        print(f"[cleanup] Moved unhealthy {game_id} to {dest}", file=sys.stderr)
+
     return 0 if report["healthy"] else 1
 
 

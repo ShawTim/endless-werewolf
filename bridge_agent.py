@@ -281,7 +281,7 @@ def spawn_thinker_subagent(model: str, prompt: str, player_name: str) -> dict:
             model=model,
             mode="run",
             cleanup="delete",
-            runTimeoutSeconds=60
+            runTimeoutSeconds=120
         )
         
         output = result.get("result", "")

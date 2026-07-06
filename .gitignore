@@ -14,6 +14,7 @@ chat_history.md
 *.pyc
 FLOW.md
 data/_trash/
+data/games/_trash/
 
 # V1/V2 leftovers
 docs_v1_backup/
@@ -25,3 +26,5 @@ chat_history.md
 web/
 data/games_archive/
 openclaw-workspace-state.json
+data/index.json
+data/roster_v2_reference.json

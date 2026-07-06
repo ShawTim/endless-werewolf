@@ -21,8 +21,8 @@ VOTE_RESULT_PATH = STATE_DIR / "vote_result.json"
 DAY_CONFIG_PATH = STATE_DIR / "day_config.json"
 
 DEFAULT_DAY_DURATION_SECONDS = 90
-DEFAULT_MIN_SLEEP_SECONDS = 2.0
-DEFAULT_MAX_SLEEP_SECONDS = 7.0
+DEFAULT_MIN_SLEEP_SECONDS = 3.0
+DEFAULT_MAX_SLEEP_SECONDS = 8.0
 DEFAULT_MAX_SPEAKS_PER_PLAYER = 3
 DEFAULT_MAX_CONCURRENT_BRIDGE = 6
 
@@ -297,6 +297,20 @@ class DayPhaseRuntime:
         state_manager.mark_phase(self.game_dir, "day", "day_result.json")
         return payload
 
+    async def _vote_one(self, player: dict[str, Any], players: list, chat_history: str) -> tuple[str, str, dict | None]:
+        """Vote for a single player. Returns (player_name, vote_target, trace_entry_or_None)."""
+        ctx = self.build_player_context(player)
+        valid_targets = [p["name"] for p in players if p["name"] != player["name"]]
+        try:
+            decision = await self.bridge_client.request_vote(ctx, chat_history, valid_targets)
+            vote_target = decision.get("vote_target")
+            if vote_target not in valid_targets:
+                vote_target = random.choice(valid_targets)
+            return player["name"], vote_target, None
+        except Exception as e:
+            vote_target = random.choice(valid_targets)
+            return player["name"], vote_target, {"player": player["name"], "error": str(e), "fallback": vote_target}
+
     async def run_voting_phase(self) -> dict[str, Any]:
         players = self.load_players_from_night_result()
         chat_history = await self.chat_log.read_all()
@@ -304,20 +318,21 @@ class DayPhaseRuntime:
         vote_trace: list[dict[str, Any]] = []
 
         print("\n=== 投票階段 (Voting Phase) ===")
-        for player in players:
-            ctx = self.build_player_context(player)
-            valid_targets = [p["name"] for p in players if p["name"] != player["name"]]
-            try:
-                decision = await self.bridge_client.request_vote(ctx, chat_history, valid_targets)
-                vote_target = decision.get("vote_target")
-                if vote_target not in valid_targets:
-                    vote_target = random.choice(valid_targets)
-            except Exception as e:
-                vote_target = random.choice(valid_targets)
-                vote_trace.append({"player": player["name"], "error": str(e), "fallback": vote_target})
 
-            votes[player["name"]] = vote_target
-            print(f"{player['name']} -> {vote_target}")
+        # Vote in 2 batches to reduce concurrent bridge load
+        mid = (len(players) + 1) // 2
+        batches = [players[:mid], players[mid:]]
+        for i, batch in enumerate(batches):
+            print(f"  Batch {i+1}/{len(batches)}: {[p['name'] for p in batch]}")
+            results = await asyncio.gather(*[self._vote_one(p, players, chat_history) for p in batch])
+            for name, target, trace in results:
+                votes[name] = target
+                if trace:
+                    vote_trace.append(trace)
+                print(f"  {name} -> {target}")
+            # Small pause between batches
+            if i < len(batches) - 1:
+                await asyncio.sleep(2)
 
         tally: dict[str, int] = {}
         for target in votes.values():
