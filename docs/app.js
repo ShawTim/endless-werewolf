@@ -219,7 +219,7 @@ function initThree() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.0;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   // Post-processing composer
@@ -228,7 +228,7 @@ function initThree() {
   composer.setSize(innerWidth, innerHeight);
   renderPass = new RenderPass(null, null); // scene/camera set right after creation
   composer.addPass(renderPass);
-  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.4, 0.6, 0.85);
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.3, 0.5, 0.95);
   composer.addPass(bloomPass);
   composer.addPass(new OutputPass());
 
@@ -1313,7 +1313,7 @@ function updateKeyboardPan() {
 // ===== Night Mode (with smooth transition) =====
 let nightTransition = null; // {fromVals, toVals, startTime, duration}
 const NIGHT_PRESETS = {
-  day: { bg:0xa8c0d8, amb:0.55, dir:1.4, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
+  day: { bg:0xa8c0d8, amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
   night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
 };
 
