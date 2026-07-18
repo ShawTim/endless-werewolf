@@ -178,12 +178,9 @@ async function init() {
 
   // Apply day preset lighting immediately so first paint is bright (default = day)
   const dayPreset = NIGHT_PRESETS.day;
-  // setHex uses linear (sRGB=0) — but we want the displayed color to look like the hex value,
-  // so we set RGB directly from the 0-255 components (matches the setRGB path in updateNightTransition)
-  const dayR = ((dayPreset.bg >> 16) & 0xff) / 255;
-  const dayG = ((dayPreset.bg >> 8) & 0xff) / 255;
-  const dayB = (dayPreset.bg & 0xff) / 255;
-  scene.background = new THREE.Color(dayR, dayG, dayB);
+  // convertSRGBToLinear: hex 0x9ec5e8 is sRGB intent. With composer, the framebuffer
+  // is linear so we must pre-convert: linear → ACES tone-map → sRGB encode → display as 0x9ec5e8
+  scene.background = new THREE.Color(dayPreset.bg).convertSRGBToLinear();
   amb.intensity = dayPreset.amb;
   dir.intensity = dayPreset.dir;
   dir.color.setHex(dayPreset.dirColor);
@@ -1365,15 +1362,19 @@ function updateNightTransition() {
   const bg = new THREE.Color(
     f.bg + (tgt.bg - f.bg) * e  // hex lerp won't work directly, use component
   );
-  // Proper component-wise interpolation
-  const bgR = (f.bg >> 16 & 0xff) / 255 + ((tgt.bg >> 16 & 0xff) - (f.bg >> 16 & 0xff)) / 255 * e;
-  const bgG = (f.bg >> 8 & 0xff) / 255 + ((tgt.bg >> 8 & 0xff) - (f.bg >> 8 & 0xff)) / 255 * e;
+  const bgR = ((f.bg >> 16) & 0xff) / 255 + (((tgt.bg >> 16) & 0xff) - ((f.bg >> 16) & 0xff)) / 255 * e;
+  const bgG = ((f.bg >> 8) & 0xff) / 255 + (((tgt.bg >> 8) & 0xff) - ((f.bg >> 8) & 0xff)) / 255 * e;
   const bgB = (f.bg & 0xff) / 255 + ((tgt.bg & 0xff) - (f.bg & 0xff)) / 255 * e;
-  scene.background.setRGB(bgR, bgG, bgB);
+  // The above are sRGB-space lerps. The framebuffer (EffectComposer) is linear, so
+  // convert sRGB to linear before assigning to scene.background.
+  const linR = Math.pow(bgR, 2.2);
+  const linG = Math.pow(bgG, 2.2);
+  const linB = Math.pow(bgB, 2.2);
+  scene.background.setRGB(linR, linG, linB);
   scene.fog.color.setRGB(
-    f.fogR + (((tgt.bg >> 16 & 0xff)/255) - f.fogR) * e,
-    f.fogG + (((tgt.bg >> 8 & 0xff)/255) - f.fogG) * e,
-    f.fogB + (((tgt.bg & 0xff)/255) - f.fogB) * e
+    f.fogR + (((tgt.bg >> 16) & 0xff) / 255 - f.fogR) * e,
+    f.fogG + (((tgt.bg >> 8) & 0xff) / 255 - f.fogG) * e,
+    f.fogB + ((tgt.bg & 0xff) / 255 - f.fogB) * e
   );
   amb.intensity = f.amb + (tgt.amb - f.amb) * e;
   dir.intensity = f.dir + (tgt.dir - f.dir) * e;
