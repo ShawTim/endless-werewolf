@@ -50,21 +50,27 @@ let lang = (navigator.language || 'en').startsWith('zh') ? 'zh' : 'en';
 function t(key) { return I18N[lang][key] || I18N.en[key] || key; }
 
 // --- Player visual styles (covers both V1 and V2 rosters) ---
+// Distinct per-character palette — 4 dimensions so each villager feels unique
+// color: name-tag accent (used in HTML/CSS only)
+// body: torso/shoulder main color (saturated clothing)
+// accent: secondary clothing color (sleeves, trim — darker shade of body)
+// head: hair color (distinct from skin)
+// skin: face/skin tone (warm light tone)
 const PLAYER_STYLES = {
   // V1 roster
-  'Blaze':       {color:0xe74c3c,accent:0xc0392b,body:0x4a0000,head:0xD4A574,icon:''},
-  'SafetySam':   {color:0x27ae60,accent:0x2ecc71,body:0x0d5234,head:0xE8C4A0,icon:''},
-  'Dr. Pizza':   {color:0x2980b9,accent:0x3498db,body:0x0d3252,head:0xD0C8B8,icon:''},
-  'Twister':     {color:0xd35400,accent:0xe67e22,body:0x7a3a10,head:0xD4B896,icon:''},
-  'EasyBake':    {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:''},
-  'ConspiBro':   {color:0x7f8c8d,accent:0x95a5a6,body:0x2a2a2a,head:0xC8A878,icon:''},
+  'Blaze':       {color:0xe74c3c, body:0xb83227, accent:0x6b1a13, hair:0x2a1410, skin:0xe8b890},
+  'SafetySam':   {color:0x27ae60, body:0x2d8a4e, accent:0x1a4d2e, hair:0x3a2a18, skin:0xf0c8a0},
+  'Dr. Pizza':   {color:0x3498db, body:0x2980b9, accent:0x163d5c, hair:0x1a1410, skin:0xf5d4b0},
+  'Twister':     {color:0xe67e22, body:0xc0611a, accent:0x5a2e0d, hair:0x8a4a20, skin:0xddb088},
+  'EasyBake':    {color:0xf39c12, body:0xc8881a, accent:0x6a4a10, hair:0xd4a050, skin:0xfde0c0},
+  'ConspiBro':   {color:0x95a5a6, body:0x4a4a52, accent:0x1a1a22, hair:0x222222, skin:0xd4a880},
   // V2 roster
-  'The Prosecutor':   {color:0xc0392b,accent:0xe74c3c,body:0x4a0000,head:0xD4A574,icon:''},
-  'The Therapist':    {color:0x2ecc71,accent:0x27ae60,body:0x0d5234,head:0xE8C4A0,icon:''},
-  'The Chaos Agent':  {color:0xe67e22,accent:0xd35400,body:0x7a3a10,head:0xD4B896,icon:''},
-  'The Gut Player':   {color:0x95a5a6,accent:0x7f8c8d,body:0x2a2a2a,head:0xC8A878,icon:''},
-  'The Statistician': {color:0x3498db,accent:0x2980b9,body:0x0d3252,head:0xD0C8B8,icon:''},
-  'The Underdog':     {color:0xf39c12,accent:0xe67e22,body:0x5a3e10,head:0xE8D0B0,icon:''},
+  'The Prosecutor':   {color:0xc0392b, body:0x8a2820, accent:0x3a1010, hair:0x1a0a08, skin:0xe0a880},
+  'The Therapist':    {color:0x2ecc71, body:0x1f7a4a, accent:0x0d3a22, hair:0x4a3020, skin:0xf0c8a4},
+  'The Chaos Agent':  {color:0xe67e22, body:0xa0501a, accent:0x4a2008, hair:0x6a3010, skin:0xe8b890},
+  'The Gut Player':   {color:0x95a5a6, body:0x3a3a3a, accent:0x141414, hair:0x2a1a10, skin:0xcca078},
+  'The Statistician': {color:0x3498db, body:0x1f5d8a, accent:0x0a2a4a, hair:0x1a1a1a, skin:0xf0d0b0},
+  'The Underdog':     {color:0xf39c12, body:0xc8881a, accent:0x6a4a10, hair:0x8a5a20, skin:0xefd0a0},
 };
 
 // --- Player data (dynamically loaded from each game's night_result) ---
@@ -83,12 +89,15 @@ let isNight = false;
 let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
-// ===== Cel-shading gradient map (3-step toon) =====
-function makeToonGradientMap(steps = 3) {
+// ===== Cel-shading gradient map (5-step toon — refined transitions) =====
+function makeToonGradientMap(steps = 5) {
+  // 5 steps: 0.30, 0.50, 0.72, 0.90, 1.00 — shadow / dark-mid / mid / light / highlight
+  // asymmetric bias toward darker bands for crisper cel look
   const data = new Uint8Array(steps);
   for (let i = 0; i < steps; i++) {
-    // 3-step: 0.4, 0.7, 1.0 — gives shadow / mid / highlight bands
-    data[i] = Math.round((0.4 + (i / (steps - 1)) * 0.6) * 255);
+    const t = i / (steps - 1);
+    const biased = Math.pow(t, 0.85);
+    data[i] = Math.round((0.30 + biased * 0.70) * 255);
   }
   const tex = new THREE.DataTexture(data, steps, 1, THREE.RedFormat);
   tex.minFilter = THREE.NearestFilter;
@@ -97,11 +106,38 @@ function makeToonGradientMap(steps = 3) {
   tex.needsUpdate = true;
   return tex;
 }
-const TOON_GRADIENT = makeToonGradientMap(3);
+const TOON_GRADIENT = makeToonGradientMap(5);
+const TOON_GRADIENT_SOFT = makeToonGradientMap(3); // for skin / soft surfaces
 
-// Cel-shaded outline material — rendered as back-faces of inflated mesh
+// Cel-shaded rim-light shader chunk — injects a stepped fresnel term into MeshToonMaterial
+// This is a discrete (cel) rim, not a smooth fresnel — it produces a hard light edge
+function applyToonRim(material, rimColor = 0xfff0c8, rimPower = 2.5, rimStrength = 0.45) {
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.uRimColor = { value: new THREE.Color(rimColor) };
+    shader.uniforms.uRimPower = { value: rimPower };
+    shader.uniforms.uRimStrength = { value: rimStrength };
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <common>',
+      `#include <common>
+       uniform vec3 uRimColor;
+       uniform float uRimPower;
+       uniform float uRimStrength;`
+    );
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <dithering_fragment>',
+      `// cel rim
+       float rimDot = 1.0 - max(dot(normalize(vNormal), normalize(vViewPosition)), 0.0);
+       float rim = smoothstep(0.55, 0.95, pow(rimDot, uRimPower));
+       gl_FragColor.rgb += uRimColor * rim * uRimStrength;
+       #include <dithering_fragment>`
+    );
+  };
+  material.needsUpdate = true;
+}
+
+// Cel-shaded outline — BackSide inflated mesh (gives chunky ink-line silhouette)
 const OUTLINE_MAT = new THREE.MeshBasicMaterial({ color: 0x0a0814, side: THREE.BackSide });
-function addOutline(mesh, scale = 1.04) {
+function addOutline(mesh, scale = 1.05) {
   if (!mesh.geometry) return;
   const outline = new THREE.Mesh(mesh.geometry, OUTLINE_MAT);
   outline.scale.setScalar(scale);
@@ -442,10 +478,15 @@ function buildCharacter(player, index){
   const ang=sa(index); g.rotation.y=-ang-PI/2;
   scene.add(g);
 
-  const skinMat=new THREE.MeshToonMaterial({color:player.head, gradientMap: TOON_GRADIENT});
+  // Distinct palette: skin, hair, main clothing, secondary clothing
+  const skinMat=new THREE.MeshToonMaterial({color:player.skin, gradientMap: TOON_GRADIENT_SOFT});
   const bodyMat=new THREE.MeshToonMaterial({color:player.body, gradientMap: TOON_GRADIENT});
   const accMat=new THREE.MeshToonMaterial({color:player.accent, gradientMap: TOON_GRADIENT});
+  const hairMat=new THREE.MeshToonMaterial({color:player.hair, gradientMap: TOON_GRADIENT});
   const darkMat=new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
+  // Apply cel rim to body materials (skin & hair excluded — soft / dark surfaces)
+  applyToonRim(bodyMat, 0xfff0d0, 2.8, 0.35);
+  applyToonRim(accMat, 0xffe0a0, 2.5, 0.40);
 
   // === Torso ===
   // Tapered body — wider at shoulders, narrower at waist
@@ -454,7 +495,7 @@ function buildCharacter(player, index){
     bodyMat
   );
   torso.position.y=0.35; torso.castShadow=true; g.add(torso);
-  addOutline(torso, 1.035);
+  addOutline(torso, 1.05);
 
   // Shoulders — slight width
   const shoulders=new THREE.Mesh(
@@ -464,19 +505,17 @@ function buildCharacter(player, index){
   shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
   addOutline(shoulders, 1.03);
 
-  // === Arms ===
-  // Left arm
-  const armL=limb(0.09,0.35,player.body);
+  // === Arms === (sleeves in accent color, hands in skin)
+  const armL=limb(0.09,0.35,player.accent);
   armL.position.set(-0.38,0.4,0);
   armL.rotation.z=0.15;
   g.add(armL);
-  addOutline(armL, 1.05);
-  // Right arm
-  const armR=limb(0.09,0.35,player.body);
+  addOutline(armL, 1.07);
+  const armR=limb(0.09,0.35,player.accent);
   armR.position.set(0.38,0.4,0);
   armR.rotation.z=-0.15;
   g.add(armR);
-  addOutline(armR, 1.05);
+  addOutline(armR, 1.07);
 
   // Hands
   const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
@@ -484,13 +523,13 @@ function buildCharacter(player, index){
   const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
   handR.position.set(0.48,0.2,0); handR.castShadow=true; g.add(handR);
 
-  // === Legs ===
-  const legL=limb(0.12,0.3,0x2a2a2a);
+  // === Legs === (pants in deep accent color)
+  const legL=limb(0.12,0.3,player.accent);
   legL.position.set(-0.14,-0.1,0); g.add(legL);
-  addOutline(legL, 1.05);
-  const legR=limb(0.12,0.3,0x2a2a2a);
+  addOutline(legL, 1.07);
+  const legR=limb(0.12,0.3,player.accent);
   legR.position.set(0.14,-0.1,0); g.add(legR);
-  addOutline(legR, 1.05);
+  addOutline(legR, 1.07);
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
@@ -499,6 +538,14 @@ function buildCharacter(player, index){
   const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
   headSphere.castShadow=true; head.add(headSphere);
   addOutline(headSphere, 1.025);
+
+  // Hair cap — slightly larger sphere clipped to top half of head, in hair color
+  const hairCap=new THREE.Mesh(
+    new THREE.SphereGeometry(0.37,24,16,0,TAU,0,PI*0.55),
+    hairMat
+  );
+  hairCap.position.y=0.04; hairCap.castShadow=true; head.add(hairCap);
+  addOutline(hairCap, 1.03);
 
   // Positions are local to head (world y - 0.98)
 
@@ -1806,9 +1853,11 @@ async function loadGame(gameId) {
           model: p.model || '',
           thinking: p.thinking || 'high',
           color: style.color || 0xc0392b,
-          accent: style.accent || 0xe74c3c,
-          body: style.body || 0x4a0000,
-          head: style.head || 0xD4A574,
+          accent: style.accent !== undefined ? style.accent : (style.body !== undefined ? style.body : 0xe74c3c),
+          body: style.body !== undefined ? style.body : 0x4a0000,
+          head: style.head || 0xD4A574, // legacy alias
+          hair: style.hair !== undefined ? style.hair : 0x1a1410,
+          skin: style.skin !== undefined ? style.skin : 0xe8b890,
           icon: style.icon || '',
         };
       });
