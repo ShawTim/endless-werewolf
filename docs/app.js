@@ -178,8 +178,7 @@ async function init() {
 
   // Apply day preset lighting immediately so first paint is bright (default = day)
   const dayPreset = NIGHT_PRESETS.day;
-  // scene.background stays at the linear value set in initThree (#84acf0
-  // displays as 0x9ec5e8 day-blue after ACES tone-map + sRGB encode)
+  scene.background.setHex(dayPreset.bg);
   amb.intensity = dayPreset.amb;
   dir.intensity = dayPreset.dir;
   dir.color.setHex(dayPreset.dirColor);
@@ -227,20 +226,15 @@ function initThree() {
   composer = new EffectComposer(renderer);
   composer.setPixelRatio(Math.min(devicePixelRatio, 2));
   composer.setSize(innerWidth, innerHeight);
-  // scene/camera set right after creation
-  renderPass = new RenderPass(null, null);
+  renderPass = new RenderPass(null, null); // scene/camera set right after creation
   composer.addPass(renderPass);
-  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.15, 0.5, 0.98);
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.3, 0.5, 0.95);
   composer.addPass(bloomPass);
   composer.addPass(new OutputPass());
 
   scene = new THREE.Scene();
-  // Day sky: setHex(0x86b2f0) is interpreted as sRGB intent. After EffectComposer's
-  // ACES tone-map + sRGB encoding, it displays as #9ec5e8 (day-blue).
-  // For night, the renderer uses the night-preset hex which is dark enough that
-  // the roll-off barely matters.
-  scene.background = new THREE.Color(0x86b2f0);
-  scene.fog = new THREE.Fog(0x86b2f0, 14, 32);
+  scene.background = new THREE.Color(0x1a1520);
+  scene.fog = new THREE.Fog(0x1a1520, 14, 32);
 
   // ===== Textures =====
   const texLoader = new THREE.TextureLoader();
@@ -264,9 +258,6 @@ function initThree() {
   const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0xffffff, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyDome);
-  // Default to day (clear blue background, no night-sky dome visible) — setNight() toggles this
-  skyDome.visible = false;
-  window.__skyDome = skyDome;
 
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
@@ -364,7 +355,7 @@ function initThree() {
 
   const tableRing = new THREE.Mesh(
     new THREE.RingGeometry(TR, TR + 0.08, 48),
-    new THREE.MeshStandardMaterial({ color: 0xe8c468, side: THREE.DoubleSide, metalness: 0.0, roughness: 0.7 })
+    new THREE.MeshStandardMaterial({ color: 0xe8c468, side: THREE.DoubleSide, metalness: 0.5, roughness: 0.3 })
   );
   tableRing.position.y = 0.16; tableRing.rotation.x = -PI / 2;
   scene.add(tableRing);
@@ -382,7 +373,6 @@ function initThree() {
     new THREE.MeshStandardMaterial({ color: 0xE8D8B8 })
   );
   candle.position.y = 0.5;
-  candle.name = 'candleMesh';
   scene.add(candle);
 
   flame = new THREE.Mesh(
@@ -390,7 +380,6 @@ function initThree() {
     new THREE.MeshStandardMaterial({ color: 0xFFD700, emissive: 0xFF8800, emissiveIntensity: 0.8 })
   );
   flame.position.y = 0.72;
-  flame.name = 'candleFlame';
   scene.add(flame);
   initParticles();
 }
@@ -1324,7 +1313,7 @@ function updateKeyboardPan() {
 // ===== Night Mode (with smooth transition) =====
 let nightTransition = null; // {fromVals, toVals, startTime, duration}
 const NIGHT_PRESETS = {
-  day: { bg:0x9ec5e8, amb:0.55, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
+  day: { bg:0xa8c0d8, amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
   night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
 };
 
@@ -1347,12 +1336,6 @@ function setNight(n) {
     for (const e of window.__brazierEmbers) e.visible = showBraziers;
     for (const l of window.__brazierLights) l.intensity = showBraziers ? 0.35 : 0;
   }
-  // Day mode also hides the candle + flame (no lit candle on a sunny day)
-  scene.traverse(obj => {
-    if (obj.name === 'candleMesh' || obj.name === 'candleFlame') obj.visible = n;
-  });
-  // Day mode hides the night-sky dome (CSS handles day sky)
-  if (window.__skyDome) window.__skyDome.visible = n;
 }
 
 function updateNightTransition() {
@@ -1363,15 +1346,19 @@ function updateNightTransition() {
   const e = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
   const f = nightTransition.from, tgt = nightTransition.target;
 
-  // sRGB-space lerp of the display-target hex; assign directly (the renderer
-  // interprets setHex as sRGB intent, then ACES + sRGB encodes for display)
-  const bgR = ((f.bg >> 16) & 0xff) + (((tgt.bg >> 16) & 0xff) - ((f.bg >> 16) & 0xff)) * e;
-  const bgG = ((f.bg >> 8) & 0xff) + (((tgt.bg >> 8) & 0xff) - ((f.bg >> 8) & 0xff)) * e;
-  const bgB = (f.bg & 0xff) + ((tgt.bg & 0xff) - (f.bg & 0xff)) * e;
-  const lerpedHex = ((Math.round(bgR) & 0xff) << 16) | ((Math.round(bgG) & 0xff) << 8) | (Math.round(bgB) & 0xff);
-  scene.background.setHex(lerpedHex);
-  scene.fog.color.setHex(lerpedHex);
-
+  const bg = new THREE.Color(
+    f.bg + (tgt.bg - f.bg) * e  // hex lerp won't work directly, use component
+  );
+  // Proper component-wise interpolation
+  const bgR = (f.bg >> 16 & 0xff) / 255 + ((tgt.bg >> 16 & 0xff) - (f.bg >> 16 & 0xff)) / 255 * e;
+  const bgG = (f.bg >> 8 & 0xff) / 255 + ((tgt.bg >> 8 & 0xff) - (f.bg >> 8 & 0xff)) / 255 * e;
+  const bgB = (f.bg & 0xff) / 255 + ((tgt.bg & 0xff) - (f.bg & 0xff)) / 255 * e;
+  scene.background.setRGB(bgR, bgG, bgB);
+  scene.fog.color.setRGB(
+    f.fogR + (((tgt.bg >> 16 & 0xff)/255) - f.fogR) * e,
+    f.fogG + (((tgt.bg >> 8 & 0xff)/255) - f.fogG) * e,
+    f.fogB + (((tgt.bg & 0xff)/255) - f.fogB) * e
+  );
   amb.intensity = f.amb + (tgt.amb - f.amb) * e;
   dir.intensity = f.dir + (tgt.dir - f.dir) * e;
   dir.color.setRGB(
