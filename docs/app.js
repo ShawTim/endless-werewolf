@@ -106,6 +106,10 @@ function addOutline(mesh, scale = 1.04) {
   const outline = new THREE.Mesh(mesh.geometry, OUTLINE_MAT);
   outline.scale.setScalar(scale);
   outline.renderOrder = -1;
+  // polygonOffset pushes outline slightly back in depth so body never z-fights
+  outline.material.polygonOffset = true;
+  outline.material.polygonOffsetFactor = 1;
+  outline.material.polygonOffsetUnits = 1;
   mesh.add(outline);
 }
 
@@ -193,8 +197,15 @@ function initThree() {
 
   // Sky as background sphere
   const skyTex = texLoader.load('./tex-sky.jpg');
+  // Shift the equirect mapping down so the bright horizon mountains sit
+  // below the floor — keeps the sky dark at all camera angles.
+  skyTex.center.set(0.5, 0.5);
+  skyTex.rotation = 0;
+  skyTex.offset.set(0, 0.18);
+  skyTex.repeat.set(1, 0.82);
   const skyGeo = new THREE.SphereGeometry(40, 64, 32);
-  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false });
+  // Dark navy tint to keep horizon dim even at low camera angles
+  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0x14102a, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyDome);
 
@@ -230,7 +241,7 @@ function initThree() {
 
   // 4 ground braziers around the table — warm fill, position-match to characters
   const brazierMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0e, roughness: 0.7, metalness: 0.4 });
-  const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff7a2a, emissive: 0xff5510, emissiveIntensity: 1.2 });
+  const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff7a2a, emissive: 0xff5510, emissiveIntensity: 0.9 });
   for (let i = 0; i < 4; i++) {
     const a = (i + 0.5) * (TAU / 4) + PI / 4; // offset 45° so they sit between character slots
     const bx = cos(a) * (R - 0.3);
@@ -245,12 +256,12 @@ function initThree() {
     stand.position.set(bx, -0.3, bz);
     stand.castShadow = true;
     scene.add(stand);
-    // Ember glow
-    const ember = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 6), brazierEmber);
+    // Ember glow — small so it doesn't read as a "second eye" on chars
+    const ember = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), brazierEmber);
     ember.position.set(bx, -0.4, bz);
     scene.add(ember);
     // Point light (limited to 4, OK)
-    const bl = new THREE.PointLight(0xff7a30, 0.6, 4, 1.5);
+    const bl = new THREE.PointLight(0xff7a30, 0.35, 3.5, 1.8);
     bl.position.set(bx, -0.3, bz);
     scene.add(bl);
   }
@@ -443,7 +454,7 @@ function buildCharacter(player, index){
     bodyMat
   );
   torso.position.y=0.35; torso.castShadow=true; g.add(torso);
-  addOutline(torso, 1.06);
+  addOutline(torso, 1.035);
 
   // Shoulders — slight width
   const shoulders=new THREE.Mesh(
@@ -451,7 +462,7 @@ function buildCharacter(player, index){
     bodyMat
   );
   shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
-  addOutline(shoulders, 1.05);
+  addOutline(shoulders, 1.03);
 
   // === Arms ===
   // Left arm
@@ -459,13 +470,13 @@ function buildCharacter(player, index){
   armL.position.set(-0.38,0.4,0);
   armL.rotation.z=0.15;
   g.add(armL);
-  addOutline(armL, 1.08);
+  addOutline(armL, 1.05);
   // Right arm
   const armR=limb(0.09,0.35,player.body);
   armR.position.set(0.38,0.4,0);
   armR.rotation.z=-0.15;
   g.add(armR);
-  addOutline(armR, 1.08);
+  addOutline(armR, 1.05);
 
   // Hands
   const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
@@ -476,10 +487,10 @@ function buildCharacter(player, index){
   // === Legs ===
   const legL=limb(0.12,0.3,0x2a2a2a);
   legL.position.set(-0.14,-0.1,0); g.add(legL);
-  addOutline(legL, 1.08);
+  addOutline(legL, 1.05);
   const legR=limb(0.12,0.3,0x2a2a2a);
   legR.position.set(0.14,-0.1,0); g.add(legR);
-  addOutline(legR, 1.08);
+  addOutline(legR, 1.05);
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
@@ -487,7 +498,7 @@ function buildCharacter(player, index){
 
   const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
   headSphere.castShadow=true; head.add(headSphere);
-  addOutline(headSphere, 1.04);
+  addOutline(headSphere, 1.025);
 
   // Positions are local to head (world y - 0.98)
 
@@ -989,10 +1000,10 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
 }
 
 // ===== Camera Controls =====
-let theta = 0, phi = PI / 3.2;
+let theta = 0, phi = PI / 2.4;
 // On mobile, start further back so all 6 characters fit
-let dist = (innerWidth <= 768) ? 16 : 9;
-const targetV = new THREE.Vector3(0, 0.8, 0);
+let dist = (innerWidth <= 768) ? 16 : 10;
+const targetV = new THREE.Vector3(0, 1.1, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
 const DIST_MIN = 3, DIST_MAX = 40;
 
