@@ -175,7 +175,22 @@ async function init() {
   initThree();
   setupCameraControls();
   setupUI();
-  
+
+  // Apply day preset lighting immediately so first paint is bright (default = day)
+  const dayPreset = NIGHT_PRESETS.day;
+  scene.background.setHex(dayPreset.bg);
+  amb.intensity = dayPreset.amb;
+  dir.intensity = dayPreset.dir;
+  dir.color.setHex(dayPreset.dirColor);
+  moonPoint.intensity = dayPreset.moon;
+  candlePoint.intensity = dayPreset.candle;
+  if (flame) flame.material.emissiveIntensity = dayPreset.flame;
+  // Hide brazier fires during daytime
+  if (window.__brazierEmbers && window.__brazierLights) {
+    for (const e of window.__brazierEmbers) e.visible = false;
+    for (const l of window.__brazierLights) l.intensity = 0;
+  }
+
   // Try to load latest game (this will populate PLAYERS and build characters)
   await loadGameIndex();
   
@@ -233,15 +248,14 @@ function initThree() {
 
   // Sky as background sphere
   const skyTex = texLoader.load('./tex-sky.jpg');
-  // Shift the equirect mapping down so the bright horizon mountains sit
-  // below the floor — keeps the sky dark at all camera angles.
+  // Default equirect mapping — bright sunset/orange texture shows at horizon
   skyTex.center.set(0.5, 0.5);
   skyTex.rotation = 0;
-  skyTex.offset.set(0, 0.18);
-  skyTex.repeat.set(1, 0.82);
+  skyTex.offset.set(0, 0);
+  skyTex.repeat.set(1, 1);
   const skyGeo = new THREE.SphereGeometry(40, 64, 32);
-  // Dark navy tint to keep horizon dim even at low camera angles
-  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0x14102a, side: THREE.BackSide, fog: false });
+  // No tint — let original sky color show through; fog:false so it stays vivid
+  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0xffffff, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyDome);
 
@@ -278,6 +292,9 @@ function initThree() {
   // 4 ground braziers around the table — warm fill, position-match to characters
   const brazierMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0e, roughness: 0.7, metalness: 0.4 });
   const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff7a2a, emissive: 0xff5510, emissiveIntensity: 0.9 });
+  // Track brazier components so we can toggle on/off for day/night
+  const brazierEmbers = [];
+  const brazierLights = [];
   for (let i = 0; i < 4; i++) {
     const a = (i + 0.5) * (TAU / 4) + PI / 4; // offset 45° so they sit between character slots
     const bx = cos(a) * (R - 0.3);
@@ -296,11 +313,16 @@ function initThree() {
     const ember = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), brazierEmber);
     ember.position.set(bx, -0.4, bz);
     scene.add(ember);
+    brazierEmbers.push(ember);
     // Point light (limited to 4, OK)
     const bl = new THREE.PointLight(0xff7a30, 0.35, 3.5, 1.8);
     bl.position.set(bx, -0.3, bz);
     scene.add(bl);
+    brazierLights.push(bl);
   }
+  // Expose for day/night toggling
+  window.__brazierEmbers = brazierEmbers;
+  window.__brazierLights = brazierLights;
 
   // Floor — stone with darker outer ring for natural vignette
   const floor = new THREE.Mesh(
@@ -1291,7 +1313,7 @@ function updateKeyboardPan() {
 // ===== Night Mode (with smooth transition) =====
 let nightTransition = null; // {fromVals, toVals, startTime, duration}
 const NIGHT_PRESETS = {
-  day: { bg:0x1a1520, amb:0.45, dir:0.85, dirColor:0xfff5e0, moon:0, candle:1.5, flame:0.8 },
+  day: { bg:0xa8c0d8, amb:0.55, dir:1.4, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
   night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
 };
 
@@ -1307,6 +1329,13 @@ function setNight(n) {
     fogR: scene.fog.color.r, fogG: scene.fog.color.g, fogB: scene.fog.color.b,
   };
   nightTransition = { from, target, startTime: performance.now(), duration: 600 };
+
+  // Day mode hides brazier embers + lights (no fire during daylight)
+  if (window.__brazierEmbers && window.__brazierLights) {
+    const showBraziers = n;
+    for (const e of window.__brazierEmbers) e.visible = showBraziers;
+    for (const l of window.__brazierLights) l.intensity = showBraziers ? 0.35 : 0;
+  }
 }
 
 function updateNightTransition() {
