@@ -1719,6 +1719,8 @@ function rebuildScene() {
   // Remove old characters
   chars.forEach(g => scene.remove(g));
   chars = [];
+  // Invalidate avatar portrait cache so portraits re-render with new character builds
+  for (const k of Object.keys(avatarCache)) delete avatarCache[k];
   // Build new ones
   buildAllCharacters();
   buildNameTags();
