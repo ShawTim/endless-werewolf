@@ -219,7 +219,7 @@ function initThree() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.0;
+  renderer.toneMappingExposure = 0.95;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   // Post-processing composer
@@ -373,6 +373,7 @@ function initThree() {
     new THREE.MeshStandardMaterial({ color: 0xE8D8B8 })
   );
   candle.position.y = 0.5;
+  candle.name = 'candleMesh';
   scene.add(candle);
 
   flame = new THREE.Mesh(
@@ -380,6 +381,7 @@ function initThree() {
     new THREE.MeshStandardMaterial({ color: 0xFFD700, emissive: 0xFF8800, emissiveIntensity: 0.8 })
   );
   flame.position.y = 0.72;
+  flame.name = 'candleFlame';
   scene.add(flame);
   initParticles();
 }
@@ -1336,6 +1338,10 @@ function setNight(n) {
     for (const e of window.__brazierEmbers) e.visible = showBraziers;
     for (const l of window.__brazierLights) l.intensity = showBraziers ? 0.35 : 0;
   }
+  // Day mode also hides the candle + flame (no lit candle on a sunny day)
+  scene.traverse(obj => {
+    if (obj.name === 'candleMesh' || obj.name === 'candleFlame') obj.visible = n;
+  });
 }
 
 function updateNightTransition() {
