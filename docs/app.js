@@ -83,6 +83,32 @@ let isNight = false;
 let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
+// ===== Cel-shading gradient map (3-step toon) =====
+function makeToonGradientMap(steps = 3) {
+  const data = new Uint8Array(steps);
+  for (let i = 0; i < steps; i++) {
+    // 3-step: 0.4, 0.7, 1.0 — gives shadow / mid / highlight bands
+    data[i] = Math.round((0.4 + (i / (steps - 1)) * 0.6) * 255);
+  }
+  const tex = new THREE.DataTexture(data, steps, 1, THREE.RedFormat);
+  tex.minFilter = THREE.NearestFilter;
+  tex.magFilter = THREE.NearestFilter;
+  tex.generateMipmaps = false;
+  tex.needsUpdate = true;
+  return tex;
+}
+const TOON_GRADIENT = makeToonGradientMap(3);
+
+// Cel-shaded outline material — rendered as back-faces of inflated mesh
+const OUTLINE_MAT = new THREE.MeshBasicMaterial({ color: 0x0a0814, side: THREE.BackSide });
+function addOutline(mesh, scale = 1.04) {
+  if (!mesh.geometry) return;
+  const outline = new THREE.Mesh(mesh.geometry, OUTLINE_MAT);
+  outline.scale.setScalar(scale);
+  outline.renderOrder = -1;
+  mesh.add(outline);
+}
+
 
 // ===== Ambient Particles =====
 let fireflies = null;   // night fireflies
@@ -197,13 +223,58 @@ function initThree() {
   candlePoint.position.set(0, 0.75, 0);
   scene.add(candlePoint);
 
-  // Floor
+  // Rim/key light: cool blue from high to make characters pop from background
+  const rimLight = new THREE.DirectionalLight(0x88aaff, 0.35);
+  rimLight.position.set(-3, 8, -5);
+  scene.add(rimLight);
+
+  // 4 ground braziers around the table — warm fill, position-match to characters
+  const brazierMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0e, roughness: 0.7, metalness: 0.4 });
+  const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff7a2a, emissive: 0xff5510, emissiveIntensity: 1.2 });
+  for (let i = 0; i < 4; i++) {
+    const a = (i + 0.5) * (TAU / 4) + PI / 4; // offset 45° so they sit between character slots
+    const bx = cos(a) * (R - 0.3);
+    const bz = sin(a) * (R - 0.3);
+    // Bowl
+    const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.12, 0.18, 10), brazierMat);
+    bowl.position.set(bx, -0.5, bz);
+    bowl.castShadow = true;
+    scene.add(bowl);
+    // Stand
+    const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.06, 0.32, 6), brazierMat);
+    stand.position.set(bx, -0.3, bz);
+    stand.castShadow = true;
+    scene.add(stand);
+    // Ember glow
+    const ember = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 6), brazierEmber);
+    ember.position.set(bx, -0.4, bz);
+    scene.add(ember);
+    // Point light (limited to 4, OK)
+    const bl = new THREE.PointLight(0xff7a30, 0.6, 4, 1.5);
+    bl.position.set(bx, -0.3, bz);
+    scene.add(bl);
+  }
+
+  // Floor — stone with darker outer ring for natural vignette
   const floor = new THREE.Mesh(
     new THREE.CircleGeometry(14, 64),
-    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.85 })
+    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.85, color: 0xb8a888 })
   );
   floor.rotation.x = -PI / 2; floor.position.y = -0.6; floor.receiveShadow = true;
   scene.add(floor);
+
+  // Grass tufts (instanced small cones) scattered around for organic ground
+  const grassMat = new THREE.MeshStandardMaterial({ color: 0x3a5a2a, roughness: 0.9 });
+  const grassCount = 60;
+  for (let i = 0; i < grassCount; i++) {
+    const a = Math.random() * TAU;
+    const r = 4 + Math.random() * 8;
+    const h = 0.08 + Math.random() * 0.12;
+    const tuft = new THREE.Mesh(new THREE.ConeGeometry(0.04, h, 4), grassMat);
+    tuft.position.set(cos(a) * r, -0.55, sin(a) * r);
+    tuft.rotation.set(Math.random() * 0.3, Math.random() * TAU, Math.random() * 0.3);
+    scene.add(tuft);
+  }
 
   // Table
   const tableTop = new THREE.Mesh(
@@ -348,7 +419,7 @@ function sa(i) { return (i / 6) * TAU - PI / 2; }
 function limb(r, len, color, rough = 0.6) {
   const m = new THREE.Mesh(
     new THREE.CapsuleGeometry(r, len, 6, 12),
-    new THREE.MeshStandardMaterial({ color, roughness: rough })
+    new THREE.MeshToonMaterial({ color, gradientMap: TOON_GRADIENT })
   );
   m.castShadow = true;
   return m;
@@ -360,10 +431,10 @@ function buildCharacter(player, index){
   const ang=sa(index); g.rotation.y=-ang-PI/2;
   scene.add(g);
 
-  const skinMat=new THREE.MeshStandardMaterial({color:player.head,roughness:0.5});
-  const bodyMat=new THREE.MeshStandardMaterial({color:player.body,roughness:0.6,metalness:0.1});
-  const accMat=new THREE.MeshStandardMaterial({color:player.accent,roughness:0.4});
-  const darkMat=new THREE.MeshStandardMaterial({color:0x1a1a2e,roughness:0.3});
+  const skinMat=new THREE.MeshToonMaterial({color:player.head, gradientMap: TOON_GRADIENT});
+  const bodyMat=new THREE.MeshToonMaterial({color:player.body, gradientMap: TOON_GRADIENT});
+  const accMat=new THREE.MeshToonMaterial({color:player.accent, gradientMap: TOON_GRADIENT});
+  const darkMat=new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
 
   // === Torso ===
   // Tapered body — wider at shoulders, narrower at waist
@@ -372,6 +443,7 @@ function buildCharacter(player, index){
     bodyMat
   );
   torso.position.y=0.35; torso.castShadow=true; g.add(torso);
+  addOutline(torso, 1.06);
 
   // Shoulders — slight width
   const shoulders=new THREE.Mesh(
@@ -379,6 +451,7 @@ function buildCharacter(player, index){
     bodyMat
   );
   shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
+  addOutline(shoulders, 1.05);
 
   // === Arms ===
   // Left arm
@@ -386,11 +459,13 @@ function buildCharacter(player, index){
   armL.position.set(-0.38,0.4,0);
   armL.rotation.z=0.15;
   g.add(armL);
+  addOutline(armL, 1.08);
   // Right arm
   const armR=limb(0.09,0.35,player.body);
   armR.position.set(0.38,0.4,0);
   armR.rotation.z=-0.15;
   g.add(armR);
+  addOutline(armR, 1.08);
 
   // Hands
   const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
@@ -401,8 +476,10 @@ function buildCharacter(player, index){
   // === Legs ===
   const legL=limb(0.12,0.3,0x2a2a2a);
   legL.position.set(-0.14,-0.1,0); g.add(legL);
+  addOutline(legL, 1.08);
   const legR=limb(0.12,0.3,0x2a2a2a);
   legR.position.set(0.14,-0.1,0); g.add(legR);
+  addOutline(legR, 1.08);
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
@@ -410,6 +487,7 @@ function buildCharacter(player, index){
 
   const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
   headSphere.castShadow=true; head.add(headSphere);
+  addOutline(headSphere, 1.04);
 
   // Positions are local to head (world y - 0.98)
 
@@ -423,15 +501,20 @@ function buildCharacter(player, index){
   const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,0.07,0.32); browL.rotation.z=0.08; head.add(browL);
   const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,0.07,0.32); browR.rotation.z=-0.08; head.add(browR);
 
-  // Eyes — whites with pupils
-  const eyeWhiteMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.3});
+  // Eyes — whites with pupils + highlight for life
+  const eyeWhiteMat=new THREE.MeshToonMaterial({color:0xffffff, gradientMap: TOON_GRADIENT});
   const eyeGeo2=new THREE.SphereGeometry(0.05,16,12);
   const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,0.02,0.32); eL.scale.set(1.2,1,0.6); head.add(eL);
   const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,0.02,0.32); eR.scale.set(1.2,1,0.6); head.add(eR);
-  // Pupils
-  const pupilGeo=new THREE.SphereGeometry(0.02,12,8);
+  // Pupils (bigger, more cartoon)
+  const pupilGeo=new THREE.SphereGeometry(0.025,12,8);
   const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,0.02,0.36); head.add(pL);
   const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,0.02,0.36); head.add(pR);
+  // Eye highlights (small white spheres for cartoon "shine")
+  const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const hlGeo = new THREE.SphereGeometry(0.012, 6, 6);
+  const hlL = new THREE.Mesh(hlGeo, hlMat); hlL.position.set(-0.105, 0.035, 0.378); head.add(hlL);
+  const hlR = new THREE.Mesh(hlGeo, hlMat); hlR.position.set(0.135, 0.035, 0.378); head.add(hlR);
 
   // Nose — more defined
   const nose=new THREE.Mesh(
@@ -744,10 +827,10 @@ function renderAvatarPortrait(player, size = 128) {
   avScene.add(avFill);
 
   // Build a simplified head+shoulders for portrait
-  const skinMat = new THREE.MeshStandardMaterial({color:player.head||0xD4A574, roughness:0.5});
-  const bodyMat = new THREE.MeshStandardMaterial({color:player.body||0x4a0000, roughness:0.6});
-  const accMat = new THREE.MeshStandardMaterial({color:player.accent||0xe74c3c, roughness:0.4});
-  const darkMat = new THREE.MeshStandardMaterial({color:0x1a1a2e, roughness:0.3});
+  const skinMat = new THREE.MeshToonMaterial({color:player.head||0xD4A574, gradientMap: TOON_GRADIENT});
+  const bodyMat = new THREE.MeshToonMaterial({color:player.body||0x4a0000, gradientMap: TOON_GRADIENT});
+  const accMat = new THREE.MeshToonMaterial({color:player.accent||0xe74c3c, gradientMap: TOON_GRADIENT});
+  const darkMat = new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
 
   // Head — group so face features follow any future head animation
   const head = new THREE.Group();
@@ -906,10 +989,10 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
 }
 
 // ===== Camera Controls =====
-let theta = 0, phi = PI / 3.5;
+let theta = 0, phi = PI / 3.2;
 // On mobile, start further back so all 6 characters fit
-let dist = (innerWidth <= 768) ? 18 : 12;
-const targetV = new THREE.Vector3(0, 0.5, 0);
+let dist = (innerWidth <= 768) ? 16 : 9;
+const targetV = new THREE.Vector3(0, 0.8, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
 const DIST_MIN = 3, DIST_MAX = 40;
 
@@ -3049,6 +3132,15 @@ function animate() {
   chars.forEach((g, i) => {
     if (!inDeathAnim.has(i) && !inTeamAnim.has(i)) {
       g.position.y = SH + Math.sin(t * 1.5 + i) * 0.03;
+      // Breathing — subtle body scale + head micro-sway
+      const breath = 1 + Math.sin(t * 1.2 + i * 0.7) * 0.012;
+      g.scale.set(1, breath, 1);
+      // Head micro-sway
+      const head = g.children.find(c => c.isGroup && c.position.y > 0.5);
+      if (head) {
+        head.rotation.z = Math.sin(t * 0.8 + i * 1.3) * 0.04;
+        head.rotation.x = Math.sin(t * 0.6 + i * 0.5) * 0.025;
+      }
     }
   });
 
