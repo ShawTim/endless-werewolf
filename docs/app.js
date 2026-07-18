@@ -79,7 +79,7 @@ let PLAYERS = [];
 // --- Game data ---
 let currentGame = null;
 let gameData = {};
-let currentPhase = 'night';
+let currentPhase = 'day';
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
@@ -539,13 +539,15 @@ function buildCharacter(player, index){
   headSphere.castShadow=true; head.add(headSphere);
   addOutline(headSphere, 1.025);
 
-  // Hair cap — slightly larger sphere clipped to top half of head, in hair color
-  const hairCap=new THREE.Mesh(
-    new THREE.SphereGeometry(0.37,24,16,0,TAU,0,PI*0.55),
-    hairMat
-  );
-  hairCap.position.y=0.04; hairCap.castShadow=true; head.add(hairCap);
-  addOutline(hairCap, 1.03);
+  // Hair cap — upper hemisphere. Skipped for characters with persona-specific hair (Prosecutor, Therapist, Statistician, Underdog, Chaos Agent, Gut Player) to avoid double-layer.
+  const personaHairChars = ['The Prosecutor', 'Blaze', 'The Therapist', 'SafetySam', 'The Statistician', 'Dr. Pizza', 'The Underdog', 'EasyBake', 'The Chaos Agent', 'Twister', 'The Gut Player', 'ConspiBro'];
+  if (!personaHairChars.includes(player.name)) {
+    const hairCap=new THREE.Mesh(
+      new THREE.SphereGeometry(0.365,24,16,0,TAU,0,PI*0.5),
+      hairMat
+    );
+    hairCap.position.y=0.01; hairCap.castShadow=true; head.add(hairCap);
+  }
 
   // Positions are local to head (world y - 0.98)
 
@@ -629,14 +631,14 @@ function buildCharacter(player, index){
         new THREE.CylinderGeometry(0.02,0.02,0.12,8),
         new THREE.MeshStandardMaterial({color:0x6B4226})
       );
-      gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
+        gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
       g.add(gavelHandle);
-      // Slick hair
+      // Slick hair — persona accent (subtle, top-of-head only)
       const hairP1=new THREE.Mesh(
-        new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.45),
-        new THREE.MeshStandardMaterial({color:0x2a1a0a,roughness:0.4})
+        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.35),
+        hairMat
       );
-      hairP1.position.set(0,0.07,0); hairP1.scale.set(1,0.5,1); head.add(hairP1);
+      hairP1.position.set(0,0.07,0); hairP1.scale.set(1,0.4,1); head.add(hairP1);
       break;
 
     case 'The Therapist': case 'SafetySam': // Glasses + clipboard / shield
@@ -665,15 +667,15 @@ function buildCharacter(player, index){
       );
       board.position.set(-0.52,0.15,0.05); board.rotation.x=-0.2;
       g.add(board);
-      // Soft hair — bun
+      // Soft hair — bun (use player hair color)
       const hairP2=new THREE.Mesh(
-        new THREE.SphereGeometry(0.35,16,12,0,TAU,0,PI*0.5),
-        new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5})
+        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.5),
+        hairMat
       );
       hairP2.position.set(0,0.06,0); hairP2.scale.set(1,0.6,1); head.add(hairP2);
       // Bun
       const bun=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),
-        new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5}));
+        hairMat);
       bun.position.set(0,0.24,-0.15); head.add(bun);
       break;
 
@@ -761,12 +763,12 @@ function buildCharacter(player, index){
       );
       screen.position.set(-0.5,0.18,0.09); screen.rotation.x=-0.15;
       g.add(screen);
-      // Neat combed hair
+      // Neat combed hair (use player hair color)
       const hairP5=new THREE.Mesh(
-        new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.4),
-        new THREE.MeshStandardMaterial({color:0x1a1a1a,roughness:0.3})
+        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.45),
+        hairMat
       );
-      hairP5.position.set(0,0.08,0); hairP5.scale.set(1,0.35,1.05); head.add(hairP5);
+      hairP5.position.set(0,0.08,0); hairP5.scale.set(1,0.4,1.05); head.add(hairP5);
       // Side part
       const part=new THREE.Mesh(
         new THREE.BoxGeometry(0.15,0.03,0.1),
@@ -776,10 +778,10 @@ function buildCharacter(player, index){
       break;
 
     case 'The Underdog': case 'EasyBake': // Messy hair + lucky charm
-      // Messy hair — uneven sphere
+      // Messy hair — uneven sphere (use player hair color)
       const hairP6=new THREE.Mesh(
         new THREE.SphereGeometry(0.38,16,12,0,TAU,0,PI*0.55),
-        new THREE.MeshStandardMaterial({color:0x5a3e10,roughness:0.6})
+        hairMat
       );
       hairP6.position.set(0,0.04,0); hairP6.scale.set(1.05,0.65,1.05);
       // Tilt slightly
@@ -884,10 +886,11 @@ function renderAvatarPortrait(player, size = 128) {
   avFill.position.set(-2, 1, 1);
   avScene.add(avFill);
 
-  // Build a simplified head+shoulders for portrait
-  const skinMat = new THREE.MeshToonMaterial({color:player.head||0xD4A574, gradientMap: TOON_GRADIENT});
+  // Build a simplified head+shoulders for portrait — use new palette fields
+  const skinMat = new THREE.MeshToonMaterial({color:player.skin||player.head||0xD4A574, gradientMap: TOON_GRADIENT});
   const bodyMat = new THREE.MeshToonMaterial({color:player.body||0x4a0000, gradientMap: TOON_GRADIENT});
-  const accMat = new THREE.MeshToonMaterial({color:player.accent||0xe74c3c, gradientMap: TOON_GRADIENT});
+  const accMat = new THREE.MeshToonMaterial({color:player.accent||player.body||0xe74c3c, gradientMap: TOON_GRADIENT});
+  const hairMat = new THREE.MeshToonMaterial({color:player.hair||0x1a1410, gradientMap: TOON_GRADIENT});
   const darkMat = new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
 
   // Head — group so face features follow any future head animation
@@ -1836,7 +1839,7 @@ async function loadGame(gameId) {
         }
       }
     }
-    currentPhase = 'night';
+    currentPhase = 'day';
 
     // Dynamically build PLAYERS from game data
     if (night && night.players) {
@@ -1865,7 +1868,7 @@ async function loadGame(gameId) {
       rebuildScene();
     }
     
-    setPhase('night');
+    setPhase('day');
     showGameInfo();
 
     // Update archive list active state to reflect newly loaded game
@@ -2417,9 +2420,13 @@ function showPostgameInfo() {
 }
 
 function showGameInfo() {
-  // Called after game loads — show night info (first phase)
-  if (!gameData.night) return;
-  showNightInfo();
+  // Called after game loads — show info matching current phase
+  const phase = currentPhase || 'day';
+  if (phase === 'night') showNightInfo();
+  else if (phase === 'day') showDayInfo();
+  else if (phase === 'vote') showVoteInfo();
+  else if (phase === 'resolve') showResolveInfo();
+  else if (phase === 'postgame') showPostgameInfo();
 }
 
 function showAboutPanel() {
