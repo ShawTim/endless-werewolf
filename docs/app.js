@@ -70,9 +70,6 @@ let PLAYERS = [];
 let currentGame = null;
 let gameData = {};
 let currentPhase = 'night';
-let replayIndex = 0;
-let replayPlaying = false;
-let replayTimer = null;
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
@@ -388,56 +385,61 @@ function buildCharacter(player, index){
   const legR=limb(0.12,0.3,0x2a2a2a);
   legR.position.set(0.14,-0.1,0); g.add(legR);
 
-  // === Head ===
-  const head=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
-  head.position.y=0.98; head.castShadow=true; g.add(head);
+  // === Head (parented group so face features follow head bob) ===
+  const head=new THREE.Group();
+  head.position.y=0.98; g.add(head);
+
+  const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
+  headSphere.castShadow=true; head.add(headSphere);
+
+  // Positions are local to head (world y - 0.98)
 
   // Ears
   const earGeo=new THREE.SphereGeometry(0.06,12,8);
-  const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,0.97,0); earL.scale.set(0.5,1,0.8); g.add(earL);
-  const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,0.97,0); earR.scale.set(0.5,1,0.8); g.add(earR);
+  const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,-0.01,0); earL.scale.set(0.5,1,0.8); head.add(earL);
+  const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,-0.01,0); earR.scale.set(0.5,1,0.8); head.add(earR);
 
   // Eyebrows
   const browGeo=new THREE.BoxGeometry(0.1,0.02,0.03);
-  const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,1.05,0.32); browL.rotation.z=0.08; g.add(browL);
-  const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,1.05,0.32); browR.rotation.z=-0.08; g.add(browR);
+  const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,0.07,0.32); browL.rotation.z=0.08; head.add(browL);
+  const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,0.07,0.32); browR.rotation.z=-0.08; head.add(browR);
 
   // Eyes — whites with pupils
   const eyeWhiteMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.3});
   const eyeGeo2=new THREE.SphereGeometry(0.05,16,12);
-  const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,1.0,0.32); eL.scale.set(1.2,1,0.6); g.add(eL);
-  const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,1.0,0.32); eR.scale.set(1.2,1,0.6); g.add(eR);
+  const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,0.02,0.32); eL.scale.set(1.2,1,0.6); head.add(eL);
+  const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,0.02,0.32); eR.scale.set(1.2,1,0.6); head.add(eR);
   // Pupils
   const pupilGeo=new THREE.SphereGeometry(0.02,12,8);
-  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,1.0,0.36); g.add(pL);
-  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,1.0,0.36); g.add(pR);
+  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,0.02,0.36); head.add(pL);
+  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,0.02,0.36); head.add(pR);
 
   // Nose — more defined
   const nose=new THREE.Mesh(
     new THREE.ConeGeometry(0.04,0.12,8),
     skinMat
   );
-  nose.position.set(0,0.92,0.38); nose.rotation.x=PI/2; nose.scale.set(0.8,1,0.8); g.add(nose);
+  nose.position.set(0,-0.06,0.38); nose.rotation.x=PI/2; nose.scale.set(0.8,1,0.8); head.add(nose);
 
   // Mouth — smile with lips
   const smile=new THREE.Mesh(
     new THREE.TorusGeometry(0.08,0.025,8,16,PI),
     new THREE.MeshStandardMaterial({color:0x8B3A3A,roughness:0.4})
   );
-  smile.position.set(0,0.86,0.35); smile.rotation.z=PI; g.add(smile);
+  smile.position.set(0,-0.12,0.35); smile.rotation.z=PI; head.add(smile);
   // Upper lip
   const lipLine=new THREE.Mesh(
     new THREE.BoxGeometry(0.12,0.01,0.02),
     darkMat
   );
-  lipLine.position.set(0,0.88,0.36); g.add(lipLine);
+  lipLine.position.set(0,-0.1,0.36); head.add(lipLine);
 
   // Chin
   const chin=new THREE.Mesh(
     new THREE.SphereGeometry(0.08,12,8),
     skinMat
   );
-  chin.position.set(0,0.82,0.28); chin.scale.set(1,0.6,0.8); g.add(chin);
+  chin.position.set(0,-0.16,0.28); chin.scale.set(1,0.6,0.8); head.add(chin);
 
   // === Persona-specific accessories ===
   switch(player.name){
@@ -474,7 +476,7 @@ function buildCharacter(player, index){
         new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.45),
         new THREE.MeshStandardMaterial({color:0x2a1a0a,roughness:0.4})
       );
-      hairP1.position.set(0,1.05,0); hairP1.scale.set(1,0.5,1); g.add(hairP1);
+      hairP1.position.set(0,0.07,0); hairP1.scale.set(1,0.5,1); head.add(hairP1);
       break;
 
     case 'The Therapist': case 'SafetySam': // Glasses + clipboard / shield
@@ -483,19 +485,19 @@ function buildCharacter(player, index){
         new THREE.TorusGeometry(0.08,0.015,8,16),
         new THREE.MeshStandardMaterial({color:0x333333,metalness:0.5,roughness:0.2})
       );
-      glassL.position.set(-0.12,1.0,0.32); g.add(glassL);
+      glassL.position.set(-0.12,0.02,0.32); head.add(glassL);
       const glassR=new THREE.Mesh(
         new THREE.TorusGeometry(0.08,0.015,8,16),
         new THREE.MeshStandardMaterial({color:0x333333,metalness:0.5,roughness:0.2})
       );
-      glassR.position.set(0.12,1.0,0.32); g.add(glassR);
+      glassR.position.set(0.12,0.02,0.32); head.add(glassR);
       // Bridge
       const bridge=new THREE.Mesh(
         new THREE.CylinderGeometry(0.01,0.01,0.08,4),
         new THREE.MeshStandardMaterial({color:0x333333})
       );
-      bridge.position.set(0,1.0,0.33); bridge.rotation.z=PI/2;
-      g.add(bridge);
+      bridge.position.set(0,0.02,0.33); bridge.rotation.z=PI/2;
+      head.add(bridge);
       // Clipboard in left hand
       const board=new THREE.Mesh(
         new THREE.BoxGeometry(0.18,0.22,0.02),
@@ -508,11 +510,11 @@ function buildCharacter(player, index){
         new THREE.SphereGeometry(0.35,16,12,0,TAU,0,PI*0.5),
         new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5})
       );
-      hairP2.position.set(0,1.04,0); hairP2.scale.set(1,0.6,1); g.add(hairP2);
+      hairP2.position.set(0,0.06,0); hairP2.scale.set(1,0.6,1); head.add(hairP2);
       // Bun
       const bun=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),
         new THREE.MeshStandardMaterial({color:0x4a3520,roughness:0.5}));
-      bun.position.set(0,1.22,-0.15); g.add(bun);
+      bun.position.set(0,0.24,-0.15); head.add(bun);
       break;
 
     case 'The Chaos Agent': case 'Twister': // Wild hair + mask
@@ -523,9 +525,9 @@ function buildCharacter(player, index){
           new THREE.MeshStandardMaterial({color:0xB85820,roughness:0.4})
         );
         const sa2=k/7*TAU;
-        spike.position.set(cos(sa2)*0.25,1.15,sin(sa2)*0.25);
+        spike.position.set(cos(sa2)*0.25,0.17,sin(sa2)*0.25);
         spike.rotation.set(Math.random()*0.3-0.15,sa2,Math.random()*0.4-0.2);
-        g.add(spike);
+        head.add(spike);
       }
       // Mask on stick (drama!)
       const stick=new THREE.Mesh(
@@ -550,14 +552,14 @@ function buildCharacter(player, index){
         new THREE.TorusGeometry(0.34,0.06,8,20),
         new THREE.MeshStandardMaterial({color:0x7f8c8d,roughness:0.4})
       );
-      bandana.position.set(0,1.08,0); bandana.rotation.x=PI/2; bandana.scale.set(1,1,0.8);
-      g.add(bandana);
+      bandana.position.set(0,0.1,0); bandana.rotation.x=PI/2; bandana.scale.set(1,1,0.8);
+      head.add(bandana);
       // Bandana knot
       const knot=new THREE.Mesh(
         new THREE.BoxGeometry(0.06,0.08,0.06),
         new THREE.MeshStandardMaterial({color:0x7f8c8d})
       );
-      knot.position.set(0,1.06,-0.32); g.add(knot);
+      knot.position.set(0,0.08,-0.32); head.add(knot);
       // Bigger arms (muscular)
       armL.scale.set(1.3,1.2,1.3); armR.scale.set(1.3,1.2,1.3);
       handL.scale.set(1.3,1.3,1.3); handR.scale.set(1.3,1.3,1.3);
@@ -569,8 +571,8 @@ function buildCharacter(player, index){
         new THREE.BoxGeometry(0.02,0.06,0.01),
         new THREE.MeshStandardMaterial({color:0xaa3333})
       );
-      scar.position.set(-0.15,0.95,0.35); scar.rotation.z=0.2;
-      g.add(scar);
+      scar.position.set(-0.15,-0.03,0.35); scar.rotation.z=0.2;
+      head.add(scar);
       break;
 
     case 'The Statistician': case 'Dr. Pizza': // Glasses + tablet / pizza
@@ -579,12 +581,12 @@ function buildCharacter(player, index){
         new THREE.TorusGeometry(0.07,0.012,8,16),
         new THREE.MeshStandardMaterial({color:0x2980b9,metalness:0.4,roughness:0.2})
       );
-      sgL.position.set(-0.12,1.0,0.32); g.add(sgL);
+      sgL.position.set(-0.12,0.02,0.32); head.add(sgL);
       const sgR=new THREE.Mesh(
         new THREE.TorusGeometry(0.07,0.012,8,16),
         new THREE.MeshStandardMaterial({color:0x2980b9,metalness:0.4,roughness:0.2})
       );
-      sgR.position.set(0.12,1.0,0.32); g.add(sgR);
+      sgR.position.set(0.12,0.02,0.32); head.add(sgR);
       // Tablet in left hand
       const tablet=new THREE.Mesh(
         new THREE.BoxGeometry(0.16,0.22,0.015),
@@ -604,13 +606,13 @@ function buildCharacter(player, index){
         new THREE.SphereGeometry(0.34,16,12,0,TAU,0,PI*0.4),
         new THREE.MeshStandardMaterial({color:0x1a1a1a,roughness:0.3})
       );
-      hairP5.position.set(0,1.06,0); hairP5.scale.set(1,0.35,1.05); g.add(hairP5);
+      hairP5.position.set(0,0.08,0); hairP5.scale.set(1,0.35,1.05); head.add(hairP5);
       // Side part
       const part=new THREE.Mesh(
         new THREE.BoxGeometry(0.15,0.03,0.1),
         new THREE.MeshStandardMaterial({color:0x333333})
       );
-      part.position.set(0.05,1.12,0.1); g.add(part);
+      part.position.set(0.05,0.14,0.1); head.add(part);
       break;
 
     case 'The Underdog': case 'EasyBake': // Messy hair + lucky charm
@@ -619,19 +621,19 @@ function buildCharacter(player, index){
         new THREE.SphereGeometry(0.38,16,12,0,TAU,0,PI*0.55),
         new THREE.MeshStandardMaterial({color:0x5a3e10,roughness:0.6})
       );
-      hairP6.position.set(0,1.02,0); hairP6.scale.set(1.05,0.65,1.05);
+      hairP6.position.set(0,0.04,0); hairP6.scale.set(1.05,0.65,1.05);
       // Tilt slightly
       hairP6.rotation.z=0.08;
-      g.add(hairP6);
+      head.add(hairP6);
       // Hair strands sticking up
       for(let k=0;k<3;k++){
         const strand=new THREE.Mesh(
           new THREE.ConeGeometry(0.03,0.1+Math.random()*0.06,4),
           new THREE.MeshStandardMaterial({color:0x5a3e10,roughness:0.6})
         );
-        strand.position.set(-0.1+k*0.1,1.2+Math.random()*0.05,0);
+        strand.position.set(-0.1+k*0.1,0.22+Math.random()*0.05,0);
         strand.rotation.set(Math.random()*0.3-0.15,0,Math.random()*0.3-0.15);
-        g.add(strand);
+        head.add(strand);
       }
       // Lucky charm (four-leaf clover) in right hand
       for(let k=0;k<4;k++){
@@ -644,9 +646,9 @@ function buildCharacter(player, index){
         leaf.scale.set(1,1.5,0.5);
         g.add(leaf);
       }
-      // Worried eyebrows — adjust existing ones
-      browL.position.y=1.08; browL.rotation.z=-0.2;
-      browR.position.y=1.08; browR.rotation.z=0.2;
+      // Worried eyebrows — adjust existing ones (local to head group)
+      browL.position.y=0.10; browL.rotation.z=-0.2;
+      browR.position.y=0.10; browR.rotation.z=0.2;
       // Nervous posture — slightly leaning back
       g.rotation.x=-0.05;
       break;
@@ -728,41 +730,46 @@ function renderAvatarPortrait(player, size = 128) {
   const accMat = new THREE.MeshStandardMaterial({color:player.accent||0xe74c3c, roughness:0.4});
   const darkMat = new THREE.MeshStandardMaterial({color:0x1a1a2e, roughness:0.3});
 
-  // Head
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), skinMat);
+  // Head — group so face features follow any future head animation
+  const head = new THREE.Group();
   head.position.y = 0.98;
   avScene.add(head);
 
+  const headSphere = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), skinMat);
+  head.add(headSphere);
+
+  // Positions are local to head (world y - 0.98)
+
   // Ears
   const earGeo = new THREE.SphereGeometry(0.06, 12, 8);
-  const earL = new THREE.Mesh(earGeo, skinMat); earL.position.set(-0.35, 0.97, 0); earL.scale.set(0.5, 1, 0.8); avScene.add(earL);
-  const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, 0.97, 0); earR.scale.set(0.5, 1, 0.8); avScene.add(earR);
+  const earL = new THREE.Mesh(earGeo, skinMat); earL.position.set(-0.35, -0.01, 0); earL.scale.set(0.5, 1, 0.8); head.add(earL);
+  const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, -0.01, 0); earR.scale.set(0.5, 1, 0.8); head.add(earR);
 
   // Eyebrows
   const browGeo = new THREE.BoxGeometry(0.1, 0.02, 0.03);
-  const browL = new THREE.Mesh(browGeo, darkMat); browL.position.set(-0.12, 1.05, 0.32); browL.rotation.z = 0.08; avScene.add(browL);
-  const browR = new THREE.Mesh(browGeo, darkMat); browR.position.set(0.12, 1.05, 0.32); browR.rotation.z = -0.08; avScene.add(browR);
+  const browL = new THREE.Mesh(browGeo, darkMat); browL.position.set(-0.12, 0.07, 0.32); browL.rotation.z = 0.08; head.add(browL);
+  const browR = new THREE.Mesh(browGeo, darkMat); browR.position.set(0.12, 0.07, 0.32); browR.rotation.z = -0.08; head.add(browR);
 
   // Eyes
   const eyeWhiteMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.3});
   const eyeGeo2 = new THREE.SphereGeometry(0.05, 16, 12);
-  const eL = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eL.position.set(-0.12, 1.0, 0.32); eL.scale.set(1.2, 1, 0.6); avScene.add(eL);
-  const eR = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eR.position.set(0.12, 1.0, 0.32); eR.scale.set(1.2, 1, 0.6); avScene.add(eR);
+  const eL = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eL.position.set(-0.12, 0.02, 0.32); eL.scale.set(1.2, 1, 0.6); head.add(eL);
+  const eR = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eR.position.set(0.12, 0.02, 0.32); eR.scale.set(1.2, 1, 0.6); head.add(eR);
   const pupilGeo = new THREE.SphereGeometry(0.02, 12, 8);
-  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 1.0, 0.36); avScene.add(pL);
-  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 1.0, 0.36); avScene.add(pR);
+  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 0.02, 0.36); head.add(pL);
+  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 0.02, 0.36); head.add(pR);
 
   // Nose
   const nose = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 8), skinMat);
-  nose.position.set(0, 0.92, 0.38); nose.rotation.x = PI/2; nose.scale.set(0.8, 1, 0.8); avScene.add(nose);
+  nose.position.set(0, -0.06, 0.38); nose.rotation.x = PI/2; nose.scale.set(0.8, 1, 0.8); head.add(nose);
 
   // Mouth
   const smile = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.025, 8, 16, PI), new THREE.MeshStandardMaterial({color:0x8B3A3A, roughness:0.4}));
-  smile.position.set(0, 0.86, 0.35); smile.rotation.z = PI; avScene.add(smile);
+  smile.position.set(0, -0.12, 0.35); smile.rotation.z = PI; head.add(smile);
 
   // Chin
   const chin = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 8), skinMat);
-  chin.position.set(0, 0.82, 0.28); chin.scale.set(1, 0.6, 0.8); avScene.add(chin);
+  chin.position.set(0, -0.16, 0.28); chin.scale.set(1, 0.6, 0.8); head.add(chin);
 
   // Shoulders/torso
   const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 16), bodyMat);
@@ -771,7 +778,7 @@ function renderAvatarPortrait(player, size = 128) {
   shoulders.position.y = 0.58; shoulders.scale.set(1, 0.5, 0.8); avScene.add(shoulders);
 
   // Persona-specific accessories (simplified for portrait)
-  addAvatarAccessories(avScene, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile);
+  addAvatarAccessories(avScene, head, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile);
 
   // Render to texture using dedicated offscreen renderer (no hijacking main renderer)
   avRenderer.setSize(size, size, false);
@@ -814,11 +821,11 @@ function renderAvatarPortrait(player, size = 128) {
   return dataUrl;
 }
 
-function addAvatarAccessories(scene, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile) {
+function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile) {
   switch(player.name) {
     case 'The Prosecutor': case 'Blaze': {
       const hair = new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12, 0, TAU, 0, PI*0.45), new THREE.MeshStandardMaterial({color:0x2a1a0a, roughness:0.4}));
-      hair.position.set(0, 1.05, 0); hair.scale.set(1, 0.5, 1); scene.add(hair);
+      hair.position.set(0, 0.07, 0); hair.scale.set(1, 0.5, 1); head.add(hair);
       const collar = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.15, 4), accMat);
       collar.position.set(0, 0.62, 0.28); collar.rotation.x = PI; collar.rotation.y = PI/4; scene.add(collar);
       const tie = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.2, 4), new THREE.MeshStandardMaterial({color:0xc0392b}));
@@ -827,53 +834,53 @@ function addAvatarAccessories(scene, player, skinMat, bodyMat, accMat, darkMat, 
     }
     case 'The Therapist': case 'SafetySam': {
       const glassL = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.015, 8, 16), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.5, roughness:0.2}));
-      glassL.position.set(-0.12, 1.0, 0.32); scene.add(glassL);
+      glassL.position.set(-0.12, 0.02, 0.32); head.add(glassL);
       const glassR = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.015, 8, 16), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.5, roughness:0.2}));
-      glassR.position.set(0.12, 1.0, 0.32); scene.add(glassR);
+      glassR.position.set(0.12, 0.02, 0.32); head.add(glassR);
       const hair = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 12, 0, TAU, 0, PI*0.5), new THREE.MeshStandardMaterial({color:0x4a3520, roughness:0.5}));
-      hair.position.set(0, 1.04, 0); hair.scale.set(1, 0.6, 1); scene.add(hair);
+      hair.position.set(0, 0.06, 0); hair.scale.set(1, 0.6, 1); head.add(hair);
       const bun = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), new THREE.MeshStandardMaterial({color:0x4a3520, roughness:0.5}));
-      bun.position.set(0, 1.22, -0.15); scene.add(bun);
+      bun.position.set(0, 0.24, -0.15); head.add(bun);
       break;
     }
     case 'The Chaos Agent': case 'Twister': {
       for (let k = 0; k < 7; k++) {
         const spike = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.2 + Math.random()*0.1, 5), new THREE.MeshStandardMaterial({color:0xB85820, roughness:0.4}));
         const a = k/7 * TAU;
-        spike.position.set(cos(a)*0.25, 1.15, sin(a)*0.25);
+        spike.position.set(cos(a)*0.25, 0.17, sin(a)*0.25);
         spike.rotation.set(Math.random()*0.3-0.15, a, Math.random()*0.4-0.2);
-        scene.add(spike);
+        head.add(spike);
       }
       smile.geometry = new THREE.TorusGeometry(0.09, 0.018, 8, 16, PI*1.1);
       break;
     }
     case 'The Gut Player': case 'ConspiBro': {
       const bandana = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.06, 8, 20), new THREE.MeshStandardMaterial({color:0x7f8c8d, roughness:0.4}));
-      bandana.position.set(0, 1.08, 0); bandana.rotation.x = PI/2; bandana.scale.set(1, 1, 0.8); scene.add(bandana);
+      bandana.position.set(0, 0.1, 0); bandana.rotation.x = PI/2; bandana.scale.set(1, 1, 0.8); head.add(bandana);
       const scar = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, 0.01), new THREE.MeshStandardMaterial({color:0xaa3333}));
-      scar.position.set(-0.15, 0.95, 0.35); scar.rotation.z = 0.2; scene.add(scar);
+      scar.position.set(-0.15, -0.03, 0.35); scar.rotation.z = 0.2; head.add(scar);
       break;
     }
     case 'The Statistician': case 'Dr. Pizza': {
       const sgL = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.012, 8, 16), new THREE.MeshStandardMaterial({color:0x2980b9, metalness:0.4, roughness:0.2}));
-      sgL.position.set(-0.12, 1.0, 0.32); scene.add(sgL);
+      sgL.position.set(-0.12, 0.02, 0.32); head.add(sgL);
       const sgR = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.012, 8, 16), new THREE.MeshStandardMaterial({color:0x2980b9, metalness:0.4, roughness:0.2}));
-      sgR.position.set(0.12, 1.0, 0.32); scene.add(sgR);
+      sgR.position.set(0.12, 0.02, 0.32); head.add(sgR);
       const hair = new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12, 0, TAU, 0, PI*0.4), new THREE.MeshStandardMaterial({color:0x1a1a1a, roughness:0.3}));
-      hair.position.set(0, 1.06, 0); hair.scale.set(1, 0.35, 1.05); scene.add(hair);
+      hair.position.set(0, 0.08, 0); hair.scale.set(1, 0.35, 1.05); head.add(hair);
       break;
     }
     case 'The Underdog': case 'EasyBake': {
       const hair = new THREE.Mesh(new THREE.SphereGeometry(0.38, 16, 12, 0, TAU, 0, PI*0.55), new THREE.MeshStandardMaterial({color:0x5a3e10, roughness:0.6}));
-      hair.position.set(0, 1.02, 0); hair.scale.set(1.05, 0.65, 1.05); hair.rotation.z = 0.08; scene.add(hair);
+      hair.position.set(0, 0.04, 0); hair.scale.set(1.05, 0.65, 1.05); hair.rotation.z = 0.08; head.add(hair);
       for (let k = 0; k < 3; k++) {
         const strand = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.1 + Math.random()*0.06, 4), new THREE.MeshStandardMaterial({color:0x5a3e10, roughness:0.6}));
-        strand.position.set(-0.1 + k*0.1, 1.2 + Math.random()*0.05, 0);
+        strand.position.set(-0.1 + k*0.1, 0.22 + Math.random()*0.05, 0);
         strand.rotation.set(Math.random()*0.3-0.15, 0, Math.random()*0.3-0.15);
-        scene.add(strand);
+        head.add(strand);
       }
-      browL.position.y = 1.08; browL.rotation.z = -0.2;
-      browR.position.y = 1.08; browR.rotation.z = 0.2;
+      browL.position.y = 0.10; browL.rotation.z = -0.2;
+      browR.position.y = 0.10; browR.rotation.z = 0.2;
       break;
     }
   }
@@ -1501,9 +1508,22 @@ function highlightCharacter(index, active) {
 // ===== Dim Character (executed) — animated death =====
 function dimCharacter(index) {
   if (!chars[index]) return;
+  // Snapshot per-character (materials are shared, so per-mesh originalColor is unsafe)
+  if (!chars[index].userData._dimSnapshot) {
+    const snap = [];
+    chars[index].traverse(obj => {
+      if (obj.isMesh && obj.material) {
+        snap.push({
+          mat: obj.material,
+          color: obj.material.color.clone(),
+          emissive: obj.material.emissive ? obj.material.emissive.clone() : null,
+        });
+      }
+    });
+    chars[index].userData._dimSnapshot = snap;
+  }
   chars[index].traverse(obj => {
     if (obj.isMesh && obj.material) {
-      obj.material.originalColor = obj.material.color.clone();
       obj.material.color.lerp(new THREE.Color(0x333333), 0.7);
       if (obj.material.emissive) obj.material.emissive.setHex(0x000000);
     }
@@ -1532,12 +1552,14 @@ function undimAll() {
   deathAnims = [];
   teamAnims = [];
   chars.forEach(g => {
-    g.traverse(obj => {
-      if (obj.isMesh && obj.material && obj.material.originalColor) {
-        obj.material.color.copy(obj.material.originalColor);
-        delete obj.material.originalColor;
-      }
-    });
+    const snap = g.userData._dimSnapshot;
+    if (snap) {
+      snap.forEach(s => {
+        s.mat.color.copy(s.color);
+        if (s.emissive && s.mat.emissive) s.mat.emissive.copy(s.emissive);
+      });
+      delete g.userData._dimSnapshot;
+    }
     g.rotation.x = 0;
     g.rotation.y = g.userData._baseRotY || 0;
     g.rotation.z = 0;
@@ -1655,8 +1677,7 @@ async function loadGame(gameId) {
       }
     }
     currentPhase = 'night';
-    replayIndex = 0;
-    
+
     // Dynamically build PLAYERS from game data
     if (night && night.players) {
       PLAYERS = Object.values(night.players).map(p => {
@@ -1812,6 +1833,8 @@ function setPhase(phase) {
   // Cancel any pending night action bubble timeouts
   nightActionTimeouts.forEach(id => clearTimeout(id));
   nightActionTimeouts = [];
+  postgameTimeouts.forEach(id => clearTimeout(id));
+  postgameTimeouts = [];
   clearBubbles();
   clearVoteArrows();
   hideResultBanner();
@@ -1831,7 +1854,7 @@ function setPhase(phase) {
       setNight(true);
       showNightInfo();
       showInitialRoles();
-      showNightActionBubbles();
+      startReplay(buildNightReplaySeq(), lang === 'zh' ? '夜晚' : 'Night');
       break;
     case 'day':
       setNight(false);
@@ -1890,11 +1913,14 @@ function showNightActionArrows() {
 
 let nightActionBubblesShown = false;
 let nightActionTimeouts = [];
+let postgameTimeouts = [];
 function showNightActionBubbles() {
-  if (nightActionBubblesShown) return; // only once per phase entry
-  if (!gameData.night || !gameData.night.night_trace) return;
-  nightActionTimeouts = [];
-  
+  // Handled by startReplay('night') in setPhase; this is a no-op for backward compat
+  nightActionBubblesShown = true;
+}
+
+function buildNightReplaySeq() {
+  if (!gameData.night || !gameData.night.night_trace) return [];
   const actionLabels = lang === 'zh' ? {
     inspect_center: '查驗中央卡牌',
     inspect_player: '查驗',
@@ -1910,20 +1936,13 @@ function showNightActionBubbles() {
     peek_wolf: 'Peeked for wolves',
     none: 'No action',
   };
-  
-  const trace = gameData.night.night_trace;
-  let delay = 0;
-  
-  for (const tr of trace) {
+  const seq = [];
+  for (const tr of gameData.night.night_trace) {
     const actor = tr.actor || tr.player;
     if (!actor) continue;
-    const idx = PLAYERS.findIndex(p => p.name === actor);
-    if (idx < 0) continue;
-    
-    let actionText = actionLabels[tr.action] || tr.action;
+    let actionText = actionLabels[tr.action] || tr.action || '?';
     if (tr.target) {
       if (tr.action === 'inspect_center') {
-        // target is a card index (number)
         actionText += ' #' + tr.target;
       } else {
         const tp = PLAYERS.find(x => x.name === tr.target);
@@ -1933,7 +1952,6 @@ function showNightActionBubbles() {
     }
     if (tr.targets && Array.isArray(tr.targets)) {
       if (tr.action === 'inspect_center') {
-        // targets are card indices
         actionText += ' #' + tr.targets.join(', #');
       } else {
         const names = tr.targets.map(tName => {
@@ -1943,20 +1961,9 @@ function showNightActionBubbles() {
         actionText += ' ' + names.join(' \u2194 ');
       }
     }
-    
-    const tid = setTimeout(() => {
-      // Guard: only show if still in night phase
-      if (currentPhase !== 'night') return;
-      showBubble(idx, actionText, 99999);
-      if (chars[idx] && chars[idx].userData.highlight) {
-        chars[idx].userData.highlight.material.opacity = 0.4;
-      }
-    }, delay);
-    nightActionTimeouts.push(tid);
-    delay += 600;
+    seq.push({ speaker: actor, text: actionText });
   }
-  
-  nightActionBubblesShown = true;
+  return seq;
 }
 
 function showNightInfo() {
@@ -2031,7 +2038,7 @@ function showDayInfo() {
       const accent = getPlayerColor(s.player_name);
       const p = PLAYERS.find(x => x.name === s.player_name);
       const displayName = lang === 'zh' && p ? (p.name_zh || s.player_name) : s.player_name;
-      html += `<div class="speech-entry" style="border-left-color:${accent}">`;
+      html += `<div class="speech-entry active-replay-target" style="border-left-color:${accent}">`;
       html += `<div class="speaker" style="color:${accent}">${displayName}${s.target ? ' @' + s.target : ''}</div>`;
       html += `<div class="text">${formatGameText(s.speech || '')}</div>`;
       if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
@@ -2225,7 +2232,7 @@ function showPostgameInfo() {
       const accent = p ? getPlayerColor(p.name) : '#888';
       const displayName = p ? (lang === 'zh' ? (p.name_zh || p.name) : p.name) : i.player_name;
       const role = p ? '' : (i.role || '');
-      html += `<div class="speech-entry" style="border-left-color:${accent}">`;
+      html += `<div class="speech-entry active-replay-target" style="border-left-color:${accent}">`;
       html += `<div class="speaker" style="color:${accent}">${displayName}${role ? ' (' + role + ')' : ''}</div>`;
       html += `<div class="text">${formatGameText(i.quote || '')}</div>`;
       html += '</div>';
@@ -2235,16 +2242,14 @@ function showPostgameInfo() {
   document.getElementById('panel-content').innerHTML = html;
   openSidePanel(true);
 
-  // Show postgame bubbles (sequential to avoid overlap)
+  // Cancel any leftover postgame bubbles from previous phase visit
+  postgameTimeouts.forEach(id => clearTimeout(id));
+  postgameTimeouts = [];
+
+  // Build postgame replay sequence; actual playback handled by unified replay bar
   const all = [...(interviews.dead || []), ...(interviews.winners || []), ...(interviews.losers || [])];
-  let delay = 0;
-  all.forEach(item => {
-    const idx = PLAYERS.findIndex(p => p.name === item.player_name);
-    if (idx >= 0 && item.quote) {
-      setTimeout(() => showBubble(idx, item.quote, 4500), delay);
-      delay += 5000;  // each bubble fully finishes before next starts
-    }
-  });
+  const seq = all.filter(i => i.quote).map(i => ({ speaker: i.player_name, text: i.quote }));
+  startReplay(seq, lang === 'zh' ? '賽後' : 'Postgame');
 }
 
 function showGameInfo() {
@@ -2603,67 +2608,63 @@ function showPlayerDetail(playerId) {
   openSidePanel(true);
 }
 
-// ===== Speech Replay =====
-function startSpeechReplay(speeches) {
+// ===== Generic Replay (used by day, night, postgame) =====
+let replaySeq = [];      // [{speaker, text, panelEntrySelector?}] — entries to play
+let replayLabel = '';    // shown in bar: "Day", "Night", "Postgame"
+let replayIndex = 0;
+let replayPlaying = false;
+let replayTimer = null;
+
+function startReplay(seq, label) {
+  stopReplay();
+  replaySeq = seq || [];
+  replayLabel = label || '';
   replayIndex = 0;
-  replayPlaying = false;
+  if (replaySeq.length === 0) {
+    replayControls.classList.remove('visible');
+    return;
+  }
   replayControls.classList.add('visible');
   updateReplayProgress();
-  
-  // Show first speech automatically
-  if (speeches.length > 0) {
-    showSpeechAt(0);
-  }
+  showReplayAt(0);
 }
 
-function showSpeechAt(idx) {
+function showReplayAt(idx) {
   clearBubbles();
-  if (idx < 0 || idx >= (gameData.day?.day_trace || []).length) return;
-  const trace = gameData.day.day_trace;
-  const item = trace[idx];
-  if (item.type === 'speech') {
-    const pi = PLAYERS.findIndex(p => p.name === item.player_name);
-    if (pi >= 0) showBubble(pi, item.speech, 6000);
+  if (idx < 0 || idx >= replaySeq.length) return;
+  const entry = replaySeq[idx];
+  if (entry.speaker) {
+    const pi = PLAYERS.findIndex(p => p.name === entry.speaker);
+    if (pi >= 0) showBubble(pi, entry.text, 6000);
+  } else if (entry.text) {
+    // fallback: show on first player
+    showBubble(0, entry.text, 6000);
   }
   replayIndex = idx;
   updateReplayProgress();
-  highlightSpeechInPanel(idx);
+  highlightReplayPanelEntry(idx);
 }
 
-function highlightSpeechInPanel(traceIdx) {
+function highlightReplayPanelEntry(seqIdx) {
   const panel = document.getElementById('panel-content');
   if (!panel) return;
-  // Remove previous highlight
   panel.querySelectorAll('.speech-entry.active-replay').forEach(el => el.classList.remove('active-replay'));
-  // Find matching speech entry in panel by data-trace-idx
-  const entries = panel.querySelectorAll('.speech-entry');
-  // Count only speech-type entries to match traceIdx
-  const trace = gameData.day?.day_trace || [];
-  let speechCount = 0;
-  let targetEntry = null;
-  for (let i = 0; i <= traceIdx && i < trace.length; i++) {
-    if (trace[i].type === 'speech') {
-      if (i === traceIdx && entries[speechCount]) {
-        targetEntry = entries[speechCount];
-      }
-      speechCount++;
-    }
-  }
-  if (targetEntry) {
-    targetEntry.classList.add('active-replay');
-    targetEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const entries = panel.querySelectorAll('.speech-entry.active-replay-target');
+  const target = entries[seqIdx];
+  if (target) {
+    target.classList.add('active-replay');
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
 function updateReplayProgress() {
-  const speeches = (gameData.day?.day_trace || []).filter(t => t.type === 'speech');
   const el = document.getElementById('replay-progress');
-  if (el) el.textContent = `${replayIndex + 1} / ${speeches.length}`;
+  if (el) el.textContent = `${replayLabel ? replayLabel + ' · ' : ''}${replayIndex + 1} / ${replaySeq.length}`;
 }
 
 function playReplay() {
-  const speeches = (gameData.day?.day_trace || []).filter(t => t.type === 'speech');
-  if (replayIndex >= speeches.length - 1) replayIndex = -1;
+  if (replaySeq.length === 0) return;
+  if (replayIndex >= replaySeq.length - 1) replayIndex = -1;
   replayPlaying = true;
   document.getElementById('btn-play').textContent = '⏸';
   nextReplayStep();
@@ -2671,22 +2672,24 @@ function playReplay() {
 
 function nextReplayStep() {
   if (!replayPlaying) return;
-  const trace = gameData.day?.day_trace || [];
-  // Find next speech
-  for (let i = replayIndex + 1; i < trace.length; i++) {
-    if (trace[i].type === 'speech') {
-      showSpeechAt(i);
-      replayTimer = setTimeout(nextReplayStep, 5000);
-      return;
-    }
-  }
-  stopReplay();
+  if (replayIndex + 1 >= replaySeq.length) { stopReplay(); return; }
+  showReplayAt(replayIndex + 1);
+  replayTimer = setTimeout(nextReplayStep, 5000);
 }
 
 function stopReplay() {
   replayPlaying = false;
-  document.getElementById('btn-play').textContent = '▶';
-  if (replayTimer) clearTimeout(replayTimer);
+  const btn = document.getElementById('btn-play');
+  if (btn) btn.textContent = '▶';
+  if (replayTimer) { clearTimeout(replayTimer); replayTimer = null; }
+}
+
+// Legacy wrapper for day panel — now just builds a speech-only sequence
+function startSpeechReplay(speeches) {
+  const seq = (gameData.day?.day_trace || [])
+    .filter(tr => tr.type === 'speech')
+    .map(tr => ({ speaker: tr.player_name, text: tr.speech }));
+  startReplay(seq, lang === 'zh' ? '日間' : 'Day');
 }
 
 // ===== UI Setup =====
@@ -2792,10 +2795,7 @@ function setupUI() {
   // Replay controls
   document.getElementById('btn-prev').addEventListener('click', () => {
     stopReplay();
-    const trace = gameData.day?.day_trace || [];
-    for (let i = replayIndex - 1; i >= 0; i--) {
-      if (trace[i].type === 'speech') { showSpeechAt(i); break; }
-    }
+    if (replayIndex > 0) showReplayAt(replayIndex - 1);
   });
   document.getElementById('btn-play').addEventListener('click', () => {
     if (replayPlaying) stopReplay();
@@ -2803,10 +2803,7 @@ function setupUI() {
   });
   document.getElementById('btn-next').addEventListener('click', () => {
     stopReplay();
-    const trace = gameData.day?.day_trace || [];
-    for (let i = replayIndex + 1; i < trace.length; i++) {
-      if (trace[i].type === 'speech') { showSpeechAt(i); break; }
-    }
+    if (replayIndex < replaySeq.length - 1) showReplayAt(replayIndex + 1);
   });
 }
 
@@ -2915,12 +2912,11 @@ function updateSpeakingAnims(t) {
     const g = chars[s.index];
     // Ramp up intensity
     s.intensity = Math.min(s.intensity + 0.05, 1);
-    // Head bob — small rapid movement
+    // Head bob — small rapid movement (animate head group so face features follow)
     const bob = Math.sin(t * 8) * 0.04 * s.intensity;
     const sway = Math.sin(t * 3) * 0.06 * s.intensity;
-    // Find head mesh (second-highest child by y)
     g.children.forEach(child => {
-      if (child.position.y > 0.9 && child.position.y < 1.2 && child.geometry instanceof THREE.SphereGeometry) {
+      if (child.position.y > 0.9 && child.position.y < 1.2 && child.isGroup) {
         child.position.y = (child.userData._baseY || child.position.y) + bob;
         if (!child.userData._baseY) child.userData._baseY = child.position.y - bob;
         child.rotation.z = sway * 0.3;
