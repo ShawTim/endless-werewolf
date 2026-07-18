@@ -1,5 +1,9 @@
 /* ===== Endless Werewolf — 3D Village Table ===== */
-import * as THREE from './three.min.mjs';
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 
@@ -73,6 +77,7 @@ let currentPhase = 'night';
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
+let composer, renderPass, bloomPass;
 let chars = [];
 let isNight = false;
 let autoRotate = true;
@@ -132,6 +137,19 @@ function initThree() {
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  // Post-processing composer
+  composer = new EffectComposer(renderer);
+  composer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  composer.setSize(innerWidth, innerHeight);
+  renderPass = new RenderPass(null, null); // scene/camera set right after creation
+  composer.addPass(renderPass);
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.4, 0.6, 0.85);
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x1a1520);
@@ -156,6 +174,7 @@ function initThree() {
 
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
+  if (renderPass) { renderPass.scene = scene; renderPass.camera = camera; }
 
   amb = new THREE.AmbientLight(0xffffff, 0.45);
   scene.add(amb);
@@ -3058,12 +3077,14 @@ function animate() {
   updateSpeakingAnims(t);
   updateConfetti(tMs);
 
-  renderer.render(scene, camera);
+  if (composer) composer.render();
+  else renderer.render(scene, camera);
 }
 
 // ===== Resize =====
 window.addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight);
+  if (composer) composer.setSize(innerWidth, innerHeight);
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   applyPanelOffset();
