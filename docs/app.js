@@ -178,7 +178,12 @@ async function init() {
 
   // Apply day preset lighting immediately so first paint is bright (default = day)
   const dayPreset = NIGHT_PRESETS.day;
-  scene.background.setHex(dayPreset.bg);
+  // setHex uses linear (sRGB=0) — but we want the displayed color to look like the hex value,
+  // so we set RGB directly from the 0-255 components (matches the setRGB path in updateNightTransition)
+  const dayR = ((dayPreset.bg >> 16) & 0xff) / 255;
+  const dayG = ((dayPreset.bg >> 8) & 0xff) / 255;
+  const dayB = (dayPreset.bg & 0xff) / 255;
+  scene.background = new THREE.Color(dayR, dayG, dayB);
   amb.intensity = dayPreset.amb;
   dir.intensity = dayPreset.dir;
   dir.color.setHex(dayPreset.dirColor);
@@ -258,6 +263,9 @@ function initThree() {
   const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0xffffff, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyDome);
+  // Default to day (clear blue background, no night-sky dome visible) — setNight() toggles this
+  skyDome.visible = false;
+  window.__skyDome = skyDome;
 
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
@@ -1315,7 +1323,7 @@ function updateKeyboardPan() {
 // ===== Night Mode (with smooth transition) =====
 let nightTransition = null; // {fromVals, toVals, startTime, duration}
 const NIGHT_PRESETS = {
-  day: { bg:0xa8c0d8, amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
+  day: { bg:0x9ec5e8, amb:0.45, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
   night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
 };
 
@@ -1342,6 +1350,8 @@ function setNight(n) {
   scene.traverse(obj => {
     if (obj.name === 'candleMesh' || obj.name === 'candleFlame') obj.visible = n;
   });
+  // Day mode hides the night-sky dome (use scene.background solid color instead)
+  if (window.__skyDome) window.__skyDome.visible = n;
 }
 
 function updateNightTransition() {
