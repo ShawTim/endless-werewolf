@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import subprocess
 import time
 import urllib.error
 import urllib.parse
@@ -50,9 +51,12 @@ def published_paths() -> list[Path]:
         DOCS_ROOT / "app.js",
         DOCS_ROOT / "data" / "index.json",
     ]
-    paths.extend(
-        sorted(path for path in (DOCS_ROOT / "data" / "games").rglob("*") if path.is_file())
-    )
+    tracked = subprocess.check_output(
+        ["git", "ls-files", "--", "docs/data/games"],
+        cwd=ROOT,
+        text=True,
+    ).splitlines()
+    paths.extend(ROOT / relative for relative in tracked)
     return paths
 
 
