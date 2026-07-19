@@ -5,7 +5,7 @@ cd /home/openclaw/.openclaw/workspaces/ai-werewolf
 
 # 1) Night phase: new game + AI decisions + finalize
 python3 - <<'PY'
-import json, subprocess, uuid
+import json, re, subprocess, time, uuid
 from pathlib import Path
 import gm_night
 import bridge_agent
@@ -20,6 +20,7 @@ def call_bridge_for_night(step: dict) -> dict:
     model = dr.get("model", "")
     thinking = dr.get("thinking", "off")
     prompt = bridge_agent.build_night_action_prompt(dr)
+    started = time.perf_counter()
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
          "--message", prompt, "--json",
@@ -37,13 +38,21 @@ def call_bridge_for_night(step: dict) -> dict:
         raise RuntimeError(f"No payloads for {dr['player_name']}: {proc.stdout[:200]}")
     text = (result[0].get("text") or "").strip()
     try:
-        return json.loads(text)
+        decision = json.loads(text)
     except json.JSONDecodeError:
         start = text.find("{")
         end = text.rfind("}")
         if start != -1 and end > start:
-            return json.loads(text[start:end+1])
-        raise RuntimeError(f"No valid JSON for {dr['player_name']}: {text[:200]}")
+            decision = json.loads(text[start:end+1])
+        else:
+            raise RuntimeError(f"No valid JSON for {dr['player_name']}: {text[:200]}")
+    decision["_meta"] = {
+        "model": model, "thinking": thinking,
+        "latency_ms": round((time.perf_counter() - started) * 1000),
+    }
+    if re.search(r"[\u3400-\u9fff]", decision.get("thought", "")):
+        raise RuntimeError(f"Non-English night reasoning from {dr['player_name']}")
+    return decision
 
 decisions = {}
 for step in plan:
@@ -52,6 +61,8 @@ for step in plan:
         result = call_bridge_for_night(step)
         action = result.get("action", "")
         decision = {"action": action}
+        decision["thought"] = result.get("thought", "")
+        decision["_meta"] = result.get("_meta", {})
         if result.get("targets"):
             decision["targets"] = result["targets"]
         elif result.get("target") is not None:
@@ -93,7 +104,15 @@ cat /tmp/werewolf_verify.log
 python3 scripts/build_pages.py >/tmp/werewolf_build_pages.log 2>&1
 echo "Pages data rebuilt."
 
-# 5) Public safety check + publish
+# 5) Block publication on language contamination or EN/ZH structural drift
+if ! python3 scripts/audit_all_games.py >/tmp/werewolf_archive_audit.log 2>&1; then
+  echo "ARCHIVE AUDIT FAILED — mixed-language or structurally corrupt data, skipping publish."
+  cat /tmp/werewolf_archive_audit.log
+  exit 1
+fi
+echo "Archive language/structure audit passed."
+
+# 6) Public safety check + publish
 bash scripts/check_public_repo.sh >/tmp/werewolf_public_check.log 2>&1
 bash scripts/publish_pages.sh
 echo "Published new game round."

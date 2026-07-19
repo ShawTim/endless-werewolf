@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -88,7 +89,18 @@ def _get_quote(player_context: dict[str, Any], game_summary: dict[str, Any], mod
     try:
         prompt = bridge_agent.build_postgame_prompt(player_context, game_summary)
         result = _call_bridge(prompt, model=model, thinking=thinking)
-        return (result.get("quote") or result.get("_raw") or "").strip()
+        quote = (result.get("quote") or result.get("_raw") or "").strip()
+        if re.search(r"[\u3400-\u9fff]", quote):
+            result = _call_bridge(
+                prompt + "\n\nCRITICAL CORRECTION: Your previous quote used Chinese. "
+                "Return the JSON again with the quote written entirely in English.",
+                model=model,
+                thinking=thinking,
+            )
+            quote = (result.get("quote") or result.get("_raw") or "").strip()
+        if re.search(r"[\u3400-\u9fff]", quote):
+            raise RuntimeError("bridge returned non-English postgame quote after retry")
+        return quote
     except Exception as e:
         print(f"[postgame] bridge call failed for {player_context.get('player_name')}: {e}", flush=True)
         return ""

@@ -422,6 +422,27 @@ def resolve_night_phase_with_decisions(game, decisions_by_name):
     for iid in role_holders(game, ROLE_INSOMNIAC):
         resolve_insomniac(game, iid)
 
+    # Attach decision provenance for observability without changing the game
+    # rules. Older decision bundles remain valid because every field is optional.
+    players_by_name = {p["name"]: p for p in players.values()}
+    for trace in game["night_trace"]:
+        actor = trace.get("actor")
+        decision = decisions_by_name.get(actor, {})
+        player = players_by_name.get(actor, {})
+        meta = decision.get("_meta", {}) if isinstance(decision, dict) else {}
+        trace["model"] = meta.get("model") or player.get("model", "")
+        trace["thinking"] = meta.get("thinking") or player.get("thinking", "off")
+        trace["thought"] = decision.get("thought", "") if isinstance(decision, dict) else ""
+        trace["latency_ms"] = meta.get("latency_ms")
+        for action in player.get("night_actions", []):
+            if action.get("action") == trace.get("action"):
+                action.update({
+                    "model": trace["model"],
+                    "thinking": trace["thinking"],
+                    "thought": trace["thought"],
+                    "latency_ms": trace["latency_ms"],
+                })
+
     result = serialize_for_output(game)
     save_json(OUTPUT_PATH, result)
     persist_player_private_states(result)

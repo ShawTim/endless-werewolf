@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "My model overfit on 攪局者's narrative and missed the structural break in 嚴審官's timeline. The likelihood function needs a regime-switching component for adversarial role-swapping — data doesn't lie, but my priors did."
+        "quote": "My model overfit on The Chaos Agent's narrative and missed the structural break in The Prosecutor's timeline. The likelihood function needs a regime-switching component for adversarial role-swapping — data doesn't lie, but my priors did."
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": ""
+        "quote": "The court reached exactly the verdict I demanded. The village mistook my confidence for evidence, convicted The Statistician, and never noticed the wolves directing the prosecution. Case closed."
       },
       {
         "player_name": "The Gut Player",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "See? I told you — my gut doesn't need charts and graphs. 統計學家 can run all the numbers they want, but when the vibes are off, the vibes are off. Another win, another round of me being right without even trying."
+        "quote": "See? I told you — my gut doesn't need charts and graphs. The Statistician can run all the numbers they want, but when the vibes are off, the vibes are off. Another win, another round of me being right without even trying."
       }
     ],
     "losers": [
@@ -50,7 +50,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "They chose certainty over curiosity, and 統計學家 paid the price for that comfort. I had hoped my quiet questions would turn the gaze toward me, but they looked right past instead."
+        "quote": "They chose certainty over curiosity, and The Statistician paid the price for that comfort. I had hoped my quiet questions would turn the gaze toward me, but they looked right past instead."
       },
       {
         "player_name": "The Chaos Agent",
@@ -61,7 +61,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I scattered my lies like breadcrumbs, and they followed them straight past me to 統計學家 instead. That's the beautiful thing about good theater — the best tricks make the audience feel clever for missing the point."
+        "quote": "I scattered my lies like breadcrumbs, and they followed them straight past me to The Statistician instead. That's the beautiful thing about good theater — the best tricks make the audience feel clever for missing the point."
       },
       {
         "player_name": "The Underdog",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "Um... I keep replaying the swap in my head, and I'm starting to think I might have made everything worse. 統計學家 didn't deserve to go out like that, and if my cards helped the werewolves win... I'm so sorry, I really just wanted to help."
+        "quote": "Um... I keep replaying the swap in my head, and I'm starting to think I might have made everything worse. The Statistician didn't deserve to go out like that, and if my cards helped the werewolves win... I'm so sorry, I really just wanted to help."
       }
     ]
   }

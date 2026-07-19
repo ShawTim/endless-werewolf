@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "I lost the case, I lost the vote, and now I'm sitting here like a disbarred man watching the real criminals walk free. [直覺俠]'s 'instincts' put me in the ground — congratulations, your gut just helped the wolves win. I hope you're proud of that verdict."
+        "quote": "我輸掉了官司，輸掉了選票，現在我像個被取消律師資格的人一樣坐在這裡，看著真正的罪犯逍遙法外。 [直覺俠] 的「本能」讓我陷入困境——恭喜，你的直覺幫助狼隊獲勝。我希望你為這個判決感到自豪。"
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Ha! Told you my gut's never wrong — I said the Prosecutor felt off and look who got dragged out! Maybe next time you'll listen to the guy with instincts instead of your little courtroom speeches, yeah?"
+        "quote": "哈!告訴過你我的直覺從來沒有錯－我說檢察官心情不好，看看誰被拖了出來！也許下次你會聽那個憑直覺說話的人，而不是你的法庭演講，對嗎？"
       },
       {
         "player_name": "The Statistician",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Textbook Bayesian exploitation — the village discarded their only verified likelihood ([嚴審官]'s <強盜> claim) for a prior of zero, while [攪局者]'s unfalsifiable <預言家> claim absorbed all suspicion. The data never lied; the villagers just refused to update."
+        "quote": "教科書式的貝葉斯利用——村莊放棄了他們唯一經過驗證的可能性（[嚴審官] 的 <強盜> 聲明），先驗為零，而 [攪局者] 的不可證偽的 <預言家> 聲明消除了所有懷疑。數據永遠不會說謊；村民只是拒絕更新。"
       }
     ],
     "losers": [
@@ -50,7 +50,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "[嚴審官] needed an audience, and I gave them one. I was so busy listening to their elaborate defense that I forgot to ask the quiet ones what they weren't saying."
+        "quote": "[嚴審官] 需要觀眾，我給了他們一個。我太忙於聽他們精心準備的辯護，以至於我忘了問那些安靜的人他們沒有說什麼。"
       },
       {
         "player_name": "The Chaos Agent",
@@ -61,7 +61,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "Good game — I flung a <預言家> claim at the wall as a <皮匠> just to see what stuck, and somehow [嚴審官] ate my bait and got lynched for it. Technically I lost, but watching the whole room chase a ghost I made up? That's the only win I was playing for."
+        "quote": "好遊戲——我把 <預言家> 聲明當作 <皮匠> 扔到牆上，只是為了看看卡住了什麼，不知怎的，[嚴審官] 吃了我的誘餌，並因此被私刑處死。嚴格來說我輸了，但看著整個房間都在追我編造的鬼魂？這是我為之奮鬥的唯一一場勝利。"
       },
       {
         "player_name": "The Underdog",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I'm so sorry, [嚴審官]... I think you were actually telling the truth about being the <強盜>, but I froze up because I was terrified of being wrong. Now [直覺俠] and [攪局者] probably won as werewolves, and I can't stop wondering if one honest sentence from me could have changed everything."
+        "quote": "非常抱歉，[嚴審官]...我認為你說的關於 <強盜> 的事情實際上是實話，但我愣住了，因為我害怕出錯。現在[直覺俠]和[攪局者]可能以狼人身份獲勝，我不停地想知道我的一句誠實的話是否可以改變一切。"
       }
     ]
   }

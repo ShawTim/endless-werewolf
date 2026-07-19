@@ -33,42 +33,42 @@
       "player_name": "The Prosecutor",
       "target": null,
       "speech": "法庭現在開庭。我經歷過夠多場遊戲，知道這是怎麼運作的。我現在正式通知所有人：我將交叉詰問每一項聲明、每一次停頓、每一個迴避。在這個房間裡，沒有人能在我不仔細審視每個字的情況下發言。所以我們簡單開始——這裡誰有夜間行動，你做了什麼？不要給我演講。不要給我感覺。給我事實。如果你試圖迴避我的問題，陪審團——也就是我們其他人——會注意到的。誰要先站上證人席？",
-      "log_line": "[2026-06-30 14:43:56 HKT] The Prosecutor: Court is in session. I've been through enough of these games to know how this works. I'm putting everyone on notice right now: I will be cross-examining every claim, every pause, every deflection. Nobody speaks in this room without me scrutinizing every word. So let's start simple — who here has a night action, and what did you do? Don't give me speeches. Don't give me vibes. Give me facts. And if you try to dodge my questions, the jury — meaning the rest of us — will notice. Who's first on the stand?"
+      "log_line": "嚴審官: 法庭現在開庭。我經歷過夠多場遊戲，知道這是怎麼運作的。我現在正式通知所有人：我將交叉詰問每一項聲明、每一次停頓、每一個迴避。在這個房間裡，沒有人能在我不仔細審視每個字的情況下發言。所以我們簡單開始——這裡誰有夜間行動，你做了什麼？不要給我演講。不要給我感覺。給我事實。如果你試圖迴避我的問題，陪審團——也就是我們其他人——會注意到的。誰要先站上證人席？"
     },
     {
       "type": "speech",
       "player_name": "The Underdog",
       "target": null,
       "speech": "呃，嗨。抱歉，我知道我應該等別人先發言，但是……我不想讓自己看起來像是在隱藏什麼。我昨晚是<村民>，所以我什麼也沒做。我知道這不是很令人興奮，很抱歉我沒有更多有用的資訊。我只是……我想幫忙釐清狀況，大概吧？",
-      "log_line": "[2026-06-30 14:44:11 HKT] The Underdog: Um, hi. Sorry, I know I should probably wait for others to go first, but... I don't want to seem like I'm hiding. I was a Villager last night, so I didn't do anything. I know that's not very exciting, and I'm sorry I don't have more useful information. I just... I want to help figure this out, I guess?"
+      "log_line": "小人物: 呃，嗨。抱歉，我知道我應該等別人先發言，但是……我不想讓自己看起來像是在隱藏什麼。我昨晚是<村民>，所以我什麼也沒做。我知道這不是很令人興奮，很抱歉我沒有更多有用的資訊。我只是……我想幫忙釐清狀況，大概吧？"
     },
     {
       "type": "speech",
       "player_name": "The Gut Player",
       "target": null,
       "speech": "好了，我們開始吧。我是村民——沒有夜間行動，沒有情報，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以誰有話要說？別逼我一個一個把你們嗅出來。",
-      "log_line": "[2026-06-30 14:44:17 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one."
+      "log_line": "直覺俠: 好了，我們開始吧。我是村民——沒有夜間行動，沒有情報，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以誰有話要說？別逼我一個一個把你們嗅出來。"
     },
     {
       "type": "speech",
       "player_name": "The Statistician",
       "target": null,
       "speech": "好的。在我們開始猜測之前，先建立數據。所有有夜間行動的人——說出你的角色、你的目標，以及你確切得知的內容。不要說「我認為」或「感覺像是」。只要事實。我會即時更新我的後驗機率，而且我不想把運算週期浪費在感覺上。誰要先來？",
-      "log_line": "[2026-06-30 14:45:01 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?"
+      "log_line": "統計學家: 好的。在我們開始猜測之前，先建立數據。所有有夜間行動的人——說出你的角色、你的目標，以及你確切得知的內容。不要說「我認為」或「感覺像是」。只要事實。我會即時更新我的後驗機率，而且我不想把運算週期浪費在感覺上。誰要先來？"
     },
     {
       "type": "speech",
       "player_name": "The Therapist",
       "target": null,
       "speech": "現在這麼安靜真是有趣……好像每個人都非常謹慎地選擇用詞。有人願意分享昨晚看到了什麼嗎？即使是一個小細節，也能幫助我們一起釐清狀況。",
-      "log_line": "[2026-06-30 14:45:14 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together."
+      "log_line": "心理諮商師: 現在這麼安靜真是有趣……好像每個人都非常謹慎地選擇用詞。有人願意分享昨晚看到了什麼嗎？即使是一個小細節，也能幫助我們一起釐清狀況。"
     },
     {
       "type": "speech",
       "player_name": "The Chaos Agent",
       "target": null,
       "speech": "哎呀呀。讓我分享一些……出乎意料的事。其中一張中央牌比在座任何人想像的都危險得多。我給你們一個提示：狼人就藏在顯而易見的地方，而且他們不是你們以為的人。但轉折來了——我可能在說謊。我也可能在說實話。這遊戲最美妙的地方在於，你永遠不會真正知道真相，直到為時已晚。所以，誰準備好跳下去了？",
-      "log_line": "[2026-06-30 14:45:33 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?"
+      "log_line": "攪局者: 哎呀呀。讓我分享一些……出乎意料的事。其中一張中央牌比在座任何人想像的都危險得多。我給你們一個提示：狼人就藏在顯而易見的地方，而且他們不是你們以為的人。但轉折來了——我可能在說謊。我也可能在說實話。這遊戲最美妙的地方在於，你永遠不會真正知道真相，直到為時已晚。所以，誰準備好跳下去了？"
     },
     {
       "type": "pass",
@@ -86,6 +86,6 @@
       "mentioned_recently": true
     }
   ],
-  "chat_history": "[2026-06-30 14:43:56 HKT] The Prosecutor: Court is in session. I've been through enough of these games to know how this works. I'm putting everyone on notice right now: I will be cross-examining every claim, every pause, every deflection. Nobody speaks in this room without me scrutinizing every word. So let's start simple — who here has a night action, and what did you do? Don't give me speeches. Don't give me vibes. Give me facts. And if you try to dodge my questions, the jury — meaning the rest of us — will notice. Who's first on the stand?\n[2026-06-30 14:44:11 HKT] The Underdog: Um, hi. Sorry, I know I should probably wait for others to go first, but... I don't want to seem like I'm hiding. I was a Villager last night, so I didn't do anything. I know that's not very exciting, and I'm sorry I don't have more useful information. I just... I want to help figure this out, I guess?\n[2026-06-30 14:44:17 HKT] The Gut Player: Alright, let's get this going. I'm a villager — no night action, no info, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say? Don't make me start sniffing people out one by one.\n[2026-06-30 14:45:01 HKT] The Statistician: Right. Let's establish the data before we start speculating. Everyone with a night action — state your role, your target, and exactly what you learned. No 'I think' or 'it felt like.' Just the facts. I'll be updating my posterior probabilities in real time, and I'd rather not waste cycles on feelings. Who's first?\n[2026-06-30 14:45:14 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.\n[2026-06-30 14:45:33 HKT] The Chaos Agent: Well, well. Let me share something... unexpected. One of the center cards is far more dangerous than anyone here realizes. I'll give you a hint: the wolves are hiding in plain sight, and they're not who you'd expect. But here's the twist — I could be lying. I could be telling the truth. The beautiful thing about this game is that you'll never really know until it's too late. So who's ready to take the plunge?\n",
+  "chat_history": "嚴審官: 法庭現在開庭。我經歷過夠多場遊戲，知道這是怎麼運作的。我現在正式通知所有人：我將交叉詰問每一項聲明、每一次停頓、每一個迴避。在這個房間裡，沒有人能在我不仔細審視每個字的情況下發言。所以我們簡單開始——這裡誰有夜間行動，你做了什麼？不要給我演講。不要給我感覺。給我事實。如果你試圖迴避我的問題，陪審團——也就是我們其他人——會注意到的。誰要先站上證人席？\n小人物: 呃，嗨。抱歉，我知道我應該等別人先發言，但是……我不想讓自己看起來像是在隱藏什麼。我昨晚是<村民>，所以我什麼也沒做。我知道這不是很令人興奮，很抱歉我沒有更多有用的資訊。我只是……我想幫忙釐清狀況，大概吧？\n直覺俠: 好了，我們開始吧。我是村民——沒有夜間行動，沒有情報，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以誰有話要說？別逼我一個一個把你們嗅出來。\n統計學家: 好的。在我們開始猜測之前，先建立數據。所有有夜間行動的人——說出你的角色、你的目標，以及你確切得知的內容。不要說「我認為」或「感覺像是」。只要事實。我會即時更新我的後驗機率，而且我不想把運算週期浪費在感覺上。誰要先來？\n心理諮商師: 現在這麼安靜真是有趣……好像每個人都非常謹慎地選擇用詞。有人願意分享昨晚看到了什麼嗎？即使是一個小細節，也能幫助我們一起釐清狀況。\n攪局者: 哎呀呀。讓我分享一些……出乎意料的事。其中一張中央牌比在座任何人想像的都危險得多。我給你們一個提示：狼人就藏在顯而易見的地方，而且他們不是你們以為的人。但轉折來了——我可能在說謊。我也可能在說實話。這遊戲最美妙的地方在於，你永遠不會真正知道真相，直到為時已晚。所以，誰準備好跳下去了？\n",
   "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
 }

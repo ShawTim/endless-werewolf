@@ -27,6 +27,7 @@ const I18N = {
     werewolfWin: 'Werewolf Wins!', villageWin: 'Village Wins!',
     tannerWin: 'Tanner Wins!', noTeamWin: 'No One Wins',
     chineseName: 'Chinese name', thinking: 'Thinking', persona: 'Persona', gameData: 'Game Data',
+    story: 'Story', proof: 'Proof', agentState: 'Agent State', decisionTrace: 'Decision Trace',
   },
   zh: {
     brand: '無限狼人殺', sub: 'AI 一夜',
@@ -45,6 +46,7 @@ const I18N = {
     werewolfWin: '狼人勝利！', villageWin: '村民勝利！',
     tannerWin: '皮匠勝利！', noTeamWin: '無人勝利',
     chineseName: '中文名', thinking: '思考深度', persona: '人設', gameData: '遊戲數據',
+    story: '故事', proof: '證據', agentState: '代理狀態', decisionTrace: '決策軌跡',
   }
 };
 let lang = (navigator.language || 'en').startsWith('zh') ? 'zh' : 'en';
@@ -82,6 +84,7 @@ let currentGame = null;
 let gameData = {};
 let currentPhase = 'night';
 let archiveGames = [];
+let gameLoadVersion = 0;
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
@@ -1315,7 +1318,7 @@ function setupCameraControls() {
           const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
           hoverCard.innerHTML = `
             <div class="avatar-img" style="width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid ${hex};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
-            <div class="name" style="color:${hex}">${displayName}${lang === 'zh' ? ' <span style=\"font-size:11px;color:#888;\">' + p.name + '</span>' : ' <span style=\"font-size:11px;color:#888;\">' + (p.name_zh||'') + '</span>'}</div>
+            <div class="name" style="color:${hex}">${displayName}</div>
             <div class="desc">${p.persona}</div>
             <div class="trait" style="margin-top:6px;font-size:10px;color:#666;">${(p.model || '').split('/').pop()}</div>
           `;
@@ -1486,8 +1489,7 @@ function buildNameTags() {
     d.style.border = '1px solid ' + hex + '44';
     d.style.color = hex;
     const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-    const sub = lang === 'zh' ? p.name : (p.name_zh || '');
-    d.innerHTML = main + '<div class="zh">' + sub + '</div><div class="role-sub"></div>';
+    d.innerHTML = main + '<div class="role-sub"></div>';
     tagsContainer.appendChild(d);
     tagEls.push(d);
   });
@@ -1584,13 +1586,12 @@ function showBubble(playerIndex, text, duration = 4000) {
   if (!p) return;
   const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
   const el = document.createElement('div');
   el.className = 'bubble';
   el.style.borderColor = hex;
   el.innerHTML = `
-    <div class="speaker" style="color:${hex}">${displayName}${subName ? '<span style=\"font-size:10px;color:#888;margin-left:4px;\"\u003e' + subName + '</span\u003e' : ''}</div>
+    <div class="speaker" style="color:${hex}">${displayName}</div>
     <div class="text">${formatGameText(text)}</div>
     <div class="arrow" style="border-top-color:${hex}"></div>
   `;
@@ -1895,44 +1896,59 @@ async function loadGameIndex() {
 }
 
 async function loadGame(gameId) {
+  const requestVersion = ++gameLoadVersion;
+  const requestedLang = lang;
   const base = `./data/games/${gameId}/`;
-  const suffix = lang === 'zh' ? '_zh' : '';
-  const fallback = '';
+  const suffix = requestedLang === 'zh' ? '_zh' : '';
   
   async function fetchJSON(name) {
-    // Try localized version first, fall back to original
-    if (suffix) {
-      try {
-        const r = await fetch(base + name + suffix + '.json');
-        if (r.ok) return await r.json();
-      } catch(e) {}
+    // Language selection is strict. Never leak English records into the
+    // Chinese UI (or vice versa) through a silent localization fallback.
+    const filename = name + suffix + '.json';
+    const response = await fetch(base + filename);
+    if (!response.ok) {
+      throw new Error(`Missing ${requestedLang.toUpperCase()} game record: ${filename}`);
     }
-    const r2 = await fetch(base + name + fallback + '.json');
-    return r2.ok ? await r2.json() : null;
+    return await response.json();
+  }
+
+  async function fetchRawJSON(name) {
+    try {
+      const r = await fetch(base + name + '.json');
+      return r.ok ? await r.json() : null;
+    } catch(e) {
+      return null;
+    }
   }
   
   try {
-    const [night, day, vote, resolve, postgame] = await Promise.all([
+    const [night, day, vote, resolve, postgame, manifest] = await Promise.all([
       fetchJSON('night_result'),
       fetchJSON('day_result'),
       fetchJSON('vote_result'),
       fetchJSON('resolve_result'),
       fetchJSON('postgame_result'),
+      fetchRawJSON('manifest'),
     ]);
     
-    let chatHistory = '';
-    try {
-      if (suffix) {
-        try {
-          chatHistory = await (await fetch(base + 'chat_history' + suffix + '.md')).text();
-        } catch(e) { chatHistory = await (await fetch(base + 'chat_history.md')).text(); }
-      } else {
-        chatHistory = await (await fetch(base + 'chat_history.md')).text();
-      }
-    } catch(e) {}
+    // The canonical discussion transcript is embedded in day_result. Older
+    // published archives do not include a separate English markdown file.
+    let chatHistory = day?.chat_history || '';
+    if (!chatHistory) {
+      try {
+        const chatName = suffix ? `chat_history${suffix}.md` : 'chat_history.md';
+        const response = await fetch(base + chatName);
+        if (response.ok) chatHistory = await response.text();
+      } catch(e) {}
+    }
+
+    // Discard stale results if another game/language load started while these
+    // files were in flight. This prevents a slow Chinese response from
+    // overwriting an English UI (or vice versa).
+    if (requestVersion !== gameLoadVersion || requestedLang !== lang) return false;
 
     currentGame = gameId;
-    gameData = { night, day, vote, resolve, postgame, chatHistory };
+    gameData = { night, day, vote, resolve, postgame, manifest, chatHistory };
     
     // Normalize ZH data: map Chinese player names back to English canonical names
     // so all lookups (PLAYERS.find, votes, speeches) work consistently
@@ -1986,6 +2002,8 @@ async function loadGame(gameId) {
         }
       }
     }
+    gameData.structuredTrace = buildStructuredTrace();
+    gameData.autonomy = buildAutonomyMetadata();
     currentPhase = 'night';
 
     // Dynamically build PLAYERS from game data
@@ -2022,8 +2040,11 @@ async function loadGame(gameId) {
     document.querySelectorAll('#archive-list .game-item').forEach(el => {
       el.classList.toggle('active', el.dataset.gameId === gameId);
     });
+    return true;
   } catch(e) {
+    if (requestVersion !== gameLoadVersion) return false;
     console.error('Failed to load game', gameId, e);
+    return false;
   }
 }
 
@@ -2067,6 +2088,104 @@ function buildArchiveList(games) {
     });
     list.appendChild(el);
   });
+}
+
+// ===== Structured Agent Trace =====
+function playerDataByName(name) {
+  return Object.values(gameData.night?.players || {}).find(p => p.name === name) || null;
+}
+
+function traceMetaFor(name, payload = {}) {
+  const player = playerDataByName(name);
+  return {
+    model: payload.model || player?.model || '',
+    thinking: payload.thinking || player?.thinking || 'off',
+    reasoning: payload.reasoning_summary || payload.thought || '',
+    latencyMs: payload.latency_ms ?? payload.latencyMs ?? null,
+    source: payload.source || 'agent',
+    fallback: Boolean(payload.fallback || payload.error),
+    error: payload.error || '',
+  };
+}
+
+function buildStructuredTrace() {
+  const events = [];
+  let sequence = 0;
+  const add = (event) => events.push({ id: `event-${++sequence}`, ...event });
+  const localizedFile = name => lang === 'zh' ? name.replace('.json', '_zh.json') : name;
+
+  for (const [index, action] of (gameData.night?.night_trace || []).entries()) {
+    add({
+      phase: 'night', type: 'action', actor: action.actor || '',
+      action: action.action || '', target: action.target, targets: action.targets,
+      role: action.role || '', sourceFile: localizedFile('night_result.json'),
+      sourcePath: `night_trace[${index}]`, ...traceMetaFor(action.actor, action),
+    });
+  }
+
+  for (const [index, event] of (gameData.day?.day_trace || []).entries()) {
+    add({
+      phase: 'day', type: event.type || 'event', actor: event.player_name || '',
+      target: event.target, text: event.speech || '', timestamp: event.timestamp || '',
+      sourceFile: localizedFile('day_result.json'), sourcePath: `day_trace[${index}]`,
+      ...traceMetaFor(event.player_name, event),
+    });
+  }
+
+  const voteTrace = new Map((gameData.vote?.vote_trace || []).map(v => [v.player, v]));
+  for (const [actor, target] of Object.entries(gameData.vote?.votes || {})) {
+    const detail = voteTrace.get(actor) || {};
+    const voteIndex = (gameData.vote?.vote_trace || []).findIndex(v => v.player === actor);
+    add({
+      phase: 'vote', type: 'vote', actor, target,
+      sourceFile: localizedFile('vote_result.json'),
+      sourcePath: voteIndex >= 0 ? `vote_trace[${voteIndex}]` : `votes.${actor}`,
+      ...traceMetaFor(actor, detail),
+    });
+  }
+
+  if (gameData.resolve) {
+    add({
+      phase: 'resolve', type: 'outcome', actor: '',
+      text: gameData.resolve.reason || '', outcome: gameData.resolve.outcome,
+      executed: gameData.resolve.executed || [], winners: gameData.resolve.winners || [],
+      sourceFile: localizedFile('resolve_result.json'), sourcePath: 'resolution',
+      source: 'game-engine', fallback: false,
+    });
+  }
+
+  for (const [category, items] of Object.entries(gameData.postgame?.interviews || {})) {
+    for (const [index, item] of (items || []).entries()) {
+      add({
+        phase: 'postgame', type: 'interview', actor: item.player_name || '',
+        text: item.quote || '', category, role: item.role || '',
+        sourceFile: localizedFile('postgame_result.json'),
+        sourcePath: `interviews.${category}[${index}]`,
+        ...traceMetaFor(item.player_name, item),
+      });
+    }
+  }
+  return events;
+}
+
+function buildAutonomyMetadata() {
+  const trace = gameData.structuredTrace || [];
+  const manifest = gameData.manifest || {};
+  const roster = Object.values(gameData.night?.players || {}).map(p => ({
+    name: p.name, model: p.model, thinking: p.thinking || 'off', seat: p.seat,
+  }));
+  return {
+    gameId: currentGame || gameData.night?.game_id || '',
+    status: manifest.status || gameData.resolve?.status || 'recorded',
+    createdAt: manifest.created_at || '',
+    completedAt: manifest.completed_at || gameData.postgame?.generated_at || '',
+    outcome: gameData.resolve?.outcome || manifest.outcome || '',
+    roster,
+    eventCount: trace.length,
+    agentEvents: trace.filter(e => e.source === 'agent').length,
+    deterministicEvents: trace.filter(e => e.source !== 'agent').length,
+    fallbackEvents: trace.filter(e => e.fallback).length,
+  };
 }
 
 
@@ -2592,17 +2711,263 @@ function showAboutPanel() {
   panelContent.dataset.panelView = 'about';
   panelContent.innerHTML = html;
   openSidePanel();
+  document.getElementById('side-panel').scrollTop = 0;
+}
+
+// ===== Complete Recorded Replay + Autonomy Proof =====
+let storySteps = [];
+let storyIndex = 0;
+let storyPlaying = false;
+let storyTimer = null;
+let storySpeed = 1;
+
+function displayPlayerName(name) {
+  const p = PLAYERS.find(x => x.name === name);
+  return lang === 'zh' && p ? (p.name_zh || name) : name;
+}
+
+function storyActionText(event) {
+  const actor = displayPlayerName(event.actor);
+  const target = event.target !== undefined && event.target !== null
+    ? (typeof event.target === 'string' ? displayPlayerName(event.target) : `${lang === 'zh' ? '中央牌' : 'center card'} ${event.target}`)
+    : '';
+  const targets = (event.targets || []).map(x => typeof x === 'string' ? displayPlayerName(x) : x).join(', ');
+  const labels = {
+    inspect_center: lang === 'zh' ? '查看了中央牌' : 'inspected the center',
+    inspect_player: lang === 'zh' ? '查驗了' : 'inspected',
+    rob: lang === 'zh' ? '偷換了' : 'robbed',
+    swap: lang === 'zh' ? '交換了' : 'swapped',
+    identify_wolves: lang === 'zh' ? '認出了狼人' : 'identified the werewolf',
+    peek_wolves: lang === 'zh' ? '看見了狼人同伴' : 'saw the other werewolf',
+    inspect_self: lang === 'zh' ? '查看了自己的牌' : 'checked their final card',
+  };
+  const label = labels[event.action] || event.action;
+  return `${actor} ${label}${targets ? `: ${targets}` : target ? ` ${target}` : ''}.`;
+}
+
+function cleanStorySpeech(text) {
+  return String(text || '')
+    .replace(/^\[[^\]]+\]\s+[^:：]+[:：]\s*/u, '')
+    .trim();
+}
+
+function storyStepDelay(step) {
+  const text = step?.body || '';
+  const cjkCount = (text.match(/[\u3400-\u9fff]/gu) || []).length;
+  const wordCount = (text.match(/\b[\p{L}\p{N}'’-]+\b/gu) || []).length;
+  const readingMs = cjkCount * 85 + wordCount * 115;
+  return THREE.MathUtils.clamp(3500 + readingMs, 4500, 14000) / storySpeed;
+}
+
+function storyPhaseLabel(phase) {
+  const labels = lang === 'zh'
+    ? { night: '夜晚', day: '白天討論', vote: '投票', resolve: '結算', postgame: '賽後' }
+    : { night: 'Night', day: 'Day discussion', vote: 'Voting', resolve: 'Resolution', postgame: 'Postgame' };
+  return labels[phase] || phase;
+}
+
+function recordedEventTitle(event) {
+  const actor = displayPlayerName(event.actor);
+  if (event.phase === 'night') {
+    return lang === 'zh' ? `${actor} 的夜晚行動` : `Night action · ${actor}`;
+  }
+  if (event.phase === 'day') {
+    if (event.type === 'speech') return lang === 'zh' ? `${actor} 發言` : `Discussion · ${actor}`;
+    if (event.type === 'pass') return lang === 'zh' ? `${actor} 選擇不發言` : `Discussion · ${actor} passes`;
+    return lang === 'zh' ? `${actor || '代理'} 的記錄事件` : `Recorded event · ${actor || 'agent'}`;
+  }
+  if (event.phase === 'vote') return lang === 'zh' ? `${actor} 投票` : `Vote · ${actor}`;
+  if (event.phase === 'resolve') return lang === 'zh' ? '規則引擎結算' : 'Game-engine resolution';
+  if (event.phase === 'postgame') return lang === 'zh' ? `${actor} 的賽後訪問` : `Postgame interview · ${actor}`;
+  return storyPhaseLabel(event.phase);
+}
+
+function recordedEventBody(event) {
+  const actor = displayPlayerName(event.actor);
+  const target = displayPlayerName(event.target);
+  if (event.phase === 'night') return storyActionText(event);
+  if (event.phase === 'day') {
+    if (event.type === 'speech') return cleanStorySpeech(event.text);
+    if (event.type === 'pass') {
+      return lang === 'zh' ? `${actor} 在這一輪選擇不發言。` : `${actor} passed without speaking in this turn.`;
+    }
+    return event.text || event.error || (lang === 'zh' ? '此事件已記錄於原始遊戲輸出。' : 'This event is recorded in the original game output.');
+  }
+  if (event.phase === 'vote') {
+    return lang === 'zh' ? `${actor} 投票給 ${target}。` : `${actor} voted for ${target}.`;
+  }
+  if (event.phase === 'resolve') {
+    const winners = (event.winners || []).map(displayPlayerName).join(', ');
+    const executed = (event.executed || []).map(displayPlayerName).join(', ');
+    const details = [];
+    if (event.text) details.push(event.text);
+    if (executed) details.push(`${lang === 'zh' ? '被處決' : 'Executed'}: ${executed}.`);
+    if (winners) details.push(`${lang === 'zh' ? '勝出者' : 'Winners'}: ${winners}.`);
+    return details.join(' ');
+  }
+  if (event.phase === 'postgame') return event.text || '';
+  return event.text || event.error || event.type || '';
+}
+
+function buildRecordedReplay() {
+  const roles = Object.entries(gameData.resolve?.final_roles || {}).map(([name, r]) => ({
+    name, initial: r.initial_role, current: r.current_role,
+  }));
+  return (gameData.structuredTrace || []).map(event => ({
+    ...event,
+    title: recordedEventTitle(event),
+    body: recordedEventBody(event),
+    roleChanges: event.phase === 'resolve' ? roles : [],
+  }));
+}
+
+function renderStoryStep() {
+  if (!storySteps.length) return;
+  const step = storySteps[storyIndex];
+  setPhase(step.phase);
+  closeSidePanel();
+  clearBubbles();
+  replayControls.classList.remove('visible');
+  document.getElementById('story-title').textContent = step.title || '';
+  document.getElementById('story-body').innerHTML = formatGameText(step.body || '');
+  const phaseSteps = storySteps.filter(s => s.phase === step.phase);
+  const phaseIndex = phaseSteps.findIndex(s => s.id === step.id) + 1;
+  document.getElementById('story-progress').textContent = lang === 'zh'
+    ? `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · 完整事件 ${storyIndex + 1}/${storySteps.length}`
+    : `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · complete event ${storyIndex + 1}/${storySteps.length}`;
+  document.getElementById('story-kicker').textContent = lang === 'zh'
+    ? '完整軌跡重播 · 沒有省略任何軌跡事件'
+    : 'COMPLETE TRACE REPLAY · NO TRACE EVENTS OMITTED';
+  const rationale = document.getElementById('story-rationale');
+  rationale.innerHTML = step.reasoning
+    ? `<span class="label">${lang === 'zh' ? '記錄理由' : 'RECORDED RATIONALE'}</span>${formatGameText(step.reasoning)}`
+    : '';
+  rationale.classList.toggle('visible', Boolean(step.reasoning));
+  const meta = [];
+  if (step.model) meta.push(step.model);
+  if (step.thinking) meta.push(`thinking=${step.thinking}`);
+  if (step.latencyMs !== null && step.latencyMs !== undefined) meta.push(`${step.latencyMs}ms`);
+  meta.push(step.fallback ? (lang === 'zh' ? '回退／錯誤' : 'fallback/error') : (step.source || 'recorded'));
+  const sourceHref = step.sourceFile ? `./data/games/${currentGame}/${step.sourceFile}` : '';
+  const sourceText = [step.sourceFile, step.sourcePath].filter(Boolean).join(' · ');
+  document.getElementById('story-meta').innerHTML = `
+    <span class="${step.fallback ? 'fallback' : ''}">${meta.join(' · ')}</span>
+    ${sourceHref ? `<a href="${sourceHref}" target="_blank">${lang === 'zh' ? '原始記錄' : 'source record'}: ${sourceText}</a>` : ''}
+  `;
+  const roleBox = document.getElementById('story-role-changes');
+  roleBox.innerHTML = '';
+  for (const r of step.roleChanges || []) {
+    const changed = r.initial !== r.current;
+    roleBox.innerHTML += `<div class="role-change${changed ? ' changed' : ''}">
+      <span class="agent">${displayPlayerName(r.name)}</span>
+      <span class="roles">${lang === 'zh' ? roleZh(r.initial) : r.initial}<span class="arrow">→</span>${lang === 'zh' ? roleZh(r.current) : r.current}</span>
+    </div>`;
+  }
+  chars.forEach((_, i) => highlightCharacter(i, false));
+  if (step.actor) {
+    const idx = PLAYERS.findIndex(p => p.name === step.actor);
+    if (idx >= 0) highlightCharacter(idx, true);
+  }
+}
+
+function openStoryMode(autoPlay = false) {
+  storySteps = buildRecordedReplay();
+  storyIndex = 0;
+  storyPlaying = false;
+  storySpeed = 1;
+  document.getElementById('story-play').textContent = '▶';
+  document.getElementById('story-speed').textContent = '1×';
+  document.getElementById('story-mode').classList.add('visible');
+  renderStoryStep();
+  if (autoPlay) {
+    storyPlaying = true;
+    document.getElementById('story-play').textContent = '⏸';
+    scheduleStoryStep();
+  }
+}
+
+function stopStoryPlayback() {
+  storyPlaying = false;
+  document.getElementById('story-play').textContent = '▶';
+  if (storyTimer) clearTimeout(storyTimer);
+  storyTimer = null;
+}
+
+function closeStoryMode() {
+  stopStoryPlayback();
+  document.getElementById('story-mode').classList.remove('visible');
+  chars.forEach((_, i) => highlightCharacter(i, false));
+}
+
+function scheduleStoryStep() {
+  if (!storyPlaying) return;
+  if (storyIndex >= storySteps.length - 1) {
+    stopStoryPlayback();
+    return;
+  }
+  storyTimer = setTimeout(() => {
+    storyIndex += 1;
+    renderStoryStep();
+    scheduleStoryStep();
+  }, storyStepDelay(storySteps[storyIndex]));
+}
+
+function showProofPanel() {
+  closeStoryMode();
+  document.getElementById('archive-panel').classList.remove('open');
+  const meta = gameData.autonomy || buildAutonomyMetadata();
+  const formatRecordedAt = value => {
+    if (!value) return '';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleString(lang === 'zh' ? 'zh-HK' : 'en-US');
+  };
+  let html = `<div class="panel-section"><h3>${lang === 'zh' ? '自主運行證據' : 'Autonomy Proof'}</h3>
+    <div class="proof-badge">● ${lang === 'zh' ? '已記錄的自主遊戲' : 'Recorded autonomous run'}</div>
+    <div class="row"><span class="key">Game ID</span><span class="val">${meta.gameId || '?'}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '狀態' : 'Status'}</span><span class="val">${meta.status}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '事件' : 'Trace events'}</span><span class="val">${meta.eventCount}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '代理事件' : 'Agent events'}</span><span class="val">${meta.agentEvents}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '回退／錯誤' : 'Fallbacks/errors'}</span><span class="val">${meta.fallbackEvents}</span></div>
+    ${meta.createdAt ? `<div class="row"><span class="key">${lang === 'zh' ? '開始記錄' : 'Started'}</span><span class="val">${formatRecordedAt(meta.createdAt)}</span></div>` : ''}
+    ${meta.completedAt ? `<div class="row"><span class="key">${lang === 'zh' ? '完成記錄' : 'Completed'}</span><span class="val">${formatRecordedAt(meta.completedAt)}</span></div>` : ''}
+  </div>`;
+  html += `<div class="panel-section"><h3>${lang === 'zh' ? '模型陣容' : 'Model Roster'}</h3>`;
+  for (const agent of meta.roster || []) {
+    html += `<div class="agent-trace-card"><strong>${displayPlayerName(agent.name)}</strong>
+      <div class="meta">${agent.model} · thinking=${agent.thinking} · seat ${Number(agent.seat) + 1}</div></div>`;
+  }
+  html += '</div>';
+  const base = `./data/games/${currentGame}/`;
+  const localizedRecord = name => `${name}${lang === 'zh' ? '_zh' : ''}.json`;
+  html += `<div class="panel-section"><h3>${lang === 'zh' ? '原始記錄' : 'Raw Records'}</h3>
+    <p style="font-size:11px;line-height:1.6;color:var(--text-dim);">${lang === 'zh'
+      ? '以下檔案是目前中文重播所使用的遊戲輸出。'
+      : 'These are the original game outputs used to construct this replay.'}</p>
+    <div class="raw-data-links">
+      <a href="${base}manifest.json" target="_blank">manifest</a>
+      <a href="${base}${localizedRecord('night_result')}" target="_blank">night</a>
+      <a href="${base}${localizedRecord('day_result')}" target="_blank">day</a>
+      <a href="${base}${localizedRecord('vote_result')}" target="_blank">vote</a>
+      <a href="${base}${localizedRecord('resolve_result')}" target="_blank">resolve</a>
+      <a href="${base}${localizedRecord('postgame_result')}" target="_blank">postgame</a>
+    </div></div>`;
+  const panel = document.getElementById('panel-content');
+  panel.dataset.panelView = 'proof';
+  panel.innerHTML = html;
+  openSidePanel();
+  document.getElementById('side-panel').scrollTop = 0;
 }
 
 // ===== Shared player data helpers (used by modal + gallery) =====
 function gatherPlayerGameData(p) {
-  let initialRole = '?', currentRole = '?', nightMem = '';
+  let initialRole = '?', currentRole = '?', nightMem = '', nightActions = [];
   if (gameData.night && gameData.night.players) {
     for (const [, pd] of Object.entries(gameData.night.players)) {
       if (pd.name === p.name) {
         initialRole = lang === 'zh' ? roleZh(pd.initial_role || '?') : (pd.initial_role || '?');
         currentRole = lang === 'zh' ? roleZh(pd.current_role || '?') : (pd.current_role || '?');
         nightMem = pd.night_memory_text || (Array.isArray(pd.night_memory) ? pd.night_memory.join(' ') : pd.night_memory || '');
+        nightActions = pd.night_actions || [];
         break;
       }
     }
@@ -2616,12 +2981,20 @@ function gatherPlayerGameData(p) {
       if (item) { postgameQuote = item.quote || ''; postgameRole = item.role || ''; break; }
     }
   }
-  return { initialRole, currentRole, nightMem, speeches, votedFor, postgameQuote, postgameRole };
+  const trace = (gameData.structuredTrace || []).filter(e => e.actor === p.name);
+  const voteEvent = trace.find(e => e.phase === 'vote');
+  return { initialRole, currentRole, nightMem, nightActions, speeches, votedFor, postgameQuote, postgameRole, trace, voteEvent };
 }
 
 function buildGameSectionHTML(p, accent, displayName) {
   const d = gatherPlayerGameData(p);
-  let html = `<div class="modal-section"><h3>${t('gameData')}</h3>
+  let html = `<div class="modal-section"><h3>${t('agentState')}</h3>
+    <div class="row"><span class="key">Model</span><span class="val">${p.model || '?'}</span></div>
+    <div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking || 'off'}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '記錄事件' : 'Recorded events'}</span><span class="val">${d.trace.length}</span></div>
+    ${d.voteEvent?.fallback ? `<div class="row"><span class="key">${lang === 'zh' ? '投票狀態' : 'Vote status'}</span><span class="val" style="color:var(--danger)">${lang === 'zh' ? '回退決策' : 'Fallback decision'}</span></div>` : ''}
+  </div>`;
+  html += `<div class="modal-section"><h3>${t('gameData')}</h3>
     <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${d.initialRole}</span></div>
     <div class="row"><span class="key">${t('currentRole')}</span><span class="val">${d.currentRole}</span></div>`;
   if (d.nightMem) html += `<div class="row" style="display:block;"><span class="key">${t('nightMemory')}</span><span style="font-size:12px;color:var(--text);margin-top:4px;display:block;">${formatGameText(d.nightMem)}</span></div>`;
@@ -2631,6 +3004,20 @@ function buildGameSectionHTML(p, accent, displayName) {
     html += `<div class="row"><span class="key">${t('vote')}</span><span class="val" style="color:${getPlayerColor(d.votedFor)}">→ ${targetName}</span></div>`;
   }
   html += '</div>';
+  if (d.trace.length > 0) {
+    html += `<div class="modal-section"><h3>${t('decisionTrace')}</h3>`;
+    d.trace.forEach(e => {
+      const summary = e.text || (e.action ? storyActionText(e) : e.target ? `→ ${displayPlayerName(e.target)}` : e.type);
+      const latency = e.latencyMs !== null ? ` · ${e.latencyMs}ms` : '';
+      const source = e.fallback ? (lang === 'zh' ? '回退' : 'fallback') : e.source;
+      html += `<div class="agent-trace-card">
+        <div class="meta">${e.phase} · ${source}${latency}</div>
+        <div class="reason">${formatGameText(summary || '')}</div>
+        ${e.reasoning ? `<div class="meta" style="margin-top:5px;">${lang === 'zh' ? '理由' : 'Rationale'}: ${formatGameText(e.reasoning)}</div>` : ''}
+      </div>`;
+    });
+    html += '</div>';
+  }
   if (d.speeches.length > 0) {
     html += `<div class="modal-section"><h3>${t('speeches')} (${d.speeches.length})</h3>`;
     d.speeches.forEach(s => {
@@ -2657,13 +3044,11 @@ function showPlayerModal(playerId) {
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   const avatarUrl = renderAvatarPortrait(p, 256);
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
   let html = `<div class="modal-header" style="border-bottom:1px solid var(--border);padding-bottom:16px;display:flex;gap:16px;align-items:center;">
     <div class="modal-avatar" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid ${accent};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
     <div>
       <div style="font-size:18px;font-weight:700;color:${accent};">${displayName}</div>
-      ${subName ? `<div style="font-size:13px;color:var(--text-dim);margin-top:2px;">${subName}</div>` : ''}
       <div style="font-size:11px;color:#666;margin-top:4px;">${(p.model||'').split('/').pop()}</div>
     </div>
   </div>`;
@@ -2703,12 +3088,10 @@ function updateGalleryContent() {
   if (!p) return;
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
 
   // --- Persona tab ---
   let personaHtml = `<div class="modal-header">
     <div class="name" style="color:${accent}">${displayName}</div>
-    ${subName ? `<div class="sub">${subName}</div>` : ''}
   </div>`;
   personaHtml += `<div class="modal-section"><h3>${t('persona')}</h3><p style="font-size:13px;line-height:1.7;color:var(--text);">${formatGameText(p.persona||'')}</p></div>`;
   personaHtml += `<div class="modal-section"><h3>${lang==='zh'?'模型':'Model'}</h3><div class="row"><span class="key">AI</span><span class="val">${(p.model||'').split('/').pop()}</span></div><div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking||'high'}</span></div></div>`;
@@ -2873,11 +3256,9 @@ function showPlayerDetail(playerId) {
   if (!p) return;
   const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-  const subName = lang === 'zh' ? p.name : (p.name_zh || '');
   
   let html = `<div class="panel-section">
     <h3 style="color:${accent}">${displayName}</h3>
-    ${subName ? `<div class="row"><span class="key">${t('chineseName')}</span><span class="val">${subName}</span></div>` : ''}
     <div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking || 'high'}</span></div>
   </div>`;
   
@@ -3036,6 +3417,11 @@ function setupUI() {
   const welcomeOverlay = document.getElementById('welcome-overlay');
   document.getElementById('welcome-btn').addEventListener('click', () => {
     welcomeOverlay.classList.add('hidden');
+    const launchStoryWhenReady = () => {
+      if (gameData.night) openStoryMode(true);
+      else setTimeout(launchStoryWhenReady, 150);
+    };
+    setTimeout(launchStoryWhenReady, 250);
   });
   // Dismiss on Escape or click outside the card
   welcomeOverlay.addEventListener('click', (e) => {
@@ -3079,6 +3465,8 @@ function setupUI() {
     document.getElementById('archive-panel').classList.remove('open');
     showAboutPanel();
   });
+  document.getElementById('btn-story').addEventListener('click', () => openStoryMode(false));
+  document.getElementById('btn-proof').addEventListener('click', showProofPanel);
   document.getElementById('btn-panel-close').addEventListener('click', () => {
     closeSidePanel();
   });
@@ -3086,8 +3474,9 @@ function setupUI() {
   // Language toggle
   document.getElementById('btn-lang').addEventListener('click', () => {
     const panelContent = document.getElementById('panel-content');
-    const restoreAbout = document.getElementById('side-panel').classList.contains('open')
-      && panelContent.dataset.panelView === 'about';
+    const openPanelView = document.getElementById('side-panel').classList.contains('open')
+      ? panelContent.dataset.panelView : '';
+    const restoreStory = document.getElementById('story-mode').classList.contains('visible');
     lang = lang === 'en' ? 'zh' : 'en';
     updateUIText();
     if (archiveGames.length > 0) buildArchiveList(archiveGames);
@@ -3095,16 +3484,53 @@ function setupUI() {
     // Reload game data with new language, then restore phase
     if (currentGame) {
       const savedPhase = currentPhase;
-      loadGame(currentGame).then(() => {
-        if (restoreAbout) showAboutPanel();
+      loadGame(currentGame).then(loaded => {
+        if (!loaded) return;
+        if (restoreStory) openStoryMode();
+        else if (openPanelView === 'about') showAboutPanel();
+        else if (openPanelView === 'proof') showProofPanel();
         else setPhase(savedPhase);
       });
     } else if (gameData.night) {
       const currentPhaseSaved = currentPhase;
-      if (restoreAbout) showAboutPanel();
+      if (restoreStory) openStoryMode();
+      else if (openPanelView === 'about') showAboutPanel();
+      else if (openPanelView === 'proof') showProofPanel();
       else setPhase(currentPhaseSaved);
     }
   });
+
+  document.getElementById('story-prev').addEventListener('click', () => {
+    stopStoryPlayback();
+    storyIndex = Math.max(0, storyIndex - 1);
+    renderStoryStep();
+  });
+  document.getElementById('story-next').addEventListener('click', () => {
+    stopStoryPlayback();
+    storyIndex = Math.min(storySteps.length - 1, storyIndex + 1);
+    renderStoryStep();
+  });
+  document.getElementById('story-play').addEventListener('click', () => {
+    if (storyPlaying) {
+      stopStoryPlayback();
+      return;
+    }
+    if (storyIndex >= storySteps.length - 1) storyIndex = 0;
+    storyPlaying = true;
+    document.getElementById('story-play').textContent = '⏸';
+    renderStoryStep();
+    scheduleStoryStep();
+  });
+  document.getElementById('story-speed').addEventListener('click', () => {
+    const speeds = [1, 1.5, 2];
+    storySpeed = speeds[(speeds.indexOf(storySpeed) + 1) % speeds.length];
+    document.getElementById('story-speed').textContent = `${storySpeed}×`;
+    if (storyPlaying) {
+      if (storyTimer) clearTimeout(storyTimer);
+      scheduleStoryStep();
+    }
+  });
+  document.getElementById('story-close').addEventListener('click', closeStoryMode);
 
   // Small modal close
   document.getElementById('player-modal-close').addEventListener('click', closePlayerModal);
@@ -3155,6 +3581,8 @@ function setupUI() {
 function updateUIText() {
   document.querySelector('.brand').innerHTML = t('brand') + ' <span class="sub">' + t('sub') + '</span>';
   document.getElementById('btn-gallery').innerHTML = (lang === 'zh' ? '角色' : 'Characters');
+  document.getElementById('btn-story').innerHTML = t('story');
+  document.getElementById('btn-proof').innerHTML = t('proof');
   document.getElementById('btn-archive').innerHTML = t('archive');
   document.getElementById('btn-info').innerHTML = t('info');
   document.getElementById('btn-night').innerHTML = t('night');

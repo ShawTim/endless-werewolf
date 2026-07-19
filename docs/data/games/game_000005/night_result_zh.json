@@ -27,19 +27,19 @@
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "night_memory": [
-        "You are the only <Werewolf> in play. You may peek at one center card.",
-        "You peeked at center card 0 and saw: <Seer>."
+        "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。",
+        "你看了看中心卡 0，看到：<預言家>。"
       ],
       "night_actions": [
         {
           "role": "Werewolf",
-          "action": "查看中央",
+          "action": "inspect_center",
           "target": 0,
           "seen_role": "Seer",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 0 and saw: <Seer>."
+      "night_memory_text": "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。你看了看中心卡 0，看到：<預言家>。"
     },
     "3": {
       "id": "3",
@@ -83,12 +83,12 @@
       "initial_role": "Troublemaker",
       "current_role": "Troublemaker",
       "night_memory": [
-        "You swapped [The Prosecutor] and [The Underdog]'s cards, but you don't know what they became."
+        "你交換了[嚴審官]和[小人物]的牌，但你不知道它們變成了什麼。"
       ],
       "night_actions": [
         {
           "role": "Troublemaker",
-          "action": "交換",
+          "action": "swap",
           "targets": [
             "The Prosecutor",
             "The Underdog"
@@ -96,7 +96,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped [The Prosecutor] and [The Underdog]'s cards, but you don't know what they became."
+      "night_memory_text": "你交換了[嚴審官]和[小人物]的牌，但你不知道它們變成了什麼。"
     },
     "6": {
       "id": "6",
@@ -110,10 +110,10 @@
       "initial_role": "Minion",
       "current_role": "Villager",
       "night_memory": [
-        "You saw the Werewolves are: [The Therapist]. The Werewolves do not know you are the <Minion>."
+        "你看到的狼人是：[心理諮商師]。狼人不知道你是<爪牙>。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the Werewolves are: [The Therapist]. The Werewolves do not know you are the <Minion>."
+      "night_memory_text": "你看到的狼人是：[心理諮商師]。狼人不知道你是<爪牙>。"
     }
   },
   "seating_order": [
@@ -131,16 +131,25 @@
   ],
   "night_trace": [
     {
+      "actor": "The Underdog",
+      "role": "Minion",
+      "action": "identify_wolves",
+      "targets": [
+        "The Therapist"
+      ],
+      "source": "deterministic"
+    },
+    {
       "actor": "The Therapist",
       "role": "Werewolf",
-      "action": "查看中央",
+      "action": "inspect_center",
       "target": 0,
       "source": "agent"
     },
     {
       "actor": "The Statistician",
       "role": "Troublemaker",
-      "action": "交換",
+      "action": "swap",
       "targets": [
         "The Prosecutor",
         "The Underdog"

@@ -42,10 +42,10 @@
       "initial_role": "Minion",
       "current_role": "Minion",
       "night_memory": [
-        "You saw the Werewolves are: [The Statistician], [The Underdog]. The Werewolves do not know you are the <Minion>."
+        "你看到的狼人是：[統計學家]，[小人物]。狼人不知道你是<爪牙>。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the Werewolves are: [The Statistician], [The Underdog]. The Werewolves do not know you are the <Minion>."
+      "night_memory_text": "你看到的狼人是：[統計學家]，[小人物]。狼人不知道你是<爪牙>。"
     },
     "4": {
       "id": "4",
@@ -74,10 +74,10 @@
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Underdog]."
+        "你看到另一個<狼人>是：[小人物]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Underdog]."
+      "night_memory_text": "你看到另一個<狼人>是：[小人物]。"
     },
     "6": {
       "id": "6",
@@ -91,10 +91,10 @@
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Statistician]."
+        "你看到另一個<狼人>是：[統計學家]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Statistician]."
+      "night_memory_text": "你看到另一個<狼人>是：[統計學家]。"
     }
   },
   "seating_order": [
@@ -110,6 +110,35 @@
     "Seer",
     "Robber"
   ],
-  "night_trace": [],
+  "night_trace": [
+    {
+      "actor": "The Statistician",
+      "role": "Werewolf",
+      "action": "peek_wolves",
+      "targets": [
+        "The Underdog"
+      ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Underdog",
+      "role": "Werewolf",
+      "action": "peek_wolves",
+      "targets": [
+        "The Statistician"
+      ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Chaos Agent",
+      "role": "Minion",
+      "action": "identify_wolves",
+      "targets": [
+        "The Statistician",
+        "The Underdog"
+      ],
+      "source": "deterministic"
+    }
+  ],
   "game_id": "game_000003"
 }

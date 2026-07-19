@@ -12,8 +12,8 @@
       "initial_role": "Werewolf",
       "current_role": "Robber",
       "night_memory": [
-        "You are the only <Werewolf> in play. You may peek at one center card.",
-        "You peeked at center card 1 and saw: <Werewolf>."
+        "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。",
+        "你看了看中心卡 1，看到：<狼人>。"
       ],
       "night_actions": [
         {
@@ -24,7 +24,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 1 and saw: <Werewolf>."
+      "night_memory_text": "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。你看了看中心卡 1，看到：<狼人>。"
     },
     "2": {
       "id": "2",
@@ -53,7 +53,7 @@
       "initial_role": "Seer",
       "current_role": "Seer",
       "night_memory": [
-        "You inspected two center cards: card 0 is <Troublemaker>, card 1 is <Werewolf>."
+        "您檢查了兩張中心卡：卡 0 是 <搗蛋鬼>，卡 1 是 <狼人>。"
       ],
       "night_actions": [
         {
@@ -76,7 +76,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You inspected two center cards: card 0 is <Troublemaker>, card 1 is <Werewolf>."
+      "night_memory_text": "您檢查了兩張中心卡：卡 0 是 <搗蛋鬼>，卡 1 是 <狼人>。"
     },
     "4": {
       "id": "4",
@@ -120,18 +120,18 @@
       "initial_role": "Robber",
       "current_role": "Werewolf",
       "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Werewolf>."
+        "你搶了[嚴審官]的卡。交換後，您現在是：<狼人>。"
       ],
       "night_actions": [
         {
           "role": "Robber",
-          "action": "搶奪",
+          "action": "rob",
           "target": "The Prosecutor",
           "new_role": "Werewolf",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Werewolf>."
+      "night_memory_text": "你搶了[嚴審官]的卡。交換後，您現在是：<狼人>。"
     }
   },
   "seating_order": [
@@ -168,7 +168,7 @@
     {
       "actor": "The Underdog",
       "role": "Robber",
-      "action": "搶奪",
+      "action": "rob",
       "target": "The Prosecutor",
       "source": "agent"
     }

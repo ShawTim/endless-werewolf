@@ -13,7 +13,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "My model overfit on 攪局者's narrative and missed the structural break in 嚴審官's timeline. The likelihood function needs a regime-switching component for adversarial role-swapping — data doesn't lie, but my priors did."
+        "quote": "我的模型過於適合《混沌特工》的敘述，錯過了《檢察官》時間線中的結構性突破。似然函數需要一個機制轉換元件來進行對抗性角色交換——數據不會說謊，但我的先驗會說謊。"
       }
     ],
     "winners": [
@@ -26,7 +26,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": ""
+        "quote": "法庭作出了我要求的裁決。村民把我的自信誤當成證據，判統計學家有罪，卻始終沒有察覺狼人一直在主導這場檢控。案件結束。"
       },
       {
         "player_name": "The Gut Player",
@@ -37,7 +37,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "See? I told you — my gut doesn't need charts and graphs. 統計學家 can run all the numbers they want, but when the vibes are off, the vibes are off. Another win, another round of me being right without even trying."
+        "quote": "看？我告訴過你——我的直覺不需要圖表。統計學家可以計算出他們想要的所有數字，但是當振動消失時，振動就消失了。又一場勝利，又一輪我甚至沒有嘗試就正確了。"
       }
     ],
     "losers": [
@@ -50,7 +50,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "They chose certainty over curiosity, and 統計學家 paid the price for that comfort. I had hoped my quiet questions would turn the gaze toward me, but they looked right past instead."
+        "quote": "他們選擇了確定性而不是好奇心，《統計學家》為這種安慰付出了代價。我本希望我安靜的問題能夠將目光轉向我，但他們卻看過去了。"
       },
       {
         "player_name": "The Chaos Agent",
@@ -61,7 +61,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "I scattered my lies like breadcrumbs, and they followed them straight past me to 統計學家 instead. That's the beautiful thing about good theater — the best tricks make the audience feel clever for missing the point."
+        "quote": "我像麵包屑一樣散佈我的謊言，他們跟著我徑直經過我去了《統計學家》。這就是優秀戲劇的美妙之處——最好的技巧讓觀眾覺得自己很聰明，因為他們沒有抓到重點。"
       },
       {
         "player_name": "The Underdog",
@@ -72,7 +72,7 @@
         "status": "loser",
         "executed": false,
         "mood": "bitter",
-        "quote": "Um... I keep replaying the swap in my head, and I'm starting to think I might have made everything worse. 統計學家 didn't deserve to go out like that, and if my cards helped the werewolves win... I'm so sorry, I really just wanted to help."
+        "quote": "嗯...我不斷在腦海中重播這次交換，我開始認為我可能會讓一切變得更糟。統計學家不應該這樣出去，如果我的牌幫助狼人獲勝……我很抱歉，我真的只是想幫忙。"
       }
     ]
   }

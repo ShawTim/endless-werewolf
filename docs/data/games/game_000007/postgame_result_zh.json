@@ -13,7 +13,7 @@
         "status": "winner",
         "executed": true,
         "mood": "defiant",
-        "quote": "The village won — justice was served — and yet the jury voted ME out? I was the one with the evidence! I confirmed [直覺俠] as the <強盜> on the stand, laid out the entire case, and what did this jury do? They convicted the prosecutor alongside the defendants. I should be disbarred for having faith in this jury pool."
+        "quote": "村子贏了——正義得到了伸張——但陪審團投票讓我出局？我是有證據的人！我確認[直覺俠]就是證人席上的<強盜>，把整個案件擺出來，這個陪審團做了什麼？他們將檢察官與被告一起定罪。我應該因為對這個陪審團有信心而被取消律師資格。"
       },
       {
         "player_name": "The Gut Player",
@@ -24,7 +24,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "Man, I KNEW something was off — my gut was screaming the whole time! But that Prosecutor... they played me like a fiddle and I walked right into it. Next time, I'm trusting the vibe BEFORE the facts come out."
+        "quote": "夥計，我知道出了什麼問題——我的腸子一直在尖叫！但那個檢察官……他們像拉小提琴一樣玩弄我，我就走進了它。下次，我會在事實真相大白之前相信這種氛圍。"
       },
       {
         "player_name": "The Statistician",
@@ -35,7 +35,7 @@
         "status": "loser",
         "executed": true,
         "mood": "frustrated",
-        "quote": "The posterior probability of my survival collapsed to zero — ironic, given I was the only one actually tracking the likelihoods. Next game, I'll assign a higher prior to 'villagers vote out the person demanding evidence.'"
+        "quote": "我生存的後驗機率降至零——諷刺的是，考慮到我是唯一一個真正追蹤可能性的人。下一場比賽，我會在「村民投票選出要求證據的人」之前分配更高的分數。"
       }
     ],
     "winners": [
@@ -48,7 +48,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "[嚴審官] spoke with such certainty, [直覺俠] with such raw belief — yet truth rarely needs to raise its voice to be heard. I'm quietly grateful the village chose to sit with the quieter observations tonight."
+        "quote": "[嚴審官] 的說話如此確定，[直覺俠] 的說話如此原始，但真相很少需要提高聲音才能被聽到。我很慶幸村裡今晚選擇安靜地觀察。"
       },
       {
         "player_name": "The Chaos Agent",
@@ -59,7 +59,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Magnificent. [嚴審官] built a cathedral out of a <預言家> claim, [直覺俠] panicked into confessing my exact role, and I just sat there like a statue while you all wrote my victory speech for me — art is dead, long live the performance."
+        "quote": "壯麗。 [嚴審官] 根據 <預言家> 的主張建造了一座大教堂，[直覺俠] 驚慌失措地承認了我的確切角色，而我只是像雕像一樣坐在那裡，而你們都為我寫了我的勝利演講 - 藝術已死，表演萬歲。"
       },
       {
         "player_name": "The Underdog",
@@ -70,7 +70,7 @@
         "status": "winner",
         "executed": false,
         "mood": "relieved",
-        "quote": "Oh my god, we actually won? I... I still can't believe pointing out that contradiction between [嚴審官] and [直覺俠] actually helped - I was so sure I was just confusing everyone. I guess sometimes overthinking things isn't so bad?"
+        "quote": "天哪，我們真的贏了？我...我仍然不敢相信指出 [嚴審官] 和 [直覺俠] 之間的矛盾實際上有幫助 - 我非常確定我只是讓每個人感到困惑。我想有時候想太多也不是那麼糟？"
       }
     ],
     "losers": []

@@ -27,10 +27,10 @@
       "initial_role": "Minion",
       "current_role": "Minion",
       "night_memory": [
-        "You woke up and saw no Werewolves, meaning both <Werewolf> cards may be in the center."
+        "你醒來後沒有看到狼人，這意味著兩張 <狼人> 卡可能都在中間。"
       ],
       "night_actions": [],
-      "night_memory_text": "You woke up and saw no Werewolves, meaning both <Werewolf> cards may be in the center."
+      "night_memory_text": "你醒來後沒有看到狼人，這意味著兩張 <狼人> 卡可能都在中間。"
     },
     "3": {
       "id": "3",
@@ -44,12 +44,12 @@
       "initial_role": "Troublemaker",
       "current_role": "Troublemaker",
       "night_memory": [
-        "You swapped [The Statistician] and [The Underdog]'s cards, but you don't know what they became."
+        "你交換了[統計學家]和[小人物]的牌，但你不知道它們變成了什麼。"
       ],
       "night_actions": [
         {
           "role": "Troublemaker",
-          "action": "交換",
+          "action": "swap",
           "targets": [
             "The Statistician",
             "The Underdog"
@@ -57,7 +57,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped [The Statistician] and [The Underdog]'s cards, but you don't know what they became."
+      "night_memory_text": "你交換了[統計學家]和[小人物]的牌，但你不知道它們變成了什麼。"
     },
     "4": {
       "id": "4",
@@ -71,18 +71,18 @@
       "initial_role": "Robber",
       "current_role": "Villager",
       "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+        "你搶了[嚴審官]的卡。交換後，您現在是：<村民>。"
       ],
       "night_actions": [
         {
           "role": "Robber",
-          "action": "搶奪",
+          "action": "rob",
           "target": "The Prosecutor",
           "new_role": "Villager",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+      "night_memory_text": "你搶了[嚴審官]的卡。交換後，您現在是：<村民>。"
     },
     "5": {
       "id": "5",
@@ -96,12 +96,12 @@
       "initial_role": "Seer",
       "current_role": "Villager",
       "night_memory": [
-        "You inspected two center cards: card 0 is <Werewolf>, card 1 is <Werewolf>."
+        "您檢查了兩張中心卡：卡 0 是 <狼人>，卡 1 是 <狼人>。"
       ],
       "night_actions": [
         {
           "role": "Seer",
-          "action": "查看中央",
+          "action": "inspect_center",
           "targets": [
             0,
             1
@@ -119,7 +119,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You inspected two center cards: card 0 is <Werewolf>, card 1 is <Werewolf>."
+      "night_memory_text": "您檢查了兩張中心卡：卡 0 是 <狼人>，卡 1 是 <狼人>。"
     },
     "6": {
       "id": "6",
@@ -154,7 +154,7 @@
     {
       "actor": "The Statistician",
       "role": "Seer",
-      "action": "查看中央",
+      "action": "inspect_center",
       "targets": [
         0,
         1
@@ -164,14 +164,14 @@
     {
       "actor": "The Gut Player",
       "role": "Robber",
-      "action": "搶奪",
+      "action": "rob",
       "target": "The Prosecutor",
       "source": "agent"
     },
     {
       "actor": "The Chaos Agent",
       "role": "Troublemaker",
-      "action": "交換",
+      "action": "swap",
       "targets": [
         "The Statistician",
         "The Underdog"

@@ -29,6 +29,7 @@ WORKSPACE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(WORKSPACE))
 
 import state_manager
+from scripts.audit_all_games import audit_game
 
 REQUIRED_FILES = [
     "manifest.json",
@@ -190,6 +191,21 @@ def main():
     zh_ok = all((game_dir / f).exists() for f in zh_files)
     report["checks"].append({"check": "zh_translations", "pass": zh_ok,
                              "detail": f"{sum(1 for f in zh_files if (game_dir / f).exists())}/{len(zh_files)} present"})
+
+    # 9. Full bilingual integrity: strict language separation plus structural
+    # parity between canonical English and Traditional-Chinese records.
+    archive_report = audit_game(game_dir)
+    for message in archive_report["errors"]:
+        err(f"Bilingual integrity: {message}")
+    report["checks"].append({
+        "check": "bilingual_integrity",
+        "pass": not archive_report["errors"],
+        "detail": (
+            "English/Chinese language and structure valid"
+            if not archive_report["errors"]
+            else f"{len(archive_report['errors'])} issue(s)"
+        ),
+    })
 
     # Summary
     report["errors"] = ERRORS

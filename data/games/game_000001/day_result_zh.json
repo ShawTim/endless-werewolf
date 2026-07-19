@@ -33,42 +33,42 @@
       "player_name": "The Gut Player",
       "target": null,
       "speech": "好了，第三輪。我是村民——又來了。昨晚什麼都沒有，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以這次誰有話要說？",
-      "log_line": "[2026-06-29 11:49:43 HKT] The Gut Player: Alright, round three. I'm a villager — again. Got nothing last night, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say this time?"
+      "log_line": "直覺俠: 好了，第三輪。我是村民——又來了。昨晚什麼都沒有，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以這次誰有話要說？"
     },
     {
       "type": "speech",
       "player_name": "The Underdog",
       "target": null,
-      "speech": "Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the <搗蛋鬼>? I think? I swapped [嚴審官] and [攪局者] last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?",
-      "log_line": "[2026-06-29 11:50:17 HKT] The Underdog: Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the Troublemaker? I think? I swapped The Prosecutor and The Chaos Agent last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?"
+      "speech": "嗯，嗨。抱歉，我知道我應該早點說，但是…我是 <搗蛋鬼>？我認為？我昨晚交換了[嚴審官]和[攪局者]。我不知道他們兩個是誰，但…其中一個可能改變了角色？你們能告訴我們你們曾經是什麼樣的，現在又是什麼樣的嗎？如果這令人困惑，我真的很抱歉，我只是......我想幫忙？",
+      "log_line": "小人物: 嗯，嗨。抱歉，我知道我應該早點說，但是…我是 <搗蛋鬼>？我認為？我昨晚交換了[嚴審官]和[攪局者]。我不知道他們兩個是誰，但…其中一個可能改變了角色？你們能告訴我們你們曾經是什麼樣的，現在又是什麼樣的嗎？如果這令人困惑，我真的很抱歉，我只是......我想幫忙？"
     },
     {
       "type": "speech",
       "player_name": "The Statistician",
       "target": null,
-      "speech": "I was the <強盜>. I targeted [嚴審官] and took their card — I'm now a <村民>. That means [嚴審官] holds the <強盜> card now, and their original role was <村民>. They have no night info as <強盜> since my action happened before the <預言家> phase. [嚴審官]'s original role is known to me: <村民>. Update your priors accordingly.",
-      "log_line": "[2026-06-29 11:50:46 HKT] The Statistician: I was the Robber. I targeted The Prosecutor and took their card — I'm now a Villager. That means The Prosecutor holds the Robber card now, and their original role was Villager. They have no night info as Robber since my action happened before the Seer phase. The Prosecutor's original role is known to me: Villager. Update your priors accordingly."
+      "speech": "我是<強盜>。我瞄準了 [嚴審官] 並拿走了他們的卡片——我現在是 <村民>。這意味著[嚴審官]現在持有<強盜>卡，他們原來的角色是<村民>。他們沒有 <強盜> 夜間訊息，因為我的操作發生在 <預言家> 階段之前。我知道[嚴審官]原來的角色：<村民>。相應地更新你的先驗知識。",
+      "log_line": "統計學家: 我是<強盜>。我瞄準了 [嚴審官] 並拿走了他們的卡片——我現在是 <村民>。這意味著[嚴審官]現在持有<強盜>卡，他們原來的角色是<村民>。他們沒有 <強盜> 夜間訊息，因為我的操作發生在 <預言家> 階段之前。我知道[嚴審官]原來的角色：<村民>。相應地更新你的先驗知識。"
     },
     {
       "type": "speech",
       "player_name": "The Therapist",
       "target": null,
-      "speech": "It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.",
-      "log_line": "[2026-06-29 11:51:02 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together."
+      "speech": "有趣的是現在多麼安靜……就像每個人都非常小心地選擇自己的言語一樣。有人願意分享他們昨晚看到的事情嗎？即使是一個小細節也可以幫助我們共同解決這個問題。",
+      "log_line": "心理諮商師: 有趣的是現在多麼安靜……就像每個人都非常小心地選擇自己的言語一樣。有人願意分享他們昨晚看到的事情嗎？即使是一個小細節也可以幫助我們共同解決這個問題。"
     },
     {
       "type": "speech",
       "player_name": "The Prosecutor",
       "target": null,
-      "speech": "Court is in session. I was a <村民> — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim.",
-      "log_line": "[2026-06-29 11:51:22 HKT] The Prosecutor: Court is in session. I was a Villager — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim."
+      "speech": "法庭正在開庭。我是 <村民>——沒有夜間信息，沒有特殊行動。但我注意到這個房間有重複模式的習慣，我打算打破它們。各位有夜間行動的人，現在就上前吧。陳述你的角色、你的目標、以及你學到了什麼。沒有戲劇性，沒有模糊的預兆——只有事實。我會盤問每一項主張。",
+      "log_line": "嚴審官: 法庭正在開庭。我是 <村民>——沒有夜間信息，沒有特殊行動。但我注意到這個房間有重複模式的習慣，我打算打破它們。各位有夜間行動的人，現在就上前吧。陳述你的角色、你的目標、以及你學到了什麼。沒有戲劇性，沒有模糊的預兆——只有事實。我會盤問每一項主張。"
     },
     {
       "type": "speech",
       "player_name": "The Chaos Agent",
       "target": null,
-      "speech": "Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the <強盜>. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?",
-      "log_line": "[2026-06-29 11:51:53 HKT] The Chaos Agent: Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the Robber. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?"
+      "speech": "好吧，讓我分享一些…意想不到的事情。昨晚我醒來，發現我已經不是原來的我了。有人交換我的卡片了——我現在是 <強盜>。我不知道我跟誰交換了，也不知道他們變成了什麼。這個房間的整個敘述已經改變了。我很想聽聽其他人對他們的夜晚有何評價。大家醒来都变成啥样了？",
+      "log_line": "攪局者: 好吧，讓我分享一些…意想不到的事情。昨晚我醒來，發現我已經不是原來的我了。有人交換我的卡片了——我現在是 <強盜>。我不知道我跟誰交換了，也不知道他們變成了什麼。這個房間的整個敘述已經改變了。我很想聽聽其他人對他們的夜晚有何評價。大家醒来都变成啥样了？"
     },
     {
       "type": "pass",
@@ -79,24 +79,24 @@
       "type": "speech",
       "player_name": "The Underdog",
       "target": "The Prosecutor",
-      "speech": "Um, sorry to push, but... [嚴審官] and [攪局者]? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?",
-      "log_line": "[2026-06-29 11:52:59 HKT] The Underdog @The Prosecutor: Um, sorry to push, but... The Prosecutor and The Chaos Agent? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?"
+      "speech": "嗯，很抱歉推送，但是...[嚴審官] 和 [攪局者]？可以告訴我們你曾經是什麼樣子，現在又是什麼樣子嗎？我知道這很尷尬，但如果我真的交換了你們的卡，那就…這很重要，對吧？我不想成為我們投票錯誤的原因。請？",
+      "log_line": "小人物 @嚴審官: 嗯，很抱歉推送，但是...[嚴審官] 和 [攪局者]？可以告訴我們你曾經是什麼樣子，現在又是什麼樣子嗎？我知道這很尷尬，但如果我真的交換了你們的卡，那就…這很重要，對吧？我不想成為我們投票錯誤的原因。請？"
     },
     {
       "type": "speech",
       "player_name": "The Statistician",
       "target": "The Underdog",
-      "speech": "[小人物], your <搗蛋鬼> claim is consistent with my <強盜> action — <強盜> acts before <搗蛋鬼>. I robbed [嚴審官] first (they were <村民>, I became <村民>, they got <強盜> card). Then you swapped [嚴審官] (now <強盜>) and [攪局者]. If this timeline holds, [嚴審官] should now have [攪局者]'s original role, and [攪局者] should have the <強盜> card. [嚴審官], [攪局者] — confirm your current roles. If the timeline breaks, we have a liar.",
-      "log_line": "[2026-06-29 11:53:21 HKT] The Statistician @The Underdog: The Underdog, your Troublemaker claim is consistent with my Robber action — Robber acts before Troublemaker. I robbed The Prosecutor first (they were Villager, I became Villager, they got Robber card). Then you swapped The Prosecutor (now Robber) and The Chaos Agent. If this timeline holds, The Prosecutor should now have The Chaos Agent's original role, and The Chaos Agent should have the Robber card. The Prosecutor, The Chaos Agent — confirm your current roles. If the timeline breaks, we have a liar."
+      "speech": "[小人物]，您的 <搗蛋鬼> 聲明與我的 <強盜> 操作一致 - <強盜> 在 <搗蛋鬼> 之前執行。我先搶了[嚴審官]（他們是<村民>，我變成了<村民>，他們拿到了<強盜>卡）。然後你交換了[嚴審官]（現在是<強盜>）和[攪局者]。如果這個時間線成立，[嚴審官] 現在應該擁有 [攪局者] 的原始角色，並且 [攪局者] 應該擁有 <強盜> 卡。 [嚴審官]、[攪局者] — 確認您目前的角色。如果時間線被打破，我們就有騙子了。",
+      "log_line": "統計學家 @小人物: [小人物]，您的 <搗蛋鬼> 聲明與我的 <強盜> 操作一致 - <強盜> 在 <搗蛋鬼> 之前執行。我先搶了[嚴審官]（他們是<村民>，我變成了<村民>，他們拿到了<強盜>卡）。然後你交換了[嚴審官]（現在是<強盜>）和[攪局者]。如果這個時間線成立，[嚴審官] 現在應該擁有 [攪局者] 的原始角色，並且 [攪局者] 應該擁有 <強盜> 卡。 [嚴審官]、[攪局者] — 確認您目前的角色。如果時間線被打破，我們就有騙子了。"
     },
     {
       "type": "speech",
       "player_name": "The Therapist",
       "target": "The Prosecutor",
-      "speech": "[嚴審官], you've been very quiet since two different people have now described night actions that directly involve you. [小人物] says they swapped you, and [統計學家] says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?",
-      "log_line": "[2026-06-29 11:53:48 HKT] The Therapist @The Prosecutor: The Prosecutor, you've been very quiet since two different people have now described night actions that directly involve you. The Underdog says they swapped you, and The Statistician says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?"
+      "speech": "[嚴審官]，自從兩個不同的人描述了與你直接相關的夜間行動以來，你一直很安靜。 [小人物]說他們交換了你，[統計學家]說他們搶劫了你。您能否幫助我們了解您最初的角色是什麼，現在您擔任什麼角色？",
+      "log_line": "心理諮商師 @嚴審官: [嚴審官]，自從兩個不同的人描述了與你直接相關的夜間行動以來，你一直很安靜。 [小人物]說他們交換了你，[統計學家]說他們搶劫了你。您能否幫助我們了解您最初的角色是什麼，現在您擔任什麼角色？"
     }
   ],
-  "chat_history": "[2026-06-29 11:49:43 HKT] The Gut Player: Alright, round three. I'm a villager — again. Got nothing last night, same as always. But I'm telling you right now, anyone who sits there quiet, my gut's gonna point straight at 'em. So who's got something to say this time?\n[2026-06-29 11:50:17 HKT] The Underdog: Um, hi. Sorry, I know I probably should've said this earlier, but... I'm the Troublemaker? I think? I swapped The Prosecutor and The Chaos Agent last night. I don't know what either of them was, but... one of them might have changed roles? Could you both please tell us what you were and what you are now? I'm really sorry if this is confusing, I just... I want to help?\n[2026-06-29 11:50:46 HKT] The Statistician: I was the Robber. I targeted The Prosecutor and took their card — I'm now a Villager. That means The Prosecutor holds the Robber card now, and their original role was Villager. They have no night info as Robber since my action happened before the Seer phase. The Prosecutor's original role is known to me: Villager. Update your priors accordingly.\n[2026-06-29 11:51:02 HKT] The Therapist: It's interesting how quiet it is right now... like everyone's choosing their words very carefully. Does anyone feel comfortable sharing what they saw last night? Even a small detail could help us figure this out together.\n[2026-06-29 11:51:22 HKT] The Prosecutor: Court is in session. I was a Villager — no night info, no special action. But I notice this room has a habit of repeating patterns, and I intend to break them. Everyone who has a night action, step forward now. State your role, your target, and what you learned. No theatrics, no vague omens — just the facts. I'll cross-examine every claim.\n[2026-06-29 11:51:53 HKT] The Chaos Agent: Alright, let me share something... unexpected. Last night I woke up and I was not what I started as. Someone swapped my card — I'm now the Robber. I don't know who I swapped with or what they became. The whole narrative of this room has shifted. I'd love to hear what everyone else has to say about their evening. What did you all wake up as?\n[2026-06-29 11:52:59 HKT] The Underdog @The Prosecutor: Um, sorry to push, but... The Prosecutor and The Chaos Agent? Could you please tell us what you were and what you are now? I know this is awkward, but if I really did swap your cards, that's... that's important, right? I don't want to be the reason we vote wrong. Please?\n[2026-06-29 11:53:21 HKT] The Statistician @The Underdog: The Underdog, your Troublemaker claim is consistent with my Robber action — Robber acts before Troublemaker. I robbed The Prosecutor first (they were Villager, I became Villager, they got Robber card). Then you swapped The Prosecutor (now Robber) and The Chaos Agent. If this timeline holds, The Prosecutor should now have The Chaos Agent's original role, and The Chaos Agent should have the Robber card. The Prosecutor, The Chaos Agent — confirm your current roles. If the timeline breaks, we have a liar.\n[2026-06-29 11:53:48 HKT] The Therapist @The Prosecutor: The Prosecutor, you've been very quiet since two different people have now described night actions that directly involve you. The Underdog says they swapped you, and The Statistician says they robbed you. Could you help us understand — what was your original role, and what role do you hold right now?\n",
+  "chat_history": "直覺俠: 好了，第三輪。我是村民——又來了。昨晚什麼都沒有，跟往常一樣。但我現在告訴你們，誰要是坐在那裡不說話，我的直覺就會直接指向他們。所以這次誰有話要說？\n小人物: 嗯，嗨。抱歉，我知道我應該早點說，但是…我是 <搗蛋鬼>？我認為？我昨晚交換了[嚴審官]和[攪局者]。我不知道他們兩個是誰，但…其中一個可能改變了角色？你們能告訴我們你們曾經是什麼樣的，現在又是什麼樣的嗎？如果這令人困惑，我真的很抱歉，我只是......我想幫忙？\n統計學家: 我是<強盜>。我瞄準了 [嚴審官] 並拿走了他們的卡片——我現在是 <村民>。這意味著[嚴審官]現在持有<強盜>卡，他們原來的角色是<村民>。他們沒有 <強盜> 夜間訊息，因為我的操作發生在 <預言家> 階段之前。我知道[嚴審官]原來的角色：<村民>。相應地更新你的先驗知識。\n心理諮商師: 有趣的是現在多麼安靜……就像每個人都非常小心地選擇自己的言語一樣。有人願意分享他們昨晚看到的事情嗎？即使是一個小細節也可以幫助我們共同解決這個問題。\n嚴審官: 法庭正在開庭。我是 <村民>——沒有夜間信息，沒有特殊行動。但我注意到這個房間有重複模式的習慣，我打算打破它們。各位有夜間行動的人，現在就上前吧。陳述你的角色、你的目標、以及你學到了什麼。沒有戲劇性，沒有模糊的預兆——只有事實。我會盤問每一項主張。\n攪局者: 好吧，讓我分享一些…意想不到的事情。昨晚我醒來，發現我已經不是原來的我了。有人交換我的卡片了——我現在是 <強盜>。我不知道我跟誰交換了，也不知道他們變成了什麼。這個房間的整個敘述已經改變了。我很想聽聽其他人對他們的夜晚有何評價。大家醒来都变成啥样了？\n小人物 @嚴審官: 嗯，很抱歉推送，但是...[嚴審官] 和 [攪局者]？可以告訴我們你曾經是什麼樣子，現在又是什麼樣子嗎？我知道這很尷尬，但如果我真的交換了你們的卡，那就…這很重要，對吧？我不想成為我們投票錯誤的原因。請？\n統計學家 @小人物: [小人物]，您的 <搗蛋鬼> 聲明與我的 <強盜> 操作一致 - <強盜> 在 <搗蛋鬼> 之前執行。我先搶了[嚴審官]（他們是<村民>，我變成了<村民>，他們拿到了<強盜>卡）。然後你交換了[嚴審官]（現在是<強盜>）和[攪局者]。如果這個時間線成立，[嚴審官] 現在應該擁有 [攪局者] 的原始角色，並且 [攪局者] 應該擁有 <強盜> 卡。 [嚴審官]、[攪局者] — 確認您目前的角色。如果時間線被打破，我們就有騙子了。\n心理諮商師 @嚴審官: [嚴審官]，自從兩個不同的人描述了與你直接相關的夜間行動以來，你一直很安靜。 [小人物]說他們交換了你，[統計學家]說他們搶劫了你。您能否幫助我們了解您最初的角色是什麼，現在您擔任什麼角色？\n",
   "chat_log_path": "/home/openclaw/.openclaw/workspaces/ai-werewolf/logs/chat_history.md"
 }

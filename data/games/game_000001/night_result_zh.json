@@ -42,10 +42,10 @@
       "initial_role": "Werewolf",
       "current_role": "Robber",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Gut Player]."
+        "你看到另一個<狼人>是：[直覺俠]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Gut Player]."
+      "night_memory_text": "你看到另一個<狼人>是：[直覺俠]。"
     },
     "4": {
       "id": "4",
@@ -59,10 +59,10 @@
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Chaos Agent]."
+        "你看到另一個<狼人>是：[攪局者]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
+      "night_memory_text": "你看到另一個<狼人>是：[攪局者]。"
     },
     "5": {
       "id": "5",
@@ -76,18 +76,18 @@
       "initial_role": "Robber",
       "current_role": "Villager",
       "night_memory": [
-        "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+        "你搶了[嚴審官]的卡。交換後，您現在是：<村民>。"
       ],
       "night_actions": [
         {
           "role": "Robber",
-          "action": "搶奪",
+          "action": "rob",
           "target": "The Prosecutor",
           "new_role": "Villager",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You robbed [The Prosecutor]'s card. After swapping, you are now: <Villager>."
+      "night_memory_text": "你搶了[嚴審官]的卡。交換後，您現在是：<村民>。"
     },
     "6": {
       "id": "6",
@@ -101,12 +101,12 @@
       "initial_role": "Troublemaker",
       "current_role": "Troublemaker",
       "night_memory": [
-        "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+        "你交換了[嚴審官]和[攪局者]的牌，但你不知道它們變成了什麼。"
       ],
       "night_actions": [
         {
           "role": "Troublemaker",
-          "action": "交換",
+          "action": "swap",
           "targets": [
             "The Prosecutor",
             "The Chaos Agent"
@@ -114,7 +114,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped [The Prosecutor] and [The Chaos Agent]'s cards, but you don't know what they became."
+      "night_memory_text": "你交換了[嚴審官]和[攪局者]的牌，但你不知道它們變成了什麼。"
     }
   },
   "seating_order": [
@@ -132,16 +132,34 @@
   ],
   "night_trace": [
     {
+      "actor": "The Chaos Agent",
+      "role": "Werewolf",
+      "action": "peek_wolves",
+      "targets": [
+        "The Gut Player"
+      ],
+      "source": "deterministic"
+    },
+    {
+      "actor": "The Gut Player",
+      "role": "Werewolf",
+      "action": "peek_wolves",
+      "targets": [
+        "The Chaos Agent"
+      ],
+      "source": "deterministic"
+    },
+    {
       "actor": "The Statistician",
       "role": "Robber",
-      "action": "搶奪",
+      "action": "rob",
       "target": "The Prosecutor",
       "source": "agent"
     },
     {
       "actor": "The Underdog",
       "role": "Troublemaker",
-      "action": "交換",
+      "action": "swap",
       "targets": [
         "The Prosecutor",
         "The Chaos Agent"

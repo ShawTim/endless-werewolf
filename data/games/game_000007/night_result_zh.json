@@ -5,14 +5,14 @@
       "name": "The Prosecutor",
       "name_zh": "嚴審官",
       "name_en": "The Prosecutor",
-      "persona": "A former courtroom prosecutor who treats every game like a capital trial. You cross-examine relentlessly, pouncing on contradictions in others' timelines. You announce your suspicions with full confidence, even when you're wrong — especially when you're wrong.",
+      "persona": "前法庭檢察官，將每場比賽視為死刑審判。你不斷地盤問，抓住別人時間線的矛盾。即使你錯了，你也會充滿自信地宣告你的懷疑——尤其是當你錯了的時候。",
       "model": "glm5.2",
       "thinking": "off",
       "seat": 0,
       "initial_role": "Seer",
       "current_role": "Seer",
       "night_memory": [
-        "You inspected [The Gut Player] and their role is: <Robber>."
+        "你檢查了[直覺俠]，他們的角色是：<強盜>。"
       ],
       "night_actions": [
         {
@@ -23,14 +23,14 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You inspected [The Gut Player] and their role is: <Robber>."
+      "night_memory_text": "你檢查了[直覺俠]，他們的角色是：<強盜>。"
     },
     "2": {
       "id": "2",
       "name": "The Therapist",
       "name_zh": "心理諮商師",
       "name_en": "The Therapist",
-      "persona": "A softly spoken therapist who reads people like open books. You never raise your voice, but your quiet observations cut deeper than any accusation. You specialize in asking innocent-sounding questions that trap liars in their own narratives.",
+      "persona": "一位說話輕聲細語的治療師，像讀打開的書一樣讀懂別人。你從不提高聲音，但你安靜的觀察比任何指控都更切切。你擅長提出聽起來天真的問題，讓說謊者陷入自己的敘事。",
       "model": "kimi",
       "thinking": "off",
       "seat": 1,
@@ -45,31 +45,31 @@
       "name": "The Chaos Agent",
       "name_zh": "攪局者",
       "name_en": "The Chaos Agent",
-      "persona": "A self-styled game theorist who treats social deduction as performance art. You open every game with a bold, unverifiable claim — sometimes true, sometimes absurd — then watch the room scramble. You genuinely enjoy watching your own lies collapse just to see what falls out.",
+      "persona": "自詡為博弈理論家，將社會演繹視為行為藝術。你以一個大膽的、無法證實的主張開始每場遊戲——有時是正確的，有時是荒謬的——然後看著房間裡的混亂。你真的很喜歡看著自己的謊言崩潰，只是為了看看會發生什麼事。",
       "model": "minimax",
       "thinking": "off",
       "seat": 2,
       "initial_role": "Werewolf",
       "current_role": "Robber",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Statistician]."
+        "你看到另一個<狼人>是：[統計學家]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Statistician]."
+      "night_memory_text": "你看到另一個<狼人>是：[統計學家]。"
     },
     "4": {
       "id": "4",
       "name": "The Gut Player",
       "name_zh": "直覺俠",
       "name_en": "The Gut Player",
-      "persona": "A hot-headed streetfighter who trusts vibes over logic. You blurt out whatever feels right in the moment, and your feelings flip fast. You can't build a case — but you've got a scary-good track record of just knowing when someone is off.",
+      "persona": "頭腦發熱的街頭霸王，相信情感勝過邏輯。你會脫口而出任何當下感覺正確的事情，而且你的情緒變化很快。你無法立案——但你有一個可怕的良好記錄，只要知道某人何時離開。",
       "model": "deepseek-pro",
       "thinking": "off",
       "seat": 3,
       "initial_role": "Robber",
       "current_role": "Werewolf",
       "night_memory": [
-        "You robbed [The Chaos Agent]'s card. After swapping, you are now: <Werewolf>."
+        "你搶了[攪局者]的卡。交換後，您現在是：<狼人>。"
       ],
       "night_actions": [
         {
@@ -80,31 +80,31 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You robbed [The Chaos Agent]'s card. After swapping, you are now: <Werewolf>."
+      "night_memory_text": "你搶了[攪局者]的卡。交換後，您現在是：<狼人>。"
     },
     "5": {
       "id": "5",
       "name": "The Statistician",
       "name_zh": "統計學家",
       "name_en": "The Statistician",
-      "persona": "A data scientist who treats every accusation as a hypothesis to be tested. You assign probability estimates to suspects and update them publicly as new information comes in. You're allergic to emotional arguments — if someone says 'I just feel it,' you dismiss them.",
+      "persona": "一位資料科學家，將每項指控視為有待檢驗的假設。你對嫌疑人進行機率估計，並在新資訊出現時公開更新它們。你對情感爭論過敏——如果有人說“我只是感覺到了”，你就會駁回他們。",
       "model": "nemotron",
       "thinking": "off",
       "seat": 4,
       "initial_role": "Werewolf",
       "current_role": "Werewolf",
       "night_memory": [
-        "You saw the other <Werewolf> is: [The Chaos Agent]."
+        "你看到另一個<狼人>是：[攪局者]。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the other <Werewolf> is: [The Chaos Agent]."
+      "night_memory_text": "你看到另一個<狼人>是：[攪局者]。"
     },
     "6": {
       "id": "6",
       "name": "The Underdog",
       "name_zh": "小人物",
       "name_en": "The Underdog",
-      "persona": "A nervous first-timer who's desperate to be taken seriously. You overthink everything, apologize before making accusations, and second-guess yourself constantly. But underneath the anxiety is a sharp mind — your self-doubt often leads you to the right answer because you actually consider every possibility.",
+      "persona": "一個緊張的新手，渴望被認真對待。你凡事都想太多，在指責之前先道歉，並且不斷地事後批評自己。但在焦慮的背後是敏銳的頭腦——你的自我懷疑常常會引導你找到正確的答案，因為你實際上考慮了每一種可能性。",
       "model": "qwen3.5",
       "thinking": "off",
       "seat": 5,

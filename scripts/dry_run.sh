@@ -23,7 +23,7 @@ run_one_game() {
   # 1. Night phase: new game + prepare + AI decisions + finalize
   echo "[1/6] Night phase..."
   python3 - <<'PY'
-import json, subprocess, uuid
+import json, re, subprocess, time, uuid
 from pathlib import Path
 import gm_night, bridge_agent
 
@@ -37,6 +37,7 @@ def call_bridge(step):
     model = dr.get("model", "")
     thinking = dr.get("thinking", "off")
     prompt = bridge_agent.build_night_action_prompt(dr)
+    started = time.perf_counter()
     proc = subprocess.run(
         ["openclaw", "agent", "--agent", "ai_werewolf_bridge",
          "--message", prompt, "--json",
@@ -53,13 +54,21 @@ def call_bridge(step):
         raise RuntimeError(f"No payloads for {dr['player_name']}: {proc.stdout[:200]}")
     text = (result[0].get("text") or "").strip()
     try:
-        return json.loads(text)
+        decision = json.loads(text)
     except json.JSONDecodeError:
         start = text.find("{")
         end = text.rfind("}")
         if start != -1 and end > start:
-            return json.loads(text[start:end+1])
-        raise RuntimeError(f"No valid JSON for {dr['player_name']}: {text[:200]}")
+            decision = json.loads(text[start:end+1])
+        else:
+            raise RuntimeError(f"No valid JSON for {dr['player_name']}: {text[:200]}")
+    decision["_meta"] = {
+        "model": model, "thinking": thinking,
+        "latency_ms": round((time.perf_counter() - started) * 1000),
+    }
+    if re.search(r"[\u3400-\u9fff]", decision.get("thought", "")):
+        raise RuntimeError(f"Non-English night reasoning from {dr['player_name']}")
+    return decision
 
 decisions = {}
 for step in plan:
@@ -67,6 +76,8 @@ for step in plan:
     try:
         result = call_bridge(step)
         decision = {"action": result.get("action", "")}
+        decision["thought"] = result.get("thought", "")
+        decision["_meta"] = result.get("_meta", {})
         if result.get("targets"):
             decision["targets"] = result["targets"]
         elif result.get("target") is not None:

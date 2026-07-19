@@ -73,6 +73,10 @@ Your current role: {current_role}
 [Your Task]
 Decide your daytime action. You may choose "speak" (talk) or "pass" (stay silent).
 
+Language requirement:
+- Write both "thought" and "speech" entirely in English.
+- Do not use Chinese, Cantonese, or any other language.
+
 Strategic guidelines (must consider):
 1) If someone directly challenged you and you ignore it, that can look suspicious (sometimes strategically useful).
 2) Speaking too aggressively can also increase suspicion.
@@ -126,6 +130,10 @@ Your current role: {current_role}
 [Your Task]
 Based on the discussion, your role's win condition, and your persona, vote to exile one player.
 
+Language requirement:
+- Write "thought" entirely in English.
+- Do not use Chinese or Cantonese.
+
 Voting strategy hints:
 - Village team: Vote for the player you most suspect is a Werewolf.
 - Werewolf team: Vote for the player who is the biggest threat to you.
@@ -173,6 +181,10 @@ Your role: {role}
 
 [Your Task]
 Choose one legal action based on your role's ability and your strategy.
+
+Language requirement:
+- Write "thought" entirely in English.
+- Do not use Chinese or Cantonese.
 
 Role strategy hints:
 - Werewolf: If you are the solo wolf, peek at a center card for intel. If there are two wolves, you recognize each other.

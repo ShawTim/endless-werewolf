@@ -27,11 +27,21 @@ except ImportError:
         "Tanner": "皮匠", "Minion": "爪牙", "Insomniac": "失眠者",
     }
 
-# Fields that contain translatable prose
-TRANSLATABLE_KEYS = {"persona", "speech", "reason", "quote", "action"}
+# Fields that contain translatable prose. Structural fields such as action,
+# role, target, status, and IDs must remain canonical across languages.
+TRANSLATABLE_KEYS = {
+    "persona", "night_memory_text", "speech", "reason", "quote",
+    "thought", "reasoning_summary", "error",
+}
 
 # Player name fields to skip (frontend handles localization)
 SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "player_name_zh", "player_name_en", "target", "actor", "voter"}
+CJK_RE = re.compile(r"[\u3400-\u9FFF]")
+CANTONESE_RE = re.compile(
+    r"(?:我哋|你哋|佢哋|尋晚|而家|唔|冇|咗|嘅|喺|嗰|嚟|啲|"
+    r"點解|先至|揸住|真係|係咪|係個|邊個|有冇|錯晒|啱到|"
+    r"睇咗|講緊|㗎|喎|啫|囉)"
+)
 
 def _pre_translate_tags(text: str, en_to_zh_players: dict[str, str]) -> str:
     """
@@ -59,7 +69,7 @@ def _needs_translation(key: str, value: Any) -> bool:
     if key in SKIP_KEYS:
         return False
     # Skip if already mostly Chinese
-    cjk_count = len(re.findall(r"[\u3400-\u9FFF]", value))
+    cjk_count = len(CJK_RE.findall(value))
     if cjk_count > len(value) * 0.3:
         return False
     # Translate persona, speech, reason, quote, action fields
@@ -180,10 +190,14 @@ def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
         response = _call_translator(prompt)
         translations = _parse_llm_response(response, len(batch))
 
-        # Fallback: if translation failed, keep original
+        # Never leak English source prose into a Chinese archive.
         for j, (key, orig) in enumerate(batch):
             if not translations[j]:
-                translations[j] = orig
+                raise RuntimeError(f"Chinese translation failed for {key}: {orig[:120]}")
+            if not CJK_RE.search(translations[j]):
+                raise RuntimeError(f"Chinese translation contains no Chinese text: {orig[:120]}")
+            if CANTONESE_RE.search(translations[j]):
+                raise RuntimeError(f"Chinese translation contains Cantonese: {translations[j][:120]}")
 
         results.extend(translations)
 

@@ -3,6 +3,7 @@ import json
 import random
 import re
 import subprocess
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -82,6 +83,7 @@ class BridgeAgentClient:
         if thinking:
             cmd.extend(["--thinking", thinking])
 
+        started = time.perf_counter()
         try:
             proc = await asyncio.to_thread(
                 subprocess.run,
@@ -105,23 +107,48 @@ class BridgeAgentClient:
 
         text = (payloads[0].get("text") or "").strip()
         try:
-            return json.loads(text)
+            decision = json.loads(text)
         except json.JSONDecodeError:
             start = text.find("{")
             end = text.rfind("}")
             if start == -1 or end == -1 or end <= start:
                 return {}
-            return json.loads(text[start:end + 1])
+            decision = json.loads(text[start:end + 1])
+        decision["_meta"] = {
+            "model": model or "",
+            "thinking": thinking or "off",
+            "latency_ms": round((time.perf_counter() - started) * 1000),
+            "raw_response": text,
+        }
+        return decision
 
     async def request_day_action(self, player_context: dict[str, Any], chat_history: str, turn_hints: dict[str, Any] | None = None) -> dict[str, Any]:
         prompt = bridge_agent.build_thinker_prompt(player_context, chat_history, turn_hints=turn_hints)
         model = player_context.get("model")
         thinking = player_context.get("thinking")
         decision = await self._call_bridge(prompt, model=model, thinking=thinking)
+        if re.search(r"[\u3400-\u9fff]", "%s %s" % (
+            decision.get("speech", ""), decision.get("thought", "")
+        )):
+            decision = await self._call_bridge(
+                prompt + "\n\nCRITICAL CORRECTION: Your previous response used Chinese. "
+                "Return the JSON again with both thought and speech written entirely in English.",
+                model=model,
+                thinking=thinking,
+            )
+        if re.search(r"[\u3400-\u9fff]", "%s %s" % (
+            decision.get("speech", ""), decision.get("thought", "")
+        )):
+            raise RuntimeError("bridge returned non-English day decision after retry")
+        meta = decision.get("_meta", {})
         return {
             "action": decision.get("action", "pass"),
             "target": decision.get("target"),
             "speech": decision.get("speech", ""),
+            "thought": decision.get("thought", ""),
+            "model": meta.get("model", model or ""),
+            "thinking": meta.get("thinking", thinking or "off"),
+            "latency_ms": meta.get("latency_ms"),
         }
 
     async def request_vote(self, player_context: dict[str, Any], chat_history: str, valid_targets: list[str]) -> dict[str, Any]:
@@ -129,7 +156,23 @@ class BridgeAgentClient:
         model = player_context.get("model")
         thinking = player_context.get("thinking")
         decision = await self._call_bridge(prompt, model=model, thinking=thinking)
-        return {"vote_target": decision.get("vote_target")}
+        if re.search(r"[\u3400-\u9fff]", decision.get("thought", "")):
+            decision = await self._call_bridge(
+                prompt + "\n\nCRITICAL CORRECTION: Your previous response used Chinese. "
+                "Return the JSON again with the thought written entirely in English.",
+                model=model,
+                thinking=thinking,
+            )
+        if re.search(r"[\u3400-\u9fff]", decision.get("thought", "")):
+            raise RuntimeError("bridge returned non-English vote decision after retry")
+        meta = decision.get("_meta", {})
+        return {
+            "vote_target": decision.get("vote_target"),
+            "thought": decision.get("thought", ""),
+            "model": meta.get("model", model or ""),
+            "thinking": meta.get("thinking", thinking or "off"),
+            "latency_ms": meta.get("latency_ms"),
+        }
 
 
 class DayPhaseRuntime:
@@ -233,7 +276,12 @@ class DayPhaseRuntime:
             speech = (decision.get("speech") or "").strip()
 
             if action == "pass":
-                self.day_trace.append({"type": "pass", "player_name": player_name, "mentioned_recently": was_mentioned})
+                self.day_trace.append({
+                    "type": "pass", "player_name": player_name, "mentioned_recently": was_mentioned,
+                    "thought": decision.get("thought", ""), "model": decision.get("model", ""),
+                    "thinking": decision.get("thinking", "off"), "latency_ms": decision.get("latency_ms"),
+                    "source": "agent",
+                })
                 continue
 
             if action != "speak" or not speech:
@@ -252,6 +300,12 @@ class DayPhaseRuntime:
                 "target": target,
                 "speech": speech,
                 "log_line": line.strip(),
+                "timestamp": line.split("]", 1)[0].lstrip("[") if "]" in line else "",
+                "thought": decision.get("thought", ""),
+                "model": decision.get("model", ""),
+                "thinking": decision.get("thinking", "off"),
+                "latency_ms": decision.get("latency_ms"),
+                "source": "agent",
             })
 
     async def run_discussion(self) -> dict[str, Any]:
@@ -306,10 +360,19 @@ class DayPhaseRuntime:
             vote_target = decision.get("vote_target")
             if vote_target not in valid_targets:
                 vote_target = random.choice(valid_targets)
-            return player["name"], vote_target, None
+            return player["name"], vote_target, {
+                "type": "vote", "player": player["name"], "target": vote_target,
+                "thought": decision.get("thought", ""), "model": decision.get("model", ""),
+                "thinking": decision.get("thinking", "off"), "latency_ms": decision.get("latency_ms"),
+                "source": "agent",
+            }
         except Exception as e:
             vote_target = random.choice(valid_targets)
-            return player["name"], vote_target, {"player": player["name"], "error": str(e), "fallback": vote_target}
+            return player["name"], vote_target, {
+                "type": "vote", "player": player["name"], "target": vote_target,
+                "error": str(e), "fallback": vote_target, "source": "fallback",
+                "model": player.get("model", ""), "thinking": player.get("thinking", "off"),
+            }
 
     async def run_voting_phase(self) -> dict[str, Any]:
         players = self.load_players_from_night_result()
@@ -327,8 +390,7 @@ class DayPhaseRuntime:
             results = await asyncio.gather(*[self._vote_one(p, players, chat_history) for p in batch])
             for name, target, trace in results:
                 votes[name] = target
-                if trace:
-                    vote_trace.append(trace)
+                vote_trace.append(trace)
                 print(f"  {name} -> {target}")
             # Small pause between batches
             if i < len(batches) - 1:

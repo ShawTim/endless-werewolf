@@ -12,12 +12,12 @@
       "initial_role": "Troublemaker",
       "current_role": "Troublemaker",
       "night_memory": [
-        "You swapped [The Statistician] and [The Chaos Agent]'s cards, but you don't know what they became."
+        "你交換了[統計學家]和[攪局者]的牌，但你不知道它們變成了什麼。"
       ],
       "night_actions": [
         {
           "role": "Troublemaker",
-          "action": "交換",
+          "action": "swap",
           "targets": [
             "The Statistician",
             "The Chaos Agent"
@@ -25,7 +25,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You swapped [The Statistician] and [The Chaos Agent]'s cards, but you don't know what they became."
+      "night_memory_text": "你交換了[統計學家]和[攪局者]的牌，但你不知道它們變成了什麼。"
     },
     "2": {
       "id": "2",
@@ -39,18 +39,18 @@
       "initial_role": "Robber",
       "current_role": "Seer",
       "night_memory": [
-        "You robbed [The Underdog]'s card. After swapping, you are now: <Seer>."
+        "你搶了[小人物]的卡。交換後，您現在是：<預言家>。"
       ],
       "night_actions": [
         {
           "role": "Robber",
-          "action": "搶劫",
+          "action": "rob",
           "target": "The Underdog",
           "new_role": "Seer",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You robbed [The Underdog]'s card. After swapping, you are now: <Seer>."
+      "night_memory_text": "你搶了[小人物]的卡。交換後，您現在是：<預言家>。"
     },
     "3": {
       "id": "3",
@@ -64,8 +64,8 @@
       "initial_role": "Werewolf",
       "current_role": "Villager",
       "night_memory": [
-        "You are the only <Werewolf> in play. You may peek at one center card.",
-        "You peeked at center card 0 and saw: <Tanner>."
+        "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。",
+        "你看了看中心卡 0，看到：<皮匠>。"
       ],
       "night_actions": [
         {
@@ -76,7 +76,7 @@
           "source": "agent"
         }
       ],
-      "night_memory_text": "You are the only <Werewolf> in play. You may peek at one center card. You peeked at center card 0 and saw: <Tanner>."
+      "night_memory_text": "你是遊戲中唯一的 <狼人>。您可以看一眼中間的一張卡片。你看了看中心卡 0，看到：<皮匠>。"
     },
     "4": {
       "id": "4",
@@ -90,10 +90,10 @@
       "initial_role": "Minion",
       "current_role": "Minion",
       "night_memory": [
-        "You saw the Werewolves are: [The Chaos Agent]. The Werewolves do not know you are the <Minion>."
+        "你看到的狼人是：[攪局者]。狼人不知道你是<爪牙>。"
       ],
       "night_actions": [],
-      "night_memory_text": "You saw the Werewolves are: [The Chaos Agent]. The Werewolves do not know you are the <Minion>."
+      "night_memory_text": "你看到的狼人是：[攪局者]。狼人不知道你是<爪牙>。"
     },
     "5": {
       "id": "5",
@@ -122,18 +122,18 @@
       "initial_role": "Seer",
       "current_role": "Robber",
       "night_memory": [
-        "You inspected [The Chaos Agent] and their role is: <Werewolf>."
+        "你檢查了[攪局者]，他們的角色是：<狼人>。"
       ],
       "night_actions": [
         {
           "role": "Seer",
-          "action": "檢查玩家",
+          "action": "inspect_player",
           "target": "The Chaos Agent",
           "seen_role": "Werewolf",
           "source": "agent"
         }
       ],
-      "night_memory_text": "You inspected [The Chaos Agent] and their role is: <Werewolf>."
+      "night_memory_text": "你檢查了[攪局者]，他們的角色是：<狼人>。"
     }
   },
   "seating_order": [
@@ -153,7 +153,7 @@
     {
       "actor": "The Gut Player",
       "role": "Minion",
-      "action": "辨識狼人",
+      "action": "identify_wolves",
       "targets": [
         "The Chaos Agent"
       ],
@@ -169,21 +169,21 @@
     {
       "actor": "The Underdog",
       "role": "Seer",
-      "action": "檢查玩家",
+      "action": "inspect_player",
       "target": "The Chaos Agent",
       "source": "agent"
     },
     {
       "actor": "The Therapist",
       "role": "Robber",
-      "action": "搶劫",
+      "action": "rob",
       "target": "The Underdog",
       "source": "agent"
     },
     {
       "actor": "The Prosecutor",
       "role": "Troublemaker",
-      "action": "交換",
+      "action": "swap",
       "targets": [
         "The Statistician",
         "The Chaos Agent"
