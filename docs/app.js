@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260719-language-p0-2';
+const CACHE_VERSION = '20260719-language-p0-3';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -2481,7 +2481,7 @@ function showDayInfo() {
       const p = PLAYERS.find(x => x.name === s.player_name);
       const displayName = lang === 'zh' && p ? (p.name_zh || s.player_name) : s.player_name;
       html += `<div class="speech-entry active-replay-target" style="border-left-color:${accent}">`;
-      html += `<div class="speaker" style="color:${accent}">${displayName}${s.target ? ' @' + s.target : ''}</div>`;
+      html += `<div class="speaker" style="color:${accent}">${displayName}${s.target ? ' @' + displayPlayerName(s.target) : ''}</div>`;
       html += `<div class="text">${formatGameText(s.speech || '')}</div>`;
       if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
       html += '</div>';
@@ -3027,7 +3027,7 @@ function buildGameSectionHTML(p, accent, displayName) {
     html += `<div class="modal-section"><h3>${t('speeches')} (${d.speeches.length})</h3>`;
     d.speeches.forEach(s => {
       html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-      if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
+      if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${displayPlayerName(s.target)}</div>`;
       else html += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
       html += `<div class="text">${formatGameText(s.speech||'')}</div>`;
       if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
@@ -3291,7 +3291,7 @@ function showPlayerDetail(playerId) {
       html += `<div class="panel-section"><h3>${t('speeches')}</h3>`;
       speeches.forEach(s => {
         html += `<div class="speech-entry" style="border-left-color:${accent}">`;
-        if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${s.target}</div>`;
+        if (s.target) html += `<div class="speaker" style="color:${accent}">${displayName} @${displayPlayerName(s.target)}</div>`;
         else html += `<div class="speaker" style="color:${accent}">${displayName}</div>`;
         html += `<div class="text">${formatGameText(s.speech || '')}</div>`;
         if (s.timestamp) html += `<div class="time">${s.timestamp}</div>`;
