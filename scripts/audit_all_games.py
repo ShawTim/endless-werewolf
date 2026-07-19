@@ -29,14 +29,21 @@ ALLOWED_ROLES = {
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
 LATIN_RE = re.compile(r"[A-Za-z]")
 CANTONESE_RE = re.compile(
-    r"(?:我哋|你哋|佢哋|尋晚|而家|唔|冇|咗|嘅|喺|嗰|嚟|啲|"
-    r"點解|先至|揸住|真係|係咪|係個|邊個|有冇|錯晒|啱到|"
-    r"睇咗|講緊|㗎|喎|啫|囉)"
+    r"(?:我哋|你哋|佢哋|佢|哋|尋晚|琴晚|噚晚|而家|唔|冇|咗|"
+    r"嘅|喺|嗰|嚟|啲|咩|噉|咁樣|點解|先至|揸住|真係|係咪|"
+    r"係個|邊個|有冇|錯晒|啱到|睇咗|講緊|㗎|喎|啫|囉|畀|"
+    r"俾|攞|搵|返嚟|瞓|嘢|仲係|睇下|講咗|唔使|唔知|唔係|"
+    r"冇人|邊張|乜嘢|做緊|諗住|等陣)"
 )
+SIMPLIFIED_ONLY_RE = re.compile(
+    "[" + re.escape("么这没样开说话诉计装统游来换扑戏对学后变东着") + "]"
+)
+UNTRANSLATED_LATIN_RE = re.compile(r"[A-Za-z]{2,}")
 LOG_PREFIX_RE = re.compile(r"^\[[^\]]+\]\s+[^:：]+[:：]\s*")
 PROSE_KEYS = {
     "persona", "night_memory_text", "speech", "reason", "quote",
-    "thought", "reasoning_summary", "error", "chat_history",
+    "thought", "reasoning", "reasoning_summary", "error", "chat_history",
+    "log_line",
 }
 PROSE_LIST_KEYS = {"night_memory"}
 
@@ -98,6 +105,23 @@ def iter_prose(obj, path="", parent_key=""):
                 yield from iter_prose(value, child_path, parent_key)
 
 
+def iter_strings(obj, path=""):
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            child_path = "%s.%s" % (path, key) if path else key
+            if isinstance(value, str):
+                yield child_path, key, value
+            elif isinstance(value, (dict, list)):
+                yield from iter_strings(value, child_path)
+    elif isinstance(obj, list):
+        for index, value in enumerate(obj):
+            child_path = "%s[%d]" % (path, index)
+            if isinstance(value, str):
+                yield child_path, "", value
+            elif isinstance(value, (dict, list)):
+                yield from iter_strings(value, child_path)
+
+
 def audit_language(payloads, errors):
     pairs = [
         ("night_result.json", "night_result_zh.json"),
@@ -117,6 +141,11 @@ def audit_language(payloads, errors):
                 errors.append("%s %s is not Chinese prose" % (zh_name, path))
             if CANTONESE_RE.search(text):
                 errors.append("%s %s contains Cantonese" % (zh_name, path))
+            if SIMPLIFIED_ONLY_RE.search(text):
+                errors.append("%s %s contains Simplified Chinese" % (zh_name, path))
+            latin_check = re.sub(r"\bP(?=\s*\()", "", text)
+            if UNTRANSLATED_LATIN_RE.search(latin_check):
+                errors.append("%s %s contains untranslated Latin text" % (zh_name, path))
             if key == "speech" and LOG_PREFIX_RE.search(text):
                 errors.append("%s %s contains a raw log prefix" % (zh_name, path))
 
@@ -277,12 +306,79 @@ def file_hash(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def audit_archive_text_files(root):
+    errors = []
+    files_checked = 0
+    strings_checked = 0
+    allowed_english_cjk_keys = {"name_zh", "player_name_zh"}
+
+    for path in sorted(p for p in root.rglob("*") if p.is_file()):
+        if path.suffix not in {".json", ".md"}:
+            continue
+        files_checked += 1
+        localized = "_zh" in path.stem
+        relative = path.relative_to(root)
+
+        if path.suffix == ".md":
+            text = path.read_text(encoding="utf-8")
+            strings_checked += 1
+            if localized:
+                if CANTONESE_RE.search(text):
+                    errors.append("%s contains Cantonese" % relative)
+                if SIMPLIFIED_ONLY_RE.search(text):
+                    errors.append("%s contains Simplified Chinese" % relative)
+                latin_check = re.sub(r"\bP(?=\s*\()", "", text)
+                if UNTRANSLATED_LATIN_RE.search(latin_check):
+                    errors.append("%s contains untranslated Latin text" % relative)
+                if not CJK_RE.search(text):
+                    errors.append("%s does not contain Chinese text" % relative)
+            elif CJK_RE.search(text):
+                errors.append("%s contains Chinese text" % relative)
+            continue
+
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            errors.append("%s is invalid JSON: %s" % (relative, exc))
+            continue
+
+        for field_path, key, text in iter_strings(payload):
+            strings_checked += 1
+            if localized:
+                if key in PROSE_KEYS:
+                    if CANTONESE_RE.search(text):
+                        errors.append("%s %s contains Cantonese" % (relative, field_path))
+                    if SIMPLIFIED_ONLY_RE.search(text):
+                        errors.append("%s %s contains Simplified Chinese" % (relative, field_path))
+                    latin_check = re.sub(r"\bP(?=\s*\()", "", text)
+                    if UNTRANSLATED_LATIN_RE.search(latin_check):
+                        errors.append("%s %s contains untranslated Latin text" % (
+                            relative, field_path))
+            elif CJK_RE.search(text) and key not in allowed_english_cjk_keys:
+                errors.append("%s %s contains Chinese text" % (relative, field_path))
+
+    return {
+        "root": str(root.relative_to(ROOT)),
+        "files_checked": files_checked,
+        "strings_checked": strings_checked,
+        "errors": errors,
+    }
+
+
 def main():
     public_dirs = sorted(p for p in PUBLIC_ROOT.glob("game_*") if p.is_dir())
     source_dirs = sorted(p for p in SOURCE_ROOT.glob("game_*") if p.is_dir())
     reports = [audit_game(p) for p in public_dirs]
     global_errors = []
     global_warnings = []
+    archive_text_audits = [
+        audit_archive_text_files(SOURCE_ROOT),
+        audit_archive_text_files(PUBLIC_ROOT),
+    ]
+    for report in archive_text_audits:
+        global_errors.extend(
+            "%s: %s" % (report["root"], error) for error in report["errors"]
+        )
 
     if [p.name for p in source_dirs] != [p.name for p in public_dirs]:
         global_errors.append("source/public game directory sets differ")
@@ -313,6 +409,7 @@ def main():
         "games": reports,
         "global_errors": global_errors,
         "global_warnings": global_warnings,
+        "archive_text_audits": archive_text_audits,
         "summary": {
             "games": len(reports),
             "games_with_errors": sum(bool(r["errors"]) for r in reports),

@@ -54,10 +54,23 @@ CJK_RE = re.compile(r"[\u3400-\u9fff]")
 LATIN_RE = re.compile(r"[A-Za-z]")
 LOG_PREFIX_RE = re.compile(r"^\[[^\]]+\]\s+[^:：]+[:：]\s*", re.S)
 CANTONESE_RE = re.compile(
-    r"(?:我哋|你哋|佢哋|尋晚|而家|唔|冇|咗|嘅|喺|嗰|嚟|啲|"
-    r"點解|先至|揸住|真係|係咪|係個|邊個|有冇|錯晒|啱到|"
-    r"睇咗|講緊|㗎|喎|啫|囉)"
+    r"(?:我哋|你哋|佢哋|佢|哋|尋晚|琴晚|噚晚|而家|唔|冇|咗|"
+    r"嘅|喺|嗰|嚟|啲|咩|噉|咁樣|點解|先至|揸住|真係|係咪|"
+    r"係個|邊個|有冇|錯晒|啱到|睇咗|講緊|㗎|喎|啫|囉|畀|"
+    r"俾|攞|搵|返嚟|瞓|嘢|仲係|睇下|講咗|唔使|唔知|唔係|"
+    r"冇人|邊張|乜嘢|做緊|諗住|等陣)"
 )
+SIMPLIFIED_TO_TRADITIONAL = str.maketrans({
+    "么": "麼", "这": "這", "没": "沒", "样": "樣", "开": "開",
+    "说": "說", "话": "話", "诉": "訴", "计": "計", "装": "裝",
+    "统": "統", "游": "遊", "来": "來", "换": "換", "扑": "撲",
+    "戏": "戲", "对": "對", "学": "學", "后": "後", "变": "變",
+    "东": "東", "着": "著",
+})
+SIMPLIFIED_ONLY_RE = re.compile(
+    "[" + re.escape("么这没样开说话诉计装统游来换扑戏对学后变东着") + "]"
+)
+UNTRANSLATED_LATIN_RE = re.compile(r"[A-Za-z]{2,}")
 
 # Only prose fields are translated. Structural values such as action names,
 # roles, player names, targets, IDs, and statuses must remain canonical.
@@ -339,10 +352,40 @@ def normalize_english_prose(text: str, translator: GoogleTranslator) -> str:
 
 
 def normalize_chinese_markup(text: str) -> str:
+    english_phrases = {
+        "Statistician just stood up and said 'I'm a <狼人>, I peeked center card zero, it's <狼人> too.'":
+            "統計學家剛剛站起來說：『我是<狼人>，我查看了中央第0張牌，那張也是<狼人>。』",
+        "The math ain't complicated: I swapped you, he's the wolf now, we vote him out.":
+            "這道推理一點也不複雜：我交換了你們兩人的牌，他現在是狼人，我們把他投出去。",
+    }
+    for old, new in english_phrases.items():
+        text = text.replace(old, new)
+
     for en, zh in PLAYER_ZH.items():
         text = text.replace(f"[{en}]", f"[{zh}]")
     for en, zh in ROLE_ZH.items():
         text = text.replace(f"<{en}>", f"<{zh}>")
+    aliases = {
+        "Gut Player": "直覺俠",
+        "Chaos Agent": "攪局者",
+        "The Prosecutor": "嚴審官",
+        "The Therapist": "心理諮商師",
+        "The Statistician": "統計學家",
+        "The Underdog": "小人物",
+        "Prosecutor": "嚴審官",
+        "Therapist": "心理諮商師",
+        "Statistician": "統計學家",
+        "Underdog": "小人物",
+        "Stat": "統計學家",
+    }
+    for old, new in sorted(aliases.items(), key=lambda item: len(item[0]), reverse=True):
+        # Do not use ``\b`` here: Unicode CJK characters count as word
+        # characters, so contamination such as ``Gut Player聲稱`` has no
+        # regex word boundary after the English alias.
+        text = text.replace(old, new)
+    text = re.sub(r"\bME\b", "我", text)
+    for en, zh in ROLE_ZH.items():
+        text = re.sub(rf"\b{re.escape(en)}\b", zh, text)
     variants = {
         "坦納": "皮匠",
         "先知": "預言家",
@@ -353,13 +396,22 @@ def normalize_chinese_markup(text: str) -> str:
     }
     for old, new in variants.items():
         text = text.replace(old, new)
-    return text
+    # Normalize accidental Simplified Chinese fragments that occasionally
+    # survive zh-TW translation responses.
+    return text.translate(SIMPLIFIED_TO_TRADITIONAL)
 
 
 def clean_existing_zh(text: Any, key: str) -> bool:
     if not isinstance(text, str) or not text.strip():
         return False
     if CANTONESE_RE.search(text):
+        return False
+    if SIMPLIFIED_ONLY_RE.search(text):
+        return False
+    # Mathematical P(...) notation is permitted. Other multi-letter Latin
+    # fragments indicate untranslated names or sentences in localized prose.
+    latin_check = re.sub(r"\bP(?=\s*\()", "", text)
+    if UNTRANSLATED_LATIN_RE.search(latin_check):
         return False
     if key == "speech" and LOG_PREFIX_RE.search(text):
         return False
@@ -438,8 +490,13 @@ def rebuild_chinese_game(
                 set_path(rebuilt, path_parts, translated)
                 continue
             existing_text = get_path(existing, path_parts)
-            if clean_existing_zh(existing_text, key):
-                translated = existing_text
+            normalized_existing = (
+                normalize_chinese_markup(existing_text)
+                if isinstance(existing_text, str)
+                else existing_text
+            )
+            if clean_existing_zh(normalized_existing, key):
+                translated = normalized_existing
             else:
                 translated = translator.translate(english_text, "en", "zh-TW")
             translated = normalize_chinese_markup(translated)
