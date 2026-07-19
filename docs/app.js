@@ -184,6 +184,9 @@ async function init() {
   dir.color.setHex(preset.dirColor);
   moonPoint.intensity = preset.moon;
   candlePoint.intensity = preset.candle;
+  scene.fog.color.setHex(preset.fogColor);
+  scene.fog.near = preset.fogNear;
+  scene.fog.far = preset.fogFar;
   if (flame) flame.material.emissiveIntensity = preset.flame;
   // Show brazier fires at night
   if (window.__brazierEmbers && window.__brazierLights) {
@@ -1313,8 +1316,17 @@ function updateKeyboardPan() {
 // ===== Night Mode (with smooth transition) =====
 let nightTransition = null; // {fromVals, toVals, startTime, duration}
 const NIGHT_PRESETS = {
-  day: { bg:0xa8c0d8, amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0 },
-  night: { bg:0x0a0a18, amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5 },
+  // Keep daytime fog beyond the floor. The previous 14–32 range blended the
+  // platform into the bright day fog and looked like a large white reflection,
+  // especially at wider zoom levels.
+  day: {
+    bg:0xa8c0d8, fogColor:0x465766, fogNear:60, fogFar:100,
+    amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0
+  },
+  night: {
+    bg:0x0a0a18, fogColor:0x0a0a18, fogNear:14, fogFar:32,
+    amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5
+  },
 };
 
 function setNight(n) {
@@ -1327,6 +1339,7 @@ function setNight(n) {
     moon: moonPoint.intensity, candle: candlePoint.intensity,
     flame: flame.material.emissiveIntensity,
     fogR: scene.fog.color.r, fogG: scene.fog.color.g, fogB: scene.fog.color.b,
+    fogNear: scene.fog.near, fogFar: scene.fog.far,
   };
   nightTransition = { from, target, startTime: performance.now(), duration: 600 };
 
@@ -1355,10 +1368,12 @@ function updateNightTransition() {
   const bgB = (f.bg & 0xff) / 255 + ((tgt.bg & 0xff) - (f.bg & 0xff)) / 255 * e;
   scene.background.setRGB(bgR, bgG, bgB);
   scene.fog.color.setRGB(
-    f.fogR + (((tgt.bg >> 16 & 0xff)/255) - f.fogR) * e,
-    f.fogG + (((tgt.bg >> 8 & 0xff)/255) - f.fogG) * e,
-    f.fogB + (((tgt.bg & 0xff)/255) - f.fogB) * e
+    f.fogR + (((tgt.fogColor >> 16 & 0xff)/255) - f.fogR) * e,
+    f.fogG + (((tgt.fogColor >> 8 & 0xff)/255) - f.fogG) * e,
+    f.fogB + (((tgt.fogColor & 0xff)/255) - f.fogB) * e
   );
+  scene.fog.near = f.fogNear + (tgt.fogNear - f.fogNear) * e;
+  scene.fog.far = f.fogFar + (tgt.fogFar - f.fogFar) * e;
   amb.intensity = f.amb + (tgt.amb - f.amb) * e;
   dir.intensity = f.dir + (tgt.dir - f.dir) * e;
   dir.color.setRGB(
