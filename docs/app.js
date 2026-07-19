@@ -6,6 +6,11 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
+const CACHE_VERSION = '20260719-language-p0-2';
+function versionedUrl(url) {
+  return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
+}
+
 const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 
 // ===== i18n =====
@@ -236,7 +241,7 @@ async function init() {
   // Fallback: if no game data, load static players.json for a preview
   if (PLAYERS.length === 0) {
     try {
-      const resp = await fetch('./players.json');
+      const resp = await fetch(versionedUrl('./players.json'));
       PLAYERS = await resp.json();
       buildAllCharacters();
       buildNameTags();
@@ -1881,7 +1886,7 @@ function undimAll() {
 // ===== Game Data Loading =====
 async function loadGameIndex() {
   try {
-    const resp = await fetch('./data/index.json');
+    const resp = await fetch(versionedUrl('./data/index.json'));
     if (!resp.ok) throw new Error('No index');
     const index = await resp.json();
     if (index.games && index.games.length > 0) {
@@ -1905,7 +1910,7 @@ async function loadGame(gameId) {
     // Language selection is strict. Never leak English records into the
     // Chinese UI (or vice versa) through a silent localization fallback.
     const filename = name + suffix + '.json';
-    const response = await fetch(base + filename);
+    const response = await fetch(versionedUrl(base + filename));
     if (!response.ok) {
       throw new Error(`Missing ${requestedLang.toUpperCase()} game record: ${filename}`);
     }
@@ -1914,7 +1919,7 @@ async function loadGame(gameId) {
 
   async function fetchRawJSON(name) {
     try {
-      const r = await fetch(base + name + '.json');
+      const r = await fetch(versionedUrl(base + name + '.json'));
       return r.ok ? await r.json() : null;
     } catch(e) {
       return null;
@@ -1937,7 +1942,7 @@ async function loadGame(gameId) {
     if (!chatHistory) {
       try {
         const chatName = suffix ? `chat_history${suffix}.md` : 'chat_history.md';
-        const response = await fetch(base + chatName);
+        const response = await fetch(versionedUrl(base + chatName));
         if (response.ok) chatHistory = await response.text();
       } catch(e) {}
     }
