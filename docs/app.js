@@ -79,7 +79,7 @@ let PLAYERS = [];
 // --- Game data ---
 let currentGame = null;
 let gameData = {};
-let currentPhase = 'day';
+let currentPhase = 'night';
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
@@ -176,19 +176,19 @@ async function init() {
   setupCameraControls();
   setupUI();
 
-  // Apply day preset lighting immediately so first paint is bright (default = day)
-  const dayPreset = NIGHT_PRESETS.day;
-  scene.background.setHex(dayPreset.bg);
-  amb.intensity = dayPreset.amb;
-  dir.intensity = dayPreset.dir;
-  dir.color.setHex(dayPreset.dirColor);
-  moonPoint.intensity = dayPreset.moon;
-  candlePoint.intensity = dayPreset.candle;
-  if (flame) flame.material.emissiveIntensity = dayPreset.flame;
-  // Hide brazier fires during daytime
+  // Apply night preset lighting immediately so first paint matches the default phase
+  const preset = NIGHT_PRESETS.night;
+  scene.background.setHex(preset.bg);
+  amb.intensity = preset.amb;
+  dir.intensity = preset.dir;
+  dir.color.setHex(preset.dirColor);
+  moonPoint.intensity = preset.moon;
+  candlePoint.intensity = preset.candle;
+  if (flame) flame.material.emissiveIntensity = preset.flame;
+  // Show brazier fires at night
   if (window.__brazierEmbers && window.__brazierLights) {
-    for (const e of window.__brazierEmbers) e.visible = false;
-    for (const l of window.__brazierLights) l.intensity = 0;
+    for (const e of window.__brazierEmbers) e.visible = true;
+    for (const l of window.__brazierLights) l.intensity = 0.35;
   }
 
   // Try to load latest game (this will populate PLAYERS and build characters)
@@ -1868,7 +1868,7 @@ async function loadGame(gameId) {
         }
       }
     }
-    currentPhase = 'day';
+    currentPhase = 'night';
 
     // Dynamically build PLAYERS from game data
     if (night && night.players) {
@@ -1897,7 +1897,7 @@ async function loadGame(gameId) {
       rebuildScene();
     }
     
-    setPhase('day');
+    setPhase('night');
     showGameInfo();
 
     // Update archive list active state to reflect newly loaded game
