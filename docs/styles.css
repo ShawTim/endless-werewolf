@@ -177,7 +177,7 @@ body::after {
 }
 #side-panel.open { transform: translateX(0); }
 #side-panel .close-btn {
-  position: absolute; top: 12px; right: 14px;
+  position: absolute; top: 52px; right: 14px;
   background: none; border: none; color: var(--text-dim); font-size: 20px;
   cursor: pointer; transition: color 0.2s; z-index: 19;
 }
@@ -218,7 +218,7 @@ body::after {
 }
 #archive-panel.open { transform: translateX(0); }
 #archive-panel .close-btn {
-  position: absolute; top: 12px; right: 14px;
+  position: absolute; top: 52px; right: 14px;
   background: none; border: none; color: var(--text-dim); font-size: 20px;
   cursor: pointer;
 }
@@ -245,7 +245,7 @@ body::after {
 .tag .model { font-size:9px; color:#666; font-weight:normal; margin-top:1px; }
 
 /* ===== Speech Bubbles ===== */
-#bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:19; }
+#bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:17; }
 .bubble {
   position:absolute; top:0; left:0;
   background:linear-gradient(135deg, rgba(20,20,40,0.92), rgba(10,10,25,0.95));
@@ -385,6 +385,14 @@ body::after {
   .brand .sub { display: none; }
   .top-actions { gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
   .btn { padding: 4px 8px; font-size: 10px; }
+  #btn-github { display: none; }
+  #controls-hint { display: none; }
+  .bubble {
+    max-width: calc(100vw - 16px);
+    padding: 8px 11px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
   /* Gallery modal: vertical layout */
   #gallery-modal-box { flex-direction: column; width: 95vw; height: 90vh; }
   #gallery-modal-left { width: 100%; min-width: 0; height: 250px; }
@@ -400,12 +408,14 @@ body::after {
   #replay-controls { bottom: 50px; }
   /* Vote labels */
   .vote-label { font-size: 9px; }
+  #result-banner .title { font-size: 32px; letter-spacing: 4px; }
+  #result-banner .sub { font-size: 14px; }
+  #result-banner .winners { font-size: 12px; }
 }
 
 @media (max-width: 480px) {
   .brand { display: none; }
   .top-actions { width: 100%; justify-content: center; }
-  #btn-lang { order: 99; }
 }
 
 /* ===== Player Modal (small, click character) ===== */

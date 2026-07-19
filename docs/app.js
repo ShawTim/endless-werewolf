@@ -4,6 +4,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
 const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 
@@ -80,19 +81,19 @@ let PLAYERS = [];
 let currentGame = null;
 let gameData = {};
 let currentPhase = 'night';
+let archiveGames = [];
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
-let composer, renderPass, bloomPass;
+let composer, renderPass, bloomPass, smaaPass;
 let chars = [];
 let isNight = false;
 let autoRotate = true;
 const R = 3.2, SH = 0.6, TR = 2.0;
 
-// ===== Cel-shading gradient map (5-step toon — refined transitions) =====
-function makeToonGradientMap(steps = 5) {
-  // 5 steps: 0.30, 0.50, 0.72, 0.90, 1.00 — shadow / dark-mid / mid / light / highlight
-  // asymmetric bias toward darker bands for crisper cel look
+// ===== Cel-shading gradient maps =====
+function makeToonGradientMap(steps = 5, smooth = false) {
+  // Asymmetric bias toward darker bands for crisper cel shading.
   const data = new Uint8Array(steps);
   for (let i = 0; i < steps; i++) {
     const t = i / (steps - 1);
@@ -100,14 +101,42 @@ function makeToonGradientMap(steps = 5) {
     data[i] = Math.round((0.30 + biased * 0.70) * 255);
   }
   const tex = new THREE.DataTexture(data, steps, 1, THREE.RedFormat);
-  tex.minFilter = THREE.NearestFilter;
-  tex.magFilter = THREE.NearestFilter;
+  tex.minFilter = smooth ? THREE.LinearFilter : THREE.NearestFilter;
+  tex.magFilter = smooth ? THREE.LinearFilter : THREE.NearestFilter;
   tex.generateMipmaps = false;
   tex.needsUpdate = true;
   return tex;
 }
-const TOON_GRADIENT = makeToonGradientMap(5);
-const TOON_GRADIENT_SOFT = makeToonGradientMap(3); // for skin / soft surfaces
+const TOON_GRADIENT = makeToonGradientMap(6);
+const TOON_GRADIENT_SOFT = makeToonGradientMap(8, true);
+
+// Small neutral weave used as a bump map on clothing. It adds material detail
+// without baking a color into the per-character palettes.
+function makeFabricBumpMap() {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  const image = ctx.createImageData(64, 64);
+  for (let y = 0; y < 64; y++) {
+    for (let x = 0; x < 64; x++) {
+      const weave = ((x % 4 === 0) ? 8 : 0) + ((y % 4 === 0) ? -7 : 0);
+      const noise = ((x * 17 + y * 31) % 9) - 4;
+      const value = Math.max(0, Math.min(255, 128 + weave + noise));
+      const i = (y * 64 + x) * 4;
+      image.data[i] = image.data[i + 1] = image.data[i + 2] = value;
+      image.data[i + 3] = 255;
+    }
+  }
+  ctx.putImageData(image, 0, 0);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(5, 7);
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.colorSpace = THREE.NoColorSpace;
+  return texture;
+}
+const FABRIC_BUMP = makeFabricBumpMap();
 
 // Cel-shaded rim-light shader chunk — injects a stepped fresnel term into MeshToonMaterial
 // This is a discrete (cel) rim, not a smooth fresnel — it produces a hard light edge
@@ -137,11 +166,15 @@ function applyToonRim(material, rimColor = 0xfff0c8, rimPower = 2.5, rimStrength
 
 // Cel-shaded outline — BackSide inflated mesh (gives chunky ink-line silhouette)
 const OUTLINE_MAT = new THREE.MeshBasicMaterial({ color: 0x0a0814, side: THREE.BackSide });
+OUTLINE_MAT.toneMapped = false;
 function addOutline(mesh, scale = 1.05) {
   if (!mesh.geometry) return;
   const outline = new THREE.Mesh(mesh.geometry, OUTLINE_MAT);
   outline.scale.setScalar(scale);
   outline.renderOrder = -1;
+  outline.castShadow = false;
+  outline.receiveShadow = false;
+  outline.userData.isOutline = true;
   // polygonOffset pushes outline slightly back in depth so body never z-fights
   outline.material.polygonOffset = true;
   outline.material.polygonOffsetFactor = 1;
@@ -216,23 +249,34 @@ async function init() {
 
 // ===== Three.js Setup =====
 function initThree() {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
+  const compactViewport = innerWidth <= 768;
+  const renderPixelRatio = Math.min(devicePixelRatio, compactViewport ? 1.5 : 2);
+  renderer.setPixelRatio(renderPixelRatio);
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.VSMShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   // Post-processing composer
   composer = new EffectComposer(renderer);
-  composer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  composer.setPixelRatio(renderPixelRatio);
   composer.setSize(innerWidth, innerHeight);
   renderPass = new RenderPass(null, null); // scene/camera set right after creation
   composer.addPass(renderPass);
-  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.3, 0.5, 0.95);
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.18, 0.35, 1.05);
   composer.addPass(bloomPass);
+  // EffectComposer renders into off-screen targets, so canvas MSAA alone does
+  // not smooth the final post-processed image. SMAA handles silhouettes and
+  // the thin facial/accessory geometry after bloom.
+  smaaPass = new SMAAPass(innerWidth * renderPixelRatio, innerHeight * renderPixelRatio);
+  composer.addPass(smaaPass);
   composer.addPass(new OutputPass());
 
   scene = new THREE.Scene();
@@ -241,16 +285,21 @@ function initThree() {
 
   // ===== Textures =====
   const texLoader = new THREE.TextureLoader();
+  const maxAnisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+  FABRIC_BUMP.anisotropy = maxAnisotropy;
   const stoneTex = texLoader.load('./tex-stone.jpg');
+  stoneTex.anisotropy = maxAnisotropy;
   stoneTex.wrapS = stoneTex.wrapT = THREE.RepeatWrapping;
   stoneTex.repeat.set(4, 4);
 
   const woodTex = texLoader.load('./tex-wood.jpg');
+  woodTex.anisotropy = maxAnisotropy;
   woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
   woodTex.repeat.set(2, 2);
 
   // Sky as background sphere
   const skyTex = texLoader.load('./tex-sky.jpg');
+  skyTex.anisotropy = maxAnisotropy;
   // Default equirect mapping — bright sunset/orange texture shows at horizon
   skyTex.center.set(0.5, 0.5);
   skyTex.rotation = 0;
@@ -266,17 +315,24 @@ function initThree() {
   camera.position.set(0, 9, 9);
   if (renderPass) { renderPass.scene = scene; renderPass.camera = camera; }
 
-  amb = new THREE.AmbientLight(0xffffff, 0.45);
+  // Hemispheric fill preserves form on faces and clothing instead of applying
+  // the same flat brightness to every surface.
+  amb = new THREE.HemisphereLight(0xdce8ff, 0x8c674a, 0.8);
   scene.add(amb);
 
   dir = new THREE.DirectionalLight(0xfff5e0, 0.85);
   dir.position.set(5, 10, 5);
   dir.castShadow = true;
-  dir.shadow.mapSize.set(1024, 1024);
+  const shadowMapSize = compactViewport ? 1024 : 2048;
+  dir.shadow.mapSize.set(shadowMapSize, shadowMapSize);
+  dir.shadow.bias = -0.00025;
+  dir.shadow.normalBias = 0.035;
+  dir.shadow.radius = 3;
+  dir.shadow.blurSamples = compactViewport ? 8 : 16;
   dir.shadow.camera.near = 0.5;
-  dir.shadow.camera.far = 30;
-  dir.shadow.camera.left = -8; dir.shadow.camera.right = 8;
-  dir.shadow.camera.top = 8; dir.shadow.camera.bottom = -8;
+  dir.shadow.camera.far = 24;
+  dir.shadow.camera.left = -6; dir.shadow.camera.right = 6;
+  dir.shadow.camera.top = 6; dir.shadow.camera.bottom = -6;
   scene.add(dir);
 
   moonPoint = new THREE.PointLight(0x7080ff, 0, 20);
@@ -330,7 +386,7 @@ function initThree() {
   // Floor — stone with darker outer ring for natural vignette
   const floor = new THREE.Mesh(
     new THREE.CircleGeometry(14, 64),
-    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.85, color: 0xb8a888 })
+    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.9, color: 0xe0d2bc })
   );
   floor.rotation.x = -PI / 2; floor.position.y = -0.6; floor.receiveShadow = true;
   scene.add(floor);
@@ -351,7 +407,7 @@ function initThree() {
   // Table
   const tableTop = new THREE.Mesh(
     new THREE.CylinderGeometry(TR, TR, 0.12, 48),
-    new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.6 })
+    new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.72, metalness: 0.02 })
   );
   tableTop.position.y = 0.15; tableTop.receiveShadow = true; tableTop.castShadow = true;
   scene.add(tableTop);
@@ -490,9 +546,10 @@ function sa(i) { return (i / 6) * TAU - PI / 2; }
 
 function limb(r, len, color, rough = 0.6) {
   const m = new THREE.Mesh(
-    new THREE.CapsuleGeometry(r, len, 6, 12),
+    new THREE.CapsuleGeometry(r, len, 8, 16),
     new THREE.MeshToonMaterial({ color, gradientMap: TOON_GRADIENT })
   );
+  m.material.dithering = true;
   m.castShadow = true;
   return m;
 }
@@ -509,66 +566,71 @@ function buildCharacter(player, index){
   const accMat=new THREE.MeshToonMaterial({color:player.accent, gradientMap: TOON_GRADIENT});
   const hairMat=new THREE.MeshToonMaterial({color:player.hair, gradientMap: TOON_GRADIENT});
   const darkMat=new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
+  for (const mat of [skinMat, bodyMat, accMat, hairMat, darkMat]) mat.dithering = true;
+  bodyMat.bumpMap = FABRIC_BUMP;
+  bodyMat.bumpScale = 0.018;
+  accMat.bumpMap = FABRIC_BUMP;
+  accMat.bumpScale = 0.014;
   // Apply cel rim to body materials (skin & hair excluded — soft / dark surfaces)
-  applyToonRim(bodyMat, 0xfff0d0, 2.8, 0.35);
-  applyToonRim(accMat, 0xffe0a0, 2.5, 0.40);
+  applyToonRim(bodyMat, 0xfff0d0, 3.0, 0.24);
+  applyToonRim(accMat, 0xffe0a0, 2.8, 0.28);
 
   // === Torso ===
   // Tapered body — wider at shoulders, narrower at waist
   const torso=new THREE.Mesh(
-    new THREE.CylinderGeometry(0.28,0.35,0.55,16),
+    new THREE.CylinderGeometry(0.28,0.35,0.55,24),
     bodyMat
   );
   torso.position.y=0.35; torso.castShadow=true; g.add(torso);
-  addOutline(torso, 1.05);
+  addOutline(torso, 1.035);
 
   // Shoulders — slight width
   const shoulders=new THREE.Mesh(
-    new THREE.SphereGeometry(0.3,16,12),
+    new THREE.SphereGeometry(0.3,24,16),
     bodyMat
   );
   shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
-  addOutline(shoulders, 1.03);
+  addOutline(shoulders, 1.025);
 
   // === Arms === (sleeves in accent color, hands in skin)
   const armL=limb(0.09,0.35,player.accent);
   armL.position.set(-0.38,0.4,0);
   armL.rotation.z=0.15;
   g.add(armL);
-  addOutline(armL, 1.07);
+  addOutline(armL, 1.04);
   const armR=limb(0.09,0.35,player.accent);
   armR.position.set(0.38,0.4,0);
   armR.rotation.z=-0.15;
   g.add(armR);
-  addOutline(armR, 1.07);
+  addOutline(armR, 1.04);
 
   // Hands
-  const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
+  const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
   handL.position.set(-0.48,0.2,0); handL.castShadow=true; g.add(handL);
-  const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),skinMat);
+  const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
   handR.position.set(0.48,0.2,0); handR.castShadow=true; g.add(handR);
 
   // === Legs === (pants in deep accent color)
   const legL=limb(0.12,0.3,player.accent);
   legL.position.set(-0.14,-0.1,0); g.add(legL);
-  addOutline(legL, 1.07);
+  addOutline(legL, 1.04);
   const legR=limb(0.12,0.3,player.accent);
   legR.position.set(0.14,-0.1,0); g.add(legR);
-  addOutline(legR, 1.07);
+  addOutline(legR, 1.04);
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
   head.position.y=0.98; g.add(head);
 
-  const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24),skinMat);
+  const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,32,24),skinMat);
   headSphere.castShadow=true; head.add(headSphere);
-  addOutline(headSphere, 1.025);
+  addOutline(headSphere, 1.018);
 
   // Hair cap — upper hemisphere. Skipped for characters with persona-specific hair (Prosecutor, Therapist, Statistician, Underdog, Chaos Agent, Gut Player) to avoid double-layer.
   const personaHairChars = ['The Prosecutor', 'Blaze', 'The Therapist', 'SafetySam', 'The Statistician', 'Dr. Pizza', 'The Underdog', 'EasyBake', 'The Chaos Agent', 'Twister', 'The Gut Player', 'ConspiBro'];
   if (!personaHairChars.includes(player.name)) {
     const hairCap=new THREE.Mesh(
-      new THREE.SphereGeometry(0.365,24,16,0,TAU,0,PI*0.5),
+      new THREE.SphereGeometry(0.365,32,20,0,TAU,0,PI*0.5),
       hairMat
     );
     hairCap.position.y=0.01; hairCap.castShadow=true; head.add(hairCap);
@@ -577,7 +639,7 @@ function buildCharacter(player, index){
   // Positions are local to head (world y - 0.98)
 
   // Ears
-  const earGeo=new THREE.SphereGeometry(0.06,12,8);
+  const earGeo=new THREE.SphereGeometry(0.06,16,10);
   const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,-0.01,0); earL.scale.set(0.5,1,0.8); head.add(earL);
   const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,-0.01,0); earR.scale.set(0.5,1,0.8); head.add(earR);
 
@@ -842,14 +904,17 @@ function buildCharacter(player, index){
   }
 
   // === Base platform ===
-  const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.3,metalness:0.2});
+  const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.58,metalness:0.04});
   const base=new THREE.Mesh(
     new THREE.CylinderGeometry(0.5,0.55,0.08,24),
     baseMat
   );
   base.position.y=-0.14; base.receiveShadow=true; g.add(base);
 
-  const ringMat = new THREE.MeshStandardMaterial({color:player.accent,side:THREE.DoubleSide,emissive:player.accent,emissiveIntensity:0.3});
+  const ringMat = new THREE.MeshStandardMaterial({
+    color:player.accent, side:THREE.DoubleSide, roughness:0.42, metalness:0.08,
+    emissive:player.accent, emissiveIntensity:0.16
+  });
   const ring=new THREE.Mesh(
     new THREE.RingGeometry(0.5,0.58,24),
     ringMat
@@ -865,6 +930,15 @@ function buildCharacter(player, index){
   highlight.position.y = -0.08; highlight.rotation.x = -PI / 2;
   highlight.userData.isHighlight = true;
   g.add(highlight);
+
+  // Accessories are created by several persona-specific branches. Normalize
+  // their shadow settings here so small details contribute to the final form,
+  // while inflated outline shells never create oversized duplicate shadows.
+  g.traverse(obj => {
+    if (!obj.isMesh || obj.userData.isOutline || obj.userData.isHighlight) return;
+    obj.castShadow = true;
+    obj.receiveShadow = true;
+  });
 
   // Store refs
   g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: player.color, _originalRingColor: player.accent, _baseRotY: g.rotation.y };
@@ -883,9 +957,16 @@ function getAvatarRenderer() {
   // Create a dedicated offscreen renderer for avatar portraits
   const avCanvas = document.createElement('canvas');
   avCanvas.width = 256; avCanvas.height = 256;
-  _avatarRenderer = new THREE.WebGLRenderer({ canvas: avCanvas, antialias: true });
+  _avatarRenderer = new THREE.WebGLRenderer({
+    canvas: avCanvas,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
   _avatarRenderer.setPixelRatio(1);
   _avatarRenderer.shadowMap.enabled = false;
+  _avatarRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+  _avatarRenderer.toneMappingExposure = 1.12;
+  _avatarRenderer.outputColorSpace = THREE.SRGBColorSpace;
   return _avatarRenderer;
 }
 
@@ -902,9 +983,9 @@ function renderAvatarPortrait(player, size = 128) {
   avCam.position.set(0, 1.0, 2.2);
   avCam.lookAt(0, 0.98, 0);
 
-  const avAmb = new THREE.AmbientLight(0xffffff, 0.6);
+  const avAmb = new THREE.HemisphereLight(0xdce8ff, 0x8c674a, 0.9);
   avScene.add(avAmb);
-  const avDir = new THREE.DirectionalLight(0xfff5e0, 0.8);
+  const avDir = new THREE.DirectionalLight(0xfff5e0, 1.05);
   avDir.position.set(2, 3, 2);
   avScene.add(avDir);
   const avFill = new THREE.DirectionalLight(0x6688ff, 0.3);
@@ -912,11 +993,16 @@ function renderAvatarPortrait(player, size = 128) {
   avScene.add(avFill);
 
   // Build a simplified head+shoulders for portrait — use new palette fields
-  const skinMat = new THREE.MeshToonMaterial({color:player.skin||player.head||0xD4A574, gradientMap: TOON_GRADIENT});
+  const skinMat = new THREE.MeshToonMaterial({color:player.skin||player.head||0xD4A574, gradientMap: TOON_GRADIENT_SOFT});
   const bodyMat = new THREE.MeshToonMaterial({color:player.body||0x4a0000, gradientMap: TOON_GRADIENT});
   const accMat = new THREE.MeshToonMaterial({color:player.accent||player.body||0xe74c3c, gradientMap: TOON_GRADIENT});
   const hairMat = new THREE.MeshToonMaterial({color:player.hair||0x1a1410, gradientMap: TOON_GRADIENT});
   const darkMat = new THREE.MeshToonMaterial({color:0x1a1a2e, gradientMap: TOON_GRADIENT});
+  for (const mat of [skinMat, bodyMat, accMat, hairMat, darkMat]) mat.dithering = true;
+  bodyMat.bumpMap = FABRIC_BUMP;
+  bodyMat.bumpScale = 0.018;
+  accMat.bumpMap = FABRIC_BUMP;
+  accMat.bumpScale = 0.014;
 
   // Head — group so face features follow any future head animation
   const head = new THREE.Group();
@@ -929,7 +1015,7 @@ function renderAvatarPortrait(player, size = 128) {
   // Positions are local to head (world y - 0.98)
 
   // Ears
-  const earGeo = new THREE.SphereGeometry(0.06, 12, 8);
+  const earGeo = new THREE.SphereGeometry(0.06, 16, 10);
   const earL = new THREE.Mesh(earGeo, skinMat); earL.position.set(-0.35, -0.01, 0); earL.scale.set(0.5, 1, 0.8); head.add(earL);
   const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, -0.01, 0); earR.scale.set(0.5, 1, 0.8); head.add(earR);
 
@@ -960,9 +1046,9 @@ function renderAvatarPortrait(player, size = 128) {
   chin.position.set(0, -0.16, 0.28); chin.scale.set(1, 0.6, 0.8); head.add(chin);
 
   // Shoulders/torso
-  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 16), bodyMat);
+  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 24), bodyMat);
   torso.position.y = 0.35; avScene.add(torso);
-  const shoulders = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 12), bodyMat);
+  const shoulders = new THREE.Mesh(new THREE.SphereGeometry(0.3, 24, 16), bodyMat);
   shoulders.position.y = 0.58; shoulders.scale.set(1, 0.5, 0.8); avScene.add(shoulders);
 
   // Persona-specific accessories (simplified for portrait)
@@ -1076,8 +1162,8 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
 
 // ===== Camera Controls =====
 let theta = 0, phi = PI / 2.4;
-// On mobile, start further back so all 6 characters fit
-let dist = (innerWidth <= 768) ? 16 : 10;
+// Narrow mobile viewports need more distance to keep the full circle visible.
+let dist = (innerWidth <= 768) ? 20 : 10;
 const targetV = new THREE.Vector3(0, 1.1, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
 const DIST_MIN = 3, DIST_MAX = 40;
@@ -1321,11 +1407,11 @@ const NIGHT_PRESETS = {
   // especially at wider zoom levels.
   day: {
     bg:0xa8c0d8, fogColor:0x465766, fogNear:60, fogFar:100,
-    amb:0.40, dir:0.9, dirColor:0xfff2d0, moon:0, candle:0, flame:0
+    amb:1.05, dir:1.15, dirColor:0xfff5df, moon:0, candle:0, flame:0
   },
   night: {
     bg:0x0a0a18, fogColor:0x0a0a18, fogNear:14, fogFar:32,
-    amb:0.15, dir:0.3, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5
+    amb:0.30, dir:0.38, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5
   },
 };
 
@@ -1556,8 +1642,24 @@ function updateBubblePosition(b) {
   const pos = sp(b.playerIndex);
   const v = new THREE.Vector3(pos[0], pos[1] + 1.8, pos[2]);
   v.project(camera);
-  const x = (v.x * 0.5 + 0.5) * innerWidth;
-  const y = (-v.y * 0.5 + 0.5) * innerHeight;
+  const projectedX = (v.x * 0.5 + 0.5) * innerWidth;
+  const projectedY = (-v.y * 0.5 + 0.5) * innerHeight;
+  const bubbleWidth = b.el.offsetWidth || Math.min(280, innerWidth - 16);
+  const bubbleHeight = b.el.offsetHeight || 80;
+  const margin = innerWidth <= 768 ? 8 : 12;
+  const topClearance = innerWidth <= 768 ? 64 : 48;
+  const bottomClearance = innerWidth <= 768 ? 108 : 72;
+  const halfWidth = bubbleWidth / 2;
+  const x = THREE.MathUtils.clamp(
+    projectedX,
+    margin + halfWidth,
+    innerWidth - margin - halfWidth
+  );
+  const y = THREE.MathUtils.clamp(
+    projectedY,
+    topClearance + bubbleHeight,
+    innerHeight - bottomClearance
+  );
   // Use transform for GPU-accelerated movement (no reflow)
   b.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
 }
@@ -1782,9 +1884,10 @@ async function loadGameIndex() {
     if (!resp.ok) throw new Error('No index');
     const index = await resp.json();
     if (index.games && index.games.length > 0) {
-      const latest = index.games[0];
+      archiveGames = index.games.slice();
+      const latest = archiveGames[0];
       await loadGame(latest.game_id || latest.id);
-      buildArchiveList(index.games);
+      buildArchiveList(archiveGames);
     }
   } catch(e) {
     console.log('No game index found, showing empty scene');
@@ -1945,7 +2048,7 @@ function buildArchiveList(games) {
     village_win_no_wolf: lang === 'zh' ? '村民勝（無狼）' : 'Village Win (no wolf)',
     no_team_win: lang === 'zh' ? '無隊勝' : 'No Team Win',
   };
-  games.reverse().forEach(g => {
+  [...games].reverse().forEach(g => {
     const el = document.createElement('div');
     const id = g.game_id || g.id;
     el.className = 'game-item' + (id === currentGame ? ' active' : '');
@@ -1958,7 +2061,10 @@ function buildArchiveList(games) {
       <div class="outcome">${outcome}</div>
       <div class="date">${date}</div>
     `;
-    el.addEventListener('click', () => loadGame(id));
+    el.addEventListener('click', () => {
+      document.getElementById('archive-panel').classList.remove('open');
+      loadGame(id);
+    });
     list.appendChild(el);
   });
 }
@@ -2036,6 +2142,7 @@ function buildCenterCards() {
 // ===== Phase Management =====
 function setPhase(phase) {
   currentPhase = phase;
+  document.getElementById('panel-content').dataset.panelView = 'phase';
   // Update timeline UI
   document.querySelectorAll('.phase-step').forEach(el => {
     el.classList.toggle('active', el.dataset.phase === phase);
@@ -2481,7 +2588,9 @@ function showAboutPanel() {
   html += '<p style="font-size:13px;line-height:1.7;color:var(--text);">' + (isZh ? '6 個 AI 代理使用不同的 LLM，自主進行一夜終極狼人殺。每個決策——夜晚行動、白天辯論、投票——都由 AI 玩家在執行時自主做出，並非腳本演示。' : '6 AI agents running different LLMs play One Night Ultimate Werewolf autonomously. Every decision — night actions, daytime debate, voting — is made by the AI players themselves at runtime. Not scripted.') + '</p>';
   html += '<p style="font-size:12px;color:var(--text-dim);margin-top:12px;"><a href="https://github.com/ShawTim/endless-werewolf" target="_blank" style="color:var(--gold);">GitHub</a></p>';
   html += '</div>';
-  document.getElementById('panel-content').innerHTML = html;
+  const panelContent = document.getElementById('panel-content');
+  panelContent.dataset.panelView = 'about';
+  panelContent.innerHTML = html;
   openSidePanel();
 }
 
@@ -2650,10 +2759,17 @@ function renderGallery3D(player) {
   const canvas = document.getElementById('gallery-3d');
   if (!canvas) return;
 
-  gallery3DRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  gallery3DRenderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
   gallery3DRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   gallery3DRenderer.shadowMap.enabled = true;
-  gallery3DRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  gallery3DRenderer.shadowMap.type = THREE.VSMShadowMap;
+  gallery3DRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+  gallery3DRenderer.toneMappingExposure = 1.12;
+  gallery3DRenderer.outputColorSpace = THREE.SRGBColorSpace;
 
   gallery3DScene = new THREE.Scene();
   gallery3DScene.background = new THREE.Color(0x1a1520);
@@ -2662,12 +2778,16 @@ function renderGallery3D(player) {
   gallery3DCamera.position.set(0, 2.0, 5.5);
   gallery3DCamera.lookAt(0, 1.1, 0);
 
-  const amb = new THREE.AmbientLight(0xffffff, 0.5);
+  const amb = new THREE.HemisphereLight(0xdce8ff, 0x8c674a, 0.9);
   gallery3DScene.add(amb);
-  const dir = new THREE.DirectionalLight(0xfff5e0, 0.9);
+  const dir = new THREE.DirectionalLight(0xfff5e0, 1.05);
   dir.position.set(2, 4, 3);
   dir.castShadow = true;
-  dir.shadow.mapSize.set(512, 512);
+  dir.shadow.mapSize.set(1024, 1024);
+  dir.shadow.bias = -0.00025;
+  dir.shadow.normalBias = 0.035;
+  dir.shadow.radius = 3;
+  dir.shadow.blurSamples = 12;
   gallery3DScene.add(dir);
   const fill = new THREE.DirectionalLight(0x6688ff, 0.2);
   fill.position.set(-2, 1, 1);
@@ -2946,33 +3066,43 @@ function setupUI() {
   });
 
   document.getElementById('btn-archive').addEventListener('click', () => {
-    document.getElementById('archive-panel').classList.toggle('open');
+    const archivePanel = document.getElementById('archive-panel');
+    const opening = !archivePanel.classList.contains('open');
+    archivePanel.classList.toggle('open', opening);
+    if (opening) closeSidePanel();
   });
   document.getElementById('btn-archive-close').addEventListener('click', () => {
     document.getElementById('archive-panel').classList.remove('open');
   });
 
   document.getElementById('btn-info').addEventListener('click', () => {
+    document.getElementById('archive-panel').classList.remove('open');
     showAboutPanel();
   });
   document.getElementById('btn-panel-close').addEventListener('click', () => {
-    document.getElementById('side-panel').classList.remove('open');
+    closeSidePanel();
   });
 
   // Language toggle
   document.getElementById('btn-lang').addEventListener('click', () => {
+    const panelContent = document.getElementById('panel-content');
+    const restoreAbout = document.getElementById('side-panel').classList.contains('open')
+      && panelContent.dataset.panelView === 'about';
     lang = lang === 'en' ? 'zh' : 'en';
     updateUIText();
+    if (archiveGames.length > 0) buildArchiveList(archiveGames);
     buildNameTags(); // Rebuild name tags with new language
     // Reload game data with new language, then restore phase
     if (currentGame) {
       const savedPhase = currentPhase;
       loadGame(currentGame).then(() => {
-        setPhase(savedPhase);
+        if (restoreAbout) showAboutPanel();
+        else setPhase(savedPhase);
       });
     } else if (gameData.night) {
       const currentPhaseSaved = currentPhase;
-      setPhase(currentPhaseSaved);
+      if (restoreAbout) showAboutPanel();
+      else setPhase(currentPhaseSaved);
     }
   });
 
@@ -3222,7 +3352,7 @@ function updateIntroAnim() {
   // Ease out cubic
   const e = 1 - Math.pow(1 - t, 3);
   // Descend from 30 to target dist
-  const targetDist = innerWidth <= 768 ? 18 : 12;
+  const targetDist = innerWidth <= 768 ? 20 : 12;
   dist = 30 + (targetDist - 30) * e;
   // Rotate slightly during descent
   theta = PI / 4 + (0 - PI / 4) * e;
