@@ -104,15 +104,8 @@ cat /tmp/werewolf_verify.log
 python3 scripts/build_pages.py >/tmp/werewolf_build_pages.log 2>&1
 echo "Pages data rebuilt."
 
-# 5) Block publication on language contamination or EN/ZH structural drift
-if ! python3 scripts/audit_all_games.py >/tmp/werewolf_archive_audit.log 2>&1; then
-  echo "ARCHIVE AUDIT FAILED — mixed-language or structurally corrupt data, skipping publish."
-  cat /tmp/werewolf_archive_audit.log
-  exit 1
-fi
-echo "Archive language/structure audit passed."
-
-# 6) Public safety check + publish
-bash scripts/check_public_repo.sh >/tmp/werewolf_public_check.log 2>&1
+# 5) Publish. publish_pages.sh owns the mandatory regression, archive,
+# language, syntax, and public-safety gates so direct/manual publishing cannot
+# bypass them.
 bash scripts/publish_pages.sh
 echo "Published new game round."

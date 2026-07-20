@@ -383,9 +383,9 @@ def normalize_chinese_markup(text: str) -> str:
         # characters, so contamination such as ``Gut Player聲稱`` has no
         # regex word boundary after the English alias.
         text = text.replace(old, new)
-    text = re.sub(r"\bME\b", "我", text)
+    text = text.replace("ME", "我")
     for en, zh in ROLE_ZH.items():
-        text = re.sub(rf"\b{re.escape(en)}\b", zh, text)
+        text = text.replace(en, zh)
     variants = {
         "坦納": "皮匠",
         "先知": "預言家",

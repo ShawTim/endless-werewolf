@@ -16,6 +16,10 @@ if [ -z "$(git status --porcelain -- docs data/games data/current_game.json data
   exit 0
 fi
 
+# This check lives inside the publisher so manual/direct invocations cannot
+# bypass the same language and archive-integrity gates used by cron.
+bash scripts/prepublish_check.sh
+
 LABEL=${BATCH_LABEL:-"auto"}
 TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 

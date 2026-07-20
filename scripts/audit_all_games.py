@@ -287,8 +287,6 @@ def audit_game(game_dir):
         errors.append("postgame interview coverage/duplicates mismatch")
 
     audit_language(payloads, errors)
-    if not (game_dir / "chat_history.md").exists():
-        warnings.append("chat_history.md missing; frontend must use day_result.chat_history")
     if not (game_dir / "chat_history_zh.md").exists():
         warnings.append("chat_history_zh.md missing")
 

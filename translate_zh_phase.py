@@ -13,6 +13,11 @@ from pathlib import Path
 from typing import Any
 
 import state_manager
+from scripts.audit_all_games import (
+    CANTONESE_RE,
+    SIMPLIFIED_ONLY_RE,
+    UNTRANSLATED_LATIN_RE,
+)
 
 WORKSPACE = Path(__file__).resolve().parent
 
@@ -31,17 +36,13 @@ except ImportError:
 # role, target, status, and IDs must remain canonical across languages.
 TRANSLATABLE_KEYS = {
     "persona", "night_memory_text", "speech", "reason", "quote",
-    "thought", "reasoning_summary", "error",
+    "thought", "reasoning", "reasoning_summary", "error",
 }
+TRANSLATABLE_LIST_KEYS = {"night_memory"}
 
 # Player name fields to skip (frontend handles localization)
 SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "player_name_zh", "player_name_en", "target", "actor", "voter"}
 CJK_RE = re.compile(r"[\u3400-\u9FFF]")
-CANTONESE_RE = re.compile(
-    r"(?:我哋|你哋|佢哋|尋晚|而家|唔|冇|咗|嘅|喺|嗰|嚟|啲|"
-    r"點解|先至|揸住|真係|係咪|係個|邊個|有冇|錯晒|啱到|"
-    r"睇咗|講緊|㗎|喎|啫|囉)"
-)
 
 def _pre_translate_tags(text: str, en_to_zh_players: dict[str, str]) -> str:
     """
@@ -68,18 +69,10 @@ def _needs_translation(key: str, value: Any) -> bool:
         return False
     if key in SKIP_KEYS:
         return False
-    # Skip if already mostly Chinese
-    cjk_count = len(CJK_RE.findall(value))
-    if cjk_count > len(value) * 0.3:
-        return False
-    # Translate persona, speech, reason, quote, action fields
-    if key in TRANSLATABLE_KEYS:
-        return True
-    # Also translate free-text fields that look like English prose
-    if key not in SKIP_KEYS and len(value) > 20 and re.search(r"[a-zA-Z]", value):
-        # Heuristic: if it's a long string with English letters, translate it
-        return True
-    return False
+    # Canonical source records are English. Always translate known prose fields
+    # in full; never reuse a "mostly Chinese" value because mixed-language
+    # fragments were able to pass through that shortcut.
+    return key in TRANSLATABLE_KEYS
 
 
 def _build_translation_prompt(items: list[tuple[str, str]]) -> str:
@@ -107,9 +100,7 @@ def _build_translation_prompt(items: list[tuple[str, str]]) -> str:
     lines.append(f"Texts to translate ({len(items)} items):")
     lines.append("")
     for i, (key, text) in enumerate(items):
-        # Truncate very long texts to fit context limits
-        truncated = text[:2000] if len(text) > 2000 else text
-        lines.append(f"[{i}] ({key}): {json.dumps(truncated, ensure_ascii=False)}")
+        lines.append(f"[{i}] ({key}): {json.dumps(text, ensure_ascii=False)}")
     lines.append("")
     lines.append("Return format: [\"翻譯1\", \"翻譯2\", ...]")
 
@@ -164,16 +155,26 @@ def _parse_llm_response(text: str, expected_count: int) -> list[str]:
     if start != -1 and end > start:
         try:
             arr = json.loads(text[start:end + 1])
-            if isinstance(arr, list):
-                # Pad or truncate to expected count
-                while len(arr) < expected_count:
-                    arr.append("")
-                return [str(x) for x in arr[:expected_count]]
+            if isinstance(arr, list) and len(arr) == expected_count:
+                return [str(x) for x in arr]
         except json.JSONDecodeError:
             pass
 
-    # Fallback: return empty strings
-    return [""] * expected_count
+    return []
+
+
+def _validate_chinese_translation(text: str, source_text: str) -> None:
+    if not text:
+        raise RuntimeError(f"Chinese translation is empty: {source_text[:120]}")
+    if not CJK_RE.search(text):
+        raise RuntimeError(f"Chinese translation contains no Chinese text: {source_text[:120]}")
+    if CANTONESE_RE.search(text):
+        raise RuntimeError(f"Chinese translation contains Cantonese: {text[:120]}")
+    if SIMPLIFIED_ONLY_RE.search(text):
+        raise RuntimeError(f"Chinese translation contains Simplified Chinese: {text[:120]}")
+    latin_check = re.sub(r"\bP(?=\s*\()", "", text)
+    if UNTRANSLATED_LATIN_RE.search(latin_check):
+        raise RuntimeError(f"Chinese translation contains untranslated Latin text: {text[:120]}")
 
 
 def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
@@ -181,30 +182,50 @@ def _translate_batch(items: list[tuple[str, str]]) -> list[str]:
     if not items:
         return []
 
-    # Process in chunks of 20 to keep prompt manageable
-    BATCH_SIZE = 10
+    # Preserve complete speeches. Batches are bounded by both item count and
+    # source characters instead of truncating individual records.
+    BATCH_SIZE = 8
+    MAX_BATCH_CHARS = 12000
     results = []
-    for i in range(0, len(items), BATCH_SIZE):
-        batch = items[i:i + BATCH_SIZE]
+    batches = []
+    batch = []
+    batch_chars = 0
+    for item in items:
+        item_chars = len(item[1])
+        if batch and (len(batch) >= BATCH_SIZE or batch_chars + item_chars > MAX_BATCH_CHARS):
+            batches.append(batch)
+            batch = []
+            batch_chars = 0
+        batch.append(item)
+        batch_chars += item_chars
+    if batch:
+        batches.append(batch)
+
+    for batch in batches:
         prompt = _build_translation_prompt(batch)
         response = _call_translator(prompt)
         translations = _parse_llm_response(response, len(batch))
+        if len(translations) != len(batch):
+            raise RuntimeError(
+                f"Chinese translation returned {len(translations)} items; "
+                f"expected {len(batch)}"
+            )
 
-        # Never leak English source prose into a Chinese archive.
+        # Never leak English, Cantonese, or Simplified source prose into a
+        # Traditional-Chinese archive.
         for j, (key, orig) in enumerate(batch):
-            if not translations[j]:
-                raise RuntimeError(f"Chinese translation failed for {key}: {orig[:120]}")
-            if not CJK_RE.search(translations[j]):
-                raise RuntimeError(f"Chinese translation contains no Chinese text: {orig[:120]}")
-            if CANTONESE_RE.search(translations[j]):
-                raise RuntimeError(f"Chinese translation contains Cantonese: {translations[j][:120]}")
+            _validate_chinese_translation(translations[j], orig)
 
         results.extend(translations)
 
     return results
 
 
-def _collect_translatable(obj: Any, path: str = "") -> list[tuple[str, str, Any]]:
+def _collect_translatable(
+    obj: Any,
+    path: str = "",
+    parent_key: str = "",
+) -> list[tuple[str, str, Any, Any]]:
     """
     Walk the object tree and collect (key, text, parent_ref) for all translatable strings.
     Returns list of (key, text, setter_info) where setter_info helps us update the value.
@@ -215,15 +236,21 @@ def _collect_translatable(obj: Any, path: str = "") -> list[tuple[str, str, Any]
             if _needs_translation(k, v):
                 items.append((k, v, obj, k))
             elif isinstance(v, (dict, list)):
-                items.extend(_collect_translatable(v, f"{path}.{k}"))
+                items.extend(_collect_translatable(v, f"{path}.{k}", k))
     elif isinstance(obj, list):
         for i, v in enumerate(obj):
-            if isinstance(v, (dict, list)):
-                items.extend(_collect_translatable(v, f"{path}[{i}]"))
+            if isinstance(v, str) and parent_key in TRANSLATABLE_LIST_KEYS and v.strip():
+                items.append((parent_key, v, obj, i))
+            elif isinstance(v, (dict, list)):
+                items.extend(_collect_translatable(v, f"{path}[{i}]", parent_key))
     return items
 
 
-def _apply_translations(obj: Any, translations: dict[str, str]) -> Any:
+def _apply_translations(
+    obj: Any,
+    translations: dict[str, str],
+    parent_key: str = "",
+) -> Any:
     """Apply translations to an object, matching by path."""
     if isinstance(obj, dict):
         result = {}
@@ -231,13 +258,40 @@ def _apply_translations(obj: Any, translations: dict[str, str]) -> Any:
             if k in TRANSLATABLE_KEYS and isinstance(v, str) and v in translations:
                 result[k] = translations[v]
             elif isinstance(v, (dict, list)):
-                result[k] = _apply_translations(v, translations)
+                result[k] = _apply_translations(v, translations, k)
             else:
                 result[k] = v
         return result
     if isinstance(obj, list):
-        return [_apply_translations(v, translations) for v in obj]
+        return [
+            translations.get(v, v)
+            if isinstance(v, str) and parent_key in TRANSLATABLE_LIST_KEYS
+            else _apply_translations(v, translations, parent_key)
+            if isinstance(v, (dict, list))
+            else v
+            for v in obj
+        ]
     return obj
+
+
+def _rebuild_chinese_day_log(
+    day: dict[str, Any],
+    en_to_zh_players: dict[str, str],
+) -> None:
+    lines = []
+    for event in day.get("day_trace", []):
+        if event.get("type") != "speech":
+            event.pop("log_line", None)
+            continue
+        speaker = en_to_zh_players.get(event.get("player_name", ""), event.get("player_name", ""))
+        target = en_to_zh_players.get(event.get("target", ""), event.get("target", ""))
+        timestamp = event.get("timestamp", "")
+        prefix = f"[{timestamp}] " if timestamp else ""
+        target_part = f" @{target}" if target else ""
+        line = f"{prefix}{speaker}{target_part}: {event.get('speech', '')}"
+        event["log_line"] = line
+        lines.append(line)
+    day["chat_history"] = "\n".join(lines) + ("\n" if lines else "")
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -279,18 +333,6 @@ def run_translate_zh_phase() -> dict[str, Any]:
             if text and text not in all_texts:
                 all_texts[text] = text
 
-    # Also collect chat history lines
-    chat_src = game_dir / "chat_history.md"
-    chat_lines = []
-    if chat_src.exists():
-        chat_lines = chat_src.read_text(encoding="utf-8").splitlines()
-        for line in chat_lines:
-            # Only translate lines with English content (skip timestamps-only lines)
-            stripped = line.strip()
-            if stripped and len(stripped) > 30 and re.search(r"[a-zA-Z]{5,}", stripped):
-                if stripped not in all_texts:
-                    all_texts[stripped] = stripped
-
     # Load player name mapping (en→zh) for deterministic tag translation
     en_to_zh_players = {}
     night_data = file_data.get("night", {})
@@ -325,21 +367,19 @@ def run_translate_zh_phase() -> dict[str, Any]:
         if key not in file_data:
             continue
         translated_obj = _apply_translations(file_data[key], translation_map)
+        if key == "day":
+            _rebuild_chinese_day_log(translated_obj, en_to_zh_players)
         dst = game_dir / f"{src.stem}_zh.json"
         _write_json(dst, translated_obj)
         output_files[key] = str(dst)
 
-    # Translate and write chat history
-    if chat_lines:
-        translated_chat = []
-        for line in chat_lines:
-            stripped = line.strip()
-            if stripped in translation_map:
-                translated_chat.append(translation_map[stripped])
-            else:
-                translated_chat.append(line)
+    # The localized Markdown transcript is derived from the translated Day
+    # record, so it cannot drift from the UI's canonical discussion data.
+    translated_day = game_dir / "day_result_zh.json"
+    if translated_day.exists():
+        day_payload = _load_json(translated_day)
         chat_dst = game_dir / "chat_history_zh.md"
-        chat_dst.write_text("\n".join(translated_chat), encoding="utf-8")
+        chat_dst.write_text(day_payload.get("chat_history", ""), encoding="utf-8")
         output_files["chat"] = str(chat_dst)
 
     print(f"[translate_zh] Done. {len(translation_map)} texts translated.")
