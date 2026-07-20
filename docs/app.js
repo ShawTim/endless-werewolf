@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260719-language-p0-4';
+const CACHE_VERSION = '20260720-showcase-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -17,7 +17,7 @@ const PI = Math.PI, cos = Math.cos, sin = Math.sin, TAU = PI * 2;
 const I18N = {
   en: {
     brand: 'Endless Werewolf', sub: 'AI One Night',
-    archive: 'Archive', info: 'Info', night: 'Night', autoRotate: 'Auto-rotate',
+    archive: 'Games', info: 'About', night: 'Night', autoRotate: 'Auto',
     nightPhase: 'Night Phase', dayDiscussion: 'Day Discussion', voting: 'Voting',
     resolution: 'Resolution', postgame: 'Postgame',
     centerCards: 'Center cards', roles: 'Roles', nightActions: 'Night Actions',
@@ -32,11 +32,11 @@ const I18N = {
     werewolfWin: 'Werewolf Wins!', villageWin: 'Village Wins!',
     tannerWin: 'Tanner Wins!', noTeamWin: 'No One Wins',
     chineseName: 'Chinese name', thinking: 'Thinking', persona: 'Persona', gameData: 'Game Data',
-    story: 'Story', proof: 'Proof', agentState: 'Agent State', decisionTrace: 'Decision Trace',
+    story: 'Watch Game', proof: 'Proof', agentState: 'Agent State', decisionTrace: 'Decision Trace',
   },
   zh: {
     brand: '無限狼人殺', sub: 'AI 一夜',
-    archive: '檔案', info: '資訊', night: '夜晚', autoRotate: '自動旋轉',
+    archive: '遊戲', info: '關於', night: '夜晚', autoRotate: '自動',
     nightPhase: '夜晚階段', dayDiscussion: '白天討論', voting: '投票',
     resolution: '結算', postgame: '賽後訪問',
     centerCards: '中央卡牌', roles: '角色', nightActions: '夜晚行動',
@@ -51,7 +51,7 @@ const I18N = {
     werewolfWin: '狼人勝利！', villageWin: '村民勝利！',
     tannerWin: '皮匠勝利！', noTeamWin: '無人勝利',
     chineseName: '中文名', thinking: '思考深度', persona: '人設', gameData: '遊戲數據',
-    story: '故事', proof: '證據', agentState: '代理狀態', decisionTrace: '決策軌跡',
+    story: '觀看遊戲', proof: '證據', agentState: '代理狀態', decisionTrace: '決策軌跡',
   }
 };
 let lang = (navigator.language || 'en').startsWith('zh') ? 'zh' : 'en';
@@ -2074,7 +2074,7 @@ function buildArchiveList(games) {
     village_win_no_wolf: lang === 'zh' ? '村民勝（無狼）' : 'Village Win (no wolf)',
     no_team_win: lang === 'zh' ? '無隊勝' : 'No Team Win',
   };
-  [...games].reverse().forEach(g => {
+  games.forEach((g, index) => {
     const el = document.createElement('div');
     const id = g.game_id || g.id;
     el.className = 'game-item' + (id === currentGame ? ' active' : '');
@@ -2083,7 +2083,7 @@ function buildArchiveList(games) {
     const outcome = outcomeLabels[rawOutcome] || rawOutcome;
     const date = g.date || g.timestamp || '';
     el.innerHTML = `
-      <div class="gid">Game ${String(id).replace('game_', '').replace('game-', '')}</div>
+      <div class="gid">Game ${String(id).replace('game_', '').replace('game-', '')}${index === 0 ? `<span class="latest-badge">${lang === 'zh' ? '最新' : 'LATEST'}</span>` : ''}</div>
       <div class="outcome">${outcome}</div>
       <div class="date">${date}</div>
     `;
@@ -2724,7 +2724,8 @@ let storySteps = [];
 let storyIndex = 0;
 let storyPlaying = false;
 let storyTimer = null;
-let storySpeed = 1;
+let storySpeed = 1.5;
+const STORY_PHASES = ['night', 'day', 'vote', 'resolve', 'postgame'];
 
 function displayPlayerName(name) {
   const p = PLAYERS.find(x => x.name === name);
@@ -2826,6 +2827,62 @@ function buildRecordedReplay() {
   }));
 }
 
+function storyKicker(step) {
+  const labels = lang === 'zh'
+    ? {
+        night: 'AI 夜晚決策',
+        day: 'AI 桌上對話',
+        vote: 'AI 投票決策',
+        resolve: '規則引擎',
+        postgame: 'AI 賽後訪問',
+      }
+    : {
+        night: 'AI NIGHT DECISION',
+        day: 'AI TABLE TALK',
+        vote: 'AI VOTE',
+        resolve: 'RULE ENGINE',
+        postgame: 'AI POSTGAME',
+      };
+  return labels[step.phase] || (lang === 'zh' ? '已記錄事件' : 'RECORDED EVENT');
+}
+
+function buildStoryPhaseNav() {
+  const nav = document.getElementById('story-phase-nav');
+  nav.innerHTML = '';
+  for (const phase of STORY_PHASES) {
+    const count = storySteps.filter(step => step.phase === phase).length;
+    if (!count) continue;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.phase = phase;
+    button.innerHTML = `${storyPhaseLabel(phase)} <span class="count">${count}</span>`;
+    button.addEventListener('click', () => {
+      const nextIndex = storySteps.findIndex(step => step.phase === phase);
+      if (nextIndex < 0) return;
+      stopStoryPlayback();
+      storyIndex = nextIndex;
+      renderStoryStep();
+    });
+    nav.appendChild(button);
+  }
+}
+
+function renderStoryAvatar(step) {
+  const box = document.getElementById('story-avatar');
+  const image = document.getElementById('story-avatar-img');
+  const icon = document.getElementById('story-avatar-icon');
+  const player = PLAYERS.find(p => p.name === step.actor);
+  box.classList.toggle('has-image', Boolean(player));
+  if (player) {
+    image.src = renderAvatarPortrait(player, 128);
+    image.alt = displayPlayerName(player.name);
+  } else {
+    image.removeAttribute('src');
+    image.alt = '';
+    icon.textContent = step.phase === 'resolve' ? '⚙' : '◆';
+  }
+}
+
 function renderStoryStep() {
   if (!storySteps.length) return;
   const step = storySteps[storyIndex];
@@ -2833,31 +2890,46 @@ function renderStoryStep() {
   closeSidePanel();
   clearBubbles();
   replayControls.classList.remove('visible');
+  document.getElementById('story-phase-badge').textContent = storyPhaseLabel(step.phase);
+  document.getElementById('story-game-id').textContent =
+    `${lang === 'zh' ? '遊戲' : 'GAME'} ${String(currentGame || '').replace('game_', '').replace('game-', '')}`;
+  document.getElementById('story-kicker').textContent = storyKicker(step);
   document.getElementById('story-title').textContent = step.title || '';
-  document.getElementById('story-body').innerHTML = formatGameText(step.body || '');
+  const body = document.getElementById('story-body');
+  body.innerHTML = formatGameText(step.body || '');
+  body.scrollTop = 0;
+  renderStoryAvatar(step);
+  const actor = step.actor ? displayPlayerName(step.actor) : (lang === 'zh' ? '遊戲規則引擎' : 'Game rules engine');
+  const model = (step.model || '').split('/').pop();
+  document.getElementById('story-agent-sub').textContent =
+    [actor, model].filter(Boolean).join(' · ');
   const phaseSteps = storySteps.filter(s => s.phase === step.phase);
   const phaseIndex = phaseSteps.findIndex(s => s.id === step.id) + 1;
   document.getElementById('story-progress').textContent = lang === 'zh'
-    ? `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · 完整事件 ${storyIndex + 1}/${storySteps.length}`
-    : `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · complete event ${storyIndex + 1}/${storySteps.length}`;
-  document.getElementById('story-kicker').textContent = lang === 'zh'
-    ? '完整軌跡重播 · 沒有省略任何軌跡事件'
-    : 'COMPLETE TRACE REPLAY · NO TRACE EVENTS OMITTED';
+    ? `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · 第 ${storyIndex + 1}/${storySteps.length} 個已記錄事件`
+    : `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · recorded event ${storyIndex + 1}/${storySteps.length}`;
+  document.getElementById('story-progress-fill').style.width =
+    `${((storyIndex + 1) / storySteps.length) * 100}%`;
+  document.querySelectorAll('#story-phase-nav button').forEach(button => {
+    button.classList.toggle('active', button.dataset.phase === step.phase);
+  });
   const rationale = document.getElementById('story-rationale');
   rationale.innerHTML = step.reasoning
     ? `<span class="label">${lang === 'zh' ? '記錄理由' : 'RECORDED RATIONALE'}</span>${formatGameText(step.reasoning)}`
     : '';
   rationale.classList.toggle('visible', Boolean(step.reasoning));
   const meta = [];
-  if (step.model) meta.push(step.model);
   if (step.thinking) meta.push(`thinking=${step.thinking}`);
   if (step.latencyMs !== null && step.latencyMs !== undefined) meta.push(`${step.latencyMs}ms`);
-  meta.push(step.fallback ? (lang === 'zh' ? '回退／錯誤' : 'fallback/error') : (step.source || 'recorded'));
+  meta.push(step.fallback
+    ? (lang === 'zh' ? '回退／錯誤' : 'fallback/error')
+    : step.source === 'game-engine'
+      ? (lang === 'zh' ? '規則引擎' : 'rules engine')
+      : (lang === 'zh' ? '已記錄的代理輸出' : 'recorded agent output'));
   const sourceHref = step.sourceFile ? `./data/games/${currentGame}/${step.sourceFile}` : '';
-  const sourceText = [step.sourceFile, step.sourcePath].filter(Boolean).join(' · ');
   document.getElementById('story-meta').innerHTML = `
     <span class="${step.fallback ? 'fallback' : ''}">${meta.join(' · ')}</span>
-    ${sourceHref ? `<a href="${sourceHref}" target="_blank">${lang === 'zh' ? '原始記錄' : 'source record'}: ${sourceText}</a>` : ''}
+    ${sourceHref ? `<a href="${sourceHref}" target="_blank">${lang === 'zh' ? '查看原始記錄 ↗' : 'Raw record ↗'}</a>` : ''}
   `;
   const roleBox = document.getElementById('story-role-changes');
   roleBox.innerHTML = '';
@@ -2875,13 +2947,15 @@ function renderStoryStep() {
   }
 }
 
-function openStoryMode(autoPlay = false) {
+function openStoryMode(autoPlay = false, startIndex = 0) {
   storySteps = buildRecordedReplay();
-  storyIndex = 0;
+  if (!storySteps.length) return;
+  storyIndex = THREE.MathUtils.clamp(startIndex, 0, storySteps.length - 1);
   storyPlaying = false;
-  storySpeed = 1;
+  storySpeed = 1.5;
   document.getElementById('story-play').textContent = '▶';
-  document.getElementById('story-speed').textContent = '1×';
+  document.getElementById('story-speed').textContent = '1.5×';
+  buildStoryPhaseNav();
   document.getElementById('story-mode').classList.add('visible');
   renderStoryStep();
   if (autoPlay) {
@@ -3414,27 +3488,58 @@ function startSpeechReplay(speeches) {
 }
 
 // ===== UI Setup =====
+function toggleLanguage() {
+  const panelContent = document.getElementById('panel-content');
+  const openPanelView = document.getElementById('side-panel').classList.contains('open')
+    ? panelContent.dataset.panelView : '';
+  const restoreStory = document.getElementById('story-mode').classList.contains('visible');
+  const savedStoryIndex = storyIndex;
+  lang = lang === 'en' ? 'zh' : 'en';
+  updateUIText();
+  if (archiveGames.length > 0) buildArchiveList(archiveGames);
+  buildNameTags();
+  if (currentGame) {
+    const savedPhase = currentPhase;
+    loadGame(currentGame).then(loaded => {
+      if (!loaded) return;
+      if (restoreStory) openStoryMode(false, savedStoryIndex);
+      else if (openPanelView === 'about') showAboutPanel();
+      else if (openPanelView === 'proof') showProofPanel();
+      else setPhase(savedPhase);
+    });
+  } else if (gameData.night) {
+    const savedPhase = currentPhase;
+    if (restoreStory) openStoryMode(false, savedStoryIndex);
+    else if (openPanelView === 'about') showAboutPanel();
+    else if (openPanelView === 'proof') showProofPanel();
+    else setPhase(savedPhase);
+  }
+}
+
 function setupUI() {
   buildNameTags();
   updateUIText();
 
   // Welcome overlay
   const welcomeOverlay = document.getElementById('welcome-overlay');
+  const dismissWelcome = () => welcomeOverlay.classList.add('hidden');
   document.getElementById('welcome-btn').addEventListener('click', () => {
-    welcomeOverlay.classList.add('hidden');
+    dismissWelcome();
     const launchStoryWhenReady = () => {
       if (gameData.night) openStoryMode(true);
       else setTimeout(launchStoryWhenReady, 150);
     };
     setTimeout(launchStoryWhenReady, 250);
   });
+  document.getElementById('welcome-explore').addEventListener('click', dismissWelcome);
+  document.getElementById('welcome-lang').addEventListener('click', toggleLanguage);
   // Dismiss on Escape or click outside the card
   welcomeOverlay.addEventListener('click', (e) => {
-    if (e.target === welcomeOverlay) welcomeOverlay.classList.add('hidden');
+    if (e.target === welcomeOverlay) dismissWelcome();
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !welcomeOverlay.classList.contains('hidden')) {
-      welcomeOverlay.classList.add('hidden');
+      dismissWelcome();
     }
   });
 
@@ -3476,34 +3581,7 @@ function setupUI() {
     closeSidePanel();
   });
 
-  // Language toggle
-  document.getElementById('btn-lang').addEventListener('click', () => {
-    const panelContent = document.getElementById('panel-content');
-    const openPanelView = document.getElementById('side-panel').classList.contains('open')
-      ? panelContent.dataset.panelView : '';
-    const restoreStory = document.getElementById('story-mode').classList.contains('visible');
-    lang = lang === 'en' ? 'zh' : 'en';
-    updateUIText();
-    if (archiveGames.length > 0) buildArchiveList(archiveGames);
-    buildNameTags(); // Rebuild name tags with new language
-    // Reload game data with new language, then restore phase
-    if (currentGame) {
-      const savedPhase = currentPhase;
-      loadGame(currentGame).then(loaded => {
-        if (!loaded) return;
-        if (restoreStory) openStoryMode();
-        else if (openPanelView === 'about') showAboutPanel();
-        else if (openPanelView === 'proof') showProofPanel();
-        else setPhase(savedPhase);
-      });
-    } else if (gameData.night) {
-      const currentPhaseSaved = currentPhase;
-      if (restoreStory) openStoryMode();
-      else if (openPanelView === 'about') showAboutPanel();
-      else if (openPanelView === 'proof') showProofPanel();
-      else setPhase(currentPhaseSaved);
-    }
-  });
+  document.getElementById('btn-lang').addEventListener('click', toggleLanguage);
 
   document.getElementById('story-prev').addEventListener('click', () => {
     stopStoryPlayback();
@@ -3585,7 +3663,7 @@ function setupUI() {
 
 function updateUIText() {
   document.querySelector('.brand').innerHTML = t('brand') + ' <span class="sub">' + t('sub') + '</span>';
-  document.getElementById('btn-gallery').innerHTML = (lang === 'zh' ? '角色' : 'Characters');
+  document.getElementById('btn-gallery').innerHTML = (lang === 'zh' ? 'AI 代理' : 'AI Agents');
   document.getElementById('btn-story').innerHTML = t('story');
   document.getElementById('btn-proof').innerHTML = t('proof');
   document.getElementById('btn-archive').innerHTML = t('archive');
@@ -3594,12 +3672,26 @@ function updateUIText() {
   document.getElementById('btn-night').classList.toggle('active', isNight);
   document.getElementById('btn-rotate').innerHTML = t('autoRotate');
   document.getElementById('btn-lang').innerHTML = t('langLabel');
+  document.getElementById('welcome-lang').textContent = t('langLabel');
   document.getElementById('loading').textContent = t('loadingVillage');
   // Welcome overlay
   document.getElementById('welcome-title').textContent = t('brand');
   document.getElementById('welcome-sub').textContent = t('sub');
-  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '進入' : 'Enter';
-  document.getElementById('welcome-desc').textContent = lang === 'zh' ? '6 個 AI 代理，不同模型，自主決策' : '6 AI agents. Different LLMs. Autonomous decisions.';
+  document.getElementById('welcome-eyebrow').textContent =
+    lang === 'zh' ? '已記錄的自主遊戲' : 'RECORDED AUTONOMOUS GAME';
+  document.getElementById('welcome-desc').textContent = lang === 'zh'
+    ? '觀看六個 AI 代理在沒有真人操控的情況下虛張聲勢、推理並投票。'
+    : 'Watch six AI agents bluff, reason, and vote with no human player controlling the table.';
+  document.getElementById('welcome-fact-agents').textContent = lang === 'zh' ? '6 個 AI 代理' : '6 AI agents';
+  document.getElementById('welcome-fact-models').textContent = lang === 'zh' ? '使用不同 LLM' : 'Different LLMs';
+  document.getElementById('welcome-fact-trace').textContent = lang === 'zh' ? '完整決策軌跡' : 'Full decision trace';
+  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '觀看最新遊戲' : 'Watch latest game';
+  document.getElementById('welcome-explore').textContent = lang === 'zh' ? '自由探索' : 'Explore freely';
+  document.getElementById('welcome-trust').textContent = lang === 'zh'
+    ? '所有已記錄事件均完整保留。你可以在「證據」中查看原始遊戲輸出。'
+    : 'Every recorded event is preserved. Raw game outputs are available in Proof.';
+  document.getElementById('welcome-gh').textContent =
+    lang === 'zh' ? '在 GitHub 查看原始碼 ↗' : 'View source on GitHub ↗';
   // Update phase labels
   const phaseLabels = { night: t('nightPhase'), day: t('dayDiscussion'), vote: t('voting'), resolve: t('resolution'), postgame: t('postgame') };
   document.querySelectorAll('.phase-step').forEach(el => {
