@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260720-showcase-1';
+const CACHE_VERSION = '20260720-showcase-2';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -3685,8 +3685,8 @@ function updateUIText() {
   document.getElementById('welcome-fact-agents').textContent = lang === 'zh' ? '6 個 AI 代理' : '6 AI agents';
   document.getElementById('welcome-fact-models').textContent = lang === 'zh' ? '使用不同 LLM' : 'Different LLMs';
   document.getElementById('welcome-fact-trace').textContent = lang === 'zh' ? '完整決策軌跡' : 'Full decision trace';
-  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '觀看最新遊戲' : 'Watch latest game';
-  document.getElementById('welcome-explore').textContent = lang === 'zh' ? '自由探索' : 'Explore freely';
+  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '觀看導覽重播' : 'Watch guided replay';
+  document.getElementById('welcome-explore').textContent = lang === 'zh' ? '探索遊戲桌' : 'Explore the table';
   document.getElementById('welcome-trust').textContent = lang === 'zh'
     ? '所有已記錄事件均完整保留。你可以在「證據」中查看原始遊戲輸出。'
     : 'Every recorded event is preserved. Raw game outputs are available in Proof.';
