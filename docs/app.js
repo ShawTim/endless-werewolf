@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-night-summary-2';
+const CACHE_VERSION = '20260721-speaker-focus-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -199,11 +199,13 @@ let dustMotes = null;   // day dust motes
 // --- State for per-frame updates ---
 let activeVotes = null;   // stored votes object for per-frame redraw
 let activeBubblesData = []; // [{playerIndex, text, duration, startTime, el, hex}]
+let bubbleGeneration = 0;
 let deathAnims = [];     // [{index, startTime, duration, baseY}]
 let teamAnims = [];      // [{index, type: 'celebrate'|'defeat', startTime}]
 
 // --- DOM refs ---
 const canvas = document.getElementById('c');
+const speakerFocusEl = document.getElementById('speaker-focus');
 const tagsContainer = document.getElementById('tags');
 const bubblesContainer = document.getElementById('bubbles');
 const voteOverlay = document.getElementById('vote-overlay');
@@ -1496,7 +1498,7 @@ function buildNameTags() {
     d.style.border = '1px solid ' + hex + '44';
     d.style.color = hex;
     const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-    d.innerHTML = main + '<div class="role-sub"></div>';
+    d.innerHTML = main + '<div class="speaking-label"></div><div class="role-sub"></div>';
     tagsContainer.appendChild(d);
     tagEls.push(d);
   });
@@ -1592,6 +1594,7 @@ const MAX_BUBBLES = 3;
 function showBubble(playerIndex, text, duration = 4000) {
   const p = PLAYERS[playerIndex];
   if (!p) return;
+  const generation = bubbleGeneration;
   const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
 
@@ -1610,6 +1613,7 @@ function showBubble(playerIndex, text, duration = 4000) {
     chars[playerIndex].userData.highlight.material.opacity = 0.6;
   }
   setSpeaking(playerIndex, true);
+  if (currentPhase === 'day') setSpeakerFocus(playerIndex, true);
 
   const bubbleData = { playerIndex, text, duration, startTime: performance.now(), el, hex };
   activeBubblesData.push(bubbleData);
@@ -1634,6 +1638,7 @@ function showBubble(playerIndex, text, duration = 4000) {
   updateBubblePosition(bubbleData);
 
   setTimeout(() => {
+    if (generation !== bubbleGeneration) return;
     el.style.transition = 'opacity 0.5s';
     el.style.opacity = '0';
     setTimeout(() => el.remove(), 500);
@@ -1642,6 +1647,9 @@ function showBubble(playerIndex, text, duration = 4000) {
       chars[playerIndex].userData.highlight.material.opacity = 0;
     }
     setSpeaking(playerIndex, false);
+    if (!activeBubblesData.some(b => b.playerIndex === playerIndex)) {
+      clearSpeakerFocus();
+    }
   }, duration);
 }
 
@@ -1678,9 +1686,11 @@ function updateAllBubbles() {
 }
 
 function clearBubbles() {
+  bubbleGeneration += 1;
   bubblesContainer.innerHTML = '';
   activeBubblesData = [];
   speakingStates = [];
+  clearSpeakerFocus();
   chars.forEach((c, i) => {
     if (c.userData && c.userData.highlight) {
       c.userData.highlight.material.opacity = 0;
@@ -1821,6 +1831,69 @@ function highlightCharacter(index, active) {
   if (chars[index] && chars[index].userData.highlight) {
     chars[index].userData.highlight.material.opacity = active ? 0.6 : 0;
   }
+}
+
+// ===== Day Speaker Focus =====
+let speakerFocusIndex = -1;
+let speakerCameraAnim = null;
+
+function focusSpeakerCamera(index) {
+  const seatAngle = (index / 6) * TAU - PI / 2;
+  const desiredTheta = seatAngle + PI - 0.55;
+  const delta = Math.atan2(
+    Math.sin(desiredTheta - theta),
+    Math.cos(desiredTheta - theta),
+  );
+  speakerCameraAnim = {
+    from: theta,
+    to: theta + delta,
+    startTime: performance.now(),
+    duration: 700,
+  };
+}
+
+function setSpeakerFocus(index, active) {
+  tagEls.forEach(tag => tag.classList.remove('speaking'));
+  if (!active || currentPhase !== 'day' || index < 0 || !chars[index]) {
+    speakerFocusIndex = -1;
+    speakerFocusEl.classList.remove('visible');
+    return;
+  }
+
+  speakerFocusIndex = index;
+  focusSpeakerCamera(index);
+  speakerFocusEl.classList.add('visible');
+  if (tagEls[index]) {
+    tagEls[index].classList.add('speaking');
+    const label = tagEls[index].querySelector('.speaking-label');
+    if (label) label.textContent = lang === 'zh' ? '發言中' : 'SPEAKING';
+  }
+  updateSpeakerFocus();
+}
+
+function clearSpeakerFocus() {
+  speakerCameraAnim = null;
+  setSpeakerFocus(-1, false);
+}
+
+function updateSpeakerCamera(t) {
+  if (!speakerCameraAnim) return;
+  const progress = Math.min((t - speakerCameraAnim.startTime) / speakerCameraAnim.duration, 1);
+  const eased = 1 - Math.pow(1 - progress, 3);
+  theta = speakerCameraAnim.from + (speakerCameraAnim.to - speakerCameraAnim.from) * eased;
+  updateCam();
+  if (progress >= 1) speakerCameraAnim = null;
+}
+
+function updateSpeakerFocus() {
+  if (speakerFocusIndex < 0 || !chars[speakerFocusIndex]) return;
+  const pos = sp(speakerFocusIndex);
+  const v = new THREE.Vector3(pos[0], pos[1] + 0.85, pos[2]);
+  v.project(camera);
+  const x = THREE.MathUtils.clamp((v.x * 0.5 + 0.5) * innerWidth, 0, innerWidth);
+  const y = THREE.MathUtils.clamp((-v.y * 0.5 + 0.5) * innerHeight, 0, innerHeight);
+  speakerFocusEl.style.setProperty('--speaker-x', `${x}px`);
+  speakerFocusEl.style.setProperty('--speaker-y', `${y}px`);
 }
 
 // ===== Dim Character (executed) — animated death =====
@@ -3176,7 +3249,13 @@ function renderStoryStep() {
   chars.forEach((_, i) => highlightCharacter(i, false));
   if (step.actor) {
     const idx = PLAYERS.findIndex(p => p.name === step.actor);
-    if (idx >= 0) highlightCharacter(idx, true);
+    if (idx >= 0) {
+      highlightCharacter(idx, true);
+      if (step.phase === 'day' && step.type === 'speech') {
+        setSpeakerFocus(idx, true);
+        setSpeaking(idx, true);
+      }
+    }
   }
 }
 
@@ -3210,6 +3289,8 @@ function stopStoryPlayback() {
 function closeStoryMode() {
   stopStoryPlayback();
   document.getElementById('story-mode').classList.remove('visible');
+  clearSpeakerFocus();
+  speakingStates = [];
   chars.forEach((_, i) => highlightCharacter(i, false));
 }
 
@@ -4342,6 +4423,7 @@ function animate() {
 
   // Intro animation (overrides auto-rotate)
   if (introAnim && !introAnim.done) { updateIntroAnim(); }
+  else if (speakerFocusIndex >= 0 && currentPhase === 'day') { updateSpeakerCamera(tMs); }
   else if (autoRotate) { theta += 0.003; updateCam(); }
 
   // Night/day light transition
@@ -4351,6 +4433,7 @@ function animate() {
   // Per-frame updates for overlays
   updateKeyboardPan();
   updateNameTags();
+  updateSpeakerFocus();
   updateAllBubbles();
   if (activeVotes) redrawVoteArrows();
   updateDeathAnims(tMs);

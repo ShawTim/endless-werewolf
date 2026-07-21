@@ -23,6 +23,23 @@ body {
 canvas#c { width:100vw; height:100vh; display:block; cursor:grab; }
 canvas#c:active { cursor:grabbing; }
 
+#speaker-focus {
+  --speaker-x:50%;
+  --speaker-y:50%;
+  --speaker-radius:170px;
+  position:fixed; inset:0; z-index:4; pointer-events:none; opacity:0;
+  background:
+    radial-gradient(
+      circle var(--speaker-radius) at var(--speaker-x) var(--speaker-y),
+      rgba(255,244,205,.18) 0%,
+      rgba(255,231,158,.08) 42%,
+      rgba(8,12,22,.08) 68%,
+      rgba(5,8,17,.29) 100%
+    );
+  transition:opacity .25s ease;
+}
+#speaker-focus.visible { opacity:1; }
+
 /* ===== Cinematic overlays: vignette + film grain ===== */
 body::before {
   content:''; position:fixed; inset:0; z-index:30; pointer-events:none;
@@ -464,11 +481,27 @@ body::after {
   position:absolute; transform:translate(-50%,-50%); pointer-events:none;
   background:rgba(10,10,25,0.92); padding:4px 10px; border-radius:6px;
   font-size:12px; font-weight:bold; white-space:nowrap; text-align:center;
-  transition:opacity .3s;
+  transition:opacity .3s, background-color .25s, border-color .25s, box-shadow .25s, filter .25s;
 }
 .tag .zh { font-size:11px; color:#aaa; font-weight:normal; }
 .tag .role-sub { font-size:12px; font-weight:700; margin-top:3px; opacity:1; text-transform:uppercase; letter-spacing:0.5px; }
 .tag .model { font-size:11px; color:#999; font-weight:normal; margin-top:1px; }
+.tag .speaking-label {
+  display:none; margin-top:3px; color:#fff0bd; font-size:12px;
+  font-weight:800; letter-spacing:1.1px; text-transform:uppercase;
+}
+.tag.speaking {
+  background:rgba(32,24,10,.96);
+  border-color:rgba(255,225,138,.92) !important;
+  box-shadow:0 0 0 2px rgba(232,196,104,.13), 0 0 24px rgba(255,218,112,.46);
+  filter:brightness(1.18);
+  animation:speakerTagPulse 1.35s ease-in-out infinite;
+}
+.tag.speaking .speaking-label { display:block; }
+@keyframes speakerTagPulse {
+  0%, 100% { box-shadow:0 0 0 2px rgba(232,196,104,.12), 0 0 18px rgba(255,218,112,.32); }
+  50% { box-shadow:0 0 0 3px rgba(232,196,104,.22), 0 0 30px rgba(255,218,112,.58); }
+}
 .tag.role-changed {
   border-color:rgba(232,196,104,.7) !important;
   box-shadow:0 0 14px rgba(232,196,104,.18);
@@ -764,7 +797,7 @@ body::after {
   to { opacity:1; transform:translateX(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tag.role-transitioning, .role-transition-card { animation:none; }
+  .tag.role-transitioning, .tag.speaking, .role-transition-card { animation:none; }
 }
 .role-change {
   display:flex; align-items:center; justify-content:space-between; gap:8px;
@@ -814,6 +847,7 @@ body::after {
 
 /* ===== Mobile ===== */
 @media (max-width: 768px) {
+  #speaker-focus { --speaker-radius:125px; }
   #side-panel { width: 100vw; }
   #archive-panel { width: 100vw; }
   #timeline { font-size: 11px; left: 0; transform: none; width: 100vw; border-radius: 0; }
