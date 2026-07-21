@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-vote-routing-1';
+const CACHE_VERSION = '20260721-mobile-accessibility-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -3574,6 +3574,7 @@ function openStoryMode(autoPlay = false, startIndex = 0, preserveViewMode = fals
   document.getElementById('story-speed').textContent = '1.5×';
   buildStoryPhaseNav();
   updateStoryViewToggle();
+  document.body.classList.add('story-open');
   document.getElementById('story-mode').classList.add('visible');
   renderStoryStep();
   if (autoPlay) {
@@ -3592,6 +3593,7 @@ function stopStoryPlayback() {
 
 function closeStoryMode() {
   stopStoryPlayback();
+  document.body.classList.remove('story-open');
   document.getElementById('story-mode').classList.remove('visible');
   clearSpeakerFocus();
   speakingStates = [];

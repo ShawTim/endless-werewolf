@@ -388,6 +388,7 @@ body::after {
   background: var(--panel-bg); border: 1px solid var(--border); border-bottom: none;
   border-radius: 12px 12px 0 0; padding: 8px 10px;
   backdrop-filter: blur(10px);
+  transition:opacity .2s ease, transform .25s ease;
 }
 .phase-step {
   display: flex; align-items: center; gap: 8px;
@@ -994,7 +995,33 @@ body::after {
   #result-banner .winners { font-size: 12px; }
   #story-mode { left:8px; bottom:52px; width:calc(100vw - 16px); padding:12px; }
   .story-title { font-size:16px; }
-  .story-body { font-size:11px; max-height:150px; }
+  .story-body { font-size:13px; max-height:150px; }
+  .story-phase-badge,
+  .story-game-id,
+  .story-kicker,
+  .story-agent-sub,
+  #story-rationale,
+  #story-rationale .label,
+  #story-meta,
+  .story-view-toggle > span,
+  .story-view-toggle button,
+  #story-progress,
+  .vote-integrity-note span,
+  .role-transition-header span,
+  .role-summary-label,
+  .night-action-summary-list span,
+  .role-chip {
+    font-size:12px;
+  }
+  .story-actions .btn { min-height:36px; font-size:12px; }
+  .story-close {
+    display:flex; align-items:center; justify-content:center;
+    width:36px; height:36px; padding:0; flex:0 0 36px;
+  }
+  body.story-open #timeline {
+    opacity:0; pointer-events:none; transform:translateY(100%);
+  }
+  body.story-open #story-mode.visible { bottom:8px; }
   #story-role-changes { grid-template-columns:1fr; max-height:180px; overflow-y:auto; }
   #story-role-changes.transition { max-height:340px; padding:8px; }
   #story-role-changes.vote-summary { max-height:360px; }
@@ -1019,7 +1046,10 @@ body::after {
     overflow-x: auto; scrollbar-width: none;
   }
   .top-actions::-webkit-scrollbar { display: none; }
-  .top-actions .btn { flex-shrink: 0; }
+  .top-actions .btn {
+    flex-shrink:0; min-height:36px; padding:7px 10px;
+    font-size:12px; justify-content:center;
+  }
   #welcome-actions { flex-direction:column; }
   #welcome-btn, #welcome-explore { width:min(300px,100%); }
   #welcome-facts span { font-size:11px; }
