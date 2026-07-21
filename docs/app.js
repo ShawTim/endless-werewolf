@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-type-1';
+const CACHE_VERSION = '20260721-readable-type-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -1327,7 +1327,7 @@ function setupCameraControls() {
             <div class="avatar-img" style="width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid ${hex};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
             <div class="name" style="color:${hex}">${displayName}</div>
             <div class="desc">${p.persona}</div>
-            <div class="trait" style="margin-top:6px;font-size:10px;color:#666;">${(p.model || '').split('/').pop()}</div>
+            <div class="trait" style="margin-top:6px;font-size:11px;color:#999;">${(p.model || '').split('/').pop()}</div>
           `;
           hoverCard.style.borderColor = hex + '66';
           hoverCard.style.opacity = '1';
