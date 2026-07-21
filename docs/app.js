@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-system-votes-1';
+const CACHE_VERSION = '20260721-label-contrast-2';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -1322,12 +1322,14 @@ function setupCameraControls() {
       if (foundId > 0) {
         const p = PLAYERS.find(x => String(x.id) === String(foundId));
         if (p) {
-          const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+          const rawColor = p.color || p.accent || 0xe74c3c;
+          const hex = hexColor(rawColor);
+          const readableHex = hexColor(readableAccent(rawColor));
           const avatarUrl = renderAvatarPortrait(p, 96);
           const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
           hoverCard.innerHTML = `
             <div class="avatar-img" style="width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid ${hex};flex-shrink:0;"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" /></div>
-            <div class="name" style="color:${hex}">${displayName}</div>
+            <div class="name" style="color:${readableHex}">${displayName}</div>
             <div class="desc">${p.persona}</div>
             <div class="trait" style="margin-top:6px;font-size:11px;color:#999;">${(p.model || '').split('/').pop()}</div>
           `;
@@ -1488,15 +1490,57 @@ function updateNightTransition() {
 
 // ===== Name Tags =====
 let tagEls = [];
+
+const LABEL_SURFACE = 0x050812;
+
+function hexColor(value) {
+  return `#${Number(value).toString(16).padStart(6, '0')}`;
+}
+
+function mixHexColors(from, to, amount) {
+  const mixChannel = shift => Math.round(
+    ((from >> shift) & 0xff) + ((((to >> shift) & 0xff) - ((from >> shift) & 0xff)) * amount),
+  );
+  return (mixChannel(16) << 16) | (mixChannel(8) << 8) | mixChannel(0);
+}
+
+function colorLuminance(color) {
+  const channel = shift => {
+    const value = ((color >> shift) & 0xff) / 255;
+    return value <= 0.04045
+      ? value / 12.92
+      : Math.pow((value + 0.055) / 1.055, 2.4);
+  };
+  return (0.2126 * channel(16)) + (0.7152 * channel(8)) + (0.0722 * channel(0));
+}
+
+function colorContrast(first, second) {
+  const firstLum = colorLuminance(first);
+  const secondLum = colorLuminance(second);
+  return (Math.max(firstLum, secondLum) + 0.05) / (Math.min(firstLum, secondLum) + 0.05);
+}
+
+function readableAccent(color, background = LABEL_SURFACE, targetContrast = 7) {
+  if (colorContrast(color, background) >= targetContrast) return color;
+  for (let step = 1; step <= 40; step += 1) {
+    const candidate = mixHexColors(color, 0xffffff, step / 40);
+    if (colorContrast(candidate, background) >= targetContrast) return candidate;
+  }
+  return mixHexColors(color, 0xffffff, 0.75);
+}
+
 function buildNameTags() {
   tagsContainer.innerHTML = '';
   tagEls = [];
   PLAYERS.forEach(p => {
     const d = document.createElement('div');
     d.className = 'tag';
-    const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
-    d.style.border = '1px solid ' + hex + '44';
-    d.style.setProperty('--tag-accent', hex);
+    const accent = p.color || p.accent || 0xe74c3c;
+    const accentHex = hexColor(accent);
+    const readableHex = hexColor(readableAccent(accent));
+    d.style.border = `1px solid ${accentHex}99`;
+    d.style.setProperty('--tag-accent', accentHex);
+    d.style.setProperty('--tag-text', readableHex);
     const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
     d.innerHTML = `<div class="tag-name">${main}</div><div class="speaking-label"></div><div class="role-sub"></div>`;
     tagsContainer.appendChild(d);
@@ -1598,14 +1642,16 @@ function showBubble(playerIndex, text, duration = 4000) {
   const p = PLAYERS[playerIndex];
   if (!p) return;
   const generation = bubbleGeneration;
-  const hex = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const accent = p.color || p.accent || 0xe74c3c;
+  const hex = hexColor(accent);
+  const readableHex = hexColor(readableAccent(accent));
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
 
   const el = document.createElement('div');
   el.className = 'bubble';
   el.style.borderColor = hex;
   el.innerHTML = `
-    <div class="speaker" style="color:${hex}">${displayName}</div>
+    <div class="speaker" style="color:${readableHex}">${displayName}</div>
     <div class="text">${formatGameText(text)}</div>
     <div class="arrow" style="border-top-color:${hex}"></div>
   `;
@@ -1710,8 +1756,10 @@ function clearBubbles() {
 }
 
 // ===== Vote Arrows =====
-// Vote arrow elements are created once, then only coordinates updated per frame
-let voteArrowEls = []; // [{path, head, label, voter, target}]
+// Vote arrow elements are created once, then only coordinates updated per frame.
+// Player names already appear in the overhead tags and voting panel, so the
+// arrows deliberately avoid adding a second, overlapping name label.
+let voteArrowEls = []; // [{pathUnderlay, path, head, voter, target}]
 
 function showVoteArrows(votes) {
   activeVotes = votes;
@@ -1724,35 +1772,39 @@ function showVoteArrows(votes) {
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
 
-    const voterColor = getPlayerColor(voter);
+    const voterP = PLAYERS.find(x => x.name === voter);
+    const voterAccent = voterP?.color || voterP?.accent || 0xe74c3c;
+    const voterColor = hexColor(readableAccent(voterAccent));
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'vote-arrow-svg');
     svg.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;';
 
+    const pathUnderlay = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    pathUnderlay.setAttribute('stroke', '#050812');
+    pathUnderlay.setAttribute('stroke-width', '5');
+    pathUnderlay.setAttribute('stroke-dasharray', '6,4');
+    pathUnderlay.setAttribute('fill', 'none');
+    pathUnderlay.setAttribute('opacity', '0.72');
+    svg.appendChild(pathUnderlay);
+
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('stroke', voterColor);
-    path.setAttribute('stroke-width', '2');
+    path.setAttribute('stroke-width', '2.5');
     path.setAttribute('stroke-dasharray', '6,4');
     path.setAttribute('fill', 'none');
-    path.setAttribute('opacity', '0.7');
+    path.setAttribute('opacity', '0.95');
     svg.appendChild(path);
 
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     head.setAttribute('fill', voterColor);
-    head.setAttribute('opacity', '0.85');
+    head.setAttribute('stroke', '#050812');
+    head.setAttribute('stroke-width', '2');
+    head.setAttribute('opacity', '1');
     svg.appendChild(head);
 
     voteOverlay.appendChild(svg);
 
-    const voterP = PLAYERS.find(x => x.name === voter);
-    const voterName = lang === 'zh' && voterP ? (voterP.name_zh || voter) : voter;
-    const label = document.createElement('div');
-    label.className = 'vote-label';
-    label.style.color = voterColor;
-    label.textContent = voterName;
-    voteOverlay.appendChild(label);
-
-    voteArrowEls.push({ path, head, label, voter, target });
+    voteArrowEls.push({ pathUnderlay, path, head, voter, target });
   }
   redrawVoteArrows();
 }
@@ -1777,12 +1829,18 @@ function redrawVoteArrows() {
 
     const dx = ex - sx, dy = ey - sy;
     const len = Math.sqrt(dx*dx + dy*dy);
-    if (len < 10) { va.path.setAttribute('d', ''); continue; }
+    if (len < 10) {
+      va.pathUnderlay.setAttribute('d', '');
+      va.path.setAttribute('d', '');
+      continue;
+    }
 
     const headLen = Math.min(16, len * 0.25);
     const midX = (sx + ex) / 2;
     const midY = (sy + ey) / 2 - Math.max(50, len * 0.35);
-    va.path.setAttribute('d', `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`);
+    const pathData = `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`;
+    va.pathUnderlay.setAttribute('d', pathData);
+    va.path.setAttribute('d', pathData);
 
     // Arrowhead tangent at end of curve
     const tdx = ex - midX, tdy = ey - midY;
@@ -1794,8 +1852,6 @@ function redrawVoteArrows() {
     const hy2c = ey - headLen * Math.sin(tangentAngle + 0.4);
     va.head.setAttribute('points', `${ex},${ey} ${hx1c},${hy1c} ${hx2c},${hy2c}`);
 
-    va.label.style.left = sx + 'px';
-    va.label.style.top = sy + 'px';
   }
 }
 
@@ -2415,8 +2471,10 @@ const ROLE_ZH = {
 function roleZh(name) { return ROLE_ZH[name] || name; }
 
 function styleRoleTag(roleSub, color) {
-  roleSub.style.setProperty('--role-accent', `#${color.toString(16).padStart(6, '0')}`);
-  roleSub.style.color = '#fffdf7';
+  const background = mixHexColors(LABEL_SURFACE, color, 0.16);
+  roleSub.style.setProperty('--role-accent', hexColor(color));
+  roleSub.style.setProperty('--role-bg', hexColor(background));
+  roleSub.style.setProperty('--role-text', hexColor(readableAccent(color, background)));
 }
 
 function showInitialRoles() {
@@ -3612,7 +3670,7 @@ function buildGameSectionHTML(p, accent, displayName) {
 function showPlayerModal(playerId) {
   const p = PLAYERS.find(x => String(x.id) === String(playerId));
   if (!p) return;
-  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const accent = getPlayerColor(p.name);
   const avatarUrl = renderAvatarPortrait(p, 256);
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
 
@@ -3657,7 +3715,7 @@ function showGallery(playerId) {
 function updateGalleryContent() {
   const p = PLAYERS[galleryCurrentIndex];
   if (!p) return;
-  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const accent = getPlayerColor(p.name);
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
 
   // --- Persona tab ---
@@ -3825,7 +3883,7 @@ function galleryNav(dir) {
 function showPlayerDetail(playerId) {
   const p = PLAYERS.find(x => String(x.id) === String(playerId));
   if (!p) return;
-  const accent = '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  const accent = getPlayerColor(p.name);
   const displayName = lang === 'zh' ? (p.name_zh || p.name) : p.name;
   
   let html = `<div class="panel-section">
@@ -4420,7 +4478,7 @@ function closeSidePanel() {
 function getPlayerColor(name) {
   const p = PLAYERS.find(x => x.name === name);
   if (!p) return '#e8c468';
-  return '#' + (p.accent || 0xe74c3c).toString(16).padStart(6, '0');
+  return hexColor(readableAccent(p.color || p.accent || 0xe74c3c));
 }
 
 

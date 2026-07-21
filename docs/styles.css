@@ -479,18 +479,18 @@ body::after {
 #tags { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5; }
 .tag {
   position:absolute; transform:translate(-50%,-50%); pointer-events:none;
-  color:#fffdf7; background:rgba(5,8,18,.97); padding:7px 12px; border-radius:8px;
+  color:var(--tag-text,#e8c468); background:rgba(5,8,18,.98); padding:7px 12px; border-radius:8px;
   font-size:15px; font-weight:800; white-space:nowrap; text-align:center;
-  text-shadow:0 1px 3px rgba(0,0,0,.95);
-  box-shadow:0 4px 14px rgba(0,0,0,.48);
+  text-shadow:0 1px 2px rgba(0,0,0,.95);
+  box-shadow:inset 3px 0 0 var(--tag-accent,#e8c468), 0 4px 14px rgba(0,0,0,.48);
   transition:opacity .3s, background-color .25s, border-color .25s, box-shadow .25s, filter .25s;
 }
-.tag .tag-name { color:#fffdf7; font-size:15px; line-height:1.2; }
+.tag .tag-name { color:var(--tag-text,#e8c468); font-size:15px; line-height:1.2; }
 .tag .zh { font-size:12px; color:#e5e7eb; font-weight:600; }
 .tag .role-sub {
   display:inline-block; padding:2px 6px; margin-top:4px; border-radius:5px;
-  color:#fffdf7; background:rgba(4,7,15,.86);
-  box-shadow:inset 0 0 0 1px var(--role-accent,rgba(255,255,255,.35));
+  color:var(--role-text,#e8c468); background:var(--role-bg,#080b14);
+  box-shadow:inset 0 0 0 1px var(--role-accent,#e8c468);
   font-size:13px; font-weight:800; opacity:1;
   text-transform:uppercase; letter-spacing:.6px;
 }
@@ -561,14 +561,6 @@ body::after {
 }
 .vote-arrow-svg {
   z-index: 6;
-}
-.vote-label {
-  position:absolute; transform:translate(-50%,-50%);
-  font-size:11px; font-weight:700; pointer-events:none;
-  text-shadow: 0 0 6px rgba(0,0,0,0.9);
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(10,10,25,0.7);
 }
 @keyframes pulse {
   0%,100% { opacity:0.6; }
@@ -989,8 +981,6 @@ body::after {
   #hover-card { max-width: 180px; font-size: 11px; padding: 8px 10px; }
   /* Replay controls */
   #replay-controls { bottom: 50px; }
-  /* Vote labels */
-  .vote-label { font-size: 11px; }
   #result-banner .title { font-size: 32px; letter-spacing: 4px; }
   #result-banner .sub { font-size: 14px; }
   #result-banner .winners { font-size: 12px; }
