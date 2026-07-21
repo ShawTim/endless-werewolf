@@ -761,6 +761,17 @@ body::after {
 .vote-summary-header span {
   color:#cbd0da; font-size:12px; line-height:1.4; text-align:right;
 }
+.vote-integrity-note {
+  display:grid; gap:3px; margin:0 0 9px; padding:8px 9px;
+  border:1px solid rgba(239,68,68,.34); border-radius:8px;
+  background:rgba(127,29,29,.18);
+}
+.vote-integrity-note strong {
+  color:#ffd4cc; font-size:12px; letter-spacing:.15px;
+}
+.vote-integrity-note span {
+  color:#e8d7d4; font-size:11px; line-height:1.45;
+}
 .vote-ballot-grid {
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px;
 }
@@ -777,13 +788,14 @@ body::after {
 .vote-ballot > b { color:var(--gold); }
 .vote-ballot > em {
   position:absolute; top:-5px; right:5px; padding:1px 4px; border-radius:4px;
-  color:#ffd4cc; background:#7f1d1d; font-size:11px; font-style:normal; font-weight:800;
+  color:#ffd4cc; background:#7f1d1d; font-size:9px; font-style:normal; font-weight:800;
   letter-spacing:.4px;
 }
-.vote-ballot.fallback {
-  padding-top:16px; border-color:rgba(239,68,68,.34);
+.vote-ballot.system-assigned {
+  padding-top:18px; border-color:rgba(239,68,68,.42);
+  background:rgba(127,29,29,.13);
 }
-.vote-ballot.fallback > em { top:2px; }
+.vote-ballot.system-assigned > em { top:3px; }
 .vote-tally-list { display:grid; gap:6px; }
 .vote-tally-row {
   display:grid; grid-template-columns:minmax(110px,1fr) minmax(80px,1.4fr) 24px;

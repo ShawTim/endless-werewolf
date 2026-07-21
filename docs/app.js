@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-vote-summary-1';
+const CACHE_VERSION = '20260721-system-votes-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -2255,6 +2255,7 @@ function buildStructuredTrace() {
 function buildAutonomyMetadata() {
   const trace = gameData.structuredTrace || [];
   const manifest = gameData.manifest || {};
+  const systemAssignedVotes = trace.filter(e => e.phase === 'vote' && e.fallback).length;
   const roster = Object.values(gameData.night?.players || {}).map(p => ({
     name: p.name, model: p.model, thinking: p.thinking || 'off', seat: p.seat,
   }));
@@ -2269,6 +2270,8 @@ function buildAutonomyMetadata() {
     agentEvents: trace.filter(e => e.source === 'agent').length,
     deterministicEvents: trace.filter(e => e.source !== 'agent').length,
     fallbackEvents: trace.filter(e => e.fallback).length,
+    systemAssignedVotes,
+    otherFallbackEvents: trace.filter(e => e.fallback).length - systemAssignedVotes,
   };
 }
 
@@ -3028,7 +3031,8 @@ function recordedBallots() {
     return {
       voter,
       target,
-      fallback: Boolean(detail.error || detail.fallback),
+      systemAssigned: Boolean(detail.error || detail.fallback),
+      error: detail.error || '',
     };
   });
 }
@@ -3041,7 +3045,7 @@ function buildVoteSummaryCheckpoint(recordedTotal, recordedStart, recordedEnd) {
   const executed = gameData.vote?.executed || [];
   const executedNames = executed.map(displayPlayerName);
   const highestCount = tally.length ? tally[0].count : 0;
-  const fallbackCount = ballots.filter(ballot => ballot.fallback).length;
+  const systemAssignedCount = ballots.filter(ballot => ballot.systemAssigned).length;
   const title = executed.length === 1
     ? (lang === 'zh'
       ? `投票結果・${executedNames[0]}被處決`
@@ -3051,13 +3055,18 @@ function buildVoteSummaryCheckpoint(recordedTotal, recordedStart, recordedEnd) {
         ? `投票結果・${executed.length}名玩家被處決`
         : `Voting result · ${executed.length} players executed`)
       : (lang === 'zh' ? '投票結果・無人被處決' : 'Voting result · no execution');
-  const body = lang === 'zh'
+  const resultBody = lang === 'zh'
     ? `全部 ${ballots.length} 張選票同時揭示。最高票為 ${highestCount} 票。${executed.length
       ? `最終處決：${executedNames.join('、')}。`
       : '本輪沒有玩家被處決。'}`
     : `All ${ballots.length} ballots were revealed together. The highest tally was ${highestCount}. ${executed.length
       ? `Executed: ${executedNames.join(', ')}.`
       : 'No player was executed.'}`;
+  const assignmentDisclosure = systemAssignedCount
+    ? (lang === 'zh'
+      ? `其中 ${systemAssignedCount} 張選票因 AI 請求失敗或逾時而由系統隨機指定，並非代理的決策。`
+      : `${systemAssignedCount} ${systemAssignedCount === 1 ? 'vote was' : 'votes were'} randomly assigned by the system after an AI request failed or timed out; ${systemAssignedCount === 1 ? 'it was not' : 'they were not'} agent decisions.`)
+    : '';
   return {
     id: 'vote-summary-checkpoint',
     phase: 'vote',
@@ -3072,11 +3081,11 @@ function buildVoteSummaryCheckpoint(recordedTotal, recordedStart, recordedEnd) {
     recordedEnd,
     recordedTotal,
     title,
-    body,
+    body: [resultBody, assignmentDisclosure].filter(Boolean).join(lang === 'zh' ? '' : ' '),
     ballots,
     tally,
     executed,
-    fallbackCount,
+    systemAssignedCount,
   };
 }
 
@@ -3313,7 +3322,9 @@ function renderStoryStep() {
   if (step.thinking) meta.push(`thinking=${step.thinking}`);
   if (step.latencyMs !== null && step.latencyMs !== undefined) meta.push(`${step.latencyMs}ms`);
   meta.push(step.fallback
-    ? (lang === 'zh' ? '回退／錯誤' : 'fallback/error')
+    ? step.phase === 'vote'
+      ? (lang === 'zh' ? '系統代投・並非代理決策' : 'system-assigned vote · not an agent decision')
+      : (lang === 'zh' ? '運行回退／錯誤' : 'runtime fallback/error')
     : step.source === 'game-engine'
       ? (lang === 'zh' ? '規則引擎' : 'rules engine')
       : (lang === 'zh' ? '已記錄的代理輸出' : 'recorded agent output'));
@@ -3332,18 +3343,25 @@ function renderStoryStep() {
       roleBox.innerHTML = `
         <div class="vote-summary-header">
           <strong>${lang === 'zh'
-            ? `${(step.ballots || []).length} 張選票・${step.fallbackCount || 0} 張回退票`
-            : `${(step.ballots || []).length} ballots · ${step.fallbackCount || 0} fallbacks`}</strong>
+            ? `${(step.ballots || []).length} 張選票・${step.systemAssignedCount || 0} 張系統代投`
+            : `${(step.ballots || []).length} ballots · ${step.systemAssignedCount || 0} system-assigned`}</strong>
           <span>${lang === 'zh' ? '所有選票同時揭示' : 'All ballots revealed together'}</span>
         </div>
+        ${(step.systemAssignedCount || 0) > 0 ? `
+          <div class="vote-integrity-note">
+            <strong>${lang === 'zh' ? '系統代投說明' : 'Why were votes system-assigned?'}</strong>
+            <span>${lang === 'zh'
+              ? `${step.systemAssignedCount} 個 AI 投票請求失敗或逾時。遊戲引擎為了完成該局，從有效對象中隨機選擇目標；這些選票並非代理的決策。`
+              : `${step.systemAssignedCount} AI vote ${step.systemAssignedCount === 1 ? 'request failed or timed out' : 'requests failed or timed out'}. To complete the recorded game, the engine randomly selected valid targets. These ballots are not agent decisions.`}</span>
+          </div>` : ''}
         <div class="role-summary-label">${lang === 'zh' ? '投票去向' : 'Ballots'}</div>
         <div class="vote-ballot-grid">
           ${(step.ballots || []).map(ballot => `
-            <div class="vote-ballot${ballot.fallback ? ' fallback' : ''}">
+            <div class="vote-ballot${ballot.systemAssigned ? ' system-assigned' : ''}">
               <span>${displayPlayerName(ballot.voter)}</span>
               <b>→</b>
               <strong>${displayPlayerName(ballot.target)}</strong>
-              ${ballot.fallback ? `<em>${lang === 'zh' ? '回退' : 'FALLBACK'}</em>` : ''}
+              ${ballot.systemAssigned ? `<em>${lang === 'zh' ? '系統代投' : 'SYSTEM-ASSIGNED'}</em>` : ''}
             </div>`).join('')}
         </div>
         <div class="role-summary-label">${lang === 'zh' ? '票數統計' : 'Tally'}</div>
@@ -3475,7 +3493,8 @@ function showProofPanel() {
     <div class="row"><span class="key">${lang === 'zh' ? '狀態' : 'Status'}</span><span class="val">${meta.status}</span></div>
     <div class="row"><span class="key">${lang === 'zh' ? '事件' : 'Trace events'}</span><span class="val">${meta.eventCount}</span></div>
     <div class="row"><span class="key">${lang === 'zh' ? '代理事件' : 'Agent events'}</span><span class="val">${meta.agentEvents}</span></div>
-    <div class="row"><span class="key">${lang === 'zh' ? '回退／錯誤' : 'Fallbacks/errors'}</span><span class="val">${meta.fallbackEvents}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '系統代投' : 'System-assigned votes'}</span><span class="val">${meta.systemAssignedVotes || 0}</span></div>
+    <div class="row"><span class="key">${lang === 'zh' ? '其他運行回退／錯誤' : 'Other runtime fallbacks/errors'}</span><span class="val">${meta.otherFallbackEvents || 0}</span></div>
     ${meta.createdAt ? `<div class="row"><span class="key">${lang === 'zh' ? '開始記錄' : 'Started'}</span><span class="val">${formatRecordedAt(meta.createdAt)}</span></div>` : ''}
     ${meta.completedAt ? `<div class="row"><span class="key">${lang === 'zh' ? '完成記錄' : 'Completed'}</span><span class="val">${formatRecordedAt(meta.completedAt)}</span></div>` : ''}
   </div>`;
@@ -3540,7 +3559,7 @@ function buildGameSectionHTML(p, accent, displayName) {
     <div class="row"><span class="key">Model</span><span class="val">${p.model || '?'}</span></div>
     <div class="row"><span class="key">${t('thinking')}</span><span class="val">${p.thinking || 'off'}</span></div>
     <div class="row"><span class="key">${lang === 'zh' ? '記錄事件' : 'Recorded events'}</span><span class="val">${d.trace.length}</span></div>
-    ${d.voteEvent?.fallback ? `<div class="row"><span class="key">${lang === 'zh' ? '投票狀態' : 'Vote status'}</span><span class="val" style="color:var(--danger)">${lang === 'zh' ? '回退決策' : 'Fallback decision'}</span></div>` : ''}
+    ${d.voteEvent?.fallback ? `<div class="row"><span class="key">${lang === 'zh' ? '投票狀態' : 'Vote status'}</span><span class="val" style="color:var(--danger)">${lang === 'zh' ? '系統代投・並非代理決策' : 'System-assigned · not an agent decision'}</span></div>` : ''}
   </div>`;
   html += `<div class="modal-section"><h3>${t('gameData')}</h3>
     <div class="row"><span class="key">${t('initialRole')}</span><span class="val">${d.initialRole}</span></div>
@@ -3557,7 +3576,11 @@ function buildGameSectionHTML(p, accent, displayName) {
     d.trace.forEach(e => {
       const summary = e.text || (e.action ? storyActionText(e) : e.target ? `→ ${displayPlayerName(e.target)}` : e.type);
       const latency = e.latencyMs !== null ? ` · ${e.latencyMs}ms` : '';
-      const source = e.fallback ? (lang === 'zh' ? '回退' : 'fallback') : e.source;
+      const source = e.fallback
+        ? e.phase === 'vote'
+          ? (lang === 'zh' ? '系統代投' : 'system-assigned')
+          : (lang === 'zh' ? '運行回退' : 'runtime fallback')
+        : e.source;
       html += `<div class="agent-trace-card">
         <div class="meta">${e.phase} · ${source}${latency}</div>
         <div class="reason">${formatGameText(summary || '')}</div>
