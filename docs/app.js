@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-rules-1';
+const CACHE_VERSION = '20260721-type-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
