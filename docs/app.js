@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-label-contrast-2';
+const CACHE_VERSION = '20260721-vote-routing-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -1759,15 +1759,26 @@ function clearBubbles() {
 // Vote arrow elements are created once, then only coordinates updated per frame.
 // Player names already appear in the overhead tags and voting panel, so the
 // arrows deliberately avoid adding a second, overlapping name label.
-let voteArrowEls = []; // [{pathUnderlay, path, head, voter, target}]
+let voteArrowEls = []; // [{pathUnderlay, path, head, voter, target, laneOffset, decisive}]
+let voteArrowSettleTimer = null;
 
 function showVoteArrows(votes) {
   activeVotes = votes;
+  if (voteArrowSettleTimer) clearTimeout(voteArrowSettleTimer);
   voteOverlay.innerHTML = '';
+  voteOverlay.classList.remove('revealed', 'settled');
   voteArrowEls = [];
   if (!activeVotes) return;
 
-  for (const [voter, target] of Object.entries(activeVotes)) {
+  const entries = Object.entries(activeVotes);
+  const targetGroups = new Map();
+  entries.forEach(([voter, target]) => {
+    if (!targetGroups.has(target)) targetGroups.set(target, []);
+    targetGroups.get(target).push(voter);
+  });
+  const executed = new Set(gameData.vote?.executed || []);
+
+  for (const [order, [voter, target]] of entries.entries()) {
     const vi = PLAYERS.findIndex(p => p.name === voter);
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
@@ -1775,42 +1786,62 @@ function showVoteArrows(votes) {
     const voterP = PLAYERS.find(x => x.name === voter);
     const voterAccent = voterP?.color || voterP?.accent || 0xe74c3c;
     const voterColor = hexColor(readableAccent(voterAccent));
+    const targetVoters = targetGroups.get(target) || [];
+    const targetIndex = targetVoters.indexOf(voter);
+    const laneOffset = (targetIndex - ((targetVoters.length - 1) / 2)) * 11;
+    const decisive = executed.has(target);
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'vote-arrow-svg');
+    svg.setAttribute('class', `vote-arrow-svg ${decisive ? 'decisive' : 'secondary'}`);
     svg.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;';
+    svg.style.setProperty('--vote-delay', `${order * 75}ms`);
 
     const pathUnderlay = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    pathUnderlay.setAttribute('class', 'vote-arrow-underlay');
     pathUnderlay.setAttribute('stroke', '#050812');
-    pathUnderlay.setAttribute('stroke-width', '5');
+    pathUnderlay.setAttribute('stroke-width', decisive ? '6' : '4.5');
     pathUnderlay.setAttribute('stroke-dasharray', '6,4');
     pathUnderlay.setAttribute('fill', 'none');
-    pathUnderlay.setAttribute('opacity', '0.72');
     svg.appendChild(pathUnderlay);
 
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'vote-arrow-path');
     path.setAttribute('stroke', voterColor);
-    path.setAttribute('stroke-width', '2.5');
+    path.setAttribute('stroke-width', decisive ? '3' : '2');
     path.setAttribute('stroke-dasharray', '6,4');
     path.setAttribute('fill', 'none');
-    path.setAttribute('opacity', '0.95');
     svg.appendChild(path);
 
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    head.setAttribute('class', 'vote-arrow-head');
     head.setAttribute('fill', voterColor);
     head.setAttribute('stroke', '#050812');
     head.setAttribute('stroke-width', '2');
-    head.setAttribute('opacity', '1');
     svg.appendChild(head);
 
     voteOverlay.appendChild(svg);
 
-    voteArrowEls.push({ pathUnderlay, path, head, voter, target });
+    voteArrowEls.push({
+      pathUnderlay,
+      path,
+      head,
+      voter,
+      target,
+      laneOffset,
+      decisive,
+    });
   }
   redrawVoteArrows();
+  requestAnimationFrame(() => voteOverlay.classList.add('revealed'));
+  voteArrowSettleTimer = setTimeout(() => {
+    voteOverlay.classList.add('settled');
+  }, 1350);
 }
 
 function redrawVoteArrows() {
   if (!activeVotes || voteArrowEls.length === 0) return;
+  const centerProjected = new THREE.Vector3(0, 0.5, 0).project(camera);
+  const centerX = (centerProjected.x * 0.5 + 0.5) * innerWidth;
+  const centerY = (-centerProjected.y * 0.5 + 0.5) * innerHeight;
   for (const va of voteArrowEls) {
     const vi = PLAYERS.findIndex(p => p.name === va.voter);
     const ti = PLAYERS.findIndex(p => p.name === va.target);
@@ -1822,30 +1853,71 @@ function redrawVoteArrows() {
     const vEnd = new THREE.Vector3(tpos[0], tpos[1] + 0.5, tpos[2]);
     const startScreen = vStart.clone().project(camera);
     const endScreen = vEnd.clone().project(camera);
-    const sx = (startScreen.x * 0.5 + 0.5) * innerWidth;
-    const sy = (-startScreen.y * 0.5 + 0.5) * innerHeight;
-    const ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
-    const ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
+    let sx = (startScreen.x * 0.5 + 0.5) * innerWidth;
+    let sy = (-startScreen.y * 0.5 + 0.5) * innerHeight;
+    let ex = (endScreen.x * 0.5 + 0.5) * innerWidth;
+    let ey = (-endScreen.y * 0.5 + 0.5) * innerHeight;
 
-    const dx = ex - sx, dy = ey - sy;
-    const len = Math.sqrt(dx*dx + dy*dy);
+    let dx = ex - sx;
+    let dy = ey - sy;
+    let len = Math.sqrt(dx*dx + dy*dy);
     if (len < 10) {
       va.pathUnderlay.setAttribute('d', '');
       va.path.setAttribute('d', '');
       continue;
     }
 
-    const headLen = Math.min(16, len * 0.25);
+    // Keep arrows clear of the character bodies and separate arrows that share
+    // a target, so simultaneous voting remains legible.
+    const dirX = dx / len;
+    const dirY = dy / len;
+    sx += dirX * 18;
+    sy += dirY * 18;
+    ex -= dirX * 24;
+    ey -= dirY * 24;
+
+    const targetRadialX = ex - centerX;
+    const targetRadialY = ey - centerY;
+    const targetRadialLen = Math.sqrt(
+      (targetRadialX * targetRadialX) + (targetRadialY * targetRadialY),
+    ) || 1;
+    ex += (-targetRadialY / targetRadialLen) * va.laneOffset;
+    ey += (targetRadialX / targetRadialLen) * va.laneOffset;
+
+    dx = ex - sx;
+    dy = ey - sy;
+    len = Math.sqrt(dx*dx + dy*dy);
     const midX = (sx + ex) / 2;
-    const midY = (sy + ey) / 2 - Math.max(50, len * 0.35);
-    const pathData = `M ${sx},${sy} Q ${midX},${midY} ${ex},${ey}`;
+    const midY = (sy + ey) / 2;
+    let routeX = midX - centerX;
+    let routeY = midY - centerY;
+    let routeLen = Math.sqrt((routeX * routeX) + (routeY * routeY));
+    if (routeLen < 24) {
+      const clockwiseDistance = (ti - vi + PLAYERS.length) % PLAYERS.length;
+      const routeSign = clockwiseDistance <= PLAYERS.length / 2 ? 1 : -1;
+      routeX = (-dy / Math.max(1, len)) * routeSign;
+      routeY = (dx / Math.max(1, len)) * routeSign;
+      routeLen = 1;
+    }
+    routeX /= routeLen;
+    routeY /= routeLen;
+    const routeBend = THREE.MathUtils.clamp(44 + (len * 0.16), 54, 112);
+    const routeLane = va.laneOffset * 0.7;
+    const controlX = midX + (routeX * routeBend) + ((-dy / Math.max(1, len)) * routeLane);
+    const controlY = midY + (routeY * routeBend) + ((dx / Math.max(1, len)) * routeLane);
+    const c1x = sx + ((controlX - sx) * 0.64);
+    const c1y = sy + ((controlY - sy) * 0.64);
+    const c2x = ex + ((controlX - ex) * 0.64);
+    const c2y = ey + ((controlY - ey) * 0.64);
+    const pathData = `M ${sx},${sy} C ${c1x},${c1y} ${c2x},${c2y} ${ex},${ey}`;
     va.pathUnderlay.setAttribute('d', pathData);
     va.path.setAttribute('d', pathData);
 
     // Arrowhead tangent at end of curve
-    const tdx = ex - midX, tdy = ey - midY;
+    const tdx = ex - c2x, tdy = ey - c2y;
     const tlen = Math.sqrt(tdx*tdx + tdy*tdy) || 1;
     const tangentAngle = Math.atan2(tdy / tlen, tdx / tlen);
+    const headLen = va.decisive ? 15 : 11;
     const hx1c = ex - headLen * Math.cos(tangentAngle - 0.4);
     const hy1c = ey - headLen * Math.sin(tangentAngle - 0.4);
     const hx2c = ex - headLen * Math.cos(tangentAngle + 0.4);
@@ -1856,8 +1928,11 @@ function redrawVoteArrows() {
 }
 
 function clearVoteArrows() {
+  if (voteArrowSettleTimer) clearTimeout(voteArrowSettleTimer);
+  voteArrowSettleTimer = null;
   activeVotes = null;
   voteOverlay.innerHTML = '';
+  voteOverlay.classList.remove('revealed', 'settled');
 }
 
 // ===== Result Banner =====
