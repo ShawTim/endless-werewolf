@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260720-showcase-2';
+const CACHE_VERSION = '20260721-rules-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -32,7 +32,8 @@ const I18N = {
     werewolfWin: 'Werewolf Wins!', villageWin: 'Village Wins!',
     tannerWin: 'Tanner Wins!', noTeamWin: 'No One Wins',
     chineseName: 'Chinese name', thinking: 'Thinking', persona: 'Persona', gameData: 'Game Data',
-    story: 'Watch Game', proof: 'Proof', agentState: 'Agent State', decisionTrace: 'Decision Trace',
+    story: 'Replay Latest', rules: 'Rules', proof: 'Proof',
+    agentState: 'Agent State', decisionTrace: 'Decision Trace',
   },
   zh: {
     brand: '無限狼人殺', sub: 'AI 一夜',
@@ -51,7 +52,8 @@ const I18N = {
     werewolfWin: '狼人勝利！', villageWin: '村民勝利！',
     tannerWin: '皮匠勝利！', noTeamWin: '無人勝利',
     chineseName: '中文名', thinking: '思考深度', persona: '人設', gameData: '遊戲數據',
-    story: '觀看遊戲', proof: '證據', agentState: '代理狀態', decisionTrace: '決策軌跡',
+    story: '重播最新遊戲', rules: '規則', proof: '證據',
+    agentState: '代理狀態', decisionTrace: '決策軌跡',
   }
 };
 let lang = (navigator.language || 'en').startsWith('zh') ? 'zh' : 'en';
@@ -3487,6 +3489,162 @@ function startSpeechReplay(speeches) {
   startReplay(seq, lang === 'zh' ? '日間' : 'Day');
 }
 
+// ===== Basic Rules Onboarding =====
+let rulesStep = 0;
+let rulesReplayAfter = false;
+
+function rulesSlides() {
+  if (lang === 'zh') {
+    return [
+      {
+        title: '九張角色牌，六名玩家，資訊彼此隔離',
+        body: '六個 AI 代理各自獲得一張角色牌，另外三張牌面朝下放在中央。每個代理開始時只知道自己的初始角色，以及該角色在夜晚允許它取得的資訊。',
+        note: '畫面可以向觀眾揭示完整牌面，但代理不會收到全知的遊戲狀態。',
+      },
+      {
+        title: '夜晚行動可能改變角色',
+        body: '角色會按照固定順序執行夜晚能力。預言家可以查看牌，強盜可以與另一名玩家交換牌，搗蛋鬼可以交換兩名其他玩家的牌。勝負由玩家最後持有的角色決定。',
+        note: '因此，代理可能誠實描述自己的記憶，但它的最終角色仍可能已被其他玩家改變。',
+      },
+      {
+        title: '聲稱、質疑、投票，然後揭示結果',
+        body: '白天討論時，代理根據私有記憶、其他人的聲稱與矛盾之處進行推理。之後每名代理投票給另一名玩家，最高票者（包含同票者）被處決，所有最終角色隨即揭示。',
+        note: '村民陣營希望處決狼人；若狼人牌全在中央，則應避免錯誤處決。狼人希望存活，皮匠則希望自己被處決。',
+      },
+    ];
+  }
+  return [
+    {
+      title: 'Nine role cards, six players, isolated information',
+      body: 'Six AI agents each receive one role card, while three cards remain face down in the center. Every agent begins with only its initial role and the private information its role can obtain during the night.',
+      note: 'The interface may reveal the full table to you, but the agents never receive omniscient game state.',
+    },
+    {
+      title: 'Night actions can change who you are',
+      body: 'Roles act in a fixed night order. The Seer can inspect cards, the Robber can trade cards with another player, and the Troublemaker can swap two other players. A player wins or loses according to the role it holds at the end.',
+      note: 'An agent can truthfully report its memory even when another player has secretly changed its final role.',
+    },
+    {
+      title: 'Claim, challenge, vote, then reveal',
+      body: 'During discussion, agents reason from private memories, other players’ claims, and contradictions. Each agent then votes for another player. The highest-voted player—or tied players—is executed and every final role is revealed.',
+      note: 'The village wants a Werewolf executed, but should avoid a wrongful execution if every Werewolf is in the center. Werewolves want to survive; the Tanner wants to be executed.',
+    },
+  ];
+}
+
+function rulesVisualMarkup(step) {
+  if (step === 0) {
+    const centerLabel = lang === 'zh' ? '三張中央牌' : '3 CENTER CARDS';
+    return `<div class="rules-deal">
+      ${Array.from({ length: 6 }, (_, index) => `<span class="rules-agent-token">AI ${index + 1}</span>`).join('')}
+      <div class="rules-center-cards"><span></span><span></span><span></span></div>
+      <div class="rules-center-label">${centerLabel}</div>
+    </div>`;
+  }
+  if (step === 1) {
+    return `<div class="rules-role-flow">
+      <div class="rules-role-card">
+        <span>${lang === 'zh' ? '初始角色' : 'INITIAL ROLE'}</span>
+        <strong>${lang === 'zh' ? '強盜' : 'ROBBER'}</strong>
+      </div>
+      <div class="rules-night-action">
+        <div class="arrow">→</div>
+        <span>${lang === 'zh' ? '查看・偷換・交換' : 'INSPECT · ROB · SWAP'}</span>
+      </div>
+      <div class="rules-role-card changed">
+        <span>${lang === 'zh' ? '最終角色' : 'FINAL ROLE'}</span>
+        <strong>${lang === 'zh' ? '預言家' : 'SEER'}</strong>
+      </div>
+    </div>`;
+  }
+  const labels = lang === 'zh'
+    ? [
+        ['☾', '夜晚'],
+        ['◌', '討論'],
+        ['✓', '投票'],
+        ['◆', '揭示'],
+      ]
+    : [
+        ['☾', 'NIGHT'],
+        ['◌', 'DISCUSS'],
+        ['✓', 'VOTE'],
+        ['◆', 'REVEAL'],
+      ];
+  const wins = lang === 'zh'
+    ? ['村民：找出狼人', '狼人：避免被處決', '皮匠：讓自己被處決']
+    : ['Village: find the wolf', 'Werewolves: survive', 'Tanner: get executed'];
+  return `<div class="rules-game-loop">
+    ${labels.map(([icon, label], index) => `
+      <div class="rules-loop-step"><span class="icon">${icon}</span><strong>${label}</strong></div>
+      ${index < labels.length - 1 ? '<span class="rules-loop-arrow">→</span>' : ''}
+    `).join('')}
+    <div class="rules-win-row">${wins.map(value => `<span>${value}</span>`).join('')}</div>
+  </div>`;
+}
+
+function renderRulesStep() {
+  const slides = rulesSlides();
+  const slide = slides[rulesStep];
+  if (!slide) return;
+  document.getElementById('rules-eyebrow').textContent =
+    lang === 'zh' ? '遊戲規則簡介' : 'HOW THE GAME WORKS';
+  document.getElementById('rules-step-label').textContent =
+    lang === 'zh' ? `第 ${rulesStep + 1} 步，共 ${slides.length} 步` : `STEP ${rulesStep + 1} OF ${slides.length}`;
+  document.getElementById('rules-title').textContent = slide.title;
+  document.getElementById('rules-body').textContent = slide.body;
+  document.getElementById('rules-note').textContent = slide.note;
+  document.getElementById('rules-visual').innerHTML = rulesVisualMarkup(rulesStep);
+  document.getElementById('rules-lang').textContent = t('langLabel');
+  document.getElementById('rules-dots').innerHTML = slides
+    .map((_, index) => `<span class="${index === rulesStep ? 'active' : ''}"></span>`)
+    .join('');
+  const previous = document.getElementById('rules-prev');
+  previous.textContent = lang === 'zh' ? '上一步' : 'Back';
+  previous.disabled = rulesStep === 0;
+  const finalStep = rulesStep === slides.length - 1;
+  document.getElementById('rules-next').textContent = finalStep
+    ? rulesReplayAfter
+      ? (lang === 'zh' ? '開始重播' : 'Start Replay')
+      : (lang === 'zh' ? '完成' : 'Done')
+    : (lang === 'zh' ? '下一步' : 'Next');
+  document.getElementById('rules-skip').textContent = rulesReplayAfter
+    ? (lang === 'zh' ? '略過並重播' : 'Skip & Replay')
+    : (lang === 'zh' ? '關閉' : 'Close');
+}
+
+function launchLatestReplayWhenReady() {
+  const startedAt = performance.now();
+  const launch = () => {
+    if (gameData.night) {
+      openStoryMode(true);
+      return;
+    }
+    if (performance.now() - startedAt < 10000) setTimeout(launch, 150);
+  };
+  setTimeout(launch, 150);
+}
+
+function openRules(replayAfter = false) {
+  closeStoryMode();
+  closeSidePanel();
+  document.getElementById('archive-panel').classList.remove('open');
+  rulesReplayAfter = replayAfter;
+  rulesStep = 0;
+  const overlay = document.getElementById('rules-overlay');
+  overlay.classList.add('visible');
+  overlay.setAttribute('aria-hidden', 'false');
+  renderRulesStep();
+}
+
+function closeRules(startReplay = false) {
+  const overlay = document.getElementById('rules-overlay');
+  overlay.classList.remove('visible');
+  overlay.setAttribute('aria-hidden', 'true');
+  const shouldReplay = startReplay && rulesReplayAfter;
+  rulesReplayAfter = false;
+  if (shouldReplay) launchLatestReplayWhenReady();
+}
+
 // ===== UI Setup =====
 function toggleLanguage() {
   const panelContent = document.getElementById('panel-content');
@@ -3525,11 +3683,7 @@ function setupUI() {
   const dismissWelcome = () => welcomeOverlay.classList.add('hidden');
   document.getElementById('welcome-btn').addEventListener('click', () => {
     dismissWelcome();
-    const launchStoryWhenReady = () => {
-      if (gameData.night) openStoryMode(true);
-      else setTimeout(launchStoryWhenReady, 150);
-    };
-    setTimeout(launchStoryWhenReady, 250);
+    openRules(true);
   });
   document.getElementById('welcome-explore').addEventListener('click', dismissWelcome);
   document.getElementById('welcome-lang').addEventListener('click', toggleLanguage);
@@ -3538,6 +3692,10 @@ function setupUI() {
     if (e.target === welcomeOverlay) dismissWelcome();
   });
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('rules-overlay').classList.contains('visible')) {
+      closeRules(false);
+      return;
+    }
     if (e.key === 'Escape' && !welcomeOverlay.classList.contains('hidden')) {
       dismissWelcome();
     }
@@ -3575,6 +3733,7 @@ function setupUI() {
     document.getElementById('archive-panel').classList.remove('open');
     showAboutPanel();
   });
+  document.getElementById('btn-rules').addEventListener('click', () => openRules(false));
   document.getElementById('btn-story').addEventListener('click', () => openStoryMode(false));
   document.getElementById('btn-proof').addEventListener('click', showProofPanel);
   document.getElementById('btn-panel-close').addEventListener('click', () => {
@@ -3582,6 +3741,26 @@ function setupUI() {
   });
 
   document.getElementById('btn-lang').addEventListener('click', toggleLanguage);
+  document.getElementById('rules-lang').addEventListener('click', toggleLanguage);
+  document.getElementById('rules-close').addEventListener('click', () => closeRules(false));
+  document.getElementById('rules-overlay').addEventListener('click', event => {
+    if (event.target.id === 'rules-overlay') closeRules(false);
+  });
+  document.getElementById('rules-prev').addEventListener('click', () => {
+    if (rulesStep <= 0) return;
+    rulesStep -= 1;
+    renderRulesStep();
+  });
+  document.getElementById('rules-next').addEventListener('click', () => {
+    const finalStep = rulesStep >= rulesSlides().length - 1;
+    if (finalStep) {
+      closeRules(true);
+      return;
+    }
+    rulesStep += 1;
+    renderRulesStep();
+  });
+  document.getElementById('rules-skip').addEventListener('click', () => closeRules(true));
 
   document.getElementById('story-prev').addEventListener('click', () => {
     stopStoryPlayback();
@@ -3665,6 +3844,7 @@ function updateUIText() {
   document.querySelector('.brand').innerHTML = t('brand') + ' <span class="sub">' + t('sub') + '</span>';
   document.getElementById('btn-gallery').innerHTML = (lang === 'zh' ? 'AI 代理' : 'AI Agents');
   document.getElementById('btn-story').innerHTML = t('story');
+  document.getElementById('btn-rules').innerHTML = t('rules');
   document.getElementById('btn-proof').innerHTML = t('proof');
   document.getElementById('btn-archive').innerHTML = t('archive');
   document.getElementById('btn-info').innerHTML = t('info');
@@ -3685,13 +3865,20 @@ function updateUIText() {
   document.getElementById('welcome-fact-agents').textContent = lang === 'zh' ? '6 個 AI 代理' : '6 AI agents';
   document.getElementById('welcome-fact-models').textContent = lang === 'zh' ? '使用不同 LLM' : 'Different LLMs';
   document.getElementById('welcome-fact-trace').textContent = lang === 'zh' ? '完整決策軌跡' : 'Full decision trace';
-  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '觀看導覽重播' : 'Watch guided replay';
+  document.getElementById('welcome-btn').textContent = lang === 'zh' ? '重播最新遊戲' : 'Replay latest game';
   document.getElementById('welcome-explore').textContent = lang === 'zh' ? '探索遊戲桌' : 'Explore the table';
   document.getElementById('welcome-trust').textContent = lang === 'zh'
     ? '所有已記錄事件均完整保留。你可以在「證據」中查看原始遊戲輸出。'
     : 'Every recorded event is preserved. Raw game outputs are available in Proof.';
   document.getElementById('welcome-gh').textContent =
     lang === 'zh' ? '在 GitHub 查看原始碼 ↗' : 'View source on GitHub ↗';
+  document.getElementById('rules-close').setAttribute(
+    'aria-label',
+    lang === 'zh' ? '關閉規則' : 'Close rules',
+  );
+  if (document.getElementById('rules-overlay').classList.contains('visible')) {
+    renderRulesStep();
+  }
   // Update phase labels
   const phaseLabels = { night: t('nightPhase'), day: t('dayDiscussion'), vote: t('voting'), resolve: t('resolution'), postgame: t('postgame') };
   document.querySelectorAll('.phase-step').forEach(el => {
