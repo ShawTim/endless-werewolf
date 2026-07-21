@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-night-summary-1';
+const CACHE_VERSION = '20260721-night-summary-2';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -2805,7 +2805,7 @@ function cleanStorySpeech(text) {
 
 function storyStepDelay(step) {
   if (step?.isCheckpoint || step?.phase === 'resolve') {
-    return 16000 / storySpeed;
+    return 9000 / storySpeed;
   }
   const text = step?.body || '';
   const cjkCount = (text.match(/[\u3400-\u9fff]/gu) || []).length;
