@@ -469,6 +469,16 @@ body::after {
 .tag .zh { font-size:11px; color:#aaa; font-weight:normal; }
 .tag .role-sub { font-size:12px; font-weight:700; margin-top:3px; opacity:1; text-transform:uppercase; letter-spacing:0.5px; }
 .tag .model { font-size:11px; color:#999; font-weight:normal; margin-top:1px; }
+.tag.role-changed {
+  border-color:rgba(232,196,104,.7) !important;
+  box-shadow:0 0 14px rgba(232,196,104,.18);
+}
+.tag.role-transitioning { animation:roleTagTransition 1.15s ease-out both; }
+@keyframes roleTagTransition {
+  0% { opacity:.35; transform:translate(-50%,-50%) scale(.82); filter:brightness(1.8); }
+  55% { opacity:1; transform:translate(-50%,-50%) scale(1.08); filter:brightness(1.35); }
+  100% { opacity:1; transform:translate(-50%,-50%) scale(1); filter:brightness(1); }
+}
 
 /* ===== Speech Bubbles ===== */
 #bubbles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:17; }
@@ -672,6 +682,68 @@ body::after {
 .story-actions .btn { padding:4px 10px; }
 #story-speed { min-width:42px; }
 #story-role-changes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-top:10px; }
+#story-role-changes.transition {
+  display:block; max-height:250px; overflow-y:auto; padding:10px;
+  border:1px solid rgba(232,196,104,.16); border-radius:10px;
+  background:rgba(232,196,104,.045);
+}
+.role-transition-header {
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  margin-bottom:8px;
+}
+.role-transition-header strong {
+  color:var(--gold); font-family:'Cinzel',serif; font-size:12px; line-height:1.35;
+}
+.role-transition-header span {
+  max-width:230px; color:var(--text-dim); font-size:11px; line-height:1.4; text-align:right;
+}
+.role-swap-list {
+  display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;
+}
+.role-swap-list span {
+  padding:4px 7px; border-radius:999px; color:var(--text);
+  background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08);
+  font-size:11px;
+}
+.role-transition-grid {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px;
+}
+.role-transition-card {
+  padding:8px 9px; border-radius:8px;
+  border:1px solid rgba(232,196,104,.24); background:rgba(232,196,104,.07);
+  animation:roleCardTransition .55s ease-out both;
+  animation-delay:var(--role-delay,0ms);
+}
+.role-transition-card .agent {
+  display:block; color:var(--text-bright); font-size:12px; font-weight:700;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.role-path {
+  display:flex; align-items:center; gap:6px; margin-top:6px;
+}
+.role-chip {
+  min-width:0; padding:4px 6px; border-radius:6px; font-size:11px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.role-chip.from {
+  color:var(--text-dim); background:rgba(255,255,255,.04);
+  text-decoration:line-through; text-decoration-color:rgba(255,255,255,.35);
+}
+.role-chip.to {
+  color:#17120a; background:var(--gold); font-weight:800;
+}
+.role-path .arrow { color:var(--gold); flex:0 0 auto; }
+.role-transition-none {
+  grid-column:1/-1; padding:10px; color:var(--text-dim);
+  text-align:center; font-size:12px;
+}
+@keyframes roleCardTransition {
+  from { opacity:0; transform:translateX(-10px); }
+  to { opacity:1; transform:translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tag.role-transitioning, .role-transition-card { animation:none; }
+}
 .role-change {
   display:flex; align-items:center; justify-content:space-between; gap:8px;
   padding:6px 8px; border-radius:7px; background:rgba(255,255,255,.04);
@@ -784,6 +856,13 @@ body::after {
   .story-title { font-size:16px; }
   .story-body { font-size:11px; max-height:150px; }
   #story-role-changes { grid-template-columns:1fr; max-height:180px; overflow-y:auto; }
+  #story-role-changes.transition { max-height:250px; padding:8px; }
+  .role-transition-header { display:block; }
+  .role-transition-header span { display:block; max-width:none; margin-top:3px; text-align:left; }
+  .role-transition-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .role-transition-card { padding:7px; }
+  .role-path { gap:4px; }
+  .role-chip { padding:3px 4px; }
   #scene-tools { bottom:52px; }
 }
 

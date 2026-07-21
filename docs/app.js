@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-readable-type-1';
+const CACHE_VERSION = '20260721-role-change-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -1557,6 +1557,7 @@ function resetTeamColors() {
     if (tagEls[i]) {
       const roleSub = tagEls[i].querySelector('.role-sub');
       if (roleSub) roleSub.textContent = '';
+      tagEls[i].classList.remove('role-changed', 'role-transitioning');
     }
   });
 }
@@ -2303,12 +2304,12 @@ function setPhase(phase) {
     case 'day':
       setNight(false);
       showDayInfo();
-      showInitialRoles();
+      showCurrentRoles(false);
       break;
     case 'vote':
       setNight(false);
       showVoteInfo();
-      showInitialRoles();
+      showCurrentRoles(false);
       break;
     case 'resolve':
       setNight(false);
@@ -2345,6 +2346,48 @@ function showInitialRoles() {
       const roleColor = ROLE_COLORS[role] || 0x95a5a6;
       roleSub.textContent = lang === 'zh' ? roleZh(role) : role;
       roleSub.style.color = '#' + roleColor.toString(16).padStart(6, '0');
+    }
+    tagEls[i].classList.remove('role-changed', 'role-transitioning');
+  });
+}
+
+function recordedRoleStates() {
+  const resolved = gameData.resolve?.final_roles || {};
+  return PLAYERS.map(player => {
+    const nightPlayer = Object.values(gameData.night?.players || {}).find(item => item.name === player.name);
+    const resolvedPlayer = resolved[player.name] || {};
+    return {
+      name: player.name,
+      initial: resolvedPlayer.initial_role || nightPlayer?.initial_role || '',
+      current: resolvedPlayer.current_role || nightPlayer?.current_role || nightPlayer?.initial_role || '',
+    };
+  }).filter(role => role.initial || role.current);
+}
+
+function showCurrentRoles(animateTransition = false) {
+  const roleStates = new Map(recordedRoleStates().map(role => [role.name, role]));
+  PLAYERS.forEach((player, index) => {
+    const state = roleStates.get(player.name);
+    const tag = tagEls[index];
+    if (!state || !tag) return;
+    const roleSub = tag.querySelector('.role-sub');
+    const changed = state.initial !== state.current;
+    if (roleSub) {
+      const roleColor = ROLE_COLORS[state.current] || 0x95a5a6;
+      const initialLabel = lang === 'zh' ? roleZh(state.initial) : state.initial;
+      const currentLabel = lang === 'zh' ? roleZh(state.current) : state.current;
+      roleSub.textContent = animateTransition && changed
+        ? `${initialLabel} → ${currentLabel}`
+        : changed
+          ? `↻ ${currentLabel}`
+          : currentLabel;
+      roleSub.style.color = '#' + roleColor.toString(16).padStart(6, '0');
+    }
+    tag.classList.toggle('role-changed', changed);
+    tag.classList.remove('role-transitioning');
+    if (animateTransition && changed) {
+      void tag.offsetWidth;
+      tag.classList.add('role-transitioning');
     }
   });
 }
@@ -2817,19 +2860,83 @@ function recordedEventBody(event) {
   return event.text || event.error || event.type || '';
 }
 
+function recordedSwapActions() {
+  return (gameData.night?.night_trace || [])
+    .filter(event => event.action === 'rob' || event.action === 'swap')
+    .map(event => ({
+      action: event.action,
+      actor: event.actor || event.player || '',
+      target: event.target,
+      targets: Array.isArray(event.targets) ? event.targets : [],
+      role: event.role || (event.action === 'rob' ? 'Robber' : 'Troublemaker'),
+    }));
+}
+
+function roleSwapText(action) {
+  const role = lang === 'zh' ? roleZh(action.role) : action.role;
+  const actor = displayPlayerName(action.actor);
+  const names = action.action === 'rob'
+    ? [actor, displayPlayerName(action.target)]
+    : (action.targets || []).map(displayPlayerName);
+  return `${role}${lang === 'zh' ? '：' : ': '}${names.filter(Boolean).join(' ↔ ')}`;
+}
+
+function buildRoleTransitionCheckpoint(roles, recordedTotal, recordedBefore) {
+  const changedRoles = roles.filter(role => role.initial !== role.current);
+  const changedCount = changedRoles.length;
+  return {
+    id: 'role-transition-checkpoint',
+    phase: 'night',
+    type: 'role_transition',
+    actor: '',
+    source: 'game-engine',
+    sourceFile: lang === 'zh' ? 'night_result_zh.json' : 'night_result.json',
+    sourcePath: 'players.*.(initial_role,current_role)',
+    isCheckpoint: true,
+    recordedBefore,
+    recordedTotal,
+    title: changedCount
+      ? (lang === 'zh' ? '夜晚結束・角色變更' : 'Night complete · role changes')
+      : (lang === 'zh' ? '夜晚結束・角色未變' : 'Night complete · roles unchanged'),
+    body: changedCount
+      ? (lang === 'zh'
+        ? `已記錄的夜晚交換令 ${changedCount} 名玩家的最終角色改變。以下是投票與結算所採用的牌面位置。`
+        : `The recorded night swaps changed ${changedCount} players’ final roles. These are the card positions used for voting and resolution.`)
+      : (lang === 'zh'
+        ? '本局的已記錄夜晚行動沒有改變任何玩家的最終角色。'
+        : 'The recorded night actions did not change any player’s final role.'),
+    roleChanges: changedRoles,
+    roleSwaps: recordedSwapActions(),
+  };
+}
+
 function buildRecordedReplay() {
-  const roles = Object.entries(gameData.resolve?.final_roles || {}).map(([name, r]) => ({
-    name, initial: r.initial_role, current: r.current_role,
-  }));
-  return (gameData.structuredTrace || []).map(event => ({
+  const roles = recordedRoleStates();
+  const recordedTrace = gameData.structuredTrace || [];
+  const recordedTotal = recordedTrace.length;
+  const replay = recordedTrace.map((event, index) => ({
     ...event,
+    recordedOrdinal: index + 1,
+    recordedTotal,
     title: recordedEventTitle(event),
     body: recordedEventBody(event),
     roleChanges: event.phase === 'resolve' ? roles : [],
   }));
+  const firstDayIndex = replay.findIndex(event => event.phase === 'day');
+  if (firstDayIndex >= 0) {
+    replay.splice(
+      firstDayIndex,
+      0,
+      buildRoleTransitionCheckpoint(roles, recordedTotal, firstDayIndex),
+    );
+  }
+  return replay;
 }
 
 function storyKicker(step) {
+  if (step.isCheckpoint) {
+    return lang === 'zh' ? '已記錄的牌面狀態' : 'RECORDED TABLE STATE';
+  }
   const labels = lang === 'zh'
     ? {
         night: 'AI 夜晚決策',
@@ -2852,7 +2959,7 @@ function buildStoryPhaseNav() {
   const nav = document.getElementById('story-phase-nav');
   nav.innerHTML = '';
   for (const phase of STORY_PHASES) {
-    const count = storySteps.filter(step => step.phase === phase).length;
+    const count = storySteps.filter(step => step.phase === phase && !step.isCheckpoint).length;
     if (!count) continue;
     const button = document.createElement('button');
     button.type = 'button';
@@ -2881,7 +2988,7 @@ function renderStoryAvatar(step) {
   } else {
     image.removeAttribute('src');
     image.alt = '';
-    icon.textContent = step.phase === 'resolve' ? '⚙' : '◆';
+    icon.textContent = step.isCheckpoint ? '↔' : step.phase === 'resolve' ? '⚙' : '◆';
   }
 }
 
@@ -2889,10 +2996,13 @@ function renderStoryStep() {
   if (!storySteps.length) return;
   const step = storySteps[storyIndex];
   setPhase(step.phase);
+  if (step.isCheckpoint) showCurrentRoles(true);
   closeSidePanel();
   clearBubbles();
   replayControls.classList.remove('visible');
-  document.getElementById('story-phase-badge').textContent = storyPhaseLabel(step.phase);
+  document.getElementById('story-phase-badge').textContent = step.isCheckpoint
+    ? (lang === 'zh' ? '夜晚結果' : 'Night result')
+    : storyPhaseLabel(step.phase);
   document.getElementById('story-game-id').textContent =
     `${lang === 'zh' ? '遊戲' : 'GAME'} ${String(currentGame || '').replace('game_', '').replace('game-', '')}`;
   document.getElementById('story-kicker').textContent = storyKicker(step);
@@ -2905,13 +3015,22 @@ function renderStoryStep() {
   const model = (step.model || '').split('/').pop();
   document.getElementById('story-agent-sub').textContent =
     [actor, model].filter(Boolean).join(' · ');
-  const phaseSteps = storySteps.filter(s => s.phase === step.phase);
-  const phaseIndex = phaseSteps.findIndex(s => s.id === step.id) + 1;
-  document.getElementById('story-progress').textContent = lang === 'zh'
-    ? `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · 第 ${storyIndex + 1}/${storySteps.length} 個已記錄事件`
-    : `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · recorded event ${storyIndex + 1}/${storySteps.length}`;
-  document.getElementById('story-progress-fill').style.width =
-    `${((storyIndex + 1) / storySteps.length) * 100}%`;
+  const recordedSteps = storySteps.filter(storyStep => !storyStep.isCheckpoint);
+  const phaseSteps = recordedSteps.filter(storyStep => storyStep.phase === step.phase);
+  if (step.isCheckpoint) {
+    document.getElementById('story-progress').textContent = lang === 'zh'
+      ? `角色變更・在第 ${step.recordedBefore}/${step.recordedTotal} 個已記錄事件之後`
+      : `Role transition · after recorded event ${step.recordedBefore}/${step.recordedTotal}`;
+    document.getElementById('story-progress-fill').style.width =
+      `${(step.recordedBefore / Math.max(1, step.recordedTotal)) * 100}%`;
+  } else {
+    const phaseIndex = phaseSteps.findIndex(storyStep => storyStep.id === step.id) + 1;
+    document.getElementById('story-progress').textContent = lang === 'zh'
+      ? `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · 第 ${step.recordedOrdinal}/${step.recordedTotal} 個已記錄事件`
+      : `${storyPhaseLabel(step.phase)} ${phaseIndex}/${phaseSteps.length} · recorded event ${step.recordedOrdinal}/${step.recordedTotal}`;
+    document.getElementById('story-progress-fill').style.width =
+      `${(step.recordedOrdinal / Math.max(1, step.recordedTotal)) * 100}%`;
+  }
   document.querySelectorAll('#story-phase-nav button').forEach(button => {
     button.classList.toggle('active', button.dataset.phase === step.phase);
   });
@@ -2921,6 +3040,7 @@ function renderStoryStep() {
     : '';
   rationale.classList.toggle('visible', Boolean(step.reasoning));
   const meta = [];
+  if (step.isCheckpoint) meta.push(lang === 'zh' ? '夜晚後的牌面位置' : 'post-night card positions');
   if (step.thinking) meta.push(`thinking=${step.thinking}`);
   if (step.latencyMs !== null && step.latencyMs !== undefined) meta.push(`${step.latencyMs}ms`);
   meta.push(step.fallback
@@ -2935,12 +3055,40 @@ function renderStoryStep() {
   `;
   const roleBox = document.getElementById('story-role-changes');
   roleBox.innerHTML = '';
-  for (const r of step.roleChanges || []) {
-    const changed = r.initial !== r.current;
-    roleBox.innerHTML += `<div class="role-change${changed ? ' changed' : ''}">
-      <span class="agent">${displayPlayerName(r.name)}</span>
-      <span class="roles">${lang === 'zh' ? roleZh(r.initial) : r.initial}<span class="arrow">→</span>${lang === 'zh' ? roleZh(r.current) : r.current}</span>
-    </div>`;
+  roleBox.classList.toggle('transition', Boolean(step.isCheckpoint));
+  if (step.isCheckpoint) {
+    const changedCount = (step.roleChanges || []).length;
+    roleBox.innerHTML = `
+      <div class="role-transition-header">
+        <strong>${changedCount
+          ? (lang === 'zh' ? `已記錄的交換・${changedCount} 個角色變更` : `Recorded swaps · ${changedCount} role changes`)
+          : (lang === 'zh' ? '已記錄的夜晚結果・角色未變' : 'Recorded night result · roles unchanged')}</strong>
+        <span>${lang === 'zh' ? '觀眾牌面・代理只知道自己的夜晚記憶' : 'Viewer table state · agents only know their own night memory'}</span>
+      </div>
+      ${(step.roleSwaps || []).length ? `<div class="role-swap-list">
+        ${(step.roleSwaps || []).map(action => `<span>${roleSwapText(action)}</span>`).join('')}
+      </div>` : ''}
+      <div class="role-transition-grid">
+        ${changedCount
+          ? (step.roleChanges || []).map((role, index) => `
+            <div class="role-transition-card" style="--role-delay:${index * 90}ms">
+              <span class="agent">${displayPlayerName(role.name)}</span>
+              <span class="role-path">
+                <span class="role-chip from">${lang === 'zh' ? roleZh(role.initial) : role.initial}</span>
+                <span class="arrow">→</span>
+                <span class="role-chip to">${lang === 'zh' ? roleZh(role.current) : role.current}</span>
+              </span>
+            </div>`).join('')
+          : `<div class="role-transition-none">${lang === 'zh' ? '沒有角色牌改變位置。' : 'No role cards changed position.'}</div>`}
+      </div>`;
+  } else {
+    for (const r of step.roleChanges || []) {
+      const changed = r.initial !== r.current;
+      roleBox.innerHTML += `<div class="role-change${changed ? ' changed' : ''}">
+        <span class="agent">${displayPlayerName(r.name)}</span>
+        <span class="roles">${lang === 'zh' ? roleZh(r.initial) : r.initial}<span class="arrow">→</span>${lang === 'zh' ? roleZh(r.current) : r.current}</span>
+      </div>`;
+    }
   }
   chars.forEach((_, i) => highlightCharacter(i, false));
   if (step.actor) {
