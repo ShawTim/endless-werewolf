@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-role-change-1';
+const CACHE_VERSION = '20260721-night-summary-1';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -2770,6 +2770,7 @@ let storyIndex = 0;
 let storyPlaying = false;
 let storyTimer = null;
 let storySpeed = 1.5;
+let storyViewMode = 'summary';
 const STORY_PHASES = ['night', 'day', 'vote', 'resolve', 'postgame'];
 
 function displayPlayerName(name) {
@@ -2803,6 +2804,9 @@ function cleanStorySpeech(text) {
 }
 
 function storyStepDelay(step) {
+  if (step?.isCheckpoint || step?.phase === 'resolve') {
+    return 16000 / storySpeed;
+  }
   const text = step?.body || '';
   const cjkCount = (text.match(/[\u3400-\u9fff]/gu) || []).length;
   const wordCount = (text.match(/\b[\p{L}\p{N}'’-]+\b/gu) || []).length;
@@ -2860,25 +2864,44 @@ function recordedEventBody(event) {
   return event.text || event.error || event.type || '';
 }
 
-function recordedSwapActions() {
-  return (gameData.night?.night_trace || [])
-    .filter(event => event.action === 'rob' || event.action === 'swap')
-    .map(event => ({
-      action: event.action,
-      actor: event.actor || event.player || '',
-      target: event.target,
-      targets: Array.isArray(event.targets) ? event.targets : [],
-      role: event.role || (event.action === 'rob' ? 'Robber' : 'Troublemaker'),
-    }));
+function recordedNightActions() {
+  return (gameData.night?.night_trace || []).map(event => ({
+    action: event.action || '',
+    actor: event.actor || event.player || '',
+    target: event.target,
+    targets: Array.isArray(event.targets) ? event.targets : [],
+    role: event.role || '',
+  }));
 }
 
-function roleSwapText(action) {
+function nightActionSummaryText(action) {
   const role = lang === 'zh' ? roleZh(action.role) : action.role;
   const actor = displayPlayerName(action.actor);
-  const names = action.action === 'rob'
-    ? [actor, displayPlayerName(action.target)]
-    : (action.targets || []).map(displayPlayerName);
-  return `${role}${lang === 'zh' ? '：' : ': '}${names.filter(Boolean).join(' ↔ ')}`;
+  const target = action.target !== undefined && action.target !== null
+    ? (typeof action.target === 'string'
+      ? displayPlayerName(action.target)
+      : `${lang === 'zh' ? '中央牌' : 'center card'} ${action.target}`)
+    : '';
+  const targets = (action.targets || []).map(displayPlayerName);
+  const prefix = [role, actor].filter(Boolean).join(' · ');
+  const separator = lang === 'zh' ? '：' : ': ';
+  if (action.action === 'rob') return `${role} · ${actor} ↔ ${target}`;
+  if (action.action === 'swap') return `${prefix}${separator}${targets.join(' ↔ ')}`;
+  if (action.action === 'inspect_center') {
+    return lang === 'zh'
+      ? `${prefix}：查看${target || '中央牌'}`
+      : `${prefix}: inspected ${target || 'center cards'}`;
+  }
+  if (action.action === 'inspect_player') {
+    return lang === 'zh' ? `${prefix}：查驗${target}` : `${prefix}: inspected ${target}`;
+  }
+  if (action.action === 'identify_wolves' || action.action === 'peek_wolves' || action.action === 'peek_wolf') {
+    const wolves = targets.length ? targets.join(', ') : target;
+    return lang === 'zh'
+      ? `${prefix}：看見狼人：${wolves}`
+      : `${prefix}: saw the werewolf ${wolves}`.trim();
+  }
+  return `${prefix}${separator}${action.action || (lang === 'zh' ? '沒有行動' : 'no action')}`;
 }
 
 function buildRoleTransitionCheckpoint(roles, recordedTotal, recordedBefore) {
@@ -2895,9 +2918,13 @@ function buildRoleTransitionCheckpoint(roles, recordedTotal, recordedBefore) {
     isCheckpoint: true,
     recordedBefore,
     recordedTotal,
-    title: changedCount
-      ? (lang === 'zh' ? '夜晚結束・角色變更' : 'Night complete · role changes')
-      : (lang === 'zh' ? '夜晚結束・角色未變' : 'Night complete · roles unchanged'),
+    title: storyViewMode === 'summary'
+      ? (changedCount
+        ? (lang === 'zh' ? `夜晚摘要・${changedCount} 個角色變更` : `Night summary · ${changedCount} role changes`)
+        : (lang === 'zh' ? '夜晚摘要・角色未變' : 'Night summary · roles unchanged'))
+      : (changedCount
+        ? (lang === 'zh' ? '夜晚結束・角色變更' : 'Night complete · role changes')
+        : (lang === 'zh' ? '夜晚結束・角色未變' : 'Night complete · roles unchanged')),
     body: changedCount
       ? (lang === 'zh'
         ? `已記錄的夜晚交換令 ${changedCount} 名玩家的最終角色改變。以下是投票與結算所採用的牌面位置。`
@@ -2906,7 +2933,7 @@ function buildRoleTransitionCheckpoint(roles, recordedTotal, recordedBefore) {
         ? '本局的已記錄夜晚行動沒有改變任何玩家的最終角色。'
         : 'The recorded night actions did not change any player’s final role.'),
     roleChanges: changedRoles,
-    roleSwaps: recordedSwapActions(),
+    nightActions: recordedNightActions(),
   };
 }
 
@@ -2929,6 +2956,9 @@ function buildRecordedReplay() {
       0,
       buildRoleTransitionCheckpoint(roles, recordedTotal, firstDayIndex),
     );
+  }
+  if (storyViewMode === 'summary') {
+    return replay.filter(event => event.phase !== 'night' || event.isCheckpoint);
   }
   return replay;
 }
@@ -2955,18 +2985,58 @@ function storyKicker(step) {
   return labels[step.phase] || (lang === 'zh' ? '已記錄事件' : 'RECORDED EVENT');
 }
 
+function updateStoryViewToggle() {
+  document.getElementById('story-view-label').textContent =
+    lang === 'zh' ? '重播內容' : 'Replay view';
+  const summary = document.getElementById('story-view-summary');
+  const full = document.getElementById('story-view-full');
+  summary.textContent = lang === 'zh' ? '摘要' : 'Summary';
+  full.textContent = lang === 'zh' ? '完整軌跡' : 'Full trace';
+  summary.classList.toggle('active', storyViewMode === 'summary');
+  full.classList.toggle('active', storyViewMode === 'full');
+  summary.setAttribute('aria-pressed', String(storyViewMode === 'summary'));
+  full.setAttribute('aria-pressed', String(storyViewMode === 'full'));
+}
+
+function setStoryViewMode(mode) {
+  if (mode !== 'summary' && mode !== 'full') return;
+  const currentStep = storySteps[storyIndex];
+  stopStoryPlayback();
+  storyViewMode = mode;
+  const rebuilt = buildRecordedReplay();
+  let nextIndex = 0;
+  if (currentStep?.isCheckpoint || (mode === 'summary' && currentStep?.phase === 'night')) {
+    nextIndex = rebuilt.findIndex(step => step.isCheckpoint);
+  } else if (currentStep?.recordedOrdinal) {
+    nextIndex = rebuilt.findIndex(step => step.recordedOrdinal === currentStep.recordedOrdinal);
+  }
+  storySteps = rebuilt;
+  storyIndex = THREE.MathUtils.clamp(nextIndex < 0 ? 0 : nextIndex, 0, Math.max(0, storySteps.length - 1));
+  buildStoryPhaseNav();
+  updateStoryViewToggle();
+  renderStoryStep();
+}
+
 function buildStoryPhaseNav() {
   const nav = document.getElementById('story-phase-nav');
   nav.innerHTML = '';
   for (const phase of STORY_PHASES) {
-    const count = storySteps.filter(step => step.phase === phase && !step.isCheckpoint).length;
+    const summaryNight = phase === 'night' && storyViewMode === 'summary';
+    const phaseSteps = storySteps.filter(step =>
+      step.phase === phase && (summaryNight ? step.isCheckpoint : !step.isCheckpoint)
+    );
+    const count = phaseSteps.length;
     if (!count) continue;
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset.phase = phase;
-    button.innerHTML = `${storyPhaseLabel(phase)} <span class="count">${count}</span>`;
+    button.innerHTML = summaryNight
+      ? `${lang === 'zh' ? '夜晚摘要' : 'Night summary'}`
+      : `${storyPhaseLabel(phase)} <span class="count">${count}</span>`;
     button.addEventListener('click', () => {
-      const nextIndex = storySteps.findIndex(step => step.phase === phase);
+      const nextIndex = storySteps.findIndex(step =>
+        step.phase === phase && (summaryNight ? step.isCheckpoint : !step.isCheckpoint)
+      );
       if (nextIndex < 0) return;
       stopStoryPlayback();
       storyIndex = nextIndex;
@@ -3001,7 +3071,9 @@ function renderStoryStep() {
   clearBubbles();
   replayControls.classList.remove('visible');
   document.getElementById('story-phase-badge').textContent = step.isCheckpoint
-    ? (lang === 'zh' ? '夜晚結果' : 'Night result')
+    ? storyViewMode === 'summary'
+      ? (lang === 'zh' ? '夜晚摘要' : 'Night summary')
+      : (lang === 'zh' ? '夜晚結果' : 'Night result')
     : storyPhaseLabel(step.phase);
   document.getElementById('story-game-id').textContent =
     `${lang === 'zh' ? '遊戲' : 'GAME'} ${String(currentGame || '').replace('game_', '').replace('game-', '')}`;
@@ -3018,9 +3090,13 @@ function renderStoryStep() {
   const recordedSteps = storySteps.filter(storyStep => !storyStep.isCheckpoint);
   const phaseSteps = recordedSteps.filter(storyStep => storyStep.phase === step.phase);
   if (step.isCheckpoint) {
-    document.getElementById('story-progress').textContent = lang === 'zh'
-      ? `角色變更・在第 ${step.recordedBefore}/${step.recordedTotal} 個已記錄事件之後`
-      : `Role transition · after recorded event ${step.recordedBefore}/${step.recordedTotal}`;
+    document.getElementById('story-progress').textContent = storyViewMode === 'summary'
+      ? (lang === 'zh'
+        ? `夜晚摘要・涵蓋第 1–${step.recordedBefore} 個事件，共 ${step.recordedTotal} 個`
+        : `Night summary · recorded events 1–${step.recordedBefore} of ${step.recordedTotal}`)
+      : (lang === 'zh'
+        ? `角色變更・在第 ${step.recordedBefore}/${step.recordedTotal} 個已記錄事件之後`
+        : `Role transition · after recorded event ${step.recordedBefore}/${step.recordedTotal}`);
     document.getElementById('story-progress-fill').style.width =
       `${(step.recordedBefore / Math.max(1, step.recordedTotal)) * 100}%`;
   } else {
@@ -3040,7 +3116,11 @@ function renderStoryStep() {
     : '';
   rationale.classList.toggle('visible', Boolean(step.reasoning));
   const meta = [];
-  if (step.isCheckpoint) meta.push(lang === 'zh' ? '夜晚後的牌面位置' : 'post-night card positions');
+  if (step.isCheckpoint) {
+    meta.push(storyViewMode === 'summary'
+      ? (lang === 'zh' ? '完整夜晚摘要' : 'complete night summary')
+      : (lang === 'zh' ? '夜晚後的牌面位置' : 'post-night card positions'));
+  }
   if (step.thinking) meta.push(`thinking=${step.thinking}`);
   if (step.latencyMs !== null && step.latencyMs !== undefined) meta.push(`${step.latencyMs}ms`);
   meta.push(step.fallback
@@ -3058,16 +3138,19 @@ function renderStoryStep() {
   roleBox.classList.toggle('transition', Boolean(step.isCheckpoint));
   if (step.isCheckpoint) {
     const changedCount = (step.roleChanges || []).length;
+    const actionCount = (step.nightActions || []).length;
     roleBox.innerHTML = `
       <div class="role-transition-header">
-        <strong>${changedCount
-          ? (lang === 'zh' ? `已記錄的交換・${changedCount} 個角色變更` : `Recorded swaps · ${changedCount} role changes`)
-          : (lang === 'zh' ? '已記錄的夜晚結果・角色未變' : 'Recorded night result · roles unchanged')}</strong>
+        <strong>${lang === 'zh'
+          ? `夜晚摘要・${actionCount} 個行動・${changedCount} 個角色變更`
+          : `Night summary · ${actionCount} actions · ${changedCount} role changes`}</strong>
         <span>${lang === 'zh' ? '觀眾牌面・代理只知道自己的夜晚記憶' : 'Viewer table state · agents only know their own night memory'}</span>
       </div>
-      ${(step.roleSwaps || []).length ? `<div class="role-swap-list">
-        ${(step.roleSwaps || []).map(action => `<span>${roleSwapText(action)}</span>`).join('')}
+      ${(step.nightActions || []).length ? `<div class="role-summary-label">${lang === 'zh' ? '所有已記錄的夜晚行動' : 'All recorded night actions'}</div>
+      <div class="night-action-summary-list">
+        ${(step.nightActions || []).map(action => `<span>${nightActionSummaryText(action)}</span>`).join('')}
       </div>` : ''}
+      <div class="role-summary-label">${lang === 'zh' ? '夜晚結束後的角色' : 'Roles after night'}</div>
       <div class="role-transition-grid">
         ${changedCount
           ? (step.roleChanges || []).map((role, index) => `
@@ -3097,7 +3180,8 @@ function renderStoryStep() {
   }
 }
 
-function openStoryMode(autoPlay = false, startIndex = 0) {
+function openStoryMode(autoPlay = false, startIndex = 0, preserveViewMode = false) {
+  if (!preserveViewMode) storyViewMode = 'summary';
   storySteps = buildRecordedReplay();
   if (!storySteps.length) return;
   storyIndex = THREE.MathUtils.clamp(startIndex, 0, storySteps.length - 1);
@@ -3106,6 +3190,7 @@ function openStoryMode(autoPlay = false, startIndex = 0) {
   document.getElementById('story-play').textContent = '▶';
   document.getElementById('story-speed').textContent = '1.5×';
   buildStoryPhaseNav();
+  updateStoryViewToggle();
   document.getElementById('story-mode').classList.add('visible');
   renderStoryStep();
   if (autoPlay) {
@@ -3808,14 +3893,14 @@ function toggleLanguage() {
     const savedPhase = currentPhase;
     loadGame(currentGame).then(loaded => {
       if (!loaded) return;
-      if (restoreStory) openStoryMode(false, savedStoryIndex);
+      if (restoreStory) openStoryMode(false, savedStoryIndex, true);
       else if (openPanelView === 'about') showAboutPanel();
       else if (openPanelView === 'proof') showProofPanel();
       else setPhase(savedPhase);
     });
   } else if (gameData.night) {
     const savedPhase = currentPhase;
-    if (restoreStory) openStoryMode(false, savedStoryIndex);
+    if (restoreStory) openStoryMode(false, savedStoryIndex, true);
     else if (openPanelView === 'about') showAboutPanel();
     else if (openPanelView === 'proof') showProofPanel();
     else setPhase(savedPhase);
@@ -3910,6 +3995,8 @@ function setupUI() {
   });
   document.getElementById('rules-skip').addEventListener('click', () => closeRules(true));
 
+  document.getElementById('story-view-summary').addEventListener('click', () => setStoryViewMode('summary'));
+  document.getElementById('story-view-full').addEventListener('click', () => setStoryViewMode('full'));
   document.getElementById('story-prev').addEventListener('click', () => {
     stopStoryPlayback();
     storyIndex = Math.max(0, storyIndex - 1);
@@ -4020,6 +4107,7 @@ function updateUIText() {
     : 'Every recorded event is preserved. Raw game outputs are available in Proof.';
   document.getElementById('welcome-gh').textContent =
     lang === 'zh' ? '在 GitHub 查看原始碼 ↗' : 'View source on GitHub ↗';
+  updateStoryViewToggle();
   document.getElementById('rules-close').setAttribute(
     'aria-label',
     lang === 'zh' ? '關閉規則' : 'Close rules',

@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./styles.css?v=20260721-role-change-1" />
+<link rel="stylesheet" href="./styles.css?v=20260721-night-summary-1" />
 </head>
 <body>
 
@@ -156,6 +156,11 @@
   <div id="story-rationale"></div>
   <div id="story-meta"></div>
   <div id="story-role-changes"></div>
+  <div class="story-view-toggle" aria-label="Replay detail">
+    <span id="story-view-label">Replay view</span>
+    <button id="story-view-summary" type="button">Summary</button>
+    <button id="story-view-full" type="button">Full trace</button>
+  </div>
   <div class="story-phase-nav" id="story-phase-nav"></div>
   <div class="story-progress-track"><span id="story-progress-fill"></span></div>
   <div class="story-footer">
@@ -230,6 +235,6 @@
   }
 }
 </script>
-<script type="module" src="./app.js?v=20260721-role-change-1"></script>
+<script type="module" src="./app.js?v=20260721-night-summary-1"></script>
 </body>
 </html>
