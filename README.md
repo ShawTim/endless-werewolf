@@ -52,7 +52,7 @@ Postgame →  In-character interviews: winners celebrate, losers explain
 
 **AI Bridge** — Each decision request is routed through an [OpenClaw](https://openclaw.ai) bridge agent that spawns a short-lived subagent using the player's assigned LLM. The subagent thinks, returns a JSON decision, and is destroyed.
 
-**Frontend** — Three.js 3D scene on GitHub Pages. Candlelit round table, 6 stylized characters, a guided full-trace replay, phase navigation, speech bubbles, vote arrows, and confetti.
+**Frontend** — Three.js 3D scene on GitHub Pages. Candlelit round table, 6 stylized characters, procedural night-sky shader with stars and moon, AI-generated day sky and texture set, a village with lit windows, ground mist, a guided full-trace replay, phase navigation, speech bubbles, vote arrows, and confetti.
 
 **Bilingual** — All game content is generated in English, then translated to 正體中文書面語 via an LLM bridge agent for a parallel Chinese track.
 

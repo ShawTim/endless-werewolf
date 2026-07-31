@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260721-mobile-accessibility-1';
+const CACHE_VERSION = '20260731-village-sky-7';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -95,10 +95,12 @@ let gameLoadVersion = 0;
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
+let skyUniforms, envGround, flameGlow, daySkyMat;
+let mistSprites = [];
 let composer, renderPass, bloomPass, smaaPass;
 let chars = [];
 let isNight = false;
-let autoRotate = true;
+let autoRotate = false; // cinematic camera (orbit + speaker focus) — OFF by default; Auto button enables
 const R = 3.2, SH = 0.6, TR = 2.0;
 
 // ===== Cel-shading gradient maps =====
@@ -233,6 +235,10 @@ async function init() {
   scene.fog.near = preset.fogNear;
   scene.fog.far = preset.fogFar;
   if (flame) flame.material.emissiveIntensity = preset.flame;
+  if (skyUniforms) skyUniforms.uNightMix.value = preset.skyMix;
+  if (daySkyMat) daySkyMat.opacity = 1 - preset.skyMix;
+  if (envGround) envGround.material.color.setHex(preset.ground);
+  if (window.__houseWinMats) for (const m of window.__houseWinMats) m.opacity = preset.winOpacity;
   // Show brazier fires at night
   if (window.__brazierEmbers && window.__brazierLights) {
     for (const e of window.__brazierEmbers) e.visible = true;
@@ -309,19 +315,97 @@ function initThree() {
   woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
   woodTex.repeat.set(2, 2);
 
-  // Sky as background sphere
-  const skyTex = texLoader.load('./tex-sky.jpg');
-  skyTex.anisotropy = maxAnisotropy;
-  // Default equirect mapping — bright sunset/orange texture shows at horizon
-  skyTex.center.set(0.5, 0.5);
-  skyTex.rotation = 0;
-  skyTex.offset.set(0, 0);
-  skyTex.repeat.set(1, 1);
+  // Sky — procedural gradient dome with stars + moon (day/night blended via uNightMix)
+  skyUniforms = {
+    uNightMix: { value: 0 },
+    uTime: { value: 0 },
+  };
+  const skyMat = new THREE.ShaderMaterial({
+    uniforms: skyUniforms,
+    side: THREE.BackSide,
+    depthWrite: false,
+    fog: false,
+    vertexShader: `
+      varying vec3 vDir;
+      void main() {
+        vDir = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uNightMix;
+      uniform float uTime;
+      varying vec3 vDir;
+
+      float hash12(vec2 p) {
+        vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+        p3 += dot(p3, p3.yzx + 33.33);
+        return fract((p3.x + p3.y) * p3.z);
+      }
+
+      void main() {
+        vec3 sd = normalize(vDir);
+        float h = clamp(sd.y, -1.0, 1.0);
+
+        // Gradient palettes (pushed slightly saturated — ACES desaturates)
+        vec3 dayTop = vec3(0.28, 0.50, 0.86);
+        vec3 dayHor = vec3(0.72, 0.82, 0.90);
+        vec3 nightTop = vec3(0.010, 0.014, 0.045);
+        vec3 nightHor = vec3(0.100, 0.075, 0.210);
+        vec3 top = mix(dayTop, nightTop, uNightMix);
+        vec3 hor = mix(dayHor, nightHor, uNightMix);
+
+        float grad = pow(clamp(h, 0.0, 1.0), 0.42);
+        vec3 col = mix(hor, top, grad);
+        // Below-horizon haze — matches the scene fog color so the ground's
+        // far edge dissolves seamlessly (day fog 0xc8d8e8, night fog 0x0a0a18)
+        vec3 below = mix(vec3(0.576, 0.686, 0.806), vec3(0.003, 0.003, 0.006), uNightMix);
+        col = mix(col, below, smoothstep(0.0, -0.25, h));
+
+        // Stars (night only) — sparse cells with per-star position + twinkle
+        vec2 suv = vec2(atan(sd.z, sd.x) / 6.2831853 + 0.5, asin(h) / 3.14159265 + 0.5);
+        vec2 sg = suv * vec2(160.0, 80.0);
+        vec2 cell = floor(sg);
+        vec2 f = fract(sg);
+        float sh = hash12(cell);
+        vec2 spos = vec2(hash12(cell + 17.31), hash12(cell + 41.77));
+        float sdist = length(f - spos);
+        float star = smoothstep(0.10, 0.0, sdist) * step(0.90, sh);
+        star *= 0.65 + 0.35 * sin(uTime * 2.2 + sh * 43.0);
+        star *= smoothstep(0.02, 0.25, h) * uNightMix;
+        col += vec3(0.9, 0.93, 1.0) * star * 0.85;
+
+        // Moon + halo (night only) — hangs low over the village rooftops
+        vec3 moonDir = normalize(vec3(-5.0, 1.9, 5.0));
+        float mdot = dot(sd, moonDir);
+        float moonDisc = smoothstep(0.9978, 0.9989, mdot);
+        float shade = dot(normalize(sd - moonDir + 1e-6), normalize(vec3(0.6, -0.5, 0.0))) * 0.5 + 0.5;
+        vec3 moonCol = mix(vec3(1.0, 0.98, 0.90), vec3(0.72, 0.74, 0.82), shade * 0.55);
+        float halo = pow(clamp(mdot, 0.0, 1.0), 220.0) * 0.5 + pow(clamp(mdot, 0.0, 1.0), 40.0) * 0.12;
+        col += (moonCol * moonDisc * 1.6 + vec3(0.75, 0.78, 1.0) * halo) * uNightMix;
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  });
   const skyGeo = new THREE.SphereGeometry(40, 64, 32);
-  // No tint — let original sky color show through; fog:false so it stays vivid
-  const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, color: 0xffffff, side: THREE.BackSide, fog: false });
   const skyDome = new THREE.Mesh(skyGeo, skyMat);
+  skyDome.renderOrder = -1;
+  skyDome.frustumCulled = false;
   scene.add(skyDome);
+
+  // Day sky — AI-generated panorama on a second dome, crossfaded via opacity
+  const daySkyTex = texLoader.load('./tex-sky-day.jpg');
+  daySkyTex.colorSpace = THREE.SRGBColorSpace;
+  daySkyTex.anisotropy = maxAnisotropy;
+  daySkyMat = new THREE.MeshBasicMaterial({
+    map: daySkyTex, side: THREE.BackSide, fog: false,
+    transparent: true, opacity: 0, depthWrite: false,
+  });
+  const daySkyDome = new THREE.Mesh(new THREE.SphereGeometry(39, 64, 32), daySkyMat);
+  daySkyDome.renderOrder = -1;
+  daySkyDome.frustumCulled = false;
+  scene.add(daySkyDome);
 
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
@@ -452,29 +536,230 @@ function initThree() {
   );
   flame.position.y = 0.72;
   scene.add(flame);
+
+  // Candle flame glow sprite — softens the cone into a real light source
+  flameGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: makeGlowTexture(), color: 0xffb84d, transparent: true, opacity: 0,
+    depthWrite: false, blending: THREE.AdditiveBlending,
+  }));
+  flameGlow.scale.set(0.7, 0.7, 1);
+  flameGlow.position.set(0, 0.76, 0);
+  scene.add(flameGlow);
+
   initParticles();
+  buildEnvironment();
+}
+
+// ===== Village Environment (silhouettes, ground, mist) =====
+function paintGroundCanvas(ctx, tex, grassImg) {
+  const S = 512;
+  if (grassImg) {
+    // Tile the AI-generated grass across the ground (~4m per tile)
+    for (let ty = 0; ty < 12; ty++) for (let tx = 0; tx < 12; tx++) {
+      ctx.drawImage(grassImg, tx * (S / 12), ty * (S / 12), S / 12, S / 12);
+    }
+  } else {
+    ctx.fillStyle = '#86905f';
+    ctx.fillRect(0, 0, S, S);
+  }
+  // Gentle radial darkening toward the horizon
+  ctx.globalCompositeOperation = 'multiply';
+  const grad = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+  grad.addColorStop(0, '#ffffff');
+  grad.addColorStop(0.45, '#e8e8e8');
+  grad.addColorStop(0.75, '#b8b8b8');
+  grad.addColorStop(1, '#989898');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, S, S);
+  ctx.globalCompositeOperation = 'source-over';
+  tex.needsUpdate = true;
+}
+
+function buildEnvironment() {
+  // Outer ground — extends far past the stone plaza so the horizon is a
+  // fog-blended tree line instead of a floating disc edge
+  const groundCanvas = document.createElement('canvas');
+  groundCanvas.width = 512; groundCanvas.height = 512;
+  const gctx = groundCanvas.getContext('2d');
+  const groundTex = new THREE.CanvasTexture(groundCanvas);
+  paintGroundCanvas(gctx, groundTex, null); // flat fallback until grass loads
+  const grassImg = new Image();
+  grassImg.onload = () => paintGroundCanvas(gctx, groundTex, grassImg);
+  grassImg.src = './tex-grass.jpg';
+
+  envGround = new THREE.Mesh(
+    new THREE.CircleGeometry(46, 48),
+    new THREE.MeshStandardMaterial({
+      color: 0xdcdcd2, roughness: 1, map: groundTex,
+    })
+  );
+  envGround.rotation.x = -PI / 2;
+  envGround.position.y = -0.63;
+  scene.add(envGround);
+
+  // AI-generated textures make the cottages read as actual buildings
+  const envTexLoader = new THREE.TextureLoader();
+  const cottageTex = envTexLoader.load('./tex-cottage.jpg');
+  cottageTex.colorSpace = THREE.SRGBColorSpace;
+  const roofTex = envTexLoader.load('./tex-roof.jpg');
+  roofTex.colorSpace = THREE.SRGBColorSpace;
+  roofTex.wrapS = roofTex.wrapT = THREE.RepeatWrapping;
+  roofTex.repeat.set(3, 1);
+
+  const pineMats = [0x2d4a34, 0x29452f, 0x33503a].map(col =>
+    new THREE.MeshStandardMaterial({ color: col, roughness: 1 }));
+  const trunkMat = new THREE.MeshStandardMaterial({ color: 0x3d2c1e, roughness: 0.95 });
+  const wallMat = new THREE.MeshStandardMaterial({ map: cottageTex, roughness: 0.95 });
+  const roofMat = new THREE.MeshStandardMaterial({ map: roofTex, roughness: 0.9 });
+  const winMat = new THREE.MeshBasicMaterial({ color: 0xffc98a, transparent: true, opacity: 0.8 });
+  const winFrameMat = new THREE.MeshBasicMaterial({ color: 0x2a1c12 });
+  window.__houseWinMats = [winMat];
+
+  function buildPine(scale, mat) {
+    const tree = new THREE.Group();
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.09, 0.4, 6), trunkMat);
+    trunk.position.y = 0.2; tree.add(trunk);
+    // Fatter, shorter tiers with overlap — reads as foliage, not stacked cones
+    const tiers = [[0.5, 0.7, 0.55], [0.4, 0.65, 0.95], [0.27, 0.55, 1.3]];
+    for (const [r, h, y] of tiers) {
+      const cone = new THREE.Mesh(new THREE.ConeGeometry(r, h, 7), mat);
+      cone.position.y = y; tree.add(cone);
+    }
+    tree.scale.setScalar(scale);
+    return tree;
+  }
+
+  function buildHouse(w, h, d, chimney) {
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), wallMat);
+    body.position.y = h / 2; g.add(body);
+    const m = Math.max(w, d);
+    const roof = new THREE.Mesh(new THREE.CylinderGeometry(0, m * 1.18 / Math.SQRT2, h * 0.7, 4), roofMat);
+    roof.rotation.y = PI / 4;
+    roof.scale.set(w / m, 1, d / m);
+    roof.position.y = h + h * 0.34; g.add(roof);
+    if (chimney) {
+      const ch = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.5, 0.2), roofMat);
+      ch.position.set(w * 0.28, h + h * 0.42, 0); g.add(ch);
+    }
+    // Small framed windows — warm dots of life, not glowing billboards
+    for (const wx of [-w * 0.24, w * 0.24]) {
+      const frame = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.19, h * 0.26), winFrameMat);
+      frame.position.set(wx, h * 0.52, d / 2 + 0.009); g.add(frame);
+      const win = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.14, h * 0.2), winMat);
+      win.position.set(wx, h * 0.52, d / 2 + 0.011); g.add(win);
+    }
+    return g;
+  }
+
+  // Houses — close enough to stay anchored in front of the tree line
+  const houses = [
+    { a: 0.55, r: 18.0, w: 2.4, h: 1.9, d: 2.0, ch: false },
+    { a: 1.75, r: 20.0, w: 3.0, h: 2.3, d: 2.5, ch: true },
+    { a: 3.05, r: 18.5, w: 2.2, h: 1.7, d: 1.9, ch: false },
+    { a: 4.35, r: 20.5, w: 2.8, h: 2.1, d: 2.3, ch: true },
+    { a: 5.50, r: 18.0, w: 2.0, h: 1.6, d: 1.8, ch: false },
+  ];
+  for (const hs of houses) {
+    const house = buildHouse(hs.w, hs.h, hs.d, hs.ch);
+    house.position.set(cos(hs.a) * hs.r, -0.6, sin(hs.a) * hs.r);
+    house.lookAt(0, -0.6, 0);
+    scene.add(house);
+  }
+
+  // Inner pines — scattered between plaza edge and houses
+  let placed = 0, guard = 0;
+  while (placed < 16 && guard++ < 300) {
+    const a = Math.random() * TAU;
+    const r = 15.5 + Math.random() * 6;
+    if (houses.some(hs => Math.abs(((a - hs.a + PI * 3) % TAU) - PI) < 0.32 && Math.abs(r - hs.r) < 3.5)) continue;
+    const pine = buildPine(0.6 + Math.random() * 0.7, pineMats[placed % pineMats.length]);
+    pine.position.set(cos(a) * r, -0.6, sin(a) * r);
+    pine.rotation.y = Math.random() * TAU;
+    scene.add(pine);
+    placed++;
+  }
+
+  // Forest ring — a dense tree line that masks the ground's fade-out zone
+  for (let i = 0; i < 44; i++) {
+    const a = (i / 44) * TAU + Math.random() * 0.14;
+    const r = 24 + Math.random() * 8;
+    const pine = buildPine(1.3 + Math.random() * 1.1, pineMats[i % pineMats.length]);
+    pine.position.set(cos(a) * r, -0.6, sin(a) * r);
+    pine.rotation.y = Math.random() * TAU;
+    scene.add(pine);
+  }
+
+  // Ground mist — soft sprites drifting slowly around the plaza
+  const mistTex = makeMistTexture();
+  for (let i = 0; i < 6; i++) {
+    const sp2 = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: mistTex, transparent: true, opacity: 0, depthWrite: false,
+    }));
+    const sx = 9 + Math.random() * 4, sy = 2.5 + Math.random() * 1.5;
+    sp2.scale.set(sx, sy, 1);
+    sp2.userData = {
+      a0: Math.random() * TAU,
+      r: 6 + Math.random() * 6.5,
+      y: 0.1 + Math.random() * 0.5,
+      speed: (Math.random() > 0.5 ? 1 : -1) * (0.008 + Math.random() * 0.012),
+      op: 0.05 + Math.random() * 0.04,
+    };
+    mistSprites.push(sp2);
+    scene.add(sp2);
+  }
+}
+
+function makeMistTexture() {
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 128;
+  const ctx = c.getContext('2d');
+  const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grad.addColorStop(0, 'rgba(220,225,240,0.30)');
+  grad.addColorStop(0.5, 'rgba(200,210,230,0.12)');
+  grad.addColorStop(1, 'rgba(200,210,230,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+}
+
+function updateEnvironment(t) {
+  if (skyUniforms) skyUniforms.uTime.value = t;
+  for (const m of mistSprites) {
+    const ud = m.userData;
+    const a = ud.a0 + t * ud.speed;
+    m.position.set(cos(a) * ud.r, ud.y, sin(a) * ud.r);
+    const target = isNight ? ud.op : 0.02;
+    m.material.opacity += (target - m.material.opacity) * 0.03;
+  }
+  if (flameGlow) {
+    const target = isNight ? 0.55 : 0;
+    const base = (flameGlow.userData.base ?? 0) + (target - (flameGlow.userData.base ?? 0)) * 0.05;
+    flameGlow.userData.base = base;
+    flameGlow.material.opacity = base * (0.85 + 0.15 * sin(t * 9.3));
+  }
 }
 
 
 function initParticles() {
   // ---- Fireflies (night) ----
-  const ffCount = 40;
+  const ffCount = 28;
   const ffGeo = new THREE.BufferGeometry();
   const ffPos = new Float32Array(ffCount * 3);
   const ffPhase = new Float32Array(ffCount);
   const ffRadius = new Float32Array(ffCount);
   for (let i = 0; i < ffCount; i++) {
     const a = Math.random() * TAU;
-    const r = 3 + Math.random() * 8;
+    const r = 3.5 + Math.random() * 7;
     ffPos[i*3] = cos(a) * r;
-    ffPos[i*3+1] = 0.5 + Math.random() * 4;
+    ffPos[i*3+1] = 1.0 + Math.random() * 2.2;
     ffPos[i*3+2] = sin(a) * r;
     ffPhase[i] = Math.random() * TAU;
     ffRadius[i] = r;
   }
   ffGeo.setAttribute('position', new THREE.BufferAttribute(ffPos, 3));
   const ffMat = new THREE.PointsMaterial({
-    color: 0xFFE066, size: 0.12, transparent: true, opacity: 0,
+    color: 0xFFE066, size: 0.09, transparent: true, opacity: 0,
     blending: THREE.AdditiveBlending, depthWrite: false,
     map: makeGlowTexture(),
   });
@@ -660,20 +945,25 @@ function buildCharacter(player, index){
   const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,0.07,0.32); browL.rotation.z=0.08; head.add(browL);
   const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,0.07,0.32); browR.rotation.z=-0.08; head.add(browR);
 
-  // Eyes — whites with pupils + highlight for life
+  // Eyes — whites with irises, pupils + highlight for life
   const eyeWhiteMat=new THREE.MeshToonMaterial({color:0xffffff, gradientMap: TOON_GRADIENT});
-  const eyeGeo2=new THREE.SphereGeometry(0.05,16,12);
+  const eyeGeo2=new THREE.SphereGeometry(0.055,16,12);
   const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,0.02,0.32); eL.scale.set(1.2,1,0.6); head.add(eL);
   const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,0.02,0.32); eR.scale.set(1.2,1,0.6); head.add(eR);
+  // Irises — tinted per player so the gaze reads at distance
+  const irisMat=new THREE.MeshBasicMaterial({color:mixHexColors(player.color||0x8a6a4a, 0x1a1a2e, 0.35)});
+  const irisGeo=new THREE.CircleGeometry(0.033,16);
+  const iL=new THREE.Mesh(irisGeo,irisMat); iL.position.set(-0.12,0.02,0.352); head.add(iL);
+  const iR=new THREE.Mesh(irisGeo,irisMat); iR.position.set(0.12,0.02,0.352); head.add(iR);
   // Pupils (bigger, more cartoon)
-  const pupilGeo=new THREE.SphereGeometry(0.025,12,8);
-  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,0.02,0.36); head.add(pL);
-  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,0.02,0.36); head.add(pR);
+  const pupilGeo=new THREE.SphereGeometry(0.028,12,8);
+  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,0.02,0.362); head.add(pL);
+  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,0.02,0.362); head.add(pR);
   // Eye highlights (small white spheres for cartoon "shine")
   const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const hlGeo = new THREE.SphereGeometry(0.012, 6, 6);
-  const hlL = new THREE.Mesh(hlGeo, hlMat); hlL.position.set(-0.105, 0.035, 0.378); head.add(hlL);
-  const hlR = new THREE.Mesh(hlGeo, hlMat); hlR.position.set(0.135, 0.035, 0.378); head.add(hlR);
+  const hlL = new THREE.Mesh(hlGeo, hlMat); hlL.position.set(-0.105, 0.04, 0.388); head.add(hlL);
+  const hlR = new THREE.Mesh(hlGeo, hlMat); hlR.position.set(0.135, 0.04, 0.388); head.add(hlR);
 
   // Nose — more defined
   const nose=new THREE.Mesh(
@@ -701,6 +991,12 @@ function buildCharacter(player, index){
     skinMat
   );
   chin.position.set(0,-0.16,0.28); chin.scale.set(1,0.6,0.8); head.add(chin);
+
+  // Blush cheeks — soft cartoon warmth
+  const blushMat=new THREE.MeshToonMaterial({color:0xe89080, gradientMap: TOON_GRADIENT_SOFT});
+  const blushGeo=new THREE.SphereGeometry(0.045,10,8);
+  const blushL=new THREE.Mesh(blushGeo,blushMat); blushL.position.set(-0.2,-0.05,0.27); blushL.scale.set(1,0.6,0.35); head.add(blushL);
+  const blushR=new THREE.Mesh(blushGeo,blushMat); blushR.position.set(0.2,-0.05,0.27); blushR.scale.set(1,0.6,0.35); head.add(blushR);
 
   // === Persona-specific accessories ===
   switch(player.name){
@@ -732,12 +1028,13 @@ function buildCharacter(player, index){
       );
         gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
       g.add(gavelHandle);
-      // Slick hair — persona accent (subtle, top-of-head only)
+      // Slicked-back hair — hemisphere tilted back: high hairline in front,
+      // full coverage at the nape
       const hairP1=new THREE.Mesh(
-        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.35),
+        new THREE.SphereGeometry(0.375,20,14,0,TAU,0,PI*0.5),
         hairMat
       );
-      hairP1.position.set(0,0.07,0); hairP1.scale.set(1,0.4,1); head.add(hairP1);
+      hairP1.position.set(0,0.03,-0.01); hairP1.rotation.x=-0.5; head.add(hairP1);
       break;
 
     case 'The Therapist': case 'SafetySam': // Glasses + clipboard / shield
@@ -766,12 +1063,12 @@ function buildCharacter(player, index){
       );
       board.position.set(-0.52,0.15,0.05); board.rotation.x=-0.2;
       g.add(board);
-      // Soft hair — bun (use player hair color)
+      // Soft hair — tilted-back hemisphere + bun
       const hairP2=new THREE.Mesh(
-        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.5),
+        new THREE.SphereGeometry(0.375,20,14,0,TAU,0,PI*0.5),
         hairMat
       );
-      hairP2.position.set(0,0.06,0); hairP2.scale.set(1,0.6,1); head.add(hairP2);
+      hairP2.position.set(0,0.03,-0.01); hairP2.rotation.x=-0.4; head.add(hairP2);
       // Bun
       const bun=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12),
         hairMat);
@@ -821,6 +1118,12 @@ function buildCharacter(player, index){
         new THREE.MeshStandardMaterial({color:0x7f8c8d})
       );
       knot.position.set(0,0.08,-0.32); head.add(knot);
+      // Bandana top cap — covers the crown so the head isn't bare
+      const bandanaTop=new THREE.Mesh(
+        new THREE.SphereGeometry(0.368,20,12,0,TAU,0,PI*0.32),
+        new THREE.MeshStandardMaterial({color:0x8a9797,roughness:0.5})
+      );
+      bandanaTop.position.set(0,0.03,0); head.add(bandanaTop);
       // Bigger arms (muscular)
       armL.scale.set(1.3,1.2,1.3); armR.scale.set(1.3,1.2,1.3);
       handL.scale.set(1.3,1.3,1.3); handR.scale.set(1.3,1.3,1.3);
@@ -862,12 +1165,12 @@ function buildCharacter(player, index){
       );
       screen.position.set(-0.5,0.18,0.09); screen.rotation.x=-0.15;
       g.add(screen);
-      // Neat combed hair (use player hair color)
+      // Neat combed hair — tilted-back hemisphere (use player hair color)
       const hairP5=new THREE.Mesh(
-        new THREE.SphereGeometry(0.365,16,12,0,TAU,0,PI*0.45),
+        new THREE.SphereGeometry(0.375,20,14,0,TAU,0,PI*0.5),
         hairMat
       );
-      hairP5.position.set(0,0.08,0); hairP5.scale.set(1,0.4,1.05); head.add(hairP5);
+      hairP5.position.set(0,0.03,-0.01); hairP5.rotation.x=-0.35; head.add(hairP5);
       // Side part
       const part=new THREE.Mesh(
         new THREE.BoxGeometry(0.15,0.03,0.1),
@@ -914,6 +1217,30 @@ function buildCharacter(player, index){
       g.rotation.x=-0.05;
       break;
   }
+
+  // === Beautification pass — hair volume + clothing trim ===
+  // Back-of-head hair shell (radius clearly outside the persona caps, same
+  // hair material, so caps merge seamlessly and no one looks bald from behind)
+  if (player.name !== 'The Chaos Agent' && player.name !== 'Twister') {
+    const hairBack=new THREE.Mesh(
+      new THREE.SphereGeometry(0.378,24,16,PI*0.88,PI*1.24,0,PI*0.55),
+      hairMat
+    );
+    hairBack.position.set(0,0.02,-0.005); hairBack.castShadow=true; head.add(hairBack);
+  }
+  // Fringe along the hairline — only for generic-hair characters
+  if (!personaHairChars.includes(player.name)) {
+    const fringe=new THREE.Mesh(
+      new THREE.SphereGeometry(0.372,24,12,PI*0.12,PI*0.76,0,PI*0.42),
+      hairMat
+    );
+    fringe.position.set(0,0.04,0.01); fringe.castShadow=true; head.add(fringe);
+  }
+  // Collar + belt trim — clothing reads as clothing
+  const collarTrim=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.035,8,24),accMat);
+  collarTrim.position.y=0.63; collarTrim.rotation.x=PI/2; g.add(collarTrim);
+  const belt=new THREE.Mesh(new THREE.TorusGeometry(0.335,0.04,8,24),accMat);
+  belt.position.y=0.16; belt.rotation.x=PI/2; g.add(belt);
 
   // === Base platform ===
   const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.58,metalness:0.04});
@@ -1038,12 +1365,16 @@ function renderAvatarPortrait(player, size = 128) {
 
   // Eyes
   const eyeWhiteMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.3});
-  const eyeGeo2 = new THREE.SphereGeometry(0.05, 16, 12);
+  const eyeGeo2 = new THREE.SphereGeometry(0.055, 16, 12);
   const eL = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eL.position.set(-0.12, 0.02, 0.32); eL.scale.set(1.2, 1, 0.6); head.add(eL);
   const eR = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eR.position.set(0.12, 0.02, 0.32); eR.scale.set(1.2, 1, 0.6); head.add(eR);
-  const pupilGeo = new THREE.SphereGeometry(0.02, 12, 8);
-  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 0.02, 0.36); head.add(pL);
-  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 0.02, 0.36); head.add(pR);
+  const irisMat = new THREE.MeshBasicMaterial({color:mixHexColors(player.color||0x8a6a4a, 0x1a1a2e, 0.35)});
+  const irisGeo = new THREE.CircleGeometry(0.033, 16);
+  const iL = new THREE.Mesh(irisGeo, irisMat); iL.position.set(-0.12, 0.02, 0.352); head.add(iL);
+  const iR = new THREE.Mesh(irisGeo, irisMat); iR.position.set(0.12, 0.02, 0.352); head.add(iR);
+  const pupilGeo = new THREE.SphereGeometry(0.028, 12, 8);
+  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 0.02, 0.362); head.add(pL);
+  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 0.02, 0.362); head.add(pR);
 
   // Nose
   const nose = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 8), skinMat);
@@ -1056,6 +1387,12 @@ function renderAvatarPortrait(player, size = 128) {
   // Chin
   const chin = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 8), skinMat);
   chin.position.set(0, -0.16, 0.28); chin.scale.set(1, 0.6, 0.8); head.add(chin);
+
+  // Blush cheeks
+  const blushMat = new THREE.MeshToonMaterial({color:0xe89080, gradientMap: TOON_GRADIENT_SOFT});
+  const blushGeo = new THREE.SphereGeometry(0.045, 10, 8);
+  const blushL = new THREE.Mesh(blushGeo, blushMat); blushL.position.set(-0.2, -0.05, 0.27); blushL.scale.set(1, 0.6, 0.35); head.add(blushL);
+  const blushR = new THREE.Mesh(blushGeo, blushMat); blushR.position.set(0.2, -0.05, 0.27); blushR.scale.set(1, 0.6, 0.35); head.add(blushR);
 
   // Shoulders/torso
   const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 24), bodyMat);
@@ -1178,28 +1515,68 @@ let theta = 0, phi = PI / 2.4;
 let dist = (innerWidth <= 768) ? 20 : 10;
 const targetV = new THREE.Vector3(0, 1.1, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
+let userInteracting = false; // true while mouse/touch drag is active — pauses auto-rotate
+let dragDist = 0; // pixels moved during current drag — used to suppress click-after-drag
 const DIST_MIN = 3, DIST_MAX = 40;
 
+const TARGET_MAX_RADIUS = 25; // keep the view target inside the village
+function clampTarget() {
+  const r = Math.hypot(targetV.x, targetV.z);
+  if (r > TARGET_MAX_RADIUS) {
+    targetV.x *= TARGET_MAX_RADIUS / r;
+    targetV.z *= TARGET_MAX_RADIUS / r;
+  }
+}
+
 function updateCam() {
-  const x = dist * sin(phi) * cos(theta);
-  const y = dist * cos(phi) + 0.5;
-  const z = dist * sin(phi) * sin(theta);
+  // Orbit around targetV (not the origin): panning moves camera and look-at
+  // point together, so the view direction stays fixed — a true parallel pan.
+  const x = targetV.x + dist * sin(phi) * cos(theta);
+  const y = targetV.y + dist * cos(phi) - 0.6; // -0.6 preserves the original default framing
+  const z = targetV.z + dist * sin(phi) * sin(theta);
   camera.position.set(x, y, z);
   camera.lookAt(targetV);
 }
 
+// Ground-plane pan (RTS style): screen-right → camera-right, screen-down →
+// camera-forward projected onto the floor. The view angle never changes.
+function panCameraGround(dx, dy, factor) {
+  const ps = factor * dist;
+  const right = new THREE.Vector3();
+  camera.getWorldDirection(right);
+  right.cross(new THREE.Vector3(0, 1, 0)).normalize(); // camera-right (always horizontal)
+  const fwd = new THREE.Vector3();
+  camera.getWorldDirection(fwd);
+  fwd.y = 0;
+  if (fwd.lengthSq() < 1e-6) fwd.set(0, 0, -1); else fwd.normalize();
+  targetV.addScaledVector(right, -dx * ps);
+  targetV.addScaledVector(fwd, dy * ps);
+  clampTarget();
+}
+
+function setAutoRotate(v) {
+  autoRotate = v;
+  const btn = document.getElementById('btn-rotate');
+  if (btn) btn.classList.toggle('active', v);
+}
+
 function setupCameraControls() {
-  canvas.addEventListener('mousedown', e => { isDrag = true; isPan = e.button === 2; px = e.clientX; py = e.clientY; });
-  window.addEventListener('mouseup', () => { isDrag = false; isPan = false; });
+  // Debug/testing hook — read live camera state from the console
+  window.__cam = () => ({ theta, phi, dist, autoRotate, camFollow, followSuspended, isDrag, dragDist, userInteracting, intro: !!introAnim, speaker: speakerFocusIndex, phase: currentPhase, target: [targetV.x, targetV.y, targetV.z], camY: camera.position.y });
+  canvas.addEventListener('mousedown', e => { isDrag = true; isPan = e.button === 2; px = e.clientX; py = e.clientY; userInteracting = true; dragDist = 0; introAnim = null; speakerCameraAnim = null; });
+  window.addEventListener('mouseup', () => { isDrag = false; isPan = false; userInteracting = false; });
   window.addEventListener('mousemove', e => {
     if (!isDrag) return;
     const dx = e.clientX - px, dy = e.clientY - py; px = e.clientX; py = e.clientY;
+    dragDist += Math.abs(dx) + Math.abs(dy);
+    // First real drag takes manual control — stop auto-rotate and suspend
+    // story camera-follow so the view stays where the user leaves it
+    if (dragDist > 4) {
+      if (autoRotate) setAutoRotate(false);
+      followSuspended = true;
+    }
     if (isPan) {
-      const ps = 0.01 * dist;
-      const right = new THREE.Vector3(); camera.getWorldDirection(right);
-      right.cross(new THREE.Vector3(0, 1, 0)).normalize();
-      targetV.addScaledVector(right, -dx * ps);
-      targetV.addScaledVector(new THREE.Vector3(0, 1, 0), dy * ps);
+      panCameraGround(dx, dy, 0.01);
     } else {
       theta -= dx * 0.008; phi -= dy * 0.008;
       phi = Math.max(0.02, Math.min(PI / 2.05, phi));
@@ -1219,6 +1596,9 @@ function setupCameraControls() {
 
   canvas.addEventListener('touchstart', e => {
     e.preventDefault();
+    userInteracting = true;
+    introAnim = null; // any touch cancels the intro flight immediately
+    speakerCameraAnim = null; // and any in-progress speaker flight
     if (e.touches.length === 1) {
       touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY, startX: e.touches[0].clientX, startY: e.touches[0].clientY, lastX: e.touches[0].clientX, lastY: e.touches[0].clientY };
     } else if (e.touches.length === 2) {
@@ -1248,6 +1628,8 @@ function setupCameraControls() {
       touchState.y0 = cy;
       touchState.lastX = cx;
       touchState.lastY = cy;
+      if (autoRotate) setAutoRotate(false); // first touch-drag takes manual control
+      followSuspended = true;
       theta -= dx * 0.008;
       phi -= dy * 0.008;
       phi = Math.max(0.02, Math.min(PI / 2.05, phi));
@@ -1259,16 +1641,12 @@ function setupCameraControls() {
       const scale = touchState.dist0 / newDist;
       dist = Math.max(DIST_MIN, Math.min(DIST_MAX, touchState.startDist * scale));
 
-      // Two-finger drag also pans target
+      // Two-finger drag also pans the view target across the floor
       const newMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
       const newMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
       const panDx = newMidX - touchState.midX;
       const panDy = newMidY - touchState.midY;
-      const ps = 0.008 * dist;
-      const right = new THREE.Vector3(); camera.getWorldDirection(right);
-      right.cross(new THREE.Vector3(0, 1, 0)).normalize();
-      targetV.addScaledVector(right, -panDx * ps);
-      targetV.addScaledVector(new THREE.Vector3(0, 1, 0), panDy * ps);
+      panCameraGround(panDx, panDy, 0.008);
       touchState.midX = newMidX;
       touchState.midY = newMidY;
 
@@ -1291,6 +1669,7 @@ function setupCameraControls() {
         }
       }
       touchState = null;
+      userInteracting = false;
     }
     else if (e.touches.length === 1) {
       touchState = { mode: 'rotate', x0: e.touches[0].clientX, y0: e.touches[0].clientY };
@@ -1350,6 +1729,7 @@ function setupCameraControls() {
   // Dedicated click / double-click handler (fixes: mousemove e.detail fires spuriously)
   let clickTimer = null;
   canvas.addEventListener('click', e => {
+    if (dragDist > 6) return; // that was a camera drag, not a tap on a character
     const rect = canvas.getBoundingClientRect();
     mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -1410,7 +1790,7 @@ function updateKeyboardPan() {
   if (keys['s'] || keys['arrowdown']) { targetV.addScaledVector(forward, -panSpeed); moved = true; }
   if (keys['a'] || keys['arrowleft']) { targetV.addScaledVector(right, -panSpeed); moved = true; }
   if (keys['d'] || keys['arrowright']) { targetV.addScaledVector(right, panSpeed); moved = true; }
-  if (moved) updateCam();
+  if (moved) { clampTarget(); updateCam(); }
 }
 
 // ===== Night Mode (with smooth transition) =====
@@ -1420,12 +1800,14 @@ const NIGHT_PRESETS = {
   // platform into the bright day fog and looked like a large white reflection,
   // especially at wider zoom levels.
   day: {
-    bg:0xa8c0d8, fogColor:0x465766, fogNear:60, fogFar:100,
-    amb:1.05, dir:1.15, dirColor:0xfff5df, moon:0, candle:0, flame:0
+    bg:0x8fb4d4, fogColor:0xc8d8e8, fogNear:40, fogFar:100,
+    amb:1.25, dir:1.3, dirColor:0xfff5df, moon:0, candle:0, flame:0,
+    skyMix:0, ground:0xdcdcd2, winOpacity:0.12,
   },
   night: {
-    bg:0x0a0a18, fogColor:0x0a0a18, fogNear:14, fogFar:32,
-    amb:0.30, dir:0.38, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5
+    bg:0x0a0a18, fogColor:0x0a0a18, fogNear:18, fogFar:52,
+    amb:0.30, dir:0.38, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5,
+    skyMix:1, ground:0x4a5a50, winOpacity:0.8,
   },
 };
 
@@ -1440,6 +1822,11 @@ function setNight(n) {
     flame: flame.material.emissiveIntensity,
     fogR: scene.fog.color.r, fogG: scene.fog.color.g, fogB: scene.fog.color.b,
     fogNear: scene.fog.near, fogFar: scene.fog.far,
+    skyMix: skyUniforms ? skyUniforms.uNightMix.value : (n ? 0 : 1),
+    groundR: envGround ? envGround.material.color.r : 0,
+    groundG: envGround ? envGround.material.color.g : 0,
+    groundB: envGround ? envGround.material.color.b : 0,
+    winOpacity: (window.__houseWinMats && window.__houseWinMats[0]) ? window.__houseWinMats[0].opacity : 0,
   };
   nightTransition = { from, target, startTime: performance.now(), duration: 600 };
 
@@ -1484,6 +1871,24 @@ function updateNightTransition() {
   moonPoint.intensity = f.moon + (tgt.moon - f.moon) * e;
   candlePoint.intensity = f.candle + (tgt.candle - f.candle) * e;
   flame.material.emissiveIntensity = f.flame + (tgt.flame - f.flame) * e;
+
+  // Sky shader blend + environment ground tint + house window glow
+  if (skyUniforms) {
+    const skyMixV = f.skyMix + (tgt.skyMix - f.skyMix) * e;
+    skyUniforms.uNightMix.value = skyMixV;
+    if (daySkyMat) daySkyMat.opacity = 1 - skyMixV;
+  }
+  if (envGround) {
+    const gT = tgt.ground;
+    envGround.material.color.setRGB(
+      f.groundR + (((gT >> 16 & 0xff)/255) - f.groundR) * e,
+      f.groundG + (((gT >> 8 & 0xff)/255) - f.groundG) * e,
+      f.groundB + (((gT & 0xff)/255) - f.groundB) * e
+    );
+  }
+  if (window.__houseWinMats) {
+    for (const m of window.__houseWinMats) m.opacity = f.winOpacity + (tgt.winOpacity - f.winOpacity) * e;
+  }
 
   if (t >= 1) nightTransition = null;
 }
@@ -1970,8 +2375,14 @@ function highlightCharacter(index, active) {
 // ===== Day Speaker Focus =====
 let speakerFocusIndex = -1;
 let speakerCameraAnim = null;
+// Cinematic story-follow: the camera flies to each speaker as the game
+// progresses. Any manual drag suspends it; the next phase change (or the
+// Auto button) re-engages it so the camera keeps rolling with the story.
+let camFollow = true;
+let followSuspended = false;
 
 function focusSpeakerCamera(index) {
+  if (!camFollow || followSuspended) return;
   const seatAngle = (index / 6) * TAU - PI / 2;
   const desiredTheta = seatAngle + PI - 0.55;
   const delta = Math.atan2(
@@ -2479,6 +2890,7 @@ function buildCenterCards() {
 // ===== Phase Management =====
 function setPhase(phase) {
   currentPhase = phase;
+  followSuspended = false; // story progression re-engages the cinematic camera
   document.getElementById('panel-content').dataset.panelView = 'phase';
   // Update timeline UI
   document.querySelectorAll('.phase-step').forEach(el => {
@@ -4340,8 +4752,8 @@ function setupUI() {
   });
 
   document.getElementById('btn-rotate').addEventListener('click', e => {
-    autoRotate = !autoRotate;
-    e.currentTarget.classList.toggle('active', autoRotate);
+    setAutoRotate(!autoRotate);
+    if (autoRotate) followSuspended = false; // Auto doubles as "resume cinematic follow"
   });
 
   document.getElementById('btn-archive').addEventListener('click', () => {
@@ -4702,6 +5114,14 @@ function updateIntroAnim() {
 }
 
 // ===== Animation Loop =====
+// Full-screen overlays (rules / story mode) swallow all canvas mouse events.
+// While one is open the scene must sit still — otherwise the user sees the
+// world rotating on its own while their drags do nothing ("broken mouse").
+function modalBlocksScene() {
+  return document.getElementById('rules-overlay').classList.contains('visible')
+    || document.getElementById('story-mode').classList.contains('visible');
+}
+
 function animate() {
   requestAnimationFrame(animate);
   const t = performance.now() * 0.001;
@@ -4734,12 +5154,13 @@ function animate() {
 
   // Intro animation (overrides auto-rotate)
   if (introAnim && !introAnim.done) { updateIntroAnim(); }
-  else if (speakerFocusIndex >= 0 && currentPhase === 'day') { updateSpeakerCamera(tMs); }
-  else if (autoRotate) { theta += 0.003; updateCam(); }
+  else if (speakerFocusIndex >= 0 && currentPhase === 'day' && !userInteracting) { updateSpeakerCamera(tMs); }
+  else if (autoRotate && !userInteracting && !modalBlocksScene()) { theta += 0.003; updateCam(); }
 
   // Night/day light transition
   updateNightTransition();
   updateParticles(t);
+  updateEnvironment(t);
 
   // Per-frame updates for overlays
   updateKeyboardPan();
