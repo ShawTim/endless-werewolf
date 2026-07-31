@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 
-const CACHE_VERSION = '20260731-village-sky-7';
+const CACHE_VERSION = '20260731-village-sky-9';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -97,6 +97,7 @@ let gameLoadVersion = 0;
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
 let skyUniforms, envGround, flameGlow, daySkyMat;
 let mistSprites = [];
+let clouds = [], smokePuffs = [];
 let composer, renderPass, bloomPass, smaaPass;
 let chars = [];
 let isNight = false;
@@ -665,6 +666,13 @@ function buildEnvironment() {
     house.position.set(cos(hs.a) * hs.r, -0.6, sin(hs.a) * hs.r);
     house.lookAt(0, -0.6, 0);
     scene.add(house);
+    // Record chimney-top world positions for the smoke particle columns
+    if (hs.ch) {
+      const top = new THREE.Vector3(hs.w * 0.28, hs.h + hs.h * 0.42 + 0.35, 0);
+      house.updateMatrixWorld(true);
+      house.localToWorld(top);
+      initSmokeColumn(top);
+    }
   }
 
   // Inner pines — scattered between plaza edge and houses
@@ -710,6 +718,40 @@ function buildEnvironment() {
   }
 }
 
+function makeSmokeTexture() {
+  // Denser, lumpier blob than the mist texture — smoke needs real presence
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 128;
+  const ctx = c.getContext('2d');
+  const lumps = [[64, 70, 44], [44, 60, 30], [86, 58, 28], [58, 46, 26]];
+  for (const [x, y, r] of lumps) {
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, 'rgba(235,235,242,0.72)');
+    grad.addColorStop(0.55, 'rgba(225,225,235,0.34)');
+    grad.addColorStop(0.85, 'rgba(220,220,230,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 128, 128);
+  }
+  return new THREE.CanvasTexture(c);
+}
+
+function initSmokeColumn(base) {
+  // A looping column of soft puffs rising from a chimney
+  const tex = makeSmokeTexture();
+  for (let i = 0; i < 6; i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: tex, color: 0xd0d0da, transparent: true, opacity: 0, depthWrite: false,
+    }));
+    sp.userData = {
+      base, phase: i / 6,
+      driftX: (Math.random() - 0.5) * 0.9, driftZ: (Math.random() - 0.5) * 0.9,
+      op: 0.55 + Math.random() * 0.15,
+    };
+    smokePuffs.push(sp);
+    scene.add(sp);
+  }
+}
+
 function makeMistTexture() {
   const c = document.createElement('canvas');
   c.width = 128; c.height = 128;
@@ -732,6 +774,29 @@ function updateEnvironment(t) {
     const target = isNight ? ud.op : 0.02;
     m.material.opacity += (target - m.material.opacity) * 0.03;
   }
+  // Drifting clouds — day only
+  for (const cl of clouds) {
+    const ud = cl.userData;
+    const a = ud.a0 + t * ud.speed;
+    cl.position.set(cos(a) * ud.r, ud.y, sin(a) * ud.r);
+    const target = isNight ? 0 : ud.op;
+    cl.material.opacity += (target - cl.material.opacity) * 0.02;
+  }
+  // Chimney smoke — always on, dimmer at night
+  for (const sm of smokePuffs) {
+    const ud = sm.userData;
+    const cycle = (t * 0.09 + ud.phase) % 1; // 0 birth → 1 gone
+    sm.position.set(
+      ud.base.x + ud.driftX * cycle + sin(t * 0.8 + ud.phase * 9) * 0.15 * cycle,
+      ud.base.y + cycle * 2.8,
+      ud.base.z + ud.driftZ * cycle,
+    );
+    const s = 0.35 + cycle * 1.9;
+    sm.scale.set(s, s * 0.8, 1);
+    // Quick fade-in keeps the column attached to the chimney; slow fade-out
+    const target = Math.min(cycle * 8, 1) * (1 - cycle) * ud.op * (isNight ? 0.45 : 1);
+    sm.material.opacity += (target - sm.material.opacity) * 0.1;
+  }
   if (flameGlow) {
     const target = isNight ? 0.55 : 0;
     const base = (flameGlow.userData.base ?? 0) + (target - (flameGlow.userData.base ?? 0)) * 0.05;
@@ -743,7 +808,7 @@ function updateEnvironment(t) {
 
 function initParticles() {
   // ---- Fireflies (night) ----
-  const ffCount = 28;
+  const ffCount = 36;
   const ffGeo = new THREE.BufferGeometry();
   const ffPos = new Float32Array(ffCount * 3);
   const ffPhase = new Float32Array(ffCount);
@@ -759,7 +824,7 @@ function initParticles() {
   }
   ffGeo.setAttribute('position', new THREE.BufferAttribute(ffPos, 3));
   const ffMat = new THREE.PointsMaterial({
-    color: 0xFFE066, size: 0.09, transparent: true, opacity: 0,
+    color: 0xFFE066, size: 0.13, transparent: true, opacity: 0,
     blending: THREE.AdditiveBlending, depthWrite: false,
     map: makeGlowTexture(),
   });
@@ -788,6 +853,53 @@ function initParticles() {
   dustMotes = new THREE.Points(dmGeo, dmMat);
   dustMotes.userData = { vels: dmVel, count: dmCount };
   scene.add(dustMotes);
+
+  // ---- Drifting clouds (day) ----
+  const cloudTex = makeCloudTexture();
+  for (let i = 0; i < 7; i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: cloudTex, transparent: true, opacity: 0, depthWrite: false, fog: false,
+      rotation: (Math.random() - 0.5) * 0.3,
+    }));
+    sp.scale.set(13 + Math.random() * 9, 4.5 + Math.random() * 2.5, 1);
+    sp.userData = {
+      a0: Math.random() * TAU,
+      r: 26 + Math.random() * 16,
+      y: 15 + Math.random() * 9,
+      speed: (0.004 + Math.random() * 0.005) * (Math.random() > 0.5 ? 1 : -1),
+      op: 0.42 + Math.random() * 0.22,
+    };
+    clouds.push(sp);
+    scene.add(sp);
+  }
+}
+
+function makeCloudTexture() {
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 192;
+  const ctx = c.getContext('2d');
+  // Cluster of soft elliptical puffs → one fluffy cloud sprite.
+  // All gradients must fade to 0 well inside the canvas or the sprite shows
+  // a visible rectangular edge in the sky.
+  const puffs = [
+    [128, 108, 58, 30], [82, 116, 40, 24], [176, 116, 42, 24],
+    [106, 88, 32, 24], [152, 84, 34, 26],
+  ];
+  for (const [x, y, rx, ry] of puffs) {
+    const r = Math.max(rx, ry);
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, 'rgba(255,255,255,0.55)');
+    grad.addColorStop(0.55, 'rgba(255,255,255,0.26)');
+    grad.addColorStop(0.85, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(rx / r, ry / r);
+    ctx.translate(-x, -y);
+    ctx.fillRect(0, 0, 256, 192);
+    ctx.restore();
+  }
+  return new THREE.CanvasTexture(c);
 }
 
 function makeGlowTexture() {
@@ -1801,7 +1913,7 @@ const NIGHT_PRESETS = {
   // especially at wider zoom levels.
   day: {
     bg:0x8fb4d4, fogColor:0xc8d8e8, fogNear:40, fogFar:100,
-    amb:1.25, dir:1.3, dirColor:0xfff5df, moon:0, candle:0, flame:0,
+    amb:1.25, dir:1.3, dirColor:0xffe2ae, moon:0, candle:0, flame:0,
     skyMix:0, ground:0xdcdcd2, winOpacity:0.12,
   },
   night: {
@@ -2432,6 +2544,14 @@ function updateSpeakerCamera(t) {
 
 function updateSpeakerFocus() {
   if (speakerFocusIndex < 0 || !chars[speakerFocusIndex]) return;
+  // Pulse the speaker's highlight ring so the current speaker pops
+  const hl = chars[speakerFocusIndex].userData.highlight;
+  if (hl) {
+    const tp = performance.now() * 0.001;
+    hl.material.opacity = 0.45 + 0.25 * sin(tp * 4.2);
+    const s = 1 + 0.09 * sin(tp * 4.2);
+    hl.scale.set(s, s, 1);
+  }
   const pos = sp(speakerFocusIndex);
   const v = new THREE.Vector3(pos[0], pos[1] + 0.85, pos[2]);
   v.project(camera);
