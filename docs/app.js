@@ -156,6 +156,197 @@ function makeFabricBumpMap() {
 }
 const FABRIC_BUMP = makeFabricBumpMap();
 
+// ===== Figure proportions =====
+// Shared by the main scene, the portrait renderer and the gallery viewer so the
+// three stay in sync. The original build had a 1.31:1 head-to-torso ratio
+// (head = 42% of figure height) with the head sunk straight into the torso;
+// these bring it to roughly 34% with a neck between.
+const HEAD_Y = 1.15;      // head-group centre (was 0.98)
+const HEAD_S = 0.86;      // head scale
+const TORSO_H = 0.69;     // tapered torso height (was 0.55)
+const TORSO_Y = 0.42;     // torso centre (was 0.35)
+const NECK_Y = 0.80;
+
+// ===== Face texture =====
+// The face is painted once into a canvas and mapped onto the head sphere,
+// instead of being assembled from ~16 floating primitives (eye discs, pupil
+// spheres, a cone nose, a torus mouth, brow boxes, blush balls). A drawn face
+// holds up both at the ~40px the characters occupy during play and at gallery
+// close-up, and it deletes more meshes than it adds.
+//
+// UV convention: on THREE.SphereGeometry the character's forward (+Z) axis is
+// u = 0.25, and v = 1 is the crown — so the canvas top row is the top of the
+// head. The head group is scaled at runtime, but UVs are scale-independent, so
+// every constant below is in the original head-local units (radius 0.36).
+const FACE_STYLES = {
+  'The Prosecutor':   { browTilt:  0.30, mouth: -0.10, eye: 0.94 }, // stern
+  'Blaze':            { browTilt:  0.30, mouth: -0.10, eye: 0.94 },
+  'The Therapist':    { browTilt:  0.00, mouth:  0.22, eye: 1.00 },
+  'SafetySam':        { browTilt:  0.00, mouth:  0.22, eye: 1.00 },
+  'The Chaos Agent':  { browTilt: -0.26, mouth:  0.60, eye: 1.06 }, // manic grin
+  'Twister':          { browTilt: -0.26, mouth:  0.60, eye: 1.06 },
+  'The Gut Player':   { browTilt:  0.34, mouth: -0.06, eye: 0.92 }, // suspicious
+  'ConspiBro':        { browTilt:  0.34, mouth: -0.06, eye: 0.92 },
+  'The Statistician': { browTilt:  0.06, mouth:  0.12, eye: 1.00 },
+  'Dr. Pizza':        { browTilt:  0.06, mouth:  0.12, eye: 1.00 },
+  'The Underdog':     { browTilt: -0.22, mouth:  0.06, eye: 1.08 }, // wide-eyed, worried
+  'EasyBake':         { browTilt: -0.22, mouth:  0.06, eye: 1.08 },
+};
+
+function makeFaceTexture(player) {
+  const W = 1024, H = 512;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+
+  const hex = (v) => '#' + (v >>> 0).toString(16).padStart(6, '0');
+  const cl = (v, a, b) => Math.min(b, Math.max(a, v));
+  const R = 0.36;
+  const S = W / (TAU * R);            // px per head-local unit at the equator
+  const FRONT = W * 0.25;             // u = 0.25 is the character's +Z side
+  const yPix = (y) => (Math.acos(cl(y / R, -1, 1)) / PI) * H;
+  const xPix = (x, y) => {
+    const z = Math.sqrt(Math.max(0, R * R - x * x - y * y));
+    return FRONT + (Math.atan2(x, z) / TAU) * W;
+  };
+
+  const skinHex  = player.skin ?? 0xd4a574;
+  const accent   = player.color ?? 0x8a6a4a;
+  const irisBase = mixHexColors(accent, 0x1a1a2e, 0.35);
+  const ink      = hex(mixHexColors(player.hair ?? 0x2a1a0a, 0x000000, 0.45));
+  const iris     = hex(irisBase);
+  const irisLit  = hex(mixHexColors(irisBase, 0xffffff, 0.38));
+  const irisDeep = hex(mixHexColors(irisBase, 0x000000, 0.45));
+
+  ctx.fillStyle = hex(skinHex);
+  ctx.fillRect(0, 0, W, H);
+
+  // Soft vertical falloff so the painted skin is not one flat fill once the
+  // toon gradient multiplies it.
+  const skinGrad = ctx.createLinearGradient(0, yPix(0.34), 0, yPix(-0.34));
+  skinGrad.addColorStop(0.00, 'rgba(255,238,220,0.30)');
+  skinGrad.addColorStop(0.55, 'rgba(255,238,220,0)');
+  skinGrad.addColorStop(1.00, 'rgba(110,60,40,0.16)');
+  ctx.fillStyle = skinGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  const st = FACE_STYLES[player.name] || { browTilt: 0, mouth: 0.10, eye: 1.0 };
+
+  // --- blush ---
+  for (const s of [-1, 1]) {
+    const bx = xPix(s * 0.205, -0.055), by = yPix(-0.055);
+    const g = ctx.createRadialGradient(bx, by, 0, bx, by, 0.10 * S);
+    g.addColorStop(0, 'rgba(226,132,116,0.32)');
+    g.addColorStop(1, 'rgba(226,132,116,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(bx, by, 0.10 * S, 0, TAU); ctx.fill();
+  }
+
+  // --- nose: a soft cel shadow rather than a geometry wedge ---
+  {
+    const nx = xPix(0, -0.05), ny = yPix(-0.062);
+    ctx.fillStyle = 'rgba(120,64,44,0.18)';
+    ctx.beginPath(); ctx.ellipse(nx, ny, 0.031 * S, 0.023 * S, 0, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(96,50,34,0.40)';
+    ctx.lineWidth = 0.011 * S;
+    ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.arc(nx, ny - 0.010 * S, 0.027 * S, 0.16 * PI, 0.84 * PI); ctx.stroke();
+  }
+
+  // --- mouth ---
+  {
+    const mx = xPix(0, -0.130), my = yPix(-0.130);
+    const halfW = 0.066 * S;
+    const lift = st.mouth * 0.05 * S;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'rgba(122,58,52,0.92)';
+    ctx.lineWidth = 0.016 * S;
+    ctx.beginPath();
+    ctx.moveTo(mx - halfW, my - lift * 0.35);
+    ctx.quadraticCurveTo(mx, my + lift, mx + halfW, my - lift * 0.35);
+    ctx.stroke();
+    if (st.mouth > 0.35) {
+      // Slightly open grin for the wildcard personas.
+      ctx.fillStyle = 'rgba(70,28,30,0.92)';
+      ctx.beginPath();
+      ctx.moveTo(mx - halfW * 0.86, my - lift * 0.30);
+      ctx.quadraticCurveTo(mx, my + lift * 1.5, mx + halfW * 0.86, my - lift * 0.30);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = 'rgba(255,252,248,0.95)';
+      ctx.fillRect(mx - halfW * 0.70, my - lift * 0.32, halfW * 1.40, 0.017 * S);
+    } else {
+      ctx.strokeStyle = 'rgba(255,225,210,0.28)';
+      ctx.lineWidth = 0.010 * S;
+      ctx.beginPath();
+      ctx.moveTo(mx - halfW * 0.70, my + lift * 0.50 + 0.020 * S);
+      ctx.quadraticCurveTo(mx, my + lift + 0.029 * S, mx + halfW * 0.70, my + lift * 0.50 + 0.020 * S);
+      ctx.stroke();
+    }
+  }
+
+  // --- eyes + brows ---
+  for (const s of [-1, 1]) {
+    const ex = xPix(s * 0.125, 0.025), ey = yPix(0.025);
+    const rx = 0.070 * st.eye * S;
+    const ry = 0.060 * st.eye * S;
+
+    // lid shadow
+    ctx.fillStyle = 'rgba(120,66,46,0.15)';
+    ctx.beginPath(); ctx.ellipse(ex, ey - ry * 0.52, rx * 1.02, ry * 0.72, 0, 0, TAU); ctx.fill();
+
+    // sclera
+    ctx.fillStyle = '#fffaf4';
+    ctx.beginPath(); ctx.ellipse(ex, ey, rx, ry, 0, 0, TAU); ctx.fill();
+
+    // iris
+    const ig = ctx.createRadialGradient(ex, ey - ry * 0.15, ry * 0.10, ex, ey, rx * 0.62);
+    ig.addColorStop(0, irisLit);
+    ig.addColorStop(0.62, iris);
+    ig.addColorStop(1, irisDeep);
+    ctx.fillStyle = ig;
+    ctx.beginPath(); ctx.ellipse(ex, ey, rx * 0.60, ry * 0.74, 0, 0, TAU); ctx.fill();
+
+    // pupil
+    ctx.fillStyle = '#120e14';
+    ctx.beginPath(); ctx.ellipse(ex, ey, rx * 0.28, ry * 0.40, 0, 0, TAU); ctx.fill();
+
+    // catchlights
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.beginPath(); ctx.arc(ex - rx * 0.30, ey - ry * 0.34, rx * 0.19, 0, TAU); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.beginPath(); ctx.arc(ex + rx * 0.30, ey + ry * 0.30, rx * 0.10, 0, TAU); ctx.fill();
+
+    // upper lash line
+    ctx.strokeStyle = ink;
+    ctx.lineCap = 'round';
+    ctx.lineWidth = ry * 0.34;
+    ctx.beginPath(); ctx.ellipse(ex, ey, rx, ry, 0, 1.06 * PI, 1.94 * PI); ctx.stroke();
+
+    // lower lid
+    ctx.strokeStyle = 'rgba(150,90,70,0.32)';
+    ctx.lineWidth = ry * 0.16;
+    ctx.beginPath(); ctx.ellipse(ex, ey, rx * 0.96, ry * 0.96, 0, 0.12 * PI, 0.88 * PI); ctx.stroke();
+
+    // brow — the tilt is what gives each persona its expression
+    const bxx = xPix(s * 0.128, 0.115), byy = yPix(0.115);
+    const halfB = 0.062 * S;
+    const innerX = bxx - s * halfB;
+    const outerX = bxx + s * halfB;
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 0.019 * S;
+    ctx.beginPath();
+    ctx.moveTo(innerX, byy + st.browTilt * halfB * 1.25);
+    ctx.quadraticCurveTo((innerX + outerX) / 2, byy - halfB * 0.55, outerX, byy - st.browTilt * halfB * 0.60);
+    ctx.stroke();
+  }
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  tex.needsUpdate = true;
+  return tex;
+}
+
 // Cel-shaded rim-light shader chunk — injects a stepped fresnel term into MeshToonMaterial
 // This is a discrete (cel) rim, not a smooth fresnel — it produces a hard light edge
 function applyToonRim(material, rimColor = 0xfff0c8, rimPower = 2.5, rimStrength = 0.45) {
@@ -1165,39 +1356,48 @@ function buildCharacter(player, index){
   applyToonRim(accMat, 0xffe0a0, 2.8, 0.28);
 
   // === Torso ===
-  // Tapered body — wider at shoulders, narrower at waist
+  // Taller than the original 0.55 so the head stops dominating the silhouette,
+  // and finished with a neck + collar so the head no longer sinks into the body.
   const torso=new THREE.Mesh(
-    new THREE.CylinderGeometry(0.28,0.35,0.55,24),
+    new THREE.CylinderGeometry(0.28,0.35,TORSO_H,24),
     bodyMat
   );
-  torso.position.y=0.35; torso.castShadow=true; g.add(torso);
+  torso.position.y=TORSO_Y; torso.castShadow=true; g.add(torso);
   addOutline(torso, 1.035);
+
+  // Neck — bridges torso top to head, removing the old bare intersection
+  const neck=new THREE.Mesh(
+    new THREE.CylinderGeometry(0.135,0.165,0.24,16),
+    skinMat
+  );
+  neck.position.y=NECK_Y; neck.castShadow=true; g.add(neck);
 
   // Shoulders — slight width
   const shoulders=new THREE.Mesh(
     new THREE.SphereGeometry(0.3,24,16),
     bodyMat
   );
-  shoulders.position.y=0.58; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
+  shoulders.position.y=0.65; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
   addOutline(shoulders, 1.025);
 
-  // === Arms === (sleeves in accent color, hands in skin)
+  // === Arms === (sleeves in accent color, hands in skin). Raised with the taller
+  // torso so they still hang from the shoulder line rather than mid-body.
   const armL=limb(0.09,0.35,player.accent);
-  armL.position.set(-0.38,0.4,0);
+  armL.position.set(-0.38,0.50,0);
   armL.rotation.z=0.15;
   g.add(armL);
   addOutline(armL, 1.04);
   const armR=limb(0.09,0.35,player.accent);
-  armR.position.set(0.38,0.4,0);
+  armR.position.set(0.38,0.50,0);
   armR.rotation.z=-0.15;
   g.add(armR);
   addOutline(armR, 1.04);
 
   // Hands
   const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
-  handL.position.set(-0.48,0.2,0); handL.castShadow=true; g.add(handL);
+  handL.position.set(-0.48,0.30,0); handL.castShadow=true; g.add(handL);
   const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
-  handR.position.set(0.48,0.2,0); handR.castShadow=true; g.add(handR);
+  handR.position.set(0.48,0.30,0); handR.castShadow=true; g.add(handR);
 
   // === Legs === (pants in deep accent color)
   const legL=limb(0.12,0.3,player.accent);
@@ -1209,9 +1409,14 @@ function buildCharacter(player, index){
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
-  head.position.y=0.98; g.add(head);
+  head.position.y=HEAD_Y; head.scale.setScalar(HEAD_S); g.add(head);
 
-  const headSphere=new THREE.Mesh(new THREE.SphereGeometry(0.36,32,24),skinMat);
+  // The face is painted into a texture, so the head is a single mesh. The old
+  // build spent ~16 meshes on separate eye/nose/mouth/brow/blush primitives.
+  const headSphere=new THREE.Mesh(
+    new THREE.SphereGeometry(0.36,48,32),
+    new THREE.MeshToonMaterial({ color:0xffffff, map:makeFaceTexture(player), gradientMap:TOON_GRADIENT_SOFT })
+  );
   headSphere.castShadow=true; head.add(headSphere);
   addOutline(headSphere, 1.018);
 
@@ -1225,70 +1430,16 @@ function buildCharacter(player, index){
     hairCap.position.y=0.01; hairCap.castShadow=true; head.add(hairCap);
   }
 
-  // Positions are local to head (world y - 0.98)
+  // Positions are local to the (scaled) head group
 
   // Ears
   const earGeo=new THREE.SphereGeometry(0.06,16,10);
-  const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,-0.01,0); earL.scale.set(0.5,1,0.8); head.add(earL);
-  const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,-0.01,0); earR.scale.set(0.5,1,0.8); head.add(earR);
+  const earL=new THREE.Mesh(earGeo,skinMat); earL.position.set(-0.35,-0.01,0); earL.scale.set(0.5,1,0.8); earL.castShadow=true; head.add(earL);
+  const earR=new THREE.Mesh(earGeo,skinMat); earR.position.set(0.35,-0.01,0); earR.scale.set(0.5,1,0.8); earR.castShadow=true; head.add(earR);
 
-  // Eyebrows
-  const browGeo=new THREE.BoxGeometry(0.1,0.02,0.03);
-  const browL=new THREE.Mesh(browGeo,darkMat); browL.position.set(-0.12,0.07,0.32); browL.rotation.z=0.08; head.add(browL);
-  const browR=new THREE.Mesh(browGeo,darkMat); browR.position.set(0.12,0.07,0.32); browR.rotation.z=-0.08; head.add(browR);
-
-  // Eyes — whites with irises, pupils + highlight for life
-  const eyeWhiteMat=new THREE.MeshToonMaterial({color:0xffffff, gradientMap: TOON_GRADIENT});
-  const eyeGeo2=new THREE.SphereGeometry(0.055,16,12);
-  const eL=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eL.position.set(-0.12,0.02,0.32); eL.scale.set(1.2,1,0.6); head.add(eL);
-  const eR=new THREE.Mesh(eyeGeo2,eyeWhiteMat); eR.position.set(0.12,0.02,0.32); eR.scale.set(1.2,1,0.6); head.add(eR);
-  // Irises — tinted per player so the gaze reads at distance
-  const irisMat=new THREE.MeshBasicMaterial({color:mixHexColors(player.color||0x8a6a4a, 0x1a1a2e, 0.35)});
-  const irisGeo=new THREE.CircleGeometry(0.033,16);
-  const iL=new THREE.Mesh(irisGeo,irisMat); iL.position.set(-0.12,0.02,0.352); head.add(iL);
-  const iR=new THREE.Mesh(irisGeo,irisMat); iR.position.set(0.12,0.02,0.352); head.add(iR);
-  // Pupils (bigger, more cartoon)
-  const pupilGeo=new THREE.SphereGeometry(0.028,12,8);
-  const pL=new THREE.Mesh(pupilGeo,darkMat); pL.position.set(-0.12,0.02,0.362); head.add(pL);
-  const pR=new THREE.Mesh(pupilGeo,darkMat); pR.position.set(0.12,0.02,0.362); head.add(pR);
-  // Eye highlights (small white spheres for cartoon "shine")
-  const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-  const hlGeo = new THREE.SphereGeometry(0.012, 6, 6);
-  const hlL = new THREE.Mesh(hlGeo, hlMat); hlL.position.set(-0.105, 0.04, 0.388); head.add(hlL);
-  const hlR = new THREE.Mesh(hlGeo, hlMat); hlR.position.set(0.135, 0.04, 0.388); head.add(hlR);
-
-  // Nose — more defined
-  const nose=new THREE.Mesh(
-    new THREE.ConeGeometry(0.04,0.12,8),
-    skinMat
-  );
-  nose.position.set(0,-0.06,0.38); nose.rotation.x=PI/2; nose.scale.set(0.8,1,0.8); head.add(nose);
-
-  // Mouth — smile with lips
-  const smile=new THREE.Mesh(
-    new THREE.TorusGeometry(0.08,0.025,8,16,PI),
-    new THREE.MeshStandardMaterial({color:0x8B3A3A,roughness:0.4})
-  );
-  smile.position.set(0,-0.12,0.35); smile.rotation.z=PI; head.add(smile);
-  // Upper lip
-  const lipLine=new THREE.Mesh(
-    new THREE.BoxGeometry(0.12,0.01,0.02),
-    darkMat
-  );
-  lipLine.position.set(0,-0.1,0.36); head.add(lipLine);
-
-  // Chin
-  const chin=new THREE.Mesh(
-    new THREE.SphereGeometry(0.08,12,8),
-    skinMat
-  );
-  chin.position.set(0,-0.16,0.28); chin.scale.set(1,0.6,0.8); head.add(chin);
-
-  // Blush cheeks — soft cartoon warmth
-  const blushMat=new THREE.MeshToonMaterial({color:0xe89080, gradientMap: TOON_GRADIENT_SOFT});
-  const blushGeo=new THREE.SphereGeometry(0.045,10,8);
-  const blushL=new THREE.Mesh(blushGeo,blushMat); blushL.position.set(-0.2,-0.05,0.27); blushL.scale.set(1,0.6,0.35); head.add(blushL);
-  const blushR=new THREE.Mesh(blushGeo,blushMat); blushR.position.set(0.2,-0.05,0.27); blushR.scale.set(1,0.6,0.35); head.add(blushR);
+  // Eyes, brows, nose, mouth, chin and blush are painted into the head texture
+  // (see makeFaceTexture) — there are no face meshes to place here. Persona
+  // expression comes from FACE_STYLES, so the old smile/brow tweaks are gone.
 
   // === Persona-specific accessories ===
   switch(player.name){
@@ -1298,7 +1449,7 @@ function buildCharacter(player, index){
         new THREE.ConeGeometry(0.22,0.15,4),
         accMat
       );
-      collar.position.set(0,0.62,0.28); collar.rotation.x=PI; collar.rotation.y=PI/4;
+      collar.position.set(0,0.72,0.30); collar.rotation.x=PI; collar.rotation.y=PI/4;
       g.add(collar);
       // Tie
       const tie=new THREE.Mesh(
@@ -1392,8 +1543,7 @@ function buildCharacter(player, index){
       );
       mask.position.set(0.6,0.35,0.1); mask.scale.set(0.8,1,0.3);
       g.add(mask);
-      // Big grin (wider smile)
-      smile.geometry=new THREE.TorusGeometry(0.09,0.018,8,16,PI*1.1);
+      // The wide "wildcard" grin is painted by FACE_STYLES.
       break;
 
     case 'The Gut Player': case 'ConspiBro': // Bandana + muscular / suspicious
@@ -1420,8 +1570,8 @@ function buildCharacter(player, index){
       armL.scale.set(1.3,1.2,1.3); armR.scale.set(1.3,1.2,1.3);
       handL.scale.set(1.3,1.3,1.3); handR.scale.set(1.3,1.3,1.3);
       // Fist pose — both hands on table
-      handL.position.set(-0.35,0.05,0.15); armL.rotation.x=-0.5; armL.position.y=0.3;
-      handR.position.set(0.35,0.05,0.15); armR.rotation.x=-0.5; armR.position.y=0.3;
+      handL.position.set(-0.35,0.15,0.15); armL.rotation.x=-0.5; armL.position.y=0.42;
+      handR.position.set(0.35,0.15,0.15); armR.rotation.x=-0.5; armR.position.y=0.42;
       // Scar on cheek
       const scar=new THREE.Mesh(
         new THREE.BoxGeometry(0.02,0.06,0.01),
@@ -1502,9 +1652,7 @@ function buildCharacter(player, index){
         leaf.scale.set(1,1.5,0.5);
         g.add(leaf);
       }
-      // Worried eyebrows — adjust existing ones (local to head group)
-      browL.position.y=0.10; browL.rotation.z=-0.2;
-      browR.position.y=0.10; browR.rotation.z=0.2;
+      // Worried expression comes from FACE_STYLES (browTilt), not mesh tweaks
       // Nervous posture — slightly leaning back
       g.rotation.x=-0.05;
       break;
@@ -1515,7 +1663,7 @@ function buildCharacter(player, index){
   // hair material, so caps merge seamlessly and no one looks bald from behind)
   if (player.name !== 'The Chaos Agent' && player.name !== 'Twister') {
     const hairBack=new THREE.Mesh(
-      new THREE.SphereGeometry(0.378,24,16,PI*0.88,PI*1.24,0,PI*0.55),
+      new THREE.SphereGeometry(0.378,32,20,PI*0.88,PI*1.24,0,PI*0.55),
       hairMat
     );
     hairBack.position.set(0,0.02,-0.005); hairBack.castShadow=true; head.add(hairBack);
@@ -1523,21 +1671,24 @@ function buildCharacter(player, index){
   // Fringe along the hairline — only for generic-hair characters
   if (!personaHairChars.includes(player.name)) {
     const fringe=new THREE.Mesh(
-      new THREE.SphereGeometry(0.372,24,12,PI*0.12,PI*0.76,0,PI*0.42),
+      new THREE.SphereGeometry(0.372,32,16,PI*0.12,PI*0.76,0,PI*0.42),
       hairMat
     );
     fringe.position.set(0,0.04,0.01); fringe.castShadow=true; head.add(fringe);
   }
-  // Collar + belt trim — clothing reads as clothing
-  const collarTrim=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.035,8,24),accMat);
-  collarTrim.position.y=0.63; collarTrim.rotation.x=PI/2; g.add(collarTrim);
-  const belt=new THREE.Mesh(new THREE.TorusGeometry(0.335,0.04,8,24),accMat);
-  belt.position.y=0.16; belt.rotation.x=PI/2; g.add(belt);
+  // Collar + belt trim — clothing reads as clothing. The collar sits at the base
+  // of the new neck and the belt rides the taller torso.
+  const collarTrim=new THREE.Mesh(new THREE.TorusGeometry(0.175,0.038,10,40),accMat);
+  collarTrim.position.y=0.70; collarTrim.rotation.x=PI/2; g.add(collarTrim);
+  const belt=new THREE.Mesh(new THREE.TorusGeometry(0.335,0.04,10,48),accMat);
+  belt.position.y=0.20; belt.rotation.x=PI/2; g.add(belt);
 
   // === Base platform ===
+  // Segments raised from 24: these rims are right under the camera and were
+  // visibly faceted at close range.
   const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.58,metalness:0.04});
   const base=new THREE.Mesh(
-    new THREE.CylinderGeometry(0.5,0.55,0.08,24),
+    new THREE.CylinderGeometry(0.5,0.55,0.08,48),
     baseMat
   );
   base.position.y=-0.14; base.receiveShadow=true; g.add(base);
@@ -1547,7 +1698,7 @@ function buildCharacter(player, index){
     emissive:player.accent, emissiveIntensity:0.16
   });
   const ring=new THREE.Mesh(
-    new THREE.RingGeometry(0.5,0.58,24),
+    new THREE.RingGeometry(0.5,0.58,64),
     ringMat
   );
   ring.position.y=-0.09; ring.rotation.x=-PI/2; g.add(ring);
@@ -1555,7 +1706,7 @@ function buildCharacter(player, index){
   
   // Highlight ring (for active speaker)
   const highlight = new THREE.Mesh(
-    new THREE.RingGeometry(0.6, 0.7, 32),
+    new THREE.RingGeometry(0.6, 0.7, 64),
     new THREE.MeshBasicMaterial({ color: 0xe8c468, transparent: true, opacity: 0, side: THREE.DoubleSide })
   );
   highlight.position.y = -0.08; highlight.rotation.x = -PI / 2;
@@ -1611,8 +1762,10 @@ function renderAvatarPortrait(player, size = 128) {
   const avScene = new THREE.Scene();
   avScene.background = new THREE.Color(0x1a1520);
   const avCam = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
-  avCam.position.set(0, 1.0, 2.2);
-  avCam.lookAt(0, 0.98, 0);
+  // Framed off the shared head constant so raising the head can never leave the
+  // portrait aiming at the old neck height.
+  avCam.position.set(0, HEAD_Y + 0.02, 2.2);
+  avCam.lookAt(0, HEAD_Y, 0);
 
   const avAmb = new THREE.HemisphereLight(0xdce8ff, 0x8c674a, 0.9);
   avScene.add(avAmb);
@@ -1635,65 +1788,35 @@ function renderAvatarPortrait(player, size = 128) {
   accMat.bumpMap = FABRIC_BUMP;
   accMat.bumpScale = 0.014;
 
-  // Head — group so face features follow any future head animation
+  // Head — one textured mesh, matching the in-scene build (see makeFaceTexture)
   const head = new THREE.Group();
-  head.position.y = 0.98;
+  head.position.y = HEAD_Y;
+  head.scale.setScalar(HEAD_S);
   avScene.add(head);
 
-  const headSphere = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 32), skinMat);
+  const headSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.36, 48, 32),
+    new THREE.MeshToonMaterial({ color:0xffffff, map:makeFaceTexture(player), gradientMap:TOON_GRADIENT_SOFT })
+  );
   head.add(headSphere);
-
-  // Positions are local to head (world y - 0.98)
 
   // Ears
   const earGeo = new THREE.SphereGeometry(0.06, 16, 10);
   const earL = new THREE.Mesh(earGeo, skinMat); earL.position.set(-0.35, -0.01, 0); earL.scale.set(0.5, 1, 0.8); head.add(earL);
   const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, -0.01, 0); earR.scale.set(0.5, 1, 0.8); head.add(earR);
 
-  // Eyebrows
-  const browGeo = new THREE.BoxGeometry(0.1, 0.02, 0.03);
-  const browL = new THREE.Mesh(browGeo, darkMat); browL.position.set(-0.12, 0.07, 0.32); browL.rotation.z = 0.08; head.add(browL);
-  const browR = new THREE.Mesh(browGeo, darkMat); browR.position.set(0.12, 0.07, 0.32); browR.rotation.z = -0.08; head.add(browR);
+  // Face features are painted into the head texture.
 
-  // Eyes
-  const eyeWhiteMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.3});
-  const eyeGeo2 = new THREE.SphereGeometry(0.055, 16, 12);
-  const eL = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eL.position.set(-0.12, 0.02, 0.32); eL.scale.set(1.2, 1, 0.6); head.add(eL);
-  const eR = new THREE.Mesh(eyeGeo2, eyeWhiteMat); eR.position.set(0.12, 0.02, 0.32); eR.scale.set(1.2, 1, 0.6); head.add(eR);
-  const irisMat = new THREE.MeshBasicMaterial({color:mixHexColors(player.color||0x8a6a4a, 0x1a1a2e, 0.35)});
-  const irisGeo = new THREE.CircleGeometry(0.033, 16);
-  const iL = new THREE.Mesh(irisGeo, irisMat); iL.position.set(-0.12, 0.02, 0.352); head.add(iL);
-  const iR = new THREE.Mesh(irisGeo, irisMat); iR.position.set(0.12, 0.02, 0.352); head.add(iR);
-  const pupilGeo = new THREE.SphereGeometry(0.028, 12, 8);
-  const pL = new THREE.Mesh(pupilGeo, darkMat); pL.position.set(-0.12, 0.02, 0.362); head.add(pL);
-  const pR = new THREE.Mesh(pupilGeo, darkMat); pR.position.set(0.12, 0.02, 0.362); head.add(pR);
-
-  // Nose
-  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.12, 8), skinMat);
-  nose.position.set(0, -0.06, 0.38); nose.rotation.x = PI/2; nose.scale.set(0.8, 1, 0.8); head.add(nose);
-
-  // Mouth
-  const smile = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.025, 8, 16, PI), new THREE.MeshStandardMaterial({color:0x8B3A3A, roughness:0.4}));
-  smile.position.set(0, -0.12, 0.35); smile.rotation.z = PI; head.add(smile);
-
-  // Chin
-  const chin = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 8), skinMat);
-  chin.position.set(0, -0.16, 0.28); chin.scale.set(1, 0.6, 0.8); head.add(chin);
-
-  // Blush cheeks
-  const blushMat = new THREE.MeshToonMaterial({color:0xe89080, gradientMap: TOON_GRADIENT_SOFT});
-  const blushGeo = new THREE.SphereGeometry(0.045, 10, 8);
-  const blushL = new THREE.Mesh(blushGeo, blushMat); blushL.position.set(-0.2, -0.05, 0.27); blushL.scale.set(1, 0.6, 0.35); head.add(blushL);
-  const blushR = new THREE.Mesh(blushGeo, blushMat); blushR.position.set(0.2, -0.05, 0.27); blushR.scale.set(1, 0.6, 0.35); head.add(blushR);
-
-  // Shoulders/torso
-  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.55, 24), bodyMat);
-  torso.position.y = 0.35; avScene.add(torso);
+  // Neck + shoulders/torso — kept in proportion with the scene build
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.135, 0.165, 0.24, 16), skinMat);
+  neck.position.y = NECK_Y; avScene.add(neck);
+  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, TORSO_H, 24), bodyMat);
+  torso.position.y = TORSO_Y; avScene.add(torso);
   const shoulders = new THREE.Mesh(new THREE.SphereGeometry(0.3, 24, 16), bodyMat);
-  shoulders.position.y = 0.58; shoulders.scale.set(1, 0.5, 0.8); avScene.add(shoulders);
+  shoulders.position.y = 0.65; shoulders.scale.set(1, 0.5, 0.8); avScene.add(shoulders);
 
   // Persona-specific accessories (simplified for portrait)
-  addAvatarAccessories(avScene, head, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile);
+  addAvatarAccessories(avScene, head, player, skinMat, bodyMat, accMat, darkMat);
 
   // Render to texture using dedicated offscreen renderer (no hijacking main renderer)
   avRenderer.setSize(size, size, false);
@@ -1736,13 +1859,13 @@ function renderAvatarPortrait(player, size = 128) {
   return dataUrl;
 }
 
-function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, darkMat, browL, browR, smile) {
+function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, darkMat) {
   switch(player.name) {
     case 'The Prosecutor': case 'Blaze': {
       const hair = new THREE.Mesh(new THREE.SphereGeometry(0.34, 16, 12, 0, TAU, 0, PI*0.45), new THREE.MeshStandardMaterial({color:0x2a1a0a, roughness:0.4}));
       hair.position.set(0, 0.07, 0); hair.scale.set(1, 0.5, 1); head.add(hair);
       const collar = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.15, 4), accMat);
-      collar.position.set(0, 0.62, 0.28); collar.rotation.x = PI; collar.rotation.y = PI/4; scene.add(collar);
+      collar.position.set(0, 0.72, 0.30); collar.rotation.x = PI; collar.rotation.y = PI/4; scene.add(collar);
       const tie = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.2, 4), new THREE.MeshStandardMaterial({color:0xc0392b}));
       tie.position.set(0, 0.5, 0.3); tie.rotation.x = -PI/2+0.3; scene.add(tie);
       break;
@@ -1766,7 +1889,7 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
         spike.rotation.set(Math.random()*0.3-0.15, a, Math.random()*0.4-0.2);
         head.add(spike);
       }
-      smile.geometry = new THREE.TorusGeometry(0.09, 0.018, 8, 16, PI*1.1);
+      // The wide "wildcard" grin is painted by FACE_STYLES.
       break;
     }
     case 'The Gut Player': case 'ConspiBro': {
@@ -1794,8 +1917,7 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
         strand.rotation.set(Math.random()*0.3-0.15, 0, Math.random()*0.3-0.15);
         head.add(strand);
       }
-      browL.position.y = 0.10; browL.rotation.z = -0.2;
-      browR.position.y = 0.10; browR.rotation.z = 0.2;
+      // Worried expression comes from FACE_STYLES (browTilt), not mesh tweaks
       break;
     }
   }
@@ -1805,7 +1927,10 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
 let theta = 0, phi = PI / 2.4;
 // Narrow mobile viewports need more distance to keep the full circle visible.
 let dist = (innerWidth <= 768) ? 20 : 10;
-const targetV = new THREE.Vector3(0, 1.1, 0);
+// Aimed just above the head so full figures stay in frame when zoomed in.
+// Derived from HEAD_Y (the old build used a flat 1.1, which left the taller
+// figures' heads outside the top of the frame at close zoom).
+const targetV = new THREE.Vector3(0, HEAD_Y + 0.12, 0);
 let isDrag = false, isPan = false, px = 0, py = 0;
 let userInteracting = false; // true while mouse/touch drag is active — pauses auto-rotate
 let dragDist = 0; // pixels moved during current drag — used to suppress click-after-drag
@@ -2313,15 +2438,16 @@ function updateNameTags() {
   PLAYERS.forEach((p, i) => {
     const pos = sp(i);
     // Lower the tag for foreground characters (closer to camera bottom) to avoid covering faces
-    const worldPos = new THREE.Vector3(pos[0], pos[1] + 1.6, pos[2]);
+    // Clearance above the head, which now sits higher (see HEAD_Y).
+    const worldPos = new THREE.Vector3(pos[0], pos[1] + 1.75, pos[2]);
     const screenPos = worldPos.clone().project(camera);
     const isForeground = screenPos.y < -0.2; // lower half of screen = foreground
-    const yOffset = isForeground ? 1.95 : 1.6;
+    const yOffset = isForeground ? 2.10 : 1.75;
     const v = new THREE.Vector3(pos[0], pos[1] + yOffset, pos[2]);
     v.project(camera);
     const x = (v.x * 0.5 + 0.5) * w;
     const y = (-v.y * 0.5 + 0.5) * h;
-    const d = camera.position.distanceTo(new THREE.Vector3(pos[0], pos[1] + 1.6, pos[2]));
+    const d = camera.position.distanceTo(new THREE.Vector3(pos[0], pos[1] + 1.75, pos[2]));
     const minScale = innerWidth <= 768 ? 0.92 : 0.82;
     const s = Math.max(minScale, Math.min(1.2, 8 / d));
     if (tagEls[i]) {
@@ -2736,7 +2862,7 @@ function updateSpeakerFocus() {
     hl.scale.set(s, s, 1);
   }
   const pos = sp(speakerFocusIndex);
-  const v = new THREE.Vector3(pos[0], pos[1] + 0.85, pos[2]);
+  const v = new THREE.Vector3(pos[0], pos[1] + 1.05, pos[2]);
   v.project(camera);
   const x = THREE.MathUtils.clamp((v.x * 0.5 + 0.5) * innerWidth, 0, innerWidth);
   const y = THREE.MathUtils.clamp((-v.y * 0.5 + 0.5) * innerHeight, 0, innerHeight);
@@ -4581,7 +4707,7 @@ function renderGallery3D(player) {
 
   gallery3DCamera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
   gallery3DCamera.position.set(0, 2.0, 5.5);
-  gallery3DCamera.lookAt(0, 1.1, 0);
+  gallery3DCamera.lookAt(0, HEAD_Y, 0);
 
   const amb = new THREE.HemisphereLight(0xdce8ff, 0x8c674a, 0.9);
   gallery3DScene.add(amb);
@@ -4636,10 +4762,10 @@ function resizeGallery3D() {
     // Adjust camera for narrow/mobile views to avoid head cropping
     if (h < 400) {
       gallery3DCamera.position.set(0, 2.2, 6.0);
-      gallery3DCamera.lookAt(0, 1.0, 0);
+      gallery3DCamera.lookAt(0, HEAD_Y, 0);
     } else {
       gallery3DCamera.position.set(0, 2.0, 5.5);
-      gallery3DCamera.lookAt(0, 1.1, 0);
+      gallery3DCamera.lookAt(0, HEAD_Y, 0);
     }
   }
 }
