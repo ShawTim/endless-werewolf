@@ -93,11 +93,25 @@ data/
     chat_history.md            full dialogue log (English)
     *_zh.json                  Chinese translations
 docs/                         GitHub Pages frontend
-  app.js                      Three.js 3D village scene + replay engine
-  styles.css                  UI styling
+  app.js                      Three.js 3D village scene + replay engine (source)
+  styles.css                  UI styling (source)
+  app.min.js / styles.min.css generated bundles actually served by index.html
   index.html                  entry point
   data/games/                 published game archive
 ```
+
+### Frontend build step
+
+`index.html` loads the minified `app.min.js` and `styles.min.css`, but the
+readable `app.js` and `styles.css` remain the source of truth. After editing
+either, regenerate the bundles:
+
+```bash
+bash scripts/build_assets.sh
+```
+
+`scripts/prepublish_check.sh` rebuilds both files and fails if the committed
+copies differ, so a stale bundle cannot reach the published site.
 
 ---
 

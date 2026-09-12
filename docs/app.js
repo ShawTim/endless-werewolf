@@ -5,8 +5,9 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-const CACHE_VERSION = '20260731-village-sky-9';
+const CACHE_VERSION = '20260913-p1p2-sky-webp-gable';
 function versionedUrl(url) {
   return `${url}${url.includes('?') ? '&' : '?'}v=${CACHE_VERSION}`;
 }
@@ -95,9 +96,13 @@ let gameLoadVersion = 0;
 
 // --- Three.js globals ---
 let scene, camera, renderer, amb, dir, moonPoint, candlePoint, flame;
-let skyUniforms, envGround, flameGlow, daySkyMat;
+let skyUniforms, envGround, flameGlow;
+// Image-based lighting. pmrem bakes the procedural sky into a small env map so
+// PBR surfaces pick up sky tint and go properly dark at night.
+let pmrem = null, envScene = null, envRT = null;
+let envIntensity = 0.5;
 let mistSprites = [];
-let clouds = [], smokePuffs = [];
+let smokePuffs = [];
 let composer, renderPass, bloomPass, smaaPass;
 let chars = [];
 let isNight = false;
@@ -177,6 +182,22 @@ function applyToonRim(material, rimColor = 0xfff0c8, rimPower = 2.5, rimStrength
   material.needsUpdate = true;
 }
 
+// ===== Resource disposal =====
+// Geometry and materials live on the GPU. Removing a mesh from the scene does
+// not free them, so anything rebuilt at runtime (characters are rebuilt on
+// every game load) has to be disposed explicitly or VRAM grows without bound.
+function disposeSubtree(root) {
+  root.traverse(obj => {
+    if (obj.geometry) obj.geometry.dispose();
+    const m = obj.material;
+    if (!m) return;
+    // Shared materials (outlines, wall/roof textures) are disposed more than
+    // once across rebuilds; dispose() is idempotent in three, so that is safe.
+    if (Array.isArray(m)) m.forEach(x => x.dispose());
+    else m.dispose();
+  });
+}
+
 // Cel-shaded outline — BackSide inflated mesh (gives chunky ink-line silhouette)
 const OUTLINE_MAT = new THREE.MeshBasicMaterial({ color: 0x0a0814, side: THREE.BackSide });
 OUTLINE_MAT.toneMapped = false;
@@ -237,7 +258,8 @@ async function init() {
   scene.fog.far = preset.fogFar;
   if (flame) flame.material.emissiveIntensity = preset.flame;
   if (skyUniforms) skyUniforms.uNightMix.value = preset.skyMix;
-  if (daySkyMat) daySkyMat.opacity = 1 - preset.skyMix;
+  if (skyUniforms && skyUniforms.uHaze) skyUniforms.uHaze.value.copy(scene.fog.color);
+  setEnvMix(preset.skyMix, true);
   if (envGround) envGround.material.color.setHex(preset.ground);
   if (window.__houseWinMats) for (const m of window.__houseWinMats) m.opacity = preset.winOpacity;
   // Show brazier fires at night
@@ -264,6 +286,78 @@ async function init() {
   loadingEl.style.display = 'none';
   startIntroAnim();
   animate();
+}
+
+// ===== Image-based lighting =====
+// A tiny gradient dome is baked through PMREMGenerator into an env map, so the
+// MeshStandardMaterial surfaces (ground, stone, timber, roofs) pick up sky tint
+// and genuine ambient occlusion-ish falloff instead of flat hemisphere fill.
+// MeshToonMaterial ignores scene.environment, so the cel-shaded characters are
+// unaffected and keep their hand-tuned bands.
+function initEnvironmentLighting() {
+  if (!renderer || pmrem) return;
+  pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+
+  envScene = new THREE.Scene();
+  const uniforms = { uMix: { value: isNight ? 1 : 0 }, uGain: { value: envIntensity } };
+  const mat = new THREE.ShaderMaterial({
+    uniforms,
+    side: THREE.BackSide,
+    depthWrite: false,
+    vertexShader: `
+      varying vec3 vDir;
+      void main() {
+        vDir = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uMix;
+      uniform float uGain;
+      varying vec3 vDir;
+      void main() {
+        vec3 sd = normalize(vDir);
+        float h = clamp(sd.y, -1.0, 1.0);
+        vec3 dayTop   = vec3(0.28, 0.50, 0.86);
+        vec3 dayHor   = vec3(0.72, 0.82, 0.90);
+        vec3 dayBot   = vec3(0.50, 0.48, 0.40);
+        vec3 nightTop = vec3(0.010, 0.014, 0.045);
+        vec3 nightHor = vec3(0.100, 0.075, 0.210);
+        vec3 nightBot = vec3(0.020, 0.020, 0.040);
+        vec3 top = mix(dayTop, nightTop, uMix);
+        vec3 hor = mix(dayHor, nightHor, uMix);
+        vec3 bot = mix(dayBot, nightBot, uMix);
+        float g = pow(clamp(h, 0.0, 1.0), 0.42);
+        vec3 col = mix(hor, top, g);
+        col = mix(col, bot, smoothstep(0.0, -0.35, h));
+        gl_FragColor = vec4(col * uGain, 1.0);
+      }
+    `,
+  });
+  envScene.add(new THREE.Mesh(new THREE.SphereGeometry(10, 32, 16), mat));
+  envScene.userData.uniforms = uniforms;
+
+  setEnvMix(uniforms.uMix.value, true);
+}
+
+let _lastEnvBake = 0;
+function setEnvMix(mix, force = false) {
+  if (!pmrem || !envScene) return;
+  envScene.userData.uniforms.uMix.value = mix;
+  // Baking is cheap at this resolution but not free — throttle during the
+  // 600ms day/night crossfade, and always force the final bake.
+  const now = performance.now();
+  if (!force && now - _lastEnvBake < 90) return;
+  _lastEnvBake = now;
+
+  const rt = pmrem.fromScene(envScene, 0.04, 0.1, 100);
+  if (envRT) envRT.dispose();
+  envRT = rt;
+  // The intensity gain is baked into the env map above rather than pushed onto
+  // each material's envMapIntensity, so materials created later (characters,
+  // confetti) inherit it automatically.
+  scene.environment = rt.texture;
 }
 
 // ===== Three.js Setup =====
@@ -306,20 +400,31 @@ function initThree() {
   const texLoader = new THREE.TextureLoader();
   const maxAnisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
   FABRIC_BUMP.anisotropy = maxAnisotropy;
-  const stoneTex = texLoader.load('./tex-stone.jpg');
+  const stoneTex = texLoader.load('./tex-stone.webp');
   stoneTex.anisotropy = maxAnisotropy;
   stoneTex.wrapS = stoneTex.wrapT = THREE.RepeatWrapping;
   stoneTex.repeat.set(4, 4);
 
-  const woodTex = texLoader.load('./tex-wood.jpg');
+  const woodTex = texLoader.load('./tex-wood.webp');
   woodTex.anisotropy = maxAnisotropy;
   woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
   woodTex.repeat.set(2, 2);
 
-  // Sky — procedural gradient dome with stars + moon (day/night blended via uNightMix)
+  // Sky — ONE procedural dome drives everything: gradient, sun, clouds, stars
+  // and moon. It replaces the old pair of domes (a gradient shader plus an
+  // AI-generated panorama crossfaded by opacity), which made the stars and moon
+  // read as decals pasted on a photograph and cost a 457KB texture download.
   skyUniforms = {
     uNightMix: { value: 0 },
     uTime: { value: 0 },
+    // Working-space (linear) fog colour of the current phase. Driven from
+    // NIGHT_PRESETS so the haze below the horizon, the scene fog and the
+    // background can never drift apart into a seam during the crossfade.
+    // Note: new THREE.Color(hex) already converts sRGB -> linear in r158.
+    uHaze: { value: new THREE.Color(0x0a0a18) },
+    // Matches the key DirectionalLight so the disc, the cloud lighting and the
+    // cast shadows all agree on where the sun is.
+    uSunDir: { value: new THREE.Vector3(5, 10, 5).normalize() },
   };
   const skyMat = new THREE.ShaderMaterial({
     uniforms: skyUniforms,
@@ -336,6 +441,8 @@ function initThree() {
     fragmentShader: `
       uniform float uNightMix;
       uniform float uTime;
+      uniform vec3 uHaze;
+      uniform vec3 uSunDir;
       varying vec3 vDir;
 
       float hash12(vec2 p) {
@@ -343,38 +450,70 @@ function initThree() {
         p3 += dot(p3, p3.yzx + 33.33);
         return fract((p3.x + p3.y) * p3.z);
       }
+      float vnoise(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(mix(hash12(i), hash12(i + vec2(1.0, 0.0)), u.x),
+                   mix(hash12(i + vec2(0.0, 1.0)), hash12(i + vec2(1.0, 1.0)), u.x), u.y);
+      }
+      float fbm(vec2 p) {
+        float v = 0.0, a = 0.5;
+        mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+        for (int i = 0; i < 5; i++) { v += a * vnoise(p); p = m * p; a *= 0.5; }
+        return v;
+      }
 
       void main() {
         vec3 sd = normalize(vDir);
         float h = clamp(sd.y, -1.0, 1.0);
+        float night = uNightMix;
+        float day = 1.0 - night;
 
         // Gradient palettes (pushed slightly saturated — ACES desaturates)
         vec3 dayTop = vec3(0.28, 0.50, 0.86);
         vec3 dayHor = vec3(0.72, 0.82, 0.90);
         vec3 nightTop = vec3(0.010, 0.014, 0.045);
         vec3 nightHor = vec3(0.100, 0.075, 0.210);
-        vec3 top = mix(dayTop, nightTop, uNightMix);
-        vec3 hor = mix(dayHor, nightHor, uNightMix);
-
         float grad = pow(clamp(h, 0.0, 1.0), 0.42);
-        vec3 col = mix(hor, top, grad);
-        // Below-horizon haze — matches the scene fog color so the ground's
-        // far edge dissolves seamlessly (day fog 0xc8d8e8, night fog 0x0a0a18)
-        vec3 below = mix(vec3(0.576, 0.686, 0.806), vec3(0.003, 0.003, 0.006), uNightMix);
-        col = mix(col, below, smoothstep(0.0, -0.25, h));
+        vec3 col = mix(mix(dayHor, nightHor, night), mix(dayTop, nightTop, night), grad);
+        // Below-horizon haze — driven from NIGHT_PRESETS (see uHaze) so the
+        // ground's far edge always dissolves into the current fog colour.
+        col = mix(col, uHaze, smoothstep(0.0, -0.25, h));
 
-        // Stars (night only) — sparse cells with per-star position + twinkle
+        // Stars (night only) — dense cells, per-star position, size and twinkle
         vec2 suv = vec2(atan(sd.z, sd.x) / 6.2831853 + 0.5, asin(h) / 3.14159265 + 0.5);
-        vec2 sg = suv * vec2(160.0, 80.0);
+        vec2 sg = suv * vec2(220.0, 110.0);
         vec2 cell = floor(sg);
         vec2 f = fract(sg);
         float sh = hash12(cell);
         vec2 spos = vec2(hash12(cell + 17.31), hash12(cell + 41.77));
-        float sdist = length(f - spos);
-        float star = smoothstep(0.10, 0.0, sdist) * step(0.90, sh);
+        float star = smoothstep(0.085, 0.0, length(f - spos)) * step(0.90, sh);
         star *= 0.65 + 0.35 * sin(uTime * 2.2 + sh * 43.0);
-        star *= smoothstep(0.02, 0.25, h) * uNightMix;
+        star *= smoothstep(0.02, 0.25, h) * night;
         col += vec3(0.9, 0.93, 1.0) * star * 0.85;
+
+        // Sun disc + glow, plus warm scatter around the horizon
+        float sdot = dot(sd, uSunDir);
+        vec3 sunCol = mix(vec3(1.0, 0.72, 0.42), vec3(1.0, 0.96, 0.90), clamp(h, 0.0, 1.0));
+        float disc = smoothstep(0.99955, 0.99988, sdot);
+        float glow = pow(max(sdot, 0.0), 240.0) * 0.9 + pow(max(sdot, 0.0), 22.0) * 0.16;
+        col += sunCol * (disc * 3.4 + glow) * day;
+
+        // Cloud deck — one fbm layer projected onto a virtual plane, so it
+        // converges to the horizon instead of tiling like a billboard.
+        if (h > 0.004) {
+          vec2 cuv = sd.xz / max(sd.y, 0.055) * 0.42 + vec2(uTime * 0.0035, uTime * 0.0011);
+          float shape = fbm(cuv) * 0.72 + fbm(cuv * 2.7 + 11.3) * 0.38;
+          float cover = smoothstep(0.46, 0.78, shape) * smoothstep(0.004, 0.10, h);
+          if (cover > 0.001) {
+            float ndl = clamp(dot(normalize(vec3(sd.x, 0.28, sd.z)), uSunDir) * 0.5 + 0.5, 0.0, 1.0);
+            vec3 cDark = mix(vec3(0.36, 0.40, 0.50), vec3(0.035, 0.040, 0.070), night);
+            vec3 cLit  = mix(vec3(0.99, 0.98, 0.96), vec3(0.16, 0.18, 0.30), night);
+            vec3 cc = mix(cDark, cLit, pow(ndl, 1.15));
+            cc += sunCol * pow(ndl, 6.0) * 0.35 * day;   // silver lining toward the sun
+            col = mix(col, cc, cover * 0.92);
+          }
+        }
 
         // Moon + halo (night only) — hangs low over the village rooftops
         vec3 moonDir = normalize(vec3(-5.0, 1.9, 5.0));
@@ -383,7 +522,7 @@ function initThree() {
         float shade = dot(normalize(sd - moonDir + 1e-6), normalize(vec3(0.6, -0.5, 0.0))) * 0.5 + 0.5;
         vec3 moonCol = mix(vec3(1.0, 0.98, 0.90), vec3(0.72, 0.74, 0.82), shade * 0.55);
         float halo = pow(clamp(mdot, 0.0, 1.0), 220.0) * 0.5 + pow(clamp(mdot, 0.0, 1.0), 40.0) * 0.12;
-        col += (moonCol * moonDisc * 1.6 + vec3(0.75, 0.78, 1.0) * halo) * uNightMix;
+        col += (moonCol * moonDisc * 1.6 + vec3(0.75, 0.78, 1.0) * halo) * night;
 
         gl_FragColor = vec4(col, 1.0);
       }
@@ -395,19 +534,6 @@ function initThree() {
   skyDome.frustumCulled = false;
   scene.add(skyDome);
 
-  // Day sky — AI-generated panorama on a second dome, crossfaded via opacity
-  const daySkyTex = texLoader.load('./tex-sky-day.jpg');
-  daySkyTex.colorSpace = THREE.SRGBColorSpace;
-  daySkyTex.anisotropy = maxAnisotropy;
-  daySkyMat = new THREE.MeshBasicMaterial({
-    map: daySkyTex, side: THREE.BackSide, fog: false,
-    transparent: true, opacity: 0, depthWrite: false,
-  });
-  const daySkyDome = new THREE.Mesh(new THREE.SphereGeometry(39, 64, 32), daySkyMat);
-  daySkyDome.renderOrder = -1;
-  daySkyDome.frustumCulled = false;
-  scene.add(daySkyDome);
-
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 9, 9);
   if (renderPass) { renderPass.scene = scene; renderPass.camera = camera; }
@@ -418,7 +544,10 @@ function initThree() {
   scene.add(amb);
 
   dir = new THREE.DirectionalLight(0xfff5e0, 0.85);
-  dir.position.set(5, 10, 5);
+  // ~24 deg elevation: a late-afternoon key. The old 55 deg put the sun almost
+  // overhead, which hid the disc above the frame in any near-horizontal view
+  // and flattened every surface it lit.
+  dir.position.set(5, 3.0, 5);
   dir.castShadow = true;
   const shadowMapSize = compactViewport ? 1024 : 2048;
   dir.shadow.mapSize.set(shadowMapSize, shadowMapSize);
@@ -427,10 +556,14 @@ function initThree() {
   dir.shadow.radius = 3;
   dir.shadow.blurSamples = compactViewport ? 8 : 16;
   dir.shadow.camera.near = 0.5;
-  dir.shadow.camera.far = 24;
-  dir.shadow.camera.left = -6; dir.shadow.camera.right = 6;
-  dir.shadow.camera.top = 6; dir.shadow.camera.bottom = -6;
+  dir.shadow.camera.far = 32;
+  // Wider than the old +-6 because a low sun throws much longer shadows.
+  dir.shadow.camera.left = -9; dir.shadow.camera.right = 9;
+  dir.shadow.camera.top = 9; dir.shadow.camera.bottom = -9;
   scene.add(dir);
+  // The sky's sun disc reads the key light's direction so the visible sun and
+  // the shadow-casting light can never disagree.
+  if (skyUniforms && skyUniforms.uSunDir) skyUniforms.uSunDir.value.copy(dir.position).normalize();
 
   moonPoint = new THREE.PointLight(0x7080ff, 0, 20);
   moonPoint.position.set(-5, 6, 5);
@@ -488,17 +621,28 @@ function initThree() {
   floor.rotation.x = -PI / 2; floor.position.y = -0.6; floor.receiveShadow = true;
   scene.add(floor);
 
-  // Grass tufts (instanced small cones) scattered around for organic ground
+  // Grass tufts — one instanced draw instead of 60 separate cones. The tuft
+  // geometry is a unit-height cone, so the previous per-tuft random height
+  // becomes a per-instance Y scale.
   const grassMat = new THREE.MeshStandardMaterial({ color: 0x3a5a2a, roughness: 0.9 });
   const grassCount = 60;
-  for (let i = 0; i < grassCount; i++) {
-    const a = Math.random() * TAU;
-    const r = 4 + Math.random() * 8;
-    const h = 0.08 + Math.random() * 0.12;
-    const tuft = new THREE.Mesh(new THREE.ConeGeometry(0.04, h, 4), grassMat);
-    tuft.position.set(cos(a) * r, -0.55, sin(a) * r);
-    tuft.rotation.set(Math.random() * 0.3, Math.random() * TAU, Math.random() * 0.3);
-    scene.add(tuft);
+  const grassGeo = new THREE.ConeGeometry(0.04, 1, 4);
+  const grassTufts = new THREE.InstancedMesh(grassGeo, grassMat, grassCount);
+  {
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < grassCount; i++) {
+      const a = Math.random() * TAU;
+      const r = 4 + Math.random() * 8;
+      const h = 0.08 + Math.random() * 0.12;
+      dummy.position.set(cos(a) * r, -0.55, sin(a) * r);
+      dummy.rotation.set(Math.random() * 0.3, Math.random() * TAU, Math.random() * 0.3);
+      dummy.scale.set(1, h, 1);
+      dummy.updateMatrix();
+      grassTufts.setMatrixAt(i, dummy.matrix);
+    }
+    grassTufts.instanceMatrix.needsUpdate = true;
+    grassTufts.frustumCulled = false;
+    scene.add(grassTufts);
   }
 
   // Table
@@ -549,15 +693,23 @@ function initThree() {
 
   initParticles();
   buildEnvironment();
+  initEnvironmentLighting();
 }
 
 // ===== Village Environment (silhouettes, ground, mist) =====
+// The ground disc has to outrun the day fog (fogFar 100) or its rim stays
+// visible when zoomed out. The grass tiling is derived from the radius so the
+// blades keep their world-space size instead of stretching with the disc.
+const GROUND_RADIUS = 140;
+const GROUND_CANVAS = 1024;
+const GROUND_TILES = Math.round(12 * GROUND_RADIUS / 46);   // ~4m per tile
+
 function paintGroundCanvas(ctx, tex, grassImg) {
-  const S = 512;
+  const S = GROUND_CANVAS;
   if (grassImg) {
-    // Tile the AI-generated grass across the ground (~4m per tile)
-    for (let ty = 0; ty < 12; ty++) for (let tx = 0; tx < 12; tx++) {
-      ctx.drawImage(grassImg, tx * (S / 12), ty * (S / 12), S / 12, S / 12);
+    const step = S / GROUND_TILES;
+    for (let ty = 0; ty < GROUND_TILES; ty++) for (let tx = 0; tx < GROUND_TILES; tx++) {
+      ctx.drawImage(grassImg, tx * step, ty * step, step, step);
     }
   } else {
     ctx.fillStyle = '#86905f';
@@ -565,7 +717,7 @@ function paintGroundCanvas(ctx, tex, grassImg) {
   }
   // Gentle radial darkening toward the horizon
   ctx.globalCompositeOperation = 'multiply';
-  const grad = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+  const grad = ctx.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
   grad.addColorStop(0, '#ffffff');
   grad.addColorStop(0.45, '#e8e8e8');
   grad.addColorStop(0.75, '#b8b8b8');
@@ -580,16 +732,18 @@ function buildEnvironment() {
   // Outer ground — extends far past the stone plaza so the horizon is a
   // fog-blended tree line instead of a floating disc edge
   const groundCanvas = document.createElement('canvas');
-  groundCanvas.width = 512; groundCanvas.height = 512;
+  groundCanvas.width = GROUND_CANVAS; groundCanvas.height = GROUND_CANVAS;
   const gctx = groundCanvas.getContext('2d');
   const groundTex = new THREE.CanvasTexture(groundCanvas);
   paintGroundCanvas(gctx, groundTex, null); // flat fallback until grass loads
   const grassImg = new Image();
   grassImg.onload = () => paintGroundCanvas(gctx, groundTex, grassImg);
-  grassImg.src = './tex-grass.jpg';
+  grassImg.src = './tex-grass.webp';
 
+  // Radius must exceed the day fog distance (fogFar 100), otherwise the disc's
+  // rim is still visible when zoomed out and cuts a faint arc across the sky.
   envGround = new THREE.Mesh(
-    new THREE.CircleGeometry(46, 48),
+    new THREE.CircleGeometry(GROUND_RADIUS, 64),
     new THREE.MeshStandardMaterial({
       color: 0xdcdcd2, roughness: 1, map: groundTex,
     })
@@ -600,9 +754,9 @@ function buildEnvironment() {
 
   // AI-generated textures make the cottages read as actual buildings
   const envTexLoader = new THREE.TextureLoader();
-  const cottageTex = envTexLoader.load('./tex-cottage.jpg');
+  const cottageTex = envTexLoader.load('./tex-cottage.webp');
   cottageTex.colorSpace = THREE.SRGBColorSpace;
-  const roofTex = envTexLoader.load('./tex-roof.jpg');
+  const roofTex = envTexLoader.load('./tex-roof.webp');
   roofTex.colorSpace = THREE.SRGBColorSpace;
   roofTex.wrapS = roofTex.wrapT = THREE.RepeatWrapping;
   roofTex.repeat.set(3, 1);
@@ -616,33 +770,118 @@ function buildEnvironment() {
   const winFrameMat = new THREE.MeshBasicMaterial({ color: 0x2a1c12 });
   window.__houseWinMats = [winMat];
 
-  function buildPine(scale, mat) {
-    const tree = new THREE.Group();
-    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.09, 0.4, 6), trunkMat);
-    trunk.position.y = 0.2; tree.add(trunk);
-    // Fatter, shorter tiers with overlap — reads as foliage, not stacked cones
-    const tiers = [[0.5, 0.7, 0.55], [0.4, 0.65, 0.95], [0.27, 0.55, 1.3]];
-    for (const [r, h, y] of tiers) {
-      const cone = new THREE.Mesh(new THREE.ConeGeometry(r, h, 7), mat);
-      cone.position.y = y; tree.add(cone);
+  // Pines are by far the most numerous props (60 trees x 4 parts = 240 meshes
+  // before), so they are drawn with instancing instead: the three foliage tiers
+  // are merged into one geometry, and each tint gets a single InstancedMesh.
+  // Combined with one shared trunk mesh that is 4 draw calls for every tree.
+  const PINE_TIERS = [[0.5, 0.7, 0.55], [0.4, 0.65, 0.95], [0.27, 0.55, 1.3]];
+  const pineFoliageGeo = mergeGeometries(PINE_TIERS.map(([r, h, y]) => {
+    const g = new THREE.ConeGeometry(r, h, 7);
+    g.translate(0, y, 0);
+    return g;
+  }));
+  const pineTrunkGeo = new THREE.CylinderGeometry(0.06, 0.09, 0.4, 6);
+  pineTrunkGeo.translate(0, 0.2, 0);
+  const pineMatsByTint = pineMats.map(() => []);
+  const pineTrunkMatrices = [];
+  const pinePlacements = [];
+  // sxz (width) and sy (height) vary independently. Uniform scaling made all 60
+  // trees identical clones; decoupling them yields slim spires and broad bushy
+  // trees from one geometry, which reads as a real forest at no extra draw cost.
+  function addPine(a, r, scale, tint) {
+    pinePlacements.push({
+      a, r, scale, tint,
+      rotY: Math.random() * TAU,
+      sxz: 0.72 + Math.random() * 0.56,
+      sy: 0.82 + Math.random() * 0.46,
+    });
+  }
+  function buildPineInstances() {
+    const dummy = new THREE.Object3D();
+    for (const p of pinePlacements) {
+      dummy.position.set(cos(p.a) * p.r, -0.6, sin(p.a) * p.r);
+      dummy.rotation.set(0, p.rotY, 0);
+      dummy.scale.set(p.scale * p.sxz, p.scale * p.sy, p.scale * p.sxz);
+      dummy.updateMatrix();
+      pineMatsByTint[p.tint].push(dummy.matrix.clone());
+      pineTrunkMatrices.push(dummy.matrix.clone());
     }
-    tree.scale.setScalar(scale);
-    return tree;
+    const add = (geo, mat, matrices) => {
+      if (!matrices.length) return;
+      const im = new THREE.InstancedMesh(geo, mat, matrices.length);
+      matrices.forEach((m, i) => im.setMatrixAt(i, m));
+      im.instanceMatrix.needsUpdate = true;
+      // Instances ring the whole village, so a single bounding sphere is a poor
+      // fit — skipping the cull costs less than a wrong mid-frame pop.
+      im.frustumCulled = false;
+      scene.add(im);
+    };
+    pineMats.forEach((mat, i) => add(pineFoliageGeo, mat, pineMatsByTint[i]));
+    add(pineTrunkGeo, trunkMat, pineTrunkMatrices);
+  }
+
+  // Gable roof built from real geometry: two sloped slabs with an eaves
+  // overhang, closed at both ends by gable triangles. The previous roof was a
+  // 4-sided cone, which read as a plain pyramid block from every angle.
+  const ROOF_OVERHANG = 0.22;
+  const doorMat = new THREE.MeshStandardMaterial({ color: 0x4a3320, roughness: 0.85 });
+  function buildGableRoof(w, h, d, roofH) {
+    const roofGroup = new THREE.Group();
+    const halfSpan = w / 2 + ROOF_OVERHANG;
+    const slopeLen = Math.sqrt(halfSpan * halfSpan + roofH * roofH);
+    const angle = Math.atan2(roofH, halfSpan);
+    for (const s of [-1, 1]) {
+      const slab = new THREE.Mesh(new THREE.BoxGeometry(slopeLen, 0.08, d + ROOF_OVERHANG * 2), roofMat);
+      slab.position.set(s * halfSpan / 2, roofH / 2, 0);
+      slab.rotation.z = -s * angle;
+      slab.castShadow = true;
+      roofGroup.add(slab);
+    }
+    // Gable ends — the triangular wall filling the space under each slope.
+    const shape = new THREE.Shape();
+    shape.moveTo(-w / 2, 0);
+    shape.lineTo(w / 2, 0);
+    shape.lineTo(0, roofH);
+    shape.closePath();
+    const gableGeo = new THREE.ShapeGeometry(shape);
+    // ShapeGeometry emits UVs in shape-space, which would clamp the cottage
+    // texture across the gable. Remap them to a clean 0..1 range.
+    {
+      const pos = gableGeo.attributes.position;
+      const uv = gableGeo.attributes.uv;
+      for (let i = 0; i < pos.count; i++) {
+        uv.setXY(i, (pos.getX(i) + w / 2) / w, pos.getY(i) / roofH);
+      }
+      uv.needsUpdate = true;
+    }
+    for (const s of [-1, 1]) {
+      const end = new THREE.Mesh(gableGeo, wallMat);
+      end.position.set(0, 0, s * (d / 2));
+      if (s < 0) end.rotation.y = PI;
+      end.castShadow = true;
+      roofGroup.add(end);
+    }
+    return roofGroup;
   }
 
   function buildHouse(w, h, d, chimney) {
     const g = new THREE.Group();
     const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), wallMat);
     body.position.y = h / 2; g.add(body);
-    const m = Math.max(w, d);
-    const roof = new THREE.Mesh(new THREE.CylinderGeometry(0, m * 1.18 / Math.SQRT2, h * 0.7, 4), roofMat);
-    roof.rotation.y = PI / 4;
-    roof.scale.set(w / m, 1, d / m);
-    roof.position.y = h + h * 0.34; g.add(roof);
+    body.castShadow = true;
+
+    const roofH = h * 0.66;
+    const roof = buildGableRoof(w, h, d, roofH);
+    roof.position.y = h;
+    g.add(roof);
+
     if (chimney) {
       const ch = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.5, 0.2), roofMat);
       ch.position.set(w * 0.28, h + h * 0.42, 0); g.add(ch);
     }
+    // Door — gives the facade a focal point and a sense of scale
+    const door = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.22, h * 0.44), doorMat);
+    door.position.set(0, h * 0.22, d / 2 + 0.008); g.add(door);
     // Small framed windows — warm dots of life, not glowing billboards
     for (const wx of [-w * 0.24, w * 0.24]) {
       const frame = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.19, h * 0.26), winFrameMat);
@@ -681,10 +920,7 @@ function buildEnvironment() {
     const a = Math.random() * TAU;
     const r = 15.5 + Math.random() * 6;
     if (houses.some(hs => Math.abs(((a - hs.a + PI * 3) % TAU) - PI) < 0.32 && Math.abs(r - hs.r) < 3.5)) continue;
-    const pine = buildPine(0.6 + Math.random() * 0.7, pineMats[placed % pineMats.length]);
-    pine.position.set(cos(a) * r, -0.6, sin(a) * r);
-    pine.rotation.y = Math.random() * TAU;
-    scene.add(pine);
+    addPine(a, r, 0.6 + Math.random() * 0.7, placed % pineMats.length);
     placed++;
   }
 
@@ -692,11 +928,9 @@ function buildEnvironment() {
   for (let i = 0; i < 44; i++) {
     const a = (i / 44) * TAU + Math.random() * 0.14;
     const r = 24 + Math.random() * 8;
-    const pine = buildPine(1.3 + Math.random() * 1.1, pineMats[i % pineMats.length]);
-    pine.position.set(cos(a) * r, -0.6, sin(a) * r);
-    pine.rotation.y = Math.random() * TAU;
-    scene.add(pine);
+    addPine(a, r, 1.3 + Math.random() * 1.1, i % pineMats.length);
   }
+  buildPineInstances();
 
   // Ground mist — soft sprites drifting slowly around the plaza
   const mistTex = makeMistTexture();
@@ -774,15 +1008,8 @@ function updateEnvironment(t) {
     const target = isNight ? ud.op : 0.02;
     m.material.opacity += (target - m.material.opacity) * 0.03;
   }
-  // Drifting clouds — day only
-  for (const cl of clouds) {
-    const ud = cl.userData;
-    const a = ud.a0 + t * ud.speed;
-    cl.position.set(cos(a) * ud.r, ud.y, sin(a) * ud.r);
-    const target = isNight ? 0 : ud.op;
-    cl.material.opacity += (target - cl.material.opacity) * 0.02;
-  }
-  // Chimney smoke — always on, dimmer at night
+  // Drifting clouds now live in the sky shader itself (see buildSky), so the
+  // old billboard sprites are gone. Chimney smoke — always on, dimmer at night.
   for (const sm of smokePuffs) {
     const ud = sm.userData;
     const cycle = (t * 0.09 + ud.phase) % 1; // 0 birth → 1 gone
@@ -853,53 +1080,6 @@ function initParticles() {
   dustMotes = new THREE.Points(dmGeo, dmMat);
   dustMotes.userData = { vels: dmVel, count: dmCount };
   scene.add(dustMotes);
-
-  // ---- Drifting clouds (day) ----
-  const cloudTex = makeCloudTexture();
-  for (let i = 0; i < 7; i++) {
-    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: cloudTex, transparent: true, opacity: 0, depthWrite: false, fog: false,
-      rotation: (Math.random() - 0.5) * 0.3,
-    }));
-    sp.scale.set(13 + Math.random() * 9, 4.5 + Math.random() * 2.5, 1);
-    sp.userData = {
-      a0: Math.random() * TAU,
-      r: 26 + Math.random() * 16,
-      y: 15 + Math.random() * 9,
-      speed: (0.004 + Math.random() * 0.005) * (Math.random() > 0.5 ? 1 : -1),
-      op: 0.42 + Math.random() * 0.22,
-    };
-    clouds.push(sp);
-    scene.add(sp);
-  }
-}
-
-function makeCloudTexture() {
-  const c = document.createElement('canvas');
-  c.width = 256; c.height = 192;
-  const ctx = c.getContext('2d');
-  // Cluster of soft elliptical puffs → one fluffy cloud sprite.
-  // All gradients must fade to 0 well inside the canvas or the sprite shows
-  // a visible rectangular edge in the sky.
-  const puffs = [
-    [128, 108, 58, 30], [82, 116, 40, 24], [176, 116, 42, 24],
-    [106, 88, 32, 24], [152, 84, 34, 26],
-  ];
-  for (const [x, y, rx, ry] of puffs) {
-    const r = Math.max(rx, ry);
-    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
-    grad.addColorStop(0, 'rgba(255,255,255,0.55)');
-    grad.addColorStop(0.55, 'rgba(255,255,255,0.26)');
-    grad.addColorStop(0.85, 'rgba(255,255,255,0)');
-    ctx.fillStyle = grad;
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.scale(rx / r, ry / r);
-    ctx.translate(-x, -y);
-    ctx.fillRect(0, 0, 256, 192);
-    ctx.restore();
-  }
-  return new THREE.CanvasTexture(c);
 }
 
 function makeGlowTexture() {
@@ -1988,7 +2168,10 @@ function updateNightTransition() {
   if (skyUniforms) {
     const skyMixV = f.skyMix + (tgt.skyMix - f.skyMix) * e;
     skyUniforms.uNightMix.value = skyMixV;
-    if (daySkyMat) daySkyMat.opacity = 1 - skyMixV;
+    // Haze follows the actual fog colour of this frame, and the tiny env map is
+    // re-baked along the crossfade so PBR surfaces darken with the sky.
+    if (skyUniforms.uHaze) skyUniforms.uHaze.value.copy(scene.fog.color);
+    setEnvMix(skyMixV, t >= 1);
   }
   if (envGround) {
     const gT = tgt.ground;
@@ -2795,8 +2978,9 @@ async function loadGame(gameId) {
 }
 
 function rebuildScene() {
-  // Remove old characters
-  chars.forEach(g => scene.remove(g));
+  // Remove old characters — and release their GPU buffers, otherwise every
+  // game load leaks the previous set's geometry and materials.
+  chars.forEach(g => { scene.remove(g); disposeSubtree(g); });
   chars = [];
   // Invalidate avatar portrait cache so portraits re-render with new character builds
   for (const k of Object.keys(avatarCache)) delete avatarCache[k];
