@@ -191,14 +191,66 @@ const NAPE_R = 0.392;     // slightly tighter, tucks under the main cap
 // tilt > arc*PI - 1.276 (the arccos of browY/HAIR_R) or the hairline drops
 // over the eyes.
 function hairPiece(mat, { arc = 0.52, tilt = 0.45, y = 0, z = 0, r = HAIR_R,
-                          phiStart = 0, phiLength = TAU, segs = 48 } = {}) {
+                          rotY = 0, rotZ = 0, phiStart = 0, phiLength = TAU,
+                          segs = 48 } = {}) {
   const m = new THREE.Mesh(
     new THREE.SphereGeometry(r, segs, Math.max(14, Math.round(segs * 0.6)),
       phiStart, phiLength, 0, PI * arc),
     mat
   );
   m.position.set(0, y, z);
-  m.rotation.x = -tilt;
+  m.rotation.set(-tilt, rotY, rotZ);
+  m.castShadow = true;
+  return m;
+}
+
+// Direction on the hair sphere. phi runs around the head (PI/2 faces forward),
+// theta runs down from +Y (0 = crown, PI/2 = ear line, > PI/2 = below the ear).
+function hairDir(phi, theta) {
+  return new THREE.Vector3(
+    -cos(phi) * sin(theta),
+     cos(theta),
+     sin(phi) * sin(theta)
+  ).normalize();
+}
+
+// A lock of hair: a capsule running from a point ON the skull (the root) to a
+// point below it (the tip). Defined by two polar angles rather than one
+// direction, because a single direction makes the capsule fly off along the
+// surface tangent — which is how the bob ended up as horizontal "wings" instead
+// of hair hanging past the jaw.
+//   thetaRoot ~1.1-1.3 : temple, above the ear
+//   thetaTip  ~2.2-2.5 : below the ear, at or past the jaw
+function hairLock(mat, phi, thetaRoot, thetaTip, radius = 0.075,
+                  rootR = 0.30, tipR = 0.40) {
+  const a = hairDir(phi, thetaRoot).multiplyScalar(rootR);
+  const b = hairDir(phi, thetaTip).multiplyScalar(tipR);
+  const span = a.distanceTo(b);
+  const m = new THREE.Mesh(
+    new THREE.CapsuleGeometry(radius, Math.max(0.02, span - radius * 2), 5, 12),
+    mat
+  );
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+  m.position.copy(a).add(b).multiplyScalar(0.5);
+  m.castShadow = true;
+  return m;
+}
+
+// A crown cap for headwear. Kept separate from hairPiece because it is not hair
+// (no tilt) and must clear the same skull + outline shell.
+function hairCrown(r, arc, segs = 40) {
+  return new THREE.SphereGeometry(r, segs, Math.max(14, Math.round(segs * 0.6)),
+    0, TAU, 0, PI * arc);
+}
+
+// A flat disc laid against the hair sphere, for buns and top-knots. `phi`
+// defaults to the back of the head (3PI/2) — a bun belongs on the occiput, not
+// on the side of the skull where phi=PI would put it.
+function hairKnot(mat, theta, size, depth = 0.9, phi = PI * 1.5) {
+  const dir = hairDir(phi, theta);
+  const m = new THREE.Mesh(new THREE.SphereGeometry(size, 24, 18), mat);
+  m.scale.set(1, 1, depth);
+  m.position.copy(dir).multiplyScalar(HAIR_R + size * 0.35);
   m.castShadow = true;
   return m;
 }
@@ -212,14 +264,112 @@ function hairMatFor(player, dark = false) {
   });
 }
 
+// ===== Hair =====
+// Every hairstyle is defined once, here, and used by both the in-scene build and
+// the portrait renderer. Previously each persona's hair was written out twice
+// (scene + portrait) and the two copies drifted — the portrait carried its own
+// copy of the buried-shell and squashed-crown bugs.
+//
+// The styles are deliberately different in SILHOUETTE, not just in angle:
+//   Prosecutor   slicked back, tight to the skull, no volume below the ears
+//   Therapist    chin-length bob that widens at the jaw, plus a low bun
+//   Statistician neat side-part, tapered at the nape
+//   Chaos Agent  tall asymmetric spikes
+//   Gut Player   bandana with a knot and a short tail at the back
+//   Underdog     messy bowl with an uneven fringe and one cowlick
+function buildHair(head, player) {
+  const mat = hairMatFor(player);
+  const add = (...ms) => ms.forEach(m => head.add(m));
+
+  switch (player.name) {
+    // ---- slicked back: low volume, sharp crown ridge ----
+    case 'The Prosecutor': case 'Blaze':
+      add(hairPiece(mat, { arc: 0.46, tilt: 0.80, z: -0.015 }));
+      // Crown ridge. Must share the SAME centre as the shell above and differ
+      // only in radius — an offset centre leaves a visible gap at the rim.
+      add(hairPiece(mat, { arc: 0.30, tilt: 0.62, z: -0.015, r: HAIR_R + 0.008 }));
+      break;
+
+    // ---- bob: locks that hang past the jaw, plus a low bun ----
+    case 'The Therapist': case 'SafetySam':
+      add(hairPiece(mat, { arc: 0.58, tilt: 0.68, z: -0.006 }));
+      // Side locks run from the temple down past the jaw (see hairLock).
+      for (const s of [-1, 1]) {
+        add(hairLock(mat, PI / 2 + s * 0.72, 1.18, 2.32, 0.086));
+        add(hairLock(mat, PI / 2 + s * 1.18, 1.22, 2.36, 0.076));
+      }
+      add(hairLock(mat, 3 * PI / 2, 1.28, 2.00, 0.082));
+      add(hairKnot(mat, 1.16, 0.105));
+      break;
+
+    // ---- neat side-part: swept, tapered, no loose locks ----
+    case 'The Statistician': case 'Dr. Pizza':
+      add(hairPiece(mat, { arc: 0.50, tilt: 0.58, z: -0.008 }));
+      add(hairPiece(mat, { arc: 0.26, tilt: 0.30, y: 0.02, z: 0.03, rotZ: 0.45 }));
+      break;
+
+    // ---- wild spikes: tall, asymmetric, uneven lengths ----
+    case 'The Chaos Agent': case 'Twister':
+      add(hairPiece(mat, { arc: 0.40, tilt: 0.26 }));
+      for (let k = 0; k < 11; k++) {
+        const phi = (k / 11) * TAU + 0.35;
+        const theta = 0.30 + (k % 4) * 0.20;
+        const len = 0.20 + ((k * 7) % 5) * 0.045;
+        add(hairSpike(mat, phi, theta, len, 0.048 + (k % 3) * 0.008));
+      }
+      break;
+
+    // ---- bandana: band + crown + knot + a short tail ----
+    case 'The Gut Player': case 'ConspiBro': {
+      const bandMat = new THREE.MeshStandardMaterial({ color: 0x7f8c8d, roughness: 0.4 });
+      const capMat = new THREE.MeshStandardMaterial({ color: 0x8a9797, roughness: 0.5 });
+      const band = new THREE.Mesh(new THREE.TorusGeometry(HAIR_R - 0.012, 0.052, 12, 40), bandMat);
+      band.position.set(0, 0.10, 0); band.rotation.x = PI / 2; band.scale.set(1, 1, 0.86);
+      band.castShadow = true;
+      const cap = new THREE.Mesh(hairCrown(HAIR_R - 0.006, 0.44), capMat);
+      cap.position.set(0, 0.005, 0); cap.castShadow = true;
+      const knot = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.095, 0.075), bandMat);
+      knot.position.set(0, 0.085, -0.375); knot.rotation.z = 0.5;
+      const tail = hairLock(bandMat, 3 * PI / 2, 1.26, 1.78, 0.055);
+      add(band, cap, knot, tail);
+      const scar = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, 0.01), new THREE.MeshStandardMaterial({ color: 0xaa3333 }));
+      scar.position.set(-0.15, -0.03, 0.35); scar.rotation.z = 0.2;
+      add(scar);
+      break;
+    }
+
+    // ---- messy bowl: uneven fringe plus a cowlick ----
+    case 'The Underdog': case 'EasyBake':
+      add(hairPiece(mat, { arc: 0.60, tilt: 0.64, z: -0.006 }));
+      add(hairPiece(mat, { arc: 0.34, tilt: 0.18, y: -0.015, z: 0.02, rotZ: 0.20, rotY: -0.25 }));
+      add(hairSpike(mat, PI / 2 + 0.55, 0.22, 0.17, 0.042));
+      add(hairSpike(mat, PI / 2 - 0.30, 0.34, 0.13, 0.038));
+      break;
+
+    default:
+      // Generic roster members: plain cap, slight nape volume.
+      add(hairPiece(mat, { arc: 0.54, tilt: 0.62 }));
+      break;
+  }
+
+  // Shared nape volume on the back of the skull, for styles that do not already
+  // bring their own mass there.
+  const noNape = ['The Chaos Agent', 'Twister', 'The Gut Player', 'ConspiBro'];
+  if (!noNape.includes(player.name)) {
+    const nape = new THREE.Mesh(
+      new THREE.SphereGeometry(NAPE_R, 40, 24, PI * 0.86, PI * 1.28, PI * 0.10, PI * 0.42),
+      mat
+    );
+    nape.position.set(0, 0, -0.01);
+    nape.castShadow = true;
+    head.add(nape);
+  }
+}
+
 // Spikes and stranded styles ride the same sphere, aimed outward along the
 // normal so they stick out of the skull instead of being buried inside it.
 function hairSpike(mat, phi, theta, len, radius = 0.055) {
-  const dir = new THREE.Vector3(
-    -cos(phi) * sin(theta),
-     cos(theta),
-     sin(phi) * sin(theta)
-  ).normalize();
+  const dir = hairDir(phi, theta);
   const m = new THREE.Mesh(new THREE.ConeGeometry(radius, len, 6), mat);
   m.position.copy(dir).multiplyScalar(HAIR_R * 0.94);
   m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
@@ -1480,13 +1630,8 @@ function buildCharacter(player, index){
   headSphere.castShadow=true; head.add(headSphere);
   addOutline(headSphere, 1.018);
 
-  // Hair cap — one shell for characters without a persona hairstyle. The old
-  // build stacked three near-coplanar shells (0.365 cap + 0.372 fringe + 0.378
-  // back) on a 0.36 skull, which z-fought into speckled bald patches.
-  const personaHairChars = ['The Prosecutor', 'Blaze', 'The Therapist', 'SafetySam', 'The Statistician', 'Dr. Pizza', 'The Underdog', 'EasyBake', 'The Chaos Agent', 'Twister', 'The Gut Player', 'ConspiBro'];
-  if (!personaHairChars.includes(player.name)) {
-    head.add(hairPiece(hairMat, { arc: 0.54, tilt: 0.62 }));
-  }
+  // Hair is defined once in buildHair() and shared with the portrait renderer.
+  buildHair(head, player);
 
   // Positions are local to the (scaled) head group
 
@@ -1529,9 +1674,7 @@ function buildCharacter(player, index){
       );
         gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
       g.add(gavelHandle);
-      // Slicked-back hair — one shell on the shared hair sphere, tilted well
-      // back so it clears the painted brows and covers the nape.
-      head.add(hairPiece(hairMat, { arc: 0.50, tilt: 0.72, z: -0.012 }));
+      // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
     case 'The Therapist': case 'SafetySam': // Glasses + clipboard / shield
@@ -1560,27 +1703,12 @@ function buildCharacter(player, index){
       );
       board.position.set(-0.52,0.15,0.05); board.rotation.x=-0.2;
       g.add(board);
-      // Soft hair — a fuller shell for a bob, plus a bun seated on the crown
-      // sphere rather than floating behind it.
-      head.add(hairPiece(hairMat, { arc: 0.56, tilt: 0.68, z: -0.008 }));
-      const bun = new THREE.Mesh(new THREE.SphereGeometry(0.105, 24, 18), hairMat);
-      bun.position.set(0, 0.185, -0.285);
-      bun.castShadow = true;
-      head.add(bun);
+      // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
     case 'The Chaos Agent': case 'Twister': // Wild hair + mask
       // Wild spiky hair. The old spikes sat at radius 0.25 while the skull's
-      // cross-section at that height is 0.317, so all seven were fully buried
-      // and the character rendered bald. Riding the hair sphere with an outward
-      // aim guarantees they protrude.
-      for (let k = 0; k < 9; k++) {
-        const phi = (k / 9) * TAU + 0.4;
-        const theta = 0.42 + (k % 3) * 0.24;
-        head.add(hairSpike(hairMat, phi, theta, 0.20 + (k % 3) * 0.05));
-      }
-      // A low shell keeps the skull from showing between the spikes.
-      head.add(hairPiece(hairMat, { arc: 0.42, tilt: 0.30 }));
+      // Spikes and the under-shell come from buildHair().
       // Mask on stick (drama!)
       const stick=new THREE.Mesh(
         new THREE.CylinderGeometry(0.015,0.015,0.35,6),
@@ -1661,31 +1789,11 @@ function buildCharacter(player, index){
       );
       screen.position.set(-0.5,0.18,0.09); screen.rotation.x=-0.15;
       g.add(screen);
-      // Neat combed hair. Was a 0.375 shell rotated -0.35 with a side-part BOX
-      // parked inside the skull (that point is ~0.18 from the head centre, well
-      // within the 0.36 skull). One shell on the shared sphere, with the parting
-      // suggested by a thin sliver sitting on the crown surface instead.
-      head.add(hairPiece(hairMat, { arc: 0.50, tilt: 0.58, z: -0.008 }));
-      const part=new THREE.Mesh(
-        new THREE.BoxGeometry(0.012,0.022,0.19),
-        new THREE.MeshStandardMaterial({color:0x333333})
-      );
-      part.position.set(0.075,0.368,0.015);
-      part.rotation.x=-0.62; part.rotation.z=-0.10;
-      head.add(part);
+      // Hair (including the side part) comes from buildHair().
       break;
 
     case 'The Underdog': case 'EasyBake': // Messy hair + lucky charm
-      // Messy hair. The old shell was squashed with scale.y = 0.65, which put
-      // its crown at 0.287 — below the 0.36 skull, so the head split through it
-      // and the character looked tonsured. The three strands also sat at radius
-      // 0.1, deep inside the skull (cross-section there is ~0.285).
-      // Use an unsquashed shell plus outward-aimed strands.
-      head.add(hairPiece(hairMat, { arc: 0.56, tilt: 0.58, y: 0, z: -0.006 }));
-      for (let k = 0; k < 4; k++) {
-        const phi = (k / 4) * TAU + 0.9;
-        head.add(hairSpike(hairMat, phi, 0.30 + (k % 2) * 0.16, 0.15, 0.045));
-      }
+      // Hair (bowl + cowlick) comes from buildHair().
       // Lucky charm (four-leaf clover) in right hand
       for(let k=0;k<4;k++){
         const leaf=new THREE.Mesh(
@@ -1703,20 +1811,8 @@ function buildCharacter(player, index){
       break;
   }
 
-  // === Beautification pass — hair volume ===
-  // The old code added a back shell AND a fringe on top of the cap; with all
-  // three on nearly the same sphere they interpenetrated. The single hairPiece
-  // above already spans crown to nape, so add only a low nape shell for mass at
-  // the back and skip it for the wildcard spike style.
-  if (player.name !== 'The Chaos Agent' && player.name !== 'Twister') {
-    const nape = new THREE.Mesh(
-      new THREE.SphereGeometry(NAPE_R, 40, 24, PI * 0.86, PI * 1.28, PI * 0.10, PI * 0.42),
-      hairMat
-    );
-    nape.position.set(0, 0, -0.01);
-    nape.castShadow = true;
-    head.add(nape);
-  }
+  // Nape volume now lives in buildHair(), so this pass only handles the clothing
+  // trim.
   // Collar + belt trim — clothing reads as clothing. The collar sits at the base
   // of the new neck and the belt rides the taller torso.
   const collarTrim=new THREE.Mesh(new THREE.TorusGeometry(0.175,0.038,10,40),accMat);
@@ -1847,6 +1943,8 @@ function renderAvatarPortrait(player, size = 128) {
   const earR = new THREE.Mesh(earGeo, skinMat); earR.position.set(0.35, -0.01, 0); earR.scale.set(0.5, 1, 0.8); head.add(earR);
 
   // Face features are painted into the head texture.
+  // Same hair as the in-scene character.
+  buildHair(head, player);
 
   // Neck + shoulders/torso — kept in proportion with the scene build
   const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.135, 0.165, 0.24, 16), skinMat);
@@ -1901,13 +1999,10 @@ function renderAvatarPortrait(player, size = 128) {
 }
 
 function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, darkMat) {
-  // Hair uses the same hairPiece/hairSpike helpers as the in-scene build so the
-  // portrait cannot drift from the character it depicts. The old portrait code
-  // carried its own copy of the same bugs (0.34 skirts inside the 0.36 skull,
-  // a 0.65-squashed crown below the skull surface, spikes buried at r=0.25).
+  // Accessories ONLY — hair is added by buildHair(), shared with the in-scene
+  // build so the portrait cannot drift from the character it depicts.
   switch(player.name) {
     case 'The Prosecutor': case 'Blaze': {
-      head.add(hairPiece(hairMatFor(player), { arc: 0.50, tilt: 0.72, z: -0.012 }));
       const collar = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.15, 4), accMat);
       collar.position.set(0, 0.72, 0.30); collar.rotation.x = PI; collar.rotation.y = PI/4; scene.add(collar);
       const tie = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.2, 4), new THREE.MeshStandardMaterial({color:0xc0392b}));
@@ -1919,25 +2014,12 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
       glassL.position.set(-0.12, 0.02, 0.32); head.add(glassL);
       const glassR = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.015, 12, 24), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.5, roughness:0.2}));
       glassR.position.set(0.12, 0.02, 0.32); head.add(glassR);
-      head.add(hairPiece(hairMatFor(player), { arc: 0.56, tilt: 0.68, z: -0.008 }));
-      const bun = new THREE.Mesh(new THREE.SphereGeometry(0.105, 24, 18), hairMatFor(player));
-      bun.position.set(0, 0.185, -0.285); head.add(bun);
       break;
     }
     case 'The Chaos Agent': case 'Twister': {
-      for (let k = 0; k < 9; k++) {
-        const phi = (k / 9) * TAU + 0.4;
-        const theta = 0.42 + (k % 3) * 0.24;
-        head.add(hairSpike(hairMatFor(player), phi, theta, 0.20 + (k % 3) * 0.05));
-      }
-      head.add(hairPiece(hairMatFor(player), { arc: 0.42, tilt: 0.30 }));
       break;
     }
     case 'The Gut Player': case 'ConspiBro': {
-      const bandana = new THREE.Mesh(new THREE.TorusGeometry(HAIR_R - 0.012, 0.052, 12, 40), new THREE.MeshStandardMaterial({color:0x7f8c8d, roughness:0.4}));
-      bandana.position.set(0, 0.10, 0); bandana.rotation.x = PI/2; bandana.scale.set(1, 1, 0.86); head.add(bandana);
-      const bandanaTop = new THREE.Mesh(new THREE.SphereGeometry(HAIR_R - 0.006, 40, 24, 0, TAU, 0, PI*0.44), new THREE.MeshStandardMaterial({color:0x8a9797, roughness:0.5}));
-      bandanaTop.position.set(0, 0.005, 0); head.add(bandanaTop);
       const scar = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, 0.01), new THREE.MeshStandardMaterial({color:0xaa3333}));
       scar.position.set(-0.15, -0.03, 0.35); scar.rotation.z = 0.2; head.add(scar);
       break;
@@ -1947,18 +2029,9 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
       sgL.position.set(-0.12, 0.02, 0.32); head.add(sgL);
       const sgR = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.012, 12, 24), new THREE.MeshStandardMaterial({color:0x2980b9, metalness:0.4, roughness:0.2}));
       sgR.position.set(0.12, 0.02, 0.32); head.add(sgR);
-      head.add(hairPiece(hairMatFor(player), { arc: 0.50, tilt: 0.58, z: -0.008 }));
-      const part = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.022, 0.19), new THREE.MeshStandardMaterial({color:0x333333}));
-      part.position.set(0.075, 0.368, 0.015); part.rotation.x = -0.62; part.rotation.z = -0.10;
-      head.add(part);
       break;
     }
     case 'The Underdog': case 'EasyBake': {
-      head.add(hairPiece(hairMatFor(player), { arc: 0.56, tilt: 0.58, z: -0.006 }));
-      for (let k = 0; k < 4; k++) {
-        const phi = (k / 4) * TAU + 0.9;
-        head.add(hairSpike(hairMatFor(player), phi, 0.30 + (k % 2) * 0.16, 0.15, 0.045));
-      }
       break;
     }
   }
