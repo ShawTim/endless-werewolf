@@ -162,7 +162,7 @@ const FABRIC_BUMP = makeFabricBumpMap();
 // (head = 42% of figure height) with the head sunk straight into the torso;
 // these bring it to roughly 34% with a neck between.
 const HEAD_Y = 1.15;      // head-group centre (was 0.98)
-const HEAD_S = 0.86;      // head scale
+const HEAD_S = 0.79;      // head scale (was 0.86 — the 3.4:1 head:body ratio read as a bobblehead)
 const TORSO_H = 0.69;     // tapered torso height (was 0.55)
 const TORSO_Y = 0.42;     // torso centre (was 0.35)
 const NECK_Y = 0.80;
@@ -341,7 +341,15 @@ const HAIR_STYLE_DEFAULT = { base: 0.394, thetaBottom: 1.74, openBelow: 1.14, ba
 
 function buildHair(head, player) {
   const mat = hairMatFor(player);
-  const st = HAIR_STYLES[player.name] || HAIR_STYLE_DEFAULT;
+  // The camera sits ~39° above the eye line, so hair that reaches the brow is
+  // not "a fringe" from up here — it is the whole face. Clamp the front of the
+  // shell to a high hairline, calm the wobble that dips a clump over the eye,
+  // and stop the brow rim bulging forward into the sightline.
+  const st = { ...(HAIR_STYLES[player.name] || HAIR_STYLE_DEFAULT) };
+  st.openBelow = Math.min(st.openBelow, 1.16) - 0.20;
+  st.fringeOut *= 0.42;
+  st.wobble *= 0.45;
+  st.asym *= 0.35;
 
   const shell = new THREE.Mesh(hairShellGeo(st.base, st), mat);
   shell.castShadow = true;
@@ -1001,42 +1009,54 @@ function initThree() {
   scene.add(moonPoint);
 
   candlePoint = new THREE.PointLight(0xFFD700, 1.5, 10);
-  candlePoint.position.set(0, 0.75, 0);
+  candlePoint.position.set(0, 1.42, 0);
   scene.add(candlePoint);
 
   // Rim/key light: cool blue from high to make characters pop from background
-  const rimLight = new THREE.DirectionalLight(0x88aaff, 0.35);
+  const rimLight = new THREE.DirectionalLight(0x9fc4ff, 0.62);
   rimLight.position.set(-3, 8, -5);
   scene.add(rimLight);
 
-  // 4 ground braziers around the table — warm fill, position-match to characters
-  const brazierMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0e, roughness: 0.7, metalness: 0.4 });
-  const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff7a2a, emissive: 0xff5510, emissiveIntensity: 0.9 });
+  // 4 braziers standing on the dais deck at the rim of the council — they frame
+  // each player from behind instead of crowding the table, and their unseen
+  // side lights every coat and shoulder with warm bounce.
+  const brazierMat = new THREE.MeshStandardMaterial({
+    color: 0x6b4a2a, roughness: 0.5, metalness: 0.5,
+    emissive: 0x341a0a, emissiveIntensity: 0.4,
+  });
+  const brazierEmber = new THREE.MeshStandardMaterial({ color: 0xff8c3a, emissive: 0xff5a12, emissiveIntensity: 1.8 });
+  const brazierFlameMat = new THREE.MeshStandardMaterial({
+    color: 0xffc46b, emissive: 0xff7a1e, emissiveIntensity: 2.2, transparent: true, opacity: 0.92,
+  });
   // Track brazier components so we can toggle on/off for day/night
   const brazierEmbers = [];
   const brazierLights = [];
   for (let i = 0; i < 4; i++) {
     const a = (i + 0.5) * (TAU / 4) + PI / 4; // offset 45° so they sit between character slots
-    const bx = cos(a) * (R - 0.3);
-    const bz = sin(a) * (R - 0.3);
+    const bx = cos(a) * (R + 0.45);
+    const bz = sin(a) * (R + 0.45);
     // Bowl
-    const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.12, 0.18, 10), brazierMat);
-    bowl.position.set(bx, -0.5, bz);
+    const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.13, 0.22, 12), brazierMat);
+    bowl.position.set(bx, 0.89, bz);
     bowl.castShadow = true;
     scene.add(bowl);
     // Stand
-    const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.06, 0.32, 6), brazierMat);
-    stand.position.set(bx, -0.3, bz);
+    const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.085, 0.36, 8), brazierMat);
+    stand.position.set(bx, 0.60, bz);
     stand.castShadow = true;
     scene.add(stand);
-    // Ember glow — small so it doesn't read as a "second eye" on chars
-    const ember = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), brazierEmber);
-    ember.position.set(bx, -0.4, bz);
+    // Ember bed + a short flame so the bowl reads as fire, not a red pin
+    const ember = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 7), brazierEmber);
+    ember.position.set(bx, 0.96, bz);
     scene.add(ember);
     brazierEmbers.push(ember);
-    // Point light (limited to 4, OK)
-    const bl = new THREE.PointLight(0xff7a30, 0.35, 3.5, 1.8);
-    bl.position.set(bx, -0.3, bz);
+    const fire = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.28, 8), brazierFlameMat);
+    fire.position.set(bx, 1.10, bz);
+    scene.add(fire);
+    brazierEmbers.push(fire);
+    // Point light — the warm fill now that the fixtures are above the deck
+    const bl = new THREE.PointLight(0xff7a30, 1.15, 4.6, 1.6);
+    bl.position.set(bx, 1.05, bz);
     scene.add(bl);
     brazierLights.push(bl);
   }
@@ -1047,10 +1067,53 @@ function initThree() {
   // Floor — stone with darker outer ring for natural vignette
   const floor = new THREE.Mesh(
     new THREE.CircleGeometry(14, 64),
-    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.9, color: 0xe0d2bc })
+    new THREE.MeshStandardMaterial({ map: stoneTex, roughness: 0.9, color: 0xc0b49b })
   );
   floor.rotation.x = -PI / 2; floor.position.y = -0.6; floor.receiveShadow = true;
   scene.add(floor);
+
+  // Council dais — two tiers of stone that the table and every player pedestal
+  // actually stand on. Before this the pedestals (bottom y = 0.42) hovered a
+  // clear metre above the ground plane at y = -0.6, so the whole table read as
+  // a floating chess set no matter how good the lighting got.
+  const daisTexA = stoneTex.clone();
+  daisTexA.needsUpdate = true;
+  daisTexA.wrapS = daisTexA.wrapT = THREE.RepeatWrapping;
+  daisTexA.repeat.set(9, 9);
+  const daisTexB = stoneTex.clone();
+  daisTexB.needsUpdate = true;
+  daisTexB.wrapS = daisTexB.wrapT = THREE.RepeatWrapping;
+  daisTexB.repeat.set(6, 6);
+  const daisMatA = new THREE.MeshStandardMaterial({
+    map: daisTexA, color: 0xe8dcc2, roughness: 0.93,
+    bumpMap: daisTexA, bumpScale: 0.03,
+  });
+  const daisMatB = new THREE.MeshStandardMaterial({
+    map: daisTexB, color: 0xe2d6bb, roughness: 0.91,
+    bumpMap: daisTexB, bumpScale: 0.022,
+  });
+  const daisA = new THREE.Mesh(new THREE.CylinderGeometry(4.28, 4.40, 0.6, 96), daisMatA);
+  daisA.position.y = -0.3;
+  // castShadow is deliberately off: the dais sits flush on the floor (no gap to
+  // show), and a large flat cap that both casts and receives under VSM shadows
+  // self-shadows across its whole top face, which turned the dais into a black
+  // disc that read darker than the ground around it.
+  daisA.receiveShadow = true; daisA.castShadow = false;
+  scene.add(daisA);
+
+  const daisB = new THREE.Mesh(new THREE.CylinderGeometry(3.94, 4.06, 0.42, 96), daisMatB);
+  daisB.position.y = 0.21;
+  daisB.receiveShadow = true; daisB.castShadow = false;
+  scene.add(daisB);
+
+  // Gold inlay where the upper tier meets the lower one — the eye needs one
+  // deliberate line to read the step as architecture instead of a stack.
+  const daisTrim = new THREE.Mesh(
+    new THREE.TorusGeometry(3.95, 0.017, 8, 120),
+    new THREE.MeshStandardMaterial({ color: 0xe8c468, metalness: 0.6, roughness: 0.34 })
+  );
+  daisTrim.position.y = 0.414; daisTrim.rotation.x = -PI / 2;
+  scene.add(daisTrim);
 
   // Grass tufts — one instanced draw instead of 60 separate cones. The tuft
   // geometry is a unit-height cone, so the previous per-tuft random height
@@ -1079,38 +1142,90 @@ function initThree() {
   // Table
   const tableTop = new THREE.Mesh(
     new THREE.CylinderGeometry(TR, TR, 0.12, 48),
-    new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.72, metalness: 0.02 })
+    new THREE.MeshStandardMaterial({
+      map: woodTex, color: 0xc2a077, roughness: 0.58, metalness: 0.04,
+      bumpMap: woodTex, bumpScale: 0.024,
+    })
   );
-  tableTop.position.y = 0.15; tableTop.receiveShadow = true; tableTop.castShadow = true;
+  // Same VSM self-shadow problem as the dais: the table top receives the
+  // players' and cards' shadows, but must not cast onto itself.
+  tableTop.position.y = 0.79; tableTop.receiveShadow = true; tableTop.castShadow = false;
   scene.add(tableTop);
 
   const tableRing = new THREE.Mesh(
-    new THREE.RingGeometry(TR, TR + 0.08, 48),
+    new THREE.RingGeometry(TR - 0.012, TR + 0.022, 96),
     new THREE.MeshStandardMaterial({ color: 0xe8c468, side: THREE.DoubleSide, metalness: 0.5, roughness: 0.3 })
   );
-  tableRing.position.y = 0.16; tableRing.rotation.x = -PI / 2;
+  tableRing.position.y = 0.83; tableRing.rotation.x = -PI / 2;
   scene.add(tableRing);
 
+  // Central plinth: the table now sits at waist height on the dais instead of
+  // hovering below the players' feet, so it needs a real column under it.
   const tablePed = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.35, 0.45, 0.6, 16),
-    new THREE.MeshStandardMaterial({ color: 0x3a2a1a, roughness: 0.7 })
+    new THREE.CylinderGeometry(0.58, 0.82, 0.31, 40),
+    new THREE.MeshStandardMaterial({ color: 0x3a2a1a, roughness: 0.72, metalness: 0.05 })
   );
-  tablePed.position.y = -0.3; tablePed.castShadow = true;
+  tablePed.position.y = 0.575; tablePed.castShadow = true;
   scene.add(tablePed);
 
-  // Candle
-  const candle = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.06, 0.08, 0.3, 8),
-    new THREE.MeshStandardMaterial({ color: 0xE8D8B8 })
+  // Candle — a brass dish plus a slender taper. The previous stubby cylinder
+  // (0.3 tall, cold 0xE8D8B8) read as a grey tub from the 39-degree camera:
+  // too short to have a silhouette and too pale to read as wax. A 45cm taper on
+  // a dish is unmistakable at any distance and gives the warmth a focal point.
+  const candleDish = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.115, 0.135, 0.022, 28),
+    new THREE.MeshStandardMaterial({ color: 0xd8a94e, metalness: 0.72, roughness: 0.32 })
   );
-  candle.position.y = 0.5;
-  scene.add(candle);
+  candleDish.position.y = 0.861;
+  candleDish.castShadow = true; candleDish.receiveShadow = true;
+  scene.add(candleDish);
+  // Drip pan lip — one thin ring is enough to sell stamped brass
+  const candleLip = new THREE.Mesh(
+    new THREE.TorusGeometry(0.112, 0.011, 8, 36),
+    new THREE.MeshStandardMaterial({ color: 0xe8c468, metalness: 0.7, roughness: 0.28 })
+  );
+  candleLip.position.y = 0.872; candleLip.rotation.x = -PI / 2;
+  scene.add(candleLip);
 
-  flame = new THREE.Mesh(
-    new THREE.ConeGeometry(0.04, 0.12, 8),
-    new THREE.MeshStandardMaterial({ color: 0xFFD700, emissive: 0xFF8800, emissiveIntensity: 0.8 })
+  const candlePts = [
+    new THREE.Vector2(0.050, 0.000),
+    new THREE.Vector2(0.048, 0.020),
+    new THREE.Vector2(0.046, 0.120),
+    new THREE.Vector2(0.045, 0.260),
+    new THREE.Vector2(0.044, 0.360),
+    new THREE.Vector2(0.045, 0.418),
+    new THREE.Vector2(0.036, 0.428),
+    new THREE.Vector2(0.022, 0.421),
+  ];
+  const candle = new THREE.Mesh(
+    new THREE.LatheGeometry(candlePts, 26),
+    new THREE.MeshStandardMaterial({ color: 0xf8eed8, roughness: 0.72, metalness: 0.0, emissive: 0xffc78a, emissiveIntensity: 0.07 })
   );
-  flame.position.y = 0.72;
+  candle.position.y = 0.872;
+  candle.castShadow = true;
+  scene.add(candle);
+  // Wick — a couple of centimetres of near-black that ties flame to wax
+  const wick = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.006, 0.008, 0.04, 6),
+    new THREE.MeshStandardMaterial({ color: 0x2a2119, roughness: 0.9 })
+  );
+  wick.position.y = 1.300;
+  scene.add(wick);
+
+  // Flame — an outer teardrop plus a hot core child. Emissive intensity is the
+  // day/night knob (see NIGHT_PRESETS.flame), so the cone has to stay a
+  // MeshStandardMaterial; the core inherits the parent's scale and flicker.
+  flame = new THREE.Mesh(
+    new THREE.ConeGeometry(0.042, 0.165, 14),
+    new THREE.MeshStandardMaterial({ color: 0xffb347, emissive: 0xff7a12, emissiveIntensity: 0.8 })
+  );
+  flame.position.y = 1.395;
+  const flameCore = new THREE.Mesh(
+    new THREE.ConeGeometry(0.020, 0.088, 12),
+    new THREE.MeshStandardMaterial({ color: 0xfff4d0, emissive: 0xffe08a, emissiveIntensity: 1.6 })
+  );
+  flameCore.position.y = -0.034;
+  flame.add(flameCore);
   scene.add(flame);
 
   // Candle flame glow sprite — softens the cone into a real light source
@@ -1119,7 +1234,7 @@ function initThree() {
     depthWrite: false, blending: THREE.AdditiveBlending,
   }));
   flameGlow.scale.set(0.7, 0.7, 1);
-  flameGlow.position.set(0, 0.76, 0);
+  flameGlow.position.set(0, 1.45, 0);
   scene.add(flameGlow);
 
   initParticles();
@@ -1183,7 +1298,6 @@ function buildEnvironment() {
   envGround.position.y = -0.63;
   scene.add(envGround);
 
-  // AI-generated textures make the cottages read as actual buildings
   const envTexLoader = new THREE.TextureLoader();
   const cottageTex = envTexLoader.load('./tex-cottage.webp');
   cottageTex.colorSpace = THREE.SRGBColorSpace;
@@ -1330,6 +1444,14 @@ function buildEnvironment() {
     { a: 3.05, r: 18.5, w: 2.2, h: 1.7, d: 1.9, ch: false },
     { a: 4.35, r: 20.5, w: 2.8, h: 2.1, d: 2.3, ch: true },
     { a: 5.50, r: 18.0, w: 2.0, h: 1.6, d: 1.8, ch: false },
+    // Second row, tucked into the gaps of the first. Five houses left the
+    // horizon looking like one lone cottage decided to watch the council; nine
+    // reads as a village that surrounds it, and the depth staggering keeps the
+    // roofline from landing on a single arc.
+    { a: 1.15, r: 16.5, w: 2.1, h: 1.7, d: 1.9, ch: false },
+    { a: 2.40, r: 21.5, w: 2.6, h: 2.0, d: 2.2, ch: false },
+    { a: 3.70, r: 17.0, w: 2.3, h: 1.8, d: 1.9, ch: true },
+    { a: 4.92, r: 22.0, w: 2.9, h: 2.2, d: 2.4, ch: false },
   ];
   for (const hs of houses) {
     const house = buildHouse(hs.w, hs.h, hs.d, hs.ch);
@@ -1363,6 +1485,48 @@ function buildEnvironment() {
   }
   buildPineInstances();
 
+  // Standing stones — a broken ring at the plaza's outer edge. The band
+  // between the dais (r 4.3) and the nearest pines (r 15.5) was a flat empty
+  // skirt, so the council looked like it had been dropped in a field. The ring
+  // gives that gap a silhouette, a scale reference and something for the low
+  // key light to rake across.
+  const megalithTex = new THREE.TextureLoader().load('./tex-stone.webp');
+  megalithTex.wrapS = megalithTex.wrapT = THREE.RepeatWrapping;
+  megalithTex.repeat.set(2, 3);
+  // A pale albedo is deliberate: the key light only reaches 24° so every
+  // vertical face picks up little more than hemisphere fill, and a mid-grey
+  // stone authored at 0xa7 read as a black slab.
+  const megalithMat = new THREE.MeshStandardMaterial({
+    map: megalithTex, color: 0xe9dfcd, roughness: 0.95,
+    bumpMap: megalithTex, bumpScale: 0.05,
+  });
+  for (let i = 0; i < 9; i++) {
+    // Uneven spacing and two collapsed slots keep the ring hand-set ruins
+    // instead of a machined fence.
+    const a = (i / 9) * TAU + (Math.random() - 0.5) * 0.2;
+    const r = 8.4 + (Math.random() - 0.5) * 0.7;
+    const ruined = i === 2 || i === 6;
+    const h = ruined ? 0.32 + Math.random() * 0.22 : 1.15 + Math.random() * 0.95;
+    const w = 0.28 + Math.random() * 0.1;
+    // Tapered hexagonal prisms instead of boxes — a box at this size reads as
+    // a crate, and the six facets give the low sun somewhere to break.
+    const st = new THREE.Mesh(new THREE.CylinderGeometry(w * 0.82, w, h, 6), megalithMat);
+    st.position.set(cos(a) * r, -0.6 + h / 2, sin(a) * r);
+    st.rotation.set(
+      (Math.random() - 0.5) * 0.05,
+      Math.random() * TAU,
+      (Math.random() - 0.5) * 0.1
+    );
+    st.castShadow = true; st.receiveShadow = true;
+    scene.add(st);
+    // Fallen rubble at the foot of every stone
+    const rubble = new THREE.Mesh(new THREE.DodecahedronGeometry(0.2 + Math.random() * 0.1, 0), megalithMat);
+    rubble.position.set(cos(a) * (r - 0.5), -0.55, sin(a) * (r - 0.5));
+    rubble.rotation.set(Math.random(), Math.random(), Math.random());
+    rubble.scale.y = 0.5;
+    rubble.castShadow = true; rubble.receiveShadow = true;
+    scene.add(rubble);
+  }
   // Ground mist — soft sprites drifting slowly around the plaza
   const mistTex = makeMistTexture();
   for (let i = 0; i < 6; i++) {
@@ -1574,6 +1738,23 @@ function limb(r, len, color, rough = 0.6) {
   return m;
 }
 
+// A tapered capsule spanning two points — the primitive every limb segment is
+// built from, so joints can actually bend instead of one rigid tube.
+const _boneUp = new THREE.Vector3(0, 1, 0);
+function bone(from, to, r, mat, outlineScale = 1) {
+  const dir = new THREE.Vector3().subVectors(to, from);
+  const len = dir.length();
+  const m = new THREE.Mesh(
+    new THREE.CapsuleGeometry(r, Math.max(0.01, len - r * 2), 6, 14),
+    mat
+  );
+  m.position.copy(from).addScaledVector(dir, 0.5);
+  m.quaternion.setFromUnitVectors(_boneUp, dir.clone().normalize());
+  m.castShadow = true;
+  if (outlineScale > 1) addOutline(m, outlineScale);
+  return m;
+}
+
 function buildCharacter(player, index){
   const g=new THREE.Group();
   const pos=sp(index); g.position.set(...pos);
@@ -1598,13 +1779,34 @@ function buildCharacter(player, index){
   // === Torso ===
   // Taller than the original 0.55 so the head stops dominating the silhouette,
   // and finished with a neck + collar so the head no longer sinks into the body.
+  // Lathed coat profile — flared hem, nipped waist, square shoulder line.
+  // The straight cylinder was the single biggest reason the figures read as
+  // clay tubes: no waist, no hem, no shoulder.
+  const coatPts = [
+    new THREE.Vector2(0.001, -TORSO_H * 0.5),
+    new THREE.Vector2(0.370, -TORSO_H * 0.5),
+    new THREE.Vector2(0.382, -TORSO_H * 0.43),
+    new THREE.Vector2(0.330, -TORSO_H * 0.29),
+    new THREE.Vector2(0.296, -TORSO_H * 0.10),
+    new THREE.Vector2(0.291, TORSO_H * 0.07),
+    new THREE.Vector2(0.315, TORSO_H * 0.27),
+    new THREE.Vector2(0.332, TORSO_H * 0.43),
+    new THREE.Vector2(0.298, TORSO_H * 0.50),
+    new THREE.Vector2(0.001, TORSO_H * 0.50),
+  ];
   const torso=new THREE.Mesh(
-    new THREE.CylinderGeometry(0.28,0.35,TORSO_H,24),
+    new THREE.LatheGeometry(coatPts, 36),
     bodyMat
   );
   torso.position.y=TORSO_Y; torso.castShadow=true; g.add(torso);
-  addOutline(torso, 1.035);
+  // No outline shell on the torso: a uniform scale of a waisted lathe cuts the
+  // dark outline back through the coat wherever the profile is concave, which
+  // showed up as black blotches and a floating diamond on the chest.
 
+  // No epaulettes. A dark cap on the shoulder line lands exactly where the eye
+  // expects a neckline, and from the 39° camera it read as a hole punched in
+  // the chest — the same failure mode as the old standing collar. The chest
+  // buttons below already carry the tailoring cue; a shoulder needs nothing.
   // Neck — bridges torso top to head, removing the old bare intersection
   const neck=new THREE.Mesh(
     new THREE.CylinderGeometry(0.135,0.165,0.24,16),
@@ -1613,31 +1815,86 @@ function buildCharacter(player, index){
   neck.position.y=NECK_Y; neck.castShadow=true; g.add(neck);
 
   // Shoulders — slight width
+  // Shoulder yoke — wider and flatter than before so the figure has a real
+  // top line for the arms to hang from.
   const shoulders=new THREE.Mesh(
-    new THREE.SphereGeometry(0.3,24,16),
+    new THREE.SphereGeometry(0.3,28,18),
     bodyMat
   );
-  shoulders.position.y=0.65; shoulders.scale.set(1,0.5,0.8); shoulders.castShadow=true; g.add(shoulders);
+  shoulders.position.y=0.685; shoulders.scale.set(1.12,0.44,0.86); shoulders.castShadow=true; g.add(shoulders);
   addOutline(shoulders, 1.025);
+
+  // Shoulder caps — the sleeve used to begin as a bare capsule stub floating
+  // beside the torso.
+  for (const s of [-1, 1]) {
+    const cap=new THREE.Mesh(new THREE.SphereGeometry(0.118,22,16),bodyMat);
+    cap.position.set(s*0.315,0.645,0); cap.castShadow=true; g.add(cap);
+  }
+
+  // No standing collar. Every version of it — flared or hugging — read as a
+  // cone of shame around the neck from this camera: a ring the figure is
+  // wearing rather than a garment edge. The neck and shoulder yoke already meet
+  // cleanly, so the silhouette is better with nothing there at all.
+  // Buttons — three brass studs down the coat front. From above they are what
+  // tells the eye the coat is tailored instead of a turned cone.
+
+  const buttonMat = new THREE.MeshToonMaterial({ color: 0xd8b468, gradientMap: TOON_GRADIENT });
+  buttonMat.dithering = true;
+  // Interpolates the real coat profile, so the studs sit on the cloth instead
+  // of floating in front of the nipped waist.
+  const coatR = (ly) => {
+    for (let i = 1; i < coatPts.length; i++) {
+      const a = coatPts[i - 1], b = coatPts[i];
+      if (ly >= a.y && ly <= b.y) {
+        const t = (ly - a.y) / Math.max(1e-6, b.y - a.y);
+        return a.x + (b.x - a.x) * t;
+      }
+    }
+    return 0.30;
+  };
+  for (let i = 0; i < 3; i++) {
+    const by = 0.545 + i * 0.075;
+    const btn = new THREE.Mesh(new THREE.SphereGeometry(0.022, 12, 9), buttonMat);
+    btn.position.set(0, by, coatR(by - TORSO_Y) + 0.004);
+    g.add(btn);
+  }
 
   // === Arms === (sleeves in accent color, hands in skin). Raised with the taller
   // torso so they still hang from the shoulder line rather than mid-body.
-  const armL=limb(0.09,0.35,player.accent);
-  armL.position.set(-0.38,0.50,0);
-  armL.rotation.z=0.15;
+  // Arms — two segments with an elbow, built from the shoulder pivot down.
+  // A single capsule read as a tube glued to the body; a real upper arm +
+  // forearm gives the silhouette a joint, a taper and a wrist.
+  const armL = new THREE.Group();
+  armL.position.set(-0.315, 0.66, 0);
   g.add(armL);
-  addOutline(armL, 1.04);
-  const armR=limb(0.09,0.35,player.accent);
-  armR.position.set(0.38,0.50,0);
-  armR.rotation.z=-0.15;
+  const armR = new THREE.Group();
+  armR.position.set(0.315, 0.66, 0);
   g.add(armR);
-  addOutline(armR, 1.04);
 
-  // Hands
-  const handL=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
-  handL.position.set(-0.48,0.30,0); handL.castShadow=true; g.add(handL);
-  const handR=new THREE.Mesh(new THREE.SphereGeometry(0.1,16,12),skinMat);
-  handR.position.set(0.48,0.30,0); handR.castShadow=true; g.add(handR);
+  const buildArm = (group, s) => {
+    const shoulder = new THREE.Vector3(0, 0, 0);
+    const elbow = new THREE.Vector3(s * 0.062, -0.185, 0.015);
+    const wrist = new THREE.Vector3(s * 0.104, -0.345, 0.032);
+    const upper = bone(shoulder, elbow, 0.088, bodyMat, 1.045);
+    group.add(upper);
+    const joint = new THREE.Mesh(new THREE.SphereGeometry(0.086, 20, 14), bodyMat);
+    joint.position.copy(elbow); joint.castShadow = true; group.add(joint);
+    const fore = bone(elbow, wrist, 0.074, bodyMat, 1.05);
+    group.add(fore);
+    // Cuff — the sleeve's hem, long enough to swallow the top of the hand. The
+    // bare skin ball used to sit out below it as a separate object.
+    const cuff = new THREE.Mesh(new THREE.CylinderGeometry(0.080, 0.089, 0.105, 18), darkMat);
+    cuff.position.copy(wrist).add(new THREE.Vector3(0, 0.030, 0));
+    cuff.castShadow = true; group.add(cuff);
+    // Hand — smaller, flatter, and tucked under the cuff hem.
+    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.074, 18, 13), skinMat);
+    hand.position.copy(wrist).add(new THREE.Vector3(s * 0.004, -0.049, 0.006));
+    hand.scale.set(1, 0.86, 0.9);
+    hand.castShadow = true; group.add(hand);
+    return hand;
+  };
+  const handL = buildArm(armL, -1);
+  const handR = buildArm(armR, 1);
 
   // === Legs === (pants in deep accent color)
   const legL=limb(0.12,0.3,player.accent);
@@ -1646,6 +1903,15 @@ function buildCharacter(player, index){
   const legR=limb(0.12,0.3,player.accent);
   legR.position.set(0.14,-0.1,0); g.add(legR);
   addOutline(legR, 1.04);
+
+  // Shoes — the legs used to stop at a capsule tip above the pedestal.
+  for (const s of [-1, 1]) {
+    const shoe=new THREE.Mesh(new THREE.BoxGeometry(0.165,0.095,0.24),darkMat);
+    // Sit the shoe on the pedestal top (y = -0.10); lower and the figure
+    // appeared to stand on air in the portrait renderer.
+    shoe.position.set(s*0.145,-0.128,0.035);
+    shoe.castShadow=true; shoe.receiveShadow=true; g.add(shoe);
+  }
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
@@ -1779,11 +2045,11 @@ function buildCharacter(player, index){
       );
       bandanaTop.position.set(0,0.005,0); bandanaTop.castShadow=true; head.add(bandanaTop);
       // Bigger arms (muscular)
-      armL.scale.set(1.3,1.2,1.3); armR.scale.set(1.3,1.2,1.3);
-      handL.scale.set(1.3,1.3,1.3); handR.scale.set(1.3,1.3,1.3);
-      // Fist pose — both hands on table
-      handL.position.set(-0.35,0.15,0.15); armL.rotation.x=-0.5; armL.position.y=0.42;
-      handR.position.set(0.35,0.15,0.15); armR.rotation.x=-0.5; armR.position.y=0.42;
+      armL.scale.set(1.24,1.16,1.24); armR.scale.set(1.24,1.16,1.24);
+      // Fist pose — both arms lean forward onto the table. Hands are children
+      // of the arm groups now, so rotating the shoulder is the whole gesture.
+      armL.rotation.x=-0.42; armR.rotation.x=-0.42;
+      armL.rotation.z=0.10; armR.rotation.z=-0.10;
       // Scar on cheek
       const scar=new THREE.Mesh(
         new THREE.BoxGeometry(0.02,0.06,0.01),
@@ -1844,11 +2110,14 @@ function buildCharacter(player, index){
   // Nape volume now lives in buildHair(), so this pass only handles the clothing
   // trim.
   // Collar + belt trim — clothing reads as clothing. The collar sits at the base
-  // of the new neck and the belt rides the taller torso.
+  // of the new neck and the belt cinches the actual waist.
   const collarTrim=new THREE.Mesh(new THREE.TorusGeometry(0.175,0.038,10,40),accMat);
   collarTrim.position.y=0.70; collarTrim.rotation.x=PI/2; g.add(collarTrim);
-  const belt=new THREE.Mesh(new THREE.TorusGeometry(0.335,0.04,10,48),accMat);
-  belt.position.y=0.20; belt.rotation.x=PI/2; g.add(belt);
+  // Belt — a slim band on the narrow part of the coat (profile local y -0.069,
+  // world 0.351), not a fat hoop around the hem. The old 0.04 tube sat on the
+  // flared skirt at y 0.20 and read as a rubber ring; this one hugs the waist.
+  const belt=new THREE.Mesh(new THREE.TorusGeometry(0.302,0.021,10,56),accMat);
+  belt.position.y=0.351; belt.rotation.x=PI/2; g.add(belt);
 
   // === Base platform ===
   // Segments raised from 24: these rims are right under the camera and were
@@ -2070,7 +2339,12 @@ function addAvatarAccessories(scene, head, player, skinMat, bodyMat, accMat, dar
 // ===== Camera Controls =====
 let theta = 0, phi = PI / 2.4;
 // Narrow mobile viewports need more distance to keep the full circle visible.
-let dist = (innerWidth <= 768) ? 20 : 10;
+// A tighter default hero framing: at dist 10 the whole dais fit in shot and the
+// six figures occupied a tenth of it.
+// Portrait also has a far narrower horizontal FOV (aspect ~0.46), so the tight
+// mobile default cropped the outer two players off both edges. 19 keeps the
+// dais at ~78% of the width and matches the resize clamp below.
+let dist = (innerWidth <= 768) ? 22 : 12;
 // Aimed just above the head so full figures stay in frame when zoomed in.
 // Derived from HEAD_Y (the old build used a flat 1.1, which left the taller
 // figures' heads outside the top of the frame at close zoom).
@@ -2091,6 +2365,10 @@ function clampTarget() {
 
 function updateCam() {
   // Orbit around targetV (not the origin): panning moves camera and look-at
+
+// Tighter default framing: at dist 10 the whole dais fit in frame and the six
+// figures occupied a tenth of it. Pulling in reads as a director's setup rather
+// than a camera left on wide.
   // point together, so the view direction stays fixed — a true parallel pan.
   const x = targetV.x + dist * sin(phi) * cos(theta);
   const y = targetV.y + dist * cos(phi) - 0.6; // -0.6 preserves the original default framing
@@ -2362,16 +2640,18 @@ const NIGHT_PRESETS = {
   // especially at wider zoom levels.
   day: {
     bg:0x8fb4d4, fogColor:0xc8d8e8, fogNear:40, fogFar:100,
-    amb:1.25, dir:1.3, dirColor:0xffe2ae, moon:0, candle:0, flame:0,
+    // Low ambient + a strong warm key. The old 1.25 ambient flooded every
+    // surface evenly, which is exactly what made the daylight table read as
+    // grey plastic no matter how good the geometry got.
+    amb:0.66, dir:1.8, dirColor:0xffd49c, moon:0, candle:0, flame:0.9,
     skyMix:0, ground:0xdcdcd2, winOpacity:0.12,
   },
   night: {
     bg:0x0a0a18, fogColor:0x0a0a18, fogNear:18, fogFar:52,
-    amb:0.30, dir:0.38, dirColor:0x6677ff, moon:0.6, candle:4, flame:2.5,
-    skyMix:1, ground:0x4a5a50, winOpacity:0.8,
+    amb:0.20, dir:0.30, dirColor:0x6677ff, moon:0.9, candle:5.2, flame:2.6,
+    skyMix:1, ground:0x4a5a50, winOpacity:0.85,
   },
 };
-
 function setNight(n) {
   isNight = n;
   const target = n ? NIGHT_PRESETS.night : NIGHT_PRESETS.day;
@@ -3406,27 +3686,22 @@ function buildCenterCards() {
     const cx = cos(angle) * 0.6;
     const cz = sin(angle) * 0.6;
 
-    // Card base — flat card lying on table
-    const cardGeo = new THREE.BoxGeometry(0.35, 0.02, 0.5);
+    // Card base — flat card lying on table. The gold frame is painted into the
+    // face texture instead of being stroked as an EdgesGeometry outline: a 1px
+    // line at this camera angle broke into a jagged dashed border, which read
+    // as a torn card. The box is also 2cm wider than the face on every side so
+    // the dark body itself forms the visible rim.
+    const cardGeo = new THREE.BoxGeometry(0.37, 0.022, 0.52);
     const cardMat = new THREE.MeshStandardMaterial({
       color: 0x1a1a2e, roughness: 0.4, metalness: 0.3,
     });
     const card = new THREE.Mesh(cardGeo, cardMat);
-    card.position.set(cx, 0.25, cz);
+    card.position.set(cx, 0.869, cz);
     card.rotation.y = angle + PI / 2;
     card.castShadow = true;
     card.receiveShadow = true;
     scene.add(card);
     centerCardMeshes.push(card);
-
-    // Card border (gold trim)
-    const borderGeo = new THREE.EdgesGeometry(cardGeo);
-    const borderMat = new THREE.LineBasicMaterial({ color: 0xe8c468 });
-    const border = new THREE.LineSegments(borderGeo, borderMat);
-    border.position.copy(card.position);
-    border.rotation.copy(card.rotation);
-    scene.add(border);
-    centerCardMeshes.push(border);
 
     // Role text via CanvasTexture on top face
     const labelCanvas = document.createElement('canvas');
@@ -3434,26 +3709,32 @@ function buildCenterCards() {
     const ctx = labelCanvas.getContext('2d');
     ctx.fillStyle = '#15152a';
     ctx.fillRect(0, 0, 128, 256);
+    // Double gold rule: a heavy outer line plus a hairline inset reads as a
+    // printed card frame once it is minified down to ~40 screen pixels.
+    ctx.strokeStyle = '#e8c468';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(4, 4, 120, 248);
+    ctx.strokeStyle = 'rgba(232,196,104,0.45)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(12, 12, 104, 232);
     ctx.fillStyle = '#e8c468';
     ctx.font = 'bold 28px serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     const roleText = lang === 'zh' ? roleZh(role) : role;
     ctx.fillText(roleText, 64, 100);
-    // Decorative border
-    ctx.strokeStyle = '#e8c468';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(8, 8, 112, 240);
     // Question mark for mystery
     ctx.font = 'bold 60px serif';
     ctx.fillStyle = '#e8c46844';
     ctx.fillText('?', 64, 170);
 
     const labelTex = new THREE.CanvasTexture(labelCanvas);
-    const labelGeo = new THREE.PlaneGeometry(0.35, 0.5);
+    labelTex.colorSpace = THREE.SRGBColorSpace;
+    labelTex.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+    const labelGeo = new THREE.PlaneGeometry(0.325, 0.475);
     const labelMat = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true });
     const label = new THREE.Mesh(labelGeo, labelMat);
-    label.position.set(cx, 0.27, cz);
+    label.position.set(cx, 0.8815, cz);
     label.rotation.x = -PI / 2;
     label.rotation.z = angle + PI / 2;
     scene.add(label);
@@ -5677,8 +5958,11 @@ function updateIntroAnim() {
   const t = Math.min(elapsed / introAnim.duration, 1);
   // Ease out cubic
   const e = 1 - Math.pow(1 - t, 3);
-  // Descend from 30 to target dist
-  const targetDist = innerWidth <= 768 ? 20 : 12;
+  // Portrait has a horizontal FOV near 22 deg (aspect 0.46). 20 let the far
+  // left/right figures bleed past the screen edges, but 26 shrank the council
+  // enough that the six name tags collapsed into one overlapping cluster —
+  // 22 is the balance point where the ring fits and the tags still separate.
+  const targetDist = innerWidth <= 768 ? 22 : 12;
   dist = 30 + (targetDist - 30) * e;
   // Rotate slightly during descent
   theta = PI / 4 + (0 - PI / 4) * e;
@@ -5723,7 +6007,7 @@ function animate() {
   if (flame) {
     flame.scale.y = 1 + Math.sin(t * 8) * 0.15;
     flame.scale.x = 1 + Math.sin(t * 7) * 0.1;
-    flame.position.y = 0.72 + Math.sin(t * 8) * 0.01;
+    flame.position.y = 1.395 + Math.sin(t * 8) * 0.01;
   }
 
   // Intro animation (overrides auto-rotate)
