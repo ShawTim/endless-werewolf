@@ -1948,6 +1948,14 @@ function buildCharacter(player, index){
   const handL = buildArm(armL, -1);
   const handR = buildArm(armR, 1);
 
+  // Grip points — the centre of each fist, in arm-group space (wrist + the hand's
+  // own offset, see buildArm). Persona props hang off these instead of being
+  // placed in figure space: a fixed figure-space position cannot follow the
+  // shoulder, so once the arms gained a shoulder pivot every prop ended up a
+  // hand's width away from the body with nothing touching it.
+  const GRIP_L = new THREE.Vector3(-0.108, -0.394, 0.038);
+  const GRIP_R = new THREE.Vector3( 0.108, -0.394, 0.038);
+
   // === Legs === (pants in deep accent color)
   const legL=limb(0.12,0.3,player.accent);
   legL.position.set(-0.14,-0.1,0); g.add(legL);
@@ -2009,19 +2017,26 @@ function buildCharacter(player, index){
       );
       tie.position.set(0,0.5,0.3); tie.rotation.x=-PI/2+0.3;
       g.add(tie);
-      // Gavel in right hand
-      const gavelHead=new THREE.Mesh(
-        new THREE.CylinderGeometry(0.06,0.06,0.14,8),
+      // Gavel — gripped in the right fist with the head up. Handle and head are
+      // one group on the arm; in world space the two parts sat 8 cm apart and
+      // neither of them was anywhere near the hand.
+      const gavel=new THREE.Group();
+      // Leaned outboard so the head clears the sleeve silhouette. Held vertically
+      // it disappeared behind the forearm from every camera outside the ring,
+      // which is the only place the camera ever is.
+      gavel.position.copy(GRIP_R).add(new THREE.Vector3(0.046,-0.015,0.050));
+      gavel.rotation.set(-0.14,0,-0.45);
+      const gavelHandle=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.019,0.022,0.26,10),
         new THREE.MeshStandardMaterial({color:0x6B4226,roughness:0.5})
       );
-      gavelHead.position.set(0.52,0.15,0.1); gavelHead.rotation.z=PI/2;
-      g.add(gavelHead);
-      const gavelHandle=new THREE.Mesh(
-        new THREE.CylinderGeometry(0.02,0.02,0.12,8),
-        new THREE.MeshStandardMaterial({color:0x6B4226})
+      gavelHandle.position.y=0.055; gavel.add(gavelHandle);
+      const gavelHead=new THREE.Mesh(
+        new THREE.CylinderGeometry(0.052,0.052,0.155,14),
+        new THREE.MeshStandardMaterial({color:0x7a4a2c,roughness:0.5})
       );
-        gavelHandle.position.set(0.6,0.1,0.1); gavelHandle.rotation.z=PI/3;
-      g.add(gavelHandle);
+      gavelHead.position.y=0.175; gavelHead.rotation.z=PI/2; gavel.add(gavelHead);
+      armR.add(gavel);
       // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
@@ -2044,32 +2059,47 @@ function buildCharacter(player, index){
       );
       bridge.position.set(0,0.02,0.33); bridge.rotation.z=PI/2;
       head.add(bridge);
-      // Clipboard in left hand
+      // Clipboard — carried at the left hip beside the fist, angled like the
+      // tablet: the clip at the top is what makes it read as a clipboard, and the
+      // outboard turn keeps the face visible from outside the ring.
+      const clipboard=new THREE.Group();
+      clipboard.position.copy(GRIP_L).add(new THREE.Vector3(-0.070,0.075,0.075));
+      clipboard.rotation.set(-0.18,-0.70,0.08);
       const board=new THREE.Mesh(
-        new THREE.BoxGeometry(0.18,0.22,0.02),
+        new THREE.BoxGeometry(0.185,0.235,0.02),
         new THREE.MeshStandardMaterial({color:0xF5F0E0,roughness:0.7})
       );
-      board.position.set(-0.52,0.15,0.05); board.rotation.x=-0.2;
-      g.add(board);
+      clipboard.add(board);
+      const clip=new THREE.Mesh(
+        new THREE.BoxGeometry(0.10,0.032,0.014),
+        new THREE.MeshStandardMaterial({color:0x9aa3a8,metalness:0.6,roughness:0.35})
+      );
+      clip.position.set(0,0.113,0.014); clipboard.add(clip);
+      armL.add(clipboard);
       // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
     case 'The Chaos Agent': case 'Twister': // Wild hair + mask
       // Wild spiky hair. The old spikes sat at radius 0.25 while the skull's
       // Spikes and the under-shell come from buildHair().
-      // Mask on stick (drama!)
+      // Mask on a stick (drama!) — gripped in the right fist. Stick and mask are
+      // one group hung off the arm, so the mask stays on the end of the stick as
+      // the shoulder moves. Placed in world space they floated beside the arm.
+      const maskProp=new THREE.Group();
+      maskProp.position.copy(GRIP_R).add(new THREE.Vector3(0.048,0.002,0.062));
+      maskProp.rotation.set(-0.14,0,-0.28);
       const stick=new THREE.Mesh(
-        new THREE.CylinderGeometry(0.015,0.015,0.35,6),
+        new THREE.CylinderGeometry(0.014,0.016,0.32,8),
         new THREE.MeshStandardMaterial({color:0x6B4226})
       );
-      stick.position.set(0.52,0.25,0.1); stick.rotation.z=-0.3;
-      g.add(stick);
+      stick.position.y=0.115; maskProp.add(stick);
       const mask=new THREE.Mesh(
-        new THREE.SphereGeometry(0.1,12,8,0,TAU,0,PI),
+        new THREE.SphereGeometry(0.1,16,10),
         accMat
       );
-      mask.position.set(0.6,0.35,0.1); mask.scale.set(0.8,1,0.3);
-      g.add(mask);
+      mask.position.y=0.29; mask.scale.set(0.8,1,0.3);
+      maskProp.add(mask);
+      armR.add(maskProp);
       // The wide "wildcard" grin is painted by FACE_STYLES.
       break;
 
@@ -2123,36 +2153,48 @@ function buildCharacter(player, index){
         new THREE.MeshStandardMaterial({color:0x2980b9,metalness:0.4,roughness:0.2})
       );
       sgR.position.set(0.12,0.02,0.32); head.add(sgR);
-      // Tablet in left hand
-      const tablet=new THREE.Mesh(
-        new THREE.BoxGeometry(0.16,0.22,0.015),
-        new THREE.MeshStandardMaterial({color:0x1a1a2e,roughness:0.2,metalness:0.5})
+      // Tablet — carried at the left hip beside the fist. Two things decide
+      // whether it reads at all: square to the chest it hides behind the figure
+      // (the camera only ever orbits outside the ring), and turned fully outboard
+      // it presents nothing but its edge. About 25 degrees out plus a lighter
+      // casing and a brighter screen so the slab is not a black notch at night.
+      const tablet=new THREE.Group();
+      tablet.position.copy(GRIP_L).add(new THREE.Vector3(-0.070,0.055,0.085));
+      tablet.rotation.set(-0.28,-0.45,0.05);
+      const slab=new THREE.Mesh(
+        new THREE.BoxGeometry(0.17,0.235,0.016),
+        new THREE.MeshStandardMaterial({color:0x2a3550,roughness:0.3,metalness:0.45})
       );
-      tablet.position.set(-0.5,0.18,0.08); tablet.rotation.x=-0.15;
-      g.add(tablet);
-      // Screen glow
+      tablet.add(slab);
+      // Screen glow — sits just proud of the slab's front face.
       const screen=new THREE.Mesh(
-        new THREE.PlaneGeometry(0.13,0.18),
-        new THREE.MeshStandardMaterial({color:0x2980b9,emissive:0x2980b9,emissiveIntensity:0.3})
+        new THREE.PlaneGeometry(0.148,0.205),
+        new THREE.MeshStandardMaterial({color:0x2980b9,emissive:0x2980b9,emissiveIntensity:0.55})
       );
-      screen.position.set(-0.5,0.18,0.09); screen.rotation.x=-0.15;
-      g.add(screen);
+      screen.position.z=0.0095; tablet.add(screen);
+      armL.add(tablet);
       // Hair (including the side part) comes from buildHair().
       break;
 
     case 'The Underdog': case 'EasyBake': // Messy hair + lucky charm
       // Hair (bowl + cowlick) comes from buildHair().
-      // Lucky charm (four-leaf clover) in right hand
+      // Lucky charm (four-leaf clover) pinched in the right fist. It hangs off
+      // the arm group so it rides the shoulder pose; the old world-space position
+      // at (0.48, 0.15) left it hovering beside the hand with nothing touching it.
+      const clover=new THREE.Group();
+      clover.position.copy(GRIP_R).add(new THREE.Vector3(0.012,0.030,0.070));
+      const leafMat=new THREE.MeshStandardMaterial({color:0x27ae60,roughness:0.4});
       for(let k=0;k<4;k++){
-        const leaf=new THREE.Mesh(
-          new THREE.SphereGeometry(0.04,8,6),
-          new THREE.MeshStandardMaterial({color:0x27ae60,roughness:0.4})
-        );
-        const a2=k/4*TAU;
-        leaf.position.set(0.48+cos(a2)*0.06,0.15+sin(a2)*0.06,0.08);
+        const leaf=new THREE.Mesh(new THREE.SphereGeometry(0.04,10,7), leafMat);
+        const a2=k/4*TAU+PI/4;
+        leaf.position.set(cos(a2)*0.048, sin(a2)*0.048, 0);
         leaf.scale.set(1,1.5,0.5);
-        g.add(leaf);
+        leaf.rotation.z=a2-PI/2;
+        clover.add(leaf);
       }
+      const cloverStem=new THREE.Mesh(new THREE.CylinderGeometry(0.009,0.009,0.06,6), leafMat);
+      cloverStem.position.y=-0.055; clover.add(cloverStem);
+      armR.add(clover);
       // Worried expression comes from FACE_STYLES (browTilt), not mesh tweaks
       // Nervous posture — slightly leaning back
       g.rotation.x=-0.05;
@@ -2720,10 +2762,12 @@ const NIGHT_PRESETS = {
   // especially at wider zoom levels.
   day: {
     bg:0x8fb4d4, fogColor:0xc8d8e8, fogNear:40, fogFar:100,
-    // Low ambient + a strong warm key. The old 1.25 ambient flooded every
-    // surface evenly, which is exactly what made the daylight table read as
-    // grey plastic no matter how good the geometry got.
-    amb:0.66, dir:1.8, dirColor:0xffd49c, moon:0, candle:0, flame:0.9,
+    // Ambient carries the shadow side. The old 1.25 flooded every surface evenly
+    // and made the daylight table read as grey plastic; 0.66 went too far the
+    // other way — with the sun this low, the long raking shadows went near black
+    // and the stone outside the dais read as dusk. The key comes down as the fill
+    // comes up, so lit stone keeps its value while the shadow side stays readable.
+    amb:1.02, dir:1.52, dirColor:0xffd49c, moon:0, candle:0, flame:0.9,
     skyMix:0, ground:0xdcdcd2, winOpacity:0.12,
   },
   night: {
@@ -3039,7 +3083,19 @@ function updateBubblePosition(b) {
   const v = new THREE.Vector3(pos[0], pos[1] + 1.8, pos[2]);
   v.project(camera);
   const projectedX = (v.x * 0.5 + 0.5) * innerWidth;
-  const projectedY = (-v.y * 0.5 + 0.5) * innerHeight;
+  // The player's name tag is anchored at +1.75 (+2.10 in the foreground) and the
+  // bubble's bottom edge used to land at +1.8 — the tag's own centre line — so a
+  // speaker's bubble sat on top of the name it belongs to. Lift the anchor by
+  // half the tag's painted height (it scales with distance) plus a gap, in screen
+  // pixels, so the bubble clears its owner's tag.
+  const tagEl = tagEls[b.playerIndex];
+  let tagLift = 0;
+  if (tagEl && tagEl.offsetHeight) {
+    const scaleMatch = /scale\(([\d.]+)\)/.exec(tagEl.style.transform || '');
+    const tagScale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+    tagLift = (tagEl.offsetHeight * tagScale) / 2 + (innerWidth <= 768 ? 6 : 8);
+  }
+  const projectedY = (-v.y * 0.5 + 0.5) * innerHeight - tagLift;
   const bubbleWidth = b.el.offsetWidth || Math.min(280, innerWidth - 16);
   const bubbleHeight = b.el.offsetHeight || 80;
   const margin = innerWidth <= 768 ? 8 : 12;
