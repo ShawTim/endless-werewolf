@@ -623,7 +623,13 @@ function applyToonRim(material, rimColor = 0xfff0c8, rimPower = 2.5, rimStrength
       '#include <dithering_fragment>',
       `// cel rim
        float rimDot = 1.0 - max(dot(normalize(vNormal), normalize(vViewPosition)), 0.0);
-       float rim = smoothstep(0.55, 0.95, pow(rimDot, uRimPower));
+      // A thresholded band (smoothstep) turned the rim into a dashed white
+      // line along the sleeve and hem at real view size: wherever the band
+      // edge crossed a facet or a bump-perturbed normal the term flicked
+      // between on and off. Dropping the threshold and keeping a plain power
+      // curve keeps the same shape but varies continuously, so the edge reads
+      // as a soft light wrap instead of a dotted outline.
+      float rim = pow(rimDot, uRimPower);
        gl_FragColor.rgb += uRimColor * rim * uRimStrength;
        #include <dithering_fragment>`
     );
@@ -1811,9 +1817,12 @@ function buildCharacter(player, index){
   bodyMat.bumpScale = 0.018;
   accMat.bumpMap = FABRIC_BUMP;
   accMat.bumpScale = 0.014;
-  // Apply cel rim to body materials (skin & hair excluded — soft / dark surfaces)
-  applyToonRim(bodyMat, 0xfff0d0, 3.0, 0.24);
-  applyToonRim(accMat, 0xffe0a0, 2.8, 0.28);
+  // Apply cel rim to body materials (skin & hair excluded — soft / dark surfaces).
+  // The power is the band width now that the shader has no threshold: rim falls
+  // off as pow(1 - N·V, power), so 6.0 keeps the highlight to the last ~15
+  // degrees before the silhouette instead of washing the whole side of the coat.
+  applyToonRim(bodyMat, 0xfff0d0, 6.0, 0.34);
+  applyToonRim(accMat, 0xffe0a0, 5.5, 0.32);
 
   // === Torso ===
   // Taller than the original 0.55 so the head stops dominating the silhouette,
@@ -1914,11 +1923,15 @@ function buildCharacter(player, index){
     const shoulder = new THREE.Vector3(0, 0, 0);
     const elbow = new THREE.Vector3(s * 0.062, -0.185, 0.015);
     const wrist = new THREE.Vector3(s * 0.104, -0.345, 0.032);
-    const upper = bone(shoulder, elbow, 0.088, bodyMat, 1.045);
+    // No outline shell on the sleeve segments. The other parts of the figure
+    // keep one, but on two overlapping capsules a uniform 1.045 inflation makes
+    // the upper arm's shell poke back through the forearm and the elbow sphere
+    // as a hard black seam running down the middle of the arm.
+    const upper = bone(shoulder, elbow, 0.088, bodyMat, 1.0);
     group.add(upper);
     const joint = new THREE.Mesh(new THREE.SphereGeometry(0.086, 20, 14), bodyMat);
     joint.position.copy(elbow); joint.castShadow = true; group.add(joint);
-    const fore = bone(elbow, wrist, 0.074, bodyMat, 1.05);
+    const fore = bone(elbow, wrist, 0.074, bodyMat, 1.0);
     group.add(fore);
     // Cuff — the sleeve's hem, long enough to swallow the top of the hand. The
     // bare skin ball used to sit out below it as a separate object.
