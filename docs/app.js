@@ -293,11 +293,21 @@ function hairKnot(mat, theta, size, depth = 0.9, phi = PI * 1.5) {
 // DoubleSide: the shell is a single sheet, so the inside of a fringe or the
 // underside of a fringe would otherwise be see-through.
 function hairMatFor(player, dark = false) {
-  return new THREE.MeshToonMaterial({
-    color: dark ? 0x1a1a2e : (player.hair ?? 0x2a1a0a),
+  // Hair colours sit within a few points of black, so under candlelight the head
+  // collapsed into a silhouette against the dark sky and stopped reading as a
+  // head at all. Lifting the colour 12% toward a warm grey keeps it dark hair
+  // but leaves enough value for the toon bands to describe the volume. A cel rim
+  // was tried first and aliased into a dotted silhouette: the shell is
+  // flat-shaded, so a rim thin enough to look like a sheen lands on single
+  // triangles instead of a continuous edge.
+  const base = new THREE.Color(dark ? 0x1a1a2e : (player.hair ?? 0x2a1a0a));
+  if (!dark) base.lerp(new THREE.Color(0x8a7a68), 0.12);
+  const mat = new THREE.MeshToonMaterial({
+    color: base,
     gradientMap: TOON_GRADIENT,
     side: THREE.DoubleSide,
   });
+  return mat;
 }
 
 // ===== Hair =====
@@ -1092,6 +1102,13 @@ function initThree() {
     map: daisTexB, color: 0xe2d6bb, roughness: 0.91,
     bumpMap: daisTexB, bumpScale: 0.022,
   });
+  // buildCharacter skins each figure's seat step with the same stone: a
+  // flat-coloured disc at the dais's nominal tint renders about twice as bright
+  // as the textured dais once the sun hits a horizontal face, so the seat glared
+  // as a white plate. Exposing the base texture lets the seat clone it with its
+  // own repeat (and its own material, so the team-colour flash can't paint the
+  // whole dais).
+  window.__stoneTex = stoneTex;
   const daisA = new THREE.Mesh(new THREE.CylinderGeometry(4.28, 4.40, 0.6, 96), daisMatA);
   daisA.position.y = -0.3;
   // castShadow is deliberately off: the dais sits flush on the floor (no gap to
@@ -1725,7 +1742,22 @@ function updateParticles(t) {
 
 // ===== Character Builder =====
 
-function sp(i) { const a = (i / 6) * TAU - PI / 2; return [cos(a) * R, SH, sin(a) * R]; }
+// Six identical models on a perfect circle at one height read as six copies of
+// a single figure, not as a village. These offsets are fixed per seat (not
+// random) so a replay always renders the same crowd.
+const FIG_JITTER = [
+  { dr:  0.00, k: 1.000, yaw:  0.000 },
+  { dr: -0.12, k: 0.974, yaw:  0.055 },
+  { dr:  0.14, k: 1.028, yaw: -0.045 },
+  { dr: -0.06, k: 0.986, yaw:  0.065 },
+  { dr:  0.10, k: 1.038, yaw: -0.060 },
+  { dr: -0.14, k: 1.014, yaw:  0.030 },
+];
+function sp(i) {
+  const a = (i / 6) * TAU - PI / 2;
+  const r = R + FIG_JITTER[i % 6].dr;
+  return [cos(a) * r, SH, sin(a) * r];
+}
 function sa(i) { return (i / 6) * TAU - PI / 2; }
 
 function limb(r, len, color, rough = 0.6) {
@@ -1757,8 +1789,15 @@ function bone(from, to, r, mat, outlineScale = 1) {
 
 function buildCharacter(player, index){
   const g=new THREE.Group();
-  const pos=sp(index); g.position.set(...pos);
-  const ang=sa(index); g.rotation.y=-ang-PI/2;
+  const fj = FIG_JITTER[index % 6];
+  const pos = sp(index);
+  // Height variation scales the whole figure, which moves the foot point: lift
+  // the group by exactly what the scale would sink or float it, so the seat
+  // plinth stays welded to the dais at every height.
+  const FOOT_LOCAL = -0.18;
+  g.position.set(pos[0], SH + FOOT_LOCAL * (1 - fj.k), pos[2]);
+  g.scale.setScalar(fj.k);
+  const ang=sa(index); g.rotation.y=-ang-PI/2+fj.yaw;
   scene.add(g);
 
   // Distinct palette: skin, hair, main clothing, secondary clothing
@@ -2119,25 +2158,53 @@ function buildCharacter(player, index){
   const belt=new THREE.Mesh(new THREE.TorusGeometry(0.302,0.021,10,56),accMat);
   belt.position.y=0.351; belt.rotation.x=PI/2; g.add(belt);
 
-  // === Base platform ===
+  // === Seat plinth ===
   // Segments raised from 24: these rims are right under the camera and were
   // visibly faceted at close range.
-  const baseMat = new THREE.MeshStandardMaterial({color:player.color,roughness:0.58,metalness:0.04});
+  // Tinted toward the dais stone and skinned with the same stone texture: a
+  // flat-coloured disc at the dais's nominal tint renders about twice as bright
+  // as the textured dais once the sun hits a horizontal face, so it read as a
+  // white plate parked on the stone. Sharing the grain fixes tone and material
+  // at once. The player colour survives on the thin ring below, which is enough
+  // to identify who is who.
+  const baseColor = new THREE.Color(player.color).lerp(new THREE.Color(0xe2d6bb), 0.62);
+  const seatStone = window.__stoneTex;
+  let baseMat;
+  if (seatStone) {
+    const seatTex = seatStone.clone();
+    seatTex.needsUpdate = true;
+    seatTex.wrapS = seatTex.wrapT = THREE.RepeatWrapping;
+    // The dais runs 6 tiles over 8 m (0.75 tiles/m); this disc is 1.1 m across,
+    // so just under one tile keeps the same grain size.
+    seatTex.repeat.set(0.85, 0.85);
+    baseMat = new THREE.MeshStandardMaterial({
+      map: seatTex, bumpMap: seatTex, bumpScale: 0.02,
+      color: baseColor, roughness: 0.92, metalness: 0
+    });
+  } else {
+    baseMat = new THREE.MeshStandardMaterial({color:baseColor,roughness:0.92,metalness:0});
+  }
   const base=new THREE.Mesh(
     new THREE.CylinderGeometry(0.5,0.55,0.08,48),
     baseMat
   );
   base.position.y=-0.14; base.receiveShadow=true; g.add(base);
 
+  // A painted circle inlaid in the stone step, not a band around its edge: at
+  // 0.5-0.58 the old band overhung the 0.5 m plinth and floated a centimetre
+  // above the dais, and a saturated accent plus emissive at that size read as a
+  // glowing rim. Toning the accent into the stone keeps a hint of the player
+  // colour without turning the seat back into a coaster.
+  const seatAccent = new THREE.Color(player.accent).lerp(new THREE.Color(0xb9ad96), 0.34);
   const ringMat = new THREE.MeshStandardMaterial({
-    color:player.accent, side:THREE.DoubleSide, roughness:0.42, metalness:0.08,
-    emissive:player.accent, emissiveIntensity:0.16
+    color:seatAccent, side:THREE.DoubleSide, roughness:0.85, metalness:0,
+    emissive:seatAccent, emissiveIntensity:0.05
   });
   const ring=new THREE.Mesh(
-    new THREE.RingGeometry(0.5,0.58,64),
+    new THREE.RingGeometry(0.408,0.452,64),
     ringMat
   );
-  ring.position.y=-0.09; ring.rotation.x=-PI/2; g.add(ring);
+  ring.position.y=-0.098; ring.rotation.x=-PI/2; g.add(ring);
 
   
   // Highlight ring (for active speaker)
@@ -2159,7 +2226,7 @@ function buildCharacter(player, index){
   });
 
   // Store refs
-  g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: player.color, _originalRingColor: player.accent, _baseRotY: g.rotation.y };
+  g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: baseColor.getHex(), _originalRingColor: seatAccent.getHex(), _originalRingGlow: 0.05, _baseRotY: g.rotation.y, baseY: g.position.y, baseScale: fj.k };
   return g;
 }
 
@@ -2847,7 +2914,7 @@ function resetTeamColors() {
     if (chars[i] && chars[i].userData.ringMat) {
       chars[i].userData.ringMat.color.setHex(chars[i].userData._originalRingColor);
       chars[i].userData.ringMat.emissive.setHex(chars[i].userData._originalRingColor);
-      chars[i].userData.ringMat.emissiveIntensity = 0.3;
+      chars[i].userData.ringMat.emissiveIntensity = chars[i].userData._originalRingGlow ?? 0.05;
     }
     if (tagEls[i]) {
       const roleSub = tagEls[i].querySelector('.role-sub');
@@ -3353,7 +3420,7 @@ function undimAll() {
     g.rotation.y = g.userData._baseRotY || 0;
     g.rotation.z = 0;
     const pos = sp(PLAYERS.indexOf(g.userData.player));
-    g.position.set(pos[0], SH, pos[2]);
+    g.position.set(pos[0], g.userData.baseY ?? SH, pos[2]);
   });
 }
 
@@ -4172,12 +4239,12 @@ function updateTeamAnims(t) {
     
     if (a.type === 'celebrate') {
       // Bounce up with joy
-      g.position.y = SH + Math.abs(Math.sin(elapsed * 3)) * 0.25;
+      g.position.y = (g.userData.baseY ?? SH) + Math.abs(Math.sin(elapsed * 3)) * 0.25;
       g.rotation.y = g.userData._baseRotY + Math.sin(elapsed * 2) * 0.3;
       // Arms up — can't easily do this with current model, so just bounce
     } else {
       // Sulk — lean forward, head down
-      g.position.y = SH - Math.min(elapsed * 0.15, 0.1);
+      g.position.y = (g.userData.baseY ?? SH) - Math.min(elapsed * 0.15, 0.1);
       g.rotation.x = Math.min(elapsed * 0.3, 0.15);
     }
   });
@@ -5154,7 +5221,7 @@ function renderGallery3D(player) {
 
   // Build full character in isolated scene
   gallery3DChar = buildCharacter(player, galleryCurrentIndex);
-  gallery3DChar.position.set(0, SH, 0);
+  gallery3DChar.position.set(0, gallery3DChar.userData.baseY ?? SH, 0);
   gallery3DChar.rotation.y = 0;
   gallery3DScene.add(gallery3DChar);
 
@@ -5165,7 +5232,7 @@ function renderGallery3D(player) {
     const t = performance.now() * 0.001;
     if (gallery3DChar) {
       gallery3DChar.rotation.y = Math.sin(t * 0.3) * 0.3;
-      gallery3DChar.position.y = SH + Math.sin(t * 1.5) * 0.03;
+      gallery3DChar.position.y = (gallery3DChar.userData.baseY ?? SH) + Math.sin(t * 1.5) * 0.03;
     }
     if (gallery3DRenderer && gallery3DScene && gallery3DCamera) {
       gallery3DRenderer.render(gallery3DScene, gallery3DCamera);
@@ -5990,10 +6057,13 @@ function animate() {
   const inTeamAnim = new Set(teamAnims.map(a => a.index));
   chars.forEach((g, i) => {
     if (!inDeathAnim.has(i) && !inTeamAnim.has(i)) {
-      g.position.y = SH + Math.sin(t * 1.5 + i) * 0.03;
+      g.position.y = (g.userData.baseY ?? SH) + Math.sin(t * 1.5 + i) * 0.03;
       // Breathing — subtle body scale + head micro-sway
       const breath = 1 + Math.sin(t * 1.2 + i * 0.7) * 0.012;
-      g.scale.set(1, breath, 1);
+      // Per-figure height lives in baseScale; breathing multiplies it rather
+      // than replacing it, or every figure would snap back to one size.
+      const bs = g.userData.baseScale || 1;
+      g.scale.set(bs, bs * breath, bs);
       // Head micro-sway
       const head = g.children.find(c => c.isGroup && c.position.y > 0.5);
       if (head) {
