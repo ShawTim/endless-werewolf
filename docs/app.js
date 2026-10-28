@@ -1044,35 +1044,50 @@ function initThree() {
   const brazierFlameMat = new THREE.MeshStandardMaterial({
     color: 0xffc46b, emissive: 0xff7a1e, emissiveIntensity: 2.2, transparent: true, opacity: 0.92,
   });
+  // The bowl's cap. A closed cylinder has one, and in daylight — when the fire is
+  // switched off — that cap was the brightest thing on the fixture: a pale disc on
+  // a fat stem, which from the 39 degree camera read as a mushroom. Proportions had
+  // to change, not just the colour: a wide shallow bowl loses its walls at that
+  // angle and is *only* a disc. So the fixture is a squat pot on a plinth that is
+  // wider than the pot — the base is the widest part from above, and the vessel's
+  // lid is an ash bed instead of a lid.
+  const brazierAsh = new THREE.MeshStandardMaterial({
+    color: 0x3e352c, roughness: 1, metalness: 0,
+  });
   // Track brazier components so we can toggle on/off for day/night
   const brazierEmbers = [];
   const brazierLights = [];
+  // The deck is at 0.42. Plinth 0.42–0.52 (0.48 wide), pot 0.50–0.74 (0.34 wide).
+  const stemGeo = new THREE.CylinderGeometry(0.24, 0.20, 0.10, 12);
+  const bowlGeo = new THREE.CylinderGeometry(0.17, 0.145, 0.24, 14);
   for (let i = 0; i < 4; i++) {
     const a = (i + 0.5) * (TAU / 4) + PI / 4; // offset 45° so they sit between character slots
     const bx = cos(a) * (R + 0.45);
     const bz = sin(a) * (R + 0.45);
     // Bowl
-    const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.13, 0.22, 12), brazierMat);
-    bowl.position.set(bx, 0.89, bz);
+    // Material order on a CylinderGeometry is side, top, bottom: only the top
+    // face becomes the ash bed, so the bowl's walls keep the patinated metal.
+    const bowl = new THREE.Mesh(bowlGeo, [brazierMat, brazierAsh, brazierMat]);
+    bowl.position.set(bx, 0.62, bz);
     bowl.castShadow = true;
     scene.add(bowl);
-    // Stand
-    const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.085, 0.36, 8), brazierMat);
-    stand.position.set(bx, 0.60, bz);
-    stand.castShadow = true;
-    scene.add(stand);
+    // Plinth — the bowl's foot sinks 2 cm into it, so no two faces are coplanar.
+    const stem = new THREE.Mesh(stemGeo, brazierMat);
+    stem.position.set(bx, 0.47, bz);
+    stem.castShadow = true;
+    scene.add(stem);
     // Ember bed + a short flame so the bowl reads as fire, not a red pin
     const ember = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 7), brazierEmber);
-    ember.position.set(bx, 0.96, bz);
+    ember.position.set(bx, 0.72, bz);
     scene.add(ember);
     brazierEmbers.push(ember);
     const fire = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.28, 8), brazierFlameMat);
-    fire.position.set(bx, 1.10, bz);
+    fire.position.set(bx, 0.86, bz);
     scene.add(fire);
     brazierEmbers.push(fire);
     // Point light — the warm fill now that the fixtures are above the deck
     const bl = new THREE.PointLight(0xff7a30, 1.15, 4.6, 1.6);
-    bl.position.set(bx, 1.05, bz);
+    bl.position.set(bx, 0.95, bz);
     scene.add(bl);
     brazierLights.push(bl);
   }
@@ -2026,16 +2041,21 @@ function buildCharacter(player, index){
       // which is the only place the camera ever is.
       gavel.position.copy(GRIP_R).add(new THREE.Vector3(0.046,-0.015,0.050));
       gavel.rotation.set(-0.14,0,-0.45);
+      // The head is a bar, not a drum — and a bar seen from a 39 degree camera has
+      // to be a box. The old drum was a cylinder lying on its side: from above, the
+      // only face the camera ever sees of it is a circle, so no amount of slimming
+      // stopped it reading as a round cap on a stem. A box presents a long
+      // rectangle to the same view, which is the whole silhouette of a mallet head.
       const gavelHandle=new THREE.Mesh(
-        new THREE.CylinderGeometry(0.019,0.022,0.26,10),
-        new THREE.MeshStandardMaterial({color:0x6B4226,roughness:0.5})
+        new THREE.CylinderGeometry(0.013,0.016,0.30,10),
+        new THREE.MeshStandardMaterial({color:0xc9a06a,roughness:0.55})
       );
-      gavelHandle.position.y=0.055; gavel.add(gavelHandle);
+      gavelHandle.position.y=0.060; gavel.add(gavelHandle);
       const gavelHead=new THREE.Mesh(
-        new THREE.CylinderGeometry(0.052,0.052,0.155,14),
-        new THREE.MeshStandardMaterial({color:0x7a4a2c,roughness:0.5})
+        new THREE.BoxGeometry(0.190,0.050,0.062),
+        new THREE.MeshStandardMaterial({color:0x5e3722,roughness:0.62})
       );
-      gavelHead.position.y=0.175; gavelHead.rotation.z=PI/2; gavel.add(gavelHead);
+      gavelHead.position.y=0.200; gavel.add(gavelHead);
       armR.add(gavel);
       // Hair comes from buildHair() — no per-branch hair geometry.
       break;
