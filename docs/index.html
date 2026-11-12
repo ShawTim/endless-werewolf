@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./styles.min.css?v=20260913-assets-min" />
+<link rel="stylesheet" href="./styles.min.css?v=20261113-insight" />
 </head>
 <body>
 
@@ -37,12 +37,15 @@
   <div class="brand">Endless Werewolf <span class="sub">AI One Night</span></div>
   <div class="top-actions">
     <button class="btn primary" id="btn-story">Replay Latest</button>
-    <button class="btn" id="btn-rules">Rules</button>
-    <button class="btn" id="btn-gallery">AI Agents</button>
-    <button class="btn" id="btn-archive">Games</button>
-    <button class="btn" id="btn-proof">Proof</button>
-    <button class="btn" id="btn-lang">中文</button>
-    <a class="btn" id="btn-github" href="https://github.com/ShawTim/endless-werewolf" target="_blank">GitHub</a>
+    <button class="btn" id="btn-menu" aria-expanded="false" aria-controls="top-menu" aria-label="More">☰</button>
+    <div class="top-menu" id="top-menu">
+      <button class="btn" id="btn-rules">Rules</button>
+      <button class="btn" id="btn-gallery">AI Agents</button>
+      <button class="btn" id="btn-archive">Games</button>
+      <button class="btn" id="btn-proof">Proof</button>
+      <button class="btn" id="btn-lang">中文</button>
+      <a class="btn" id="btn-github" href="https://github.com/ShawTim/endless-werewolf" target="_blank">GitHub</a>
+    </div>
   </div>
 </div>
 
@@ -156,6 +159,7 @@
     </div>
   </div>
   <div class="story-body" id="story-body"></div>
+  <div id="story-insight"></div>
   <div id="story-rationale"></div>
   <div id="story-meta"></div>
   <div id="story-role-changes"></div>
@@ -174,6 +178,20 @@
       <button class="btn" id="story-next">→</button>
       <button class="btn" id="story-speed">1.5×</button>
     </div>
+  </div>
+</div>
+
+<!-- Table dynamics: who addressed whom, role claims, conflicts, votes -->
+<div id="dynamics-panel" aria-live="polite">
+  <button id="dynamics-toggle" type="button" aria-expanded="true">
+    <span id="dynamics-title">TABLE DYNAMICS</span>
+    <span id="dynamics-sub"></span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div id="dynamics-body">
+    <svg id="dynamics-svg" viewBox="0 0 300 290" role="img" aria-labelledby="dynamics-title"></svg>
+    <div id="dynamics-legend"></div>
+    <div id="dynamics-stats"></div>
   </div>
 </div>
 
@@ -218,6 +236,7 @@
       <span id="welcome-fact-models">Different LLMs</span>
       <span id="welcome-fact-trace">Full decision trace</span>
     </div>
+    <div id="welcome-models" aria-label="Models at the table"></div>
     <div id="welcome-actions">
       <button id="welcome-btn">Replay latest game</button>
       <button id="welcome-explore">Explore the table</button>
@@ -238,6 +257,6 @@
   }
 }
 </script>
-<script type="module" src="./app.min.js?v=20260913-assets-min"></script>
+<script type="module" src="./app.min.js?v=20261113-insight"></script>
 </body>
 </html>

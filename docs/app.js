@@ -2935,7 +2935,7 @@ function buildNameTags() {
     d.style.setProperty('--tag-accent', accentHex);
     d.style.setProperty('--tag-text', readableHex);
     const main = lang === 'zh' ? (p.name_zh || p.name) : p.name;
-    d.innerHTML = `<div class="tag-name">${main}</div><div class="speaking-label"></div><div class="role-sub"></div>`;
+    d.innerHTML = `<div class="tag-name">${main}</div><div class="speaking-label"></div><div class="tag-sub-row">${modelBadgeHTML(p.model, 'tag-model')}<span class="role-sub"></span></div>`;
     tagsContainer.appendChild(d);
     tagEls.push(d);
   });
@@ -3044,9 +3044,18 @@ function showBubble(playerIndex, text, duration = 4000) {
   const el = document.createElement('div');
   el.className = 'bubble';
   el.style.borderColor = hex;
+  // The full transcript lives in the side panel (explore) or the replay card
+  // (story), so the in-world bubble only carries a short excerpt — it marks
+  // who is talking without becoming a third copy of the same paragraph.
+  const plain = String(text || '');
+  const isCJK = /[\u3400-\u9fff]/.test(plain);
+  const BUBBLE_MAX = isCJK ? (innerWidth <= 768 ? 46 : 64) : (innerWidth <= 768 ? 110 : 150);
+  const excerpt = plain.length > BUBBLE_MAX
+    ? plain.slice(0, BUBBLE_MAX).replace(/\s+\S*$/, '').replace(/[<\[][^>\]]*$/, '').trimEnd() + '…'
+    : plain;
   el.innerHTML = `
-    <div class="speaker" style="color:${readableHex}">${displayName}</div>
-    <div class="text">${formatGameText(text)}</div>
+    <div class="speaker" style="color:${readableHex}">${displayName} ${modelBadgeHTML(p.model, 'mini')}</div>
+    <div class="text">${formatGameText(excerpt)}</div>
     <div class="arrow" style="border-top-color:${hex}"></div>
   `;
   bubblesContainer.appendChild(el);
@@ -3557,13 +3566,16 @@ async function loadGame(gameId) {
   }
   
   try {
-    const [night, day, vote, resolve, postgame, manifest] = await Promise.all([
+    const [night, day, vote, resolve, postgame, manifest, dayEn] = await Promise.all([
       fetchJSON('night_result'),
       fetchJSON('day_result'),
       fetchJSON('vote_result'),
       fetchJSON('resolve_result'),
       fetchJSON('postgame_result'),
       fetchRawJSON('manifest'),
+      // Structural analysis only (role-claim detection runs on the canonical
+      // English transcript); no English prose is ever shown in the zh UI.
+      suffix ? fetchRawJSON('day_result') : Promise.resolve(null),
     ]);
     
     // The canonical discussion transcript is embedded in day_result. Older
@@ -3583,7 +3595,7 @@ async function loadGame(gameId) {
     if (requestVersion !== gameLoadVersion || requestedLang !== lang) return false;
 
     currentGame = gameId;
-    gameData = { night, day, vote, resolve, postgame, manifest, chatHistory };
+    gameData = { night, day, vote, resolve, postgame, manifest, chatHistory, dayEn };
     
     // Normalize ZH data: map Chinese player names back to English canonical names
     // so all lookups (PLAYERS.find, votes, speeches) work consistently
@@ -3639,6 +3651,7 @@ async function loadGame(gameId) {
     }
     gameData.structuredTrace = buildStructuredTrace();
     gameData.autonomy = buildAutonomyMetadata();
+    gameData.insight = buildInsight();
     currentPhase = 'night';
 
     // Dynamically build PLAYERS from game data
@@ -3666,6 +3679,7 @@ async function loadGame(gameId) {
       });
       // Rebuild 3D scene with new players
       rebuildScene();
+      renderWelcomeModels();
     }
     
     setPhase('night');
@@ -3764,6 +3778,8 @@ function buildStructuredTrace() {
       phase: 'day', type: event.type || 'event', actor: event.player_name || '',
       target: event.target, text: event.speech || '', timestamp: event.timestamp || '',
       sourceFile: localizedFile('day_result.json'), sourcePath: `day_trace[${index}]`,
+      dayIndex: index, replyTo: event.reply_to || null, stance: event.stance || null,
+      suspicions: event.suspicions || null,
       ...traceMetaFor(event.player_name, event),
     });
   }
@@ -3776,6 +3792,7 @@ function buildStructuredTrace() {
       phase: 'vote', type: 'vote', actor, target,
       sourceFile: localizedFile('vote_result.json'),
       sourcePath: voteIndex >= 0 ? `vote_trace[${voteIndex}]` : `votes.${actor}`,
+      suspicions: detail.suspicions || null,
       ...traceMetaFor(actor, detail),
     });
   }
@@ -3827,6 +3844,368 @@ function buildAutonomyMetadata() {
   };
 }
 
+
+// ===== Model Badges =====
+// Every seat runs a different LLM. That is the headline of the demo, so the
+// model is surfaced as a branded pill everywhere a player is named instead of
+// hiding in small grey metadata text.
+const MODEL_INFO = {
+  'glm5.2':       { label: 'GLM-5.2',      vendor: 'Zhipu AI',    color: '#5b8cff' },
+  'kimi':         { label: 'Kimi',         vendor: 'Moonshot AI', color: '#b197fc' },
+  'minimax':      { label: 'MiniMax',      vendor: 'MiniMax',     color: '#f783ac' },
+  'deepseek-pro': { label: 'DeepSeek Pro', vendor: 'DeepSeek',    color: '#4dabf7' },
+  'nemotron':     { label: 'Nemotron',     vendor: 'NVIDIA',      color: '#94d82d' },
+  'qwen3.5':      { label: 'Qwen 3.5',     vendor: 'Alibaba',     color: '#ffa94d' },
+};
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]
+  ));
+}
+
+function modelInfo(modelId) {
+  const id = String(modelId || '').split('/').pop();
+  const known = MODEL_INFO[id] || MODEL_INFO[id.toLowerCase()];
+  if (known) return { id, ...known };
+  const label = id.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  return { id, label, vendor: '', color: '#e8c468' };
+}
+
+function modelBadgeHTML(modelId, extraClass = '') {
+  const info = modelInfo(modelId);
+  if (!info.id) return '';
+  const title = [info.vendor, info.id].filter(Boolean).join(' · ');
+  return `<span class="model-badge ${extraClass}" style="--model-color:${info.color}" title="${escapeHTML(title)}">${escapeHTML(info.label)}</span>`;
+}
+
+function renderWelcomeModels() {
+  const box = document.getElementById('welcome-models');
+  if (!box) return;
+  box.innerHTML = PLAYERS.map(p => `
+    <span class="welcome-model" style="--model-color:${modelInfo(p.model).color}">
+      ${modelBadgeHTML(p.model)}
+      <span class="who">${escapeHTML(lang === 'zh' ? (p.name_zh || p.name) : p.name)}</span>
+    </span>`).join('');
+}
+
+// ===== Agent Insight: public claims vs private knowledge =====
+// Old archives record speech, @targets, night memory and votes but no
+// structured claims, so the viewer derives "who claimed which starting role"
+// from the canonical English transcript. Newer engine output may carry an
+// explicit `claimed_role`, which always wins over the heuristic.
+const CANONICAL_ROLES = ['Werewolf', 'Seer', 'Robber', 'Troublemaker', 'Villager', 'Tanner', 'Minion', 'Insomniac'];
+const UNIQUE_ROLES = new Set(['Seer', 'Robber', 'Troublemaker', 'Tanner', 'Minion', 'Insomniac']);
+const ROLE_TOKEN_RE = new RegExp(`<?\\b(${CANONICAL_ROLES.join('|')})\\b>?`, 'gi');
+const FIRST_PERSON_CLAIM_RE = /\b(?:I\s+(?:was|am|started(?:\s+(?:out|the\s+night))?(?:\s+as)?|woke\s+up\s+as|began\s+as|got)|I'm|I've\s+been|my\s+(?:role|card)\s+(?:was|is)|as\s+the)\s+(?:(?:actually|really|originally|just|indeed|definitely|a|an|the|plain|simple|humble)\s+)*$/i;
+const HEDGE_RE = /\b(not|n't|never|if|were|maybe|could|would|claim(?:ed|ing)?\s+to\s+be|pretend|now)\b/i;
+
+function canonicalRole(value) {
+  if (!value) return null;
+  const v = String(value).trim().toLowerCase();
+  return CANONICAL_ROLES.find(r => r.toLowerCase() === v) || null;
+}
+
+function extractRoleClaim(text) {
+  const source = String(text || '').replace(/[’]/g, "'");
+  for (const sentence of source.split(/(?<=[.!?])\s+|\n+/)) {
+    ROLE_TOKEN_RE.lastIndex = 0;
+    let match;
+    while ((match = ROLE_TOKEN_RE.exec(sentence))) {
+      const before = sentence.slice(Math.max(0, match.index - 70), match.index);
+      if (!FIRST_PERSON_CLAIM_RE.test(before)) continue;
+      if (HEDGE_RE.test(before.slice(-40))) continue;
+      if (/as\s+the\s+(?:\w+\s+)*$/i.test(before) && !/\bI\b/.test(before)) continue;
+      // Quoting someone else ("he said 'I'm a Werewolf'") is not a claim.
+      if (/\b(?:said|says|saying|claims?|claimed|told|admit(?:ted|s)?)\b[^.]*['"“‘]/i.test(before)) continue;
+      if (/['"“‘][^'"”’]*$/.test(before.replace(/\b\w+'\w+\b/g, ''))) continue;
+      return canonicalRole(match[1]);
+    }
+  }
+  return null;
+}
+
+function buildInsight() {
+  const night = gameData.night?.players || {};
+  const initialRole = {};
+  const memory = {};
+  for (const p of Object.values(night)) {
+    initialRole[p.name] = p.initial_role || '';
+    memory[p.name] = p.night_memory_text
+      || (Array.isArray(p.night_memory) ? p.night_memory.join(' ') : (p.night_memory || ''));
+  }
+  const localTrace = gameData.day?.day_trace || [];
+  const enTrace = (gameData.dayEn || gameData.day)?.day_trace || [];
+  const claims = new Map();        // day_trace index -> { role, verdict }
+  localTrace.forEach((event, index) => {
+    if (event.type !== 'speech') return;
+    const en = enTrace[index] || {};
+    const role = canonicalRole(event.claimed_role)
+      || canonicalRole(en.claimed_role)
+      || extractRoleClaim(en.speech || '');
+    if (!role) return;
+    const truth = initialRole[event.player_name];
+    claims.set(index, { role, verdict: truth ? (truth === role ? 'truthful' : 'bluff') : 'unknown' });
+  });
+  return { initialRole, memory, claims };
+}
+
+// Table state as of a replay step: standing claims, who addressed whom, and
+// which unique roles are contested. Only day events at or before the step
+// are counted, so the graph grows as the debate unfolds.
+function tableStateAt(step) {
+  const insight = gameData.insight || buildInsight();
+  const trace = gameData.day?.day_trace || [];
+  const phaseOrder = { night: 0, day: 1, vote: 2, resolve: 3, postgame: 4 };
+  const stepPhase = phaseOrder[step?.phase] ?? 4;
+  const lastIndex = stepPhase < 1 ? -1
+    : stepPhase > 1 ? trace.length - 1
+    : (Number.isInteger(step?.dayIndex) ? step.dayIndex : trace.length - 1);
+  const standing = {};
+  const edges = new Map();
+  for (let i = 0; i <= lastIndex; i += 1) {
+    const ev = trace[i];
+    if (!ev || ev.type !== 'speech') continue;
+    const claim = insight.claims.get(i);
+    if (claim) standing[ev.player_name] = { ...claim, at: i };
+    const to = ev.reply_to || ev.target;
+    if (to && to !== ev.player_name) {
+      const key = `${ev.player_name}→${to}`;
+      const edge = edges.get(key) || { from: ev.player_name, to, count: 0, stance: null, last: -1 };
+      edge.count += 1;
+      edge.stance = ev.stance || edge.stance;
+      edge.last = i;
+      edges.set(key, edge);
+    }
+  }
+  const byRole = {};
+  for (const [name, claim] of Object.entries(standing)) {
+    (byRole[claim.role] = byRole[claim.role] || []).push(name);
+  }
+  const conflicts = [];
+  for (const [role, names] of Object.entries(byRole)) {
+    if (!UNIQUE_ROLES.has(role) || names.length < 2) continue;
+    for (let a = 0; a < names.length; a += 1) {
+      for (let b = a + 1; b < names.length; b += 1) conflicts.push({ role, a: names[a], b: names[b] });
+    }
+  }
+  return { standing, edges: [...edges.values()], conflicts, lastIndex };
+}
+
+function roleLabel(role) { return lang === 'zh' ? roleZh(role) : role; }
+
+function verdictLabel(verdict) {
+  if (verdict === 'truthful') return lang === 'zh' ? '屬實' : 'TRUTHFUL';
+  if (verdict === 'bluff') return lang === 'zh' ? '虛張聲勢' : 'BLUFF';
+  return lang === 'zh' ? '未知' : 'UNKNOWN';
+}
+
+function stanceLabel(stance) {
+  const zh = { accuse: '指控', defend: '辯護', question: '質詢', support: '支持' };
+  const en = { accuse: 'accuses', defend: 'defends', question: 'questions', support: 'backs' };
+  return (lang === 'zh' ? zh : en)[stance] || (lang === 'zh' ? '回應' : 'addresses');
+}
+
+function renderStoryInsight(step) {
+  const box = document.getElementById('story-insight');
+  if (!box) return;
+  const isAgentTurn = step && !step.isCheckpoint && step.actor
+    && (step.phase === 'day' || step.phase === 'vote' || step.phase === 'night');
+  if (!isAgentTurn) {
+    box.innerHTML = '';
+    box.classList.remove('visible');
+    return;
+  }
+  const insight = gameData.insight || buildInsight();
+  const knows = insight.memory[step.actor] || '';
+  const startRole = insight.initialRole[step.actor] || '';
+  let says = '';
+  if (step.phase === 'day') {
+    const claim = Number.isInteger(step.dayIndex) ? insight.claims.get(step.dayIndex) : null;
+    const standing = tableStateAt(step).standing[step.actor];
+    if (claim) {
+      says += `<span class="claim-chip">${escapeHTML(roleLabel(claim.role))}</span>
+        <span class="verdict ${claim.verdict}">${verdictLabel(claim.verdict)}</span>`;
+    } else if (standing) {
+      says += `<span class="dim">${lang === 'zh' ? '沿用先前聲稱' : 'Standing claim'}</span>
+        <span class="claim-chip">${escapeHTML(roleLabel(standing.role))}</span>
+        <span class="verdict ${standing.verdict}">${verdictLabel(standing.verdict)}</span>`;
+    } else {
+      says += `<span class="dim">${lang === 'zh' ? '未聲稱身分' : 'No role claimed yet'}</span>`;
+    }
+    const to = step.replyTo || step.target;
+    if (to) {
+      says += `<span class="addressed">${stanceLabel(step.stance)} <b style="color:${getPlayerColor(to)}">@${escapeHTML(displayPlayerName(to))}</b></span>`;
+    }
+  } else if (step.phase === 'vote' && step.target) {
+    says = `<span class="addressed">${lang === 'zh' ? '投票給' : 'votes for'} <b style="color:${getPlayerColor(step.target)}">${escapeHTML(displayPlayerName(step.target))}</b></span>`;
+  } else if (step.phase === 'night') {
+    says = `<span class="dim">${lang === 'zh' ? '夜晚行動不公開' : 'Night actions are secret'}</span>`;
+  }
+  box.innerHTML = `
+    <div class="insight-col private">
+      <span class="label">${lang === 'zh' ? '私下所知' : 'PRIVATELY KNOWS'}
+        ${startRole ? `<span class="claim-chip true-role" title="${lang === 'zh' ? '起始身分（觀眾視角）' : 'Starting card (viewer only)'}">${escapeHTML(roleLabel(startRole))}</span>` : ''}</span>
+      <div class="insight-text">${knows ? formatGameText(knows) : `<span class="dim">${lang === 'zh' ? '沒有夜晚資訊' : 'No night information'}</span>`}</div>
+    </div>
+    <div class="insight-col public">
+      <span class="label">${lang === 'zh' ? '公開聲稱' : 'PUBLICLY CLAIMS'}</span>
+      <div class="insight-claims">${says}</div>
+    </div>`;
+  box.classList.add('visible');
+}
+
+// ===== Table Dynamics graph (SVG) =====
+const DYN_CX = 150, DYN_CY = 142, DYN_R = 92, DYN_NODE = 19;
+let dynamicsCollapsed = innerWidth <= 768;
+
+function dynNodePos(index) {
+  const a = sa(index);
+  return [DYN_CX + Math.cos(a) * DYN_R, DYN_CY + Math.sin(a) * DYN_R];
+}
+
+function dynEdgePath(from, to, bend = 0.18, inset = DYN_NODE + 4) {
+  const [x1, y1] = from, [x2, y2] = to;
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len, uy = dy / len;
+  const sx = x1 + ux * inset, sy = y1 + uy * inset;
+  const ex = x2 - ux * inset, ey = y2 - uy * inset;
+  // Bend to the right of travel so A→B and B→A arcs separate.
+  const mx = (sx + ex) / 2 - uy * len * bend, my = (sy + ey) / 2 + ux * len * bend;
+  return { d: `M${sx.toFixed(1)},${sy.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}`, mx, my };
+}
+
+function renderDynamics(step) {
+  const panel = document.getElementById('dynamics-panel');
+  const svg = document.getElementById('dynamics-svg');
+  if (!panel || !svg || !PLAYERS.length || !gameData.night) return;
+  panel.classList.toggle('collapsed', dynamicsCollapsed);
+  document.getElementById('dynamics-toggle').setAttribute('aria-expanded', String(!dynamicsCollapsed));
+  document.getElementById('dynamics-title').textContent = lang === 'zh' ? '桌面局勢' : 'TABLE DYNAMICS';
+  const phase = step?.phase || currentPhase;
+  const state = tableStateAt(step || { phase });
+  const idx = name => PLAYERS.findIndex(p => p.name === name);
+  const executed = (phase === 'vote' || phase === 'resolve' || phase === 'postgame')
+    ? (gameData.vote?.executed || []) : [];
+  const parts = [];
+  // One arrowhead marker per colour: `fill="context-stroke"` would be neater
+  // but older Safari renders it black.
+  const markerColors = new Map();
+  const arrow = color => {
+    if (!markerColors.has(color)) markerColors.set(color, `dyn-arrow-${markerColors.size}`);
+    return `url(#${markerColors.get(color)})`;
+  };
+  parts.push('');   // defs placeholder, filled once all colours are known
+  parts.push(`<circle cx="${DYN_CX}" cy="${DYN_CY}" r="${DYN_R}" class="dyn-ring"/>`);
+
+  let sub = '';
+  if (phase === 'night') {
+    sub = lang === 'zh' ? '夜晚 · 秘密行動' : 'Night · secret actions';
+    for (const action of recordedNightActions()) {
+      const a = idx(action.actor);
+      if (a < 0) continue;
+      const targets = action.targets?.length ? action.targets : (typeof action.target === 'string' ? [action.target] : []);
+      if (action.action === 'swap' && targets.length === 2) {
+        const t1 = idx(targets[0]), t2 = idx(targets[1]);
+        if (t1 >= 0 && t2 >= 0) {
+          const p = dynEdgePath(dynNodePos(t1), dynNodePos(t2), 0.12);
+          parts.push(`<path d="${p.d}" class="dyn-edge night swap" marker-start="${arrow('#b197fc')}" marker-end="${arrow('#b197fc')}" style="stroke:#b197fc"/>`);
+        }
+        continue;
+      }
+      for (const target of targets) {
+        const t = idx(target);
+        if (t < 0 || t === a) continue;
+        const color = action.action === 'rob' ? '#ffa94d' : '#74c0fc';
+        const p = dynEdgePath(dynNodePos(a), dynNodePos(t));
+        parts.push(`<path d="${p.d}" class="dyn-edge night" marker-end="${arrow(color)}" style="stroke:${color}"/>`);
+      }
+    }
+  } else {
+    const showVotes = phase !== 'day';
+    sub = phase === 'day'
+      ? (lang === 'zh' ? '白天 · 誰在回應誰' : 'Debate · who addressed whom')
+      : (lang === 'zh' ? '投票去向' : 'Ballots');
+    for (const edge of state.edges) {
+      const a = idx(edge.from), b = idx(edge.to);
+      if (a < 0 || b < 0) continue;
+      const p = dynEdgePath(dynNodePos(a), dynNodePos(b));
+      const current = phase === 'day' && edge.last === step?.dayIndex;
+      const width = Math.min(1.3 + edge.count * 0.9, 4.5);
+      const color = hexColor(PLAYERS[a].color || 0xe8c468);
+      parts.push(`<path d="${p.d}" class="dyn-edge talk${current ? ' current' : ''}${showVotes ? ' faded' : ''}${edge.stance ? ` stance-${edge.stance}` : ''}" marker-end="${arrow(color)}" style="stroke:${color};stroke-width:${width}"/>`);
+      if (edge.count > 1 && !showVotes) {
+        parts.push(`<text x="${p.mx.toFixed(1)}" y="${(p.my + 3).toFixed(1)}" class="dyn-count">×${edge.count}</text>`);
+      }
+    }
+    if (showVotes) {
+      for (const [voter, target] of Object.entries(gameData.vote?.votes || {})) {
+        const a = idx(voter), b = idx(target);
+        if (a < 0 || b < 0) continue;
+        const p = dynEdgePath(dynNodePos(a), dynNodePos(b), 0.1);
+        const decisive = executed.includes(target);
+        const voteColor = decisive ? '#ff8787' : '#e8c468';
+        parts.push(`<path d="${p.d}" class="dyn-edge vote${decisive ? ' decisive' : ''}" marker-end="${arrow(voteColor)}" style="stroke:${voteColor}"/>`);
+      }
+    }
+    for (const c of state.conflicts) {
+      const a = idx(c.a), b = idx(c.b);
+      if (a < 0 || b < 0) continue;
+      const p = dynEdgePath(dynNodePos(a), dynNodePos(b), -0.08, DYN_NODE + 1);
+      parts.push(`<path d="${p.d}" class="dyn-conflict"/>`);
+      parts.push(`<text x="${p.mx.toFixed(1)}" y="${(p.my + 4).toFixed(1)}" class="dyn-bolt">⚡</text>`);
+    }
+  }
+
+  const suspicions = step?.suspicions && typeof step.suspicions === 'object' ? step.suspicions : null;
+  PLAYERS.forEach((player, i) => {
+    const [x, y] = dynNodePos(i);
+    const color = hexColor(player.color || 0xe8c468);
+    const isActor = step?.actor === player.name;
+    const dead = executed.includes(player.name);
+    const claim = state.standing[player.name];
+    const short = (lang === 'zh' ? (player.name_zh || player.name) : player.name).replace(/^The\s+/, '');
+    const below = y > DYN_CY;
+    const labelY = below ? y + DYN_NODE + 12 : y - DYN_NODE - 16;
+    parts.push(`<g class="dyn-node${isActor ? ' actor' : ''}${dead ? ' dead' : ''}" data-player="${escapeHTML(player.name)}">
+      ${isActor ? `<circle cx="${x}" cy="${y}" r="${DYN_NODE + 5}" class="dyn-halo" style="stroke:${color}"/>` : ''}
+      <circle cx="${x}" cy="${y}" r="${DYN_NODE}" fill="#141226" stroke="${color}" stroke-width="${isActor ? 3 : 2}"/>
+      <image href="${renderAvatarPortrait(player, 64)}" x="${x - DYN_NODE + 2}" y="${y - DYN_NODE + 2}" width="${(DYN_NODE - 2) * 2}" height="${(DYN_NODE - 2) * 2}" clip-path="url(#dyn-clip-${i})" preserveAspectRatio="xMidYMid slice"/>
+      ${dead ? `<text x="${x}" y="${y + 6}" class="dyn-dead">✕</text>` : ''}
+      <text x="${x}" y="${labelY}" class="dyn-name" style="fill:${getPlayerColor(player.name)}">${escapeHTML(short)}</text>
+      ${claim ? `<text x="${x}" y="${labelY + 11}" class="dyn-claim ${claim.verdict}">${escapeHTML(roleLabel(claim.role))}${claim.verdict === 'bluff' ? ' ✗' : claim.verdict === 'truthful' ? ' ✓' : ''}</text>` : ''}
+      ${suspicions && suspicions[player.name] !== undefined && !isActor ? `<text x="${x + DYN_NODE - 2}" y="${y - DYN_NODE + 6}" class="dyn-susp" style="fill:hsl(${120 - Math.min(100, Math.max(0, suspicions[player.name])) * 1.2},80%,62%)">${Math.round(suspicions[player.name])}%</text>` : ''}
+    </g>`);
+  });
+  parts[0] = `<defs>
+    ${[...markerColors].map(([color, id]) => `<marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker>`).join('')}
+    ${PLAYERS.map((_, i) => `<clipPath id="dyn-clip-${i}"><circle cx="${dynNodePos(i)[0]}" cy="${dynNodePos(i)[1]}" r="${DYN_NODE - 2}"/></clipPath>`).join('')}
+  </defs>`;
+  svg.innerHTML = parts.join('');
+  document.getElementById('dynamics-sub').textContent = sub;
+
+  const legend = phase === 'night'
+    ? [
+        `<span><i style="background:#74c0fc"></i>${lang === 'zh' ? '查驗' : 'inspect'}</span>`,
+        `<span><i style="background:#ffa94d"></i>${lang === 'zh' ? '搶奪' : 'rob'}</span>`,
+        `<span><i style="background:#b197fc"></i>${lang === 'zh' ? '交換' : 'swap'}</span>`,
+      ]
+    : [
+        `<span><i class="talk"></i>${lang === 'zh' ? '點名回應' : 'addressed'}</span>`,
+        phase !== 'day' ? `<span><i class="vote"></i>${lang === 'zh' ? '投票' : 'vote'}</span>` : '',
+        `<span><b class="bolt">⚡</b>${lang === 'zh' ? '身分衝突' : 'clashing claims'}</span>`,
+        `<span><b class="ok">✓</b>${lang === 'zh' ? '屬實' : 'truthful'} <b class="bad">✗</b>${lang === 'zh' ? '虛張' : 'bluff'}</span>`,
+      ];
+  document.getElementById('dynamics-legend').innerHTML = legend.filter(Boolean).join('');
+  const claimsList = Object.values(state.standing);
+  const bluffs = claimsList.filter(c => c.verdict === 'bluff').length;
+  document.getElementById('dynamics-stats').textContent = phase === 'night'
+    ? (lang === 'zh' ? '只有觀眾看到這些行動，代理只知道自己的夜晚記憶。' : 'Only the viewer sees these. Each agent only knows its own night memory.')
+    : (lang === 'zh'
+      ? `${claimsList.length} 個身分聲稱 · ${bluffs} 個虛張 · ${state.conflicts.length} 個衝突 · ${state.edges.reduce((n, e) => n + e.count, 0)} 次點名`
+      : `${claimsList.length} claims · ${bluffs} bluffs · ${state.conflicts.length} clashes · ${state.edges.reduce((n, e) => n + e.count, 0)} call-outs`);
+}
 
 // ===== Center Cards (3D on table) =====
 let centerCardMeshes = [];
@@ -4411,6 +4790,7 @@ let storyPlaying = false;
 let storyTimer = null;
 let storySpeed = 1.5;
 let storyViewMode = 'summary';
+let storyAppliedPhase = null;   // phase whose scene effects are currently applied by the story
 const STORY_PHASES = ['night', 'day', 'vote', 'resolve', 'postgame'];
 
 function displayPlayerName(name) {
@@ -4806,7 +5186,13 @@ function renderStoryAvatar(step) {
 function renderStoryStep() {
   if (!storySteps.length) return;
   const step = storySteps[storyIndex];
-  setPhase(step.phase);
+  // Re-entering the same phase on every step restarted phase-level effects
+  // (night light ramp, vote arrows, confetti, camera shots) once per line of
+  // dialogue. Only apply the phase when the story actually crosses into it.
+  if (storyAppliedPhase !== step.phase) {
+    setPhase(step.phase);
+    storyAppliedPhase = step.phase;
+  }
   if (step.isCheckpoint && step.summaryKind === 'night') showCurrentRoles(true);
   closeSidePanel();
   clearBubbles();
@@ -4832,8 +5218,8 @@ function renderStoryStep() {
       ? (lang === 'zh' ? '已記錄選票' : 'Recorded ballots')
       : (lang === 'zh' ? '遊戲規則引擎' : 'Game rules engine');
   const model = (step.model || '').split('/').pop();
-  document.getElementById('story-agent-sub').textContent =
-    [actor, model].filter(Boolean).join(' · ');
+  document.getElementById('story-agent-sub').innerHTML =
+    `${escapeHTML(actor)}${model ? ` ${modelBadgeHTML(model)}` : ''}`;
   const recordedSteps = storySteps.filter(storyStep => !storyStep.isCheckpoint);
   const phaseSteps = recordedSteps.filter(storyStep => storyStep.phase === step.phase);
   if (step.isCheckpoint) {
@@ -4863,10 +5249,15 @@ function renderStoryStep() {
     button.classList.toggle('active', button.dataset.phase === step.phase);
   });
   const rationale = document.getElementById('story-rationale');
+  const privateLabel = step.phase === 'day' || step.phase === 'vote' || step.phase === 'night'
+    ? (lang === 'zh' ? '私下推理・其他代理看不到' : 'PRIVATE REASONING · hidden from other agents')
+    : (lang === 'zh' ? '記錄理由' : 'RECORDED RATIONALE');
   rationale.innerHTML = step.reasoning
-    ? `<span class="label">${lang === 'zh' ? '記錄理由' : 'RECORDED RATIONALE'}</span>${formatGameText(step.reasoning)}`
+    ? `<span class="label">${privateLabel}</span>${formatGameText(step.reasoning)}`
     : '';
   rationale.classList.toggle('visible', Boolean(step.reasoning));
+  renderStoryInsight(step);
+  renderDynamics(step);
   const meta = [];
   if (step.isCheckpoint) {
     meta.push(step.summaryKind === 'vote'
@@ -4981,6 +5372,13 @@ function renderStoryStep() {
       if (step.phase === 'day' && step.type === 'speech') {
         setSpeakerFocus(idx, true);
         setSpeaking(idx, true);
+        // Body language for call-outs (provided by the character-life module).
+        const to = step.replyTo || step.target;
+        const targetIdx = to ? PLAYERS.findIndex(p => p.name === to) : -1;
+        if (targetIdx >= 0 && targetIdx !== idx) {
+          if (typeof pointAt === 'function') pointAt(idx, targetIdx);
+          if (typeof reactToAccusation === 'function') reactToAccusation(targetIdx, idx);
+        }
       }
     }
   }
@@ -4992,6 +5390,7 @@ function openStoryMode(autoPlay = false, startIndex = 0, preserveViewMode = fals
   if (!storySteps.length) return;
   storyIndex = THREE.MathUtils.clamp(startIndex, 0, storySteps.length - 1);
   storyPlaying = false;
+  storyAppliedPhase = null;
   storySpeed = 1.5;
   document.getElementById('story-play').textContent = '▶';
   document.getElementById('story-speed').textContent = '1.5×';
@@ -5016,6 +5415,7 @@ function stopStoryPlayback() {
 
 function closeStoryMode() {
   stopStoryPlayback();
+  storyAppliedPhase = null;
   document.body.classList.remove('story-open');
   document.getElementById('story-mode').classList.remove('visible');
   clearSpeakerFocus();
@@ -5058,7 +5458,7 @@ function showProofPanel() {
   </div>`;
   html += `<div class="panel-section"><h3>${lang === 'zh' ? '模型陣容' : 'Model Roster'}</h3>`;
   for (const agent of meta.roster || []) {
-    html += `<div class="agent-trace-card"><strong>${displayPlayerName(agent.name)}</strong>
+    html += `<div class="agent-trace-card"><strong>${displayPlayerName(agent.name)}</strong> ${modelBadgeHTML(agent.model)}
       <div class="meta">${agent.model} · thinking=${agent.thinking} · seat ${Number(agent.seat) + 1}</div></div>`;
   }
   html += '</div>';
@@ -5749,9 +6149,44 @@ function setupUI() {
     }
   });
 
-  // Phase steps
+  // Phase steps. While the recorded replay is open it owns the scene, so the
+  // timeline navigates the replay instead of opening a competing side panel.
   document.querySelectorAll('.phase-step').forEach(el => {
-    el.addEventListener('click', () => setPhase(el.dataset.phase));
+    el.addEventListener('click', () => {
+      if (document.getElementById('story-mode').classList.contains('visible')) {
+        const nextIndex = storySteps.findIndex(step => step.phase === el.dataset.phase);
+        if (nextIndex >= 0) {
+          stopStoryPlayback();
+          storyIndex = nextIndex;
+          renderStoryStep();
+        }
+        return;
+      }
+      setPhase(el.dataset.phase);
+    });
+  });
+
+  // Compact top menu (mobile): secondary actions collapse behind ☰.
+  const topbar = document.getElementById('topbar');
+  const menuBtn = document.getElementById('btn-menu');
+  const setMenu = open => {
+    topbar.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+  };
+  menuBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    setMenu(!topbar.classList.contains('menu-open'));
+  });
+  document.getElementById('top-menu').addEventListener('click', e => {
+    if (e.target.closest('.btn')) setMenu(false);
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#topbar')) setMenu(false);
+  });
+
+  document.getElementById('dynamics-toggle').addEventListener('click', () => {
+    dynamicsCollapsed = !dynamicsCollapsed;
+    renderDynamics(storySteps[storyIndex]);
   });
 
   // Buttons
@@ -5913,7 +6348,7 @@ function updateUIText() {
     ? '觀看六個 AI 代理在沒有真人操控的情況下虛張聲勢、推理並投票。'
     : 'Watch six AI agents bluff, reason, and vote with no human player controlling the table.';
   document.getElementById('welcome-fact-agents').textContent = lang === 'zh' ? '6 個 AI 代理' : '6 AI agents';
-  document.getElementById('welcome-fact-models').textContent = lang === 'zh' ? '使用不同 LLM' : 'Different LLMs';
+  document.getElementById('welcome-fact-models').textContent = lang === 'zh' ? '6 個不同 LLM' : '6 different LLMs';
   document.getElementById('welcome-fact-trace').textContent = lang === 'zh' ? '完整決策軌跡' : 'Full decision trace';
   document.getElementById('welcome-btn').textContent = lang === 'zh' ? '重播最新遊戲' : 'Replay latest game';
   document.getElementById('welcome-explore').textContent = lang === 'zh' ? '探索遊戲桌' : 'Explore the table';
