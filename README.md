@@ -100,6 +100,25 @@ docs/                         GitHub Pages frontend
   data/games/                 published game archive
 ```
 
+### Structured debate fields (optional)
+
+Newer games record machine-readable debate structure on each `day_trace`
+entry of type `speech` (and `suspicions` on `pass`) in `day_result.json`, and
+`suspicions` on each `vote_trace` entry in `vote_result.json`. Older games
+simply omit them; consumers must treat missing fields as `null`.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `reply_to` | player name \| `null` | whose earlier speech this answers |
+| `stance` | `accuse` \| `defend` \| `question` \| `support` \| `null` | attitude toward `target` (`null` when there is no target) |
+| `claimed_role` | role from `roles_pool.json` \| `null` | starting role the speaker publicly claims in this speech |
+| `suspicions` | `{player name: int 0-100}` \| `null` | speaker's private P(werewolf team) for other players, updated every turn |
+| `thought` | string | private reasoning (existing field) |
+
+`reply_to`, `stance`, `claimed_role` and the `suspicions` keys are structural:
+they stay canonical English in `*_zh.json`, are never tagged, and are
+validated by `scripts/audit_all_games.py`. Only `thought` / `speech` are prose.
+
 ### Frontend build step
 
 `index.html` loads the minified `app.min.js` and `styles.min.css`, but the
@@ -141,6 +160,7 @@ Tags are applied by `tag_phase.py` (deterministic post-processing, not by AI age
 - 🤖 **多模型協作** — 6 個玩家使用不同的 LLM，呈現各異的推理風格與性格
 - 🌐 **雙語支援** — 英文 + 正體中文書面語，角色名稱與玩家名稱翻譯一致
 - 🎮 **3D 互動介面** — Three.js 場景、完整軌跡重播、階段導覽，以及 AI 生成的貼圖與燈光
+- 🗣️ **結構化辯論紀錄** — 新對局的發言另記 `reply_to`（回應對象）、`stance`（指控／辯護／質問／支持）、`claimed_role`（聲稱的起始角色）與 `suspicions`（對其他玩家是狼人陣營的私下機率 0–100），投票紀錄亦附 `suspicions`；這些欄位為選填、不翻譯，舊對局沒有這些欄位
 
 ---
 

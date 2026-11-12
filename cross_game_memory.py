@@ -9,6 +9,8 @@ Each player receives the full game data from the previous game:
 
 This gives characters awareness of past games without manual summarization.
 """
+from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any

@@ -42,6 +42,11 @@ TRANSLATABLE_LIST_KEYS = {"night_memory"}
 
 # Player name fields to skip (frontend handles localization)
 SKIP_KEYS = {"name", "name_en", "name_zh", "player_name", "player_name_zh", "player_name_en", "target", "actor", "voter"}
+# Structured day-debate fields: canonical English player names / enum values /
+# role names, plus the {player name: int} suspicion map. They are copied
+# verbatim into *_zh.json and are never walked for translatable prose.
+STRUCTURAL_KEYS = {"reply_to", "stance", "claimed_role", "suspicions", "vote_target", "player"}
+SKIP_KEYS |= STRUCTURAL_KEYS
 CJK_RE = re.compile(r"[\u3400-\u9FFF]")
 
 def _pre_translate_tags(text: str, en_to_zh_players: dict[str, str]) -> str:
@@ -235,7 +240,7 @@ def _collect_translatable(
         for k, v in obj.items():
             if _needs_translation(k, v):
                 items.append((k, v, obj, k))
-            elif isinstance(v, (dict, list)):
+            elif isinstance(v, (dict, list)) and k not in STRUCTURAL_KEYS:
                 items.extend(_collect_translatable(v, f"{path}.{k}", k))
     elif isinstance(obj, list):
         for i, v in enumerate(obj):
@@ -257,6 +262,8 @@ def _apply_translations(
         for k, v in obj.items():
             if k in TRANSLATABLE_KEYS and isinstance(v, str) and v in translations:
                 result[k] = translations[v]
+            elif k in STRUCTURAL_KEYS:
+                result[k] = v
             elif isinstance(v, (dict, list)):
                 result[k] = _apply_translations(v, translations, k)
             else:

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import asyncio
 import json
 import random
@@ -141,18 +143,40 @@ class BridgeAgentClient:
         )):
             raise RuntimeError("bridge returned non-English day decision after retry")
         meta = decision.get("_meta", {})
+        hints = turn_hints or {}
+        validated = bridge_agent.validate_decision(
+            decision,
+            player_name=player_context.get("player_name"),
+            player_names=hints.get("all_players"),
+            spoken_players=hints.get("spoken_players"),
+        )
         return {
+            # Keep the raw action so malformed actions are still recorded as
+            # invalid_decision by the caller instead of silently becoming passes.
             "action": decision.get("action", "pass"),
-            "target": decision.get("target"),
-            "speech": decision.get("speech", ""),
-            "thought": decision.get("thought", ""),
+            "target": validated["target"],
+            "speech": validated["speech"] if validated["action"] == "speak" else decision.get("speech", ""),
+            "thought": validated["thought"],
+            "reply_to": validated["reply_to"],
+            "stance": validated["stance"],
+            "claimed_role": validated["claimed_role"],
+            "suspicions": validated["suspicions"],
             "model": meta.get("model", model or ""),
             "thinking": meta.get("thinking", thinking or "off"),
             "latency_ms": meta.get("latency_ms"),
         }
 
-    async def request_vote(self, player_context: dict[str, Any], chat_history: str, valid_targets: list[str]) -> dict[str, Any]:
-        prompt = bridge_agent.build_vote_prompt(player_context, chat_history, valid_targets)
+    async def request_vote(
+        self,
+        player_context: dict[str, Any],
+        chat_history: str,
+        valid_targets: list[str],
+        my_last_suspicions: dict[str, int] | None = None,
+        player_names: list[str] | None = None,
+    ) -> dict[str, Any]:
+        prompt = bridge_agent.build_vote_prompt(
+            player_context, chat_history, valid_targets, my_last_suspicions=my_last_suspicions,
+        )
         model = player_context.get("model")
         thinking = player_context.get("thinking")
         decision = await self._call_bridge(prompt, model=model, thinking=thinking)
@@ -166,9 +190,16 @@ class BridgeAgentClient:
         if re.search(r"[\u3400-\u9fff]", decision.get("thought", "")):
             raise RuntimeError("bridge returned non-English vote decision after retry")
         meta = decision.get("_meta", {})
+        vote = bridge_agent.validate_vote(
+            decision,
+            player_name=player_context.get("player_name"),
+            valid_targets=valid_targets,
+            player_names=player_names,
+        )
         return {
-            "vote_target": decision.get("vote_target"),
-            "thought": decision.get("thought", ""),
+            "vote_target": vote["vote_target"],
+            "thought": vote["thought"],
+            "suspicions": vote["suspicions"],
             "model": meta.get("model", model or ""),
             "thinking": meta.get("thinking", thinking or "off"),
             "latency_ms": meta.get("latency_ms"),
@@ -185,6 +216,9 @@ class DayPhaseRuntime:
         self.players: list[dict[str, Any]] = []
         self.player_stats: dict[str, dict[str, Any]] = {}
         self.bridge_semaphore: asyncio.Semaphore | None = None
+        # Each player's latest private P(werewolf team) map, carried between
+        # turns so the model updates its beliefs instead of restarting.
+        self.last_suspicions: dict[str, dict[str, int]] = {}
         current = state_manager.ensure_current_game()
         self.game_id = current["game_id"]
         self.game_dir = current["game_dir"]
@@ -217,6 +251,54 @@ class DayPhaseRuntime:
             if speaker and speaker not in speakers:
                 speakers.append(speaker)
         return speakers
+
+    def _speech_events(self) -> list[dict[str, Any]]:
+        return [e for e in self.day_trace if e.get("type") == "speech"]
+
+    def _spoken_players(self) -> list[str]:
+        spoken: list[str] = []
+        for event in self._speech_events():
+            name = event.get("player_name")
+            if name and name not in spoken:
+                spoken.append(name)
+        return spoken
+
+    def _addressed_by(self, player_name: str, window: int = 8) -> tuple[list[str], dict[str, str]]:
+        """Players who targeted / replied to ``player_name`` since their last speech.
+
+        Looks at most ``window`` speeches back. Returns (names in order of
+        occurrence, {name: latest stance toward player_name}).
+        """
+        speeches = self._speech_events()[-window:]
+        last_own = max((i for i, e in enumerate(speeches) if e.get("player_name") == player_name), default=-1)
+        names: list[str] = []
+        stances: dict[str, str] = {}
+        for event in speeches[last_own + 1:]:
+            speaker = event.get("player_name")
+            if not speaker or speaker == player_name:
+                continue
+            aimed = event.get("target") == player_name
+            if not aimed and event.get("reply_to") != player_name:
+                continue
+            if speaker in names:
+                names.remove(speaker)
+            names.append(speaker)
+            if aimed and event.get("stance"):
+                stances[speaker] = event["stance"]
+        return names, stances
+
+    def _public_claims(self) -> dict[str, str]:
+        claims: dict[str, str] = {}
+        for event in self._speech_events():
+            if event.get("claimed_role") and event.get("player_name"):
+                claims[event["player_name"]] = event["claimed_role"]
+        return claims
+
+    def _remember_suspicions(self, player_name: str, suspicions: dict[str, int] | None) -> None:
+        if suspicions:
+            merged = dict(self.last_suspicions.get(player_name, {}))
+            merged.update(suspicions)
+            self.last_suspicions[player_name] = merged
 
     def load_players_from_night_result(self) -> list[dict[str, Any]]:
         night_path = self._night_result_path()
@@ -253,9 +335,18 @@ class DayPhaseRuntime:
             chat_history = await self.chat_log.read_all()
             was_mentioned = self._mentioned_by_recent(chat_history, player_name)
             recent_speakers = [n for n in self._recent_speaker_names(chat_history) if n != player_name]
+            all_players = [p["name"] for p in self.players]
+            addressed_by, addressed_stances = self._addressed_by(player_name)
             turn_hints = {
                 "was_mentioned_recently": was_mentioned,
                 "recent_speakers": recent_speakers,
+                "all_players": all_players,
+                "other_players": [n for n in all_players if n != player_name],
+                "spoken_players": [n for n in self._spoken_players() if n != player_name],
+                "addressed_by": addressed_by,
+                "addressed_stances": addressed_stances,
+                "public_claims": self._public_claims(),
+                "my_last_suspicions": dict(self.last_suspicions.get(player_name, {})),
                 "speak_count": self.player_stats[player_name]["speak_count"],
                 "max_speaks": self.config.max_speaks_per_player,
                 "debate_notes": [
@@ -274,6 +365,8 @@ class DayPhaseRuntime:
             action = decision.get("action")
             target = decision.get("target")
             speech = (decision.get("speech") or "").strip()
+            suspicions = decision.get("suspicions") or None
+            self._remember_suspicions(player_name, suspicions)
 
             if action == "pass":
                 self.day_trace.append({
@@ -281,6 +374,7 @@ class DayPhaseRuntime:
                     "thought": decision.get("thought", ""), "model": decision.get("model", ""),
                     "thinking": decision.get("thinking", "off"), "latency_ms": decision.get("latency_ms"),
                     "source": "agent",
+                    "suspicions": suspicions,
                 })
                 continue
 
@@ -291,6 +385,10 @@ class DayPhaseRuntime:
             valid_targets = [p["name"] for p in self.players if p["name"] != player_name]
             if target is not None and target not in valid_targets:
                 target = None
+            reply_to = decision.get("reply_to")
+            if reply_to is not None and reply_to not in valid_targets:
+                reply_to = None
+            stance = decision.get("stance") if target is not None else None
 
             line = await self.chat_log.append_speech(player_name, target, speech)
             self.player_stats[player_name]["speak_count"] += 1
@@ -301,6 +399,10 @@ class DayPhaseRuntime:
                 "speech": speech,
                 "log_line": line.strip(),
                 "timestamp": line.split("]", 1)[0].lstrip("[") if "]" in line else "",
+                "reply_to": reply_to,
+                "stance": stance,
+                "claimed_role": decision.get("claimed_role"),
+                "suspicions": suspicions,
                 "thought": decision.get("thought", ""),
                 "model": decision.get("model", ""),
                 "thinking": decision.get("thinking", "off"),
@@ -356,12 +458,17 @@ class DayPhaseRuntime:
         ctx = self.build_player_context(player)
         valid_targets = [p["name"] for p in players if p["name"] != player["name"]]
         try:
-            decision = await self.bridge_client.request_vote(ctx, chat_history, valid_targets)
+            decision = await self.bridge_client.request_vote(
+                ctx, chat_history, valid_targets,
+                my_last_suspicions=dict(self.last_suspicions.get(player["name"], {})) or None,
+                player_names=[p["name"] for p in players],
+            )
             vote_target = decision.get("vote_target")
             if vote_target not in valid_targets:
                 vote_target = random.choice(valid_targets)
             return player["name"], vote_target, {
                 "type": "vote", "player": player["name"], "target": vote_target,
+                "suspicions": decision.get("suspicions") or None,
                 "thought": decision.get("thought", ""), "model": decision.get("model", ""),
                 "thinking": decision.get("thinking", "off"), "latency_ms": decision.get("latency_ms"),
                 "source": "agent",

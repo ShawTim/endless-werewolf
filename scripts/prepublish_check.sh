@@ -7,17 +7,24 @@ cd "$REPO_DIR"
 echo "=== Language regression tests ==="
 python3 scripts/test_language_audit.py
 
+echo "=== Day-debate schema tests ==="
+python3 scripts/test_debate_schema.py
+
 echo "=== Full source/public archive audit ==="
 python3 scripts/audit_all_games.py
 
 echo "=== Syntax and public-safety checks ==="
 python3 -m py_compile \
   state_manager.py \
+  bridge_agent.py \
+  day_phase.py \
+  tag_phase.py \
   translate_zh_phase.py \
   scripts/audit_all_games.py \
   scripts/build_pages.py \
   scripts/repair_language_data.py \
   scripts/test_language_audit.py \
+  scripts/test_debate_schema.py \
   scripts/verify_game.py \
   scripts/verify_live_archive.py
 node --check docs/app.js

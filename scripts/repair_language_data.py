@@ -85,6 +85,10 @@ PROSE_KEYS = {
     "error",
 }
 PROSE_LIST_KEYS = {"night_memory"}
+# Structured day-debate fields (exact English player names, enum values, role
+# names, and the {player name: int} suspicion map). They are copied verbatim
+# from the canonical English record into *_zh.json and never translated.
+STRUCTURAL_KEYS = {"reply_to", "stance", "claimed_role", "suspicions"}
 
 GAME_000009_EN_REPAIRS = {
     2: (
@@ -250,7 +254,7 @@ def iter_prose(obj: Any, path: tuple[Any, ...] = (), parent_key: str = ""):
             child_path = path + (key,)
             if key in PROSE_KEYS and isinstance(value, str) and value.strip():
                 yield child_path, key, value
-            elif isinstance(value, (dict, list)):
+            elif isinstance(value, (dict, list)) and key not in STRUCTURAL_KEYS:
                 yield from iter_prose(value, child_path, key)
     elif isinstance(obj, list):
         for index, value in enumerate(obj):

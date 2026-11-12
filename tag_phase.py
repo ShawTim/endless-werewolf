@@ -40,6 +40,9 @@ STRUCT_FIELDS = {
     "team", "werewolves_in_play", "executed_werewolves", "model", "thinking",
     "speak_count", "duration_seconds", "chat_history", "night_memory_list",
     "log_line",
+    # Structured day-debate fields (exact player names, enums, role names and
+    # the {player name: int} suspicion map) — copied verbatim, never tagged.
+    "reply_to", "stance", "claimed_role", "suspicions",
 }
 
 
@@ -121,6 +124,8 @@ def _tag_object(obj: Any, en_player_names: list[str], is_zh: bool = False) -> An
                 result[k] = _tag_text(v, en_player_names, is_zh)
             elif k in TEXT_FIELDS and isinstance(v, list):
                 result[k] = [_tag_text(item, en_player_names, is_zh) if isinstance(item, str) else item for item in v]
+            elif k in STRUCT_FIELDS:
+                result[k] = v
             elif isinstance(v, (dict, list)):
                 result[k] = _tag_object(v, en_player_names, is_zh)
             else:
@@ -142,6 +147,8 @@ def _tag_zh_players(obj: Any, zh_player_names: list[str]) -> Any:
                     if f"[{zh_name}]" not in text:
                         text = text.replace(zh_name, f"[{zh_name}]")
                 result[k] = text
+            elif k in STRUCT_FIELDS:
+                result[k] = v
             elif isinstance(v, (dict, list)):
                 result[k] = _tag_zh_players(v, zh_player_names)
             else:

@@ -46,6 +46,12 @@ PROSE_KEYS = {
     "log_line",
 }
 PROSE_LIST_KEYS = {"night_memory"}
+# Optional structured day-debate fields. They hold canonical English player
+# names / enum values / role names and must be byte-identical between the
+# English and *_zh.json records (never translated or tagged).
+STANCES = {"accuse", "defend", "question", "support"}
+DEBATE_FIELDS = ("reply_to", "stance", "claimed_role", "suspicions")
+STRUCTURAL_KEYS = set(DEBATE_FIELDS)
 
 
 def load_json(path, errors):
@@ -94,7 +100,7 @@ def iter_prose(obj, path="", parent_key=""):
             child_path = "%s.%s" % (path, key) if path else key
             if key in PROSE_KEYS and isinstance(value, str) and value.strip():
                 yield child_path, key, value
-            elif isinstance(value, (dict, list)):
+            elif isinstance(value, (dict, list)) and key not in STRUCTURAL_KEYS:
                 yield from iter_prose(value, child_path, key)
     elif isinstance(obj, list):
         for index, value in enumerate(obj):
@@ -173,6 +179,21 @@ def audit_language(payloads, errors):
     ]
     if en_day_shape != zh_day_shape:
         errors.append("EN/ZH day trace structure differs")
+    elif debate_shape(day.get("day_trace", [])) != debate_shape(day_zh.get("day_trace", [])):
+        errors.append("EN/ZH day trace debate fields differ")
+
+    vote = payloads.get("vote_result.json", {})
+    vote_zh = payloads.get("vote_result_zh.json", {})
+    en_vote_shape = [
+        (x.get("player"), x.get("target"), x.get("suspicions"))
+        for x in vote.get("vote_trace", [])
+    ]
+    zh_vote_shape = [
+        (x.get("player"), x.get("target"), x.get("suspicions"))
+        for x in vote_zh.get("vote_trace", [])
+    ]
+    if en_vote_shape != zh_vote_shape:
+        errors.append("EN/ZH vote trace structure differs")
 
     postgame = payloads.get("postgame_result.json", {}).get("interviews", {})
     postgame_zh = payloads.get("postgame_result_zh.json", {}).get("interviews", {})
@@ -186,6 +207,50 @@ def audit_language(payloads, errors):
     }
     if en_interviews != zh_interviews:
         errors.append("EN/ZH postgame interview structure differs")
+
+
+def debate_shape(trace):
+    return [tuple(x.get(field) for field in DEBATE_FIELDS) for x in trace]
+
+
+def audit_suspicions(value, owner, names, where, errors):
+    if value is None:
+        return
+    if not isinstance(value, dict):
+        errors.append("%s suspicions is not an object" % where)
+        return
+    for name, score in value.items():
+        if name not in names:
+            errors.append("%s suspicions names unknown player %s" % (where, name))
+        elif name == owner:
+            errors.append("%s suspicions includes the speaker" % where)
+        if isinstance(score, bool) or not isinstance(score, int) or not 0 <= score <= 100:
+            errors.append("%s suspicion for %s is not an int 0-100" % (where, name))
+
+
+def audit_debate_fields(day, vote, names, errors):
+    """Validate the optional structured debate fields (absent in old games)."""
+    for index, event in enumerate(day.get("day_trace", [])):
+        where = "day_trace[%d]" % index
+        speaker = event.get("player_name")
+        reply_to = event.get("reply_to")
+        if reply_to is not None and (reply_to not in names or reply_to == speaker):
+            errors.append("%s reply_to %r is not another player" % (where, reply_to))
+        stance = event.get("stance")
+        if stance is not None:
+            if stance not in STANCES:
+                errors.append("%s stance %r is not allowed" % (where, stance))
+            if not event.get("target"):
+                errors.append("%s has a stance without a target" % where)
+        claimed = event.get("claimed_role")
+        if claimed is not None and claimed not in ALLOWED_ROLES:
+            errors.append("%s claimed_role %r is not a canonical role" % (where, claimed))
+        audit_suspicions(event.get("suspicions"), speaker, names, where, errors)
+    for index, event in enumerate(vote.get("vote_trace", [])):
+        audit_suspicions(
+            event.get("suspicions"), event.get("player"), names,
+            "vote_trace[%d]" % index, errors,
+        )
 
 
 def audit_game(game_dir):
@@ -286,6 +351,7 @@ def audit_game(game_dir):
     if Counter(interview_names) != Counter(names):
         errors.append("postgame interview coverage/duplicates mismatch")
 
+    audit_debate_fields(day, vote, set(names), errors)
     audit_language(payloads, errors)
     if not (game_dir / "chat_history_zh.md").exists():
         warnings.append("chat_history_zh.md missing")
