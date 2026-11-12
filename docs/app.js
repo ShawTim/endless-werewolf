@@ -1820,6 +1820,11 @@ function buildCharacter(player, index){
   g.scale.setScalar(fj.k);
   const ang=sa(index); g.rotation.y=-ang-PI/2+fj.yaw;
   scene.add(g);
+  // Rig bookkeeping (see "=== Rig ===" below): resting hip lean, the persona
+  // prop and the parts that belong to the legs rather than the upper body.
+  let baseLean = 0;
+  let prop = null;
+  const lowerParts = [];
 
   // Distinct palette: skin, hair, main clothing, secondary clothing
   const skinMat=new THREE.MeshToonMaterial({color:player.skin, gradientMap: TOON_GRADIENT_SOFT});
@@ -1978,6 +1983,7 @@ function buildCharacter(player, index){
   const legR=limb(0.12,0.3,player.accent);
   legR.position.set(0.14,-0.1,0); g.add(legR);
   addOutline(legR, 1.04);
+  lowerParts.push(legL, legR);
 
   // Shoes — the legs used to stop at a capsule tip above the pedestal.
   for (const s of [-1, 1]) {
@@ -1986,11 +1992,15 @@ function buildCharacter(player, index){
     // appeared to stand on air in the portrait renderer.
     shoe.position.set(s*0.145,-0.128,0.035);
     shoe.castShadow=true; shoe.receiveShadow=true; g.add(shoe);
+    lowerParts.push(shoe);
   }
 
   // === Head (parented group so face features follow head bob) ===
   const head=new THREE.Group();
   head.position.y=HEAD_Y; head.scale.setScalar(HEAD_S); g.add(head);
+  // Yaw first, then pitch: a listener turns to the speaker and then nods,
+  // instead of the nod axis swinging round with the turn.
+  head.rotation.order='YXZ';
 
   // The face is painted into a texture, so the head is a single mesh. The old
   // build spent ~16 meshes on separate eye/nose/mouth/brow/blush primitives.
@@ -2056,7 +2066,7 @@ function buildCharacter(player, index){
         new THREE.MeshStandardMaterial({color:0x5e3722,roughness:0.62})
       );
       gavelHead.position.y=0.200; gavel.add(gavelHead);
-      armR.add(gavel);
+      armR.add(gavel); prop=gavel;
       // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
@@ -2095,7 +2105,7 @@ function buildCharacter(player, index){
         new THREE.MeshStandardMaterial({color:0x9aa3a8,metalness:0.6,roughness:0.35})
       );
       clip.position.set(0,0.113,0.014); clipboard.add(clip);
-      armL.add(clipboard);
+      armL.add(clipboard); prop=clipboard;
       // Hair comes from buildHair() — no per-branch hair geometry.
       break;
 
@@ -2119,7 +2129,7 @@ function buildCharacter(player, index){
       );
       mask.position.y=0.29; mask.scale.set(0.8,1,0.3);
       maskProp.add(mask);
-      armR.add(maskProp);
+      armR.add(maskProp); prop=maskProp;
       // The wide "wildcard" grin is painted by FACE_STYLES.
       break;
 
@@ -2192,7 +2202,7 @@ function buildCharacter(player, index){
         new THREE.MeshStandardMaterial({color:0x2980b9,emissive:0x2980b9,emissiveIntensity:0.55})
       );
       screen.position.z=0.0095; tablet.add(screen);
-      armL.add(tablet);
+      armL.add(tablet); prop=tablet;
       // Hair (including the side part) comes from buildHair().
       break;
 
@@ -2214,10 +2224,11 @@ function buildCharacter(player, index){
       }
       const cloverStem=new THREE.Mesh(new THREE.CylinderGeometry(0.009,0.009,0.06,6), leafMat);
       cloverStem.position.y=-0.055; clover.add(cloverStem);
-      armR.add(clover);
+      armR.add(clover); prop=clover;
       // Worried expression comes from FACE_STYLES (browTilt), not mesh tweaks
-      // Nervous posture — slightly leaning back
-      g.rotation.x=-0.05;
+      // Nervous posture — slightly leaning back. Applied at the hip by the rig
+      // (a root tilt also tipped the seat stone, and was wiped by every reset).
+      baseLean=-0.05;
       break;
   }
 
@@ -2300,8 +2311,46 @@ function buildCharacter(player, index){
     obj.receiveShadow = true;
   });
 
+  // === Rig ===
+  // Two pivot groups, so animation addresses parts by reference instead of
+  // guessing which child is the head from its height:
+  //   body  — everything standing on the plinth, pivoting at the soles. A death
+  //           fall or a celebration hop moves the figure, never the seat stone.
+  //   upper — coat, arms, head and trim, pivoting at the hip. Breathing, weight
+  //           shifts, leans and torso turns bend the figure at the waist.
+  // The seat (plinth, inlay ring, highlight) stays on the root group. Pivots
+  // are pure translations, so re-parenting only offsets each child's y.
+  const RIG_FOOT_Y = -0.15, RIG_HIP_Y = 0.15;
+  const body = new THREE.Group();
+  body.name = 'rig-body';
+  body.position.y = RIG_FOOT_Y;
+  const upper = new THREE.Group();
+  upper.name = 'rig-upper';
+  upper.position.y = RIG_HIP_Y - RIG_FOOT_Y;
+  body.add(upper);
+  const seatParts = new Set([base, ring, highlight]);
+  const lowerSet = new Set(lowerParts);
+  for (const child of [...g.children]) {
+    if (seatParts.has(child)) continue;
+    if (lowerSet.has(child)) { child.position.y -= RIG_FOOT_Y; body.add(child); }
+    else { child.position.y -= RIG_HIP_Y; upper.add(child); }
+  }
+  g.add(body);
+  upper.rotation.x = baseLean;
+  const rig = {
+    body, upper, head, armL, armR, handL, handR, prop,
+    bodyBaseY: body.position.y,
+    upperBaseY: upper.position.y,
+    headBaseY: head.position.y,
+    baseLean,
+    armBase: {
+      L: { x: armL.rotation.x, y: armL.rotation.y, z: armL.rotation.z },
+      R: { x: armR.rotation.x, y: armR.rotation.y, z: armR.rotation.z },
+    },
+  };
+
   // Store refs
-  g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: baseColor.getHex(), _originalRingColor: seatAccent.getHex(), _originalRingGlow: 0.05, _baseRotY: g.rotation.y, baseY: g.position.y, baseScale: fj.k };
+  g.userData = { player, index, highlight, baseMat, ringMat, _originalBaseColor: baseColor.getHex(), _originalRingColor: seatAccent.getHex(), _originalRingGlow: 0.05, _baseRotY: g.rotation.y, baseY: g.position.y, baseScale: fj.k, rig, life: makeLifeState(index) };
   return g;
 }
 
@@ -2821,6 +2870,7 @@ function setNight(n) {
     for (const e of window.__brazierEmbers) e.visible = showBraziers;
     for (const l of window.__brazierLights) l.intensity = showBraziers ? 0.35 : 0;
   }
+  directCamera(n ? 'night' : 'day');
 }
 
 function updateNightTransition() {
@@ -3175,6 +3225,7 @@ function showVoteArrows(votes) {
   voteOverlay.classList.remove('revealed', 'settled');
   voteArrowEls = [];
   if (!activeVotes) return;
+  directCamera('vote');
 
   const entries = Object.entries(activeVotes);
   const targetGroups = new Map();
@@ -3188,6 +3239,7 @@ function showVoteArrows(votes) {
     const vi = PLAYERS.findIndex(p => p.name === voter);
     const ti = PLAYERS.findIndex(p => p.name === target);
     if (vi < 0 || ti < 0) continue;
+    pointAt(vi, ti, 1900, 300 + order * 75); // voter points as its arrow draws in
 
     const voterP = PLAYERS.find(x => x.name === voter);
     const voterAccent = voterP?.color || voterP?.accent || 0xe74c3c;
@@ -3359,6 +3411,7 @@ function showResultBanner(outcome, reason, winners) {
   }) : [];
   resultBanner.querySelector('.winners').textContent = winNames.length ? winLabel + winNames.join(', ') : '';
   resultBanner.classList.add('visible');
+  directCamera('result');
   setTimeout(() => resultBanner.classList.remove('visible'), 5000);
 }
 
@@ -3394,7 +3447,7 @@ function focusSpeakerCamera(index) {
     from: theta,
     to: theta + delta,
     startTime: performance.now(),
-    duration: 700,
+    duration: 1100,
   };
 }
 
@@ -3425,7 +3478,8 @@ function clearSpeakerFocus() {
 function updateSpeakerCamera(t) {
   if (!speakerCameraAnim) return;
   const progress = Math.min((t - speakerCameraAnim.startTime) / speakerCameraAnim.duration, 1);
-  const eased = 1 - Math.pow(1 - progress, 3);
+  // Ease in-out: a whip-pan start read as a cut, not a camera move.
+  const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
   theta = speakerCameraAnim.from + (speakerCameraAnim.to - speakerCameraAnim.from) * eased;
   updateCam();
   if (progress >= 1) speakerCameraAnim = null;
@@ -3452,51 +3506,60 @@ function updateSpeakerFocus() {
 
 // ===== Dim Character (executed) — animated death =====
 function dimCharacter(index) {
-  if (!chars[index]) return;
-  // Snapshot per-character (materials are shared, so per-mesh originalColor is unsafe)
-  if (!chars[index].userData._dimSnapshot) {
+  const g = chars[index];
+  if (!g) return;
+  // Snapshot per-character, figure only (seat stone keeps its team colour) and
+  // never the shared OUTLINE_MAT: dimming that greyed every figure's ink line,
+  // and two executions restored it in the wrong order.
+  if (!g.userData._dimSnapshot) {
     const snap = [];
-    chars[index].traverse(obj => {
-      if (obj.isMesh && obj.material) {
-        snap.push({
-          mat: obj.material,
-          color: obj.material.color.clone(),
-          emissive: obj.material.emissive ? obj.material.emissive.clone() : null,
-        });
-      }
+    const seen = new Set();
+    (g.userData.rig ? g.userData.rig.body : g).traverse(obj => {
+      if (!obj.isMesh || !obj.material || obj.userData.isOutline || seen.has(obj.material)) return;
+      seen.add(obj.material);
+      snap.push({
+        mat: obj.material,
+        color: obj.material.color.clone(),
+        emissive: obj.material.emissive ? obj.material.emissive.clone() : null,
+      });
     });
-    chars[index].userData._dimSnapshot = snap;
+    g.userData._dimSnapshot = snap;
   }
-  chars[index].traverse(obj => {
-    if (obj.isMesh && obj.material) {
-      obj.material.color.lerp(new THREE.Color(0x333333), 0.7);
-      if (obj.material.emissive) obj.material.emissive.setHex(0x000000);
-    }
-  });
-  // Start death animation (fall over)
-  deathAnims.push({ index, startTime: performance.now(), duration: 800, baseY: chars[index].position.y });
+  const L = g.userData.life;
+  if (!L) { // no rig (should not happen) — dim instantly, no fall
+    for (const s of g.userData._dimSnapshot) s.mat.color.lerp(LIFE_DIM_GREY, 0.7);
+    return;
+  }
+  // Re-dim in the same frame as undimAll() = state restore: keep the death.
+  const prev = lifeRestoreFrame === lifeFrame ? lifeRestoreDeaths.get(index) : null;
+  // Right after the ballots appear, wait for the arrows and the camera dolly
+  // before the fall; colour fade and topple both run off this clock.
+  const entry = prev || {
+    index, startTime: performance.now(), duration: 2000,
+    delay: voteRevealFrame === lifeFrame ? 2600 : 150,
+  };
+  L.death = entry;
+  L.dead = true;
+  L.dimDone = false;
+  if (!deathAnims.includes(entry)) deathAnims.push(entry);
+  directCamera('execution', { index });
 }
 
 function updateDeathAnims(t) {
-  deathAnims = deathAnims.filter(d => {
-    if (!chars[d.index]) return false;
-    const elapsed = t - d.startTime;
-    const progress = Math.min(elapsed / d.duration, 1);
-    // Ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    // Tilt 90 degrees — fall flat
-    chars[d.index].rotation.x = -(PI / 2) * eased;
-    // Sink down to ground level
-    const pos = sp(d.index);
-    chars[d.index].position.set(pos[0], d.baseY - 0.35 * eased, pos[2]);
-    return progress < 1;
-  });
+  // The pose itself is written by updateCharacterLife(); this only retires
+  // entries whose clutch, fall and bounce have played out.
+  for (let k = deathAnims.length - 1; k >= 0; k--) {
+    const d = deathAnims[k];
+    if (!chars[d.index] || t - d.startTime - (d.delay || 0) > d.duration) deathAnims.splice(k, 1);
+  }
 }
 
 function undimAll() {
+  lifeRestoreFrame = lifeFrame;
+  lifeRestoreDeaths.clear();
   deathAnims = [];
   teamAnims = [];
-  chars.forEach(g => {
+  chars.forEach((g, i) => {
     const snap = g.userData._dimSnapshot;
     if (snap) {
       snap.forEach(s => {
@@ -3510,6 +3573,27 @@ function undimAll() {
     g.rotation.z = 0;
     const pos = sp(PLAYERS.indexOf(g.userData.player));
     g.position.set(pos[0], g.userData.baseY ?? SH, pos[2]);
+    // Rig back to its rest pose. The eased channels (head yaw, gesture
+    // weights) are left alone: updateCharacterLife rewrites every joint before
+    // the next render, so a phase change never snaps a turning head.
+    const L = g.userData.life, R = g.userData.rig;
+    if (L) {
+      if (L.death) lifeRestoreDeaths.set(i, L.death);
+      L.death = null;
+      L.dead = false;
+      L.dimDone = false;
+    }
+    if (R) {
+      R.body.position.set(0, R.bodyBaseY, 0);
+      R.body.rotation.set(0, 0, 0);
+      R.upper.position.set(0, R.upperBaseY, 0);
+      R.upper.rotation.set(R.baseLean, 0, 0);
+      R.upper.scale.set(1, 1, 1);
+      R.head.position.y = R.headBaseY;
+      R.head.rotation.set(0, 0, 0);
+      R.armL.rotation.set(R.armBase.L.x, R.armBase.L.y, R.armBase.L.z);
+      R.armR.rotation.set(R.armBase.R.x, R.armBase.R.y, R.armBase.R.z);
+    }
   });
 }
 
@@ -4320,23 +4404,10 @@ function triggerTeamAnimations(resolveData) {
 }
 
 function updateTeamAnims(t) {
-  teamAnims.forEach(a => {
-    if (!chars[a.index]) return;
-    const elapsed = (t - a.startTime) / 1000 - a.offset;
-    if (elapsed < 0) return;
-    const g = chars[a.index];
-    
-    if (a.type === 'celebrate') {
-      // Bounce up with joy
-      g.position.y = (g.userData.baseY ?? SH) + Math.abs(Math.sin(elapsed * 3)) * 0.25;
-      g.rotation.y = g.userData._baseRotY + Math.sin(elapsed * 2) * 0.3;
-      // Arms up — can't easily do this with current model, so just bounce
-    } else {
-      // Sulk — lean forward, head down
-      g.position.y = (g.userData.baseY ?? SH) - Math.min(elapsed * 0.15, 0.1);
-      g.rotation.x = Math.min(elapsed * 0.3, 0.15);
-    }
-  });
+  // Celebrate (hop + arms-up wave) and sulk (slump, head down) are layered into
+  // the rig by updateCharacterLife()'s mood channel, eased in and out, and on
+  // the body pivot — the old root bounce lifted the seat stone off the dais.
+  // teamAnims stays the source of truth for who does which, and when.
 }
 
 function showPostgameInfo() {
@@ -6003,6 +6074,9 @@ function formatGameText(text) {
 
 
 // ===== Speaking Animation =====
+// speakingStates is only the *intent* list (who is talking right now). The
+// gesture/listening weights are eased per figure in updateCharacterLife(), so
+// clearBubbles() emptying this array never snaps a pose.
 let speakingStates = []; // [{index, intensity, startTime}]
 
 function setSpeaking(index, active) {
@@ -6015,26 +6089,13 @@ function setSpeaking(index, active) {
 }
 
 function updateSpeakingAnims(t) {
-  speakingStates.forEach(s => {
-    if (!chars[s.index]) return;
-    const g = chars[s.index];
-    // Ramp up intensity
+  // Drop states whose figure is gone (scene rebuilt mid-speech); the old
+  // trailing filter could never remove anything.
+  for (let k = speakingStates.length - 1; k >= 0; k--) {
+    const s = speakingStates[k];
+    if (!chars[s.index]) { speakingStates.splice(k, 1); continue; }
     s.intensity = Math.min(s.intensity + 0.05, 1);
-    // Head bob — small rapid movement (animate head group so face features follow)
-    const bob = Math.sin(t * 8) * 0.04 * s.intensity;
-    const sway = Math.sin(t * 3) * 0.06 * s.intensity;
-    g.children.forEach(child => {
-      if (child.position.y > 0.9 && child.position.y < 1.2 && child.isGroup) {
-        child.position.y = (child.userData._baseY || child.position.y) + bob;
-        if (!child.userData._baseY) child.userData._baseY = child.position.y - bob;
-        child.rotation.z = sway * 0.3;
-      }
-    });
-    // Slight forward lean
-    g.rotation.x = -0.03 * s.intensity;
-  });
-  // Fade out when stopped
-  speakingStates = speakingStates.filter(s => s.intensity > 0.01 || performance.now() - s.startTime < 999999);
+  }
 }
 
 
@@ -6127,6 +6188,498 @@ function updateIntroAnim() {
   if (t >= 1) { introAnim.done = true; introAnim = null; }
 }
 
+// ===== Character Life & Camera Director =====
+//
+// Everything that makes the council read as six people at a table rather than
+// six posed models: per-figure idle personality, listeners turning to the
+// speaker, speaker gestures, accusation beats, the death fall, celebration /
+// sulk poses, and a small camera director for the big story moments.
+//
+// All rig poses are written in ONE place (updateCharacterLife) from eased
+// state, so event code only flips intent (who speaks, who points, who died)
+// and never snaps a pose. Parts are addressed through g.userData.rig (built in
+// buildCharacter), never by guessing children from their height.
+//
+// Public API — module scope (window.__life mirrors it for console testing):
+//   pointAt(fromIndex, toIndex, durationMs = 1500, delayMs = 0)
+//       fromIndex raises the arm on the target's side and points at toIndex,
+//       turning head and torso with it.
+//   reactToAccusation(targetIndex, accuserIndex = current speaker, delayMs = 0)
+//       targetIndex recoils, throws its hands up and snaps its head toward the
+//       accuser, holding the look ~2.5 s.
+//   accuse(fromIndex, toIndex)
+//       Both of the above, with the flinch landing just after the point. This
+//       is the call for a speech with an @target, made right after showBubble()
+//       has started the speaker:
+//         const from = PLAYERS.findIndex(p => p.name === speech.player_name);
+//         const to = PLAYERS.findIndex(p => p.name === speech.target);
+//         if (from >= 0 && to >= 0 && from !== to) accuse(from, to);
+//   directCamera(shot, opts = {})
+//       shot: 'night' | 'day' ('home') | 'vote' | 'execution' | 'result'.
+//       opts.index is required for 'execution'; opts.force restarts a shot
+//       that is already running. Requests made in the same frame are batched
+//       and the highest priority wins (result > execution > vote > night/day),
+//       so setPhase() can fire setNight + showVoteArrows + dimCharacter in one
+//       go and get the right move. Re-requesting the running shot is a no-op,
+//       so story mode (setPhase on every step) does not restart it. Shots only
+//       run while camFollow && !followSuspended && !userInteracting, and cancel
+//       themselves the moment anything else moves the camera (drag, wheel
+//       zoom, WASD pan) — manual control always wins.
+
+const _lifeV = new THREE.Vector3();
+const _lifeQ = new THREE.Quaternion();
+const _lifeQ2 = new THREE.Quaternion();
+const _lifeDown = new THREE.Vector3(0, -1, 0);
+const _lifeLook = { yaw: 0, pitch: 0 };
+const LIFE_DIM_GREY = new THREE.Color(0x333333);
+let lifeFrame = 0;      // animate() frame counter
+let lifeLastMs = 0;
+// setPhase() runs on every story step, so undimAll() + dimCharacter() inside
+// one frame is a state *restore*, not a second execution: the in-flight (or
+// finished) death is carried across instead of replaying the fall.
+let lifeRestoreFrame = -1;
+const lifeRestoreDeaths = new Map();
+
+function lifeHash(n) { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+function lifeSmooth(e0, e1, x) { const k = Math.min(1, Math.max(0, (x - e0) / (e1 - e0))); return k * k * (3 - 2 * k); }
+function lifeDamp(cur, target, rate, dt) { return cur + (target - cur) * (1 - Math.exp(-rate * dt)); }
+function lifeClamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+// Deterministic per seat: the same replay always shows the same crowd, but no
+// two figures breathe, shift or glance in step.
+function makeLifeState(index) {
+  const h = k => lifeHash(index * 13.37 + k);
+  return {
+    breathRate: 1.05 + h(1) * 0.4,
+    breathPhase: h(2) * TAU,
+    shiftRate: 0.21 + h(3) * 0.16,
+    shiftPhase: h(4) * TAU,
+    shiftAmp: 0.016 + h(5) * 0.018,
+    swayPhase: h(6) * TAU,
+    glancePeriod: 4.2 + h(7) * 3.2,
+    glanceOffset: h(8) * 10,
+    gestureSide: index % 2 === 0 ? 1 : -1,
+    gesturePhase: h(9) * TAU,
+    // eased channels
+    headYaw: 0, headPitch: 0, torsoYaw: 0,
+    speakW: 0, listenW: 0, sleepW: 0, moodW: 0, moodType: 0,
+    // events
+    point: null,   // { to, start, dur }
+    react: null,   // { from, start }
+    death: null,   // deathAnims entry { index, startTime, delay, duration }
+    dead: false,
+    dimDone: false,
+  };
+}
+
+function currentSpeakerIndex() {
+  for (let k = speakingStates.length - 1; k >= 0; k--) {
+    if (chars[speakingStates[k].index]) return speakingStates[k].index;
+  }
+  return speakerFocusIndex;
+}
+
+// Yaw/pitch from figure g toward seat j, in g's own frame (+z faces the table).
+// Analytic rather than worldToLocal so it never depends on last frame's matrices.
+function lifeLookAt(g, j, out) {
+  const tg = chars[j];
+  const dx = tg.position.x - g.position.x, dz = tg.position.z - g.position.z;
+  const ry = g.rotation.y, c = Math.cos(ry), s = Math.sin(ry);
+  out.yaw = Math.atan2(dx * c - dz * s, dx * s + dz * c);
+  // A fallen figure lies at seat level: look down at it, not through it.
+  out.pitch = tg.userData.life && tg.userData.life.dead ? 0.32 : 0.04;
+  return out;
+}
+
+// Arm rotation (in the upper-body frame) that aims the hanging arm at seat j.
+function lifePointQuat(g, R, side, j, out) {
+  const tg = chars[j];
+  const dx = tg.position.x - g.position.x, dz = tg.position.z - g.position.z;
+  const ry = g.rotation.y, c = Math.cos(ry), s = Math.sin(ry);
+  const k = g.scale.x || 1;
+  _lifeV.set((dx * c - dz * s) / k - side * 0.315, 0.22, (dx * s + dz * c) / k).normalize();
+  _lifeQ.copy(R.upper.quaternion).invert();
+  _lifeV.applyQuaternion(_lifeQ);
+  return out.setFromUnitVectors(_lifeDown, _lifeV);
+}
+
+function lifeApplyDim(g, fade) {
+  const snap = g.userData._dimSnapshot;
+  if (!snap) return;
+  for (let k = 0; k < snap.length; k++) {
+    const s = snap[k];
+    s.mat.color.copy(s.color).lerp(LIFE_DIM_GREY, 0.7 * fade);
+    if (s.emissive && s.mat.emissive) s.mat.emissive.copy(s.emissive).multiplyScalar(1 - fade);
+  }
+  if (fade >= 1) g.userData.life.dimDone = true;
+}
+
+function pointAt(fromIndex, toIndex, durationMs = 1500, delayMs = 0) {
+  const g = chars[fromIndex];
+  if (!g || !g.userData.life || !chars[toIndex] || fromIndex === toIndex) return;
+  g.userData.life.point = { to: toIndex, start: performance.now() + delayMs, dur: durationMs };
+}
+
+function reactToAccusation(targetIndex, accuserIndex = currentSpeakerIndex(), delayMs = 0) {
+  const g = chars[targetIndex];
+  if (!g || !g.userData.life) return;
+  const from = accuserIndex === targetIndex ? -1 : accuserIndex;
+  g.userData.life.react = { from, start: performance.now() + delayMs };
+}
+
+function accuse(fromIndex, toIndex) {
+  pointAt(fromIndex, toIndex, 1600);
+  reactToAccusation(toIndex, fromIndex, 280);
+}
+
+function updateCharacterLife(t, dt) {
+  const tMs = t * 1000;
+  const speaker = currentSpeakerIndex();
+  for (let i = 0; i < chars.length; i++) {
+    const g = chars[i];
+    const R = g.userData.rig, L = g.userData.life;
+    if (!R || !L) continue;
+
+    let speaking = false;
+    for (let k = 0; k < speakingStates.length; k++) {
+      if (speakingStates[k].index === i) { speaking = true; break; }
+    }
+    let team = null;
+    for (let k = 0; k < teamAnims.length; k++) {
+      if (teamAnims[k].index === i) { team = teamAnims[k]; break; }
+    }
+
+    // Death clock: seconds since the fall was cued (< 0 = still standing).
+    const de = L.death ? (tMs - L.death.startTime - (L.death.delay || 0)) / 1000 : -1;
+    const alive = !L.death || de < 0;
+
+    // ---- eased blend weights
+    const nightAmp = isNight ? 0.55 : 1;
+    L.speakW = lifeDamp(L.speakW, speaking && alive ? 1 : 0, 5, dt);
+    const hasSpeaker = speaker >= 0 && speaker !== i && !!chars[speaker];
+    const listening = alive && !speaking && !isNight && hasSpeaker;
+    L.listenW = lifeDamp(L.listenW, listening ? 1 : 0, 3.2, dt);
+    // One Night rules: everyone not acting is asleep at night.
+    L.sleepW = lifeDamp(L.sleepW, isNight && alive && !speaking ? 1 : 0, 1.4, dt);
+    if (team) L.moodType = team.type === 'celebrate' ? 1 : -1;
+    const moodE = team ? (tMs - team.startTime) / 1000 - (team.offset || 0) : 0;
+    L.moodW = lifeDamp(L.moodW, team && moodE >= 0 && alive ? 1 : 0, 3.5, dt);
+    const cel = L.moodType > 0 ? L.moodW : 0;
+    const sulk = L.moodType < 0 ? L.moodW : 0;
+    const sW = L.speakW;
+
+    // ---- idle personality: breath, weight shift, occasional glance
+    const br = Math.sin(t * L.breathRate * (1 - 0.25 * L.sleepW) + L.breathPhase);
+    const breathAmp = 0.011 + 0.009 * L.sleepW;
+    const shift = Math.sin(t * L.shiftRate + L.shiftPhase);
+    const gp = (t + L.glanceOffset) / L.glancePeriod;
+    const gk = Math.floor(gp), gf = gp - gk;
+    const glanceW = lifeSmooth(0.12, 0.24, gf) * (1 - lifeSmooth(0.42, 0.56, gf))
+      * (1 - L.listenW) * (1 - L.sleepW) * (1 - sW);
+    let yawT = (lifeHash(i * 7.13 + gk) - 0.5) * 1.15 * glanceW;
+    let pitchT = (lifeHash(i * 3.31 + gk * 1.7) - 0.55) * 0.2 * glanceW;
+    let torsoShare = 0.3;
+    let headRate = 6;
+
+    // ---- listeners turn to the speaker
+    if (hasSpeaker && L.listenW > 0.001) {
+      lifeLookAt(g, speaker, _lifeLook);
+      yawT += (_lifeLook.yaw - yawT) * L.listenW;
+      pitchT += (_lifeLook.pitch - pitchT) * L.listenW;
+    }
+
+    // ---- the speaker addresses the whole table
+    const gestPhase = t + L.gesturePhase;
+    const beat = 0.5 + 0.5 * Math.sin(gestPhase * 5.1);
+    const emph = Math.pow(Math.max(0, Math.sin(gestPhase * 1.9)), 2);
+    yawT += Math.sin(t * 0.47 + L.gesturePhase) * (isNight ? 0.6 : 0.42) * sW;
+
+    // ---- pointing
+    let pointW = 0, pointSide = 1;
+    if (L.point) {
+      const pe = (tMs - L.point.start) / 1000;
+      const pd = L.point.dur / 1000;
+      if (pe > pd || !chars[L.point.to] || !alive) L.point = null;
+      else if (pe > 0) {
+        pointW = lifeSmooth(0, 0.28, pe) * (1 - lifeSmooth(pd - 0.4, pd, pe));
+        lifeLookAt(g, L.point.to, _lifeLook);
+        pointSide = _lifeLook.yaw >= 0 ? 1 : -1;
+        yawT += (_lifeLook.yaw - yawT) * pointW;
+        pitchT += (_lifeLook.pitch - pitchT) * pointW;
+        torsoShare += 0.2 * pointW;
+      }
+    }
+
+    // ---- accusation: flinch + snap round to the accuser
+    let flinch = 0;
+    if (L.react) {
+      const re = (tMs - L.react.start) / 1000;
+      if (re > 3 || !alive) L.react = null;
+      else if (re > 0) {
+        flinch = re < 0.09 ? re / 0.09 : Math.exp(-(re - 0.09) * 4.2);
+        const lookW = lifeSmooth(0, 0.12, re) * (1 - lifeSmooth(2.2, 2.9, re));
+        if (L.react.from >= 0 && chars[L.react.from]) {
+          lifeLookAt(g, L.react.from, _lifeLook);
+          yawT += (_lifeLook.yaw - yawT) * lookW;
+          pitchT += (_lifeLook.pitch - pitchT) * lookW;
+        }
+        headRate = 14;
+      }
+    }
+
+    pitchT += 0.36 * L.sleepW - 0.18 * cel + 0.4 * sulk;
+    if (!alive) { yawT = 0; pitchT = 0; }
+
+    // ---- split the turn: the torso takes a share, the head the rest
+    const yawC = lifeClamp(yawT, -1.3, 1.3);
+    L.torsoYaw = lifeDamp(L.torsoYaw, lifeClamp(yawC * torsoShare, -0.42, 0.42), 3, dt);
+    L.headYaw = lifeDamp(L.headYaw, lifeClamp(yawC - L.torsoYaw, -0.95, 0.95), headRate, dt);
+    L.headPitch = lifeDamp(L.headPitch, lifeClamp(pitchT, -0.35, 0.5), headRate * 0.8, dt);
+
+    // ---- assemble the pose
+    let bodyY = R.bodyBaseY, bodyRX = 0, bodyRY = 0, bodyRZ = 0;
+    let lean = R.baseLean + 0.06 * L.sleepW + 0.035 * L.listenW
+      + sW * (0.045 + 0.035 * emph) * nightAmp - 0.2 * flinch + 0.2 * sulk - 0.04 * cel;
+    let roll = shift * L.shiftAmp + Math.sin(tMs * 0.045) * 0.025 * flinch;
+    const upY = R.upperBaseY + br * 0.004 - 0.03 * sulk;
+    let hPitch = L.headPitch + Math.sin(t * 0.6 + i * 0.5) * 0.025
+      + sW * (0.05 * Math.sin(gestPhase * 7.3) + 0.045 * emph) * nightAmp - 0.12 * flinch;
+    let hRoll = Math.sin(t * 0.8 + i * 1.3) * 0.04 * (1 - 0.5 * sW) - roll * 0.6;
+    const hY = R.headBaseY + sW * 0.012 * Math.abs(Math.sin(gestPhase * 7.3));
+
+    const aL = R.armBase.L, aR = R.armBase.R;
+    const sway = Math.sin(t * 0.9 + L.swayPhase) * 0.035;
+    let lx = aL.x + sway, lz = aL.z - 0.015 - br * 0.012;
+    let rx = aR.x - sway * 0.8, rz = aR.z + 0.015 + br * 0.012;
+    if (sW > 0.001) {
+      // One emphatic hand (alternating by seat) and one supporting hand.
+      const big = -(0.5 + 0.5 * emph + 0.14 * beat) * sW * nightAmp;
+      const small = -(0.16 + 0.1 * Math.sin(gestPhase * 2.7)) * sW * nightAmp;
+      const out = (0.18 + 0.12 * beat) * sW * nightAmp;
+      if (L.gestureSide > 0) { rx += big; rz += out; lx += small; lz -= 0.07 * sW; }
+      else { lx += big; lz -= out; rx += small; rz += 0.07 * sW; }
+    }
+    lx -= 0.6 * flinch; rx -= 0.6 * flinch;
+    lz -= 0.18 * flinch; rz += 0.18 * flinch;
+    lx += 0.06 * L.sleepW; rx += 0.06 * L.sleepW;
+    if (cel > 0.001) {
+      const hop = Math.abs(Math.sin(moodE * 3.2));
+      const wave = Math.sin(moodE * 6.5);
+      bodyY += 0.13 * hop * cel;
+      bodyRY += Math.sin(moodE * 2) * 0.28 * cel;
+      lx += (-2.55 + 0.2 * wave - lx) * cel; rx += (-2.55 - 0.2 * wave - rx) * cel;
+      lz += (-0.38 - lz) * cel; rz += (0.38 - rz) * cel;
+    }
+    if (sulk > 0.001) { lx += 0.1 * sulk; rx += 0.1 * sulk; lz += 0.05 * sulk; rz -= 0.05 * sulk; }
+
+    // ---- death: clutch (anticipation), topple, two small impact bounces
+    if (L.death && de >= 0) {
+      const side = i % 2 === 0 ? 1 : -1;
+      const antic = lifeSmooth(0, 0.22, de) * (1 - lifeSmooth(0.3, 0.46, de));
+      const f = lifeClamp((de - 0.32) / 0.6, 0, 1);
+      let fall = f * f;
+      if (de > 0.92) { const b = de - 0.92; fall -= 0.085 * Math.exp(-b * 5.5) * Math.abs(Math.sin(b * 11)); }
+      bodyY += 0.035 * antic + 0.17 * fall;
+      bodyRZ = side * 1.42 * fall;
+      bodyRX = -0.2 * fall;
+      lean += 0.16 * antic - 0.06 * fall;
+      hPitch += 0.32 * antic - 0.1 * fall;
+      hRoll += side * 0.4 * fall;
+      lx += -0.55 * antic + 0.25 * fall; rx += -0.55 * antic + 0.25 * fall;
+      lz += 0.2 * antic - 0.75 * fall; rz += -0.2 * antic + 0.75 * fall;
+      if (!L.dimDone) lifeApplyDim(g, lifeSmooth(0, 0.9, de));
+    }
+
+    R.body.position.set(0, bodyY, 0);
+    R.body.rotation.set(bodyRX, bodyRY, bodyRZ);
+    R.upper.position.set(alive ? shift * 0.012 : 0, upY, 0);
+    R.upper.rotation.set(lean, L.torsoYaw, roll);
+    const bA = br * breathAmp;
+    R.upper.scale.set(1 + bA * 0.35, 1 + bA, 1 + bA * 0.35);
+    R.head.position.y = hY;
+    R.head.rotation.set(hPitch, L.headYaw, hRoll);
+    R.armL.rotation.set(lx, aL.y, lz);
+    R.armR.rotation.set(rx, aR.y, rz);
+    if (pointW > 0.001 && L.point) {
+      const arm = pointSide > 0 ? R.armR : R.armL;
+      lifePointQuat(g, R, pointSide, L.point.to, _lifeQ2);
+      arm.quaternion.slerp(_lifeQ2, pointW);
+    }
+  }
+}
+
+// ----- Camera director -----
+const CAM_SHOT_PRIORITY = { night: 1, day: 1, home: 1, vote: 2, execution: 3, result: 4 };
+const CAM_HOME_Y = HEAD_Y + 0.12;   // targetV's default height
+let camPending = null;              // best request made since the last frame
+let camShot = null;                 // running (or finished, for de-dupe) shot
+let voteRevealFrame = -1;
+const _camLast = { theta: 0, phi: 0, dist: 0, tx: 0, ty: 0, tz: 0 };
+
+function directCamera(shot, opts = {}) {
+  const prio = CAM_SHOT_PRIORITY[shot];
+  if (prio === undefined) return;
+  if (shot === 'vote') voteRevealFrame = lifeFrame;
+  const withVote = (camPending && camPending.withVote) || shot === 'vote';
+  if (!camPending || prio >= camPending.prio) camPending = { shot, opts, prio, withVote };
+  else camPending.withVote = withVote;
+}
+
+function camKey(at, dur, to) { return { at, dur, to, from: null, toTheta: 0 }; }
+
+// The desktop side panel covers the right ~30% of the canvas. Shots aim the
+// camera a little to the right of their subject (camera-right, scaled with
+// distance) so the subject lands in the middle of what is still visible.
+// Tweens run in un-shifted "raw" target space and the shift is added on
+// write, so orbiting or zooming keeps the subject framed left of the panel.
+function camPanelOpen() { return sidePanelOpen && innerWidth > 768; }
+function camPanelLateral() { return camPanelOpen() ? 0.19 * dist : 0; }
+
+function buildCamShot(req) {
+  // Portrait phones need the wider base distance to keep the ring in frame;
+  // every shot is a multiple of it so mobile framing scales with it. With the
+  // desktop side panel open the visible stage is ~30% narrower, so pull back
+  // (and see camPanelLateral for the sideways shift).
+  const D = (innerWidth <= 768 ? 22 : 12) * (camPanelOpen() ? 1.28 : 1);
+  const overhead = { phi: 0.5, dist: D * 1.22, tx: 0, ty: CAM_HOME_Y - 0.3, tz: 0 };
+  switch (req.shot) {
+    case 'night':
+      // Low, slow orbit — the village seen from just above the braziers.
+      return { key: 'night', kfs: [camKey(0, 2.8, { phi: 1.3, dist: D * 0.86, tx: 0, ty: CAM_HOME_Y - 0.15, tz: 0 })], orbit: 0.05, orbitAt: 0.3 };
+    case 'day': case 'home':
+      return { key: 'day', kfs: [camKey(0, 1.8, { phi: PI / 3.5, dist: D, tx: 0, ty: CAM_HOME_Y, tz: 0 })] };
+    case 'vote':
+      // Pull back and up so every ballot arrow is on screen at once.
+      return { key: 'vote', kfs: [camKey(0, 1.9, overhead)] };
+    case 'execution': {
+      const i = req.opts && req.opts.index;
+      if (!chars[i]) return null;
+      const p = chars[i].position;
+      // When the ballots were just revealed, hold the overhead while the
+      // arrows draw in, then dolly across the table into the condemned's face
+      // (camera between two seats on the far side), then ease back out.
+      const lead = req.withVote ? 1.6 : 0;
+      const kfs = [];
+      if (req.withVote) kfs.push(camKey(0, 1.4, overhead));
+      kfs.push(camKey(lead, 1.8, { theta: sa(i) + PI - 0.5, phi: 1.04, dist: D * 0.5, tx: p.x * 0.62, ty: 1.05, tz: p.z * 0.62 }));
+      kfs.push(camKey(lead + 4.4, 2.8, { phi: 0.92, dist: D * 0.8, tx: p.x * 0.25, ty: CAM_HOME_Y, tz: p.z * 0.25 }));
+      return { key: 'execution:' + i, kfs };
+    }
+    case 'result':
+      // Slow wide crane-up over the whole council.
+      return { key: 'result', kfs: [camKey(0, 6.5, { phi: 0.66, dist: D * 1.32, tx: 0, ty: CAM_HOME_Y + 0.5, tz: 0 })], orbit: 0.035, orbitAt: 0.5 };
+  }
+  return null;
+}
+
+function camOwns(s) {
+  const o = { theta: !!s.orbit, phi: false, dist: false, target: false };
+  for (const k of s.kfs) {
+    if (k.to.theta !== undefined) o.theta = true;
+    if (k.to.phi !== undefined) o.phi = true;
+    if (k.to.dist !== undefined) o.dist = true;
+    if (k.to.tx !== undefined) o.target = true;
+  }
+  return o;
+}
+
+function camMovedExternally(s) {
+  const o = s.owns, e = 1e-6;
+  // Once a shot has landed it lets theta go (speaker follow, auto-rotate).
+  return (o.theta && !s.done && Math.abs(theta - _camLast.theta) > e)
+    || (o.phi && Math.abs(phi - _camLast.phi) > e)
+    || (o.dist && Math.abs(dist - _camLast.dist) > e)
+    || (o.target && (Math.abs(targetV.x - _camLast.tx) > e
+      || Math.abs(targetV.y - _camLast.ty) > e || Math.abs(targetV.z - _camLast.tz) > e));
+}
+
+// Returns true when it drove theta this frame (so auto-rotate stands down).
+function updateCameraDirector(tMs, dt) {
+  if (!camFollow || followSuspended || userInteracting) {
+    camShot = null;
+    camPending = null;
+    return false;
+  }
+  if (camPending) {
+    const req = camPending;
+    camPending = null;
+    const next = buildCamShot(req);
+    if (next && (!camShot || camShot.key !== next.key || (req.opts && req.opts.force))) {
+      next.t0 = tMs;
+      next.owns = camOwns(next);
+      next.fresh = true;
+      next.done = false;
+      camShot = next;
+    }
+  }
+  const s = camShot;
+  if (!s) return false;
+  if (!s.fresh && camMovedExternally(s)) { camShot = null; return false; }
+  s.fresh = false;
+  if (s.done) {
+    // Landed: hold the framing (re-applying the panel shift as theta moves)
+    // until the next shot, or until the user takes the camera.
+    if (s.raw) {
+      const lat = camPanelLateral();
+      targetV.set(s.raw.x + Math.sin(theta) * lat, s.raw.y, s.raw.z - Math.cos(theta) * lat);
+      updateCam();
+    }
+    camRecordLast();
+    return false;
+  }
+
+  const el = (tMs - s.t0) / 1000;
+  let pending = false;
+  for (let n = 0; n < s.kfs.length; n++) {
+    const k = s.kfs[n];
+    if (el < k.at) { pending = true; continue; }
+    const to = k.to;
+    if (!k.from) {
+      if (!s.raw) {
+        // Strip the current panel shift so the tween starts where we are.
+        const lat0 = camPanelLateral();
+        s.raw = { x: targetV.x - Math.sin(theta) * lat0, y: targetV.y, z: targetV.z + Math.cos(theta) * lat0 };
+      }
+      k.from = { theta, phi, dist, tx: s.raw.x, ty: s.raw.y, tz: s.raw.z };
+      if (to.theta !== undefined) k.toTheta = theta + Math.atan2(Math.sin(to.theta - theta), Math.cos(to.theta - theta));
+    }
+    const x = Math.min(1, (el - k.at) / k.dur);
+    if (x < 1) pending = true;
+    const e = x * x * x * (x * (x * 6 - 15) + 10);   // smootherstep
+    const f = k.from;
+    if (to.theta !== undefined) theta = f.theta + (k.toTheta - f.theta) * e;
+    if (to.phi !== undefined) phi = f.phi + (to.phi - f.phi) * e;
+    if (to.dist !== undefined) dist = f.dist + (to.dist - f.dist) * e;
+    if (to.tx !== undefined) {
+      s.raw.x = f.tx + (to.tx - f.tx) * e;
+      s.raw.y = f.ty + (to.ty - f.ty) * e;
+      s.raw.z = f.tz + (to.tz - f.tz) * e;
+    }
+  }
+  let ownsTheta = false;
+  if (s.orbit && el >= s.orbitAt) {
+    theta += s.orbit * dt * lifeSmooth(s.orbitAt, s.orbitAt + 2.5, el);
+    ownsTheta = true;
+  }
+  if (!pending && !s.orbit) s.done = true;
+  phi = Math.max(0.02, Math.min(PI / 2.05, phi));
+  dist = Math.max(DIST_MIN, Math.min(DIST_MAX, dist));
+  if (s.raw) {
+    const lat = camPanelLateral();
+    targetV.set(s.raw.x + Math.sin(theta) * lat, s.raw.y, s.raw.z - Math.cos(theta) * lat);
+  }
+  updateCam();
+  camRecordLast();
+  return ownsTheta || s.owns.theta;
+}
+
+function camRecordLast() {
+  _camLast.theta = theta; _camLast.phi = phi; _camLast.dist = dist;
+  _camLast.tx = targetV.x; _camLast.ty = targetV.y; _camLast.tz = targetV.z;
+}
+
+window.__life = { pointAt, reactToAccusation, accuse, directCamera, shot: () => camShot && camShot.key, chars: () => chars };
+
 // ===== Animation Loop =====
 // Full-screen overlays (rules / story mode) swallow all canvas mouse events.
 // While one is open the scene must sit still — otherwise the user sees the
@@ -6140,27 +6693,11 @@ function animate() {
   requestAnimationFrame(animate);
   const t = performance.now() * 0.001;
   const tMs = performance.now();
-
-  // Idle bob (only for characters not in death/team anims)
-  const inDeathAnim = new Set(deathAnims.map(d => d.index));
-  const inTeamAnim = new Set(teamAnims.map(a => a.index));
-  chars.forEach((g, i) => {
-    if (!inDeathAnim.has(i) && !inTeamAnim.has(i)) {
-      g.position.y = (g.userData.baseY ?? SH) + Math.sin(t * 1.5 + i) * 0.03;
-      // Breathing — subtle body scale + head micro-sway
-      const breath = 1 + Math.sin(t * 1.2 + i * 0.7) * 0.012;
-      // Per-figure height lives in baseScale; breathing multiplies it rather
-      // than replacing it, or every figure would snap back to one size.
-      const bs = g.userData.baseScale || 1;
-      g.scale.set(bs, bs * breath, bs);
-      // Head micro-sway
-      const head = g.children.find(c => c.isGroup && c.position.y > 0.5);
-      if (head) {
-        head.rotation.z = Math.sin(t * 0.8 + i * 1.3) * 0.04;
-        head.rotation.x = Math.sin(t * 0.6 + i * 0.5) * 0.025;
-      }
-    }
-  });
+  // Frame delta for the eased life/camera channels, clamped so a background
+  // tab coming back does not fling every head round in a single step.
+  const dt = lifeLastMs ? Math.min(0.05, Math.max(0, (tMs - lifeLastMs) / 1000)) : 1 / 60;
+  lifeLastMs = tMs;
+  lifeFrame++;
 
   // Flame flicker
   if (flame) {
@@ -6169,10 +6706,14 @@ function animate() {
     flame.position.y = 1.395 + Math.sin(t * 8) * 0.01;
   }
 
-  // Intro animation (overrides auto-rotate)
+  // Camera: the intro flight wins, then the director's phase shots, then the
+  // day speaker follow / auto-rotate (which stands down while a shot orbits).
   if (introAnim && !introAnim.done) { updateIntroAnim(); }
-  else if (speakerFocusIndex >= 0 && currentPhase === 'day' && !userInteracting) { updateSpeakerCamera(tMs); }
-  else if (autoRotate && !userInteracting && !modalBlocksScene()) { theta += 0.003; updateCam(); }
+  else {
+    const directorOwnsTheta = updateCameraDirector(tMs, dt);
+    if (speakerFocusIndex >= 0 && currentPhase === 'day' && !userInteracting) { updateSpeakerCamera(tMs); }
+    else if (autoRotate && !userInteracting && !modalBlocksScene() && !directorOwnsTheta) { theta += 0.003; updateCam(); }
+  }
 
   // Night/day light transition
   updateNightTransition();
@@ -6188,6 +6729,7 @@ function animate() {
   updateDeathAnims(tMs);
   updateTeamAnims(tMs);
   updateSpeakingAnims(t);
+  updateCharacterLife(t, dt);
   updateConfetti(tMs);
 
   if (composer) composer.render();
