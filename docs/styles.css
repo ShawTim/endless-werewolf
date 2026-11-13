@@ -1392,4 +1392,12 @@ body.story-open #scene-tools { bottom:12px; }
   .story-view-toggle { display:none; }
   #story-insight { margin-top:8px; }
   .insight-col { padding:6px 8px; }
+  /* In the small strip above the replay sheet, full name tags collide.
+     The card already names the speaker and model, so tags go compact. */
+  body.story-open .tag { padding:3px 7px; border-radius:6px; }
+  body.story-open .tag .tag-name { font-size:11px; }
+  body.story-open .tag .tag-model { display:none; }
+  body.story-open .tag .role-sub { font-size:9.5px; padding:1px 4px; }
+  body.story-open .tag .speaking-label { font-size:9.5px; margin-top:1px; }
+  body.story-open .tag .tag-sub-row { margin-top:2px; }
 }

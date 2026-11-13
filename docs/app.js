@@ -4309,7 +4309,7 @@ function updateViewShift(dt) {
     const panelLeft = innerWidth - (dynamicsCollapsed ? 16 : 316);
     tx = THREE.MathUtils.clamp((cardRight + panelLeft) / 2 - innerWidth / 2, 0, innerWidth * 0.18);
   } else if (storyOpen) {
-    ty = innerHeight * 0.17;
+    ty = innerHeight * 0.2;
   }
   const k = 1 - Math.exp(-dt * 4);
   viewShift.x += (tx - viewShift.x) * k;
