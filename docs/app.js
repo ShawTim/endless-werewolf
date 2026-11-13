@@ -6514,7 +6514,6 @@ const CAM_HOME_Y = HEAD_Y + 0.12;   // targetV's default height
 let camPending = null;              // best request made since the last frame
 let camShot = null;                 // running (or finished, for de-dupe) shot
 let voteRevealFrame = -1;
-const _camLast = { theta: 0, phi: 0, dist: 0, tx: 0, ty: 0, tz: 0 };
 
 function directCamera(shot, opts = {}) {
   const prio = CAM_SHOT_PRIORITY[shot];
@@ -6572,29 +6571,23 @@ function buildCamShot(req) {
   return null;
 }
 
-function camOwns(s) {
-  const o = { theta: !!s.orbit, phi: false, dist: false, target: false };
-  for (const k of s.kfs) {
-    if (k.to.theta !== undefined) o.theta = true;
-    if (k.to.phi !== undefined) o.phi = true;
-    if (k.to.dist !== undefined) o.dist = true;
-    if (k.to.tx !== undefined) o.target = true;
-  }
-  return o;
-}
-
-function camMovedExternally(s) {
-  const o = s.owns, e = 1e-6;
-  // Once a shot has landed it lets theta go (speaker follow, auto-rotate).
-  return (o.theta && !s.done && Math.abs(theta - _camLast.theta) > e)
-    || (o.phi && Math.abs(phi - _camLast.phi) > e)
-    || (o.dist && Math.abs(dist - _camLast.dist) > e)
-    || (o.target && (Math.abs(targetV.x - _camLast.tx) > e
-      || Math.abs(targetV.y - _camLast.ty) > e || Math.abs(targetV.z - _camLast.tz) > e));
+// Manual camera input that does not go through the drag flags (wheel zoom,
+// WASD / arrow pan) hands control back to the user just like a drag does.
+// Watching inputs rather than diffing camera values matters: the side panel's
+// applyPanelOffset() rewrites dist/target on every story step, and that must
+// not cancel (and so restart) a running shot.
+let camUserNudged = false;
+canvas.addEventListener('wheel', () => { camUserNudged = true; }, { passive: true });
+function camPanKeysDown() {
+  const k = window._panKeys;
+  return !!k && !!(k.w || k.a || k.s || k.d || k.arrowup || k.arrowdown || k.arrowleft || k.arrowright);
 }
 
 // Returns true when it drove theta this frame (so auto-rotate stands down).
 function updateCameraDirector(tMs, dt) {
+  const nudged = camUserNudged || camPanKeysDown();
+  camUserNudged = false;
+  if (nudged) camShot = null;
   if (!camFollow || followSuspended || userInteracting) {
     camShot = null;
     camPending = null;
@@ -6606,25 +6599,23 @@ function updateCameraDirector(tMs, dt) {
     const next = buildCamShot(req);
     if (next && (!camShot || camShot.key !== next.key || (req.opts && req.opts.force))) {
       next.t0 = tMs;
-      next.owns = camOwns(next);
-      next.fresh = true;
       next.done = false;
       camShot = next;
     }
   }
   const s = camShot;
   if (!s) return false;
-  if (!s.fresh && camMovedExternally(s)) { camShot = null; return false; }
-  s.fresh = false;
   if (s.done) {
     // Landed: hold the framing (re-applying the panel shift as theta moves)
-    // until the next shot, or until the user takes the camera.
+    // until the next shot or until the user takes the camera. Theta is left
+    // free for speaker follow / auto-rotate.
+    phi = s.holdPhi;
+    dist = s.holdDist;
     if (s.raw) {
       const lat = camPanelLateral();
       targetV.set(s.raw.x + Math.sin(theta) * lat, s.raw.y, s.raw.z - Math.cos(theta) * lat);
-      updateCam();
     }
-    camRecordLast();
+    updateCam();
     return false;
   }
 
@@ -6661,21 +6652,15 @@ function updateCameraDirector(tMs, dt) {
     theta += s.orbit * dt * lifeSmooth(s.orbitAt, s.orbitAt + 2.5, el);
     ownsTheta = true;
   }
-  if (!pending && !s.orbit) s.done = true;
   phi = Math.max(0.02, Math.min(PI / 2.05, phi));
   dist = Math.max(DIST_MIN, Math.min(DIST_MAX, dist));
+  if (!pending && !s.orbit) { s.done = true; s.holdPhi = phi; s.holdDist = dist; }
   if (s.raw) {
     const lat = camPanelLateral();
     targetV.set(s.raw.x + Math.sin(theta) * lat, s.raw.y, s.raw.z - Math.cos(theta) * lat);
   }
   updateCam();
-  camRecordLast();
-  return ownsTheta || s.owns.theta;
-}
-
-function camRecordLast() {
-  _camLast.theta = theta; _camLast.phi = phi; _camLast.dist = dist;
-  _camLast.tx = targetV.x; _camLast.ty = targetV.y; _camLast.tz = targetV.z;
+  return ownsTheta || pending;
 }
 
 window.__life = { pointAt, reactToAccusation, accuse, directCamera, shot: () => camShot && camShot.key, chars: () => chars };
