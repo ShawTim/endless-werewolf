@@ -4141,7 +4141,7 @@ function renderStoryInsight(step) {
 
 // ===== Table Dynamics graph (SVG) =====
 const DYN_CX = 150, DYN_CY = 142, DYN_R = 92, DYN_NODE = 19;
-let dynamicsCollapsed = innerWidth <= 768;
+let dynamicsCollapsed = innerWidth <= 1180;   // narrow screens start with the graph folded so the table stays visible
 
 function dynNodePos(index) {
   const a = sa(index);
@@ -4289,6 +4289,37 @@ function renderDynamics(step) {
     : (lang === 'zh'
       ? `${claimsList.length} 個身分聲稱 · ${bluffs} 個虛張 · ${state.conflicts.length} 個衝突 · ${state.edges.reduce((n, e) => n + e.count, 0)} 次點名`
       : `${claimsList.length} claims · ${bluffs} bluffs · ${state.conflicts.length} clashes · ${state.edges.reduce((n, e) => n + e.count, 0)} call-outs`);
+}
+
+// ===== Screen-space framing around the replay overlays =====
+// The replay card covers the lower-left of the screen (the bottom half on
+// phones) and the dynamics panel the top-right. Rather than moving the camera
+// in world space — which breaks as the camera orbits — shift the projection
+// window so the council stays centred in the uncovered part of the screen.
+// Name tags, bubbles and vote arrows all project through the same camera, so
+// they follow automatically.
+const viewShift = { x: 0, y: 0 };
+function updateViewShift(dt) {
+  const storyOpen = document.body.classList.contains('story-open');
+  let tx = 0, ty = 0;
+  if (storyOpen && innerWidth > 768) {
+    // Mirrors #story-mode's CSS box (left:22px; width:min(560px, 100vw - 44px))
+    // so no layout read is needed every frame.
+    const cardRight = 22 + Math.min(560, innerWidth - 44);
+    const panelLeft = innerWidth - (dynamicsCollapsed ? 16 : 316);
+    tx = THREE.MathUtils.clamp((cardRight + panelLeft) / 2 - innerWidth / 2, 0, innerWidth * 0.18);
+  } else if (storyOpen) {
+    ty = innerHeight * 0.17;
+  }
+  const k = 1 - Math.exp(-dt * 4);
+  viewShift.x += (tx - viewShift.x) * k;
+  viewShift.y += (ty - viewShift.y) * k;
+  if (Math.abs(viewShift.x) < 0.5 && Math.abs(viewShift.y) < 0.5 && tx === 0 && ty === 0) {
+    if (camera.view && camera.view.enabled) { camera.clearViewOffset(); }
+    viewShift.x = 0; viewShift.y = 0;
+    return;
+  }
+  camera.setViewOffset(innerWidth, innerHeight, -viewShift.x, viewShift.y, innerWidth, innerHeight);
 }
 
 // ===== Center Cards (3D on table) =====
@@ -7134,6 +7165,7 @@ function animate() {
     if (speakerFocusIndex >= 0 && currentPhase === 'day' && !userInteracting) { updateSpeakerCamera(tMs); }
     else if (autoRotate && !userInteracting && !modalBlocksScene() && !directorOwnsTheta) { theta += 0.003; updateCam(); }
   }
+  updateViewShift(dt);
 
   // Night/day light transition
   updateNightTransition();

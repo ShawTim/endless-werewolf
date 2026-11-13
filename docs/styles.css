@@ -1386,4 +1386,10 @@ body.story-open #scene-tools { bottom:12px; }
   .top-actions .btn { min-height:36px; }
   #welcome-models { gap:6px; }
   .welcome-model .who { display:none; }
+  /* Keep the replay card compact so the council stays visible above it. */
+  .story-body { max-height:104px; }
+  .insight-text { max-height:36px; }
+  .story-view-toggle { display:none; }
+  #story-insight { margin-top:8px; }
+  .insight-col { padding:6px 8px; }
 }
